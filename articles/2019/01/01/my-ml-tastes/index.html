@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>My Machine Learning tastes and principles - Dr Timothy Corbett-Clark</title>
+    <title>My Machine Learning tastes and principles - Dr Timothy Corbett-Clark</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -13,13 +13,13 @@
 
         <meta name="author" content="Timothy Corbett-Clark" />
         <meta name="keywords" content="machine-learning,principles" />
-        <meta name="description" content="A description of my Machine Learning tastes in the form of some principles I endeavour to follow" />
+        <meta name="description" content="A description of my Machine Learning tastes in the form of some principles I endeavour to follow" />
 
         <meta property="og:site_name" content="Dr Timothy Corbett-Clark" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="My Machine Learning tastes and principles"/>
+        <meta property="og:title" content="My Machine Learning tastes and principles"/>
         <meta property="og:url" content="https://www.corbettclark.com/articles/2019/01/01/my-ml-tastes/"/>
-        <meta property="og:description" content="A description of my Machine Learning tastes in the form of some principles I endeavour to follow"/>
+        <meta property="og:description" content="A description of my Machine Learning tastes in the form of some principles I endeavour to follow"/>
         <meta property="article:published_time" content="2019-01-01" />
             <meta property="article:section" content="machine-learning" />
             <meta property="article:tag" content="machine-learning" />
@@ -29,17 +29,17 @@
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://www.corbettclark.com/theme/css/bootstrap.cerulean.min.css" type="text/css"/>
+        <link rel="stylesheet" href="https://www.corbettclark.com/theme/css/bootstrap.readable.min.css" type="text/css"/>
     <link href="https://www.corbettclark.com/theme/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="https://www.corbettclark.com/theme/css/pygments/monokai.css" rel="stylesheet">
+        <link href="https://www.corbettclark.com/theme/css/typogrify.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.corbettclark.com/theme/css/style.css" type="text/css"/>
 
         <link href="https://www.corbettclark.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Dr Timothy Corbett-Clark ATOM Feed"/>
 
-        <link href="https://www.corbettclark.com/feeds/machine-learning.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Dr Timothy Corbett-Clark machine-learning ATOM Feed"/>
+
 </head>
 <body>
 
@@ -57,8 +57,9 @@ Dr Timothy Corbett-Clark            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+                    <li><a href="feeds/all.atom.xml"><i class="fa fa-rss fa-lg"></i></a></li>
                          <li><a href="https://www.corbettclark.com/pages/about-me/">
-                             About Me
+                             About&nbsp;Me
                           </a></li>
                          <li><a href="https://www.corbettclark.com/pages/publications/">
                              Publications
@@ -87,8 +88,8 @@ Dr Timothy Corbett-Clark            </a>
                 <h1>
                     <a href="https://www.corbettclark.com/articles/2019/01/01/my-ml-tastes/"
                        rel="bookmark"
-                       title="Permalink to My Machine Learning tastes and principles">
-                        My Machine Learning tastes and principles
+                       title="Permalink to My Machine Learning tastes and principles">
+                        My Machine Learning tastes and&nbsp;principles
                     </a>
                 </h1>
             </header>
@@ -112,19 +113,19 @@ Dr Timothy Corbett-Clark            </a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>Whenever I read material on-line, one of the first things I want to know are the tastes and style of the author. So with that in mind, here are mine.</p>
-<p>Firstly, I’m a computer scientist and engineer, with an amateur love of mathematics.</p>
-<p>With regards to the domain of ML, I currently believe in the following general principles and approaches:</p>
+                <p>Whenever I read material on-line, one of the first things I want to know are the tastes and style of the author. So with that in mind, here are&nbsp;mine.</p>
+<p>Firstly, I’m a computer scientist and engineer, with an amateur love of&nbsp;mathematics.</p>
+<p>With regards to the domain of <span class="caps">ML</span>, I currently believe in the following general principles and&nbsp;approaches:</p>
 <ol>
-<li>Use probability. Use statistical ideas. Be principled. Leverage centuries of research. But also: understand the assumptions behind many results created before the availability of powerful computers and software. Most data isn’t linear, or drawn from independent identical distributions, or normal, etc. Even when these assumptions don’t hold, the results can still work or aid understanding.</li>
-<li>Appreciate the “curse of dimensionality”. High dimensional space is basically void of data; distance metrics in feature space can be unintuitive or misleading, or say more about the metric than the data; results from algorithms should not change if measurement units are altered; the volume of hyper-spheres contain a vanishing fraction of bounding hyper-cube volume; etc.</li>
-<li>Models such as Artificial Neural Networks and Kernel-based density estimators are general-purpose parameterised functions which make minimal assumptions about the data. Implicitly they do make assumptions of course, but the hope is that these structural constraints are either harmless or desired. Any inspiration from or analogy with brain function is of minor historical interest only.</li>
-<li>Use fast (not first order) and mathematically motivated optimisation algorithms such as <a href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">BFGS</a>. In particular, don’t use slow (first order) algorithms as an implicit way to try to prevent overfitting. Algorithms or models which use an initial random element (parameters or weights or subsets of data etc) should be run multiple times using ideas like cross-validation, regularisation, “bagging”, etc to minimise any variation effects caused by that random seeding. Basically, always try to measure and explicitly deal with this source of variation.</li>
-<li>Publish reproducible results. I’ve spent the last 20 years using Python for commercial software development, so that will continue to be my go-to tool. Unsurprisingly, Jupyter notebooks will feature too.</li>
-<li>Make honest assessments using both real datasets (publically available) and artificial pedagogical datasets created with specific and known characteristics.</li>
+<li>Use probability. Use statistical ideas. Be principled. Leverage centuries of research. But also: understand the assumptions behind many results created before the availability of powerful computers and software. Most data isn’t linear, or drawn from independent identical distributions, or normal, etc. Even when these assumptions don’t hold, the results can still work or aid&nbsp;understanding.</li>
+<li>Appreciate the “curse of dimensionality”. High dimensional space is basically void of data; distance metrics in feature space can be unintuitive or misleading, or say more about the metric than the data; results from algorithms should not change if measurement units are altered; the volume of hyper-spheres contain a vanishing fraction of bounding hyper-cube volume;&nbsp;etc.</li>
+<li>Models such as Artificial Neural Networks and Kernel-based density estimators are general-purpose parameterised functions which make minimal assumptions about the data. Implicitly they do make assumptions of course, but the hope is that these structural constraints are either harmless or desired. Any inspiration from or analogy with brain function is of minor historical interest&nbsp;only.</li>
+<li>Use fast (not first order) and mathematically motivated optimisation algorithms such as <a href="https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm"><span class="caps">BFGS</span></a>. In particular, don’t use slow (first order) algorithms as an implicit way to try to prevent overfitting. Algorithms or models which use an initial random element (parameters or weights or subsets of data etc) should be run multiple times using ideas like cross-validation, regularisation, “bagging”, etc to minimise any variation effects caused by that random seeding. Basically, always try to measure and explicitly deal with this source of&nbsp;variation.</li>
+<li>Publish reproducible results. I’ve spent the last 20 years using Python for commercial software development, so that will continue to be my go-to tool. Unsurprisingly, Jupyter notebooks will feature&nbsp;too.</li>
+<li>Make honest assessments using both real datasets (publically available) and artificial pedagogical datasets created with specific and known&nbsp;characteristics.</li>
 </ol>
-<p>As this blog evolves, I will try hard to adhere to my own principles!</p>
-<p>I’m primarily interested in the subset of Machine Learning which is about deciding (and explaining) the category of a datapoint. Examples abound, such as reject or accept a loan application, diagnose a disease, forecast road traffic, or decide the optimal time to plant, subsequently manage, then harvest and clean a crop. I will generally avoid the added complexities of dealing with large quantities of time-series or image data.</p>
+<p>As this blog evolves, I will try hard to adhere to my own&nbsp;principles!</p>
+<p>I’m primarily interested in the subset of Machine Learning which is about deciding (and explaining) the category of a datapoint. Examples abound, such as reject or accept a loan application, diagnose a disease, forecast road traffic, or decide the optimal time to plant, subsequently manage, then harvest and clean a crop. I will generally avoid the added complexities of dealing with large quantities of time-series or image&nbsp;data.</p>
             </div>
             <!-- /.entry-content -->
         </article>
