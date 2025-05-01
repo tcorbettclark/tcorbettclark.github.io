@@ -10,5 +10,3 @@ GOOGLE_ANALYTICS = "UA-6880945-2" # also the analytics.html template
 MY_NAME = "Dr Timothy Corbett-Clark"
 MY_SHORT_NAME = "Tim C-C"
 MY_TAGLINE = "CTO, Researcher, Architect, Developer"
-
-USE_PLACEHOLDER = true
