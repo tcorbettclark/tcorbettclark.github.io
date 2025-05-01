@@ -28,7 +28,7 @@ logging.getLogger("watchfiles.main").setLevel(
 )  # Stop watchfiles from logging file changes, as we do it instead.
 
 
-def log(message, *args):
+def log(message, *args, level=logging.INFO):
     # Make all pathlib.Path args relative to ROOT_DIR.
     tmp = [
         str(pathlib.Path(arg).relative_to(ROOT_DIR))
@@ -36,7 +36,13 @@ def log(message, *args):
         else arg
         for arg in args
     ]
-    logger.info(message.format(*tmp))
+    logger.log(level, message.format(*tmp))
+
+
+def abort(message, *args):
+    log(message, *args, level=logging.ERROR)
+    log("Aborting!", level=logging.ERROR)
+    quit()
 
 
 class Builder:
@@ -69,6 +75,9 @@ class Builder:
         ):
             log("Reading template data from: {}", filename)
             data = toml.load(self.output_dir / filename)
+            overlap = set(data.keys()).intersection(env.globals.keys())
+            if overlap:
+                abort(f"Found duplicate key(s) in TOML template data: {", ".join(overlap)}")
             env.globals.update(data)
 
     def _add_markdown_filter(self, env):

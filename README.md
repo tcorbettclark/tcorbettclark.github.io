@@ -20,7 +20,6 @@ See `output/pages/my-website.md` (or rendered version on my website).
 - Websocket handler reading messages. Should listen for ping.
 - Add licence
 - Create a 404 in the dev server, but also on the main page.
-- Issue warning if config.toml data overrides settings from elsewhere (since global).
 - Fix hot reloader on back/forward history (when dev tools closed)
 - Use the W3C Validator
 - Add Google analytics
