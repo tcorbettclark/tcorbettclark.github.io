@@ -15,7 +15,6 @@ See `output/pages/my-website.md` (or rendered version on my website).
 
 # TODO - technical
 
-- Support suspend/resume terminal signals for when making many edits
 - Control the wrapping of icons and words in the profile section with different widths and zooms.
 - Look at all markdown plugins
 - Add licence
