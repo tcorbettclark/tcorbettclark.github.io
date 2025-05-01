@@ -96,3 +96,8 @@ Tools:
   event freeze and resume
 
 See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+
+
+
+
+Output has to go in `docs/` because github pages only support serving content from `/` or `docs/`.
