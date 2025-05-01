@@ -1,6 +1,6 @@
 # README
 
-See `output/pages/my-website.md` (or rendered version on my website).
+See `content/pages/_my-website.md` (or rendered version on my website).
 
 # TODO - content
 
