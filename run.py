@@ -15,6 +15,7 @@ import tidy
 import toml
 import user_agents
 import watchfiles
+from mdit_py_plugins.attrs import attrs_plugin as markdown_attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin as markdown_math_plugin
 from mdit_py_plugins.footnote import footnote_plugin as markdown_footnote_plugin
 
@@ -44,6 +45,20 @@ def abort(message, *args):
     log(message, *args, level=logging.ERROR)
     log("Aborting!", level=logging.ERROR)
     quit()
+
+
+class _RelativeEnvironment(jinja2.Environment):
+    """Make template loading relative to the directory of the source filename.
+
+    See: https://jinja.palletsprojects.com/en/stable/api/#jinja2.Environment.join_path
+    """
+
+    def join_path(self, template, parent):
+        template_to_load = template
+        from_template = parent  # Relative to FileSystemLoader's base directory.
+        return os.path.normpath(
+            os.path.join(os.path.dirname(from_template), template_to_load)
+        )
 
 
 class Builder:
@@ -80,8 +95,9 @@ class Builder:
         for filename in glob.glob(
             "**/*.toml", root_dir=self.output_dir, recursive=True
         ):
+            filename = self.output_dir / filename
             log("Reading template data from: {}", filename)
-            data = toml.load(self.output_dir / filename)
+            data = toml.load(filename)
             overlap = set(data.keys()).intersection(env.globals.keys())
             if overlap:
                 abort(
@@ -92,20 +108,16 @@ class Builder:
     def _add_markdown_filter(self, env):
         @jinja2.pass_context
         def convert_markdown(context, value):
-            if value.startswith(".") or "/" not in value:
-                # Relative to template file.
-                markdown_filename = (
-                    self.output_dir / pathlib.Path(context.name).parent / value
-                )
-            else:
-                # Relative to main content root.
-                markdown_filename = self.output_dir / value
-            os.chdir(markdown_filename.parent)
+            # Always relative to template file.
+            markdown_filename = (
+                self.output_dir / pathlib.Path(context.name).parent / value
+            )
             md = markdown_it.MarkdownIt(
                 "commonmark", {"typographer": True, "linkify": True}
             )
             md.use(markdown_footnote_plugin)
             md.use(markdown_math_plugin)
+            md.use(markdown_attrs_plugin)
             md.enable(["replacements", "smartquotes", "linkify", "table"])
             log("Converted markdown from: {}", markdown_filename)
             with open(markdown_filename, "r") as f:
@@ -115,7 +127,7 @@ class Builder:
 
     def render_templates(self):
         loader = jinja2.FileSystemLoader(self.output_dir)
-        env = jinja2.Environment(loader=loader)
+        env = _RelativeEnvironment(loader=loader)
         self._add_template_data(env)
         self._add_markdown_filter(env)
         template_filenames = env.list_templates(
@@ -240,7 +252,9 @@ class Server:
                 async for msg in ws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
                         if msg.data != "ping":
-                            log("Received unexpected message over hot reloader websocket: {msg.data}")
+                            log(
+                                "Received unexpected message over hot reloader websocket: {msg.data}"
+                            )
             finally:
                 log("Closed hot reloader websocket")
                 await ws.close()
@@ -278,6 +292,7 @@ class Watcher:
         log("Watching for changes in: {}", self.directory)
         async for changes in watchfiles.awatch(self.directory):
             for change, filename in list(changes):
+                filename = pathlib.Path(filename)
                 if change == watchfiles.Change.added:
                     log("Noticed file added: {}", filename)
                 elif change == watchfiles.Change.deleted:

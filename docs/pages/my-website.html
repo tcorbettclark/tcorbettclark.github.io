@@ -16,11 +16,11 @@
     <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
     "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
-    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
     <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
+    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
     <script src="/js/hot_reloader.js" async="async"></script>
     <script src="/js/render_maths.js"></script>
   </head>
@@ -35,8 +35,8 @@
         </p>
       </div>
     </section>
-    <div class="tag m-4">
-      <a href="/index.html"><i class="fa-solid fa-arrow-left"></i> Back to home page</a>
+    <div class="m-4">
+      <span class="tag"><a href="/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
     </div>
     <section class="section pt-0">
       <div class="box has-background-primary-95">
@@ -170,6 +170,30 @@
             See <a href=
             "https://developer.chrome.com/docs/web-platform/page-lifecycle-api">https://developer.chrome.com/docs/web-platform/page-lifecycle-api</a>
           </p>
+          <h2>
+            Pending / keep an eye for the future
+          </h2>
+          <p>
+            Don’t include a trailing slash on void elements. See: <a href=
+            "https://wet-boew.github.io/wet-boew-documentation/decision/15.html">https://wet-boew.github.io/wet-boew-documentation/decision/15.html</a>
+          </p>
+          <p>
+            W3 Validator warns about them.
+          </p>
+          <p>
+            <a href=
+            "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes</a>
+          </p>
+          <p>
+            Basically, HTML5 is not XML. And since href arguments don’t have to be quoted, we have an ambiguity:
+          </p>
+          <pre><code>&lt;link href=https://foo.bar.baz/&gt;
+&lt;link href="https://foo.bar.baz"/&gt;
+&lt;link href="https://foo.bar.baz/"&gt;
+</code></pre>
+          <h2>
+            Notes
+          </h2>
           <p>
             Output has to go in <code>docs/</code> because github pages only support serving content from
             <code>/</code> or <code>docs/</code>.

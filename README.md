@@ -15,7 +15,8 @@ See `output/pages/my-website.md` (or rendered version on my website).
 
 # TODO - technical
 
-- Extend base to support additional per-page css, per-page javascript, and general meta.
+- Support suspend/resume terminal signals for when making many edits
+- Control the wrapping of icons and words in the profile section with different widths and zooms.
 - Look at all markdown plugins
 - Add licence
 - Create a 404 in the dev server, but also on the main page.
