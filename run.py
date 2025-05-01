@@ -239,15 +239,11 @@ class Server:
             try:
                 async for msg in ws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
-                        if msg.data == "close":
-                            await ws.close()
-                    elif msg.type == aiohttp.WSMsgType.ERROR:
-                        print(
-                            "ws connection closed with exception %s"
-                            % ws.exception()
-                        )
-                log("Closed hot reloader websocket")
+                        if msg.data != "ping":
+                            log("Received unexpected message over hot reloader websocket: {msg.data}")
             finally:
+                log("Closed hot reloader websocket")
+                await ws.close()
                 self.web_sockets.remove(ws)
             return ws
 
