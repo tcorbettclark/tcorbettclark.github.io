@@ -47,6 +47,20 @@ def abort(message, *args):
     quit()
 
 
+class _RelativeEnvironment(jinja2.Environment):
+    """Make template loading relative to the directory of the source filename.
+
+    See: https://jinja.palletsprojects.com/en/stable/api/#jinja2.Environment.join_path
+    """
+
+    def join_path(self, template, parent):
+        template_to_load = template
+        from_template = parent  # Relative to FileSystemLoader's base directory.
+        return os.path.normpath(
+            os.path.join(os.path.dirname(from_template), template_to_load)
+        )
+
+
 class Builder:
     def __init__(self, content_dir, output_dir):
         self.output_dir = output_dir
@@ -93,15 +107,10 @@ class Builder:
     def _add_markdown_filter(self, env):
         @jinja2.pass_context
         def convert_markdown(context, value):
-            if value.startswith(".") or "/" not in value:
-                # Relative to template file.
-                markdown_filename = (
-                    self.output_dir / pathlib.Path(context.name).parent / value
-                )
-            else:
-                # Relative to main content root.
-                markdown_filename = self.output_dir / value
-            os.chdir(markdown_filename.parent)
+            # Always relative to template file.
+            markdown_filename = (
+                self.output_dir / pathlib.Path(context.name).parent / value
+            )
             md = markdown_it.MarkdownIt(
                 "commonmark", {"typographer": True, "linkify": True}
             )
@@ -117,7 +126,7 @@ class Builder:
 
     def render_templates(self):
         loader = jinja2.FileSystemLoader(self.output_dir)
-        env = jinja2.Environment(loader=loader)
+        env = _RelativeEnvironment(loader=loader)
         self._add_template_data(env)
         self._add_markdown_filter(env)
         template_filenames = env.list_templates(
