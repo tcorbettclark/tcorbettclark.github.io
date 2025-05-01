@@ -1,0 +1,64 @@
+[[MY_INTERESTS]]
+topic = "Programming"
+fa_class = "fa-code"
+
+[[MY_INTERESTS]]
+topic = "Mathematics"
+fa_class = "fa-shapes"
+
+[[MY_INTERESTS]]
+topic = "AI/ML"
+fa_class = "fa-share-nodes"
+
+[[MY_INTERESTS]]
+topic = "Philosophy"
+fa_class = "fa-lightbulb"
+
+[[MY_INTERESTS]]
+topic = "Music"
+fa_class = "fa-music"
+
+[[MY_INTERESTS]]
+topic = "Skiing"
+fa_class = "fa-person-skiing"
+
+[[MY_INTERESTS]]
+topic = "Chess"
+fa_class = "fa-chess-knight"
+
+[[MY_INTERESTS]]
+topic = "Writing"
+fa_class = "fa-book"
+
+[[MY_INTERESTS]]
+topic = "Learning"
+fa_class = "fa-graduation-cap"
+
+[[MY_INTERESTS]]
+topic = "Investing"
+fa_class = "fa-sack-dollar"
+
+
+[[MY_SOCIALS]]
+fa_class = "fa-linkedin"
+url = "https://www.linkedin.com/in/tcorbettclark/"
+
+[[MY_SOCIALS]]
+fa_class = "fa-github"
+url = "https://github.com/tcorbettclark"
+
+[[MY_SOCIALS]]
+fa_class = "fa-quora"
+url = "https://quora.com/Timothy-Corbett-Clark"
+
+[[MY_SOCIALS]]
+fa_class = "fa-stack-overflow"
+url = "https://stackoverflow.com/users/1980944/timothy-corbett-clark"
+
+[[MY_SOCIALS]]
+fa_class = "fa-bluesky"
+url = "https://bluesky.app/@tcorbettclark"
+
+[[MY_SOCIALS]]
+fa_class = "fa-orcid"
+url = "https://orcid.org/0009-0004-7391-744X"

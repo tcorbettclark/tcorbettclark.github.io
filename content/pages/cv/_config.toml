@@ -1,0 +1,18 @@
+MY_CAREER_SUMMARY = "TODO copy from LinkedIn"
+
+[[MY_EDUCATION]]
+degree = "asdf"
+asdf = "nology (NSIT)"
+time = "2012 - 2016"
+
+[[MY_EXPERIENCE]]
+job_title = "Software Development Engineer"
+time = "Oct 2016 - Present"
+company = "Zomato, Gurgaon IN"
+details = "Part of the web team working on developing a smart POS system for restaurants."
+
+MY_PROJECT_INTRO = "You can list your side projects or open source libraries in this section. "
+
+[[MY_PROJECTS]]
+title = "Open Source Contributions"
+tagline = "blah."

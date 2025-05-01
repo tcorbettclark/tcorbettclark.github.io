@@ -1,0 +1,12 @@
+{% if MY_EDUCATION %}
+<div class="block">
+    <h2>Education</h2>
+    {% for education in MY_EDUCATION %}
+        <div class="item">
+    	    <h4 class="degree">{{ education['degree'] }}</h4>
+    	    <h5 class="meta">{{ education['meta'] }}</h5>
+    	    <div class="time">{{ education['time'] }}</div>
+    	</div>
+     {% endfor %}
+</div>
+{% endif %}
