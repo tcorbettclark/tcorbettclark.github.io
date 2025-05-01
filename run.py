@@ -15,6 +15,7 @@ import tidy
 import toml
 import user_agents
 import watchfiles
+from mdit_py_plugins.attrs import attrs_plugin as markdown_attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin as markdown_math_plugin
 from mdit_py_plugins.footnote import footnote_plugin as markdown_footnote_plugin
 
@@ -106,6 +107,7 @@ class Builder:
             )
             md.use(markdown_footnote_plugin)
             md.use(markdown_math_plugin)
+            md.use(markdown_attrs_plugin)
             md.enable(["replacements", "smartquotes", "linkify", "table"])
             log("Converted markdown from: {}", markdown_filename)
             with open(markdown_filename, "r") as f:
@@ -240,7 +242,9 @@ class Server:
                 async for msg in ws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
                         if msg.data != "ping":
-                            log("Received unexpected message over hot reloader websocket: {msg.data}")
+                            log(
+                                "Received unexpected message over hot reloader websocket: {msg.data}"
+                            )
             finally:
                 log("Closed hot reloader websocket")
                 await ws.close()
