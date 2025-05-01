@@ -117,3 +117,5 @@ Basically, HTML5 is not XML. And since href arguments don't have to be quoted, w
 ## Notes
 
 Output has to go in `docs/` because github pages only support serving content from `/` or `docs/`.
+
+If making changes which temporarily break templating, suspend with `ctrl-z`, make the changes, and then foreground with `fg`. If changes were made to files then the reloader will run.
