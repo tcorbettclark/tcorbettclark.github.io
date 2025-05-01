@@ -170,6 +170,30 @@
             See <a href=
             "https://developer.chrome.com/docs/web-platform/page-lifecycle-api">https://developer.chrome.com/docs/web-platform/page-lifecycle-api</a>
           </p>
+          <h2>
+            Pending / keep an eye for the future
+          </h2>
+          <p>
+            Don’t include a trailing slash on void elements. See: <a href=
+            "https://wet-boew.github.io/wet-boew-documentation/decision/15.html">https://wet-boew.github.io/wet-boew-documentation/decision/15.html</a>
+          </p>
+          <p>
+            W3 Validator warns about them.
+          </p>
+          <p>
+            <a href=
+            "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes</a>
+          </p>
+          <p>
+            Basically, HTML5 is not XML. And since href arguments don’t have to be quoted, we have an ambiguity:
+          </p>
+          <pre><code>&lt;link href=https://foo.bar.baz/&gt;
+&lt;link href="https://foo.bar.baz"/&gt;
+&lt;link href="https://foo.bar.baz/"&gt;
+</code></pre>
+          <h2>
+            Notes
+          </h2>
           <p>
             Output has to go in <code>docs/</code> because github pages only support serving content from
             <code>/</code> or <code>docs/</code>.
