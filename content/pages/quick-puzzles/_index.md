@@ -7,22 +7,7 @@ Below are a few of my answers to some maths puzzles, mostly taken from
 
 This PDF (TODO) contains the fully worked up answers, but the questions are listed below:
 
-## Wheel of fortune
-
-![wheel of fortune](wheel-of-fortune.png "Wheel of fortune"){.small-image}
-
-Unit square and inscribed circle. Find: $a^2 + b^2 + c^2 + d^2$.
-
-From https://mirangu.com/wheel-of-fortune/
-
-Twitter post (first approach): https://x.com/tcorbettclark/status/1692831256810037358
-
-Second approach: https://x.com/tcorbettclark/status/1692585115371577465
-
-
-TODO: what about more sides? Triangle? Hexagon?
-
-
+* [Puzzle 1](puzzle-1/index.html)
 
 # TODO from here
 

@@ -95,8 +95,9 @@ class Builder:
         for filename in glob.glob(
             "**/*.toml", root_dir=self.output_dir, recursive=True
         ):
+            filename = self.output_dir / filename
             log("Reading template data from: {}", filename)
-            data = toml.load(self.output_dir / filename)
+            data = toml.load(filename)
             overlap = set(data.keys()).intersection(env.globals.keys())
             if overlap:
                 abort(
@@ -291,6 +292,7 @@ class Watcher:
         log("Watching for changes in: {}", self.directory)
         async for changes in watchfiles.awatch(self.directory):
             for change, filename in list(changes):
+                filename = pathlib.Path(filename)
                 if change == watchfiles.Change.added:
                     log("Noticed file added: {}", filename)
                 elif change == watchfiles.Change.deleted:

@@ -28,6 +28,7 @@
     </head>
     <body>
         {% include "_header.html" %}
+        {% block breadcrumb %}{% endblock %}
         {% block content %}{% endblock %}
         {% include "_footer.html" %}
         {% include "_analytics.html" %}
