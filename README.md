@@ -17,7 +17,6 @@ See `output/pages/my-website.md` (or rendered version on my website).
 
 - Extend base to support additional per-page css, per-page javascript, and general meta.
 - Look at all markdown plugins
-- Websocket handler reading messages. Should listen for ping.
 - Add licence
 - Create a 404 in the dev server, but also on the main page.
 - Fix hot reloader on back/forward history (when dev tools closed)

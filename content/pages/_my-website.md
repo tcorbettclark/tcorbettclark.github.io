@@ -46,7 +46,7 @@ Why organise artefacts by type? Organise by use.
 
 TODO: explain math rendering (markdown plugin to escape and include in span with class, then small javascript hook to call katex on all cells after DOM loaded.)
 
-TODO: explain webmanifest file, especially for favicons
+TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
 
 ## Colour and styling
 
@@ -96,3 +96,8 @@ Tools:
   event freeze and resume
 
 See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+
+
+
+
+Output has to go in `docs/` because github pages only support serving content from `/` or `docs/`.

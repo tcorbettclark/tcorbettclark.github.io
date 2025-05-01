@@ -4,6 +4,7 @@ import logging
 import os
 import pathlib
 import shutil
+import sys
 
 import aiohttp
 import aiohttp.abc
@@ -70,6 +71,12 @@ class Builder:
         )
 
     def _add_template_data(self, env):
+        cmdline_data = [
+            a.lstrip("-").replace("-", "_").upper() for a in sys.argv[1:]
+        ]
+        if cmdline_data:
+            log(f"Using template data from shell: {', '.join(cmdline_data)}")
+            env.globals.update(dict.fromkeys(cmdline_data, True))
         for filename in glob.glob(
             "**/*.toml", root_dir=self.output_dir, recursive=True
         ):
@@ -77,7 +84,9 @@ class Builder:
             data = toml.load(self.output_dir / filename)
             overlap = set(data.keys()).intersection(env.globals.keys())
             if overlap:
-                abort(f"Found duplicate key(s) in TOML template data: {", ".join(overlap)}")
+                abort(
+                    f"Duplicated key(s) in template data: {', '.join(overlap)}"
+                )
             env.globals.update(data)
 
     def _add_markdown_filter(self, env):
@@ -230,15 +239,11 @@ class Server:
             try:
                 async for msg in ws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
-                        if msg.data == "close":
-                            await ws.close()
-                    elif msg.type == aiohttp.WSMsgType.ERROR:
-                        print(
-                            "ws connection closed with exception %s"
-                            % ws.exception()
-                        )
-                log("Closed hot reloader websocket")
+                        if msg.data != "ping":
+                            log("Received unexpected message over hot reloader websocket: {msg.data}")
             finally:
+                log("Closed hot reloader websocket")
+                await ws.close()
                 self.web_sockets.remove(ws)
             return ws
 
