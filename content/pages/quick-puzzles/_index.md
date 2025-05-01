@@ -9,7 +9,7 @@ This PDF (TODO) contains the fully worked up answers, but the questions are list
 
 ## Wheel of fortune
 
-![wheel of fortune](wheel-of-fortune.png "Wheel of fortune")
+![wheel of fortune](wheel-of-fortune.png "Wheel of fortune"){.small-image}
 
 Unit square and inscribed circle. Find: $a^2 + b^2 + c^2 + d^2$.
 
@@ -20,6 +20,7 @@ Twitter post (first approach): https://x.com/tcorbettclark/status/16928312568100
 Second approach: https://x.com/tcorbettclark/status/1692585115371577465
 
 
+TODO: what about more sides? Triangle? Hexagon?
 
 
 
