@@ -282,7 +282,7 @@ class Watcher:
 
 async def main():
     content_dir = ROOT_DIR / "content"
-    output_dir = ROOT_DIR / "output"
+    output_dir = ROOT_DIR / "docs"
 
     builder = Builder(content_dir, output_dir)
     watcher = Watcher(content_dir)
