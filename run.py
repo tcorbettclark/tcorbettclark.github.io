@@ -251,9 +251,9 @@ class Server:
             try:
                 async for msg in ws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
-                        if msg.data != "ping":
+                        if msg.data != "keep-alive-ping":
                             log(
-                                "Received unexpected message over hot reloader websocket: {msg.data}"
+                                f"Received unexpected message over hot reloader websocket: {msg.data}"
                             )
             finally:
                 log("Closed hot reloader websocket")
