@@ -119,6 +119,11 @@ Basically, HTML5 is not XML. And since href arguments don't have to be quoted, w
 <link href="https://foo.bar.baz/">
 ```
 
+## Deploment
+
+Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the changes will be live.
+
+Then run the deployed site  against W3C Validator.
 
 ## Notes
 

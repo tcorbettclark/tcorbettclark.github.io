@@ -30,3 +30,4 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 - Reduce (stop?) Fontawesome rendering flicker on load
 - Switch this list into github issues, with milestone planning, ready for merging workflow, etc.
 - Keep an eye on how well the pages print to PDF, e.g. my CV page. Currently pretty good!
+  Perhaps hide the breadcrumb navigation?
