@@ -1,0 +1,24 @@
+{% set draft=true %}
+{% extends "_base.html" %}
+{% block content %}
+<section class="section">
+    <div class="columns">
+        <div class="column">
+            <div class="box has-background-primary-95">
+                <h1 class="title">Work in progress</h1>
+                <ul>
+                    <li><a href="pages/cv.html">Professional career</a></li>
+                    <li><a href="pages/about-me.html">About me</a></li>
+                    <li><a href="pages/my-tastes.html">My Tastes</a></li>
+                    <li><a href="pages/publications.html">Publications</a></li>
+                    <li><a href="pages/recreational-maths/index.html">Recreational Maths</a></li>
+                    <li><a href="pages/my-website.html">My website</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="column is-narrow">
+            {% include "profile/_index.html" %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,5 +1,5 @@
 [project]
-name = "website-src"
+name = "my-website"
 version = "0.1.0"
 description = "My homepage at www.corbettclark.com"
 readme = "README.md"

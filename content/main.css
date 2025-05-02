@@ -17,3 +17,14 @@
         max-width: unset;
     }
 }
+
+/* Use SVG to create a nice background watermark indicating the page is in DRAFT */
+.draft-watermark {
+    background-image: url("data:image/svg+xml;utf8,\
+        <svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='80px' width='80px'>\
+            <text transform='translate(20, 77) rotate(-25)' fill='rgba(45,45,45,0.2)' font-size='20px'>\
+                DRAFT\
+            </text>\
+        </svg>\
+    ");
+}

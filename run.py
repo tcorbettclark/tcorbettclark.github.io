@@ -4,7 +4,6 @@ import logging
 import os
 import pathlib
 import shutil
-import sys
 
 import aiohttp
 import aiohttp.abc
@@ -86,12 +85,6 @@ class Builder:
         )
 
     def _add_template_data(self, env):
-        cmdline_data = [
-            a.lstrip("-").replace("-", "_").upper() for a in sys.argv[1:]
-        ]
-        if cmdline_data:
-            log(f"Using template data from shell: {', '.join(cmdline_data)}")
-            env.globals.update(dict.fromkeys(cmdline_data, True))
         for filename in glob.glob(
             "**/*.toml", root_dir=self.output_dir, recursive=True
         ):

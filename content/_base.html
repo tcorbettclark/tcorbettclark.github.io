@@ -26,7 +26,7 @@
         <script src="/js/render_maths.js"></script>
         {% block script_tags_to_extra_js %}{% endblock %}
     </head>
-    <body>
+    <body {% if draft %}class="draft-watermark"{% endif %}>
         {% include "_header.html" %}
         {% block breadcrumb %}{% endblock %}
         {% block content %}{% endblock %}
