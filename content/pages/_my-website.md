@@ -97,6 +97,12 @@ Tools:
 
 See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
 
+new WebSocket does not raise an exception on failure to connect because it is asynchronous.
+onerror can occur even under normal use, e.g. using the browser history forward/back buttons, and having the page freeze/resume etc.
+
+Most robust approach is to trap onclose and differentiate between whether the connection has ever opened ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it hasn't opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we reload the whole page (and hence start the cycle again).
+
+
 ## Pending / keep an eye for the future
 
 Don't include a trailing slash on void elements. See:
