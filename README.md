@@ -4,6 +4,7 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 
 # TODO - content
 
+- rename math puzzles to recreational maths, and then list as problem 1, problem 2, etc.
 - skills
 - now page. See https://nownownow.com/about
 - Typst diagram and first pdf
@@ -15,11 +16,12 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 
 # TODO - technical
 
+- Fix colour issue with manifest and Bulma not appearing to be the same...?!
+- View in dark mode has poor contrast (I took photo)
 - Control the wrapping of icons and words in the profile section with different widths and zooms.
 - Look at all markdown plugins
 - Add licence
 - Create a 404 in the dev server, but also on the main page.
-- Fix hot reloader on back/forward history (when dev tools closed)
 - Use the W3C Validator
 - Add Google analytics
 - Add a sitemap.xml and update robots.txt file
