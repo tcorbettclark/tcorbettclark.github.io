@@ -28,7 +28,16 @@
     </head>
     <body {% if draft %}class="draft-watermark"{% endif %}>
         {% include "_header.html" %}
-        {% block breadcrumb %}{% endblock %}
+        <div class="m-4">
+            {% if draft %}
+                <span class="tag">
+                    <a href="/wip.html">
+                        <i class="fa-solid fa-bug"></i> wip
+                    </a>
+                </span>
+            {% endif %}
+            {% block breadcrumb %}{% endblock %}
+        </div>
         {% block content %}{% endblock %}
         {% include "_footer.html" %}
         {% include "_analytics.html" %}

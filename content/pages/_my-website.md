@@ -130,3 +130,18 @@ Then run the deployed site  against W3C Validator.
 Output has to go in `docs/` because github pages only support serving content from `/` or `docs/`.
 
 If making changes which temporarily break templating, suspend with `ctrl-z`, make the changes, and then foreground with `fg`. If changes were made to files then the reloader will run.
+
+
+## DRAFT mode
+
+CSS watermark
+switch passed in to top level templates
+The `/wip.html` page and the "hidden" link in right side of the navigation (breadcrumb) space.
+So now often I can commit and push to master, and github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
+
+And now I can test draft pages with w3 validator, on different devices etc.
+
+I don't really care that people can see such pages - the watermark makes it obvious.
+And the search engines start to see something arriving, changing often, which speeds up indexing to make more discoverable (not that that really matters, but is nice).
+
+Also, no separate dev build and live build - all one and the same.
