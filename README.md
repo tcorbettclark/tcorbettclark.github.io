@@ -4,7 +4,6 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 
 # TODO - content
 
-- rename math puzzles to recreational maths, and then list as problem 1, problem 2, etc.
 - skills
 - now page. See https://nownownow.com/about
 - Typst diagram and first pdf

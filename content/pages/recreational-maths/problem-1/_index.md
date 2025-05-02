@@ -1,4 +1,4 @@
-## Puzzle 1
+## Problem 1
 
 ![wheel of fortune](wheel-of-fortune.png "Wheel of fortune"){.small-image}
 
