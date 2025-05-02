@@ -14,7 +14,6 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 # TODO - technical
 
 - View in dark mode has poor contrast (I took photo).
-- Control the wrapping of icons and words in the profile section with different widths and zooms.
 - Decide on all markdown plugins.
 - Add open source licence.
 - Create a 404 in the dev server, but also on the main page.
