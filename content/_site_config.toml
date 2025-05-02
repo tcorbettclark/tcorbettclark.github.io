@@ -7,6 +7,6 @@ COPYRIGHT_FOOTER = "Timothy Corbett-Clark, 2025"
 # TODO - sort/fix
 GOOGLE_ANALYTICS = "UA-6880945-2" # also the analytics.html template
 
-MY_NAME = "Dr Timothy Corbett-Clark"
+MY_NAME = "Dr Timothy Corbett&#8209;Clark"
 MY_SHORT_NAME = "Tim C-C"
 MY_TAGLINE = "CTO, Researcher, Architect, Developer"

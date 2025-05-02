@@ -1,6 +1,10 @@
-# Maintaining my website
+# My website
 
-My home page is built using a simple home grown static site generator.
+Firstly, the purpose of my website is to encourage me to write, which in turn encourages me to clarify my thinking. Whether anyone else actually reads it is secondary, although of course I hope that it may be of some interest to others, and it is important for my own discipline that I believe others could be reading it!
+
+It is not a blog. My imaginary readers should not have to assemble an historical assembly of articles into cohesive thoughts; instead it is on the writer to provide and maintain cohesion.
+
+At a technical level, this website is built using a home grown static site generator.
 
 ## Environment
 
@@ -16,12 +20,6 @@ To update content, rebuild, and deploy:
   ...make changes and tool will reload
   ...update git repo and push to github
 ```
-
-## Philosphy
-
-Purpose of this site...
-
-Don't make the reader assemble blog timeline of thoughts, but make that the writer's responsibility. To see recent changes, see XXXX.
 
 ## Key features
 
