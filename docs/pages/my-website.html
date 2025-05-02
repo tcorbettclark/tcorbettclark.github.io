@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Timothy Corbett-Clark" />
+    <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
+    <title>
+      Dr Timothy Corbett-Clark
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
+    "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
+    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script src="/js/hot_reloader.js" async="async"></script>
+    <script src="/js/render_maths.js"></script>
+  </head>
+  <body class="draft-watermark">
+    <section class="hero is-small is-primary">
+      <div class="hero-body">
+        <p class="title">
+          Dr Timothy Corbett-Clark
+        </p>
+        <p class="subtitle">
+          CTO, Researcher, Architect, Developer
+        </p>
+      </div>
+    </section>
+    <div class="m-4">
+      <span class="tag"><a href="/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
+    </div>
+    <section class="section pt-0">
+      <div class="box has-background-primary-95">
+        <div class="content">
+          <h1>
+            Maintaining my website
+          </h1>
+          <p>
+            My home page is built using a simple home grown static site generator.
+          </p>
+          <h2>
+            Environment
+          </h2>
+          <p>
+            Need html-tidy (<a href="https://www.html-tidy.org">https://www.html-tidy.org</a>) brew install tidy-html5
+            And make sure that the library can be found on the library search path. For example, ensure
+            DYLD_LIBRARY_PATH includes /usr/local/lib/
+          </p>
+          <p>
+            To update content, rebuild, and deploy:
+          </p>
+          <pre><code>  uv run python main.py
+  ...view / review on locally served site
+  ...make changes and tool will reload
+  ...update git repo and push to github
+</code></pre>
+          <h2>
+            Philosphy
+          </h2>
+          <p>
+            Purpose of this site…
+          </p>
+          <p>
+            Don’t make the reader assemble blog timeline of thoughts, but make that the writer’s responsibility. To see
+            recent changes, see XXXX.
+          </p>
+          <h2>
+            Key features
+          </h2>
+          <p>
+            The key features of my approach are:
+          </p>
+          <ul>
+            <li>Just code i.e. not another static site generator library! (see <a href=
+            "https://jamstack.org/generators/">https://jamstack.org/generators/</a> …)
+            </li>
+            <li>Support writing and maintaining pages of content. No blog posts, tags, articles, Atom or RSS feeds etc.
+            </li>
+            <li>All files are kept together in one directory tree. At the start of the build process, this is cloned.
+            </li>
+            <li>No files are moved around, but working files are deleted (so more of a subtractive approach than a
+            move/additive one.)
+            </li>
+            <li>Organising and templating HTML using Jinja2.
+            </li>
+            <li>Simple Jinja2 filter to allow content to be written using Markdown (in plain .md files).
+            </li>
+            <li>TODO Automatic generation of sitemap (both HTML and xml file) from the content (for SEO).
+            </li>
+            <li>Html-tidy of all output to both validate and keep everything tidy.
+            </li>
+            <li>Hot reloading localhost server, which rebuilds on change before signalling to browser(s) to reload.
+            </li>
+          </ul>
+          <p>
+            Look - localisation of content. Add to my website notes Indentation - for clarity in content view for
+            easier writing and maintaining. But also want properly formatted output. Hence tidy. Also my website -
+            explain value of writing and recording FOR ME. Think of it like a test. And might be useful for others. Why
+            organise artefacts by type? Organise by use.
+          </p>
+          <p>
+            TODO: explain math rendering (markdown plugin to escape and include in span with class, then small
+            javascript hook to call katex on all cells after DOM loaded.)
+          </p>
+          <p>
+            TODO: explain webmanifest file, especially for favicons. See <a href=
+            "https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>.
+          </p>
+          <h2>
+            Colour and styling
+          </h2>
+          <p>
+            TODO
+          </p>
+          <p>
+            Simple “tcc” Favicon generated using <a href=
+            "https://favicon.io/favicon-generator/">https://favicon.io/favicon-generator/</a>, using the same primary
+            colour as configured in Bulma.
+          </p>
+          <h2>
+            Build process
+          </h2>
+          <p>
+            The build process works as follows:
+          </p>
+          <ol>
+            <li>Clone the content directory into a new output directory.
+            </li>
+            <li>Using only the output directory 1a. Apply Jinja2 templates to all HTML files which do not start with an
+            underscore, and render back in place. 1b Delete all working files and directories (anything with a leading
+            underscore in the path segment). 1c Run html-tidy over all HTML files to validate and fix indentation.
+            </li>
+          </ol>
+          <p>
+            The end result is a clean output directory ready for deployment.
+          </p>
+          <p>
+            Every build is a clean build. No caching as plenty faster enough without complexity penalty or subtle
+            gotchas.
+          </p>
+          <h2>
+            Hot Re-loader fun
+          </h2>
+          <p>
+            <a href=
+            "https://developer.chrome.com/docs/web-platform/page-lifecycle-api">https://developer.chrome.com/docs/web-platform/page-lifecycle-api</a>
+          </p>
+          <p>
+            Need to be able to handle: 1 Browser refresh/reload by hand 1 Browser refresh/reload triggered from server
+            following change 1 Navigating away to a page on another site which exists 1 Navigating away to a page on
+            another site which does not exist (404) 1 Navigating to another page on my site which exists 1 Navigating
+            to another page on my site which does not exist (404) 1 Back button 1 Forward button 1 Close tab 1 Close
+            browser
+          </p>
+          <p>
+            Tools: 1 Server detecting connection has dropped 1 Client detecting connection has dropped 1 Client side
+            localstorage 1 Browser detecting a reload/refresh is about to happen event beforeunload event pagehide and
+            pageshow event visibilitychange event freeze and resume
+          </p>
+          <p>
+            See <a href=
+            "https://developer.chrome.com/docs/web-platform/page-lifecycle-api">https://developer.chrome.com/docs/web-platform/page-lifecycle-api</a>
+          </p>
+          <p>
+            new WebSocket does not raise an exception on failure to connect because it is asynchronous. onerror can
+            occur even under normal use, e.g. using the browser history forward/back buttons, and having the page
+            freeze/resume etc.
+          </p>
+          <p>
+            Most robust approach is to trap onclose and differentiate between whether the connection has ever opened
+            ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it
+            hasn’t opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we
+            reload the whole page (and hence start the cycle again).
+          </p>
+          <h2>
+            Pending / keep an eye for the future
+          </h2>
+          <p>
+            Don’t include a trailing slash on void elements. See: <a href=
+            "https://wet-boew.github.io/wet-boew-documentation/decision/15.html">https://wet-boew.github.io/wet-boew-documentation/decision/15.html</a>
+          </p>
+          <p>
+            W3 Validator warns about them.
+          </p>
+          <p>
+            <a href=
+            "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes</a>
+          </p>
+          <p>
+            Basically, HTML5 is not XML. And since href arguments don’t have to be quoted, we have an ambiguity:
+          </p>
+          <pre><code>&lt;link href=https://foo.bar.baz/&gt;
+&lt;link href="https://foo.bar.baz"/&gt;
+&lt;link href="https://foo.bar.baz/"&gt;
+</code></pre>
+          <h2>
+            Deploment
+          </h2>
+          <p>
+            Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the
+            changes will be live.
+          </p>
+          <p>
+            Then run the deployed site against W3C Validator.
+          </p>
+          <h2>
+            Notes
+          </h2>
+          <p>
+            Output has to go in <code>docs/</code> because github pages only support serving content from
+            <code>/</code> or <code>docs/</code>.
+          </p>
+          <p>
+            If making changes which temporarily break templating, suspend with <code>ctrl-z</code>, make the changes,
+            and then foreground with <code>fg</code>. If changes were made to files then the reloader will run.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer class="footer pt-4 pb-4">
+      <div class="has-text-centered">
+        <p>
+          <span class="icon-text"><span class="icon"><i class="fa-regular fa-copyright"></i></span> <span>Timothy
+          Corbett-Clark, 2025</span></span>
+        </p>
+        <p>
+          Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
+          using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
+          "https://jinja.palletsprojects.com/" target="_blank">Jinja2</a>, <a href=
+          "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
+          target="_blank">Bulma</a>.
+        </p>
+      </div>
+    </footer>
+    <script type="text/javascript">
+    //<![CDATA[
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-6880945-2', 'auto');
+    ga('send', 'pageview');
+    //]]>
+    </script>
+  </body>
+</html>
