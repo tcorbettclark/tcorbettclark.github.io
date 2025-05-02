@@ -1,13 +1,13 @@
-# Fun puzzles
+# Recreational Maths
 
-I enjoy solving maths puzzles, e.g. from:
+I enjoy mathematical nuggets and puzzles, e.g. from:
 [@mathisstillfun](https://x.com/mathisstillfun),
 [@mathssolutionz](https://x.com/mathssolutionz),
 [Mirangu](https://mirangu.com).
 
-Here are some which looked interesting, surprising, and/or fun. My answer(s) are written up as a PDF.
+Here are some of the more interesting, surprising, and/or fun. My answer(s) are written up as a PDF.
 
-* [Puzzle 1](puzzle-1/index.html)
+* [Problem 1](problem-1/index.html)
 * _More soon!_
 
 <!--
