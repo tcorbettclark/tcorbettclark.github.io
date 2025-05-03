@@ -13,7 +13,8 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 
 # TODO - technical
 
-- View in dark mode has poor contrast (I took photo).
+- Add light/dark mode switcher (take from Bulma website)
+- Fix colour issues in dark mode - poor contrast.
 - Decide on all markdown plugins.
 - Add open source licence.
 - Create a 404 in the dev server, but also on the main page.
