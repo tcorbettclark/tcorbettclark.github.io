@@ -1,4 +1,4 @@
-#!/usr/bin/env DYLD_LIBRARY_PATH=/usr/local/lib uv run
+#!/usr/bin/env -S DYLD_LIBRARY_PATH=/usr/local/lib uv run --script
 
 # /// script
 # requires-python = ">=3.12"
