@@ -15,6 +15,9 @@ In short, to build and serve locally with a hot reloader, run:
 - Create My computer setup page, include software setup, configuration (link to github), and fastfetch output
 - Create My tools of choice page
 - Create an Updates page to list recent and notable updates. Maybe...
+- Look for other content ideas from:
+   - https://bastian.rieck.me
+   - https://theoryandpractice.org
 
 # TODO - technical
 
@@ -28,6 +31,7 @@ In short, to build and serve locally with a hot reloader, run:
 - Add a sitemap.xml and update robots.txt file.
   See https://thatware.co/xml-sitemap-creation-python/
   See https://michael-lisboa.medium.com/automate-your-sitemap-xml-with-python-and-deploy-it-as-a-cron-job-to-google-cloud-c5c4f986c734
+  See https://github.com/fossworx-labs/fossfolio/blob/main/fossfolio/sitemap.py
   Use git to see when files last changed.
   Note also need to submit to search engines (once?).
 - Find an alternative to FontAwesome. Maybe
