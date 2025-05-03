@@ -2,11 +2,6 @@
 
 See `content/pages/_my-website.md` (or rendered version on my website).
 
-In short, to build and serve locally with a hot reloader, run:
-```bash
-    uv run run.py
-```
-
 # TODO - content
 
 - Create a now page. See https://nownownow.com/about
