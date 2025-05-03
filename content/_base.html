@@ -28,7 +28,7 @@
     </head>
     <body {% if draft %}class="draft-watermark"{% endif %}>
         {% include "_header.html" %}
-        <div class="m-4">
+        <section class="m-4">
             {% if draft %}
                 <span class="tag">
                     <a href="/wip.html">
@@ -37,7 +37,7 @@
                 </span>
             {% endif %}
             {% block breadcrumb %}{% endblock %}
-        </div>
+        </section>
         {% block content %}{% endblock %}
         {% include "_footer.html" %}
     </body>
