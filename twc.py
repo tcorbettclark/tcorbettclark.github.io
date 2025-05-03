@@ -126,7 +126,7 @@ class Builder:
             )
             md.use(markdown_footnote_plugin)
             md.use(markdown_math_plugin)
-            md.use(markdown_attrs_plugin)
+            md.use(markdown_attrs_plugin, spans=True)
             md.enable(["replacements", "smartquotes", "linkify", "table"])
             log("Converted markdown from: {}", markdown_filename)
             with open(markdown_filename, "r") as f:
