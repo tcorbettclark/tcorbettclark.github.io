@@ -49,37 +49,39 @@
             Purpose
           </h2>
           <p>
-            The purpose of this website is to encourage me to write and think clearly. Whether anyone actually reads it
-            is secondary, although of course I hope that it may be of some interest. The website is also a presentation
-            of who I am.
+            The purpose of this website is to encourage me to write and think clearly. Whether anyone reads it is
+            secondary, although naturally I hope that it may be of some interest. The website is also a presentation of
+            who I am.
           </p>
           <p>
-            It is not a blog. I think it is better for the author (i.e. me) to take responsibilty for the assembly and
-            navigation of cohesive thought, improving and modifying as needed over time, rather than expect readers to
-            work through a chronology of potentially disparate articles “preserved for posterity”.
+            It is not a blog. Given the purpose, I think it is better for the author (i.e. me) to take responsibility
+            for the assembly and navigation of cohesive thought, improving and modifying as needed over time. This also
+            alleviates readers from working through a chronology of potentially disparate articles “preserved for
+            posterity”.
           </p>
           <h2>
             Technical overview
           </h2>
           <p>
-            This website is built using a hand-crafted static site generator. Yes, another one - see <a href=
-            "https://jamstack.org/generators/">this list</a>. My main justification for “reinventing the wheel” is
+            This website is built using a hand-crafted static site generator. Yes, another one - see for example,
+            <a href="https://jamstack.org/generators/">this list</a>. My justification for “reinventing the wheel” is
             that:
           </p>
           <ul>
-            <li>I want full control to make the result clean and right, with only the features I need;
-            </li>
             <li>I personally enjoy the deeper understanding which comes from creation;
             </li>
-            <li>For technical creators, I am not convinced of the benefits of working with a division between static
-            website “tool X” and the content. I’ve tried it in the past and too often needed to work on both sides of
-            the line to achieve what I wanted. The boundary seems too personal and arbitrary, so it is better to
-            dispense with it entirely.
+            <li>I want full control to make the result clean and right at both the human and technical level;
+            </li>
+            <li>I only want a small number of the features possible in a static site;
+            </li>
+            <li>In my evaluation of other tools I found an uneven and arbitrary (personal?) interface between the tool
+            and the content, resulting in the need to work on both sides of the line. This suggests either abandoning
+            the separation entirely or moving it substantially.
             </li>
           </ul>
           <p>
-            TODO: is the above correct? Or is it that the line is in the wrong place, mixing worlds? Avoid magic.
-            Explicit and obvious.
+            So the role of my tool is <em>only</em> to make it easier to create a static website made fundamentally of
+            HTML, CSS, and Javascript; it has no opinion about the web world.
           </p>
           <p>
             Show a minimal site.
@@ -88,7 +90,8 @@
             The key features of my approach are:
           </p>
           <ul>
-            <li>Support writing and maintaining pages of content. No blog posts, tags, articles, Atom or RSS feeds etc.
+            <li>Support writing and maintaining pages of content. No themes, plugins, blog posts, tags, articles, Atom
+            or RSS feeds etc.
             </li>
             <li>All files are kept together in one directory tree. At the start of the build process, this is cloned.
             </li>
@@ -112,18 +115,18 @@
             explain value of writing and recording FOR ME. Think of it like a test. And might be useful for others. Why
             organise artefacts by type? Organise by use.
           </p>
+          <p>
+            Subtractive approach, not copy/move/adjust.
+          </p>
           <h2>
             Environment
           </h2>
           <p>
-            The dependencies are Python and <a href="https://www.html-tidy.org">html-tidy</a>. The Python packages and
-            virtualenv are managed with <a href="https://docs.astral.sh/uv/">uv</a>. To create the enviroment on a Mac,
+            The dependencies are Python and <a href="https://www.html-tidy.org">html-tidy</a>. The Python interpretetr,
+            packages, and virtualenv are all managed with <a href="https://docs.astral.sh/uv/">uv</a>. To set things up
+            on a Mac,
           </p>
-          <pre><code class="language-bash">    brew install tidy-html5
-    # And ensure the library can be found on the library search path.
-    # For example, ensure DYLD_LIBRARY_PATH includes /usr/local/lib/
-
-    brew install uv
+          <pre><code class="language-bash">    brew install tidy-html5 uv
 
     # Checkout this repository
     git clone git@github.com:tcorbettclark/tcorbettclark.github.io.git
@@ -134,20 +137,72 @@
           </h2>
           <p>
             The builder, hot-reloader, and local server (on <code>http://localhost:8000</code>) are all in the
-            <code>run.py</code> script. Run this using <code>uv</code> (<a href=
-            "https://peps.python.org/pep-0723/">https://peps.python.org/pep-0723/</a> and <a href=
-            "https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies</a>)
+            <code>twc.py</code> script (TWC = Tim’s Web Creator; it had to be called something). This uses inline
+            script metadata <a href="https://peps.python.org/pep-0723">PEP-0723</a> to define dependencies which
+            <code>uv</code> can [read](see <a href=
+            "https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies</a>).
+            Due to the <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>, this can be run as an
+            executable.
           </p>
-          <pre><code class="language-bash">    uv run run.py
-    # ... logs activity and keeps running until cancelled e.g. with ctrl-c
+          <pre><code class="language-bash">    ❯ ./twc.py --help
+    Usage: twc.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
+
+      Create a website.
+
+      CONTENT_DIR is the directory of web contents. It is never altered.
+
+      OUTPUT_DIR is the new directory into which the website will be built.
+
+    Options:
+      --help  Show this message and exit.
 </code></pre>
           <p>
-            Now just edit the content (in <code>content/</code>) and the browser will automatically update after every
-            save.
+            To run,
+          </p>
+          <pre><code class="language-bash">    ❯./twc.py content/ docs/
+    Using content in: /Users/tcorbettclark/Projects/tcorbettclark.github.io/content (content)
+    Cloned content into fresh output directory: /Users/tcorbettclark/Projects/tcorbettclark.github.io/docs (docs)
+    Reading template data from: docs/_site_config.toml
+    Reading template data from: docs/profile/_config.toml
+    Reading template data from: docs/pages/cv/_config.toml
+    Rendered template: docs/index.html
+    Converted markdown from: docs/pages/_about-me.md
+    Rendered template: docs/pages/about-me.html
+    Rendered template: docs/pages/cv.html
+    Converted markdown from: docs/pages/_my-tastes.md
+    Rendered template: docs/pages/my-tastes.html
+    Converted markdown from: docs/pages/_my-website.md
+    Rendered template: docs/pages/my-website.html
+    Converted markdown from: docs/pages/_publications.md
+    Rendered template: docs/pages/publications.html
+    Converted markdown from: docs/pages/recreational-maths/_index.md
+    Rendered template: docs/pages/recreational-maths/index.html
+    Converted markdown from: docs/pages/recreational-maths/problem-1/_index.md
+    Rendered template: docs/pages/recreational-maths/problem-1/index.html
+    Rendered template: docs/wip.html
+    Removed 19 working files and 1 empty directories from output directory
+    Html-tidy ok: docs/index.html
+    Html-tidy ok: docs/wip.html
+    Html-tidy ok: docs/pages/about-me.html
+    Html-tidy ok: docs/pages/my-website.html
+    Html-tidy ok: docs/pages/my-tastes.html
+    Html-tidy ok: docs/pages/cv.html
+    Html-tidy ok: docs/pages/publications.html
+    Html-tidy ok: docs/pages/recreational-maths/index.html
+    Html-tidy ok: docs/pages/recreational-maths/problem-1/index.html
+    Created XML sitemap - TODO!!
+    Rebuilt all files in: docs
+    Starting local server on http://localhost:8000
+    Serving files from: docs
+    Watching for changes in: content
+</code></pre>
+          <p>
+            Now edit the content (in <code>content/</code>). The browser(s) will automatically reload after every save.
           </p>
           <p>
-            If making changes which temporarily break templating, suspend with <code>ctrl-z</code>, make the changes,
-            and then foreground with <code>fg</code>. If changes were made to files then the reloader will run.
+            Sometimes changes break the templating mechanism temporarily (e.g. after renaming files). A simple solution
+            is to suspend with <code>ctrl-z</code>, make the changes, and then foreground with <code>fg</code>. If
+            changes were made then the browser(s) will reload.
           </p>
           <h2>
             Deployment e.g. on GitHub pages
