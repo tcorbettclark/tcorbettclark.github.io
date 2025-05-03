@@ -98,7 +98,7 @@ Relative paths for localisation
 
 TOML
 
-## markdown
+## Markdown
 
 Include simple example.
 
@@ -114,11 +114,25 @@ TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/
 
 TODO
 
-Simple "tcc" Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour as configured in Bulma.
-
 Need to keep Bulma, manifest, and favicon theme colours in sync.
 
-TODO talk about night view.
+Simple "tcc" Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour as configured in Bulma.
+
+Refer to all the help from Bulma, and therefore what is left to do.
+
+Talk about night view.
+
+Talk about different standards of RGB (use Standard RGB or sRGB).
+
+Useful learning about colours:
+* https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html
+* https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html
+
+Useful tools:
+* https://www.canva.com/colors/color-wheel/
+* https://colorhunt.co
+* https://coolors.co
+* https://pixelied.com/colors/color-wheel
 
 ## DRAFT mode
 
