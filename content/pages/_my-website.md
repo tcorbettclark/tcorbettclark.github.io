@@ -14,6 +14,14 @@ This website is built using a hand-crafted static site generator. Yes, another o
 - I personally enjoy the deeper understanding which comes from creation;
 - For technical creators, I am not convinced of the benefits of working with a division between static website "tool X" and the content. I've tried it in the past and too often needed to work on both sides of the line to achieve what I wanted. The boundary seems too personal and arbitrary, so it is better to dispense with it entirely.
 
+TODO: is the above correct? Or is it that the line is in the wrong place, mixing worlds?
+Avoid magic. Explicit and obvious.
+
+Show a minimal site.
+
+
+
+
 The key features of my approach are:
 
 * Support writing and maintaining pages of content. No blog posts, tags, articles, Atom or RSS feeds etc.
@@ -44,16 +52,14 @@ The dependencies are Python and [html-tidy](https://www.html-tidy.org). The Pyth
     # Checkout this repository
     git clone git@github.com:tcorbettclark/tcorbettclark.github.io.git
     cd tcorbettclark.github.io
-
-    # Install Python, create virtual env, and install Python packages
-    uv sync
 ```
 
 ## Build and view locally
 
-Then to run the builder and hot-reloader so that pages can be viewed locally on `http://localhost:8000`,
+The builder, hot-reloader, and local server (on `http://localhost:8000`) are all in the `run.py` script. Run this using `uv` (https://peps.python.org/pep-0723/ and https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies)
+
 ``` bash
-    uv run python run.py
+    uv run run.py
     # ... logs activity and keeps running until cancelled e.g. with ctrl-c
 ```
 
@@ -189,6 +195,24 @@ Most robust approach is to trap onclose and differentiate between whether the co
 ## Code overview
 
 TODO: include simplified snippets.
+
+## Publish checklist
+
+* Visual check on different devices and orientation
+* Colour consistency (e.g. manifest, favicon, and page theme)
+* W3Validator
+* Page titles and descriptions
+* Alt and title tags
+* Contrast ratio
+* https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
+
+## Development of the run.py script
+
+So that your editor can pick up the scripts' virtual enviroment, symlink `.venv` e.g. something like:
+
+```bash
+ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
+```
 
 ## Pending / keep an eye for the future
 

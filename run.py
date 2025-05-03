@@ -1,3 +1,17 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "aiohttp",
+#     "jinja2",
+#     "markdown-it-py[linkify]",
+#     "mdit-py-plugins",
+#     "toml",
+#     "user-agents",
+#     "utidylib",
+#     "watchfiles",
+# ]
+# ///
+
 import asyncio
 import glob
 import logging

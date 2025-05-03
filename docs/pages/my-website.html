@@ -78,6 +78,13 @@
             </li>
           </ul>
           <p>
+            TODO: is the above correct? Or is it that the line is in the wrong place, mixing worlds? Avoid magic.
+            Explicit and obvious.
+          </p>
+          <p>
+            Show a minimal site.
+          </p>
+          <p>
             The key features of my approach are:
           </p>
           <ul>
@@ -121,18 +128,17 @@
     # Checkout this repository
     git clone git@github.com:tcorbettclark/tcorbettclark.github.io.git
     cd tcorbettclark.github.io
-
-    # Install Python, create virtual env, and install Python packages
-    uv sync
 </code></pre>
           <h2>
             Build and view locally
           </h2>
           <p>
-            Then to run the builder and hot-reloader so that pages can be viewed locally on
-            <code>http://localhost:8000</code>,
+            The builder, hot-reloader, and local server (on <code>http://localhost:8000</code>) are all in the
+            <code>run.py</code> script. Run this using <code>uv</code> (<a href=
+            "https://peps.python.org/pep-0723/">https://peps.python.org/pep-0723/</a> and <a href=
+            "https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies</a>)
           </p>
-          <pre><code class="language-bash">    uv run python run.py
+          <pre><code class="language-bash">    uv run run.py
     # ... logs activity and keeps running until cancelled e.g. with ctrl-c
 </code></pre>
           <p>
@@ -340,6 +346,37 @@
           <p>
             TODO: include simplified snippets.
           </p>
+          <h2>
+            Publish checklist
+          </h2>
+          <ul>
+            <li>Visual check on different devices and orientation
+            </li>
+            <li>Colour consistency (e.g. manifest, favicon, and page theme)
+            </li>
+            <li>W3Validator
+            </li>
+            <li>Page titles and descriptions
+            </li>
+            <li>Alt and title tags
+            </li>
+            <li>Contrast ratio
+            </li>
+            <li>
+              <a href=
+              "https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata">https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata</a>
+            </li>
+          </ul>
+          <h2>
+            Development of the <a href="http://run.py">run.py</a> script
+          </h2>
+          <p>
+            So that your editor can pick up the scripts’ virtual enviroment, symlink <code>.venv</code> e.g. something
+            like:
+          </p>
+          <pre><code class=
+          "language-bash">ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
+</code></pre>
           <h2>
             Pending / keep an eye for the future
           </h2>

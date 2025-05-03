@@ -2,6 +2,11 @@
 
 See `content/pages/_my-website.md` (or rendered version on my website).
 
+In short, to build and serve locally with a hot reloader, run:
+```bash
+    uv run run.py
+```
+
 # TODO - content
 
 - Create a now page. See https://nownownow.com/about
@@ -13,6 +18,7 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 
 # TODO - technical
 
+- Find way to allow editor (Zed) find the virtualenv magically created by uv when running script
 - Add light/dark mode switcher (take from Bulma website)
 - Fix colour issues in dark mode - poor contrast.
 - Decide on all markdown plugins.
@@ -30,3 +36,4 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 - Switch this list into github issues, with milestone planning, ready for merging workflow, etc.
 - Keep an eye on how well the pages print to PDF, e.g. my CV page. Currently pretty good!
   Perhaps hide the breadcrumb navigation?
+- Look into Social Media meta tags: https://css-tricks.com/essential-meta-tags-social-media/
