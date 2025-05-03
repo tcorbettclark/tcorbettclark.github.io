@@ -91,6 +91,10 @@ The end result is a clean output directory ready for deployment.
 
 Every build is a clean build. No caching as plenty faster enough without complexity penalty or subtle gotchas.
 
+## Code style
+
+Don't attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy maintenance - properly indented for readability as source. This is also why files are of one language type - so that editors can use the corresponding language mode (LSP).
+
 
 ## Jinja2 templating
 
