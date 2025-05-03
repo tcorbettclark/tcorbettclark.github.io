@@ -17,7 +17,6 @@ See `content/pages/_my-website.md` (or rendered version on my website).
 - Decide on all markdown plugins.
 - Add open source licence.
 - Create a 404 in the dev server, but also on the main page.
-- Add Google analytics.
 - Add a sitemap.xml and update robots.txt file.
   See https://thatware.co/xml-sitemap-creation-python/
   See https://michael-lisboa.medium.com/automate-your-sitemap-xml-with-python-and-deploy-it-as-a-cron-job-to-google-cloud-c5c4f986c734
