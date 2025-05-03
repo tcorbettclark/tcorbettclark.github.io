@@ -26,13 +26,15 @@ In short, to build and serve locally with a hot reloader, run:
 - Add light/dark mode switcher (take from Bulma website)
 - Fix colour issues in dark mode - poor contrast.
 - Decide on all markdown plugins.
-- Add open source licence.
 - Create a 404 in the dev server, but also on the main page.
 - Add a sitemap.xml and update robots.txt file.
+  Could this be done in a generic, tool-agnostic way? Create a list of all the .html files, ready to be templated into a sitemap.xml?
+  Since the output dir is recreated every time, use git to see when files last changed.
+  See https://www.sitemaps.org/index.html
   See https://thatware.co/xml-sitemap-creation-python/
   See https://michael-lisboa.medium.com/automate-your-sitemap-xml-with-python-and-deploy-it-as-a-cron-job-to-google-cloud-c5c4f986c734
   See https://github.com/fossworx-labs/fossfolio/blob/main/fossfolio/sitemap.py
-  Use git to see when files last changed.
+  See https://www.woorank.com/en/blog/how-to-locate-a-sitemap-in-a-robots-txt-file
   Note also need to submit to search engines (once?).
 - Find an alternative to FontAwesome. Maybe
   I'm using the free plan which has a monthly limit of 10,000 views.

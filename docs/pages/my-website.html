@@ -54,18 +54,17 @@
             who I am.
           </p>
           <p>
-            It is not a blog. Given the purpose, I think it is better for the author (i.e. me) to take responsibility
-            for the assembly and navigation of cohesive thought, improving and modifying as needed over time. This also
-            alleviates readers from working through a chronology of potentially disparate articles “preserved for
-            posterity”.
+            It is not a blog. Blogs are a chronological record of output. Given its purpose, I think it is better for
+            the author (i.e. me) to take responsibility for the assembly and navigation of cohesive thought, improving
+            and modifying as needed over time.
           </p>
           <h2>
             Technical overview
           </h2>
           <p>
-            This website is built using a hand-crafted static site generator. Yes, another one - see for example,
-            <a href="https://jamstack.org/generators/">this list</a>. My justification for “reinventing the wheel” is
-            that:
+            This website is built using a hand-crafted static site generator. Yes, another one - see <a href=
+            "https://jamstack.org/generators/">this list</a> for example. My justification for “reinventing the wheel”
+            is that:
           </p>
           <ul>
             <li>I personally enjoy the deeper understanding which comes from creation;
@@ -75,8 +74,8 @@
             <li>I only want a small number of the features possible in a static site;
             </li>
             <li>In my evaluation of other tools I found an uneven and arbitrary (personal?) interface between the tool
-            and the content, resulting in the need to work on both sides of the line. This suggests either abandoning
-            the separation entirely or moving it substantially.
+            and the content, resulting in the need to work on both sides of the boundary. This suggests either
+            abandoning the separation entirely or moving it substantially.
             </li>
           </ul>
           <p>
@@ -122,13 +121,13 @@
             Environment
           </h2>
           <p>
-            The dependencies are Python and <a href="https://www.html-tidy.org">html-tidy</a>. The Python interpretetr,
-            packages, and virtualenv are all managed with <a href="https://docs.astral.sh/uv/">uv</a>. To set things up
-            on a Mac,
+            The dependencies are <a href="https://www.html-tidy.org">html-tidy</a> and <a href=
+            "https://docs.astral.sh/uv/">uv</a>. To set things up on a Mac,
           </p>
-          <pre><code class="language-bash">    brew install tidy-html5 uv
+          <pre><code class="language-bash">    # Install primary tools.
+    brew install tidy-html5 uv
 
-    # Checkout this repository
+    # Checkout this repository.
     git clone git@github.com:tcorbettclark/tcorbettclark.github.io.git
     cd tcorbettclark.github.io
 </code></pre>
@@ -137,12 +136,13 @@
           </h2>
           <p>
             The builder, hot-reloader, and local server (on <code>http://localhost:8000</code>) are all in the
-            <code>twc.py</code> script (TWC = Tim’s Web Creator; it had to be called something). This uses inline
-            script metadata <a href="https://peps.python.org/pep-0723">PEP-0723</a> to define dependencies which
-            <code>uv</code> can [read](see <a href=
-            "https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies</a>).
-            Due to the <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>, this can be run as an
-            executable.
+            <code>twc.py</code> script (<strong>t</strong>im’s <strong>w</strong>eb <strong>c</strong>reator; it had to
+            be called something). This uses <a href="https://peps.python.org/pep-0723">inline script metadata</a> to
+            define dependencies which <code>uv</code> can <a href=
+            "https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">read</a>. Due to the <a href=
+            "https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>, this is conveniently run as an executable,
+            hiding all the magic of <code>uv</code> installing a valid version of Python and required packages in a
+            virtualenv.
           </p>
           <pre><code class="language-bash">    ❯ ./twc.py --help
     Usage: twc.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
@@ -157,7 +157,7 @@
       --help  Show this message and exit.
 </code></pre>
           <p>
-            To run,
+            And so to run <code>twc.py</code>,
           </p>
           <pre><code class="language-bash">    ❯./twc.py content/ docs/
     Using content in: /Users/tcorbettclark/Projects/tcorbettclark.github.io/content (content)
@@ -197,12 +197,23 @@
     Watching for changes in: content
 </code></pre>
           <p>
-            Now edit the content (in <code>content/</code>). The browser(s) will automatically reload after every save.
+            If this produces an error such as
+          </p>
+          <pre><code>AttributeError: dlsym(0x69da4e660, tidyLibraryVersion): symbol not found
+</code></pre>
+          <p>
+            then possibly you need to adjust the <code>DYLIB_LIBRARY_PATH</code> or <code>LIB_LIBRARY_PATH</code> to
+            allow the <code>libtidy</code> library to be loaded by Python ctypes. See the shebang line in
+            <code>twc.py</code>.
           </p>
           <p>
-            Sometimes changes break the templating mechanism temporarily (e.g. after renaming files). A simple solution
-            is to suspend with <code>ctrl-z</code>, make the changes, and then foreground with <code>fg</code>. If
-            changes were made then the browser(s) will reload.
+            Now edit the content (in <code>content/</code>). The tool will notice the change, rebuild, and tell the
+            browser(s) to reload.
+          </p>
+          <p>
+            Hint: Content changes sometimes temporarily break the templating mechanism (e.g. after renaming files). A
+            simple solution is to suspend with <code>ctrl-z</code>, make the changes, and then foreground with
+            <code>fg</code>. If changes were made then the browser(s) will reload.
           </p>
           <h2>
             Deployment e.g. on GitHub pages
@@ -423,15 +434,35 @@
             </li>
           </ul>
           <h2>
-            Development of the <a href="http://run.py">run.py</a> script
+            Further development of <a href="http://twc.py">twc.py</a>
           </h2>
           <p>
             So that your editor can pick up the scripts’ virtual enviroment, symlink <code>.venv</code> e.g. something
             like:
           </p>
+          <p>
+            ???
+          </p>
           <pre><code class=
           "language-bash">ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
 </code></pre>
+          <p>
+            To add or remove packages needed by <code>twc.py</code>,
+          </p>
+          <pre><code class="language-bash">uv add --script twc.py &lt;package&gt;
+uv remove --script twc.py &lt;package&gt;
+</code></pre>
+          <h2>
+            Licensing
+          </h2>
+          <p>
+            I started with
+          </p>
+          <p>
+            <a href=
+            "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository">
+            https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository</a>
+          </p>
           <h2>
             Pending / keep an eye for the future
           </h2>

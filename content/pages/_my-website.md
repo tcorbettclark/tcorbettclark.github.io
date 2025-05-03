@@ -4,16 +4,16 @@
 
 The purpose of this website is to encourage me to write and think clearly. Whether anyone reads it is secondary, although naturally I hope that it may be of some interest. The website is also a presentation of who I am.
 
-It is not a blog. Given the purpose, I think it is better for the author (i.e. me) to take responsibility for the assembly and navigation of cohesive thought, improving and modifying as needed over time. This also alleviates readers from working through a chronology of potentially disparate articles "preserved for posterity".
+It is not a blog. Blogs are a chronological record of output. Given its purpose, I think it is better for the author (i.e. me) to take responsibility for the assembly and navigation of cohesive thought, improving and modifying as needed over time.
 
 ## Technical overview
 
-This website is built using a hand-crafted static site generator. Yes, another one - see for example, [this list](https://jamstack.org/generators/). My justification for "reinventing the wheel" is that:
+This website is built using a hand-crafted static site generator. Yes, another one - see [this list](https://jamstack.org/generators/) for example. My justification for "reinventing the wheel" is that:
 
 - I personally enjoy the deeper understanding which comes from creation;
 - I want full control to make the result clean and right at both the human and technical level;
 - I only want a small number of the features possible in a static site;
-- In my evaluation of other tools I found an uneven and arbitrary (personal?) interface between the tool and the content, resulting in the need to work on both sides of the line. This suggests either abandoning the separation entirely or moving it substantially.
+- In my evaluation of other tools I found an uneven and arbitrary (personal?) interface between the tool and the content, resulting in the need to work on both sides of the boundary. This suggests either abandoning the separation entirely or moving it substantially.
 
 So the role of my tool is _only_ to make it easier to create a static website made fundamentally of HTML, CSS, and Javascript; it has no opinion about the web world.
 
@@ -39,19 +39,20 @@ Subtractive approach, not copy/move/adjust.
 
 ## Environment
 
-The dependencies are Python and [html-tidy](https://www.html-tidy.org). The Python interpretetr, packages, and virtualenv are all managed with [uv](https://docs.astral.sh/uv/). To set things up on a Mac,
+The dependencies are [html-tidy](https://www.html-tidy.org) and [uv](https://docs.astral.sh/uv/). To set things up on a Mac,
 
 ```bash
+    # Install primary tools.
     brew install tidy-html5 uv
 
-    # Checkout this repository
+    # Checkout this repository.
     git clone git@github.com:tcorbettclark/tcorbettclark.github.io.git
     cd tcorbettclark.github.io
 ```
 
 ## Build and view locally
 
-The builder, hot-reloader, and local server (on `http://localhost:8000`) are all in the `twc.py` script (TWC = Tim's Web Creator; it had to be called something). This uses inline script metadata [PEP-0723](https://peps.python.org/pep-0723) to define dependencies which `uv` can [read](see https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), this can be run as an executable.
+The builder, hot-reloader, and local server (on `http://localhost:8000`) are all in the `twc.py` script (**t**im's **w**eb **c**reator; it had to be called something). This uses [inline script metadata](https://peps.python.org/pep-0723) to define dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), this is conveniently run as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
 
 ```bash
     ❯ ./twc.py --help
@@ -67,7 +68,7 @@ The builder, hot-reloader, and local server (on `http://localhost:8000`) are all
       --help  Show this message and exit.
 ```
 
-To run,
+And so to run `twc.py`,
 
 ```bash
     ❯./twc.py content/ docs/
@@ -108,9 +109,17 @@ To run,
     Watching for changes in: content
 ```
 
-Now edit the content (in `content/`). The browser(s) will automatically reload after every save.
+If this produces an error such as
 
-Sometimes changes break the templating mechanism temporarily (e.g. after renaming files). A simple solution is to suspend with `ctrl-z`, make the changes, and then foreground with `fg`. If changes were made then the browser(s) will reload.
+```
+AttributeError: dlsym(0x69da4e660, tidyLibraryVersion): symbol not found
+```
+
+then possibly you need to adjust the `DYLIB_LIBRARY_PATH` or `LIB_LIBRARY_PATH` to allow the `libtidy` library to be loaded by Python ctypes. See the shebang line in `twc.py`.
+
+Now edit the content (in `content/`). The tool will notice the change, rebuild, and tell the browser(s) to reload.
+
+Hint: Content changes sometimes temporarily break the templating mechanism (e.g. after renaming files). A simple solution is to suspend with `ctrl-z`, make the changes, and then foreground with `fg`. If changes were made then the browser(s) will reload.
 
 ## Deployment e.g. on GitHub pages
 
@@ -251,12 +260,21 @@ TODO: include simplified snippets.
 - Contrast ratio
 - https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
 
-## Development of the run.py script
+## Further development of twc.py
 
 So that your editor can pick up the scripts' virtual enviroment, symlink `.venv` e.g. something like:
 
+???
+
 ```bash
 ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
+```
+
+To add or remove packages needed by `twc.py`,
+
+```bash
+uv add --script twc.py <package>
+uv remove --script twc.py <package>
 ```
 
 ## Pending / keep an eye for the future
