@@ -45,45 +45,42 @@
           <h1>
             My website
           </h1>
-          <p>
-            Firstly, the purpose of my website is to encourage me to write, which in turn encourages me to clarify my
-            thinking. Whether anyone else actually reads it is secondary, although of course I hope that it may be of
-            some interest to others, and it is important for my own discipline that I believe others could be reading
-            it!
-          </p>
-          <p>
-            It is not a blog. My imaginary readers should not have to assemble an historical assembly of articles into
-            cohesive thoughts; instead it is on the writer to provide and maintain cohesion.
-          </p>
-          <p>
-            At a technical level, this website is built using a home grown static site generator.
-          </p>
           <h2>
-            Environment
+            Purpose
           </h2>
           <p>
-            Need html-tidy (<a href="https://www.html-tidy.org">https://www.html-tidy.org</a>) brew install tidy-html5
-            And make sure that the library can be found on the library search path. For example, ensure
-            DYLD_LIBRARY_PATH includes /usr/local/lib/
+            The purpose of this website is to encourage me to write and think clearly. Whether anyone actually reads it
+            is secondary, although of course I hope that it may be of some interest. The website is also a presentation
+            of who I am.
           </p>
           <p>
-            To update content, rebuild, and deploy:
+            It is not a blog. I think it is better for the author (i.e. me) to take responsibilty for the assembly and
+            navigation of cohesive thought, improving and modifying as needed over time, rather than expect readers to
+            work through a chronology of potentially disparate articles “preserved for posterity”.
           </p>
-          <pre><code>  uv run python main.py
-  ...view / review on locally served site
-  ...make changes and tool will reload
-  ...update git repo and push to github
-</code></pre>
           <h2>
-            Key features
+            Technical overview
           </h2>
+          <p>
+            This website is built using a hand-crafted static site generator. Yes, another one - see <a href=
+            "https://jamstack.org/generators/">this list</a>. My main justification for “reinventing the wheel” is
+            that:
+          </p>
+          <ul>
+            <li>I want full control to make the result clean and right, with only the features I need;
+            </li>
+            <li>I personally enjoy the deeper understanding which comes from creation;
+            </li>
+            <li>For technical creators, I am not convinced of the benefits of working with a division between static
+            website “tool X” and the content. I’ve tried it in the past and too often needed to work on both sides of
+            the line to achieve what I wanted. The boundary seems too personal and arbitrary, so it is better to
+            dispense with it entirely.
+            </li>
+          </ul>
           <p>
             The key features of my approach are:
           </p>
           <ul>
-            <li>Just code i.e. not another static site generator library! (see <a href=
-            "https://jamstack.org/generators/">https://jamstack.org/generators/</a> …)
-            </li>
             <li>Support writing and maintaining pages of content. No blog posts, tags, articles, Atom or RSS feeds etc.
             </li>
             <li>All files are kept together in one directory tree. At the start of the build process, this is cloned.
@@ -108,27 +105,73 @@
             explain value of writing and recording FOR ME. Think of it like a test. And might be useful for others. Why
             organise artefacts by type? Organise by use.
           </p>
-          <p>
-            TODO: explain math rendering (markdown plugin to escape and include in span with class, then small
-            javascript hook to call katex on all cells after DOM loaded.)
-          </p>
-          <p>
-            TODO: explain webmanifest file, especially for favicons. See <a href=
-            "https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>.
-          </p>
           <h2>
-            Colour and styling
+            Environment
           </h2>
           <p>
-            TODO
+            The dependencies are Python and <a href="https://www.html-tidy.org">html-tidy</a>. The Python packages and
+            virtualenv are managed with <a href="https://docs.astral.sh/uv/">uv</a>. To create the enviroment on a Mac,
+          </p>
+          <pre><code class="language-bash">    brew install tidy-html5
+    # And ensure the library can be found on the library search path.
+    # For example, ensure DYLD_LIBRARY_PATH includes /usr/local/lib/
+
+    brew install uv
+
+    # Checkout this repository
+    git clone git@github.com:tcorbettclark/tcorbettclark.github.io.git
+    cd tcorbettclark.github.io
+
+    # Install Python, create virtual env, and install Python packages
+    uv sync
+</code></pre>
+          <h2>
+            Build and view locally
+          </h2>
+          <p>
+            Then to run the builder and hot-reloader so that pages can be viewed locally on
+            <code>http://localhost:8000</code>,
+          </p>
+          <pre><code class="language-bash">    uv run python run.py
+    # ... logs activity and keeps running until cancelled e.g. with ctrl-c
+</code></pre>
+          <p>
+            Now just edit the content (in <code>content/</code>) and the browser will automatically update after every
+            save.
           </p>
           <p>
-            Simple “tcc” Favicon generated using <a href=
-            "https://favicon.io/favicon-generator/">https://favicon.io/favicon-generator/</a>, using the same primary
-            colour as configured in Bulma.
+            If making changes which temporarily break templating, suspend with <code>ctrl-z</code>, make the changes,
+            and then foreground with <code>fg</code>. If changes were made to files then the reloader will run.
           </p>
           <h2>
-            Build process
+            Deployment e.g. on GitHub pages
+          </h2>
+          <p>
+            TOOD: reference github, explain configuration
+          </p>
+          <p>
+            TODO: explain github actions from master branch in the <code>docs/</code> directory
+          </p>
+          <p>
+            Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the
+            changes will be live.
+          </p>
+          <p>
+            Output has to go in <code>docs/</code> because github pages only support serving content from
+            <code>/</code> or <code>docs/</code>.
+          </p>
+          <p>
+            Then run the deployed site against W3C Validator, check rendering using different devices etc. See also the
+            “DRAFT” mode approach, below. TODO.
+          </p>
+          <h2>
+            Choice of main libraries
+          </h2>
+          <p>
+            TODO Talk about Bulma, Jinja, markdown
+          </p>
+          <h2>
+            The build process
           </h2>
           <p>
             The build process works as follows:
@@ -147,6 +190,71 @@
           <p>
             Every build is a clean build. No caching as plenty faster enough without complexity penalty or subtle
             gotchas.
+          </p>
+          <h2>
+            Jinja2 templating
+          </h2>
+          <p>
+            Relative paths for localisation
+          </p>
+          <p>
+            TOML
+          </p>
+          <h2>
+            markdown
+          </h2>
+          <p>
+            Include simple example.
+          </p>
+          <h2>
+            Maths
+          </h2>
+          <p>
+            TODO: explain math rendering (markdown plugin to escape and include in span with class, then small
+            javascript hook to call katex on all cells after DOM loaded.)
+          </p>
+          <h2>
+            Manifest and favicon
+          </h2>
+          <p>
+            TODO: explain webmanifest file, especially for favicons. See <a href=
+            "https://www.w3.org/TR/appmanifest/">https://www.w3.org/TR/appmanifest/</a>.
+          </p>
+          <h2>
+            Colour, styling, and night view
+          </h2>
+          <p>
+            TODO
+          </p>
+          <p>
+            Simple “tcc” Favicon generated using <a href=
+            "https://favicon.io/favicon-generator/">https://favicon.io/favicon-generator/</a>, using the same primary
+            colour as configured in Bulma.
+          </p>
+          <p>
+            Need to keep Bulma, manifest, and favicon theme colours in sync.
+          </p>
+          <p>
+            TODO talk about night view.
+          </p>
+          <h2>
+            DRAFT mode
+          </h2>
+          <p>
+            CSS watermark switch passed in to top level templates The <code>/wip.html</code> page and the “hidden” link
+            in right side of the navigation (breadcrumb) space. So now often I can commit and push to master, and
+            github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
+          </p>
+          <p>
+            And now I can test draft pages with w3 validator, on different devices etc.
+          </p>
+          <p>
+            I don’t really care that people can see such pages - the watermark makes it obvious. And the search engines
+            start to see something arriving, changing often, which speeds up indexing to make more discoverable (not
+            that that really matters, but is nice).
+          </p>
+          <p>
+            Also, no separate dev build and live build - all one and the same.
           </p>
           <h2>
             Hot Re-loader fun
@@ -183,6 +291,12 @@
             reload the whole page (and hence start the cycle again).
           </p>
           <h2>
+            Code overview
+          </h2>
+          <p>
+            TODO: include simplified snippets.
+          </p>
+          <h2>
             Pending / keep an eye for the future
           </h2>
           <p>
@@ -203,46 +317,6 @@
 &lt;link href="https://foo.bar.baz"/&gt;
 &lt;link href="https://foo.bar.baz/"&gt;
 </code></pre>
-          <h2>
-            Deploment
-          </h2>
-          <p>
-            Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the
-            changes will be live.
-          </p>
-          <p>
-            Then run the deployed site against W3C Validator.
-          </p>
-          <h2>
-            Notes
-          </h2>
-          <p>
-            Output has to go in <code>docs/</code> because github pages only support serving content from
-            <code>/</code> or <code>docs/</code>.
-          </p>
-          <p>
-            If making changes which temporarily break templating, suspend with <code>ctrl-z</code>, make the changes,
-            and then foreground with <code>fg</code>. If changes were made to files then the reloader will run.
-          </p>
-          <h2>
-            DRAFT mode
-          </h2>
-          <p>
-            CSS watermark switch passed in to top level templates The <code>/wip.html</code> page and the “hidden” link
-            in right side of the navigation (breadcrumb) space. So now often I can commit and push to master, and
-            github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
-          </p>
-          <p>
-            And now I can test draft pages with w3 validator, on different devices etc.
-          </p>
-          <p>
-            I don’t really care that people can see such pages - the watermark makes it obvious. And the search engines
-            start to see something arriving, changing often, which speeds up indexing to make more discoverable (not
-            that that really matters, but is nice).
-          </p>
-          <p>
-            Also, no separate dev build and live build - all one and the same.
-          </p>
         </div>
       </div>
     </section>

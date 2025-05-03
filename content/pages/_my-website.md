@@ -1,31 +1,21 @@
 # My website
 
-Firstly, the purpose of my website is to encourage me to write, which in turn encourages me to clarify my thinking. Whether anyone else actually reads it is secondary, although of course I hope that it may be of some interest to others, and it is important for my own discipline that I believe others could be reading it!
+## Purpose
 
-It is not a blog. My imaginary readers should not have to assemble an historical assembly of articles into cohesive thoughts; instead it is on the writer to provide and maintain cohesion.
+The purpose of this website is to encourage me to write and think clearly. Whether anyone actually reads it is secondary, although of course I hope that it may be of some interest. The website is also a presentation of who I am.
 
-At a technical level, this website is built using a home grown static site generator.
+It is not a blog. I think it is better for the author (i.e. me) to take responsibilty for the assembly and navigation of cohesive thought, improving and modifying as needed over time, rather than expect readers to work through a chronology of potentially disparate articles "preserved for posterity".
 
-## Environment
+## Technical overview
 
-Need html-tidy (https://www.html-tidy.org)
-brew install tidy-html5
-And make sure that the library can be found on the library search path.
-For example, ensure DYLD_LIBRARY_PATH includes /usr/local/lib/
+This website is built using a hand-crafted static site generator. Yes, another one - see [this list](https://jamstack.org/generators/). My main justification for "reinventing the wheel" is that:
 
-To update content, rebuild, and deploy:
-```
-  uv run python main.py
-  ...view / review on locally served site
-  ...make changes and tool will reload
-  ...update git repo and push to github
-```
-
-## Key features
+- I want full control to make the result clean and right, with only the features I need;
+- I personally enjoy the deeper understanding which comes from creation;
+- For technical creators, I am not convinced of the benefits of working with a division between static website "tool X" and the content. I've tried it in the past and too often needed to work on both sides of the line to achieve what I wanted. The boundary seems too personal and arbitrary, so it is better to dispense with it entirely.
 
 The key features of my approach are:
 
-* Just code i.e. not another static site generator library! (see https://jamstack.org/generators/ ...)
 * Support writing and maintaining pages of content. No blog posts, tags, articles, Atom or RSS feeds etc.
 * All files are kept together in one directory tree. At the start of the build process, this is cloned.
 * No files are moved around, but working files are deleted (so more of a subtractive approach than a move/additive one.)
@@ -35,24 +25,59 @@ The key features of my approach are:
 * Html-tidy of all output to both validate and keep everything tidy.
 * Hot reloading localhost server, which rebuilds on change before signalling to browser(s) to reload.
 
-
 Look - localisation of content. Add to my website notes
 Indentation - for clarity in content view for easier writing and maintaining. But also want properly formatted output. Hence tidy.
 Also my website - explain value of writing and recording FOR ME. Think of it like a test. And might be useful for others.
 Why organise artefacts by type? Organise by use.
 
+## Environment
 
-TODO: explain math rendering (markdown plugin to escape and include in span with class, then small javascript hook to call katex on all cells after DOM loaded.)
+The dependencies are Python and [html-tidy](https://www.html-tidy.org). The Python packages and virtualenv are managed with [uv](https://docs.astral.sh/uv/). To create the enviroment on a Mac,
 
-TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
+``` bash
+    brew install tidy-html5
+    # And ensure the library can be found on the library search path.
+    # For example, ensure DYLD_LIBRARY_PATH includes /usr/local/lib/
 
-## Colour and styling
+    brew install uv
 
-TODO
+    # Checkout this repository
+    git clone git@github.com:tcorbettclark/tcorbettclark.github.io.git
+    cd tcorbettclark.github.io
 
-Simple "tcc" Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour as configured in Bulma.
+    # Install Python, create virtual env, and install Python packages
+    uv sync
+```
 
-## Build process
+## Build and view locally
+
+Then to run the builder and hot-reloader so that pages can be viewed locally on `http://localhost:8000`,
+``` bash
+    uv run python run.py
+    # ... logs activity and keeps running until cancelled e.g. with ctrl-c
+```
+
+Now just edit the content (in `content/`) and the browser will automatically update after every save.
+
+If making changes which temporarily break templating, suspend with `ctrl-z`, make the changes, and then foreground with `fg`. If changes were made to files then the reloader will run.
+
+## Deployment e.g. on GitHub pages
+
+TOOD: reference github, explain configuration
+
+TODO: explain github actions from master branch in the `docs/` directory
+
+Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the changes will be live.
+
+Output has to go in `docs/` because github pages only support serving content from `/` or `docs/`.
+
+Then run the deployed site  against W3C Validator, check rendering using different devices etc. See also the "DRAFT" mode approach, below. TODO.
+
+## Choice of main libraries
+
+TODO Talk about Bulma, Jinja, markdown
+
+## The build process
 
 The build process works as follows:
 
@@ -65,6 +90,49 @@ The build process works as follows:
 The end result is a clean output directory ready for deployment.
 
 Every build is a clean build. No caching as plenty faster enough without complexity penalty or subtle gotchas.
+
+
+## Jinja2 templating
+
+Relative paths for localisation
+
+TOML
+
+## markdown
+
+Include simple example.
+
+## Maths
+
+TODO: explain math rendering (markdown plugin to escape and include in span with class, then small javascript hook to call katex on all cells after DOM loaded.)
+
+## Manifest and favicon
+
+TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
+
+## Colour, styling, and night view
+
+TODO
+
+Simple "tcc" Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour as configured in Bulma.
+
+Need to keep Bulma, manifest, and favicon theme colours in sync.
+
+TODO talk about night view.
+
+## DRAFT mode
+
+CSS watermark
+switch passed in to top level templates
+The `/wip.html` page and the "hidden" link in right side of the navigation (breadcrumb) space.
+So now often I can commit and push to master, and github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
+
+And now I can test draft pages with w3 validator, on different devices etc.
+
+I don't really care that people can see such pages - the watermark makes it obvious.
+And the search engines start to see something arriving, changing often, which speeds up indexing to make more discoverable (not that that really matters, but is nice).
+
+Also, no separate dev build and live build - all one and the same.
 
 
 ## Hot Re-loader fun
@@ -100,6 +168,9 @@ onerror can occur even under normal use, e.g. using the browser history forward/
 
 Most robust approach is to trap onclose and differentiate between whether the connection has ever opened ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it hasn't opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we reload the whole page (and hence start the cycle again).
 
+## Code overview
+
+TODO: include simplified snippets.
 
 ## Pending / keep an eye for the future
 
@@ -116,30 +187,3 @@ Basically, HTML5 is not XML. And since href arguments don't have to be quoted, w
 <link href="https://foo.bar.baz"/>
 <link href="https://foo.bar.baz/">
 ```
-
-## Deploment
-
-Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the changes will be live.
-
-Then run the deployed site  against W3C Validator.
-
-## Notes
-
-Output has to go in `docs/` because github pages only support serving content from `/` or `docs/`.
-
-If making changes which temporarily break templating, suspend with `ctrl-z`, make the changes, and then foreground with `fg`. If changes were made to files then the reloader will run.
-
-
-## DRAFT mode
-
-CSS watermark
-switch passed in to top level templates
-The `/wip.html` page and the "hidden" link in right side of the navigation (breadcrumb) space.
-So now often I can commit and push to master, and github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
-
-And now I can test draft pages with w3 validator, on different devices etc.
-
-I don't really care that people can see such pages - the watermark makes it obvious.
-And the search engines start to see something arriving, changing often, which speeds up indexing to make more discoverable (not that that really matters, but is nice).
-
-Also, no separate dev build and live build - all one and the same.
