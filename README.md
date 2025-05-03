@@ -18,6 +18,7 @@ In short, to build and serve locally with a hot reloader, run:
 
 # TODO - technical
 
+- Use the breadcrumb Bulma component
 - Find way to allow editor (Zed) find the virtualenv magically created by uv when running script
 - Add light/dark mode switcher (take from Bulma website)
 - Fix colour issues in dark mode - poor contrast.
