@@ -1,7 +1,10 @@
+#!/usr/bin/env DYLD_LIBRARY_PATH=/usr/local/lib uv run
+
 # /// script
 # requires-python = ">=3.12"
 # dependencies = [
 #     "aiohttp",
+#     "click",
 #     "jinja2",
 #     "markdown-it-py[linkify]",
 #     "mdit-py-plugins",
@@ -22,6 +25,7 @@ import shutil
 import aiohttp
 import aiohttp.abc
 import aiohttp.web
+import click
 import jinja2
 import markdown_it
 import tidy
@@ -32,9 +36,6 @@ from mdit_py_plugins.attrs import attrs_plugin as markdown_attrs_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin as markdown_math_plugin
 from mdit_py_plugins.footnote import footnote_plugin as markdown_footnote_plugin
 
-ROOT_DIR = pathlib.Path(__file__).parent
-
-
 # Configure Logging.
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -44,9 +45,10 @@ logging.getLogger("watchfiles.main").setLevel(
 
 
 def log(message, *args, level=logging.INFO):
-    # Make all pathlib.Path args relative to ROOT_DIR.
+    # Make all pathlib.Path args relative to current working directory.
+    cwd = os.getcwd()
     tmp = [
-        str(pathlib.Path(arg).relative_to(ROOT_DIR))
+        str(pathlib.Path(arg).relative_to(cwd))
         if isinstance(arg, pathlib.Path)
         else arg
         for arg in args
@@ -316,9 +318,9 @@ class Watcher:
         self._change_event.clear()
 
 
-async def main():
-    content_dir = ROOT_DIR / "content"
-    output_dir = ROOT_DIR / "docs"
+async def run(content_dir, output_dir):
+    content_dir = pathlib.Path(content_dir).absolute()
+    output_dir = pathlib.Path(output_dir).absolute()
 
     builder = Builder(content_dir, output_dir)
     watcher = Watcher(content_dir)
@@ -340,5 +342,19 @@ async def main():
         log("Bye")
 
 
+@click.command()
+@click.argument("content_dir")
+@click.argument("output_dir")
+def main(content_dir, output_dir):
+    """Create a website.
+
+    CONTENT_DIR is the directory of web contents. It is never altered.
+
+    OUTPUT_DIR is the new directory into which the website will be built.
+
+    """
+    asyncio.run(run(content_dir, output_dir))
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
