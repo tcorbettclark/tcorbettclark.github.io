@@ -28,7 +28,6 @@ import aiohttp.web
 import click
 import jinja2
 import markdown_it
-import tidy
 import toml
 import user_agents
 import watchfiles
@@ -173,6 +172,15 @@ class Builder:
         )
 
     def tidy_html_files(self):
+        try:
+            import tidy
+        except Exception as e:
+            log(
+                "Unable to load libtidy (html-tidy). Check your library paths "
+                "LD_LIBRARY_PATH / DYLD_LIBRARY_PATH"
+            )
+            log(f"  (Exception: {str(e)})")
+            return
         for root, dirs, files in self.output_dir.walk():
             for name in files:
                 p = root / name
