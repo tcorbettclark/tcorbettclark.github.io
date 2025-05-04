@@ -20,6 +20,7 @@ import glob
 import logging
 import os
 import pathlib
+import re
 import shutil
 
 import aiohttp
@@ -76,21 +77,30 @@ class _RelativeEnvironment(jinja2.Environment):
 
 
 class Builder:
-    TEMPLATE_EXTENSIONS = (".html", ".txt", ".xml")
-
-    def __init__(self, content_dir, output_dir):
+    def __init__(
+        self, content_dir, output_dir, working_file_regex, template_extensions
+    ):
         self.output_dir = output_dir
         self.content_dir = content_dir
+        self.working_file_regex = re.compile(working_file_regex)
+        self.template_extensions = template_extensions
+        log(f"Working files match regex: {working_file_regex}")
+        log(
+            "Template files have extension(s): {}",
+            ", ".join(self.template_extensions),
+        )
 
     def _is_working_filename(self, filename):
-        # A working file has a name which starts with either an underscore or a dot.
-        return pathlib.Path(filename).name[0] in ("_", ".")
+        return (
+            self.working_file_regex.match(pathlib.Path(filename).name)
+            is not None
+        )
 
     def _is_template_filename(self, filename):
         # A template file has a non-working filename with a template extension.
         p = pathlib.Path(filename)
         return (
-            p.suffix in self.TEMPLATE_EXTENSIONS
+            p.suffix in self.template_extensions
             and not self._is_working_filename(p)
         )
 
@@ -232,10 +242,9 @@ class _ServerAccessLogger(aiohttp.abc.AbstractAccessLogger):
 
 
 class Server:
-    host = "localhost"
-    port = 8000
-
-    def __init__(self, directory):
+    def __init__(self, host, port, directory):
+        self.host = host
+        self.port = port
         self.directory = directory
         self.web_sockets = set()
 
@@ -316,13 +325,17 @@ class Watcher:
         self._change_event.clear()
 
 
-async def run(content_dir, output_dir):
+async def run(
+    content_dir, output_dir, working_file_regex, template_extensions, host, port
+):
     content_dir = pathlib.Path(content_dir).absolute()
     output_dir = pathlib.Path(output_dir).absolute()
 
-    builder = Builder(content_dir, output_dir)
+    builder = Builder(
+        content_dir, output_dir, working_file_regex, template_extensions
+    )
     watcher = Watcher(content_dir)
-    server = Server(output_dir)
+    server = Server(host, port, output_dir)
 
     builder.rebuild()
     await watcher.start()
@@ -343,7 +356,44 @@ async def run(content_dir, output_dir):
 @click.command()
 @click.argument("content_dir")
 @click.argument("output_dir")
-def main(content_dir, output_dir):
+@click.option(
+    "-w",
+    "--working-file-regex",
+    default=r"\_.*",
+    show_default=True,
+    help="Regex to match working files.",
+)
+@click.option(
+    "-t",
+    "--template_extension",
+    "template_extensions",
+    default=[".html", ".xml", ".txt"],
+    show_default=True,
+    multiple=True,
+    help="Run Jinja2 templating on files with this extension",
+)
+@click.option(
+    "-h",
+    "--host",
+    default="localhost",
+    show_default=True,
+    help="Serve on this host",
+)
+@click.option(
+    "-p",
+    "--port",
+    default=8000,
+    show_default=True,
+    help="Serve on this port",
+)
+def main(
+    content_dir,
+    output_dir,
+    working_file_regex,
+    template_extensions,
+    host,
+    port,
+):
     """Create a website.
 
     CONTENT_DIR is the directory of web contents. It is never altered.
@@ -351,7 +401,16 @@ def main(content_dir, output_dir):
     OUTPUT_DIR is the new directory into which the website will be built.
 
     """
-    asyncio.run(run(content_dir, output_dir))
+    asyncio.run(
+        run(
+            content_dir,
+            output_dir,
+            working_file_regex,
+            template_extensions,
+            host,
+            port,
+        )
+    )
 
 
 if __name__ == "__main__":
