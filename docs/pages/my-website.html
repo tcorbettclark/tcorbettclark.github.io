@@ -377,12 +377,8 @@
             XML sitemap
           </h2>
           <p>
-            TODO: create a template array with all the information, and push *.xml files through Jinja. Then we can
-            just use Jinja2 to make the sitemap and again reduce the magic / draw the line in a more re-usable place.
-          </p>
-          <p>
-            For example, this allows us to easily create a site contents page/map for humans without any changes to the
-            tool.
+            Simply done by putting the data into a <code>_sitemap.toml</code> and writing a template
+            <code>sitemap.xml</code>. Then linking to it from <code>robots.txt</code>.
           </p>
           <h2>
             DRAFT mode

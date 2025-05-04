@@ -13,11 +13,20 @@ This website is built using a hand-crafted static site generator. Yes, another o
 - I personally enjoy the deeper understanding which comes from creation;
 - I want full control to make the result clean and right at both the human and technical level;
 - I only want a small number of the features possible in a static site;
-- In my evaluation of other tools I found an uneven and arbitrary (personal?) interface between the tool and the content, resulting in the need to work on both sides of the boundary. This suggests either abandoning the separation entirely or moving it substantially.
+- In my evaluation of other tools I found an uneven and arbitrary (personal?) interface between the tool and the content, resulting in the need to work in both sides. This suggests either abandoning the boundary entirely or moving it substantially.
 
 So the role of my tool is _only_ to make it easier to create a static website made fundamentally of HTML, CSS, and Javascript; it has no opinion about the web world.
 
-Show a minimal site.
+In short, the tool provides:
+- Jinja2 templating.
+- Reading of TOML files containing data to feed to Jinja2 templating.
+- Ability to compile Markdown into HTML.
+- A local http webserver to server content during development.
+- A watcher of file/directory changes, triggering an automatic rebuild.
+- A websocket to allow browsers to be notified of changes e.g. to cause an automatic reload ("hot reloader").
+- TODO: explain sitemap generation
+
+TODO: show a minimal site.
 
 The key features of my approach are:
 
@@ -198,6 +207,10 @@ Useful tools:
 - https://colorhunt.co
 - https://coolors.co
 - https://pixelied.com/colors/color-wheel
+
+## XML sitemap
+
+Simply done by putting the data into a `_sitemap.toml` and writing a template `sitemap.xml`. Then linking to it from `robots.txt`.
 
 ## DRAFT mode
 
