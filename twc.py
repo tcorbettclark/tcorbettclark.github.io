@@ -77,6 +77,8 @@ class _RelativeEnvironment(jinja2.Environment):
 
 
 class Builder:
+    TEMPLATE_EXTENSIONS = (".html", ".txt", ".xml")
+
     def __init__(self, content_dir, output_dir):
         self.output_dir = output_dir
         self.content_dir = content_dir
@@ -86,9 +88,12 @@ class Builder:
         return pathlib.Path(filename).name[0] in ("_", ".")
 
     def _is_template_filename(self, filename):
-        # A template file has a non-working filename with a .html extension.
+        # A template file has a non-working filename with a template extension.
         p = pathlib.Path(filename)
-        return p.suffix == ".html" and not self._is_working_filename(p)
+        return (
+            p.suffix in self.TEMPLATE_EXTENSIONS
+            and not self._is_working_filename(p)
+        )
 
     def create_fresh_output_directory(self):
         log(f"Using content in: {self.content_dir} ({{}})", self.content_dir)
@@ -194,26 +199,11 @@ class Builder:
                     with open(output_filename, "w") as fp:
                         fp.write(doc.gettext())
 
-    def create_xml_sitemap(self):
-        log("Created XML sitemap - TODO!!")
-        # sitemap = Sitemap()
-        # for (root, dirs, files) in OUTPUT_DIR.walk(top_down=False):
-        #     for name in files:
-        #         p = root / name
-        #         if _is_working_filename(p):
-        #             continue
-        #         if p.suffix == ".html":
-        #             sitemap.add(p.relative_to(OUTPUT_DIR).as_posix())
-        # with open(OUTPUT_DIR / "sitemap.xml", "w") as f:
-        #     f.write(sitemap.to_string())
-        # log("Created XML sitemap")
-
     def rebuild(self):
         self.create_fresh_output_directory()
         self.render_templates()
         self.remove_working_files()
         self.tidy_html_files()
-        self.create_xml_sitemap()
         log("Rebuilt all files in: {}", self.output_dir)
 
 
