@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {%- for p in SITEMAP_FILENAMES %}
+    <url>
+        <loc>{{SITEURL}}/{{p.name}}</loc>
+        <changefreq>{{p.change_frequency or "monthly"}}</changefreq>
+        {%- if p.last_mod %}
+        <lastmod>{{p.last_mod}}</lastmod>
+        {%- endif %}
+    </url>
+    {%- endfor %}
+</urlset>
