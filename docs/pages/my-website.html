@@ -31,7 +31,7 @@
           Dr Timothy Corbett‑Clark
         </p>
         <p class="subtitle">
-          CTO, Researcher, Architect, Developer
+          CTO, Researcher, Developer
         </p>
       </div>
     </header>
@@ -74,8 +74,8 @@
             <li>I only want a small number of the features possible in a static site;
             </li>
             <li>In my evaluation of other tools I found an uneven and arbitrary (personal?) interface between the tool
-            and the content, resulting in the need to work on both sides of the boundary. This suggests either
-            abandoning the separation entirely or moving it substantially.
+            and the content, resulting in the need to work in both sides. This suggests either abandoning the boundary
+            entirely or moving it substantially.
             </li>
           </ul>
           <p>
@@ -83,7 +83,27 @@
             HTML, CSS, and Javascript; it has no opinion about the web world.
           </p>
           <p>
-            Show a minimal site.
+            In short, the tool provides:
+          </p>
+          <ul>
+            <li>Jinja2 templating.
+            </li>
+            <li>Reading of TOML files containing data to feed to Jinja2 templating.
+            </li>
+            <li>Ability to compile Markdown into HTML.
+            </li>
+            <li>A local http webserver to server content during development.
+            </li>
+            <li>A watcher of file/directory changes, triggering an automatic rebuild.
+            </li>
+            <li>A websocket to allow browsers to be notified of changes e.g. to cause an automatic reload (“hot
+            reloader”).
+            </li>
+            <li>TODO: explain sitemap generation
+            </li>
+          </ul>
+          <p>
+            TODO: show a minimal site.
           </p>
           <p>
             The key features of my approach are:
@@ -353,6 +373,17 @@
               <a href="https://pixelied.com/colors/color-wheel">https://pixelied.com/colors/color-wheel</a>
             </li>
           </ul>
+          <h2>
+            XML sitemap
+          </h2>
+          <p>
+            TODO: create a template array with all the information, and push *.xml files through Jinja. Then we can
+            just use Jinja2 to make the sitemap and again reduce the magic / draw the line in a more re-usable place.
+          </p>
+          <p>
+            For example, this allows us to easily create a site contents page/map for humans without any changes to the
+            tool.
+          </p>
           <h2>
             DRAFT mode
           </h2>
