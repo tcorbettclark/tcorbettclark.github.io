@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Timothy Corbett-Clark" />
+    <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
+    <title>
+      Dr Timothy Corbett-Clark
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
+    "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
+    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script src="/js/hot_reloader.js" async="async"></script>
+    <script src="/js/render_maths.js"></script>
+  </head>
+  <body class="draft-watermark">
+    <header class="hero is-small is-primary">
+      <div class="hero-body">
+        <p class="title">
+          Dr Timothy Corbett‑Clark
+        </p>
+        <p class="subtitle">
+          CTO, Researcher, Developer
+        </p>
+      </div>
+    </header>
+    <section class="m-4">
+      <span class="tag"><a href="/wip.html"><i class="fa-solid fa-bug"></i> wip</a></span> <span class="tag"><a href=
+      "/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
+    </section>
+    <section class="section pt-0">
+      <div class="box has-background-primary-95">
+        <div class="content">
+          <h1>
+            My web content
+          </h1>
+          <p>
+            TODO Everything described above is generic (see comments about lines).
+          </p>
+          <h2>
+            Deployment e.g. on GitHub pages
+          </h2>
+          <p>
+            TOOD: reference github, explain configuration
+          </p>
+          <p>
+            TODO: explain github actions from master branch in the <code>docs/</code> directory
+          </p>
+          <p>
+            Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the
+            changes will be live.
+          </p>
+          <p>
+            Output has to go in <code>docs/</code> because github pages only support serving content from
+            <code>/</code> or <code>docs/</code>.
+          </p>
+          <p>
+            Then run the deployed site against W3C Validator, check rendering using different devices etc. See also the
+            “DRAFT” mode approach, below. TODO.
+          </p>
+          <h2>
+            Choice of web libraries
+          </h2>
+          <p>
+            TODO Talk about Bulma
+          </p>
+          <h2>
+            Maths
+          </h2>
+          <p>
+            TODO: explain math rendering (markdown plugin to escape and include in span with class, then small
+            javascript hook to call katex on all cells after DOM loaded.)
+          </p>
+          <h2>
+            Code block
+          </h2>
+          <p>
+            TODO
+          </p>
+          <h2>
+            Navigation breadcrumb
+          </h2>
+          <p>
+            TODO
+          </p>
+          <h2>
+            Manifest and favicon
+          </h2>
+          <p>
+            TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
+          </p>
+          <h2>
+            Colour, styling, and night view
+          </h2>
+          <p>
+            TODO
+          </p>
+          <p>
+            Need to keep Bulma, manifest, and favicon theme colours in sync.
+          </p>
+          <p>
+            Simple “tcc” Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour
+            as configured in Bulma.
+          </p>
+          <p>
+            Refer to all the help from Bulma, and therefore what is left to do.
+          </p>
+          <p>
+            Talk about night view.
+          </p>
+          <p>
+            Talk about different standards of RGB (use Standard RGB or sRGB).
+          </p>
+          <p>
+            Useful learning about colours:
+          </p>
+          <ul>
+            <li>https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html
+            </li>
+            <li>https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html
+            </li>
+          </ul>
+          <p>
+            Useful tools:
+          </p>
+          <ul>
+            <li>https://www.canva.com/colors/color-wheel/
+            </li>
+            <li>https://colorhunt.co
+            </li>
+            <li>https://coolors.co
+            </li>
+            <li>https://pixelied.com/colors/color-wheel
+            </li>
+          </ul>
+          <h2>
+            XML sitemap
+          </h2>
+          <p>
+            Simply done by putting the data into a <code>_sitemap.toml</code> and writing a template
+            <code>sitemap.xml</code>. Then linking to it from <code>robots.txt</code>.
+          </p>
+          <h2>
+            DRAFT mode
+          </h2>
+          <p>
+            CSS watermark switch passed in to top level templates The <code>/wip.html</code> page and the “hidden” link
+            in right side of the navigation (breadcrumb) space. So now often I can commit and push to master, and
+            github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
+          </p>
+          <p>
+            And now I can test draft pages with w3 validator, on different devices etc.
+          </p>
+          <p>
+            I don’t really care that people can see such pages - the watermark makes it obvious. And the search engines
+            start to see something arriving, changing often, which speeds up indexing to make more discoverable (not
+            that that really matters, but is nice).
+          </p>
+          <p>
+            Also, no separate dev build and live build - all one and the same.
+          </p>
+          <h2>
+            Publish checklist
+          </h2>
+          <ul>
+            <li>Visual check on different devices and orientation
+            </li>
+            <li>Colour consistency (e.g. manifest, favicon, and page theme)
+            </li>
+            <li>W3Validator
+            </li>
+            <li>Page titles and descriptions
+            </li>
+            <li>Alt and title tags
+            </li>
+            <li>Contrast ratio
+            </li>
+            <li>https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
+            </li>
+          </ul>
+          <h2>
+            Pending / keep an eye for the future
+          </h2>
+          <p>
+            Don’t include a trailing slash on void elements. See:
+            https://wet-boew.github.io/wet-boew-documentation/decision/15.html
+          </p>
+          <p>
+            W3 Validator warns about them.
+          </p>
+          <p>
+            https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes
+          </p>
+          <p>
+            Basically, HTML5 is not XML. And since href arguments don’t have to be quoted, we have an ambiguity:
+          </p>
+          <pre><code>&lt;link href=https://foo.bar.baz/&gt;
+&lt;link href="https://foo.bar.baz"/&gt;
+&lt;link href="https://foo.bar.baz/"&gt;
+</code></pre>
+        </div>
+      </div>
+    </section>
+    <footer class="footer pt-4 pb-4">
+      <div class="has-text-centered">
+        <p>
+          <span class="icon-text"><span class="icon"><i class="fa-regular fa-copyright"></i></span> <span>Timothy
+          Corbett-Clark, 2025</span></span>
+        </p>
+        <p>
+          Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
+          using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
+          "https://jinja.palletsprojects.com/" target="_blank">Jinja2</a>, <a href=
+          "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
+          target="_blank">Bulma</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

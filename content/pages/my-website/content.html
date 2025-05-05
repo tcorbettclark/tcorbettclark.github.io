@@ -1,0 +1,5 @@
+{% set draft = true %}
+{% extends "../_page.html" %}
+{% block page %}
+{{ "_content.md" | markdown() }}
+{% endblock %}
