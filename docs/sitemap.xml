@@ -4,8 +4,4 @@
         <loc>https://www.corbettclark.com/index.html</loc>
         <changefreq>weekly</changefreq>
     </url>
-    <url>
-        <loc>https://www.corbettclark.com/cv.html</loc>
-        <changefreq>monthly</changefreq>
-    </url>
 </urlset>
