@@ -1,30 +1,43 @@
 # Tim's Web Generator (TWG) tool
 
-## Tool features
+## Features / anti-features
 
-My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few others such as the manifest.json, robots.txt, and sitemap.xml). It does so without _any opinion_ of these web files. The essential features are:
+Assuming a willingness to understand the web technologies, why don't we create a static website *by hand*? The main problem is around repetition and cumbersome syntax. For example,
 
-- Compiling Markdown into HTML (to allow content to be written more easily).
-- File templating using Jinja2 (most obviously to produce HTML).
-- Reading template data from TOML files (to pass to Jinja2).
-- Validating and prettifying all final HTML by running through [HTML tidy](http://html-tidy.org) (if available).
-- Serving up content on a local http webserver (for review during development).
-- Watching for source file changes and rebuilding automatically.
-- Notifying browser(s) of new builds (_e.g._ to trigger a "hot reload").
+- copy-and-paste maintenance of the same content e.g. in headers and footers;
+- copy-and-paste maintenance of the same formatting/styling tags around repeated lists of things;
+- using a verbose syntax like HTML when focussing purely on content.
 
-Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc.
+These pain points can be ameliorated by using a markup language (like [markdown](https://commonmark.org)), templating (e.g. with [Jinja2](https://jinja.palletsprojects.com/en/stable/)), and writing data/metadata in a data-oriented syntax (such as [TOML](https://toml.io/)).
+
+My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few others such as the manifest.json, robots.txt, and sitemap.xml). **It is a scaffolding tool with no fundamental opinion about these web files**.
+
+The essential features are:
+
+1. Compiling Markdown into HTML (to allow content to be written more easily).
+1. Templating using Jinja2 (most obviously to make it easier to produce repetative HTML).
+1. Reading template data from TOML files (to pass to Jinja2).
+1. Validating and prettifying all final HTML by running through [HTML tidy](http://html-tidy.org) (if available).
+
+Then to create a fast, iterative loop:
+
+5. Serving up content on a local http webserver (for review during development).
+5. Watching for source file changes and rebuilding automatically.
+5. Notifying browser(s) of new builds (_e.g._ to trigger a "hot reload").
+
+Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc. Some are perfectly possible and even easy, but they are not provided *natively* by the tool, and can be created using the tool's machinery.
 
 ## Zero config
 
-With the exception of a few command line options to tell the tool where to find the content and put the output _etc_, there is no configuration. There are no required files or directory structures, and the tool will run fine on an empty directory. There is a simple `example/` content directory in the [GitHub repository](https://github.com/tcorbettclark/tcorbettclark.github.io) to demo some of the functionality and provide a learning sandpit to play in.
+With the exception of a few command line options to tell the tool where to find the content and put the output, **there is no configuration**. There are no required files or directory structures, and so (degenerately) **the tool will run fine on an empty directory**. There is a simple `example/` content directory in the [GitHub repository](https://github.com/tcorbettclark/tcorbettclark.github.io) to demo some of the functionality and provide a learning sandpit to play in.
 
 ## Subtractive approach
 
-Instead of copying and creating files and directories from various sources, the tool takes a "subtractive" approach. The build process starts by cloning a specified content directory into a new output directory. After running the template generation, all "working files" are then deleted from this output directory. By default, _working files_ are identified as filenames starting with an underscore and _template files_ as having an extension of `.html`, `.xml`, and `.txt`.
+Instead of copying and creating files and directories from various sources and processes, the tool takes a "subtractive" approach. The build process starts by cloning a given content directory into a new output directory. After running the template generation, all "working files" are deleted from this output directory. By default, _working files_ are identified as filenames starting with an underscore and _template files_ as having an extension of `.html`, `.xml`, and `.txt`.
 
-In addition to reducing any mystery of how an output is generated, this approach allows maintenance effort to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, _etc_ relating to a particular page on the site can be kept together under a single directory. Then after changes, removal, or replacement, we reduce the chances of things being left behind.
+In addition to removing mystery around how an output is generated, this approach allows maintenance effort to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, _etc_ relating to a particular page or section of the site can be kept together in the same directory. Then after changes, removal, or replacement, we reduce the chances of things being left behind afterwards.
 
-However, due to the tool's lack of opinion in this regard, content can by grouped by type in the traditional fashion if desired (so all the javascript in one directory, all the CSS in another, _etc_). Or a mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
+Due to the tool's lack of opinion in this regard, content can still be grouped by type in the traditional fashion if desired (all the javascript in one directory, all the CSS in another, _etc_). Or a mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
 
 ## Dependencies
 
@@ -36,9 +49,9 @@ The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tid
 
 ## Running the tool
 
-The tool itself is a single file Python script called `twg.py`. This uses [inline script metadata](https://peps.python.org/pep-0723) to define dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Then due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), the tool can conveniently be run as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
+The tool itself is a single file Python script called `twg.py`. It uses [inline script metadata](https://peps.python.org/pep-0723) to define dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Then due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), the tool is conveniently run as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
 
-```plaintext
+```console
 ❯ ./twg.py --help
 Usage: twg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
 
@@ -46,7 +59,7 @@ Usage: twg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
 
   CONTENT_DIR is the directory of source web contents. It is never altered.
 
-  OUTPUT_DIR is the new directory into which the website will be built. It is destroyed on every build.
+  OUTPUT_DIR is the new directory into which the website will be built. It is destroyed before every build.
 
 Options:
   -w, --working-file-regex TEXT  Regex to match working files.  [default: \_.*]
@@ -56,9 +69,9 @@ Options:
   --help                         Show this message and exit.
 ```
 
-Running will produce an output as follows:
+The two mandatory arguments are the content and output directories. Providing them results in something like this:
 
-```plaintext
+```console
 ❯ ./twg.py example/ output/
 Working files match regex: \_.*
 Template files have extension(s): .html, .xml, .txt
@@ -76,9 +89,9 @@ Serving files from: output
 Watching for changes in: example
 ```
 
-The tool is now watching for changes to the source content, after which it will rebuild and notify any browsers to trigger a reload. Every build is a full clean build without any caching or incremental behaviour, avoiding complexity penalties and subtle gotchas.
+The tool is now watching for changes to the source content, after which it will rebuild and notify any browsers to trigger a reload before waiting again for more changes. Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
 
-Hint: Content changes sometimes temporarily break the templating mechanism (_e.g._ after renaming files). A simple solution is to suspend with `ctrl-z`, make the changes, and then foreground with `fg`. If changes were made then the browser(s) will reload.
+**Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files). A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`. If the content changed then the site will be rebuilt and browser(s) told to reload.
 
 ## Template data
 

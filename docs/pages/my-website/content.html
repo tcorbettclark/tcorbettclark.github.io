@@ -88,11 +88,41 @@
             javascript hook to call katex on all cells after DOM loaded.)
           </p>
           <h2>
-            Code block
+            Code
           </h2>
           <p>
-            TODO
+            Highlighting code is easy with <a href="https://highlightjs.org">highlight.js</a>. This will colour many
+            different languages in any of a number of different themes, expecting html like
           </p>
+          <pre><code class=
+          "language-HTML">&lt;pre&gt;&lt;code class="language-python"&gt; ...python code... &lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+          <p>
+            The Common Markdown standard used by <a href="twg.html">twg.py</a> has <a href=
+            "https://spec.commonmark.org/0.31.2/#fenced-code-blocks">fenced code blocks</a> which produces tags with
+            CSS classes exactly like this.
+          </p>
+          <p>
+            So we just need to pull in the Javascript and chosen theme CSS (in this case, atom-one-dark) from a CDN,
+            and ask it to render once the page has loaded. Hence the <code>&lt;head&gt;</code> section of the base
+            template contains:
+          </p>
+          <pre><code class="language-HTML">...
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css"&gt;
+...
+&lt;script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;
+...
+&lt;script src="/js/render_code.js"&gt;&lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
+          <p>
+            and the contents of <code>/js/render_code.js</code> runs the highlighter after all the DOM content is
+            present and correct:
+          </p>
+          <pre><code class="language-Javascript">document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  hljs.highlightAll();
+});
+</code></pre>
           <h2>
             Navigation breadcrumb
           </h2>

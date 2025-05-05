@@ -22,9 +22,35 @@ TODO Talk about Bulma
 
 TODO: explain math rendering (markdown plugin to escape and include in span with class, then small javascript hook to call katex on all cells after DOM loaded.)
 
-## Code block
+## Code
 
-TODO
+Highlighting code is easy with [highlight.js](https://highlightjs.org). This will colour many different languages in any of a number of different themes, expecting html like
+
+```HTML
+<pre><code class="language-python"> ...python code... </code></pre>
+```
+
+The Common Markdown standard used by [twg.py](twg.html) has [fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks) which produces tags with CSS classes exactly like this.
+
+So we just need to pull in the Javascript and chosen theme CSS (in this case, atom-one-dark) from a CDN, and ask it to render once the page has loaded. Hence the `<head>` section of the base template contains:
+
+```HTML
+...
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
+...
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"></script>
+...
+<script src="/js/render_code.js"></script>
+</html>
+```
+
+and the contents of `/js/render_code.js` runs the highlighter after all the DOM content is present and correct:
+
+```Javascript
+document.addEventListener("DOMContentLoaded", (event) => {
+  hljs.highlightAll();
+});
+```
 
 ## Navigation breadcrumb
 
