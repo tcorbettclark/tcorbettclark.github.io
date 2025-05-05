@@ -402,7 +402,7 @@ def main(
 
     CONTENT_DIR is the directory of source web contents. It is never altered.
 
-    OUTPUT_DIR is the new directory into which the website will be built. It is destroyed on every build.
+    OUTPUT_DIR is the new directory into which the website will be built. It is destroyed before every build.
 
     """
     asyncio.run(
