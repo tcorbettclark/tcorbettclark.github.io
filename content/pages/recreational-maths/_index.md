@@ -5,7 +5,7 @@ I enjoy mathematical nuggets and puzzles, e.g. from:
 [@mathssolutionz](https://x.com/mathssolutionz),
 [Mirangu](https://mirangu.com).
 
-Here are some of the more interesting, surprising, and/or fun. My answer(s) are written up as a PDF.
+Here are some of the more interesting, surprising, and/or fun. My answers are written up as PDFs.
 
 * [Problem 1](problem-1/index.html)
 * _More soon!_
