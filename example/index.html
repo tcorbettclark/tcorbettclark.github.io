@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="author" content="{{ AUTHOR }}" />
+        <meta name="description" content="{{ SITEDESCRIPTION }}" />
+        <title>{{ SITENAME }}</title>
+        <script src="/hot_reloader.js" async></script>
+    </head>
+    <body>
+        <h1>Some content from a markdown file</h1>
+        {{ "_hello.md" | markdown() }}
+        <br/>
+        <h1>Some points taken from a data structure</h1>
+        <ol>
+        {% for p in important_points %}
+            <li>
+            {{ p.text }} - level {{ p.level }}
+            </li>
+        {% endfor %}
+        </ol>
+    </body>
+</html>

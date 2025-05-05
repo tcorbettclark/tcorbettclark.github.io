@@ -1,0 +1,3 @@
+AUTHOR = "Fred Bloggs"
+SITENAME = "Hello from minimal twg.py example!"
+SITEDESCRIPTION = "Minimal example site to show main functionality of twg.py tool."

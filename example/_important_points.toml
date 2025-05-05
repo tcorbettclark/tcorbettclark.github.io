@@ -1,0 +1,11 @@
+[[important_points]]
+text = "First important point"
+level = "high"
+
+[[important_points]]
+text = "Another important point, but not so important"
+level = "low"
+
+[[important_points]]
+text = "The world is about to end..."
+level = "critical"
