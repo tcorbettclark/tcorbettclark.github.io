@@ -263,7 +263,7 @@ class Server:
             ws = aiohttp.web.WebSocketResponse()
             self.web_sockets.add(ws)
             await ws.prepare(request)
-            log("Started new hot reloader websocket")
+            log("New hot reloader connected")
             try:
                 async for msg in ws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
@@ -272,7 +272,7 @@ class Server:
                                 f"Received unexpected message over hot reloader websocket: {msg.data}"
                             )
             finally:
-                log("Closed hot reloader websocket")
+                log("Hot reloader closed")
                 await ws.close()
                 self.web_sockets.remove(ws)
             return ws
@@ -343,6 +343,9 @@ async def run(
     try:
         while True:
             await watcher.wait_for_change()
+            await asyncio.sleep(
+                0.1
+            )  # Hack to wait for editors tracking of file changes e.g. for git
             builder.rebuild()
             await server.signal_hot_reloaders()
     except asyncio.CancelledError:
