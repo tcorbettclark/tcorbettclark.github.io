@@ -1,6 +1,4 @@
-# My web content
-
-TODO Everything described above is generic (see comments about lines).
+# My content approach
 
 ## Deployment e.g. on GitHub pages
 
