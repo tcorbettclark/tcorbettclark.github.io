@@ -38,7 +38,7 @@ The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tid
 
 The tool itself is a single file Python script called `twg.py`. This uses [inline script metadata](https://peps.python.org/pep-0723) to define dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Then due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), the tool can conveniently be run as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
 
-```bash
+```plaintext
 ❯ ./twg.py --help
 Usage: twg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
 
@@ -58,7 +58,7 @@ Options:
 
 Running will produce an output as follows:
 
-```bash
+```plaintext
 ❯ ./twg.py example/ output/
 Working files match regex: \_.*
 Template files have extension(s): .html, .xml, .txt
@@ -142,6 +142,34 @@ Most robust approach is to trap onclose and differentiate between whether the co
 ## Code overview
 
 TODO: include simplified snippets.
+
+For example
+```Python
+class Watcher:
+    def __init__(self, directory):
+        self.directory = directory
+        self._change_event = asyncio.Event()
+
+    async def _start(self):
+        log("Watching for changes in: {}", self.directory)
+        async for changes in watchfiles.awatch(self.directory):
+            for change, filename in list(changes):
+                filename = pathlib.Path(filename)
+                if change == watchfiles.Change.added:
+                    log("Noticed file added: {}", filename)
+                elif change == watchfiles.Change.deleted:
+                    log("Noticed file deleted: {}", filename)
+                elif change == watchfiles.Change.modified:
+                    log("Noticed file modified: {}", filename)
+            self._change_event.set()
+
+    async def start(self):
+        return asyncio.create_task(self._start())
+
+    async def wait_for_change(self):
+        await self._change_event.wait()
+        self._change_event.clear()
+```
 
 ## Further development
 
