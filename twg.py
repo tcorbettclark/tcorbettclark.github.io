@@ -105,7 +105,7 @@ class Builder:
         )
 
     def create_fresh_output_directory(self):
-        log(f"Using content in: {self.content_dir} ({{}})", self.content_dir)
+        log(f"Using content from: {self.content_dir} ({{}})", self.content_dir)
         if os.path.exists(self.output_dir):
             shutil.rmtree(self.output_dir)
         shutil.copytree(self.content_dir, self.output_dir)
@@ -136,12 +136,13 @@ class Builder:
                 self.output_dir / pathlib.Path(context.name).parent / value
             )
             md = markdown_it.MarkdownIt(
-                "commonmark", {"typographer": True, "linkify": True}
+                "commonmark",
+                {"typographer": True},
             )
             md.use(markdown_footnote_plugin)
             md.use(markdown_math_plugin)
             md.use(markdown_attrs_plugin, spans=True)
-            md.enable(["replacements", "smartquotes", "linkify", "table"])
+            md.enable(["replacements", "smartquotes", "table"])
             log("Converted markdown from: {}", markdown_filename)
             with open(markdown_filename, "r") as f:
                 return md.render(f.read())
@@ -368,12 +369,12 @@ async def run(
 )
 @click.option(
     "-t",
-    "--template_extension",
+    "--template-extension",
     "template_extensions",
     default=[".html", ".xml", ".txt"],
     show_default=True,
     multiple=True,
-    help="Run Jinja2 templating on files with this extension",
+    help="Extension identifying files to template with Jinja2",
 )
 @click.option(
     "-h",
@@ -397,11 +398,11 @@ def main(
     host,
     port,
 ):
-    """Create a website.
+    """TWG = Tim's Website Generator.
 
-    CONTENT_DIR is the directory of web contents. It is never altered.
+    CONTENT_DIR is the directory of source web contents. It is never altered.
 
-    OUTPUT_DIR is the new directory into which the website will be built.
+    OUTPUT_DIR is the new directory into which the website will be built. It is destroyed on every build.
 
     """
     asyncio.run(
@@ -417,4 +418,4 @@ def main(
 
 
 if __name__ == "__main__":
-    main()
+    main(max_content_width=120)
