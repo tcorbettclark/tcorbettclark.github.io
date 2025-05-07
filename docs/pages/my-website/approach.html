@@ -21,13 +21,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
     <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
     "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin=
-    "anonymous"></script>
-    <script src="/js/hot_reloader.js" async="async"></script>
-    <script src="/js/render_maths.js"></script>
-    <script src="/js/render_code.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+    crossorigin="anonymous"></script>
+    <script defer="defer" src="/js/hot_reloader.js" async="async"></script>
+    <script defer="defer" src="/js/render_maths.js"></script>
+    <script defer="defer" src="/js/render_code.js"></script>
   </head>
   <body class="draft-watermark">
     <header class="hero is-small is-primary">
@@ -50,46 +50,167 @@
           <h1>
             My content approach
           </h1>
+          <p>
+            This page explains how I have structured all the web files, templates, and data to achieve this site. Also,
+            my notes on how I addressed aspects such as hosting, validation, security, selecting libraries, rendering
+            maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app
+            manifest, making the XML sitemap, and a draft/wip mode.
+          </p>
           <h2>
-            Deployment e.g. on GitHub pages
+            Deployment on GitHub pages
           </h2>
           <p>
-            TOOD: reference github, explain configuration
+            It is easy and convenient to host static content on <a href="https://pages.github.com">GitHub pages</a>.
           </p>
           <p>
-            TODO: explain github actions from master branch in the <code>docs/</code> directory
+            One can either use files from a git branch, the root directory of the repository, or a directory called
+            <code>docs/</code>. It would be nice to be able to use a different directory name, but so be it. I just use
+            the <code>docs/</code> directory on the master branch.
           </p>
           <p>
-            Commit to master branch on github. This triggers the deploy action, so within 10 mins (often faster) the
-            changes will be live.
+            A custom domain can be used by creating a <code>CNAME</code> file containing the full domain (in my case,
+            <code>www.corbettclark.com</code>).
           </p>
           <p>
-            Output has to go in <code>docs/</code> because github pages only support serving content from
-            <code>/</code> or <code>docs/</code>.
+            The default GitHub action detects code commits and deploys on their infrastructure, making the result
+            visible within a couple of minutes (often faster).
           </p>
           <p>
-            Then run the deployed site against W3C Validator, check rendering using different devices etc. See also the
-            “DRAFT” mode approach, below. TODO.
+            As I’m the only person making changes, I mostly dispense with creating a branch and making a pull request
+            to myself (<a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow</a>), but
+            instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub.
+            In short, my workflow is:
           </p>
+          <ul>
+            <li>Start up <a href="twg.html">my tool</a> with <code>./twg.py content/ docs/</code>
+            </li>
+            <li>Repeat until ready to publish:
+              <ul>
+                <li>Make changes and check in local browser without leaving my editor (because of hot reload).
+                </li>
+                <li>Commit locally using git.
+                </li>
+              </ul>
+            </li>
+            <li>Git push to GitHub.
+            </li>
+            <li>After a minute or so, check the changes have reached live ok.
+            </li>
+          </ul>
+          <h2>
+            Validation
+          </h2>
+          <p>
+            Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and
+            learn about the web world. For example:
+          </p>
+          <ul>
+            <li>
+              <a href="https://validator.w3.org/nu/">W3 Validator</a>
+            </li>
+            <li>
+              <a href="https://developer.mozilla.org/en-US/observatory">MDN’s Observatory tool</a>
+            </li>
+            <li>
+              <a href="https://www.validbot.com/">ValidBot</a>
+            </li>
+          </ul>
+          <p>
+            Notable issues I could not address include:
+          </p>
+          <ol>
+            <li>The existence of trailing slashes on void elements such as <code>meta</code> and <code>link</code>
+            tags. These cannot be fixed by hand because <a href="twg.html">TWG</a> checks and formats all HTML with
+            <a href="https://html-tidy.org">HTML Tidy</a>, produces such trailing slashes. The main concern (see
+            <a href="https://wet-boew.github.io/wet-boew-documentation/decision/15.html">here</a> and <a href=
+            "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">here</a>) seems
+            to be that because HTML5 is not XML, and since href arguments don’t have to be quoted, there is an
+            ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
+              <pre><code>&lt;link href=https://foo.bar.baz/&gt;
+&lt;link href="https://foo.bar.baz"/&gt;
+&lt;link href="https://foo.bar.baz/"&gt;
+</code></pre>This isn’t a problem so long as we always quote href’s.
+            </li>
+            <li>TODO, add more…
+            </li>
+          </ol>
           <h2>
             Choice of web libraries
           </h2>
           <p>
-            TODO Talk about Bulma
+            TODO Talk about selecting Bulma. Do this later, just in case I change it e.g. to UIkit.
           </p>
           <h2>
             Maths
           </h2>
           <p>
-            TODO: explain math rendering (markdown plugin to escape and include in span with class, then small
-            javascript hook to call katex on all cells after DOM loaded.)
+            For any substantial maths I create PDFs using <a href="https://typst.app">Typst</a>, but for immediately
+            visible maths in the browser I use the javascript library, <a href="https://katex.org">KaTeX</a>. Other
+            libraries exist but Katex is well maintained, popular, and fast.
           </p>
+          <p>
+            The Common Markdown parser used by <a href="twg.html">twg.py</a> includes the <a href=
+            "https://mdit-py-plugins.readthedocs.io/en/latest/#mdit_py_plugins.dollarmath.dollarmath_plugin">dollarmath_plugin</a>.
+            It produces inline and block maths with the following HTML markup:
+          </p>
+          <pre><code class="language-HTML">&lt;span class="math inline"&gt; ...latex maths... &lt;/span&gt;
+&lt;div class="math block"&gt; ...latex maths... &lt;/div&gt;
+</code></pre>
+          <p>
+            A small amount of javascript makes KaTeX render on the correct elements after the DOM has loaded:
+          </p>
+          <pre><code class="language-javascript">document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  for (var node of document.getElementsByClassName("math")) {
+    katex.render(node.innerText, node, {
+      displayMode: node.classList.contains("block"), // otherwise assume it is "inline"
+      throwOnError: false,
+    });
+  }
+});
+</code></pre>
+          <p>
+            I put this javascript in the file <code>render_maths.js</code> and load it in the <code>&lt;head&gt;</code>
+            tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the
+            <a href="https://cdn.jsdelivr.net">jsDelivr CDN</a>:
+          </p>
+          <pre><code class="language-HTML">&lt;head&gt;
+    ...
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous"&gt;
+    ...
+    &lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"&gt;&lt;/script&gt;
+    ...
+    &lt;script defer src="/render_maths.js"&gt;&lt;/script&gt;
+    ...
+&lt;/head&gt;
+</code></pre>
+          <p>
+            The result is for markdown like
+          </p>
+          <pre><code class=
+          "language-markdown">For example, inline maths like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
+
+$$
+\sum_{k=1}^n { k! \over (1+k)^2 }
+$$
+</code></pre>
+          <p>
+            to be displayed as
+          </p>
+          <blockquote>
+            <p>
+              For example, inline maths like <span class="math inline">(x+1)^2 - (x-1)^2 = 4x</span>, and block maths
+              like
+            </p>
+            <div class="math block">
+              \sum_{k=1}^n { k! \over (1+k)^2 }
+            </div>
+          </blockquote>
           <h2>
             Code
           </h2>
           <p>
             Highlighting code is easy with <a href="https://highlightjs.org">highlight.js</a>. This will colour many
-            different languages in any of a number of different themes, expecting html like
+            different programming languages in any of a number of different themes, expecting HTML markup like
           </p>
           <pre><code class=
           "language-HTML">&lt;pre&gt;&lt;code class="language-python"&gt; ...python code... &lt;/code&gt;&lt;/pre&gt;
@@ -104,17 +225,19 @@
             and ask it to render once the page has loaded. Hence the <code>&lt;head&gt;</code> section of the base
             template contains:
           </p>
-          <pre><code class="language-HTML">...
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css"&gt;
-...
-&lt;script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;
-...
-&lt;script src="/js/render_code.js"&gt;&lt;/script&gt;
-&lt;/html&gt;
+          <pre><code class="language-HTML">&lt;head&gt;
+    ...
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css"&gt;
+    ...
+    &lt;script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;
+    ...
+    &lt;script defer src="/render_code.js"&gt;&lt;/script&gt;
+    ...
+&lt;/head&gt;
 </code></pre>
           <p>
-            and the contents of <code>/js/render_code.js</code> runs the highlighter after all the DOM content is
-            present and correct:
+            and the contents of <code>/render_code.js</code> runs the highlighter after all the DOM content is present
+            and correct:
           </p>
           <pre><code class="language-Javascript">document.addEventListener("DOMContentLoaded", (event) =&gt; {
   hljs.highlightAll();
@@ -131,6 +254,10 @@
           </h2>
           <p>
             TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
+          </p>
+          <p>
+            TODO does favicon.ico and apple xxx need to go in root directory to be found? At least one validator
+            suggested so…
           </p>
           <h2>
             Colour, styling, and night view
@@ -210,37 +337,17 @@
             </li>
             <li>Colour consistency (e.g. manifest, favicon, and page theme)
             </li>
-            <li>W3Validator
+            <li>Validator
             </li>
             <li>Page titles and descriptions
             </li>
             <li>Alt and title tags
             </li>
-            <li>Contrast ratio
+            <li>Contrast ratio. TODO link to tools.
             </li>
-            <li>https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
+            <li>TODO: read about https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata $$
             </li>
           </ul>
-          <h2>
-            Pending / keep an eye for the future
-          </h2>
-          <p>
-            Don’t include a trailing slash on void elements. See:
-            https://wet-boew.github.io/wet-boew-documentation/decision/15.html
-          </p>
-          <p>
-            W3 Validator warns about them.
-          </p>
-          <p>
-            https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes
-          </p>
-          <p>
-            Basically, HTML5 is not XML. And since href arguments don’t have to be quoted, we have an ambiguity:
-          </p>
-          <pre><code>&lt;link href=https://foo.bar.baz/&gt;
-&lt;link href="https://foo.bar.baz"/&gt;
-&lt;link href="https://foo.bar.baz/"&gt;
-</code></pre>
         </div>
       </div>
     </section>

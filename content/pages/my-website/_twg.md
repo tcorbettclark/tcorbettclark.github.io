@@ -25,7 +25,7 @@ Then, to create a fast iterative loop:
 5. Watching for source file changes and rebuilding automatically.
 5. Notifying browser(s) of new builds (_e.g._ to trigger a "hot reload").
 
-Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc. Many of these are perfectly possible and even easy to achieve using the tool's machinery without it needing to provide native support.
+Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc. Many of these are easy to achieve using the tool's machinery without explicit native support.
 
 ## Zero config
 
