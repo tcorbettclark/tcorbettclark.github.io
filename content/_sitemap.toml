@@ -1,3 +1,7 @@
 [[SITEMAP_FILENAMES]]
 name = "index.html"
 change_frequency = "weekly"
+
+[[SITEMAP_FILENAMES]]
+name = "welcome/index.html"
+change_frequency = "weekly"
