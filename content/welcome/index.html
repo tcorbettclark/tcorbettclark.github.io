@@ -1,0 +1,25 @@
+{% extends "../_base.html" %}
+
+{% block links_to_extra_css %}
+<link rel="stylesheet" type="text/css" href="me.css"/>
+{% endblock %}
+
+{% block content %}
+<section class="section pt-0">
+    <div class="columns">
+        <div class="column">
+            <div class="box has-background-primary-95">
+                <div class="block is-size-4 has-text-centered ">
+                        <i class="fa-solid fa-person-digging"></i> Website under construction!
+                </div>
+                <div class="content">
+                {{ "_index.md" | markdown() }}
+                </div>
+            </div>
+        </div>
+        <div class="column is-narrow">
+            {% include "_profile.html" %}
+        </div>
+    </div>
+</section>
+{% endblock %}

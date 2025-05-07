@@ -1,0 +1,9 @@
+/* Set max size for my photo unless using a screen on a small device. */
+#photo-of-me {
+    max-width: 200px;
+}
+@media screen and (width <= 768px) {
+    #photo-of-me {
+        max-width: unset;
+    }
+}
