@@ -23,7 +23,7 @@ Then, to create a fast iterative loop:
 
 5. Serving up content on a local http webserver (for review during development).
 5. Watching for source file changes and rebuilding automatically.
-5. Notifying browser(s) of new builds (_e.g._ to trigger a "hot reload").
+5. Notifying browser(s) of new builds (e.g. to trigger a "hot reload").
 
 Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc. Many of these are easy to achieve using the tool's machinery without explicit native support.
 
@@ -35,9 +35,9 @@ With the exception of a few command line options to tell the tool where to find 
 
 Instead of copying and creating files and directories from various sources and processes, the tool takes a "subtractive" approach. The build process starts by cloning a given content directory into a new output directory. After running the build process, all "working files" are deleted from this output directory. By default, _working files_ are identified as filenames starting with an underscore and _template files_ as having an extension of `.html`, `.xml`, and `.txt`.
 
-In addition to removing mystery around how an output is generated, this approach allows maintenance effort to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, _etc_ relating to a particular page or section of the site **can be kept together in the same directory**. This localisation of content means that after changes, removal, or replacement, the chances of things being left behind afterwards are much reduced.
+In addition to removing mystery around how an output is generated, this approach allows maintenance effort to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, etc relating to a particular page or section of the site **can be kept together in the same directory**. This localisation of content means that after changes, removal, or replacement, the chances of things being left behind afterwards are much reduced.
 
-Note however that due to the tool's lack of opinion in this regard, content can still be grouped by type in the traditional fashion if desired (all the javascript in one directory, all the CSS in another, _etc_). Or a mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
+Note however that due to the tool's lack of opinion in this regard, content can still be grouped by type in the traditional fashion if desired (all the javascript in one directory, all the CSS in another, etc). Or a mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
 
 ## Dependencies
 

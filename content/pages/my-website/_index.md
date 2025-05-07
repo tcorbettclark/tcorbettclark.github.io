@@ -10,5 +10,5 @@ This website is built using my own static site generator. Yes, another one - see
 I've chosen to move the boundary so that the build tool has essentially no opinion of web technologies and content structure, allowing the choice of web technologies to be flexible, explicit, and transparent, and the fundamental content easy to write and maintain. Hence,
 
 - see [my twg tool](twg.html) to understand what it does (and does not) do, and how it works;
-- see [my content approach](approach.html) for a systematic walk-through of how I structured the content, my choice of web framework, libraries, generating the sitemap, notes to achieve colour consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, _etc_;
+- see [my content approach](approach.html) for a systematic walk-through of how I structured the content, my choice of web framework, libraries, generating the sitemap, notes to achieve colour consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, etc;
 - leaving the content itself to be found in the [source repository](https://github.com/tcorbettclark/tcorbettclark.github.io) for this site, consisting almost entirely of markdown files.
