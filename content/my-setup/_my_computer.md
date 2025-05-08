@@ -30,6 +30,6 @@ I have configured using Karabiner to make
 
 So the modifier buttons are now:
 
-> Ctrl ⌥ ⌘ <space> ⌘ Fn ⌥ Ctrl
+Ctrl ⌥ ⌘ \<space\> ⌘ Fn ⌥ Ctrl
 
 And make sure keyboard is set to British, and not to Unicode Hex Input!
