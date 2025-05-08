@@ -155,9 +155,17 @@
             Instead of copying and creating files and directories from various sources and processes, the tool takes a
             “subtractive” approach. The build process starts by cloning a given content directory into a new output
             directory. After running the build process, all “working files” are deleted from this output directory. By
-            default, <em>working files</em> are identified as filenames starting with an underscore and <em>template
-            files</em> as having an extension of <code>.html</code>, <code>.xml</code>, and <code>.txt</code>.
+            default,
           </p>
+          <ul>
+            <li>
+              <em>working files</em> are identified as filenames starting with an underscore, and
+            </li>
+            <li>
+              <em>template files</em> are identified as <em>not</em> being a working file and having an extension of
+              <code>.html</code>, <code>.xml</code>, and <code>.txt</code>.
+            </li>
+          </ul>
           <p>
             In addition to removing mystery around how an output is generated, this approach allows maintenance effort
             to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, etc
@@ -180,17 +188,23 @@
           <p>
             Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming
             directories), and discourages “by-purpose” organisation of the files. Hence TWG overrides the Jinja
-            environment so that including/extending other files is <em>relative to the loading template file</em>. For
-            example:
+            environment so that including or extending other files is <em>relative to the loading template file</em>.
+            For example, here is a consistent location of 3 files:
           </p>
-          <pre><code class="language-jinja">
-{% include %}
+          <pre><code class="language-html">&lt;!-- in /a/b/c.html --&gt;
+{% extends "../_foo.html" %}
+{% include "_bar.html" %}
 
-{% extends %}
+&lt;!-- /a/_foo.html --&gt;
+...some extendable template...
 
+&lt;!-- /a/b/_bar.html --&gt;
+...some includable content...
 </code></pre>
           <p>
-            TODO: show an example.
+            Note that both <code>_foo.html</code> and <code>_bar.html</code> are working files (because of the leading
+            underscore), and therefore won’t be run through Jinja directly. Anything included by a Jinja template
+            should almost certainly be a working file.
           </p>
           <p>
             Templating can make use of data, for example to generate lists of things, pull out into one place something
@@ -198,26 +212,67 @@
           </p>
           <p>
             TWG reads data from all TOML files (<code>*.toml</code>), combining everything into a single namespace.
-            Although tempting to have some kind of namespace mechanism, doing so from a hierarchy of such files
-            (including multiple files in the same directory) seems overly complex and could even <em>increase</em> the
-            maintenance overhead. Using meaningful names and having the tool check for name collisions is both
-            practical and easy to understand.
-          </p>
-          <p>
-            Re toml data sharing same namespace, point out that trivial to add a namespace in toml
+            This allows the data to be kept near to where it is used. Although tempting to have some kind of namespace
+            mechanism, doing so from a hierarchy of such files (including multiple files in the same directory) seems
+            overly complex and could even <em>increase</em> the maintenance overhead. Using meaningful names and having
+            the tool check for name collisions is both practical and easy to understand.
           </p>
           <h2>
             Markdown
           </h2>
           <p>
-            TODO: explain how to call from Jinja templates. TODO: explain why CommonMarkdown TODO: explain plugins
+            There are many flavours of Markdown. I have chosen to use <a href="https://commonmark.org">CommonMark</a>,
+            implemented using the <a href="https://markdown-it-py.readthedocs.io">markdown-it-py</a> Python library.
           </p>
           <p>
-            Explain that filename loading is also relative.
+            To allow markdown to be incorporated into the HTML, TWG adds a “filter” to the Jinja environment. Although
+            an abuse of filters, it is easy to implement and convenient to use. The input to the filter is the name of
+            the file which should be converted from Markdown into HTML and included in the document at that point. For
+            example:
+          </p>
+          <pre><code class="language-html">{{ "&lt;filename&gt;.md" | markdown() }}
+</code></pre>
+          <p>
+            As with Jinja includes/extends (see above), the path to the file is relative to the calling template.
           </p>
           <p>
-            Refer to example directory.
+            TWG also includes some useful plugins to the markdown parser.
           </p>
+          <p>
+            From the <a href="https://markdown-it-py.readthedocs.io">built-in markdown-it-py extensions</a>:
+          </p>
+          <ul>
+            <li>
+              <code>replacements</code> - makes it easy to include © by writing (c) etc
+            </li>
+            <li>
+              <code>smartquotes</code> - to make better looking “quotation marks” (as opposed to "these")
+            </li>
+            <li>
+              <code>table</code> - to support tables
+            </li>
+            <li>(but not <code>linkify</code>, so links need to be made explictly)
+            </li>
+          </ul>
+          <p>
+            And from <a href="https://mdit-py-plugins.readthedocs.io">mdit-py-plugins</a>:
+          </p>
+          <ul>
+            <li>
+              <code>attrs</code> - to support CSS attributes
+            </li>
+            <li>
+              <code>deflist</code> - for definition lists
+            </li>
+            <li>
+              <code>footnotes</code> - to render footnotes like this<sup class="footnote-ref"><a href="#fn1" id=
+              "fnref1">[1]</a></sup>
+            </li>
+            <li>
+              <code>math</code> - so maths can be written in $ or $$ marks and converted into sensible HTML tags with
+              escaped content
+            </li>
+          </ul>
           <h2>
             Summary: the TWG content interface
           </h2>
@@ -244,8 +299,8 @@
               Other files may contain templating markup, but must be included from template files to be templated.
             </dd>
             <dd>
-              By default, have filenames with an extension of <code>.html</code>, <code>.xml</code>, or
-              <code>.txt</code>.
+              Are non-working files, and by default have filenames with an extension of <code>.html</code>,
+              <code>.xml</code>, or <code>.txt</code>.
             </dd>
             <dt>
               Data files
@@ -273,7 +328,7 @@
             <li>Run all <strong>template files</strong> through Jinja, producing files of the same name.
             </li>
             <li>During templating, the contents of Markdown files can be rendered into HTML through use of the
-            <code>markdown()</code> Jinja filter (i.e. <code>{{ "&lt;filename&gt;.md" | markdown() }}</code>).
+            <code>markdown()</code> Jinja filter.
             </li>
             <li>Run all HTML files (<code>*.html</code>) through <a href="http://html-tidy.org">HTML tidy</a>,
             reporting any warnings, and standardising the formatting (e.g. indentation).
@@ -357,55 +412,52 @@ Watching for changes in: example
             after renaming files). A simple solution is to suspend the tool with <code>ctrl-z</code>, make the changes,
             and then foreground it with <code>fg</code>. If the content changed then the site will be rebuilt and
             browser(s) told to reload.
-          </p>
-          <h1>
-            Implementation details
-          </h1>
-          <p>
-            TODO How it works and how to develop further.
-          </p>
-          <h2>
-            Hot Reloader fun
-          </h2>
-          <p>
-            https://developer.chrome.com/docs/web-platform/page-lifecycle-api
-          </p>
-          <p>
-            Need to be able to handle: 1 Browser refresh/reload by hand 1 Browser refresh/reload triggered from server
-            following change 1 Navigating away to a page on another site which exists 1 Navigating away to a page on
-            another site which does not exist (404) 1 Navigating to another page on my site which exists 1 Navigating
-            to another page on my site which does not exist (404) 1 Back button 1 Forward button 1 Close tab 1 Close
-            browser
-          </p>
-          <p>
-            Tools: 1 Server detecting connection has dropped 1 Client detecting connection has dropped 1 Client side
-            localstorage 1 Browser detecting a reload/refresh is about to happen event beforeunload event pagehide and
-            pageshow event visibilitychange event freeze and resume
-          </p>
-          <p>
-            See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
-          </p>
-          <p>
-            new WebSocket does not raise an exception on failure to connect because it is asynchronous. onerror can
-            occur even under normal use, e.g. using the browser history forward/back buttons, and having the page
-            freeze/resume etc.
-          </p>
-          <p>
-            Most robust approach is to trap onclose and differentiate between whether the connection has ever opened
-            ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it
-            hasn’t opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we
-            reload the whole page (and hence start the cycle again).
-          </p>
-          <h2>
-            Code overview
-          </h2>
-          <p>
-            TODO: include simplified snippets.
-          </p>
-          <p>
-            For example
-          </p>
-          <pre><code class="language-Python">class Watcher:
+          </p><!--
+# Implementation details
+
+TODO How it works and how to develop further.
+
+## Hot Reloader fun
+
+https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+
+Need to be able to handle:
+1 Browser refresh/reload by hand
+1 Browser refresh/reload triggered from server following change
+1 Navigating away to a page on another site which exists
+1 Navigating away to a page on another site which does not exist (404)
+1 Navigating to another page on my site which exists
+1 Navigating to another page on my site which does not exist (404)
+1 Back button
+1 Forward button
+1 Close tab
+1 Close browser
+
+Tools:
+1 Server detecting connection has dropped
+1 Client detecting connection has dropped
+1 Client side localstorage
+1 Browser detecting a reload/refresh is about to happen
+event beforeunload
+event pagehide and pageshow
+event visibilitychange
+event freeze and resume
+
+See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+
+new WebSocket does not raise an exception on failure to connect because it is asynchronous.
+onerror can occur even under normal use, e.g. using the browser history forward/back buttons, and having the page freeze/resume etc.
+
+Most robust approach is to trap onclose and differentiate between whether the connection has ever opened ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it hasn't opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we reload the whole page (and hence start the cycle again).
+
+## Code overview
+
+TODO: include simplified snippets.
+
+For example
+
+```Python
+class Watcher:
     def __init__(self, directory):
         self.directory = directory
         self._change_event = asyncio.Event()
@@ -429,26 +481,34 @@ Watching for changes in: example
     async def wait_for_change(self):
         await self._change_event.wait()
         self._change_event.clear()
-</code></pre>
-          <h2>
-            Tool development
-          </h2>
-          <p>
-            So that your editor can pick up the scripts’ virtual enviroment, symlink <code>.venv</code> e.g. something
-            like:
-          </p>
-          <p>
-            ???
-          </p>
-          <pre><code class=
-          "language-bash">ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
-</code></pre>
-          <p>
-            To add or remove packages needed by <code>twg.py</code>,
-          </p>
-          <pre><code class="language-bash">uv add --script twg.py &lt;package&gt;
-uv remove --script twg.py &lt;package&gt;
-</code></pre>
+```
+
+## Tool development
+
+So that your editor can pick up the scripts' virtual enviroment, symlink `.venv` e.g. something like:
+
+???
+
+```bash
+ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
+```
+
+To add or remove packages needed by `twg.py`,
+
+```bash
+uv add \-\-script twg.py <package>
+uv remove \-\-script twg.py <package>
+``` -->
+          <hr class="footnotes-sep" />
+          <section class="footnotes">
+            <ol class="footnotes-list">
+              <li id="fn1" class="footnote-item">
+                <p>
+                  Demo footnote. <a href="#fnref1" class="footnote-backref">↩︎</a>
+                </p>
+              </li>
+            </ol>
+          </section>
         </div>
       </div>
     </section>

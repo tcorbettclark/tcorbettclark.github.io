@@ -33,7 +33,9 @@ With the exception of a few command line options to tell the tool where to find 
 
 ## Subtractive approach
 
-Instead of copying and creating files and directories from various sources and processes, the tool takes a "subtractive" approach. The build process starts by cloning a given content directory into a new output directory. After running the build process, all "working files" are deleted from this output directory. By default, _working files_ are identified as filenames starting with an underscore and _template files_ as having an extension of `.html`, `.xml`, and `.txt`.
+Instead of copying and creating files and directories from various sources and processes, the tool takes a "subtractive" approach. The build process starts by cloning a given content directory into a new output directory. After running the build process, all "working files" are deleted from this output directory. By default,
+- _working files_ are identified as filenames starting with an underscore, and
+- _template files_ are identified as *not* being a working file and having an extension of `.html`, `.xml`, and `.txt`.
 
 In addition to removing mystery around how an output is generated, this approach allows maintenance effort to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, etc relating to a particular page or section of the site **can be kept together in the same directory**. This localisation of content means that after changes, removal, or replacement, the chances of things being left behind afterwards are much reduced.
 
@@ -43,34 +45,53 @@ Note however that due to the tool's lack of opinion in this regard, content can 
 
 To provide templating, TWG uses [Jinja](https://jinja.palletsprojects.com), a hugely popular and mature templating library.
 
-Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming directories), and discourages "by-purpose" organisation of the files. Hence TWG overrides the Jinja environment so that including/extending other files is *relative to the loading template file*. For example:
+Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming directories), and discourages "by-purpose" organisation of the files. Hence TWG overrides the Jinja environment so that including or extending other files is *relative to the loading template file*. For example, here is a consistent location of 3 files:
 
-```jinja
+```html
+<!-- in /a/b/c.html -->
+{% extends "../_foo.html" %}
+{% include "_bar.html" %}
 
-{% include %}
+<!-- /a/_foo.html -->
+...some extendable template...
 
-{% extends %}
-
+<!-- /a/b/_bar.html -->
+...some includable content...
 ```
-TODO: show an example.
+
+Note that both `_foo.html` and `_bar.html` are working files (because of the leading underscore), and therefore won't be run through Jinja directly. Anything included by a Jinja template should almost certainly be a working file.
 
 Templating can make use of data, for example to generate lists of things, pull out into one place something which is used in multiple places, or just self-document the meaning of something better.
 
-TWG reads data from all TOML files (`*.toml`), combining everything into a single namespace. Although tempting to have some kind of namespace mechanism, doing so from a hierarchy of such files (including multiple files in the same directory) seems overly complex and could even *increase* the maintenance overhead. Using meaningful names and having the tool check for name collisions is both practical and easy to understand.
-
-
-
-Re toml data sharing same namespace, point out that trivial to add a namespace in toml
+TWG reads data from all TOML files (`*.toml`), combining everything into a single namespace. This allows the data to be kept near to where it is used. Although tempting to have some kind of namespace mechanism, doing so from a hierarchy of such files (including multiple files in the same directory) seems overly complex and could even *increase* the maintenance overhead. Using meaningful names and having the tool check for name collisions is both practical and easy to understand.
 
 ## Markdown
 
-TODO: explain how to call from Jinja templates.
-TODO: explain why CommonMarkdown
-TODO: explain plugins
+There are many flavours of Markdown. I have chosen to use [CommonMark](https://commonmark.org), implemented using the [markdown-it-py](https://markdown-it-py.readthedocs.io) Python library.
 
-Explain that filename loading is also relative.
+To allow markdown to be incorporated into the HTML, TWG adds a "filter" to the Jinja environment. Although an abuse of filters, it is easy to implement and convenient to use. The input to the filter is the name of the file which should be converted from Markdown into HTML and included in the document at that point. For example:
 
-Refer to example directory.
+ ```html
+ {{ "<filename>.md" | markdown() }}
+ ```
+
+As with Jinja includes/extends (see above), the path to the file is relative to the calling template.
+
+TWG also includes some useful plugins to the markdown parser.
+
+From the [built-in markdown-it-py extensions](https://markdown-it-py.readthedocs.io):
+- `replacements` - makes it easy to include (c) by writing \(c\) etc
+- `smartquotes` - to make better looking "quotation marks" (as opposed to \"these\")
+- `table` - to support tables
+- (but not `linkify`, so links need to be made explictly)
+
+And from [mdit-py-plugins](https://mdit-py-plugins.readthedocs.io):
+- `attrs` - to support CSS attributes
+- `deflist` - for definition lists
+- `footnotes` - to render footnotes like this[^1]
+- `math` - so maths can be written in \$ or \$\$ marks and converted into sensible HTML tags with escaped content
+
+[^1]: Demo footnote.
 
 ## Summary: the TWG content interface
 
@@ -83,7 +104,7 @@ Working files
 Template files
 ~ Files which will be run through Jinja for templating.
 ~ Other files may contain templating markup, but must be included from template files to be templated.
-~ By default, have filenames with an extension of `.html`, `.xml`, or `.txt`.
+~ Are non-working files, and by default have filenames with an extension of `.html`, `.xml`, or `.txt`.
 
 Data files
 ~ Source of the data made available for templating.
@@ -95,7 +116,7 @@ The build process is as follows:
 1. Clone the source directory afresh for every build. The source directory is never changed (although it is watched).
 1. Load all **data files** into a single namespace. Any name clashes (attempts to set the same variable more than once) is considered an error, causing the tool to abort.
 1. Run all **template files** through Jinja, producing files of the same name.
-1. During templating, the contents of Markdown files can be rendered into HTML through use of the `markdown()` Jinja filter (i.e. `{{ "<filename>.md" | markdown() }}`).
+1. During templating, the contents of Markdown files can be rendered into HTML through use of the `markdown()` Jinja filter.
 1. Run all HTML files (`*.html`) through [HTML tidy](http://html-tidy.org), reporting any warnings, and standardising the formatting (e.g. indentation).
 1. Delete all **working files**, and afterwards delete any leftover empty directories.
 
@@ -157,6 +178,7 @@ The tool is now watching for changes to the source content, after which it will 
 
 **Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files). A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`. If the content changed then the site will be rebuilt and browser(s) told to reload.
 
+<!--
 # Implementation details
 
 TODO How it works and how to develop further.
@@ -240,6 +262,6 @@ ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
 To add or remove packages needed by `twg.py`,
 
 ```bash
-uv add --script twg.py <package>
-uv remove --script twg.py <package>
-```
+uv add \-\-script twg.py <package>
+uv remove \-\-script twg.py <package>
+``` -->
