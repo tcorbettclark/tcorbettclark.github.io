@@ -33,6 +33,7 @@ import toml
 import user_agents
 import watchfiles
 from mdit_py_plugins.attrs import attrs_plugin as markdown_attrs_plugin
+from mdit_py_plugins.deflist import deflist_plugin as markdown_deflist_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin as markdown_math_plugin
 from mdit_py_plugins.footnote import footnote_plugin as markdown_footnote_plugin
 
@@ -142,6 +143,7 @@ class Builder:
             md.use(markdown_footnote_plugin)
             md.use(markdown_math_plugin)
             md.use(markdown_attrs_plugin, spans=True)
+            md.use(markdown_deflist_plugin)
             md.enable(["replacements", "smartquotes", "table"])
             log("Converted markdown from: {}", markdown_filename)
             with open(markdown_filename, "r") as f:
