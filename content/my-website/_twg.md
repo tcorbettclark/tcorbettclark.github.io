@@ -45,13 +45,20 @@ To provide templating, TWG uses [Jinja](https://jinja.palletsprojects.com), a hu
 
 Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming directories), and discourages "by-purpose" organisation of the files. Hence TWG overrides the Jinja environment so that including/extending other files is *relative to the loading template file*. For example:
 
+```jinja
+
+{% include %}
+
+{% extends %}
+
+```
 TODO: show an example.
 
+Templating can make use of data, for example to generate lists of things, pull out into one place something which is used in multiple places, or just self-document the meaning of something better.
+
+TWG reads data from all TOML files (`*.toml`), combining everything into a single namespace. Although tempting to have some kind of namespace mechanism, doing so from a hierarchy of such files (including multiple files in the same directory) seems overly complex and could even *increase* the maintenance overhead. Using meaningful names and having the tool check for name collisions is both practical and easy to understand.
 
 
-
-
-TODO: explain collecting TOML, and detecting conflicts.
 
 Re toml data sharing same namespace, point out that trivial to add a namespace in toml
 
@@ -88,8 +95,8 @@ The build process is as follows:
 1. Clone the source directory afresh for every build. The source directory is never changed (although it is watched).
 1. Load all **data files** into a single namespace. Any name clashes (attempts to set the same variable more than once) is considered an error, causing the tool to abort.
 1. Run all **template files** through Jinja, producing files of the same name.
-1. During templating, any Markdown (`*.md`) files are rendered into HTML through use of the `markdown()` Jinja filter (i.e. `{{ "<filename.md> | markdown() }}`).
-1. Run all HTML files (`*.html`) through [HTML tidy](http://html-tidy.org), reporting any warnings, and formatting (e.g. indentation).
+1. During templating, the contents of Markdown files can be rendered into HTML through use of the `markdown()` Jinja filter (i.e. `{{ "<filename>.md" | markdown() }}`).
+1. Run all HTML files (`*.html`) through [HTML tidy](http://html-tidy.org), reporting any warnings, and standardising the formatting (e.g. indentation).
 1. Delete all **working files**, and afterwards delete any leftover empty directories.
 
 The tool requires no particular file or directory structure, and will work (degenerately) on an empty source directory.

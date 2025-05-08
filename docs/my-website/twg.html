@@ -57,6 +57,10 @@
             </div>
             <div class="dropdown-menu" role="menu">
               <div class="dropdown-content">
+                <div class="dropdown-item has-text-centered has-text-weight-semibold">
+                  Work in Progress
+                </div>
+                <hr class="dropdown-divider" />
                 <a href="/cv/index.html" class="dropdown-item">Professional career</a> <a href="/about-me/index.html"
                 class="dropdown-item">About me</a> <a href="/my-tastes/index.html" class="dropdown-item">My tastes</a>
                 <a href="/my-setup/index.html" class="dropdown-item">Setup of my computer</a> <a href=
@@ -179,11 +183,25 @@
             environment so that including/extending other files is <em>relative to the loading template file</em>. For
             example:
           </p>
+          <pre><code class="language-jinja">
+{% include %}
+
+{% extends %}
+
+</code></pre>
           <p>
             TODO: show an example.
           </p>
           <p>
-            TODO: explain collecting TOML, and detecting conflicts.
+            Templating can make use of data, for example to generate lists of things, pull out into one place something
+            which is used in multiple places, or just self-document the meaning of something better.
+          </p>
+          <p>
+            TWG reads data from all TOML files (<code>*.toml</code>), combining everything into a single namespace.
+            Although tempting to have some kind of namespace mechanism, doing so from a hierarchy of such files
+            (including multiple files in the same directory) seems overly complex and could even <em>increase</em> the
+            maintenance overhead. Using meaningful names and having the tool check for name collisions is both
+            practical and easy to understand.
           </p>
           <p>
             Re toml data sharing same namespace, point out that trivial to add a namespace in toml
@@ -254,11 +272,11 @@
             </li>
             <li>Run all <strong>template files</strong> through Jinja, producing files of the same name.
             </li>
-            <li>During templating, any Markdown (<code>*.md</code>) files are rendered into HTML through use of the
-            <code>markdown()</code> Jinja filter (i.e. <code>{{ "&lt;filename.md&gt; | markdown() }}</code>).
+            <li>During templating, the contents of Markdown files can be rendered into HTML through use of the
+            <code>markdown()</code> Jinja filter (i.e. <code>{{ "&lt;filename&gt;.md" | markdown() }}</code>).
             </li>
             <li>Run all HTML files (<code>*.html</code>) through <a href="http://html-tidy.org">HTML tidy</a>,
-            reporting any warnings, and formatting (e.g. indentation).
+            reporting any warnings, and standardising the formatting (e.g. indentation).
             </li>
             <li>Delete all <strong>working files</strong>, and afterwards delete any leftover empty directories.
             </li>
