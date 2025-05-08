@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,18 +28,8 @@
         <script defer src="/render_code.js"></script>
         {% block script_tags_to_extra_js %}{% endblock %}
     </head>
-    <body {% if draft %}class="draft-watermark"{% endif %}>
+    <body>
         {% include "_header.html" %}
-        <section class="m-4">
-            {% if draft %}
-                <span class="tag">
-                    <a href="/wip.html">
-                        <i class="fa-solid fa-bug"></i> wip
-                    </a>
-                </span>
-            {% endif %}
-            {% block breadcrumb %}{% endblock %}
-        </section>
         {% block content %}{% endblock %}
         {% include "_footer.html" %}
     </body>

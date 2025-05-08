@@ -29,7 +29,7 @@
     <script defer="defer" src="/render_maths.js"></script>
     <script defer="defer" src="/render_code.js"></script>
   </head>
-  <body class="draft-watermark">
+  <body>
     <header class="hero is-small is-primary">
       <div class="hero-body">
         <p class="title">
@@ -46,13 +46,13 @@
     </section>
     <section class="section pt-0">
       <div class="box has-background-primary-95">
-        <div class="content">
+        <div class="block is-size-2 has-text-centered">
+          Tim's Web Generator - TWG
+        </div>
+        <div class="content draft-watermark">
           <h1>
-            Tim’s Web Generator (TWG) tool
+            Introduction
           </h1>
-          <h2>
-            Features / anti-features
-          </h2>
           <p>
             Assuming a willingness to understand the necessary web technologies, why not create static websites <em>by
             hand</em>? The main problems are around inefficient repetition and cumbersome syntax. For example,
@@ -71,6 +71,9 @@
             "https://jinja.palletsprojects.com/en/stable/">Jinja2</a>), and writing data/metadata in a data-oriented
             syntax (such as <a href="https://toml.io/">TOML</a>).
           </p>
+          <h2>
+            Features / anti-features
+          </h2>
           <p>
             My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few
             others such as the manifest.json, robots.txt, and sitemap.xml). <strong>It is a scaffolding tool with no
@@ -139,6 +142,15 @@
             mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
           </p>
           <h2>
+            Contract
+          </h2>
+          <p>
+            TODO: explain the contract (api) between the tool and the files. Should this be in the section below?
+          </p>
+          <h1>
+            How to use
+          </h1>
+          <h2>
             Dependencies
           </h2>
           <p>
@@ -146,7 +158,7 @@
             "https://www.html-tidy.org">html-tidy</a>. For example, to set things up on a Mac using <a href=
             "https://brew.sh">Homebrew</a>:
           </p>
-          <pre><code class="language-bash">❯ brew install tidy-html5 uv
+          <pre><code class="language-bash">❯ brew install uv tidy-html5
 </code></pre>
           <h2>
             Running the tool
@@ -234,17 +246,11 @@ Watching for changes in: example
           <p>
             Refer to example directory.
           </p>
-          <h2>
-            Indentation management
-          </h2>
+          <h1>
+            Development
+          </h1>
           <p>
-            Indentation - for clarity in content view for easier writing and maintaining. But also want properly
-            formatted output. Hence tidy.
-          </p>
-          <p>
-            Don’t attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy
-            maintenance - properly indented for readability as source. This is also why files are of one language type
-            - so that editors can use the corresponding language mode (LSP).
+            TODO How it works and how to develop further.
           </p>
           <h2>
             Hot Reloader fun

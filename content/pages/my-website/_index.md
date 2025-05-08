@@ -1,5 +1,3 @@
-# My website
-
 This website is built using my own static site generator. Yes, another one - see [this list](https://jamstack.org/generators/) for example. My justification for "reinventing the wheel" is that:
 
 - I personally enjoy the deeper understanding which comes from creation;

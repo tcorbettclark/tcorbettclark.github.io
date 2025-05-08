@@ -1,6 +1,4 @@
-# Tim's Web Generator (TWG) tool
-
-## Features / anti-features
+# Introduction
 
 Assuming a willingness to understand the necessary web technologies, why not create static websites *by hand*? The main problems are around inefficient repetition and cumbersome syntax. For example,
 
@@ -9,6 +7,8 @@ Assuming a willingness to understand the necessary web technologies, why not cre
 - using a verbose syntax like HTML when wanting to focus purely on content.
 
 These pain points can be ameliorated by using a markup language (like [markdown](https://commonmark.org)), templating (e.g. with [Jinja2](https://jinja.palletsprojects.com/en/stable/)), and writing data/metadata in a data-oriented syntax (such as [TOML](https://toml.io/)).
+
+## Features / anti-features
 
 My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few others such as the manifest.json, robots.txt, and sitemap.xml). **It is a scaffolding tool with no fundamental opinion about these web files**.
 
@@ -39,12 +39,18 @@ In addition to removing mystery around how an output is generated, this approach
 
 Note however that due to the tool's lack of opinion in this regard, content can still be grouped by type in the traditional fashion if desired (all the javascript in one directory, all the CSS in another, etc). Or a mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
 
+## Contract
+
+TODO: explain the contract (api) between the tool and the files. Should this be in the section below?
+
+# How to use
+
 ## Dependencies
 
 The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tidy](https://www.html-tidy.org). For example, to set things up on a Mac using [Homebrew](https://brew.sh):
 
 ```bash
-❯ brew install tidy-html5 uv
+❯ brew install uv tidy-html5
 ```
 
 ## Running the tool
@@ -113,11 +119,9 @@ TODO: explain plugins
 
 Refer to example directory.
 
-## Indentation management
+# Development
 
-Indentation - for clarity in content view for easier writing and maintaining. But also want properly formatted output. Hence tidy.
-
-Don't attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy maintenance - properly indented for readability as source. This is also why files are of one language type - so that editors can use the corresponding language mode (LSP).
+TODO How it works and how to develop further.
 
 ## Hot Reloader fun
 

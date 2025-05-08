@@ -29,7 +29,7 @@
     <script defer="defer" src="/render_maths.js"></script>
     <script defer="defer" src="/render_code.js"></script>
   </head>
-  <body class="draft-watermark">
+  <body>
     <header class="hero is-small is-primary">
       <div class="hero-body">
         <p class="title">
@@ -46,19 +46,19 @@
     </section>
     <section class="section pt-0">
       <div class="box has-background-primary-95">
-        <div class="content">
-          <h1>
-            My content approach
-          </h1>
+        <div class="block is-size-2 has-text-centered">
+          Content approach
+        </div>
+        <div class="content draft-watermark">
           <p>
             This page explains how I have structured all the web files, templates, and data to achieve this site. Also,
             my notes on how I addressed aspects such as hosting, validation, security, selecting libraries, rendering
             maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app
             manifest, making the XML sitemap, and a draft/wip mode.
           </p>
-          <h2>
+          <h1>
             Deployment on GitHub pages
-          </h2>
+          </h1>
           <p>
             It is easy and convenient to host static content on <a href="https://pages.github.com">GitHub pages</a>.
           </p>
@@ -97,9 +97,9 @@
             <li>After a minute or so, check the changes have reached live ok.
             </li>
           </ul>
-          <h2>
+          <h1>
             Validation
-          </h2>
+          </h1>
           <p>
             Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and
             learn about the web world. For example:
@@ -134,15 +134,15 @@
             <li>TODO, add more…
             </li>
           </ol>
-          <h2>
+          <h1>
             Choice of web libraries
-          </h2>
+          </h1>
           <p>
             TODO Talk about selecting Bulma. Do this later, just in case I change it e.g. to UIkit.
           </p>
-          <h2>
+          <h1>
             Maths
-          </h2>
+          </h1>
           <p>
             For any substantial maths I create PDFs using <a href="https://typst.app">Typst</a>, but for immediately
             visible maths in the browser I use the javascript library, <a href="https://katex.org">KaTeX</a>. Other
@@ -202,12 +202,12 @@ $$
               like
             </p>
             <div class="math block">
-              \sum_{k=1}^n { k! \over (1+k)^2 }
+              \sum\_{k=1}^n { k! \over (1+k)^2 }
             </div>
           </blockquote>
-          <h2>
+          <h1>
             Code
-          </h2>
+          </h1>
           <p>
             Highlighting code is easy with <a href="https://highlightjs.org">highlight.js</a>. This will colour many
             different programming languages in any of a number of different themes, expecting HTML markup like
@@ -243,15 +243,27 @@ $$
   hljs.highlightAll();
 });
 </code></pre>
-          <h2>
+          <h1>
+            Indentation management
+          </h1>
+          <p>
+            Indentation - for clarity in content view for easier writing and maintaining. But also want properly
+            formatted output. Hence tidy.
+          </p>
+          <p>
+            Don’t attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy
+            maintenance - properly indented for readability as source. This is also why files are of one language type
+            - so that editors can use the corresponding language mode (LSP).
+          </p>
+          <h1>
             Navigation breadcrumb
-          </h2>
+          </h1>
           <p>
             TODO
           </p>
-          <h2>
+          <h1>
             Manifest and favicon
-          </h2>
+          </h1>
           <p>
             TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
           </p>
@@ -259,9 +271,9 @@ $$
             TODO does favicon.ico and apple xxx need to go in root directory to be found? At least one validator
             suggested so…
           </p>
-          <h2>
+          <h1>
             Colour, styling, and night view
-          </h2>
+          </h1>
           <p>
             TODO
           </p>
@@ -303,16 +315,16 @@ $$
             <li>https://pixelied.com/colors/color-wheel
             </li>
           </ul>
-          <h2>
+          <h1>
             XML sitemap
-          </h2>
+          </h1>
           <p>
             Simply done by putting the data into a <code>_sitemap.toml</code> and writing a template
             <code>sitemap.xml</code>. Then linking to it from <code>robots.txt</code>.
           </p>
-          <h2>
+          <h1>
             DRAFT mode
-          </h2>
+          </h1>
           <p>
             CSS watermark switch passed in to top level templates The <code>/wip.html</code> page and the “hidden” link
             in right side of the navigation (breadcrumb) space. So now often I can commit and push to master, and
@@ -329,9 +341,9 @@ $$
           <p>
             Also, no separate dev build and live build - all one and the same.
           </p>
-          <h2>
+          <h1>
             Publish checklist
-          </h2>
+          </h1>
           <ul>
             <li>Visual check on different devices and orientation
             </li>
@@ -345,7 +357,7 @@ $$
             </li>
             <li>Contrast ratio. TODO link to tools.
             </li>
-            <li>TODO: read about https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata $$
+            <li>TODO: read about https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
             </li>
           </ul>
         </div>

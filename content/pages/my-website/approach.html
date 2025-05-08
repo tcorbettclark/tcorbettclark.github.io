@@ -1,5 +1,9 @@
 {% set draft = true %}
+
 {% extends "../_page.html" %}
+
+{% block title %} Content approach {% endblock %}
+
 {% block page %}
 {{ "_approach.md" | markdown() }}
 {% endblock %}

@@ -1,8 +1,6 @@
-# My content approach
-
 This page explains how I have structured all the web files, templates, and data to achieve this site. Also, my notes on how I addressed aspects such as hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, and a draft/wip mode.
 
-## Deployment on GitHub pages
+# Deployment on GitHub pages
 
 It is easy and convenient to host static content on [GitHub pages](https://pages.github.com).
 
@@ -21,7 +19,7 @@ As I'm the only person making changes, I mostly dispense with creating a branch 
 - Git push to GitHub.
 - After a minute or so, check the changes have reached live ok.
 
-## Validation
+# Validation
 
 Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and learn about the web world. For example:
 
@@ -40,11 +38,11 @@ Notable issues I could not address include:
    This isn't a problem so long as we always quote href's.
 1. TODO, add more...
 
-## Choice of web libraries
+# Choice of web libraries
 
 TODO Talk about selecting Bulma. Do this later, just in case I change it e.g. to UIkit.
 
-## Maths
+# Maths
 
 For any substantial maths I create PDFs using [Typst](https://typst.app), but for immediately visible maths in the browser I use the javascript library, [KaTeX](https://katex.org). Other libraries exist but Katex is well maintained, popular, and fast.
 
@@ -96,9 +94,9 @@ to be displayed as
 
 > For example, inline maths like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
 >
-> $$ \sum_{k=1}^n { k! \over (1+k)^2 } $$
+> $$ \sum\_{k=1}^n { k! \over (1+k)^2 } $$
 
-## Code
+# Code
 
 Highlighting code is easy with [highlight.js](https://highlightjs.org). This will colour many different programming languages in any of a number of different themes, expecting HTML markup like
 
@@ -130,17 +128,23 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-## Navigation breadcrumb
+# Indentation management
+
+Indentation - for clarity in content view for easier writing and maintaining. But also want properly formatted output. Hence tidy.
+
+Don't attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy maintenance - properly indented for readability as source. This is also why files are of one language type - so that editors can use the corresponding language mode (LSP).
+
+# Navigation breadcrumb
 
 TODO
 
-## Manifest and favicon
+# Manifest and favicon
 
 TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
 
 TODO does favicon.ico and apple xxx need to go in root directory to be found? At least one validator suggested so...
 
-## Colour, styling, and night view
+# Colour, styling, and night view
 
 TODO
 
@@ -166,11 +170,11 @@ Useful tools:
 - https://coolors.co
 - https://pixelied.com/colors/color-wheel
 
-## XML sitemap
+# XML sitemap
 
 Simply done by putting the data into a `_sitemap.toml` and writing a template `sitemap.xml`. Then linking to it from `robots.txt`.
 
-## DRAFT mode
+# DRAFT mode
 
 CSS watermark
 switch passed in to top level templates
@@ -184,7 +188,7 @@ And the search engines start to see something arriving, changing often, which sp
 
 Also, no separate dev build and live build - all one and the same.
 
-## Publish checklist
+# Publish checklist
 
 - Visual check on different devices and orientation
 - Colour consistency (e.g. manifest, favicon, and page theme)
@@ -193,4 +197,3 @@ Also, no separate dev build and live build - all one and the same.
 - Alt and title tags
 - Contrast ratio. TODO link to tools.
 - TODO: read about https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
-  $$

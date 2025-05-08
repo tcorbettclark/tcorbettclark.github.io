@@ -15,6 +15,7 @@ My personal website.
 
 # TODO - technical
 
+- Some kind of floating TOC on main pages
 - Use the breadcrumb Bulma component and make it easier to maintain (e.g. with my-website).
 - Find way to allow editor (Zed) find the virtualenv magically created by uv when running script
 - Add light/dark mode switcher (take from Bulma website)
