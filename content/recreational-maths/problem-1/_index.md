@@ -1,5 +1,3 @@
-## Problem 1
-
 ![wheel of fortune](wheel-of-fortune.png "Wheel of fortune"){.small-image}
 
 Find: $a^2 + b^2 + c^2 + d^2$

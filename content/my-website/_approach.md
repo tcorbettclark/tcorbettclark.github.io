@@ -1,42 +1,19 @@
 This page explains how I have structured all the web files, templates, and data to achieve this site. Also, my notes on how I addressed aspects such as hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, and a draft/wip mode.
 
-# Deployment on GitHub pages
+# File structure
 
-It is easy and convenient to host static content on [GitHub pages](https://pages.github.com).
+TODO: explain files at root, and folder structure. This is a by-purpose approach (not by-type).
 
-One can either use files from a git branch, the root directory of the repository, or a directory called `docs/`. It would be nice to be able to use a different directory name, but so be it. I just use the `docs/` directory on the master branch.
+TODO: include an example
 
-A custom domain can be used by creating a `CNAME` file containing the full domain (in my case, `www.corbettclark.com`).
+# Indentation management
 
-The default GitHub action detects code commits and deploys on their infrastructure, making the result visible within a couple of minutes (often faster).
+Indentation - for clarity in content view for easier writing and maintaining. But also want properly formatted output. Hence tidy.
 
-As I'm the only person making changes, I mostly dispense with creating a branch and making a pull request to myself ([GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)), but instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub. In short, my workflow is:
+Don't attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy maintenance - properly indented for readability as source. This is also why files are of one language type - so that editors can use the corresponding language mode (LSP).
 
-- Start up [my tool](twg.html) with `./twg.py content/ docs/`
-- Repeat until ready to publish:
-  - Make changes and check in local browser without leaving my editor (because of hot reload).
-  - Commit locally using git.
-- Git push to GitHub.
-- After a minute or so, check the changes have reached live ok.
+TODO: include an example
 
-# Validation
-
-Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and learn about the web world. For example:
-
-- [W3 Validator](https://validator.w3.org/nu/)
-- [MDN's Observatory tool](https://developer.mozilla.org/en-US/observatory)
-- [ValidBot](https://www.validbot.com/)
-
-Notable issues I could not address include:
-
-1. The existence of trailing slashes on void elements such as `meta` and `link` tags. These cannot be fixed by hand because [TWG](twg.html) checks and formats all HTML with [HTML Tidy](https://html-tidy.org), produces such trailing slashes. The main concern (see [here](https://wet-boew.github.io/wet-boew-documentation/decision/15.html) and [here](https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes)) seems to be that because HTML5 is not XML, and since href arguments don't have to be quoted, there is an ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
-   ```
-   <link href=https://foo.bar.baz/>
-   <link href="https://foo.bar.baz"/>
-   <link href="https://foo.bar.baz/">
-   ```
-   This isn't a problem so long as we always quote href's.
-1. TODO, add more...
 
 # Choice of web libraries
 
@@ -88,7 +65,7 @@ I put this javascript in the file `render_maths.js` and load it in the `<head>` 
 The result is for markdown like
 
 ```markdown
-For example, inline maths like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
+For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
 
 $$
 \sum_{k=1}^n { k! \over (1+k)^2 }
@@ -97,9 +74,9 @@ $$
 
 to be displayed as
 
-> For example, inline maths like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
+> For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
 >
-> $$ \sum\_{k=1}^n { k! \over (1+k)^2 } $$
+> $$ \sum_{k=1}^n { k! \over (1+k)^2 } $$
 
 # Code
 
@@ -133,11 +110,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-# Indentation management
+Of course, the above demonstrates the formatting result on some HTML and Javascript code.
 
-Indentation - for clarity in content view for easier writing and maintaining. But also want properly formatted output. Hence tidy.
 
-Don't attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy maintenance - properly indented for readability as source. This is also why files are of one language type - so that editors can use the corresponding language mode (LSP).
 
 # Navigation breadcrumb
 
@@ -193,9 +168,47 @@ And the search engines start to see something arriving, changing often, which sp
 
 Also, no separate dev build and live build - all one and the same.
 
+# Validation
+
+Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and learn about the web world. For example:
+
+- [W3 Validator](https://validator.w3.org/nu/)
+- [MDN's Observatory tool](https://developer.mozilla.org/en-US/observatory)
+- [ValidBot](https://www.validbot.com/)
+
+Notable issues I could not address include:
+
+1. The existence of trailing slashes on void elements such as `meta` and `link` tags. These cannot be fixed by hand because [TWG](twg.html) checks and formats all HTML with [HTML Tidy](https://html-tidy.org), produces such trailing slashes. The main concern (see [here](https://wet-boew.github.io/wet-boew-documentation/decision/15.html) and [here](https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes)) seems to be that because HTML5 is not XML, and since href arguments don't have to be quoted, there is an ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
+   ```
+   <link href=https://foo.bar.baz/>
+   <link href="https://foo.bar.baz"/>
+   <link href="https://foo.bar.baz/">
+   ```
+   This isn't a problem so long as we always quote href's.
+1. TODO, add more...
+
 # Security
 
 TODO: Use validation tools (esp MDN Overservatory) and http-equv-header in meta tag.
+
+# Deployment on GitHub pages
+
+It is easy and convenient to host static content on [GitHub pages](https://pages.github.com).
+
+One can either use files from a git branch, the root directory of the repository, or a directory called `docs/`. It would be nice to be able to use a different directory name, but so be it. I just use the `docs/` directory on the master branch.
+
+A custom domain can be used by creating a `CNAME` file containing the full domain (in my case, `www.corbettclark.com`).
+
+The default GitHub action detects code commits and deploys on their infrastructure, making the result visible within a couple of minutes (often faster).
+
+As I'm the only person making changes, I mostly dispense with creating a branch and making a pull request to myself ([GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)), but instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub. In short, my workflow is:
+
+- Start up [my tool](twg.html) with `./twg.py content/ docs/`
+- Repeat until ready to publish:
+  - Make changes and check in local browser without leaving my editor (because of hot reload).
+  - Commit locally using git.
+- Git push to GitHub.
+- After a minute or so, check the changes have reached live ok.
 
 # Publish checklist
 

@@ -43,8 +43,11 @@
     <nav class="level mt-4 ml-4 mr-4">
       <div class="level-left">
         <div class="level-item">
-          <span class="tag"><a href="/welcome/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
-        </div><span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> My website</a></span>
+          <span class="tag"><a href="/welcome/index.html"><i class="fa-solid fa-home"></i> Home</a></span>
+        </div>
+        <div class="level-item">
+          <span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: My website</a></span>
+        </div>
       </div>
       <div class="level-right">
         <div class="level-item">
@@ -79,83 +82,29 @@
             manifest, making the XML sitemap, and a draft/wip mode.
           </p>
           <h1>
-            Deployment on GitHub pages
+            File structure
           </h1>
           <p>
-            It is easy and convenient to host static content on <a href="https://pages.github.com">GitHub pages</a>.
+            TODO: explain files at root, and folder structure. This is a by-purpose approach (not by-type).
           </p>
           <p>
-            One can either use files from a git branch, the root directory of the repository, or a directory called
-            <code>docs/</code>. It would be nice to be able to use a different directory name, but so be it. I just use
-            the <code>docs/</code> directory on the master branch.
+            TODO: include an example
           </p>
-          <p>
-            A custom domain can be used by creating a <code>CNAME</code> file containing the full domain (in my case,
-            <code>www.corbettclark.com</code>).
-          </p>
-          <p>
-            The default GitHub action detects code commits and deploys on their infrastructure, making the result
-            visible within a couple of minutes (often faster).
-          </p>
-          <p>
-            As I’m the only person making changes, I mostly dispense with creating a branch and making a pull request
-            to myself (<a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow</a>), but
-            instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub.
-            In short, my workflow is:
-          </p>
-          <ul>
-            <li>Start up <a href="twg.html">my tool</a> with <code>./twg.py content/ docs/</code>
-            </li>
-            <li>Repeat until ready to publish:
-              <ul>
-                <li>Make changes and check in local browser without leaving my editor (because of hot reload).
-                </li>
-                <li>Commit locally using git.
-                </li>
-              </ul>
-            </li>
-            <li>Git push to GitHub.
-            </li>
-            <li>After a minute or so, check the changes have reached live ok.
-            </li>
-          </ul>
           <h1>
-            Validation
+            Indentation management
           </h1>
           <p>
-            Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and
-            learn about the web world. For example:
+            Indentation - for clarity in content view for easier writing and maintaining. But also want properly
+            formatted output. Hence tidy.
           </p>
-          <ul>
-            <li>
-              <a href="https://validator.w3.org/nu/">W3 Validator</a>
-            </li>
-            <li>
-              <a href="https://developer.mozilla.org/en-US/observatory">MDN’s Observatory tool</a>
-            </li>
-            <li>
-              <a href="https://www.validbot.com/">ValidBot</a>
-            </li>
-          </ul>
           <p>
-            Notable issues I could not address include:
+            Don’t attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy
+            maintenance - properly indented for readability as source. This is also why files are of one language type
+            - so that editors can use the corresponding language mode (LSP).
           </p>
-          <ol>
-            <li>The existence of trailing slashes on void elements such as <code>meta</code> and <code>link</code>
-            tags. These cannot be fixed by hand because <a href="twg.html">TWG</a> checks and formats all HTML with
-            <a href="https://html-tidy.org">HTML Tidy</a>, produces such trailing slashes. The main concern (see
-            <a href="https://wet-boew.github.io/wet-boew-documentation/decision/15.html">here</a> and <a href=
-            "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">here</a>) seems
-            to be that because HTML5 is not XML, and since href arguments don’t have to be quoted, there is an
-            ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
-              <pre><code>&lt;link href=https://foo.bar.baz/&gt;
-&lt;link href="https://foo.bar.baz"/&gt;
-&lt;link href="https://foo.bar.baz/"&gt;
-</code></pre>This isn’t a problem so long as we always quote href’s.
-            </li>
-            <li>TODO, add more…
-            </li>
-          </ol>
+          <p>
+            TODO: include an example
+          </p>
           <h1>
             Choice of web libraries
           </h1>
@@ -215,7 +164,7 @@
             The result is for markdown like
           </p>
           <pre><code class=
-          "language-markdown">For example, inline maths like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
+          "language-markdown">For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
 
 $$
 \sum_{k=1}^n { k! \over (1+k)^2 }
@@ -226,11 +175,11 @@ $$
           </p>
           <blockquote>
             <p>
-              For example, inline maths like <span class="math inline">(x+1)^2 - (x-1)^2 = 4x</span>, and block maths
-              like
+              For example, inline maths looks like <span class="math inline">(x+1)^2 - (x-1)^2 = 4x</span>, and block
+              maths like
             </p>
             <div class="math block">
-              \sum\_{k=1}^n { k! \over (1+k)^2 }
+              \sum_{k=1}^n { k! \over (1+k)^2 }
             </div>
           </blockquote>
           <h1>
@@ -271,17 +220,8 @@ $$
   hljs.highlightAll();
 });
 </code></pre>
-          <h1>
-            Indentation management
-          </h1>
           <p>
-            Indentation - for clarity in content view for easier writing and maintaining. But also want properly
-            formatted output. Hence tidy.
-          </p>
-          <p>
-            Don’t attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy
-            maintenance - properly indented for readability as source. This is also why files are of one language type
-            - so that editors can use the corresponding language mode (LSP).
+            Of course, the above demonstrates the formatting result on some HTML and Javascript code.
           </p>
           <h1>
             Navigation breadcrumb
@@ -370,11 +310,89 @@ $$
             Also, no separate dev build and live build - all one and the same.
           </p>
           <h1>
+            Validation
+          </h1>
+          <p>
+            Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and
+            learn about the web world. For example:
+          </p>
+          <ul>
+            <li>
+              <a href="https://validator.w3.org/nu/">W3 Validator</a>
+            </li>
+            <li>
+              <a href="https://developer.mozilla.org/en-US/observatory">MDN’s Observatory tool</a>
+            </li>
+            <li>
+              <a href="https://www.validbot.com/">ValidBot</a>
+            </li>
+          </ul>
+          <p>
+            Notable issues I could not address include:
+          </p>
+          <ol>
+            <li>The existence of trailing slashes on void elements such as <code>meta</code> and <code>link</code>
+            tags. These cannot be fixed by hand because <a href="twg.html">TWG</a> checks and formats all HTML with
+            <a href="https://html-tidy.org">HTML Tidy</a>, produces such trailing slashes. The main concern (see
+            <a href="https://wet-boew.github.io/wet-boew-documentation/decision/15.html">here</a> and <a href=
+            "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">here</a>) seems
+            to be that because HTML5 is not XML, and since href arguments don’t have to be quoted, there is an
+            ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
+              <pre><code>&lt;link href=https://foo.bar.baz/&gt;
+&lt;link href="https://foo.bar.baz"/&gt;
+&lt;link href="https://foo.bar.baz/"&gt;
+</code></pre>This isn’t a problem so long as we always quote href’s.
+            </li>
+            <li>TODO, add more…
+            </li>
+          </ol>
+          <h1>
             Security
           </h1>
           <p>
             TODO: Use validation tools (esp MDN Overservatory) and http-equv-header in meta tag.
           </p>
+          <h1>
+            Deployment on GitHub pages
+          </h1>
+          <p>
+            It is easy and convenient to host static content on <a href="https://pages.github.com">GitHub pages</a>.
+          </p>
+          <p>
+            One can either use files from a git branch, the root directory of the repository, or a directory called
+            <code>docs/</code>. It would be nice to be able to use a different directory name, but so be it. I just use
+            the <code>docs/</code> directory on the master branch.
+          </p>
+          <p>
+            A custom domain can be used by creating a <code>CNAME</code> file containing the full domain (in my case,
+            <code>www.corbettclark.com</code>).
+          </p>
+          <p>
+            The default GitHub action detects code commits and deploys on their infrastructure, making the result
+            visible within a couple of minutes (often faster).
+          </p>
+          <p>
+            As I’m the only person making changes, I mostly dispense with creating a branch and making a pull request
+            to myself (<a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow</a>), but
+            instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub.
+            In short, my workflow is:
+          </p>
+          <ul>
+            <li>Start up <a href="twg.html">my tool</a> with <code>./twg.py content/ docs/</code>
+            </li>
+            <li>Repeat until ready to publish:
+              <ul>
+                <li>Make changes and check in local browser without leaving my editor (because of hot reload).
+                </li>
+                <li>Commit locally using git.
+                </li>
+              </ul>
+            </li>
+            <li>Git push to GitHub.
+            </li>
+            <li>After a minute or so, check the changes have reached live ok.
+            </li>
+          </ul>
           <h1>
             Publish checklist
           </h1>

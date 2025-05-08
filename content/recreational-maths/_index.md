@@ -1,5 +1,3 @@
-# Recreational Maths
-
 I enjoy mathematical nuggets and puzzles, e.g. from:
 [@mathisstillfun](https://x.com/mathisstillfun),
 [@mathssolutionz](https://x.com/mathssolutionz),

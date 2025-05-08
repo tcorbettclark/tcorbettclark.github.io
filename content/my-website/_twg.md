@@ -55,7 +55,7 @@ The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tid
 
 ## Running the tool
 
-The tool itself is a single file Python script called `twg.py`. It uses [inline script metadata](https://peps.python.org/pep-0723) to declare Python and Python package dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Then due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), the tool is conveniently runnable as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
+The tool itself is a single file Python script, [twg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/twg.py). It uses [inline script metadata](https://peps.python.org/pep-0723) to declare Python and Python package dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Then due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), the tool is conveniently runnable as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
 
 ```console
 ❯ ./twg.py --help
@@ -119,7 +119,7 @@ TODO: explain plugins
 
 Refer to example directory.
 
-# Development
+# Implementation details
 
 TODO How it works and how to develop further.
 

@@ -8,14 +8,16 @@
     --bulma-primary-l: 45%;
 }
 
-/* Lighten the weight of the font in headings used in markdown (in the content class)  */
+/* Lighten the weight of the font used in headings coming from markdown
+   (which will be in a div with the .content class)
+*/
 .content h1,
 .content h2,
 .content h3 {
     font-weight: normal;
 }
 
-/* Use SVG to create a nice background watermark indicating the page is in DRAFT */
+/* Use SVG to create a background watermark indicating a page is considered DRAFT */
 .draft-watermark {
     background-image: url("data:image/svg+xml;utf8,\
         <svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='170px' width='210px'>\
