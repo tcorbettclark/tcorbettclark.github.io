@@ -6,7 +6,7 @@
 #     "aiohttp",
 #     "click",
 #     "jinja2",
-#     "markdown-it-py[linkify]",
+#     "markdown-it-py",
 #     "mdit-py-plugins",
 #     "toml",
 #     "user-agents",
