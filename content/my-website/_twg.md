@@ -1,12 +1,12 @@
 # Introduction
 
-Assuming a willingness to understand the necessary web technologies, why not create static websites *by hand*? The main problems are around inefficient repetition and cumbersome syntax. For example,
+Assuming a willingness to understand the necessary web technologies, why not create static websites _by hand_? The main problems are around inefficient repetition and cumbersome syntax. For example,
 
 - copy-and-paste maintenance of the same content e.g. in headers and footers;
 - copy-and-paste maintenance of the same formatting/styling tags around repeated lists of things;
 - using a verbose syntax like HTML when wanting to focus purely on content.
 
-These pain points can be ameliorated by using a markup language (like [markdown](https://commonmark.org)), templating (e.g. with [Jinja2](https://jinja.palletsprojects.com/en/stable/)), and writing data/metadata in a data-oriented syntax (such as [TOML](https://toml.io/)).
+These pain points can be ameliorated by using a markup language (like [markdown](https://commonmark.org)), templating (e.g. with [Jinja](https://jinja.palletsprojects.com)), and writing data/metadata in a data-oriented syntax (such as [TOML](https://toml.io/)).
 
 ## Features / anti-features
 
@@ -15,15 +15,15 @@ My tool makes it easier to create a static website of the usual HTML, CSS, and J
 The essential features are:
 
 1. Converting Markdown into HTML (to allow content to be written more easily).
-1. Templating using Jinja2 (most obviously to make it easier to produce repetative HTML).
-1. Reading template data from TOML files (to pass to Jinja2).
+1. Templating using Jinja (most obviously to make it easier to produce repetative HTML).
+1. Reading template data from TOML files (to pass to Jinja).
 1. Validating and prettifying all final HTML by running through [HTML tidy](http://html-tidy.org) (if available).
 
 Then, to create a fast iterative loop:
 
 5. Serving up content on a local http webserver (for review during development).
-5. Watching for source file changes and rebuilding automatically.
-5. Notifying browser(s) of new builds (e.g. to trigger a "hot reload").
+6. Watching for source file changes and rebuilding automatically.
+7. Notifying browser(s) of new builds (e.g. to trigger a "hot reload").
 
 Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc. Many of these are easy to achieve using the tool's machinery without explicit native support.
 
@@ -39,9 +39,60 @@ In addition to removing mystery around how an output is generated, this approach
 
 Note however that due to the tool's lack of opinion in this regard, content can still be grouped by type in the traditional fashion if desired (all the javascript in one directory, all the CSS in another, etc). Or a mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
 
-## Contract
+## Templating and template data
 
-TODO: explain the contract (api) between the tool and the files. Should this be in the section below?
+To provide templating, TWG uses [Jinja](https://jinja.palletsprojects.com), a hugely popular and mature templating library.
+
+Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming directories), and discourages "by-purpose" organisation of the files. Hence TWG overrides the Jinja environment so that including/extending other files is *relative to the loading template file*. For example:
+
+TODO: show an example.
+
+
+
+
+
+TODO: explain collecting TOML, and detecting conflicts.
+
+Re toml data sharing same namespace, point out that trivial to add a namespace in toml
+
+## Markdown
+
+TODO: explain how to call from Jinja templates.
+TODO: explain why CommonMarkdown
+TODO: explain plugins
+
+Explain that filename loading is also relative.
+
+Refer to example directory.
+
+## Summary: the TWG content interface
+
+The TWG tool recognises 3 types of file:
+
+Working files
+~ Files used only during the build, and will be deleted from the output.
+~ By default, have filenames starting with an underscore (regex `\_.*`).
+
+Template files
+~ Files which will be run through Jinja for templating.
+~ Other files may contain templating markup, but must be included from template files to be templated.
+~ By default, have filenames with an extension of `.html`, `.xml`, or `.txt`.
+
+Data files
+~ Source of the data made available for templating.
+~ All share the same namespace, and name clashes/re-use across data files is an error.
+~ Identified by files with extension `.toml`.
+
+The build process is as follows:
+
+1. Clone the source directory afresh for every build. The source directory is never changed (although it is watched).
+1. Load all **data files** into a single namespace. Any name clashes (attempts to set the same variable more than once) is considered an error, causing the tool to abort.
+1. Run all **template files** through Jinja, producing files of the same name.
+1. During templating, any Markdown (`*.md`) files are rendered into HTML through use of the `markdown()` Jinja filter (i.e. `{{ "<filename.md> | markdown() }}`).
+1. Run all HTML files (`*.html`) through [HTML tidy](http://html-tidy.org), reporting any warnings, and formatting (e.g. indentation).
+1. Delete all **working files**, and afterwards delete any leftover empty directories.
+
+The tool requires no particular file or directory structure, and will work (degenerately) on an empty source directory.
 
 # How to use
 
@@ -69,7 +120,7 @@ Usage: twg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
 
 Options:
   -w, --working-file-regex TEXT  Regex to match working files.  [default: \_.*]
-  -t, --template-extension TEXT  Extension identifying files to template with Jinja2  [default: .html, .xml, .txt]
+  -t, --template-extension TEXT  Extension identifying files to template with Jinja  [default: .html, .xml, .txt]
   -h, --host TEXT                Serve on this host  [default: localhost]
   -p, --port INTEGER             Serve on this port  [default: 8000]
   --help                         Show this message and exit.
@@ -98,26 +149,6 @@ Watching for changes in: example
 The tool is now watching for changes to the source content, after which it will rebuild and notify any browsers to trigger a reload before waiting again for more changes. Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
 
 **Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files). A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`. If the content changed then the site will be rebuilt and browser(s) told to reload.
-
-## Template data
-
-TODO: explain collecting TOML, and detecting conflicts.
-
-Re toml data sharing same namespace, point out that trivial to add a namespace in toml
-
-## Jinja2 templating
-
-TODO: explain Relative paths for localisation
-
-TODO: List Jinja2 options used.
-
-## Markdown
-
-TODO: explain how to call from Jinja2 templates.
-TODO: explain why CommonMarkdown
-TODO: explain plugins
-
-Refer to example directory.
 
 # Implementation details
 
@@ -161,6 +192,7 @@ Most robust approach is to trap onclose and differentiate between whether the co
 TODO: include simplified snippets.
 
 For example
+
 ```Python
 class Watcher:
     def __init__(self, directory):

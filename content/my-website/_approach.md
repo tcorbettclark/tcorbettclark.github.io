@@ -4,6 +4,8 @@ This page explains how I have structured all the web files, templates, and data 
 
 TODO: explain files at root, and folder structure. This is a by-purpose approach (not by-type).
 
+TODO: explain template hierarchy. Maybe include a picture...
+
 TODO: include an example
 
 # Indentation management

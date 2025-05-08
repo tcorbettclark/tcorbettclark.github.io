@@ -93,8 +93,8 @@
           <p>
             These pain points can be ameliorated by using a markup language (like <a href=
             "https://commonmark.org">markdown</a>), templating (e.g. with <a href=
-            "https://jinja.palletsprojects.com/en/stable/">Jinja2</a>), and writing data/metadata in a data-oriented
-            syntax (such as <a href="https://toml.io/">TOML</a>).
+            "https://jinja.palletsprojects.com">Jinja</a>), and writing data/metadata in a data-oriented syntax (such
+            as <a href="https://toml.io/">TOML</a>).
           </p>
           <h2>
             Features / anti-features
@@ -110,9 +110,9 @@
           <ol>
             <li>Converting Markdown into HTML (to allow content to be written more easily).
             </li>
-            <li>Templating using Jinja2 (most obviously to make it easier to produce repetative HTML).
+            <li>Templating using Jinja (most obviously to make it easier to produce repetative HTML).
             </li>
-            <li>Reading template data from TOML files (to pass to Jinja2).
+            <li>Reading template data from TOML files (to pass to Jinja).
             </li>
             <li>Validating and prettifying all final HTML by running through <a href="http://html-tidy.org">HTML
             tidy</a> (if available).
@@ -167,10 +167,105 @@
             mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
           </p>
           <h2>
-            Contract
+            Templating and template data
           </h2>
           <p>
-            TODO: explain the contract (api) between the tool and the files. Should this be in the section below?
+            To provide templating, TWG uses <a href="https://jinja.palletsprojects.com">Jinja</a>, a hugely popular and
+            mature templating library.
+          </p>
+          <p>
+            Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming
+            directories), and discourages “by-purpose” organisation of the files. Hence TWG overrides the Jinja
+            environment so that including/extending other files is <em>relative to the loading template file</em>. For
+            example:
+          </p>
+          <p>
+            TODO: show an example.
+          </p>
+          <p>
+            TODO: explain collecting TOML, and detecting conflicts.
+          </p>
+          <p>
+            Re toml data sharing same namespace, point out that trivial to add a namespace in toml
+          </p>
+          <h2>
+            Markdown
+          </h2>
+          <p>
+            TODO: explain how to call from Jinja templates. TODO: explain why CommonMarkdown TODO: explain plugins
+          </p>
+          <p>
+            Explain that filename loading is also relative.
+          </p>
+          <p>
+            Refer to example directory.
+          </p>
+          <h2>
+            Summary: the TWG content interface
+          </h2>
+          <p>
+            The TWG tool recognises 3 types of file:
+          </p>
+          <dl>
+            <dt>
+              Working files
+            </dt>
+            <dd>
+              Files used only during the build, and will be deleted from the output.
+            </dd>
+            <dd>
+              By default, have filenames starting with an underscore (regex <code>\_.*</code>).
+            </dd>
+            <dt>
+              Template files
+            </dt>
+            <dd>
+              Files which will be run through Jinja for templating.
+            </dd>
+            <dd>
+              Other files may contain templating markup, but must be included from template files to be templated.
+            </dd>
+            <dd>
+              By default, have filenames with an extension of <code>.html</code>, <code>.xml</code>, or
+              <code>.txt</code>.
+            </dd>
+            <dt>
+              Data files
+            </dt>
+            <dd>
+              Source of the data made available for templating.
+            </dd>
+            <dd>
+              All share the same namespace, and name clashes/re-use across data files is an error.
+            </dd>
+            <dd>
+              Identified by files with extension <code>.toml</code>.
+            </dd>
+          </dl>
+          <p>
+            The build process is as follows:
+          </p>
+          <ol>
+            <li>Clone the source directory afresh for every build. The source directory is never changed (although it
+            is watched).
+            </li>
+            <li>Load all <strong>data files</strong> into a single namespace. Any name clashes (attempts to set the
+            same variable more than once) is considered an error, causing the tool to abort.
+            </li>
+            <li>Run all <strong>template files</strong> through Jinja, producing files of the same name.
+            </li>
+            <li>During templating, any Markdown (<code>*.md</code>) files are rendered into HTML through use of the
+            <code>markdown()</code> Jinja filter (i.e. <code>{{ "&lt;filename.md&gt; | markdown() }}</code>).
+            </li>
+            <li>Run all HTML files (<code>*.html</code>) through <a href="http://html-tidy.org">HTML tidy</a>,
+            reporting any warnings, and formatting (e.g. indentation).
+            </li>
+            <li>Delete all <strong>working files</strong>, and afterwards delete any leftover empty directories.
+            </li>
+          </ol>
+          <p>
+            The tool requires no particular file or directory structure, and will work (degenerately) on an empty
+            source directory.
           </p>
           <h1>
             How to use
@@ -209,7 +304,7 @@ Usage: twg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
 
 Options:
   -w, --working-file-regex TEXT  Regex to match working files.  [default: \_.*]
-  -t, --template-extension TEXT  Extension identifying files to template with Jinja2  [default: .html, .xml, .txt]
+  -t, --template-extension TEXT  Extension identifying files to template with Jinja  [default: .html, .xml, .txt]
   -h, --host TEXT                Serve on this host  [default: localhost]
   -p, --port INTEGER             Serve on this port  [default: 8000]
   --help                         Show this message and exit.
@@ -244,33 +339,6 @@ Watching for changes in: example
             after renaming files). A simple solution is to suspend the tool with <code>ctrl-z</code>, make the changes,
             and then foreground it with <code>fg</code>. If the content changed then the site will be rebuilt and
             browser(s) told to reload.
-          </p>
-          <h2>
-            Template data
-          </h2>
-          <p>
-            TODO: explain collecting TOML, and detecting conflicts.
-          </p>
-          <p>
-            Re toml data sharing same namespace, point out that trivial to add a namespace in toml
-          </p>
-          <h2>
-            Jinja2 templating
-          </h2>
-          <p>
-            TODO: explain Relative paths for localisation
-          </p>
-          <p>
-            TODO: List Jinja2 options used.
-          </p>
-          <h2>
-            Markdown
-          </h2>
-          <p>
-            TODO: explain how to call from Jinja2 templates. TODO: explain why CommonMarkdown TODO: explain plugins
-          </p>
-          <p>
-            Refer to example directory.
           </p>
           <h1>
             Implementation details
@@ -375,7 +443,7 @@ uv remove --script twg.py &lt;package&gt;
         <p>
           Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
           using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
-          "https://jinja.palletsprojects.com/" target="_blank">Jinja2</a>, <a href=
+          "https://jinja.palletsprojects.com/" target="_blank">Jinja</a>, <a href=
           "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
           target="_blank">Bulma</a>.
         </p>
