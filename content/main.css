@@ -20,10 +20,6 @@
 /* Style definition lists coming from markdown
    (which will be in a div with the .content class)
 */
-.content dl {
-    border: 3px double #ccc;
-    padding: 0.5em;
-}
 .content dt {
     float: left;
     clear: left;
@@ -32,7 +28,7 @@
     font-weight: bold;
 }
 .content dd {
-    margin: 0 0 0 160px;
+    margin: 0 0 0 180px;
     padding: 0 0 0.5em 0;
 }
 
