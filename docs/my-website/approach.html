@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Timothy Corbett-Clark" />
+    <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
+    <title>
+      Dr Timothy Corbett-Clark
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
+    "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
+    <link rel="stylesheet" href=
+    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
+    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+    crossorigin="anonymous"></script>
+    <script defer="defer" src="/hot_reloader.js" async="async"></script>
+    <script defer="defer" src="/render_maths.js"></script>
+    <script defer="defer" src="/render_code.js"></script>
+  </head>
+  <body>
+    <header class="hero is-small is-primary">
+      <div class="hero-body">
+        <p class="title">
+          Dr Timothy Corbett‑Clark
+        </p>
+        <p class="subtitle">
+          CTO, Researcher, Developer
+        </p>
+      </div>
+    </header>
+    <section class="m-4">
+      <span class="tag"><a href="/wip.html"><i class="fa-solid fa-bug"></i> wip</a></span> <span class="tag"><a href=
+      "/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span> <span class="tag"><a href=
+      "index.html"><i class="fa-solid fa-arrow-left"></i> My website</a></span>
+    </section>
+    <section class="section pt-0">
+      <div class="box has-background-primary-95">
+        <div class="block is-size-2 has-text-centered">
+          Content approach
+        </div>
+        <div class="content draft-watermark">
+          <p>
+            This page explains how I have structured all the web files, templates, and data to achieve this site. Also,
+            my notes on how I addressed aspects such as hosting, validation, security, selecting libraries, rendering
+            maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app
+            manifest, making the XML sitemap, and a draft/wip mode.
+          </p>
+          <h1>
+            Deployment on GitHub pages
+          </h1>
+          <p>
+            It is easy and convenient to host static content on <a href="https://pages.github.com">GitHub pages</a>.
+          </p>
+          <p>
+            One can either use files from a git branch, the root directory of the repository, or a directory called
+            <code>docs/</code>. It would be nice to be able to use a different directory name, but so be it. I just use
+            the <code>docs/</code> directory on the master branch.
+          </p>
+          <p>
+            A custom domain can be used by creating a <code>CNAME</code> file containing the full domain (in my case,
+            <code>www.corbettclark.com</code>).
+          </p>
+          <p>
+            The default GitHub action detects code commits and deploys on their infrastructure, making the result
+            visible within a couple of minutes (often faster).
+          </p>
+          <p>
+            As I’m the only person making changes, I mostly dispense with creating a branch and making a pull request
+            to myself (<a href="https://docs.github.com/en/get-started/using-github/github-flow">GitHub flow</a>), but
+            instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub.
+            In short, my workflow is:
+          </p>
+          <ul>
+            <li>Start up <a href="twg.html">my tool</a> with <code>./twg.py content/ docs/</code>
+            </li>
+            <li>Repeat until ready to publish:
+              <ul>
+                <li>Make changes and check in local browser without leaving my editor (because of hot reload).
+                </li>
+                <li>Commit locally using git.
+                </li>
+              </ul>
+            </li>
+            <li>Git push to GitHub.
+            </li>
+            <li>After a minute or so, check the changes have reached live ok.
+            </li>
+          </ul>
+          <h1>
+            Validation
+          </h1>
+          <p>
+            Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and
+            learn about the web world. For example:
+          </p>
+          <ul>
+            <li>
+              <a href="https://validator.w3.org/nu/">W3 Validator</a>
+            </li>
+            <li>
+              <a href="https://developer.mozilla.org/en-US/observatory">MDN’s Observatory tool</a>
+            </li>
+            <li>
+              <a href="https://www.validbot.com/">ValidBot</a>
+            </li>
+          </ul>
+          <p>
+            Notable issues I could not address include:
+          </p>
+          <ol>
+            <li>The existence of trailing slashes on void elements such as <code>meta</code> and <code>link</code>
+            tags. These cannot be fixed by hand because <a href="twg.html">TWG</a> checks and formats all HTML with
+            <a href="https://html-tidy.org">HTML Tidy</a>, produces such trailing slashes. The main concern (see
+            <a href="https://wet-boew.github.io/wet-boew-documentation/decision/15.html">here</a> and <a href=
+            "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">here</a>) seems
+            to be that because HTML5 is not XML, and since href arguments don’t have to be quoted, there is an
+            ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
+              <pre><code>&lt;link href=https://foo.bar.baz/&gt;
+&lt;link href="https://foo.bar.baz"/&gt;
+&lt;link href="https://foo.bar.baz/"&gt;
+</code></pre>This isn’t a problem so long as we always quote href’s.
+            </li>
+            <li>TODO, add more…
+            </li>
+          </ol>
+          <h1>
+            Choice of web libraries
+          </h1>
+          <p>
+            TODO Talk about selecting Bulma. Do this later, just in case I change it e.g. to UIkit.
+          </p>
+          <h1>
+            Maths
+          </h1>
+          <p>
+            For any substantial maths I create PDFs using <a href="https://typst.app">Typst</a>, but for immediately
+            visible maths in the browser I use the javascript library, <a href="https://katex.org">KaTeX</a>. Other
+            libraries exist but Katex is well maintained, popular, and fast.
+          </p>
+          <p>
+            The Common Markdown parser used by <a href="twg.html">twg.py</a> includes the <a href=
+            "https://mdit-py-plugins.readthedocs.io/en/latest/#mdit_py_plugins.dollarmath.dollarmath_plugin">dollarmath_plugin</a>.
+            It produces inline and block maths with the following HTML markup:
+          </p>
+          <pre><code class="language-HTML">&lt;span class="math inline"&gt; ...latex maths... &lt;/span&gt;
+&lt;div class="math block"&gt; ...latex maths... &lt;/div&gt;
+</code></pre>
+          <p>
+            A small amount of javascript makes KaTeX render on the correct elements after the DOM has loaded:
+          </p>
+          <pre><code class="language-javascript">document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  for (var node of document.getElementsByClassName("math")) {
+    katex.render(node.innerText, node, {
+      displayMode: node.classList.contains("block"), // otherwise assume it is "inline"
+      throwOnError: false,
+    });
+  }
+});
+</code></pre>
+          <p>
+            I put this javascript in the file <code>render_maths.js</code> and load it in the <code>&lt;head&gt;</code>
+            tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the
+            <a href="https://cdn.jsdelivr.net">jsDelivr CDN</a>:
+          </p>
+          <pre><code class="language-HTML">&lt;head&gt;
+    ...
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous"&gt;
+    ...
+    &lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"&gt;&lt;/script&gt;
+    ...
+    &lt;script defer src="/render_maths.js"&gt;&lt;/script&gt;
+    ...
+&lt;/head&gt;
+</code></pre>
+          <p>
+            The result is for markdown like
+          </p>
+          <pre><code class=
+          "language-markdown">For example, inline maths like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
+
+$$
+\sum_{k=1}^n { k! \over (1+k)^2 }
+$$
+</code></pre>
+          <p>
+            to be displayed as
+          </p>
+          <blockquote>
+            <p>
+              For example, inline maths like <span class="math inline">(x+1)^2 - (x-1)^2 = 4x</span>, and block maths
+              like
+            </p>
+            <div class="math block">
+              \sum\_{k=1}^n { k! \over (1+k)^2 }
+            </div>
+          </blockquote>
+          <h1>
+            Code
+          </h1>
+          <p>
+            Highlighting code is easy with <a href="https://highlightjs.org">highlight.js</a>. This will colour many
+            different programming languages in any of a number of different themes, expecting HTML markup like
+          </p>
+          <pre><code class=
+          "language-HTML">&lt;pre&gt;&lt;code class="language-python"&gt; ...python code... &lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+          <p>
+            The Common Markdown standard used by <a href="twg.html">twg.py</a> has <a href=
+            "https://spec.commonmark.org/0.31.2/#fenced-code-blocks">fenced code blocks</a> which produces tags with
+            CSS classes exactly like this.
+          </p>
+          <p>
+            So we just need to pull in the Javascript and chosen theme CSS (in this case, atom-one-dark) from a CDN,
+            and ask it to render once the page has loaded. Hence the <code>&lt;head&gt;</code> section of the base
+            template contains:
+          </p>
+          <pre><code class="language-HTML">&lt;head&gt;
+    ...
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css"&gt;
+    ...
+    &lt;script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;
+    ...
+    &lt;script defer src="/render_code.js"&gt;&lt;/script&gt;
+    ...
+&lt;/head&gt;
+</code></pre>
+          <p>
+            and the contents of <code>/render_code.js</code> runs the highlighter after all the DOM content is present
+            and correct:
+          </p>
+          <pre><code class="language-Javascript">document.addEventListener("DOMContentLoaded", (event) =&gt; {
+  hljs.highlightAll();
+});
+</code></pre>
+          <h1>
+            Indentation management
+          </h1>
+          <p>
+            Indentation - for clarity in content view for easier writing and maintaining. But also want properly
+            formatted output. Hence tidy.
+          </p>
+          <p>
+            Don’t attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy
+            maintenance - properly indented for readability as source. This is also why files are of one language type
+            - so that editors can use the corresponding language mode (LSP).
+          </p>
+          <h1>
+            Navigation breadcrumb
+          </h1>
+          <p>
+            TODO
+          </p>
+          <h1>
+            Manifest and favicon
+          </h1>
+          <p>
+            TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
+          </p>
+          <p>
+            TODO does favicon.ico and apple xxx need to go in root directory to be found? At least one validator
+            suggested so…
+          </p>
+          <h1>
+            Colour, styling, and night view
+          </h1>
+          <p>
+            TODO
+          </p>
+          <p>
+            Need to keep Bulma, manifest, and favicon theme colours in sync.
+          </p>
+          <p>
+            Simple “tcc” Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour
+            as configured in Bulma.
+          </p>
+          <p>
+            Refer to all the help from Bulma, and therefore what is left to do.
+          </p>
+          <p>
+            Talk about night view.
+          </p>
+          <p>
+            Talk about different standards of RGB (use Standard RGB or sRGB).
+          </p>
+          <p>
+            Useful learning about colours:
+          </p>
+          <ul>
+            <li>https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html
+            </li>
+            <li>https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html
+            </li>
+          </ul>
+          <p>
+            Useful tools:
+          </p>
+          <ul>
+            <li>https://www.canva.com/colors/color-wheel/
+            </li>
+            <li>https://colorhunt.co
+            </li>
+            <li>https://coolors.co
+            </li>
+            <li>https://pixelied.com/colors/color-wheel
+            </li>
+          </ul>
+          <h1>
+            XML sitemap
+          </h1>
+          <p>
+            Simply done by putting the data into a <code>_sitemap.toml</code> and writing a template
+            <code>sitemap.xml</code>. Then linking to it from <code>robots.txt</code>.
+          </p>
+          <h1>
+            DRAFT mode
+          </h1>
+          <p>
+            CSS watermark switch passed in to top level templates The <code>/wip.html</code> page and the “hidden” link
+            in right side of the navigation (breadcrumb) space. So now often I can commit and push to master, and
+            github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
+          </p>
+          <p>
+            And now I can test draft pages with w3 validator, on different devices etc.
+          </p>
+          <p>
+            I don’t really care that people can see such pages - the watermark makes it obvious. And the search engines
+            start to see something arriving, changing often, which speeds up indexing to make more discoverable (not
+            that that really matters, but is nice).
+          </p>
+          <p>
+            Also, no separate dev build and live build - all one and the same.
+          </p>
+          <h1>
+            Publish checklist
+          </h1>
+          <ul>
+            <li>Visual check on different devices and orientation
+            </li>
+            <li>Colour consistency (e.g. manifest, favicon, and page theme)
+            </li>
+            <li>Validator
+            </li>
+            <li>Page titles and descriptions
+            </li>
+            <li>Alt and title tags
+            </li>
+            <li>Contrast ratio. TODO link to tools.
+            </li>
+            <li>TODO: read about https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <footer class="footer pt-4 pb-4">
+      <div class="has-text-centered">
+        <p>
+          <span class="icon-text"><span class="icon"><i class="fa-regular fa-copyright"></i></span> <span>Timothy
+          Corbett-Clark, 2025</span></span>
+        </p>
+        <p>
+          Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
+          using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
+          "https://jinja.palletsprojects.com/" target="_blank">Jinja2</a>, <a href=
+          "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
+          target="_blank">Bulma</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

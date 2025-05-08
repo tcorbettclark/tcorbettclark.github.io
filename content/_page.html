@@ -1,0 +1,27 @@
+{% extends "_base.html" %}
+
+{% block content %}
+    <section class="m-4">
+        {% if draft %}
+            <span class="tag">
+                <a href="/wip.html">
+                    <i class="fa-solid fa-bug"></i> wip
+                </a>
+            </span>
+        {% endif %}
+        {% block breadcrumb %}
+            <span class="tag"><a href="/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
+        {% endblock %}
+    </section>
+
+    <section class="section pt-0">
+        <div class="box has-background-primary-95">
+            <div class="block is-size-2 has-text-centered ">
+                {% block title %}{% endblock %}
+            </div>
+            <div class="content {% if draft %}draft-watermark{% endif %}">
+                {% block page %}{% endblock %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

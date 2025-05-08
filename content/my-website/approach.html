@@ -1,0 +1,14 @@
+{% set draft = true %}
+
+{% extends "../_page.html" %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    <span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> My website</a></span>
+{% endblock %}
+
+{% block title %} Content approach {% endblock %}
+
+{% block page %}
+    {{ "_approach.md" | markdown() }}
+{% endblock %}

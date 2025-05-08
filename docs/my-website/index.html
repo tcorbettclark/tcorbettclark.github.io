@@ -40,34 +40,52 @@
         </p>
       </div>
     </header>
-    <section class="section">
-      <div class="columns">
-        <div class="column">
-          <div class="box has-background-primary-95">
-            <h1 class="title">
-              Work in progress
-            </h1>
-            <ul>
-              <li>
-                <a href="/cv/index.html">Professional career</a>
-              </li>
-              <li>
-                <a href="/about-me/index.html">About me</a>
-              </li>
-              <li>
-                <a href="/my-tastes/index.html">My Tastes</a>
-              </li>
-              <li>
-                <a href="/publications/index.html">Publications</a>
-              </li>
-              <li>
-                <a href="/recreational-maths/index.html">Recreational Maths</a>
-              </li>
-              <li>
-                <a href="/my-website/index.html">My website</a>
-              </li>
-            </ul>
-          </div>
+    <section class="m-4">
+      <span class="tag"><a href="/wip.html"><i class="fa-solid fa-bug"></i> wip</a></span> <span class="tag"><a href=
+      "/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
+    </section>
+    <section class="section pt-0">
+      <div class="box has-background-primary-95">
+        <div class="block is-size-2 has-text-centered">
+          My website
+        </div>
+        <div class="content draft-watermark">
+          <p>
+            This website is built using my own static site generator. Yes, another one - see <a href=
+            "https://jamstack.org/generators/">this list</a> for example. My justification for “reinventing the wheel”
+            is that:
+          </p>
+          <ul>
+            <li>I personally enjoy the deeper understanding which comes from creation;
+            </li>
+            <li>I want full control to make the result clean and right at both the human and technical level;
+            </li>
+            <li>I only need some of the features possible in a static site, and don’t wish to be distracted by
+            scattered evidence of the unused;
+            </li>
+            <li>In my experience of other static site generation tools over the years, I found an <strong>uneven
+            (personal?) interface between the tool and the content, and always had to work and think on “both
+            sides”</strong>. So for me at least, the boundary should either be abandoned entirely or moved
+            substantially.
+            </li>
+          </ul>
+          <p>
+            I’ve chosen to move the boundary so that the build tool has essentially no opinion of web technologies and
+            content structure, allowing the choice of web technologies to be flexible, explicit, and transparent, and
+            the fundamental content easy to write and maintain. Hence,
+          </p>
+          <ul>
+            <li>see <a href="twg.html">my twg tool</a> to understand what it does (and does not) do, and how it works;
+            </li>
+            <li>see <a href="approach.html">my content approach</a> for a systematic walk-through of how I structured
+            the content, my choice of web framework, libraries, generating the sitemap, notes to achieve colour
+            consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, etc;
+            </li>
+            <li>leaving the content itself to be found in the <a href=
+            "https://github.com/tcorbettclark/tcorbettclark.github.io">source repository</a> for this site, consisting
+            almost entirely of markdown files.
+            </li>
+          </ul>
         </div>
       </div>
     </section>
