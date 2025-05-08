@@ -374,7 +374,7 @@ async def run(
     default=[".html", ".xml", ".txt"],
     show_default=True,
     multiple=True,
-    help="Extension identifying files to template with Jinja2",
+    help="Extension identifying files to template with Jinja",
 )
 @click.option(
     "-h",
