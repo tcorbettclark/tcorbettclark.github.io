@@ -1,18 +1,37 @@
 {% extends "_base.html" %}
 
 {% block content %}
-    <section class="m-4">
+    <nav class="level mt-4 ml-4 mr-4">
+        <div class="level-left">
+            {% block breadcrumb %}
+                <div class="level-item">
+                    <span class="tag"><a href="/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
+                </div>
+            {% endblock %}
+        </div>
         {% if draft %}
-            <span class="tag">
-                <a href="/wip.html">
-                    <i class="fa-solid fa-bug"></i> wip
-                </a>
-            </span>
+            <div class="level-right">
+                <div class="level-item">
+                    <div class="dropdown is-right is-hoverable">
+                        <div class="dropdown-trigger">
+                            <span class="tag">
+                                <a href="/wip.html">
+                                    <i class="fa-solid fa-bug"></i>&nbsp;wip
+                                </a>
+                            </span>
+                        </div>
+                        <div class="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                            {% for wip_page in wip_pages %}
+                                <a href="{{wip_page.url}}" class="dropdown-item">{{ wip_page.name}}</a>
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {% endif %}
-        {% block breadcrumb %}
-            <span class="tag"><a href="/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
-        {% endblock %}
-    </section>
+    </nav>
 
     <section class="section pt-0">
         <div class="box has-background-primary-95">

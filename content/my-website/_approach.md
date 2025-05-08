@@ -40,7 +40,12 @@ Notable issues I could not address include:
 
 # Choice of web libraries
 
-TODO Talk about selecting Bulma. Do this later, just in case I change it e.g. to UIkit.
+TODO Talk about selecting Bulma. No javascript - just CSS elements.
+
+Colour management.
+Popular and maintained.
+
+Tempted by UIKit...
 
 # Maths
 
@@ -187,6 +192,10 @@ I don't really care that people can see such pages - the watermark makes it obvi
 And the search engines start to see something arriving, changing often, which speeds up indexing to make more discoverable (not that that really matters, but is nice).
 
 Also, no separate dev build and live build - all one and the same.
+
+# Security
+
+TODO: Use validation tools (esp MDN Overservatory) and http-equv-header in meta tag.
 
 # Publish checklist
 

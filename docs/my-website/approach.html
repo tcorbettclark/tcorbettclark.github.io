@@ -40,11 +40,32 @@
         </p>
       </div>
     </header>
-    <section class="m-4">
-      <span class="tag"><a href="/wip.html"><i class="fa-solid fa-bug"></i> wip</a></span> <span class="tag"><a href=
-      "/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span> <span class="tag"><a href=
-      "index.html"><i class="fa-solid fa-arrow-left"></i> My website</a></span>
-    </section>
+    <nav class="level mt-4 ml-4 mr-4">
+      <div class="level-left">
+        <div class="level-item">
+          <span class="tag"><a href="/index.html"><i class="fa-solid fa-arrow-up"></i> Back to home</a></span>
+        </div><span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> My website</a></span>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <div class="dropdown is-right is-hoverable">
+            <div class="dropdown-trigger">
+              <span class="tag"><a href="/wip.html"><i class="fa-solid fa-bug"></i>&nbsp;wip</a></span>
+            </div>
+            <div class="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <a href="/cv/index.html" class="dropdown-item">Professional career</a> <a href="/about-me/index.html"
+                class="dropdown-item">About me</a> <a href="/my-tastes/index.html" class="dropdown-item">My tastes</a>
+                <a href="/my-setup/index.html" class="dropdown-item">Setup of my computer</a> <a href=
+                "/publications/index.html" class="dropdown-item">Publications</a> <a href=
+                "/recreational-maths/index.html" class="dropdown-item">Recreational Maths</a> <a href=
+                "/my-website/index.html" class="dropdown-item">My website</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
     <section class="section pt-0">
       <div class="box has-background-primary-95">
         <div class="block is-size-2 has-text-centered">
@@ -139,7 +160,13 @@
             Choice of web libraries
           </h1>
           <p>
-            TODO Talk about selecting Bulma. Do this later, just in case I change it e.g. to UIkit.
+            TODO Talk about selecting Bulma. No javascript - just CSS elements.
+          </p>
+          <p>
+            Colour management. Popular and maintained.
+          </p>
+          <p>
+            Tempted by UIKit…
           </p>
           <h1>
             Maths
@@ -341,6 +368,12 @@ $$
           </p>
           <p>
             Also, no separate dev build and live build - all one and the same.
+          </p>
+          <h1>
+            Security
+          </h1>
+          <p>
+            TODO: Use validation tools (esp MDN Overservatory) and http-equv-header in meta tag.
           </p>
           <h1>
             Publish checklist
