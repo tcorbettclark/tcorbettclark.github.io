@@ -404,7 +404,7 @@ def main(
     host,
     port,
 ):
-    """TWG = Tim's Website Generator.
+    """AWG = Agnostic Website Generator.
 
     CONTENT_DIR is the directory of source web contents. It is never altered.
 

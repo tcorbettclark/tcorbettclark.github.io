@@ -32,7 +32,7 @@ Tempted by UIKit...
 
 For any substantial maths I create PDFs using [Typst](https://typst.app), but for immediately visible maths in the browser I use the javascript library, [KaTeX](https://katex.org). Other libraries exist but Katex is well maintained, popular, and fast.
 
-The Common Markdown parser used by [twg.py](twg.html) includes the [dollarmath_plugin](https://mdit-py-plugins.readthedocs.io/en/latest/#mdit_py_plugins.dollarmath.dollarmath_plugin). It produces inline and block maths with the following HTML markup:
+The Common Markdown parser used by [AWG](awg.html) includes the [dollarmath_plugin](https://mdit-py-plugins.readthedocs.io/en/latest/#mdit_py_plugins.dollarmath.dollarmath_plugin). It produces inline and block maths with the following HTML markup:
 
 ```HTML
 <span class="math inline"> ...latex maths... </span>
@@ -90,7 +90,7 @@ Highlighting code is easy with [highlight.js](https://highlightjs.org). This wil
 <pre><code class="language-python"> ...python code... </code></pre>
 ```
 
-The Common Markdown standard used by [twg.py](twg.html) has [fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks) which produces tags with CSS classes exactly like this.
+The Common Markdown standard used by [AWG](awg.html) has [fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks) which produces tags with CSS classes exactly like this.
 
 So we just need to pull in the Javascript and chosen theme CSS (in this case, atom-one-dark) from a CDN, and ask it to render once the page has loaded. Hence the `<head>` section of the base template contains:
 
@@ -182,7 +182,7 @@ Iterating with various (free) validation sites makes it easy to check for correc
 
 Notable issues I could not address include:
 
-1. The existence of trailing slashes on void elements such as `meta` and `link` tags. These cannot be fixed by hand because [TWG](twg.html) checks and formats all HTML with [HTML Tidy](https://html-tidy.org), produces such trailing slashes. The main concern (see [here](https://wet-boew.github.io/wet-boew-documentation/decision/15.html) and [here](https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes)) seems to be that because HTML5 is not XML, and since href arguments don't have to be quoted, there is an ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
+1. The existence of trailing slashes on void elements such as `meta` and `link` tags. These cannot be fixed by hand because [AWG](awg.html) checks and formats all HTML with [HTML Tidy](https://html-tidy.org), produces such trailing slashes. The main concern (see [here](https://wet-boew.github.io/wet-boew-documentation/decision/15.html) and [here](https://github.com/validator/validator/wiki/Markup-»-Void-elements#trailing-slashes)) seems to be that because HTML5 is not XML, and since href arguments don't have to be quoted, there is an ambiguity if the href is the last attribute and the url contains a trailing slash. Compare:
    ```
    <link href=https://foo.bar.baz/>
    <link href="https://foo.bar.baz"/>
@@ -207,7 +207,7 @@ The default GitHub action detects code commits and deploys on their infrastructu
 
 As I'm the only person making changes, I mostly dispense with creating a branch and making a pull request to myself ([GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)), but instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub. In short, my workflow is:
 
-- Start up [my tool](twg.html) with `./twg.py content/ docs/`
+- Start up [AWG](awg.html) with `./awg.py content/ docs/`
 - Repeat until ready to publish:
   - Make changes and check in local browser without leaving my editor (because of hot reload).
   - Commit locally using git.
