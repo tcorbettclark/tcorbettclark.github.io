@@ -4,6 +4,7 @@ My personal website.
 
 # TODO - content
 
+- Write up my Apple notes.
 - On intellectual side:
   - Puzzles - recreational, bite-sized
   - Investigations - more specialist, deeper and more extensive write-up trying to answer "why". For example, logarithms, or complex numbers.

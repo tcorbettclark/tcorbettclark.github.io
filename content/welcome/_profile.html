@@ -16,14 +16,14 @@
     <div class="mt-0">
     	<h2 class="title is-size-4 has-text-centered mb-3">Interests</h2>
     	<ul>
-    		{% for interest in MY_INTERESTS -%}
+    		{% for interest in MY_INTERESTS %}
     	    <li>
     			<span class="icon-text">
     			    <span class="icon"><i class="fa-solid {{interest.fa_class}}"></i></span>
     				<span>{{ interest.topic }}</span>
     			</span>
     		</li>
-    		{%- endfor %}
+    		{% endfor %}
     	</ul>
     </div>
 </div>

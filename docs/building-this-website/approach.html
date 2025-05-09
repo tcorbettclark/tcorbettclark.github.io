@@ -95,41 +95,111 @@
             File structure
           </h1>
           <p>
-            TODO: explain files at root, and folder structure. This is a by-purpose approach (not by-type).
+            Organisational considerations include:
+          </p>
+          <ol>
+            <li>The purpose of each file, the relationship with other files, and especially how nearby each file is to
+            related files.
+            </li>
+            <li>When the file is loaded by the templating mechanism (<code>{% include %}</code> or <code>{% extends
+            %}</code>).
+            </li>
+            <li>When the file is loaded by the browser.
+            </li>
+            <li>Where browsers expect or need to find special files.
+            </li>
+          </ol>
+          <p>
+            This translates into the following principles:
+          </p>
+          <ol>
+            <li>Use a flat root directory for all files which browsers expect to see there, such as
+            <code>robots.txt</code>, <code>sitemap.xml</code>, the app manifest, favicons, etc.
+            </li>
+            <li>Use a flat root directory for all the files loaded by the base template (<code>_base.html</code>) on
+            every page. The base template uses absolute paths.
+            </li>
+            <li>Only extend templates from the same directory or in parent directories. So the template hierarchy
+            overlays the file system hierarchy.
+            </li>
+            <li>Otherwise, keep related files together in their own directory. And use relative paths.
+            </li>
+          </ol>
+          <p>
+            Even though it is traditional, I don’t organise files by type (all javascript in <code>/js/</code>, all css
+            in <code>/css/</code>, etc).
           </p>
           <p>
-            TODO: explain template hierarchy. Maybe include a picture…
+            The result is quite a few files in the root directory, but with the benefit that they are all visible. And
+            then each page has its own directory, with child pages in child directories, etc.
           </p>
           <p>
-            TODO: include an example
+            The template inheritance hierarchy is simple:
           </p>
+          <ul>
+            <li>The base template is in <code>/_base.html</code>, and includes <code>/_header.html</code> and
+            <code>/_footer.html</code>.
+            </li>
+            <li>The page template is in <code>/_page.html</code>, extends the base template, and adds blocks for the
+            breadcrumb, title, page content, and the “page is draft” additions (see below).
+            </li>
+            <li>Most concrete pages then extend the page template (the welcome page being an exception, as it alters
+            the layout to have a sidebar card).
+            </li>
+          </ul>
           <h1>
             Indentation management
           </h1>
           <p>
-            Indentation - for clarity in content view for easier writing and maintaining. But also want properly
-            formatted output. Hence tidy.
+            All HTML files are indented for clarity during editing. On output after templating, they are all formatted
+            properly by <a href="awg.html">AWG</a>, so there is no need to try to generate properly indented HTML
+            within the templates (avoiding fiddly whitespace management with “-” in e.g. <code>{%- ... %}</code>). For
+            example, the indentation below is entirely to aid readability at the template stage (rather than final
+            HTML).
           </p>
+          <pre><code class="language-HTML">{% extends "../_page.html" %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    &lt;div class="level-item"&gt;
+        &lt;span class="tag"&gt;
+            &lt;a href="index.html"&gt;&lt;i class="fa-solid fa-arrow-left"&gt;&lt;/i&gt; Back to: Building this website&lt;/a&gt;
+        &lt;/span&gt;
+    &lt;/div&gt;
+{% endblock %}
+
+{% block title %} Content approach {% endblock %}
+
+{% block page %}
+    {{ "_approach.md" | markdown() }}
+{% endblock %}
+</code></pre>
           <p>
-            Don’t attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy
-            maintenance - properly indented for readability as source. This is also why files are of one language type
-            - so that editors can use the corresponding language mode (LSP).
-          </p>
-          <p>
-            TODO: include an example
+            To make editing easy with language specific editing/formatting/colourising modes, I avoid files containing
+            a mixture of languages. Hence there are separate files for each piece of markdown, no “frontmatter”
+            TOML/YAML within markdown files, javascript is always included from <code>.js</code> files, etc.
           </p>
           <h1>
-            Choice of web libraries
+            Choice of web framework
           </h1>
           <p>
-            TODO Talk about selecting Bulma. No javascript - just CSS elements.
+            There are many to choose from, but I selected <a href="https://bulma.io">Bulma</a> because it is CSS only
+            (no javascript), looks good, is well documented, very popular, and actively maintained. I like it’s
+            responsive layout and support for colour management.
           </p>
           <p>
-            Colour management. Popular and maintained.
+            The two closest alternatives were:
           </p>
-          <p>
-            Tempted by UIKit…
-          </p>
+          <ul>
+            <li>
+              <a href="https://getbootstrap.com">Bootstrap</a>, which is older, bit boring looking now, and slightly
+              heavier weight than I need.
+            </li>
+            <li>
+              <a href="https://getuikit.com">UIkit</a>, which looks slick, but is perhaps more intended for
+              applications. Also there is less support e.g. for colours.
+            </li>
+          </ul>
           <h1>
             Maths
           </h1>
@@ -211,9 +281,9 @@ $$
             CSS classes exactly like this.
           </p>
           <p>
-            So we just need to pull in the Javascript and chosen theme CSS (in this case, atom-one-dark) from a CDN,
-            and ask it to render once the page has loaded. Hence the <code>&lt;head&gt;</code> section of the base
-            template contains:
+            So we just need to pull in the Javascript and chosen theme CSS (in this case, <code>atom-one-dark</code>)
+            from a CDN, and ask it to render once the page has loaded. Hence the <code>&lt;head&gt;</code> section of
+            the base template contains:
           </p>
           <pre><code class="language-HTML">&lt;head&gt;
     ...
@@ -234,7 +304,7 @@ $$
 });
 </code></pre>
           <p>
-            Of course, the above demonstrates the formatting result on some HTML and Javascript code.
+            Of course, the above demonstrates the formatting of some HTML and Javascript code.
           </p>
           <h1>
             Navigation breadcrumb
@@ -287,13 +357,40 @@ $$
             Useful tools:
           </p>
           <ul>
-            <li>https://www.canva.com/colors/color-wheel/
+            <li>
+              <p>
+                https://www.canva.com/colors/color-wheel/
+              </p>
             </li>
-            <li>https://colorhunt.co
+            <li>
+              <p>
+                https://colorhunt.co
+              </p>
             </li>
-            <li>https://coolors.co
+            <li>
+              <p>
+                https://coolors.co
+              </p>
             </li>
-            <li>https://pixelied.com/colors/color-wheel
+            <li>
+              <p>
+                https://pixelied.com/colors/color-wheel
+              </p>
+            </li>
+            <li>
+              <p>
+                Colour consistency (e.g. manifest, favicon, and page theme).
+              </p>
+            </li>
+            <li>
+              <p>
+                Colour contrast ratio. TODO link to tools.
+              </p>
+            </li>
+            <li>
+              <p>
+                Colours in both day and night mode.
+              </p>
             </li>
           </ul>
           <h1>
@@ -404,25 +501,6 @@ $$
             <li>Git push to GitHub.
             </li>
             <li>After a minute or so, check the changes have reached live ok.
-            </li>
-          </ul>
-          <h1>
-            Publish checklist
-          </h1>
-          <ul>
-            <li>Visual check on different devices and orientation
-            </li>
-            <li>Colour consistency (e.g. manifest, favicon, and page theme)
-            </li>
-            <li>Validator
-            </li>
-            <li>Page titles and descriptions
-            </li>
-            <li>Alt and title tags
-            </li>
-            <li>Contrast ratio. TODO link to tools.
-            </li>
-            <li>TODO: read about https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata
             </li>
           </ul>
         </div>

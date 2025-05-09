@@ -1,32 +1,66 @@
 This page explains how I structured all the web files, templates, and data to achieve this website. It also contains my notes on hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, adding a draft/wip mode, ...
 
-Hence this page provides *recipes* for how to achieve the various features of a website. They are mostly independent of one another, allowing for easy modification, substitution, or ommission (and the agnostic nature of [AWG](awg.html) means that nothing is left behind).
+Hence this page provides _recipes_ for how to achieve the various features of a website. They are mostly independent of one another, allowing for easy modification, substitution, or ommission (and the agnostic nature of [AWG](awg.html) means that nothing is left behind).
 
 # File structure
 
-TODO: explain files at root, and folder structure. This is a by-purpose approach (not by-type).
+Organisational considerations include:
 
-TODO: explain template hierarchy. Maybe include a picture...
+1. The purpose of each file, the relationship with other files, and especially how nearby each file is to related files.
+1. When the file is loaded by the templating mechanism (`{% include %}` or `{% extends %}`).
+1. When the file is loaded by the browser.
+1. Where browsers expect or need to find special files.
 
-TODO: include an example
+This translates into the following principles:
+
+1. Use a flat root directory for all files which browsers expect to see there, such as `robots.txt`, `sitemap.xml`, the app manifest, favicons, etc.
+1. Use a flat root directory for all the files loaded by the base template (`_base.html`) on every page. The base template uses absolute paths.
+1. Only extend templates from the same directory or in parent directories. So the template hierarchy overlays the file system hierarchy.
+1. Otherwise, keep related files together in their own directory. And use relative paths.
+
+Even though it is traditional, I don't organise files by type (all javascript in `/js/`, all css in `/css/`, etc).
+
+The result is quite a few files in the root directory, but with the benefit that they are all visible. And then each page has its own directory, with child pages in child directories, etc.
+
+The template inheritance hierarchy is simple:
+
+- The base template is in `/_base.html`, and includes `/_header.html` and `/_footer.html`.
+- The page template is in `/_page.html`, extends the base template, and adds blocks for the breadcrumb, title, page content, and the "page is draft" additions (see below).
+- Most concrete pages then extend the page template (the welcome page being an exception, as it alters the layout to have a sidebar card).
 
 # Indentation management
 
-Indentation - for clarity in content view for easier writing and maintaining. But also want properly formatted output. Hence tidy.
+All HTML files are indented for clarity during editing. On output after templating, they are all formatted properly by [AWG](awg.html), so there is no need to try to generate properly indented HTML within the templates (avoiding fiddly whitespace management with "-" in e.g. `{%- ... %}`). For example, the indentation below is entirely to aid readability at the template stage (rather than final HTML).
 
-Don't attempt to generate nicely indented HTML. Use Tidy instead. But write source files neatly for easy maintenance - properly indented for readability as source. This is also why files are of one language type - so that editors can use the corresponding language mode (LSP).
+```HTML
+{% extends "../_page.html" %}
 
-TODO: include an example
+{% block breadcrumb %}
+    {{ super() }}
+    <div class="level-item">
+        <span class="tag">
+            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: Building this website</a>
+        </span>
+    </div>
+{% endblock %}
 
+{% block title %} Content approach {% endblock %}
 
-# Choice of web libraries
+{% block page %}
+    {{ "_approach.md" | markdown() }}
+{% endblock %}
+```
 
-TODO Talk about selecting Bulma. No javascript - just CSS elements.
+To make editing easy with language specific editing/formatting/colourising modes, I avoid files containing a mixture of languages. Hence there are separate files for each piece of markdown, no "frontmatter" TOML/YAML within markdown files, javascript is always included from `.js` files, etc.
 
-Colour management.
-Popular and maintained.
+# Choice of web framework
 
-Tempted by UIKit...
+There are many to choose from, but I selected [Bulma](https://bulma.io) because it is CSS only (no javascript), looks good, is well documented, very popular, and actively maintained. I like it's responsive layout and support for colour management.
+
+The two closest alternatives were:
+
+- [Bootstrap](https://getbootstrap.com), which is older, bit boring looking now, and slightly heavier weight than I need.
+- [UIkit](https://getuikit.com), which looks slick, but is perhaps more intended for applications. Also there is less support e.g. for colours.
 
 # Maths
 
@@ -92,7 +126,7 @@ Highlighting code is easy with [highlight.js](https://highlightjs.org). This wil
 
 The Common Markdown standard used by [AWG](awg.html) has [fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks) which produces tags with CSS classes exactly like this.
 
-So we just need to pull in the Javascript and chosen theme CSS (in this case, atom-one-dark) from a CDN, and ask it to render once the page has loaded. Hence the `<head>` section of the base template contains:
+So we just need to pull in the Javascript and chosen theme CSS (in this case, `atom-one-dark`) from a CDN, and ask it to render once the page has loaded. Hence the `<head>` section of the base template contains:
 
 ```HTML
 <head>
@@ -114,9 +148,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-Of course, the above demonstrates the formatting result on some HTML and Javascript code.
-
-
+Of course, the above demonstrates the formatting of some HTML and Javascript code.
 
 # Navigation breadcrumb
 
@@ -153,6 +185,10 @@ Useful tools:
 - https://colorhunt.co
 - https://coolors.co
 - https://pixelied.com/colors/color-wheel
+
+- Colour consistency (e.g. manifest, favicon, and page theme).
+- Colour contrast ratio. TODO link to tools.
+- Colours in both day and night mode.
 
 # XML sitemap
 
@@ -213,13 +249,3 @@ As I'm the only person making changes, I mostly dispense with creating a branch 
   - Commit locally using git.
 - Git push to GitHub.
 - After a minute or so, check the changes have reached live ok.
-
-# Publish checklist
-
-- Visual check on different devices and orientation
-- Colour consistency (e.g. manifest, favicon, and page theme)
-- Validator
-- Page titles and descriptions
-- Alt and title tags
-- Contrast ratio. TODO link to tools.
-- TODO: read about https://developer.mozilla.org/en-US/docs/Web/HTML/Guides/Microdata

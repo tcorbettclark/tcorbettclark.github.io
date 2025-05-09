@@ -102,8 +102,8 @@ Working files
 ~ By default, have filenames starting with an underscore (regex `\_.*`).
 
 Template files
-~ Files which will be run through Jinja for templating.
-~ Other files may contain templating markup, but must be included from template files to be templated.
+~ Files which will be run through Jinja for templating, replacing the original file.
+~ Other files may contain templating markup, but must be included from a template file to be templated.
 ~ Are non-working files, and by default have filenames with an extension of `.html`, `.xml`, or `.txt`.
 
 Data files
