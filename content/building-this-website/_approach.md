@@ -1,4 +1,6 @@
-This page explains how I have structured all the web files, templates, and data to achieve this site. Also, my notes on how I addressed aspects such as hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, and a draft/wip mode.
+This page explains how I structured all the web files, templates, and data to achieve this website. It also contains my notes on hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, adding a draft/wip mode, ...
+
+Hence this page provides *recipes* for how to achieve the various features of a website. They are mostly independent of one another, allowing for easy modification, substitution, or ommission. And the agnostic nature of [AWG](awg.html) means that nothing is left behind.
 
 # File structure
 

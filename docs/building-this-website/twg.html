@@ -46,7 +46,8 @@
           <span class="tag"><a href="/welcome/index.html"><i class="fa-solid fa-home"></i> Home</a></span>
         </div>
         <div class="level-item">
-          <span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: My website</a></span>
+          <span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: Building this
+          website</a></span>
         </div>
       </div>
       <div class="level-right">
@@ -57,7 +58,7 @@
             </div>
             <div class="dropdown-menu" role="menu">
               <div class="dropdown-content">
-                <div class="dropdown-item has-text-centered has-text-weight-semibold">
+                <div class="dropdown-item has-text-centered has-text-weight-semibold smallcaps">
                   Work in Progress
                 </div>
                 <hr class="dropdown-divider" />
@@ -66,7 +67,7 @@
                 <a href="/my-setup/index.html" class="dropdown-item">Setup of my computer</a> <a href=
                 "/publications/index.html" class="dropdown-item">Publications</a> <a href=
                 "/recreational-maths/index.html" class="dropdown-item">Recreational Maths</a> <a href=
-                "/my-website/index.html" class="dropdown-item">My website</a>
+                "/building-this-website/index.html" class="dropdown-item">Building this website</a>
               </div>
             </div>
           </div>
@@ -212,10 +213,10 @@
           </p>
           <p>
             TWG reads data from all TOML files (<code>*.toml</code>), combining everything into a single namespace.
-            This allows the data to be kept near to where it is used. Although tempting to have some kind of namespace
-            mechanism, doing so from a hierarchy of such files (including multiple files in the same directory) seems
-            overly complex and could even <em>increase</em> the maintenance overhead. Using meaningful names and having
-            the tool check for name collisions is both practical and easy to understand.
+            This allows the data to be kept near to where it is used. Although tempting to have separate namespaces,
+            doing so from a hierarchy of such files (including multiple files in the same directory) seems overly
+            complex and could even <em>increase</em> the maintenance overhead. Using meaningful names and having the
+            tool check for name collisions is both practical and easy to understand.
           </p>
           <h2>
             Markdown
@@ -259,7 +260,8 @@
           </p>
           <ul>
             <li>
-              <code>attrs</code> - to support CSS attributes
+              <code>attrs</code> and <code>attrs_block</code> - to support CSS attributes, including on spanned text
+              e.g. to allow <span class="smallcaps">Smallcaps</span>
             </li>
             <li>
               <code>deflist</code> - for definition lists
@@ -345,7 +347,8 @@
             TWG. It is the only aspect of the output which is not under the complete control of the author (in the
             sense that it contains HTML tags determined by the markdown library). Some of those tags need additional
             CSS to style (such as definition lists), and code or maths excerpts need even more substantial processing
-            to look good. How that can be done is explained in my <a href="approach.html">content approach</a>.
+            to look good. How that can be done and more is explained in my <a href="approach.html">content
+            approach</a>.
           </p>
           <h1>
             How to use
