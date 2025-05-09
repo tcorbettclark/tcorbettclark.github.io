@@ -42,3 +42,8 @@
         </svg>\
     ");
 }
+
+/* Mixin to use small-caps, e.g. for menu headings */
+.smallcaps {
+    font-variant: small-caps;
+}
