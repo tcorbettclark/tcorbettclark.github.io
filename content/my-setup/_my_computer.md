@@ -12,6 +12,10 @@ https://fishshell.com/docs/current/design.html
 
 Check fish_delta
 
+# Odds
+
+[AutoRaise application](https://github.com/sbmpost/AutoRaise)
+
 # Keyboard
 
 - ⌥ is Option/Alt
