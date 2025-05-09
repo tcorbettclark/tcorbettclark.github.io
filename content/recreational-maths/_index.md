@@ -9,6 +9,12 @@ Here are some of the more interesting, surprising, and/or fun. My answers are wr
 * _More soon!_
 
 <!--
+
+JD Cook.
+All my puzzle books!
+
+
+
 * https://x.com/tcorbettclark/status/1682357430011805698
 * https://x.com/tcorbettclark/status/1676132727966375936
 * https://x.com/tcorbettclark/status/1675758858831011841
