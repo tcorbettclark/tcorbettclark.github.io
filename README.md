@@ -4,11 +4,21 @@ My personal website.
 
 # TODO - content
 
+- On intellectual side:
+  - Puzzles - recreational, bite-sized
+  - Investigations - more specialist, deeper and more extensive write-up trying to answer "why". For example, logarithms, or complex numbers.
+  - Experiments - code e.g complexity.
+  - Research projects - programmes of work. Largest sized. Could reference investigations.
+- My productivity tools
+  - cloud and locally installed software
+- My computer setup
+  - Low level, Rectangle, RayCast
+  - Keyboard mapping
+  - fastfetch output
+  - Ref github repo
 - Create a now page. See https://nownownow.com/about
 - Find a link to the PDF for my "Choosing an appropriate model for novelty detection" paper.
   - Perhaps? https://ieeexplore.ieee.org/document/607503
-- Create My computer setup page, include software setup, configuration (link to github), and fastfetch output
-- Create My tools of choice page
 - Look for other content ideas from:
   - https://bastian.rieck.me
   - https://theoryandpractice.org
