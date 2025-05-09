@@ -88,8 +88,8 @@
           </p>
           <p>
             Hence this page provides <em>recipes</em> for how to achieve the various features of a website. They are
-            mostly independent of one another, allowing for easy modification, substitution, or ommission. And the
-            agnostic nature of <a href="awg.html">AWG</a> means that nothing is left behind.
+            mostly independent of one another, allowing for easy modification, substitution, or ommission (and the
+            agnostic nature of <a href="awg.html">AWG</a> means that nothing is left behind).
           </p>
           <h1>
             File structure
@@ -139,7 +139,7 @@
             libraries exist but Katex is well maintained, popular, and fast.
           </p>
           <p>
-            The Common Markdown parser used by <a href="twg.html">twg.py</a> includes the <a href=
+            The Common Markdown parser used by <a href="awg.html">AWG</a> includes the <a href=
             "https://mdit-py-plugins.readthedocs.io/en/latest/#mdit_py_plugins.dollarmath.dollarmath_plugin">dollarmath_plugin</a>.
             It produces inline and block maths with the following HTML markup:
           </p>
@@ -206,7 +206,7 @@ $$
           "language-HTML">&lt;pre&gt;&lt;code class="language-python"&gt; ...python code... &lt;/code&gt;&lt;/pre&gt;
 </code></pre>
           <p>
-            The Common Markdown standard used by <a href="twg.html">twg.py</a> has <a href=
+            The Common Markdown standard used by <a href="awg.html">AWG</a> has <a href=
             "https://spec.commonmark.org/0.31.2/#fenced-code-blocks">fenced code blocks</a> which produces tags with
             CSS classes exactly like this.
           </p>
@@ -345,7 +345,7 @@ $$
           </p>
           <ol>
             <li>The existence of trailing slashes on void elements such as <code>meta</code> and <code>link</code>
-            tags. These cannot be fixed by hand because <a href="twg.html">TWG</a> checks and formats all HTML with
+            tags. These cannot be fixed by hand because <a href="awg.html">AWG</a> checks and formats all HTML with
             <a href="https://html-tidy.org">HTML Tidy</a>, produces such trailing slashes. The main concern (see
             <a href="https://wet-boew.github.io/wet-boew-documentation/decision/15.html">here</a> and <a href=
             "https://github.com/validator/validator/wiki/Markup-%C2%BB-Void-elements#trailing-slashes">here</a>) seems
@@ -391,7 +391,7 @@ $$
             In short, my workflow is:
           </p>
           <ul>
-            <li>Start up <a href="twg.html">my tool</a> with <code>./twg.py content/ docs/</code>
+            <li>Start up <a href="awg.html">AWG</a> with <code>./awg.py content/ docs/</code>
             </li>
             <li>Repeat until ready to publish:
               <ul>
