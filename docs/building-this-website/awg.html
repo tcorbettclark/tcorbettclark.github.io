@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Timothy Corbett-Clark" />
+    <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
+    <title>
+      Dr Timothy Corbett-Clark
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
+    "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
+    <link rel="stylesheet" href=
+    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
+    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+    crossorigin="anonymous"></script>
+    <script defer="defer" src="/hot_reloader.js" async="async"></script>
+    <script defer="defer" src="/render_maths.js"></script>
+    <script defer="defer" src="/render_code.js"></script>
+  </head>
+  <body>
+    <header class="hero is-small is-primary">
+      <div class="hero-body">
+        <p class="title">
+          Dr Timothy Corbett‑Clark
+        </p>
+        <p class="subtitle">
+          CTO, Researcher, Developer
+        </p>
+      </div>
+    </header>
+    <nav class="level mt-4 ml-4 mr-4">
+      <div class="level-left">
+        <div class="level-item">
+          <span class="tag"><a href="/welcome/index.html"><i class="fa-solid fa-home"></i> Home</a></span>
+        </div>
+        <div class="level-item">
+          <span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: Building this
+          website</a></span>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <div class="dropdown is-right is-hoverable">
+            <div class="dropdown-trigger">
+              <span class="tag"><a href="/wip.html"><i class="fa-solid fa-bug"></i>&nbsp;wip</a></span>
+            </div>
+            <div class="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item has-text-centered has-text-weight-semibold smallcaps">
+                  Work in Progress
+                </div>
+                <hr class="dropdown-divider" />
+                <a href="/cv/index.html" class="dropdown-item">Professional career</a> <a href="/about-me/index.html"
+                class="dropdown-item">About me</a> <a href="/my-tastes/index.html" class="dropdown-item">My tastes</a>
+                <a href="/my-setup/index.html" class="dropdown-item">Setup of my computer</a> <a href=
+                "/publications/index.html" class="dropdown-item">Publications</a> <a href=
+                "/recreational-maths/index.html" class="dropdown-item">Recreational Maths</a> <a href=
+                "/building-this-website/index.html" class="dropdown-item">Building this website</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="section pt-0">
+      <div class="box has-background-primary-95">
+        <div class="block is-size-2 has-text-centered">
+          Agnostic Website Generator - AWG
+        </div>
+        <div class="content draft-watermark">
+          <h1>
+            Introduction
+          </h1>
+          <p>
+            Assuming a willingness to understand the necessary web technologies, why not create static websites <em>by
+            hand</em>? The main problems are around inefficient repetition and cumbersome syntax. For example,
+          </p>
+          <ul>
+            <li>copy-and-paste maintenance of the same content e.g. in headers and footers;
+            </li>
+            <li>copy-and-paste maintenance of the same formatting/styling tags around repeated lists of things;
+            </li>
+            <li>using a verbose syntax like HTML when wanting to focus purely on content.
+            </li>
+          </ul>
+          <p>
+            These pain points can be ameliorated by using a markup language (like <a href=
+            "https://commonmark.org">markdown</a>), templating (e.g. with <a href=
+            "https://jinja.palletsprojects.com">Jinja</a>), and writing data/metadata in a data-oriented syntax (such
+            as <a href="https://toml.io/">TOML</a>).
+          </p>
+          <h2>
+            Features / anti-features
+          </h2>
+          <p>
+            My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few
+            others such as the manifest.json, robots.txt, and sitemap.xml). <strong>It is a scaffolding tool with no
+            fundamental opinion about these web files</strong>.
+          </p>
+          <p>
+            The essential features are:
+          </p>
+          <ol>
+            <li>Converting Markdown into HTML (to allow content to be written more easily).
+            </li>
+            <li>Templating using Jinja (most obviously to make it easier to produce repetative HTML).
+            </li>
+            <li>Reading template data from TOML files (to pass to Jinja).
+            </li>
+            <li>Validating and prettifying all final HTML by running through <a href="http://html-tidy.org">HTML
+            tidy</a> (if available).
+            </li>
+          </ol>
+          <p>
+            Then, to create a fast iterative loop:
+          </p>
+          <ol start="5">
+            <li>Serving up content on a local http webserver (for review during development).
+            </li>
+            <li>Watching for source file changes and rebuilding automatically.
+            </li>
+            <li>Notifying browser(s) of new builds (e.g. to trigger a “hot reload”).
+            </li>
+          </ol>
+          <p>
+            Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc. Many of these are
+            easy to achieve using the tool’s machinery without explicit native support.
+          </p>
+          <h2>
+            Zero config
+          </h2>
+          <p>
+            With the exception of a few command line options to tell the tool where to find the content and put the
+            output, <strong>there is no configuration</strong>. There are no required files or directory structures,
+            and so (degenerately) <strong>the tool will run fine on an empty directory</strong>. There is a simple
+            <code>example/</code> content directory in the <a href=
+            "https://github.com/tcorbettclark/tcorbettclark.github.io">GitHub repository</a> to demo some of the
+            functionality and provide a learning sandpit to play in.
+          </p>
+          <h2>
+            Subtractive approach
+          </h2>
+          <p>
+            Instead of copying and creating files and directories from various sources and processes, the tool takes a
+            “subtractive” approach. The build process starts by cloning a given content directory into a new output
+            directory. After running the build process, all “working files” are deleted from this output directory. By
+            default,
+          </p>
+          <ul>
+            <li>
+              <em>working files</em> are identified as filenames starting with an underscore, and
+            </li>
+            <li>
+              <em>template files</em> are identified as <em>not</em> being a working file and having an extension of
+              <code>.html</code>, <code>.xml</code>, and <code>.txt</code>.
+            </li>
+          </ul>
+          <p>
+            In addition to removing mystery around how an output is generated, this approach allows maintenance effort
+            to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, etc
+            relating to a particular page or section of the site <strong>can be kept together in the same
+            directory</strong>. This localisation of content means that after changes, removal, or replacement, the
+            chances of things being left behind afterwards are much reduced.
+          </p>
+          <p>
+            Note however that due to the tool’s lack of opinion in this regard, content can still be grouped by type in
+            the traditional fashion if desired (all the javascript in one directory, all the CSS in another, etc). Or a
+            mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
+          </p>
+          <h2>
+            Templating and template data
+          </h2>
+          <p>
+            To provide templating, AWG uses <a href="https://jinja.palletsprojects.com">Jinja</a>, a hugely popular and
+            mature templating library.
+          </p>
+          <p>
+            Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming
+            directories), and discourages “by-purpose” organisation of the files. Hence AWG overrides the Jinja
+            environment so that including or extending other files is <em>relative to the loading template file</em>.
+            For example, here is a consistent location of 3 files:
+          </p>
+          <pre><code class="language-html">&lt;!-- in /a/b/c.html --&gt;
+{% extends "../_foo.html" %}
+{% include "_bar.html" %}
+
+&lt;!-- /a/_foo.html --&gt;
+...some extendable template...
+
+&lt;!-- /a/b/_bar.html --&gt;
+...some includable content...
+</code></pre>
+          <p>
+            Note that both <code>_foo.html</code> and <code>_bar.html</code> are working files (because of the leading
+            underscore), and therefore won’t be run through Jinja directly. Anything included by a Jinja template
+            should almost certainly be a working file.
+          </p>
+          <p>
+            Templating can make use of data, for example to generate lists of things, pull out into one place something
+            which is used in multiple places, or just self-document the meaning of something better.
+          </p>
+          <p>
+            AWG reads data from all TOML files (<code>*.toml</code>), combining everything into a single namespace.
+            This allows the data to be kept near to where it is used. Although tempting to have separate namespaces,
+            doing so from a hierarchy of such files (including multiple files in the same directory) seems overly
+            complex and could even <em>increase</em> the maintenance overhead. Using meaningful names and having the
+            tool check for name collisions is both practical and easy to understand.
+          </p>
+          <h2>
+            Markdown
+          </h2>
+          <p>
+            There are many flavours of Markdown. I have chosen to use <a href="https://commonmark.org">CommonMark</a>,
+            implemented using the <a href="https://markdown-it-py.readthedocs.io">markdown-it-py</a> Python library.
+          </p>
+          <p>
+            To allow markdown to be incorporated into the HTML, AWG adds a “filter” to the Jinja environment. Although
+            an abuse of filters, it is easy to implement and convenient to use. The input to the filter is the name of
+            the file which should be converted from Markdown into HTML and included in the document at that point. For
+            example:
+          </p>
+          <pre><code class="language-html">{{ "&lt;filename&gt;.md" | markdown() }}
+</code></pre>
+          <p>
+            As with Jinja includes/extends (see above), the path to the file is relative to the calling template.
+          </p>
+          <p>
+            AWG also includes some useful plugins to the markdown parser.
+          </p>
+          <p>
+            From the <a href="https://markdown-it-py.readthedocs.io">built-in markdown-it-py extensions</a>:
+          </p>
+          <ul>
+            <li>
+              <code>replacements</code> - makes it easy to include © by writing (c) etc
+            </li>
+            <li>
+              <code>smartquotes</code> - to make better looking “quotation marks” (as opposed to "these")
+            </li>
+            <li>
+              <code>table</code> - to support tables
+            </li>
+            <li>(but not <code>linkify</code>, so links need to be made explictly)
+            </li>
+          </ul>
+          <p>
+            And from <a href="https://mdit-py-plugins.readthedocs.io">mdit-py-plugins</a>:
+          </p>
+          <ul>
+            <li>
+              <code>attrs</code> and <code>attrs_block</code> - to support CSS attributes, including on spanned text
+              e.g. to allow <span class="smallcaps">Smallcaps</span>
+            </li>
+            <li>
+              <code>deflist</code> - for definition lists
+            </li>
+            <li>
+              <code>footnotes</code> - to render footnotes like this<sup class="footnote-ref"><a href="#fn1" id=
+              "fnref1">[1]</a></sup>
+            </li>
+            <li>
+              <code>math</code> - so maths can be written in $ or $$ marks and converted into sensible HTML tags with
+              escaped content
+            </li>
+          </ul>
+          <h2>
+            Summary: the AWG content interface
+          </h2>
+          <p>
+            The AWG tool recognises 3 types of file:
+          </p>
+          <dl>
+            <dt>
+              Working files
+            </dt>
+            <dd>
+              Files used only during the build, and will be deleted from the output.
+            </dd>
+            <dd>
+              By default, have filenames starting with an underscore (regex <code>\_.*</code>).
+            </dd>
+            <dt>
+              Template files
+            </dt>
+            <dd>
+              Files which will be run through Jinja for templating.
+            </dd>
+            <dd>
+              Other files may contain templating markup, but must be included from template files to be templated.
+            </dd>
+            <dd>
+              Are non-working files, and by default have filenames with an extension of <code>.html</code>,
+              <code>.xml</code>, or <code>.txt</code>.
+            </dd>
+            <dt>
+              Data files
+            </dt>
+            <dd>
+              Source of the data made available for templating.
+            </dd>
+            <dd>
+              All share the same namespace, and name clashes/re-use across data files is an error.
+            </dd>
+            <dd>
+              Identified by files with extension <code>.toml</code>.
+            </dd>
+          </dl>
+          <p>
+            The build process is as follows:
+          </p>
+          <ol>
+            <li>Clone the source directory afresh for every build. The source directory is never changed (although it
+            is watched).
+            </li>
+            <li>Load all <strong>data files</strong> into a single namespace. Any name clashes (attempts to set the
+            same variable more than once) is considered an error, causing the tool to abort.
+            </li>
+            <li>Run all <strong>template files</strong> through Jinja, producing files of the same name.
+            </li>
+            <li>During templating, the contents of Markdown files can be rendered into HTML through use of the
+            <code>markdown()</code> Jinja filter.
+            </li>
+            <li>Run all HTML files (<code>*.html</code>) through <a href="http://html-tidy.org">HTML tidy</a>,
+            reporting any warnings, and standardising the formatting (e.g. indentation).
+            </li>
+            <li>Delete all <strong>working files</strong>, and afterwards delete any leftover empty directories.
+            </li>
+          </ol>
+          <p>
+            The tool requires no particular file or directory structure, and will work (degenerately) on an empty
+            source directory.
+          </p>
+          <p>
+            <strong>Note:</strong> The HTML generated from the markdown is the point of “maximum opinion” for AWG. It
+            is the only aspect of the output which is not under the complete control of the author (in the sense that
+            it contains HTML tags determined by the markdown library). Some of those tags need additional CSS to style
+            (such as definition lists), and code or maths excerpts need even more substantial processing. How that can
+            be done and more is explained in my <a href="approach.html">content approach</a>.
+          </p>
+          <h1>
+            How to use
+          </h1>
+          <h2>
+            Dependencies
+          </h2>
+          <p>
+            The dependencies are <a href="https://docs.astral.sh/uv/">uv</a> and (optionally) <a href=
+            "https://www.html-tidy.org">html-tidy</a>. For example, to set things up on a Mac using <a href=
+            "https://brew.sh">Homebrew</a>:
+          </p>
+          <pre><code class="language-bash">❯ brew install uv tidy-html5
+</code></pre>
+          <h2>
+            Running the tool
+          </h2>
+          <p>
+            The tool itself is a single file Python script, <a href=
+            "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py">awg.py</a>. It uses <a href=
+            "https://peps.python.org/pep-0723">inline script metadata</a> to declare Python and Python package
+            dependencies which <code>uv</code> can <a href=
+            "https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">read</a>. Then due to the
+            <a href="https://en.wikipedia.org/wiki/Shebang_(Unix)">shebang</a>, the tool is conveniently runnable as an
+            executable, hiding all the magic of <code>uv</code> installing a valid version of Python and required
+            packages in a virtualenv.
+          </p>
+          <pre><code class="language-console">❯ ./awg.py --help
+Usage: awg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
+
+  AWG = Agnostic Website Generator.
+
+  CONTENT_DIR is the directory of source web contents. It is never altered.
+
+  OUTPUT_DIR is the new directory into which the website will be built. It is destroyed before every build.
+
+Options:
+  -w, --working-file-regex TEXT  Regex to match working files.  [default: \_.*]
+  -t, --template-extension TEXT  Extension identifying files to template with Jinja  [default: .html, .xml, .txt]
+  -h, --host TEXT                Serve on this host  [default: localhost]
+  -p, --port INTEGER             Serve on this port  [default: 8000]
+  --help                         Show this message and exit.
+</code></pre>
+          <p>
+            The two mandatory arguments are the content and output directories. Providing them results in something
+            like this:
+          </p>
+          <pre><code class="language-console">❯ ./awg.py example/ output/
+Working files match regex: \_.*
+Template files have extension(s): .html, .xml, .txt
+Using content from: /Users/tcorbettclark/Projects/tcorbettclark.github.io/example (example)
+Cloned content into fresh output directory: /Users/tcorbettclark/Projects/tcorbettclark.github.io/output (output)
+Reading template data from: output/_important_points.toml
+Reading template data from: output/_config.toml
+Converted markdown from: output/_hello.md
+Rendered template: output/index.html
+Removed 3 working files and 0 empty directories from output directory
+Html-tidy ok: output/index.html
+Rebuilt all files in: output
+Starting local server on http://localhost:8000
+Serving files from: output
+Watching for changes in: example
+</code></pre>
+          <p>
+            The tool is now watching for changes to the source content, after which it will rebuild and notify any
+            browsers to trigger a reload before waiting again for more changes. Every build is a full clean build
+            without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
+          </p>
+          <p>
+            <strong>Hint</strong>: Content changes sometimes temporarily break the templating mechanism (for example,
+            after renaming files). A simple solution is to suspend the tool with <code>ctrl-z</code>, make the changes,
+            and then foreground it with <code>fg</code>. If the content changed then the site will be rebuilt and
+            browser(s) told to reload.
+          </p><!--
+# Implementation details
+
+TODO How it works and how to develop further.
+
+## Hot Reloader fun
+
+https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+
+Need to be able to handle:
+1 Browser refresh/reload by hand
+1 Browser refresh/reload triggered from server following change
+1 Navigating away to a page on another site which exists
+1 Navigating away to a page on another site which does not exist (404)
+1 Navigating to another page on my site which exists
+1 Navigating to another page on my site which does not exist (404)
+1 Back button
+1 Forward button
+1 Close tab
+1 Close browser
+
+Tools:
+1 Server detecting connection has dropped
+1 Client detecting connection has dropped
+1 Client side localstorage
+1 Browser detecting a reload/refresh is about to happen
+event beforeunload
+event pagehide and pageshow
+event visibilitychange
+event freeze and resume
+
+See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+
+new WebSocket does not raise an exception on failure to connect because it is asynchronous.
+onerror can occur even under normal use, e.g. using the browser history forward/back buttons, and having the page freeze/resume etc.
+
+Most robust approach is to trap onclose and differentiate between whether the connection has ever opened ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it hasn't opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we reload the whole page (and hence start the cycle again).
+
+## Code overview
+
+TODO: include simplified snippets.
+
+For example
+
+```Python
+class Watcher:
+    def __init__(self, directory):
+        self.directory = directory
+        self._change_event = asyncio.Event()
+
+    async def _start(self):
+        log("Watching for changes in: {}", self.directory)
+        async for changes in watchfiles.awatch(self.directory):
+            for change, filename in list(changes):
+                filename = pathlib.Path(filename)
+                if change == watchfiles.Change.added:
+                    log("Noticed file added: {}", filename)
+                elif change == watchfiles.Change.deleted:
+                    log("Noticed file deleted: {}", filename)
+                elif change == watchfiles.Change.modified:
+                    log("Noticed file modified: {}", filename)
+            self._change_event.set()
+
+    async def start(self):
+        return asyncio.create_task(self._start())
+
+    async def wait_for_change(self):
+        await self._change_event.wait()
+        self._change_event.clear()
+```
+
+## Tool development
+
+So that your editor can pick up the scripts' virtual enviroment, symlink `.venv` e.g. something like:
+
+???
+
+```bash
+ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
+```
+
+To add or remove packages needed by `awg.py`,
+
+```bash
+uv add \-\-script awg.py <package>
+uv remove \-\-script awg.py <package>
+``` -->
+          <hr class="footnotes-sep" />
+          <section class="footnotes">
+            <ol class="footnotes-list">
+              <li id="fn1" class="footnote-item">
+                <p>
+                  Demo footnote. <a href="#fnref1" class="footnote-backref">↩︎</a>
+                </p>
+              </li>
+            </ol>
+          </section>
+        </div>
+      </div>
+    </section>
+    <footer class="footer pt-4 pb-4">
+      <div class="has-text-centered">
+        <p>
+          <span class="icon-text"><span class="icon"><i class="fa-regular fa-copyright"></i></span> <span>Timothy
+          Corbett-Clark, 2025</span></span>
+        </p>
+        <p>
+          Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
+          using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
+          "https://jinja.palletsprojects.com/" target="_blank">Jinja</a>, <a href=
+          "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
+          target="_blank">Bulma</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
