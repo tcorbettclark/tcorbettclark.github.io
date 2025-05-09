@@ -34,13 +34,7 @@
 
 /* Use SVG to create a background watermark indicating a page is considered DRAFT */
 .draft-watermark {
-    background-image: url("data:image/svg+xml;utf8,\
-        <svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='170px' width='210px'>\
-            <text transform='translate(0, 40) rotate(30)' fill='rgba(245,5,5,0.05)' font-size='60px'>\
-                DRAFT\
-            </text>\
-        </svg>\
-    ");
+    background-image: url("draft-watermark.svg");
 }
 
 /* Mixin to use small-caps, e.g. for menu headings */
