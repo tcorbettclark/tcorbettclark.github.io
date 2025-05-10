@@ -36,5 +36,6 @@
   ],
   "theme_color": "#d4d410",
   "background_color": "#ffffff",
-  "display": "browser"
+  "display": "browser",
+  "start_url": "https://www.corbettclark.com/welcome/index.html"
 }
