@@ -7,7 +7,7 @@
                 <div class="level-item">
                     <span class="tag"><a href="/welcome/index.html"><i class="fa-solid fa-home"></i> Home</a></span>
                 </div>
-            {% endblock %}
+            {% endblock breadcrumb %}
         </div>
         {% if draft %}
             <div class="level-right">
@@ -40,11 +40,11 @@
     <section class="section pt-0">
         <div class="box has-background-primary-95">
             <div class="block is-size-2 has-text-centered ">
-                {% block title %}{% endblock %}
+                {% block title %}{% endblock title %}
             </div>
             <div class="content {% if draft %}draft-watermark{% endif %}">
-                {% block page %}{% endblock %}
+                {% block page %}{% endblock page %}
             </div>
         </div>
     </section>
-{% endblock %}
+{% endblock content %}

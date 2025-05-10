@@ -392,7 +392,7 @@ Options:
   --help                         Show this message and exit.
 </code></pre>
           <p>
-            The two mandatory arguments are the content and output directories. Providing them results in something
+            The two mandatory arguments are the content and output directories. Providing them results in an output
             like this:
           </p>
           <pre><code class="language-console">❯ ./awg.py example/ output/
@@ -412,9 +412,10 @@ Serving files from: output
 Watching for changes in: example
 </code></pre>
           <p>
-            The tool is now watching for changes to the source content, after which it will rebuild and notify any
-            browsers to trigger a reload before waiting again for more changes. Every build is a full clean build
-            without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
+            The tool is now watching for changes to the source content, after which it will rebuild and notify all
+            browsers subscribed for hot reloading (see below) before waiting again for more changes. Every build is a
+            full clean build without any caching or incremental behaviour, avoiding penalties from complexity and
+            gotchas.
           </p>
           <p>
             <strong>Hint</strong>: Content changes sometimes temporarily break the templating mechanism (for example,
@@ -426,7 +427,7 @@ Watching for changes in: example
 
 TODO How it works and how to develop further.
 
-## Hot Reloader fun
+## Hot reloading
 
 https://developer.chrome.com/docs/web-platform/page-lifecycle-api
 

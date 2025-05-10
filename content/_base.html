@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"/>
         <link rel="stylesheet" type="text/css" href="/main.css"/>
-        {% block links_to_extra_css %}{% endblock %}
+        {% block links_to_extra_css %}{% endblock links_to_extra_css %}
 
         <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
@@ -26,11 +26,11 @@
         <script defer src="/hot_reloader.js" async></script>
         <script defer src="/render_maths.js"></script>
         <script defer src="/render_code.js"></script>
-        {% block script_tags_to_extra_js %}{% endblock %}
+        {% block script_tags_to_extra_js %}{% endblock script_tags_to_extra_js %}
     </head>
     <body>
         {% include "_header.html" %}
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock content %}
         {% include "_footer.html" %}
     </body>
 </html>

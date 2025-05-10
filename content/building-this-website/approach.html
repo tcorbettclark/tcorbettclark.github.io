@@ -7,10 +7,10 @@
     <div class="level-item">
         <span class="tag"><a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: Building this website</a></span>
     </div>
-{% endblock %}
+{% endblock breadcrumb %}
 
-{% block title %} Content approach {% endblock %}
+{% block title %} Content approach {% endblock title %}
 
 {% block page %}
     {{ "_approach.md" | markdown() }}
-{% endblock %}
+{% endblock page %}

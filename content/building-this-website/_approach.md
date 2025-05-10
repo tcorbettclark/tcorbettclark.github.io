@@ -42,13 +42,13 @@ All HTML files are indented for clarity during editing. On output after templati
             <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: Building this website</a>
         </span>
     </div>
-{% endblock %}
+{% endblock breadcrumb %}
 
-{% block title %} Content approach {% endblock %}
+{% block title %} Content approach {% endblock title %}
 
 {% block page %}
     {{ "_approach.md" | markdown() }}
-{% endblock %}
+{% endblock page %}
 ```
 
 To make editing easy with language specific editing/formatting/colourising modes, I avoid files containing a mixture of languages. Hence there are separate files for each piece of markdown, no "frontmatter" TOML/YAML within markdown files, javascript is always included from `.js` files, etc.
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-I put this javascript in the file `render_maths.js` and load it in the `<head>` tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the [jsDelivr CDN](https://cdn.jsdelivr.net):
+I put this javascript in the file `/render_maths.js` and load it in the `<head>` tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the [jsDelivr CDN](https://cdn.jsdelivr.net):
 
 ```HTML
 <head>
@@ -152,7 +152,35 @@ Of course, the above demonstrates the formatting of some HTML and Javascript cod
 
 # Navigation breadcrumb
 
-TODO
+The navigation breadcrumb works by sub-templating, calling `{{ super() }}` to retain the navigation from above. So the pattern is as follows (ignoring all styling).
+
+In the base template
+
+```HTML
+<!-- This is the base template: /_page.html -->
+<nav class="navigation">
+    {% block breadcrumb %}
+    {% endblock breadcrumb %}
+</nav>
+
+
+<!-- Then in a subclass template in a sub-directory, e.g. /a/_foo.html -->
+{% extends "../_page.html" %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    <a href="/">Home</a>
+{% endblock breadcrumb%}
+
+
+<!-- And then again, e.g. in /a/b/_bar.html -->
+{% extends "../_foo.html" %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    <a href="../index.html">Back to Recreational Maths</a>
+{% endblock breadcrumb%}
+```
 
 # Manifest and favicon
 

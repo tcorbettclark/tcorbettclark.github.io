@@ -156,7 +156,7 @@ Options:
   --help                         Show this message and exit.
 ```
 
-The two mandatory arguments are the content and output directories. Providing them results in something like this:
+The two mandatory arguments are the content and output directories. Providing them results in an output like this:
 
 ```console
 ❯ ./awg.py example/ output/
@@ -176,7 +176,7 @@ Serving files from: output
 Watching for changes in: example
 ```
 
-The tool is now watching for changes to the source content, after which it will rebuild and notify any browsers to trigger a reload before waiting again for more changes. Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
+The tool is now watching for changes to the source content, after which it will rebuild and notify all browsers subscribed for hot reloading (see below) before waiting again for more changes. Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
 
 **Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files). A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`. If the content changed then the site will be rebuilt and browser(s) told to reload.
 
@@ -185,7 +185,7 @@ The tool is now watching for changes to the source content, after which it will 
 
 TODO How it works and how to develop further.
 
-## Hot Reloader fun
+## Hot reloading
 
 https://developer.chrome.com/docs/web-platform/page-lifecycle-api
 

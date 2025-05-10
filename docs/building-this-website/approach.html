@@ -166,13 +166,13 @@
             &lt;a href="index.html"&gt;&lt;i class="fa-solid fa-arrow-left"&gt;&lt;/i&gt; Back to: Building this website&lt;/a&gt;
         &lt;/span&gt;
     &lt;/div&gt;
-{% endblock %}
+{% endblock breadcrumb %}
 
-{% block title %} Content approach {% endblock %}
+{% block title %} Content approach {% endblock title %}
 
 {% block page %}
     {{ "_approach.md" | markdown() }}
-{% endblock %}
+{% endblock page %}
 </code></pre>
           <p>
             To make editing easy with language specific editing/formatting/colourising modes, I avoid files containing
@@ -229,9 +229,9 @@
 });
 </code></pre>
           <p>
-            I put this javascript in the file <code>render_maths.js</code> and load it in the <code>&lt;head&gt;</code>
-            tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the
-            <a href="https://cdn.jsdelivr.net">jsDelivr CDN</a>:
+            I put this javascript in the file <code>/render_maths.js</code> and load it in the
+            <code>&lt;head&gt;</code> tag of the base template. This is also where we load the KaTeX library (both
+            javascript and CSS) from the <a href="https://cdn.jsdelivr.net">jsDelivr CDN</a>:
           </p>
           <pre><code class="language-HTML">&lt;head&gt;
     ...
@@ -310,8 +310,36 @@ $$
             Navigation breadcrumb
           </h1>
           <p>
-            TODO
+            The navigation breadcrumb works by sub-templating, calling <code>{{ super() }}</code> to retain the
+            navigation from above. So the pattern is as follows (ignoring all styling).
           </p>
+          <p>
+            In the base template
+          </p>
+          <pre><code class="language-HTML">&lt;!-- This is the base template: /_page.html --&gt;
+&lt;nav class="navigation"&gt;
+    {% block breadcrumb %}
+    {% endblock breadcrumb %}
+&lt;/nav&gt;
+
+
+&lt;!-- Then in a subclass template in a sub-directory, e.g. /a/_foo.html --&gt;
+{% extends "../_page.html" %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    &lt;a href="/"&gt;Home&lt;/a&gt;
+{% endblock breadcrumb%}
+
+
+&lt;!-- And then again, e.g. in /a/b/_bar.html --&gt;
+{% extends "../_foo.html" %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    &lt;a href="../index.html"&gt;Back to Recreational Maths&lt;/a&gt;
+{% endblock breadcrumb%}
+</code></pre>
           <h1>
             Manifest and favicon
           </h1>
