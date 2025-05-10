@@ -313,9 +313,6 @@ $$
             The navigation breadcrumb works by sub-templating, calling <code>{{ super() }}</code> to retain the
             navigation from above. So the pattern is as follows (ignoring all styling).
           </p>
-          <p>
-            In the base template
-          </p>
           <pre><code class="language-HTML">&lt;!-- This is the base template: /_page.html --&gt;
 &lt;nav class="navigation"&gt;
     {% block breadcrumb %}
@@ -341,15 +338,55 @@ $$
 {% endblock breadcrumb%}
 </code></pre>
           <h1>
-            Manifest and favicon
+            Manifest and favicons
           </h1>
           <p>
-            TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
+            The <a href="https://www.w3.org/TR/appmanifest/">Web Application Manifest</a> is a <code>JSON</code> file
+            containing metadata about a web application. Although this site is not web app as such, it improves user
+            experience to use the manifest to document the location of all the favicons and theme colours.
           </p>
           <p>
-            TODO does favicon.ico and apple xxx need to go in root directory to be found? At least one validator
-            suggested so…
+            “Favicons” appear as the icons in browser url bars, tabs, bookmark menus. And also in “add to home screen”
+            of touch screen devices.
           </p>
+          <p>
+            So we need to:
+          </p>
+          <ul>
+            <li>Create a set of favicons, and ensure the colours are coordinated with the colour theme of the website.
+            </li>
+            <li>Tell browsers where to find all the favicons, noting that some are expected in “standard” locations
+            anyway.
+            </li>
+          </ul>
+          <p>
+            I created a set of favicons using an online <a href="https://favicon.io/favicon-generator/">favicon
+            generator</a>, using the same primary colours as configured in Bulma (see below). These are all copied into
+            the root (<code>/</code>) directory of the site according to the file structure principles described above.
+          </p>
+          <p>
+            The manifest then points to these favicons, and is itself put in the root directory as
+            <code>manifest.json</code> (see <a href=
+            "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json">here</a>).
+          </p>
+          <p>
+            Lastly, the base template (in <code>_base.html</code>) indicates the principle favicons and the location of
+            the manifest:
+          </p>
+          <pre><code class="language-HTML">&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"&gt;
+    &lt;head&gt;
+        ...
+        &lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;
+        &lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
+        &lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
+        &lt;link rel="icon" type="image/x-icon" href="/favicon.ico" /&gt;
+        &lt;link rel="manifest" href="/manifest.json"&gt;
+        ...
+    &lt;/head&gt;
+    ...
+&lt;/html&gt;
+</code></pre>
           <h1>
             Colour, styling, and night view
           </h1>
@@ -422,11 +459,56 @@ $$
             </li>
           </ul>
           <h1>
-            XML sitemap
+            XML sitemap and the robots.txt file
           </h1>
           <p>
-            Simply done by putting the data into a <code>_sitemap.toml</code> and writing a template
-            <code>sitemap.xml</code>. Then linking to it from <code>robots.txt</code>.
+            To support search engine indexing and SEO, the <code>robots.txt</code> file and related sitemap file (in
+            <code>sitemap.xml</code>) are used to hint to search engines what pages they should index. See Google’s
+            description of the <a href=
+            "https://developers.google.com/search/docs/crawling-indexing/robots/intro">robots.txt file</a> and the
+            <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview">sitemap</a>.
+          </p>
+          <p>
+            For this site I just use the <code>robots.txt</code> file to point to the sitemap:
+          </p>
+          <pre><code>Sitemap: {{ SITEURL }}/sitemap.xml
+</code></pre>
+          <p>
+            (the <code>SITEURL</code> is set in a template data TOML file).
+          </p>
+          <p>
+            The <code>sitemap.xml</code> file will be run though Jinja by <a href="awg.html">AWG</a> because it has an
+            <code>.xml</code> extension. Hence it is a template:
+          </p>
+          <pre><code class="language-XML">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+    {%- for p in SITEMAP_FILENAMES %}
+    &lt;url&gt;
+        &lt;loc&gt;{{SITEURL}}/{{p.name}}&lt;/loc&gt;
+        &lt;changefreq&gt;{{p.change_frequency or "monthly"}}&lt;/changefreq&gt;
+        {%- if p.last_mod %}
+        &lt;lastmod&gt;{{p.last_mod}}&lt;/lastmod&gt;
+        {%- endif %}
+    &lt;/url&gt;
+    {%- endfor %}
+&lt;/urlset&gt;
+</code></pre>
+          <p>
+            The data describing the set of URLs which should be indexed is kept in <code>_sitemap.toml</code>. For
+            example:
+          </p>
+          <pre><code class="language-toml">[[SITEMAP_FILENAMES]]
+name = "index.html"
+change_frequency = "monthly"
+
+[[SITEMAP_FILENAMES]]
+name = "welcome/index.html"
+change_frequency = "weekly"
+</code></pre>
+          <p>
+            Then I just need to maintain <code>_sitemap.toml</code>. This isn’t too cumbersomb (e.g. by listing all
+            candidates with <code>ls -1 **.html</code>). It is also possible to put the different entries in different
+            <code>.toml</code> files in respective directories.
           </p>
           <h1>
             DRAFT mode

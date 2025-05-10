@@ -154,8 +154,6 @@ Of course, the above demonstrates the formatting of some HTML and Javascript cod
 
 The navigation breadcrumb works by sub-templating, calling `{{ super() }}` to retain the navigation from above. So the pattern is as follows (ignoring all styling).
 
-In the base template
-
 ```HTML
 <!-- This is the base template: /_page.html -->
 <nav class="navigation">
@@ -182,11 +180,38 @@ In the base template
 {% endblock breadcrumb%}
 ```
 
-# Manifest and favicon
+# Manifest and favicons
 
-TODO: explain webmanifest file, especially for favicons. See https://www.w3.org/TR/appmanifest/.
+The [Web Application Manifest](https://www.w3.org/TR/appmanifest/) is a `JSON` file containing metadata about a web application. Although this site is not web app as such, it improves user experience to use the manifest to document the location of all the favicons and theme colours.
 
-TODO does favicon.ico and apple xxx need to go in root directory to be found? At least one validator suggested so...
+"Favicons" appear as the icons in browser url bars, tabs, bookmark menus. And also in "add to home screen" of touch screen devices.
+
+So we need to:
+
+- Create a set of favicons, and ensure the colours are coordinated with the colour theme of the website.
+- Tell browsers where to find all the favicons, noting that some are expected in "standard" locations anyway.
+
+I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma (see below). These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
+
+The manifest then points to these favicons, and is itself put in the root directory as `manifest.json` (see [here](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json)).
+
+Lastly, the base template (in `_base.html`) indicates the principle favicons and the location of the manifest:
+
+```HTML
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        ...
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json">
+        ...
+    </head>
+    ...
+</html>
+```
 
 # Colour, styling, and night view
 
@@ -218,9 +243,46 @@ Useful tools:
 - Colour contrast ratio. TODO link to tools.
 - Colours in both day and night mode.
 
-# XML sitemap
+# XML sitemap and the robots.txt file
 
-Simply done by putting the data into a `_sitemap.toml` and writing a template `sitemap.xml`. Then linking to it from `robots.txt`.
+To support search engine indexing and SEO, the `robots.txt` file and related sitemap file (in `sitemap.xml`) are used to hint to search engines what pages they should index. See Google's description of the [robots.txt file](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and the [sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
+
+For this site I just use the `robots.txt` file to point to the sitemap:
+```
+Sitemap: {{ SITEURL }}/sitemap.xml
+```
+(the `SITEURL` is set in a template data TOML file).
+
+The `sitemap.xml` file will be run though Jinja by [AWG](awg.html) because it has an `.xml` extension. Hence it is a template:
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    {%- for p in SITEMAP_FILENAMES %}
+    <url>
+        <loc>{{SITEURL}}/{{p.name}}</loc>
+        <changefreq>{{p.change_frequency or "monthly"}}</changefreq>
+        {%- if p.last_mod %}
+        <lastmod>{{p.last_mod}}</lastmod>
+        {%- endif %}
+    </url>
+    {%- endfor %}
+</urlset>
+```
+
+The data describing the set of URLs which should be indexed is kept in `_sitemap.toml`. For example:
+
+```toml
+[[SITEMAP_FILENAMES]]
+name = "index.html"
+change_frequency = "monthly"
+
+[[SITEMAP_FILENAMES]]
+name = "welcome/index.html"
+change_frequency = "weekly"
+```
+
+Then I just need to maintain `_sitemap.toml`. This isn't too cumbersomb (e.g. by listing all candidates with `ls -1 **.html`). It is also possible to put the different entries in different `.toml` files in respective directories.
 
 # DRAFT mode
 
