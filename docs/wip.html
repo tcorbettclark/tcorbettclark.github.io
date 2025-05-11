@@ -1,93 +1,18 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-  <head>
-    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Timothy Corbett-Clark" />
-    <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
-    <title>
-      Dr Timothy Corbett-Clark
-    </title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
-    "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
-    <link rel="stylesheet" href=
-    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="/main.css" />
-    <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
-    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
-    crossorigin="anonymous"></script>
-    <script defer="defer" src="/hot_reloader.js" async="async"></script>
-    <script defer="defer" src="/render_maths.js"></script>
-    <script defer="defer" src="/render_code.js"></script>
-  </head>
-  <body>
-    <header class="hero is-small is-primary">
-      <div class="hero-body">
-        <p class="title">
-          Dr Timothy Corbett‑Clark
-        </p>
-        <p class="subtitle">
-          CTO, Researcher, Developer
-        </p>
-      </div>
-    </header>
-    <section class="section">
-      <div class="columns">
+{% extends "_base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="columns">
         <div class="column">
-          <div class="box has-background-primary-bold-invert has-text-primary-bold">
-            <h1 class="title">
-              Work in progress...
-            </h1>
-            <ul>
-              <li>
-                <a href="/cv/index.html">Professional career</a>
-              </li>
-              <li>
-                <a href="/about-me/index.html">About me</a>
-              </li>
-              <li>
-                <a href="/my-tastes/index.html">My tastes</a>
-              </li>
-              <li>
-                <a href="/my-setup/index.html">Setup of my computer</a>
-              </li>
-              <li>
-                <a href="/publications/index.html">Publications</a>
-              </li>
-              <li>
-                <a href="/recreational-maths/index.html">Recreational Maths</a>
-              </li>
-              <li>
-                <a href="/building-this-website/index.html">Building this website</a>
-              </li>
-            </ul>
-          </div>
+            <div class="box has-background-primary-bold-invert has-text-primary-bold">
+                <h1 class="title">Work in progress...</h1>
+                <ul>
+                    {% for wip_page in WIP_PAGES %}
+                        <li><a href="{{wip_page.url}}">{{wip_page.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-      </div>
-    </section>
-    <footer class="footer pt-4 pb-4">
-      <div class="has-text-centered">
-        <p>
-          <span class="icon-text"><span class="icon"><i class="fa-regular fa-copyright"></i></span> <span>Timothy
-          Corbett-Clark, 2025</span></span>
-        </p>
-        <p>
-          Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
-          using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
-          "https://jinja.palletsprojects.com/" target="_blank">Jinja</a>, <a href=
-          "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
-          target="_blank">Bulma</a>.
-        </p>
-      </div>
-    </footer>
-  </body>
-</html>
+    </div>
+</section>
+{% endblock content %}

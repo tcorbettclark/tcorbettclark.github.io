@@ -17,6 +17,12 @@
     --bulma-hr-height: 1px;
 }
 
+/* Draw a quiet border around block code */
+pre > code {
+    border: 2px dotted grey;
+    border-radius: 0;
+}
+
 /* Remove padding around pre tag (used e.g. to contain for code)
    when in the content class. Mostly just to give more space to the code.
 */
