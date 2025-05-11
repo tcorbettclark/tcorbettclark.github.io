@@ -11,6 +11,10 @@
     /* Remove padding and inherit colour for code tags */
     --bulma-code-padding: 0em 0em 0em;
     --bulma-code-background: inherit;
+
+    /* Make horizontal lines darker and thinner */
+    --bulma-hr-background-color: hsl(221, 14%, 25%);
+    --bulma-hr-height: 1px;
 }
 
 /* Remove padding around pre tag (used e.g. to contain for code)
