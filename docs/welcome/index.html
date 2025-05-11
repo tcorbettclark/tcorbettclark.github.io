@@ -1,155 +1,25 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-  <head>
-    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="Timothy Corbett-Clark" />
-    <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
-    <title>
-      Dr Timothy Corbett-Clark
-    </title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
-    "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
-    <link rel="stylesheet" href=
-    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="/main.css" />
-    <link rel="stylesheet" type="text/css" href="me.css" />
-    <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
-    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
-    crossorigin="anonymous"></script>
-    <script defer="defer" src="/hot_reloader.js" async="async"></script>
-    <script defer="defer" src="/render_maths.js"></script>
-    <script defer="defer" src="/render_code.js"></script>
-  </head>
-  <body>
-    <header class="hero is-small is-primary">
-      <div class="hero-body">
-        <p class="title">
-          Dr Timothy Corbett‑Clark
-        </p>
-        <p class="subtitle">
-          CTO, Researcher, Developer
-        </p>
-      </div>
-    </header>
+{% extends "../_base.html" %}
+
+{% block links_to_extra_css %}
+    <link rel="stylesheet" type="text/css" href="me.css"/>
+{% endblock links_to_extra_css %}
+
+{% block content %}
     <section class="section">
-      <div class="columns">
-        <div class="column">
-          <div class="box has-background-primary-bold-invert has-text-primary-bold">
-            <div class="title is-size-2 has-text-centered">
-              <i class="fa-solid fa-person-digging"></i> Under construction!
+        <div class="columns">
+            <div class="column">
+                <div class="box has-background-primary-bold-invert has-text-primary-bold">
+                    <div class="title is-size-2 has-text-centered ">
+                        <i class="fa-solid fa-person-digging"></i> Under construction!
+                    </div>
+                    <div class="content">
+                        {{ "_index.md" | markdown() }}
+                    </div>
+                </div>
             </div>
-            <div class="content">
-              <h1>
-                About
-              </h1>
-              <p>
-                The purpose of this website is to encourage me to write and think clearly, to share things I find
-                interesting and hope will be of interest to others, and to be a presentation of who I am.
-              </p>
-              <p>
-                It is not a blog, i.e. it is not a series of articles created over time. Instead, I take responsibility
-                for the assembly and navigation of cohesive content, making additions and improvements over time, and
-                refactoring when needed.
-              </p>
+            <div class="column is-narrow">
+                {% include "_profile.html" %}
             </div>
-          </div>
         </div>
-        <div class="column is-narrow">
-          <div class="box has-background-primary-bold-invert has-text-primary-bold">
-            <div class="card mb-0">
-              <div class="card-image">
-                <figure class="image">
-                  <img id="photo-of-me" src="me.jpg" alt="My profile picture" />
-                </figure>
-              </div>
-            </div>
-            <hr />
-            <div class="title is-size-4 has-text-centered m-0">
-              Pursuits
-            </div>
-            <div class="container mt-4">
-              <ul>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-code"></i></span>
-                  <span>Programming</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-shapes"></i></span>
-                  <span>Mathematics</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-share-nodes"></i></span>
-                  <span>AI/ML</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-lightbulb"></i></span>
-                  <span>Philosophy</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-music"></i></span>
-                  <span>Music</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-person-skiing"></i></span>
-                  <span>Skiing</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-chess-knight"></i></span>
-                  <span>Chess</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-book"></i></span>
-                  <span>Writing</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-graduation-cap"></i></span>
-                  <span>Learning</span></span>
-                </li>
-                <li>
-                  <span class="icon-text"><span class="icon"><i class="fa-solid fa-sack-dollar"></i></span>
-                  <span>Investing</span></span>
-                </li>
-              </ul>
-            </div>
-            <hr />
-            <div class="container mt-4 mb-0 has-text-centered has-text-link">
-              <a href="https://www.linkedin.com/in/tcorbettclark/" target="_blank"><i class=
-              "fa-brands fa-linkedin"></i></a> <a href="https://github.com/tcorbettclark" target="_blank"><i class=
-              "fa-brands fa-github"></i></a> <a href="https://quora.com/Timothy-Corbett-Clark" target=
-              "_blank"><i class="fa-brands fa-quora"></i></a> <a href=
-              "https://stackoverflow.com/users/1980944/timothy-corbett-clark" target="_blank"><i class=
-              "fa-brands fa-stack-overflow"></i></a> <a href="https://bluesky.app/@tcorbettclark" target=
-              "_blank"><i class="fa-brands fa-bluesky"></i></a> <a href="https://orcid.org/0009-0004-7391-744X" target=
-              "_blank"><i class="fa-brands fa-orcid"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
-    <footer class="footer pt-4 pb-4">
-      <div class="has-text-centered">
-        <p>
-          <span class="icon-text"><span class="icon"><i class="fa-regular fa-copyright"></i></span> <span>Timothy
-          Corbett-Clark, 2025</span></span>
-        </p>
-        <p>
-          Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
-          using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
-          "https://jinja.palletsprojects.com/" target="_blank">Jinja</a>, <a href=
-          "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
-          target="_blank">Bulma</a>.
-        </p>
-      </div>
-    </footer>
-  </body>
-</html>
+{% endblock content %}

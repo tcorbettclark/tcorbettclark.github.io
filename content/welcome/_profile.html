@@ -1,4 +1,4 @@
-<div class="box has-background-primary-bold-invert has-text-primary-bold">
+<div class="box has-background-primary-bold-invert has-text-primary-bold mb-0">
     <div class="card mb-0">
         <div class="card-image">
             <figure class="image">
@@ -6,9 +6,9 @@
             </figure>
         </div>
     </div>
-    <hr>
-   	<div class="title is-size-4 has-text-centered m-0">Pursuits</div>
-    <div class="container mt-4">
+    <hr class="mt-4 mb-3">
+   	<div class="title is-size-4 has-text-centered mb-3">Pursuits</div>
+    <div class="container">
        	<ul>
       		{% for interest in MY_INTERESTS %}
        	    <li>
@@ -20,8 +20,8 @@
       		{% endfor %}
        	</ul>
     </div>
-    <hr>
-    <div class="container mt-4 mb-0 has-text-centered has-text-link">
+    <hr class="mt-4 mb-3">
+    <div class="container has-text-centered has-text-link">
         {% for ms in MY_SOCIALS %}
         <a href="{{ ms.url }}" target="_blank"><i class="fa-brands {{ms.fa_class}}"></i></a>
         {% endfor %}
