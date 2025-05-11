@@ -191,7 +191,7 @@ So we need to:
 - Create a set of favicons, and ensure the colours are coordinated with the colour theme of the website.
 - Tell browsers where to find all the favicons, noting that some are expected in "standard" locations anyway.
 
-I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma (see below). These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
+I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma. These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
 
 The manifest then points to these favicons, and is itself put in the root directory as `manifest.json` (see [here](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json)).
 
@@ -213,35 +213,29 @@ Lastly, the base template (in `_base.html`) indicates the principle favicons and
 </html>
 ```
 
-# Colour, styling, and night view
+# Colour, styling, and light/dark mode
 
-TODO
+Colours are both technical and personal. I found these useful to get started:
 
-Need to keep Bulma, manifest, and favicon theme colours in sync.
+- [The HSB Colour System](https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html)
+- [Colour in UI Design](https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html)
 
-Simple "tcc" Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour as configured in Bulma.
+Then the following tools helped to experiment with different palettes:
 
-Refer to all the help from Bulma, and therefore what is left to do.
+- [Canva colour wheel](https://www.canva.com/colors/color-wheel/)
+- [Pixelied colour wheel](https://pixelied.com/colors/color-wheel)
+- [ColorHunt](https://colorhunt.co)
+- [Coolors.co](https://coolors.co)
 
-Talk about night view.
+One gotcha I encountered was that there are different variants/standards of RGB.
 
-Talk about different standards of RGB (use Standard RGB or sRGB).
+[Bulma](https://bulma.io) has a "customizer" popup built-in to their own website, which allows colours (and other style aspects) to be tried out before exporting as CSS settings. Because it [automatically derives shades](https://bulma.io/documentation/features/color-palettes/), the main task is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
 
-Useful learning about colours:
+Bulma also automatically derives and manages the colour variations for a dark mode. For that to work, one needs to XXXXXXXXXXX TODO
 
-- https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html
-- https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html
+TODO: Colour contrast ratio for readability
 
-Useful tools:
-
-- https://www.canva.com/colors/color-wheel/
-- https://colorhunt.co
-- https://coolors.co
-- https://pixelied.com/colors/color-wheel
-
-- Colour consistency (e.g. manifest, favicon, and page theme).
-- Colour contrast ratio. TODO link to tools.
-- Colours in both day and night mode.
+Lastly, it is important to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
 
 # XML sitemap and the robots.txt file
 
@@ -283,20 +277,6 @@ change_frequency = "weekly"
 ```
 
 Then I just need to maintain `_sitemap.toml`. This isn't too cumbersomb (e.g. by listing all candidates with `ls -1 **.html`). It is also possible to put the different entries in different `.toml` files in respective directories.
-
-# DRAFT mode
-
-CSS watermark
-switch passed in to top level templates
-The `/wip.html` page and the "hidden" link in right side of the navigation (breadcrumb) space.
-So now often I can commit and push to master, and github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
-
-And now I can test draft pages with w3 validator, on different devices etc.
-
-I don't really care that people can see such pages - the watermark makes it obvious.
-And the search engines start to see something arriving, changing often, which speeds up indexing to make more discoverable (not that that really matters, but is nice).
-
-Also, no separate dev build and live build - all one and the same.
 
 # Validation
 

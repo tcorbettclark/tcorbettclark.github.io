@@ -75,8 +75,8 @@
       </div>
     </nav>
     <section class="section pt-0">
-      <div class="box has-background-primary-95">
-        <div class="block is-size-2 has-text-centered">
+      <div class="box has-background-primary-bold-invert has-text-primary-bold">
+        <div class="title is-size-2 has-text-centered">
           Content approach
         </div>
         <div class="content draft-watermark">
@@ -361,8 +361,8 @@ $$
           </ul>
           <p>
             I created a set of favicons using an online <a href="https://favicon.io/favicon-generator/">favicon
-            generator</a>, using the same primary colours as configured in Bulma (see below). These are all copied into
-            the root (<code>/</code>) directory of the site according to the file structure principles described above.
+            generator</a>, using the same primary colours as configured in Bulma. These are all copied into the root
+            (<code>/</code>) directory of the site according to the file structure principles described above.
           </p>
           <p>
             The manifest then points to these favicons, and is itself put in the root directory as
@@ -388,76 +388,58 @@ $$
 &lt;/html&gt;
 </code></pre>
           <h1>
-            Colour, styling, and night view
+            Colour, styling, and light/dark mode
           </h1>
           <p>
-            TODO
-          </p>
-          <p>
-            Need to keep Bulma, manifest, and favicon theme colours in sync.
-          </p>
-          <p>
-            Simple “tcc” Favicon generated using https://favicon.io/favicon-generator/, using the same primary colour
-            as configured in Bulma.
-          </p>
-          <p>
-            Refer to all the help from Bulma, and therefore what is left to do.
-          </p>
-          <p>
-            Talk about night view.
-          </p>
-          <p>
-            Talk about different standards of RGB (use Standard RGB or sRGB).
-          </p>
-          <p>
-            Useful learning about colours:
-          </p>
-          <ul>
-            <li>https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html
-            </li>
-            <li>https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html
-            </li>
-          </ul>
-          <p>
-            Useful tools:
+            Colours are both technical and personal. I found these useful to get started:
           </p>
           <ul>
             <li>
-              <p>
-                https://www.canva.com/colors/color-wheel/
-              </p>
+              <a href="https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html">The HSB Colour
+              System</a>
             </li>
             <li>
-              <p>
-                https://colorhunt.co
-              </p>
-            </li>
-            <li>
-              <p>
-                https://coolors.co
-              </p>
-            </li>
-            <li>
-              <p>
-                https://pixelied.com/colors/color-wheel
-              </p>
-            </li>
-            <li>
-              <p>
-                Colour consistency (e.g. manifest, favicon, and page theme).
-              </p>
-            </li>
-            <li>
-              <p>
-                Colour contrast ratio. TODO link to tools.
-              </p>
-            </li>
-            <li>
-              <p>
-                Colours in both day and night mode.
-              </p>
+              <a href="https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html">Colour in UI
+              Design</a>
             </li>
           </ul>
+          <p>
+            Then the following tools helped to experiment with different palettes:
+          </p>
+          <ul>
+            <li>
+              <a href="https://www.canva.com/colors/color-wheel/">Canva colour wheel</a>
+            </li>
+            <li>
+              <a href="https://pixelied.com/colors/color-wheel">Pixelied colour wheel</a>
+            </li>
+            <li>
+              <a href="https://colorhunt.co">ColorHunt</a>
+            </li>
+            <li>
+              <a href="https://coolors.co">Coolors.co</a>
+            </li>
+          </ul>
+          <p>
+            One gotcha I encountered was that there are different variants/standards of RGB.
+          </p>
+          <p>
+            <a href="https://bulma.io">Bulma</a> has a “customizer” popup built-in to their own website, which allows
+            colours (and other style aspects) to be tried out before exporting as CSS settings. Because it <a href=
+            "https://bulma.io/documentation/features/color-palettes/">automatically derives shades</a>, the main task
+            is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
+          </p>
+          <p>
+            Bulma also automatically derives and manages the colour variations for a dark mode. For that to work, one
+            needs to XXXXXXXXXXX TODO
+          </p>
+          <p>
+            TODO: Colour contrast ratio for readability
+          </p>
+          <p>
+            Lastly, it is important to coordinate the colour choices across the Bulma setting, the manifest, and the
+            favicons.
+          </p>
           <h1>
             XML sitemap and the robots.txt file
           </h1>
@@ -509,25 +491,6 @@ change_frequency = "weekly"
             Then I just need to maintain <code>_sitemap.toml</code>. This isn’t too cumbersomb (e.g. by listing all
             candidates with <code>ls -1 **.html</code>). It is also possible to put the different entries in different
             <code>.toml</code> files in respective directories.
-          </p>
-          <h1>
-            DRAFT mode
-          </h1>
-          <p>
-            CSS watermark switch passed in to top level templates The <code>/wip.html</code> page and the “hidden” link
-            in right side of the navigation (breadcrumb) space. So now often I can commit and push to master, and
-            github will publish. Streamlined workflow. Only use branches with pull requests for larger stuff.
-          </p>
-          <p>
-            And now I can test draft pages with w3 validator, on different devices etc.
-          </p>
-          <p>
-            I don’t really care that people can see such pages - the watermark makes it obvious. And the search engines
-            start to see something arriving, changing often, which speeds up indexing to make more discoverable (not
-            that that really matters, but is nice).
-          </p>
-          <p>
-            Also, no separate dev build and live build - all one and the same.
           </p>
           <h1>
             Validation

@@ -1,11 +1,23 @@
 /* Set Bulma colour theme */
 :root {
-    --bulma-link-h: 220deg;
-    --bulma-link-s: 100%;
-    --bulma-link-l: 50%;
     --bulma-primary-h: 60deg;
     --bulma-primary-s: 85%;
     --bulma-primary-l: 45%;
+
+    --bulma-link-h: 220deg;
+    --bulma-link-s: 100%;
+    --bulma-link-l: 50%;
+
+    /* Remove padding and inherit colour for code tags */
+    --bulma-code-padding: 0em 0em 0em;
+    --bulma-code-background: inherit;
+}
+
+/* Remove padding around pre tag (used e.g. to contain for code)
+   when in the content class. Mostly just to give more space to the code.
+*/
+.content {
+    --bulma-content-pre-padding: 0rem 0rem;
 }
 
 /* Lighten the weight of the font used in headings coming from markdown
