@@ -1,18 +1,11 @@
-{% extends "_base.html" %}
+{% extends "_page.html" %}
 
-{% block content %}
-<section class="section">
-    <div class="columns">
-        <div class="column">
-            <div class="box has-background-primary-bold-invert has-text-primary-bold">
-                <h1 class="title">Work in progress...</h1>
-                <ul>
-                    {% for wip_page in WIP_PAGES %}
-                        <li><a href="{{wip_page.url}}">{{wip_page.name}}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
-{% endblock content %}
+{% block title %}Work in progress...{% endblock title %}
+
+{% block page %}
+    <ul>
+        {% for wip_page in WIP_PAGES %}
+            <li><a href="{{wip_page.url}}">{{wip_page.name}}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock page %}
