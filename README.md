@@ -30,8 +30,6 @@ My personal website.
   And inject a special variable into the TOML for the current directory to make relocatable.
 - Some kind of floating and automatic TOC on all main pages. And document on approach page.
 - Find way to allow editor (Zed) find the virtualenv magically created by uv when running script
-- Add light/dark mode switcher (take from Bulma website)
-- Fix colour issues in dark mode - poor contrast.
 - Decide on all markdown plugins.
 - Find a way to deliver a 404 on the dev server (currently just returns empty files!).
 - Submit sitemap to search engines (once?).

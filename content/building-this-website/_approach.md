@@ -102,7 +102,7 @@ I put this javascript in the file `/render_maths.js` and load it in the `<head>`
 
 The result is for markdown like
 
-```markdown
+```text
 For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
 
 $$
@@ -220,7 +220,7 @@ Colours are both technical and personal. I found these useful to get started:
 - [The HSB Colour System](https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html)
 - [Colour in UI Design](https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html)
 
-Then the following tools helped to experiment with different palettes:
+Then the following helped me experiment with different palettes:
 
 - [Canva colour wheel](https://www.canva.com/colors/color-wheel/)
 - [Pixelied colour wheel](https://pixelied.com/colors/color-wheel)
@@ -231,11 +231,9 @@ One gotcha I encountered was that there are different variants/standards of RGB.
 
 [Bulma](https://bulma.io) has a "customizer" popup built-in to their own website, which allows colours (and other style aspects) to be tried out before exporting as CSS settings. Because it [automatically derives shades](https://bulma.io/documentation/features/color-palettes/), the main task is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
 
-Bulma also automatically derives and manages the colour variations for a dark mode. For that to work, one needs to XXXXXXXXXXX TODO
+Bulma also automatically derives and manages the colour variations between light and dark mode. For that to work, one needs to use the "soft" and "bold" colour classes for those elements which should be a function of light/dark mode. For example, I use the `has-background-primary-bold-invert` and `has-text-primary-bold` classes for the main page section. See the [Bulma docs](https://bulma.io/documentation/features/dark-mode/) for details.
 
-TODO: Colour contrast ratio for readability
-
-Lastly, it is important to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
+Lastly, remember to important to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
 
 # XML sitemap and the robots.txt file
 

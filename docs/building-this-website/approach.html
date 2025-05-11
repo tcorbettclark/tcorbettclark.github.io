@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity=
     "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
     <link rel="stylesheet" href=
-    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css" />
+    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" />
     <link rel="stylesheet" type="text/css" href="/main.css" />
     <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
@@ -247,7 +247,7 @@
             The result is for markdown like
           </p>
           <pre><code class=
-          "language-markdown">For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
+          "language-text">For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
 
 $$
 \sum_{k=1}^n { k! \over (1+k)^2 }
@@ -404,7 +404,7 @@ $$
             </li>
           </ul>
           <p>
-            Then the following tools helped to experiment with different palettes:
+            Then the following helped me experiment with different palettes:
           </p>
           <ul>
             <li>
@@ -430,15 +430,15 @@ $$
             is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
           </p>
           <p>
-            Bulma also automatically derives and manages the colour variations for a dark mode. For that to work, one
-            needs to XXXXXXXXXXX TODO
+            Bulma also automatically derives and manages the colour variations between light and dark mode. For that to
+            work, one needs to use the “soft” and “bold” colour classes for those elements which should be a function
+            of light/dark mode. For example, I use the <code>has-background-primary-bold-invert</code> and
+            <code>has-text-primary-bold</code> classes for the main page section. See the <a href=
+            "https://bulma.io/documentation/features/dark-mode/">Bulma docs</a> for details.
           </p>
           <p>
-            TODO: Colour contrast ratio for readability
-          </p>
-          <p>
-            Lastly, it is important to coordinate the colour choices across the Bulma setting, the manifest, and the
-            favicons.
+            Lastly, remember to important to coordinate the colour choices across the Bulma setting, the manifest, and
+            the favicons.
           </p>
           <h1>
             XML sitemap and the robots.txt file
