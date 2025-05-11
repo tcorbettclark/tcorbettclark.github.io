@@ -17,10 +17,11 @@
     --bulma-hr-height: 1px;
 }
 
-/* Draw a quiet border around block code */
-pre > code {
-    border: 2px dotted grey;
-    border-radius: 0;
+/* Fix up the style of the code blocks e.g. consistent background colour. */
+code.hljs {
+    border: 1px solid grey;
+    border-radius: 0px;
+    background: var(--bulma-primary-95);
 }
 
 /* Remove padding around pre tag (used e.g. to contain for code)
