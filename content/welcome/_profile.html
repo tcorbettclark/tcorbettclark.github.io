@@ -6,23 +6,24 @@
             </figure>
         </div>
     </div>
-    <div class="container mt-1 has-text-centered has-text-link">
+    <hr>
+   	<div class="title is-size-4 has-text-centered m-0">Pursuits</div>
+    <div class="container mt-4">
+       	<ul>
+      		{% for interest in MY_INTERESTS %}
+       	    <li>
+     			<span class="icon-text">
+     			    <span class="icon"><i class="fa-solid {{interest.fa_class}}"></i></span>
+    				<span>{{ interest.topic }}</span>
+     			</span>
+      		</li>
+      		{% endfor %}
+       	</ul>
+    </div>
+    <hr>
+    <div class="container mt-4 mb-0 has-text-centered has-text-link">
         {% for ms in MY_SOCIALS %}
         <a href="{{ ms.url }}" target="_blank"><i class="fa-brands {{ms.fa_class}}"></i></a>
         {% endfor %}
-    </div>
-    <hr>
-   	<div class="title is-size-4 has-text-centered mb-3 mt-2">Pursuits</div>
-    <div class="container mt-4">
-   	<ul>
-  		{% for interest in MY_INTERESTS %}
-   	    <li>
- 			<span class="icon-text">
- 			    <span class="icon"><i class="fa-solid {{interest.fa_class}}"></i></span>
-				<span>{{ interest.topic }}</span>
- 			</span>
-  		</li>
-  		{% endfor %}
-   	</ul>
     </div>
 </div>
