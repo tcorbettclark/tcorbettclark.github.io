@@ -229,7 +229,7 @@
 });
 </code></pre>
           <p>
-            I put this javascript in the file <code>/render_maths.js</code> and load it in the
+            I put this javascript in the file <code>/render-maths.js</code> and load it in the
             <code>&lt;head&gt;</code> tag of the base template. This is also where we load the KaTeX library (both
             javascript and CSS) from the <a href="https://cdn.jsdelivr.net">jsDelivr CDN</a>:
           </p>
@@ -239,7 +239,7 @@
     ...
     &lt;script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"&gt;&lt;/script&gt;
     ...
-    &lt;script defer src="/render_maths.js"&gt;&lt;/script&gt;
+    &lt;script defer src="/render-maths.js"&gt;&lt;/script&gt;
     ...
 &lt;/head&gt;
 </code></pre>
@@ -294,12 +294,12 @@ $$
     ...
     &lt;script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;
     ...
-    &lt;script defer src="/render_code.js"&gt;&lt;/script&gt;
+    &lt;script defer src="/render-code.js"&gt;&lt;/script&gt;
     ...
 &lt;/head&gt;
 </code></pre>
           <p>
-            and the contents of <code>/render_code.js</code> runs the highlighter after all the DOM content is present
+            and the contents of <code>/render-code.js</code> runs the highlighter after all the DOM content is present
             and correct:
           </p>
           <pre><code class="language-Javascript">document.addEventListener("DOMContentLoaded", (event) =&gt; {

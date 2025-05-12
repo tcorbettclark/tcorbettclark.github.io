@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-I put this javascript in the file `/render_maths.js` and load it in the `<head>` tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the [jsDelivr CDN](https://cdn.jsdelivr.net):
+I put this javascript in the file `/render-maths.js` and load it in the `<head>` tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the [jsDelivr CDN](https://cdn.jsdelivr.net):
 
 ```HTML
 <head>
@@ -95,7 +95,7 @@ I put this javascript in the file `/render_maths.js` and load it in the `<head>`
     ...
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
     ...
-    <script defer src="/render_maths.js"></script>
+    <script defer src="/render-maths.js"></script>
     ...
 </head>
 ```
@@ -139,12 +139,12 @@ So we just need to pull in the Javascript and chosen theme CSS (in this case, `g
     ...
     <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"></script>
     ...
-    <script defer src="/render_code.js"></script>
+    <script defer src="/render-code.js"></script>
     ...
 </head>
 ```
 
-and the contents of `/render_code.js` runs the highlighter after all the DOM content is present and correct:
+and the contents of `/render-code.js` runs the highlighter after all the DOM content is present and correct:
 
 ```Javascript
 document.addEventListener("DOMContentLoaded", (event) => {

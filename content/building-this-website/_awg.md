@@ -182,20 +182,20 @@ The tool is now watching for changes to the source content, after which it will 
 
 ## Hot reloading
 
-The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload. This feature can be used by loading a small amount of [javascript](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
+The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload. This feature can be used with a small amount of javascript e.g. in [hot-reloader.js](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
 
 ```Html
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         ...
-        <script defer src="/hot_reloader.js" async></script>
+        <script defer src="/hot-reloader.js" async></script>
         ...
     </head>
     ...
 </html>
 ```
 
-Note that it only runs when being served up over `localhost`.
+Note that it only does anything when being served up over `localhost`, so is fine to keep in production (where it does nothing). Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
 
 More details explaining how this works are in the implementation section, below.
 
