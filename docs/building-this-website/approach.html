@@ -272,8 +272,11 @@ $$
             Highlighting code is easy with <a href="https://highlightjs.org">highlight.js</a>. This will colour many
             different programming languages in any of a number of different themes, expecting HTML markup like
           </p>
-          <pre><code class=
-          "language-HTML">&lt;pre&gt;&lt;code class="language-python"&gt; ...python code... &lt;/code&gt;&lt;/pre&gt;
+          <pre><code class="language-HTML">&lt;pre&gt;
+    &lt;code class="language-python"&gt;
+        ...python code...
+    &lt;/code&gt;
+&lt;/pre&gt;
 </code></pre>
           <p>
             The Common Markdown standard used by <a href="awg.html">AWG</a> has <a href=
@@ -281,13 +284,13 @@ $$
             CSS classes exactly like this.
           </p>
           <p>
-            So we just need to pull in the Javascript and chosen theme CSS (in this case, <code>atom-one-dark</code>)
-            from a CDN, and ask it to render once the page has loaded. Hence the <code>&lt;head&gt;</code> section of
-            the base template contains:
+            So we just need to pull in the Javascript and chosen theme CSS (in this case,
+            <code>gruvbox-light-hard</code>) from a CDN, and ask it to render once the page has loaded. Hence the
+            <code>&lt;head&gt;</code> section of the base template contains:
           </p>
           <pre><code class="language-HTML">&lt;head&gt;
     ...
-    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css"&gt;
+    &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/gruvbox-light-hard.min.css"&gt;
     ...
     &lt;script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"&gt;&lt;/script&gt;
     ...
@@ -304,7 +307,20 @@ $$
 });
 </code></pre>
           <p>
-            Of course, the above demonstrates the formatting of some HTML and Javascript code.
+            The highlight colour theme was chosen to be close to my colour theme, but although close the background
+            isn’t a perfect match. I fix this with some CSS in <code>/main.css</code> (using <a href=
+            "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties">CSS
+            custom properties</a> to access bulma’s derived colours), and also style with a fine border:
+          </p>
+          <pre><code class="language-css">/* Fix up the style of the code blocks e.g. consistent background colour. */
+code.hljs {
+    border: 1px solid grey;
+    border-radius: 0px;
+    background: var(--bulma-primary-95);
+}
+</code></pre>
+          <p>
+            Of course, the above demonstrates the end-result of formatting some HTML and Javascript code.
           </p>
           <h1>
             Navigation breadcrumb
@@ -342,12 +358,12 @@ $$
           </h1>
           <p>
             The <a href="https://www.w3.org/TR/appmanifest/">Web Application Manifest</a> is a <code>JSON</code> file
-            containing metadata about a web application. Although this site is not web app as such, it improves user
+            containing metadata about a web application. Although this site is not a web app as such, it improves user
             experience to use the manifest to document the location of all the favicons and theme colours.
           </p>
           <p>
-            “Favicons” appear as the icons in browser url bars, tabs, bookmark menus. And also in “add to home screen”
-            of touch screen devices.
+            Favicons appear as the icons in browser url bars, tabs, bookmark menus. And also in the “add to home
+            screen” feature of touch screen devices.
           </p>
           <p>
             So we need to:
@@ -370,7 +386,7 @@ $$
             "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json">here</a>).
           </p>
           <p>
-            Lastly, the base template (in <code>_base.html</code>) indicates the principle favicons and the location of
+            Lastly, the base template (in <code>_base.html</code>) indicates the principal favicons and the location of
             the manifest:
           </p>
           <pre><code class="language-HTML">&lt;!DOCTYPE html&gt;
@@ -437,8 +453,13 @@ $$
             "https://bulma.io/documentation/features/dark-mode/">Bulma docs</a> for details.
           </p>
           <p>
-            Lastly, remember to important to coordinate the colour choices across the Bulma setting, the manifest, and
-            the favicons.
+            Lastly, remember to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
+          </p>
+          <h1>
+            Draft / wip mode
+          </h1>
+          <p>
+            TODO
           </p>
           <h1>
             XML sitemap and the robots.txt file
@@ -446,9 +467,9 @@ $$
           <p>
             To support search engine indexing and SEO, the <code>robots.txt</code> file and related sitemap file (in
             <code>sitemap.xml</code>) are used to hint to search engines what pages they should index. See Google’s
-            description of the <a href=
-            "https://developers.google.com/search/docs/crawling-indexing/robots/intro">robots.txt file</a> and the
-            <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview">sitemap</a>.
+            descriptions of <a href=
+            "https://developers.google.com/search/docs/crawling-indexing/robots/intro">robots.txt</a> and <a href=
+            "https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview">sitemaps</a>.
           </p>
           <p>
             For this site I just use the <code>robots.txt</code> file to point to the sitemap:

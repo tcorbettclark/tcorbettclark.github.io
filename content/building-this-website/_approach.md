@@ -121,17 +121,21 @@ to be displayed as
 Highlighting code is easy with [highlight.js](https://highlightjs.org). This will colour many different programming languages in any of a number of different themes, expecting HTML markup like
 
 ```HTML
-<pre><code class="language-python"> ...python code... </code></pre>
+<pre>
+    <code class="language-python">
+        ...python code...
+    </code>
+</pre>
 ```
 
 The Common Markdown standard used by [AWG](awg.html) has [fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks) which produces tags with CSS classes exactly like this.
 
-So we just need to pull in the Javascript and chosen theme CSS (in this case, `atom-one-dark`) from a CDN, and ask it to render once the page has loaded. Hence the `<head>` section of the base template contains:
+So we just need to pull in the Javascript and chosen theme CSS (in this case, `gruvbox-light-hard`) from a CDN, and ask it to render once the page has loaded. Hence the `<head>` section of the base template contains:
 
 ```HTML
 <head>
     ...
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/gruvbox-light-hard.min.css">
     ...
     <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"></script>
     ...
@@ -148,7 +152,18 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-Of course, the above demonstrates the formatting of some HTML and Javascript code.
+The highlight colour theme was chosen to be close to my colour theme, but although close the background isn't a perfect match. I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to access bulma's derived colours), and also style with a fine border:
+
+```css
+/* Fix up the style of the code blocks e.g. consistent background colour. */
+code.hljs {
+    border: 1px solid grey;
+    border-radius: 0px;
+    background: var(--bulma-primary-95);
+}
+```
+
+Of course, the above demonstrates the end-result of formatting some HTML and Javascript code.
 
 # Navigation breadcrumb
 
@@ -182,9 +197,9 @@ The navigation breadcrumb works by sub-templating, calling `{{ super() }}` to re
 
 # Manifest and favicons
 
-The [Web Application Manifest](https://www.w3.org/TR/appmanifest/) is a `JSON` file containing metadata about a web application. Although this site is not web app as such, it improves user experience to use the manifest to document the location of all the favicons and theme colours.
+The [Web Application Manifest](https://www.w3.org/TR/appmanifest/) is a `JSON` file containing metadata about a web application. Although this site is not a web app as such, it improves user experience to use the manifest to document the location of all the favicons and theme colours.
 
-"Favicons" appear as the icons in browser url bars, tabs, bookmark menus. And also in "add to home screen" of touch screen devices.
+Favicons appear as the icons in browser url bars, tabs, bookmark menus. And also in the "add to home screen" feature of touch screen devices.
 
 So we need to:
 
@@ -195,7 +210,7 @@ I created a set of favicons using an online [favicon generator](https://favicon.
 
 The manifest then points to these favicons, and is itself put in the root directory as `manifest.json` (see [here](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json)).
 
-Lastly, the base template (in `_base.html`) indicates the principle favicons and the location of the manifest:
+Lastly, the base template (in `_base.html`) indicates the principal favicons and the location of the manifest:
 
 ```HTML
 <!DOCTYPE html>
@@ -233,11 +248,15 @@ One gotcha I encountered was that there are different variants/standards of RGB.
 
 Bulma also automatically derives and manages the colour variations between light and dark mode. For that to work, one needs to use the "soft" and "bold" colour classes for those elements which should be a function of light/dark mode. For example, I use the `has-background-primary-bold-invert` and `has-text-primary-bold` classes for the main page section. See the [Bulma docs](https://bulma.io/documentation/features/dark-mode/) for details.
 
-Lastly, remember to important to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
+Lastly, remember to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
+
+# Draft / wip mode
+
+TODO
 
 # XML sitemap and the robots.txt file
 
-To support search engine indexing and SEO, the `robots.txt` file and related sitemap file (in `sitemap.xml`) are used to hint to search engines what pages they should index. See Google's description of the [robots.txt file](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and the [sitemap](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
+To support search engine indexing and SEO, the `robots.txt` file and related sitemap file (in `sitemap.xml`) are used to hint to search engines what pages they should index. See Google's descriptions of [robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
 
 For this site I just use the `robots.txt` file to point to the sitemap:
 ```
