@@ -180,6 +180,25 @@ The tool is now watching for changes to the source content, after which it will 
 
 **Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files). A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`. If the content changed then the site will be rebuilt and browser(s) told to reload.
 
+## Hot reloading
+
+The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload. This feature can be used by loading a small amount of [javascript](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
+
+```Html
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        ...
+        <script defer src="/hot_reloader.js" async></script>
+        ...
+    </head>
+    ...
+</html>
+```
+
+Note that it only runs when being served up over `localhost`.
+
+More details explaining how this works are in the implementation section, below.
+
 <!--
 # Implementation details
 
