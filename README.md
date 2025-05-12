@@ -26,7 +26,8 @@ My personal website.
 
 # TODO - technical
 
-- Allow merging lists across TOML files, e.g. to better manage sitemap files.
+- Use tomllib from the standard library rather than separate toml library?
+  Allow merging lists across TOML files, e.g. to better manage sitemap files.
   And inject a special variable into the TOML for the current directory to make relocatable.
 - Some kind of floating and automatic TOC on all main pages. And document on approach page.
 - Find way to allow editor (Zed) find the virtualenv magically created by uv when running script

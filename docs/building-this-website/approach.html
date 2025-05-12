@@ -244,7 +244,7 @@
 &lt;/head&gt;
 </code></pre>
           <p>
-            The result is for markdown like
+            The result is for markdown such as
           </p>
           <pre><code class=
           "language-text">For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
@@ -312,7 +312,7 @@ $$
             "https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties">CSS
             custom properties</a> to access bulma’s derived colours), and also style with a fine border:
           </p>
-          <pre><code class="language-css">/* Fix up the style of the code blocks e.g. consistent background colour. */
+          <pre><code class="language-CSS">/* Fix up the style of the code blocks e.g. consistent background colour. */
 code.hljs {
     border: 1px solid grey;
     border-radius: 0px;
@@ -382,7 +382,7 @@ code.hljs {
           </p>
           <p>
             The manifest then points to these favicons, and is itself put in the root directory as
-            <code>manifest.json</code> (see <a href=
+            <code>/manifest.json</code> (see <a href=
             "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json">here</a>).
           </p>
           <p>
@@ -480,22 +480,27 @@ code.hljs {
             (the <code>SITEURL</code> is set in a template data TOML file).
           </p>
           <p>
-            The <code>sitemap.xml</code> file will be run though Jinja by <a href="awg.html">AWG</a> because it has an
-            <code>.xml</code> extension. Hence it is a template:
+            The <code>sitemap.xml</code> file will also be run though Jinja by <a href="awg.html">AWG</a> because it
+            has an <code>.xml</code> extension. Hence it is a template:
           </p>
           <pre><code class="language-XML">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
     {%- for p in SITEMAP_FILENAMES %}
     &lt;url&gt;
-        &lt;loc&gt;{{SITEURL}}/{{p.name}}&lt;/loc&gt;
-        &lt;changefreq&gt;{{p.change_frequency or "monthly"}}&lt;/changefreq&gt;
+        &lt;loc&gt;{{ SITEURL }}/{{ p.name }}&lt;/loc&gt;
+        &lt;changefreq&gt;{{ p.change_frequency or "monthly" }}&lt;/changefreq&gt;
         {%- if p.last_mod %}
-        &lt;lastmod&gt;{{p.last_mod}}&lt;/lastmod&gt;
+        &lt;lastmod&gt;{{ p.last_mod }}&lt;/lastmod&gt;
         {%- endif %}
     &lt;/url&gt;
     {%- endfor %}
 &lt;/urlset&gt;
 </code></pre>
+          <p>
+            (Unlike HTML, XML is not automatically tidied by AWG, hence the few “<code>{%-</code>” <a href=
+            "https://jinja.palletsprojects.com/en/stable/templates/#whitespace-control">whitespace control</a>
+            indicators to indent the output.)
+          </p>
           <p>
             The data describing the set of URLs which should be indexed is kept in <code>_sitemap.toml</code>. For
             example:
@@ -509,9 +514,9 @@ name = "welcome/index.html"
 change_frequency = "weekly"
 </code></pre>
           <p>
-            Then I just need to maintain <code>_sitemap.toml</code>. This isn’t too cumbersomb (e.g. by listing all
-            candidates with <code>ls -1 **.html</code>). It is also possible to put the different entries in different
-            <code>.toml</code> files in respective directories.
+            This isn’t too cumbersomb to maintain (e.g. by listing all candidates with <code>ls -1 **.html</code>). It
+            is also possible to put the different entries in different <code>.toml</code> files in respective
+            directories.
           </p>
           <h1>
             Validation

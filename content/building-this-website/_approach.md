@@ -100,7 +100,7 @@ I put this javascript in the file `/render_maths.js` and load it in the `<head>`
 </head>
 ```
 
-The result is for markdown like
+The result is for markdown such as
 
 ```text
 For example, inline maths looks like $(x+1)^2 - (x-1)^2 = 4x$, and block maths like
@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
 The highlight colour theme was chosen to be close to my colour theme, but although close the background isn't a perfect match. I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to access bulma's derived colours), and also style with a fine border:
 
-```css
+```CSS
 /* Fix up the style of the code blocks e.g. consistent background colour. */
 code.hljs {
     border: 1px solid grey;
@@ -208,7 +208,7 @@ So we need to:
 
 I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma. These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
 
-The manifest then points to these favicons, and is itself put in the root directory as `manifest.json` (see [here](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json)).
+The manifest then points to these favicons, and is itself put in the root directory as `/manifest.json` (see [here](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json)).
 
 Lastly, the base template (in `_base.html`) indicates the principal favicons and the location of the manifest:
 
@@ -264,22 +264,24 @@ Sitemap: {{ SITEURL }}/sitemap.xml
 ```
 (the `SITEURL` is set in a template data TOML file).
 
-The `sitemap.xml` file will be run though Jinja by [AWG](awg.html) because it has an `.xml` extension. Hence it is a template:
+The `sitemap.xml` file will also be run though Jinja by [AWG](awg.html) because it has an `.xml` extension. Hence it is a template:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     {%- for p in SITEMAP_FILENAMES %}
     <url>
-        <loc>{{SITEURL}}/{{p.name}}</loc>
-        <changefreq>{{p.change_frequency or "monthly"}}</changefreq>
+        <loc>{{ SITEURL }}/{{ p.name }}</loc>
+        <changefreq>{{ p.change_frequency or "monthly" }}</changefreq>
         {%- if p.last_mod %}
-        <lastmod>{{p.last_mod}}</lastmod>
+        <lastmod>{{ p.last_mod }}</lastmod>
         {%- endif %}
     </url>
     {%- endfor %}
 </urlset>
 ```
+
+(Unlike HTML, XML is not automatically tidied by AWG, hence the few "`{%-`" [whitespace control](https://jinja.palletsprojects.com/en/stable/templates/#whitespace-control) indicators to indent the output.)
 
 The data describing the set of URLs which should be indexed is kept in `_sitemap.toml`. For example:
 
@@ -293,7 +295,7 @@ name = "welcome/index.html"
 change_frequency = "weekly"
 ```
 
-Then I just need to maintain `_sitemap.toml`. This isn't too cumbersomb (e.g. by listing all candidates with `ls -1 **.html`). It is also possible to put the different entries in different `.toml` files in respective directories.
+This isn't too cumbersomb to maintain (e.g. by listing all candidates with `ls -1 **.html`). It is also possible to put the different entries in different `.toml` files in respective directories.
 
 # Validation
 
