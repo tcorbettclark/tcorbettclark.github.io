@@ -3,6 +3,8 @@
   <head>
     <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
     <meta charset="utf-8" />
+    <meta http-equiv="Referrer-Policy" content="no-referrer" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Content-Security-Policy" content=
     "default-src 'none'; require-trusted-types-for 'script'; base-uri 'self'; img-src 'self'; manifest-src 'self'; script-src-elem 'strict-dynamic' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' 'sha384-yTB2wx6UBfG/vVmw00WOL5kU63/nWDZTw1KXg6BapzYP+xoYMMDemsecEoIJEK5h' 'sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp' 'sha384-kri+HXDJ8qm2+WX+LF0dvE8ZJRXWWWVDI0SdNy0/OHM6ol22TeFGcl3jLgxhBNhc' 'sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS' 'sha384-Yfa985Z0LorjBya15TjALqmYYUOLsdk67u37ToLE+xJAfmJ8G78yGxNkv4zPJsBI' ; connect-src 'self' https://ka-f.fontawesome.com ; font-src https://cdn.jsdelivr.net https://ka-f.fontawesome.com ; style-src 'self' https://cdn.jsdelivr.net 'sha256-E2q5uhm+T8+yRPO91kGFCPrb999m9YzwEB9sWmKzTwk=' 'sha256-xyO8S5xWOAtczCCfbCiMJgKOLsrQ0neV9mX7Aan06aw=' 'sha256-bi2K0pOjkFvwpWy9QI9qM3EUJiA+VcVJ5GGZIwSEFhQ=' 'sha256-0Y0YoXQ0nmYkphSjq+iyr2TWsiF2CUw7gsn8mpwIUog=' 'sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX' 'sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP' 'sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd' 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk' ;" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -755,6 +757,52 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
     "sha256-bi2K0pOjkFvwpWy9QI9qM3EUJiA+VcVJ5GGZIwSEFhQ=",
     "sha256-0Y0YoXQ0nmYkphSjq+iyr2TWsiF2CUw7gsn8mpwIUog=",
 ]
+</code></pre>
+          <h2>
+            Strict Transport Security (HSTS)
+          </h2>
+          <p>
+            This site can use HTTPS throughout, and so to help prevent manipulator-in-the-middle (MiTM) attacks I set
+            the <code>Strict-Transport-Security</code> HTTP Header and the <code>upgrade-insecure-requests</code>
+            directive in the CSP.
+          </p>
+          <p>
+            TODO: unfortunately this breaks http: on localhost for development!
+          </p>
+          <h2>
+            Deny embedding
+          </h2>
+          <p>
+            A clickjacking approach relies on embedding sites in other sites. Ideally this would be prevented using CSP
+            by setting the <code>frame-ancestors</code> and the <code>X-Frame-Options</code> header. See <a href=
+            "https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking">here</a>
+            for details. But unfortunately neither can be done using <code>http-equiv</code> and I don’t have control
+            of actual server HTTP Headers…
+          </p>
+          <h2>
+            Referrer policy
+          </h2>
+          <p>
+            To stop leaking information about where outbound links are coming from (see <a href=
+            "https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy">here</a>),
+            I set the HTTP header as follows:
+          </p>
+          <pre><code class="language-HTML5">...
+&lt;meta http-equiv="Referrer-Policy" content="no-referrer"&gt;
+...
+</code></pre>
+          <h2>
+            MIME types
+          </h2>
+          <p>
+            To inform browsers not to load scripts and stylesheets unless the server indicates the correct MIME type, I
+            set the <code>X-Content-Type-Options</code> header using the <code>&lt;meta&gt;</code> tag to
+            <code>nosniff</code> as explained <a href=
+            "https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types">here</a>:
+          </p>
+          <pre><code class="language-HTML5">...
+&lt;meta http-equiv="X-Content-Type-Options" content="nosniff"&gt;
+...
 </code></pre>
           <h1>
             Deployment on GitHub pages

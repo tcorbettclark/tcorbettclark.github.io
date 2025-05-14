@@ -455,6 +455,36 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
 ]
 ```
 
+## Strict Transport Security (HSTS)
+
+This site can use HTTPS throughout, and so to help prevent manipulator-in-the-middle (MiTM) attacks I set the `Strict-Transport-Security` HTTP Header and the `upgrade-insecure-requests` directive in the CSP.
+
+TODO: unfortunately this breaks http: on localhost for development!
+
+## Deny embedding
+
+A clickjacking approach relies on embedding sites in other sites. Ideally this would be prevented using CSP by setting the `frame-ancestors` and the `X-Frame-Options` header. See [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking) for details. But unfortunately neither can be done using `http-equiv` and I don't have control of actual server HTTP Headers...
+
+## Referrer policy
+
+To stop leaking information about where outbound links are coming from (see [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy)), I set the HTTP header as follows:
+
+```HTML5
+...
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+...
+```
+
+## MIME types
+
+To inform browsers not to load scripts and stylesheets unless the server indicates the correct MIME type, I set the `X-Content-Type-Options` header using the `<meta>` tag to `nosniff` as explained [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types):
+
+```HTML5
+...
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+...
+```
+
 
 
 # Deployment on GitHub pages
