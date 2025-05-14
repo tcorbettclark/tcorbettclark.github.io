@@ -293,6 +293,14 @@ class Server:
         for ws in list(self.web_sockets):
             await ws.close()
 
+    def _add_permissive_cores(self, app):
+        # Agree to serving up content to any origin.
+        # Mostly for edge-case testing, e.g. serving on localhost and accessing files on 127.0.0.1.
+        async def permissive_cors_for_testing(request, response):
+            response.headers["Access-Control-Allow-Origin"] = "*"
+
+        app.on_response_prepare.append(permissive_cors_for_testing)
+
     async def start(self):
         async def websocket_handler(request):
             ws = aiohttp.web.WebSocketResponse()
@@ -314,14 +322,7 @@ class Server:
 
         app = aiohttp.web.Application()
         app.router.add_static("/", self.directory, show_index=True)
-
-        async def hack(request, response):
-            response.headers["Content-Security-Policy"] = (
-                "style-src 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk';"
-            )
-            response.headers["Access-Control-Allow-Origin"] = "*"
-
-        # app.on_response_prepare.append(hack)
+        self._add_permissive_cores(app)
         app.router.add_get("/ws", websocket_handler)
         self._runner = aiohttp.web.AppRunner(
             app,
