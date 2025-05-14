@@ -2,6 +2,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
         <meta charset="utf-8" />
+        <meta http-equiv="Content-Security-Policy" content="
+            default-src 'none';
+            object-src 'none';
+            base-uri 'none';
+            img-src 'self';
+            manifest-src 'self';
+            script-src
+                'strict-dynamic'
+                '{{ KATEX_JS_SHA }}'
+                '{{ FONTAWESOME_JS_SHA }}'
+                '{{ HIGHLIGHT_JS_SHA }}'
+                'sha384-{{ '/hot-reloader.js' | sha() }}'
+                'sha384-{{ '/render-maths.js' | sha() }}'
+                'sha384-{{ '/render-code.js' | sha() }}'
+                ;
+            connect-src
+                'self'
+                https://ka-f.fontawesome.com
+                ;
+            font-src
+                https://cdn.jsdelivr.net
+                https://ka-f.fontawesome.com
+                ;
+            style-src
+                'self'
+                https://cdn.jsdelivr.net
+                {%- for sha in FONTAWESOME_INLINE_CSS_SHAs %}
+                '{{ sha }}'
+                {%- endfor %}
+                '{{ BULMA_CSS_SHA }}'
+                '{{ KATEX_CSS_SHA }}'
+                '{{ GRUVBOX_CSS_SHA }}'
+                'sha384-{{ '/main.css' | sha() }}'
+                ;
+        ">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="{{ AUTHOR }}" />
         <meta name="description" content="{{ SITEDESCRIPTION }}" />
@@ -13,19 +49,19 @@
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json">
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css">
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"/>
-        <link rel="stylesheet" type="text/css" href="/main.css"/>
+        <link rel="stylesheet" type="text/css" href="{{ KATEX_CSS }}" integrity="{{ KATEX_CSS_SHA }}" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ GRUVBOX_CSS }}" integrity="{{ GRUVBOX_CSS_SHA }}" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ BULMA_CSS }}" integrity="{{ BULMA_CSS_SHA }}" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/main.css" integrity="sha384-{{ '/main.css' | sha() }}">
         {% block links_to_extra_css %}{% endblock links_to_extra_css %}
 
-        <script src="https://kit.fontawesome.com/39e34b83e1.js" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js" crossorigin="anonymous"></script>
+        <script src="{{ FONTAWESOME_JS }}" integrity="{{ FONTAWESOME_JS_SHA }}" crossorigin="anonymous"></script>
+        <script defer src="{{ KATEX_JS }}" integrity="{{ KATEX_JS_SHA }}" crossorigin="anonymous"></script>
+        <script defer src="{{ HIGHLIGHT_JS }}" integrity="{{ HIGHLIGHT_JS_SHA }}" crossorigin="anonymous"></script>
 
-        <script defer src="/hot-reloader.js" async></script>
-        <script defer src="/render-maths.js"></script>
-        <script defer src="/render-code.js"></script>
+        <script defer src="/hot-reloader.js" integrity="sha384-{{ '/hot-reloader.js' | sha() }}" async></script>
+        <script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
+        <script defer src="/render-code.js" integrity="sha384-{{ '/render-code.js' | sha() }}"></script>
         {% block script_tags_to_extra_js %}{% endblock script_tags_to_extra_js %}
     </head>
     <body>

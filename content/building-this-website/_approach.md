@@ -301,6 +301,7 @@ This isn't too cumbersomb to maintain (e.g. by listing all candidates with `ls -
 
 Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and learn about the web world. For example:
 
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview)
 - [W3 Validator](https://validator.w3.org/nu/)
 - [MDN's Observatory tool](https://developer.mozilla.org/en-US/observatory)
 - [ValidBot](https://www.validbot.com/)
@@ -314,11 +315,67 @@ Notable issues I could not address include:
    <link href="https://foo.bar.baz/">
    ```
    This isn't a problem so long as we always quote href's.
-1. TODO, add more...
+1. TODO more...
 
 # Security
 
+Primarily I following the findings from MDN's [Observatory tool](https://developer.mozilla.org/en-US/observatory).
+
+First, was to implement a Content Security Policy, see [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) and [here](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html). A CSP instructs browsers to place restrictions on what the code can do, to defend against cross-site-scripting (CSS) attacks in which an attacker injects malicious code; to defend against clickjacking; and helping ensure the site loads over HTTPS.
+
+We start with a default directive which declares all resources must be provided from the serving host:
+
+```HTML
+<meta http-equiv="content-security-policy" content="default-src 'self'">
+```
+
+Then block all `<object>` and `<embed>` resources, since we won't use them:
+```
+object-src 'none'
+```
+
+Then only allow https:
+```
+Content-Security-Policy: default-src https:
+```
+
+All our resources are coming from a reputable CDN, so this is a low friction protection:
+
+```
+Content-Security-Policy: cdn.jsdelivr.net
+```
+
+Disallow embedding in a nested browsing context such as an `<iframe>` (effective protection against clickjacking):
+```
+Content-Security-Policy: frame-ancestors 'none'
+```
+
+Putting it all together:
+```html
+<meta http-equiv="content-security-policy" content="default-src https: 'self' cdn.jsdelivr.net; object-src 'none'; frame-ancestors 'none'">
+```
+
+Before uploading and testing from the live website, this [CSP Evaluator](https://csp-evaluator.withgoogle.com) allow testing by pasting in the rul.
+
+Gotcha: There is no inheritance. If a script-src directive is explicitly specified, for example, then the value of default-src has no influence on script requests.
+Gotcha: Safari does not seem to read script-src-elem (but allows it to exist).
+
+NB: not using the integrity hashes...?
+
 TODO: Use validation tools (esp MDN Overservatory) and http-equv-header in meta tag.
+
+
+"Strict CSP" is a mode of CSP operation, and changes how the CSP directives are interpreted.
+
+I could not make strict hash based CSP work for stylesheets loaded using link tags. Possibly not the only one - see [here](https://stackoverflow.com/questions/77338818/content-security-policy-hashes-for-files-dont-seem-to-work).
+
+So instead I use subresource integrity (SRI) and white list...? HMMMMSSMSMSMM
+
+Maybe it is a CSP2 vs CSP3 thing. Also, Safari only recently supported SRI.
+
+https://www.w3.org/TR/CSP3/#external-hash
+
+To enable web sockets: connect-src 'self'
 
 # Deployment on GitHub pages
 

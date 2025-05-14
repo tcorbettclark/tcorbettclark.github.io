@@ -93,6 +93,10 @@ And from [mdit-py-plugins](https://mdit-py-plugins.readthedocs.io):
 
 [^1]: Demo footnote.
 
+## Computing hashes e.g. for SRI and CSP
+
+TODO: explain the `sha()` filter.
+
 ## Summary: the AWG content interface
 
 The AWG tool recognises 3 types of file:
@@ -195,7 +199,7 @@ The AWG tool provides a simple websocket API to "push notify" any browsers open 
 </html>
 ```
 
-Note that it only does anything when being served up over `localhost`, so is fine to keep in production (where it does nothing). Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
+Note that it only does anything when being served up over `localhost`, so is fine to keep in production (when it does nothing). Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
 
 More details explaining how this works are in the implementation section, below.
 
