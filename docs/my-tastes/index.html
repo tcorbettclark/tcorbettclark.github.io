@@ -1,7 +1,157 @@
-{% set draft = true %}
-
-{% extends "../_page.html" %}
-
-{% block page %}
-    {{ "_my-tastes.md" | markdown() }}
-{% endblock page %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Apple macOS version 5.8.0" />
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content=
+    "default-src 'none'; require-trusted-types-for 'script'; base-uri 'self'; img-src 'self'; manifest-src 'self'; script-src-elem 'strict-dynamic' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' 'sha384-yTB2wx6UBfG/vVmw00WOL5kU63/nWDZTw1KXg6BapzYP+xoYMMDemsecEoIJEK5h' 'sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp' 'sha384-kri+HXDJ8qm2+WX+LF0dvE8ZJRXWWWVDI0SdNy0/OHM6ol22TeFGcl3jLgxhBNhc' 'sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS' 'sha384-Yfa985Z0LorjBya15TjALqmYYUOLsdk67u37ToLE+xJAfmJ8G78yGxNkv4zPJsBI' ; connect-src 'self' https://ka-f.fontawesome.com ; font-src https://cdn.jsdelivr.net https://ka-f.fontawesome.com ; style-src 'self' https://cdn.jsdelivr.net 'sha256-E2q5uhm+T8+yRPO91kGFCPrb999m9YzwEB9sWmKzTwk=' 'sha256-xyO8S5xWOAtczCCfbCiMJgKOLsrQ0neV9mX7Aan06aw=' 'sha256-bi2K0pOjkFvwpWy9QI9qM3EUJiA+VcVJ5GGZIwSEFhQ=' 'sha256-0Y0YoXQ0nmYkphSjq+iyr2TWsiF2CUw7gsn8mpwIUog=' 'sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX' 'sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP' 'sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd' 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk' ;" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Timothy Corbett-Clark" />
+    <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
+    <title>
+      Dr Timothy Corbett-Clark
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+    integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href=
+    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css"
+    integrity="sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" integrity=
+    "sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/main.css" integrity=
+    "sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk" />
+    <script defer="defer" src="https://kit.fontawesome.com/39e34b83e1.js" integrity=
+    "sha384-yTB2wx6UBfG/vVmw00WOL5kU63/nWDZTw1KXg6BapzYP+xoYMMDemsecEoIJEK5h" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
+    "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+    integrity="sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp" crossorigin=
+    "anonymous"></script>
+    <script defer="defer" src="/hot-reloader.js" integrity=
+    "sha384-kri+HXDJ8qm2+WX+LF0dvE8ZJRXWWWVDI0SdNy0/OHM6ol22TeFGcl3jLgxhBNhc" async="async"></script>
+    <script defer="defer" src="/render-maths.js" integrity=
+    "sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS"></script>
+    <script defer="defer" src="/render-code.js" integrity=
+    "sha384-Yfa985Z0LorjBya15TjALqmYYUOLsdk67u37ToLE+xJAfmJ8G78yGxNkv4zPJsBI"></script>
+  </head>
+  <body>
+    <header class="hero is-small is-primary">
+      <div class="hero-body">
+        <p class="title">
+          Dr Timothy Corbett‑Clark
+        </p>
+        <p class="subtitle">
+          CTO, Researcher, Developer
+        </p>
+      </div>
+    </header>
+    <nav class="level mt-4 ml-4 mr-4">
+      <div class="level-left">
+        <div class="level-item">
+          <span class="tag"><a href="/welcome/index.html"><i class="fa-solid fa-home"></i> Home</a></span>
+        </div>
+      </div>
+      <div class="level-right">
+        <div class="level-item">
+          <div class="dropdown is-right is-hoverable">
+            <div class="dropdown-trigger">
+              <span class="tag"><a href="/wip.html"><i class="fa-solid fa-bug"></i>&nbsp;wip</a></span>
+            </div>
+            <div class="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item has-text-centered has-text-weight-semibold smallcaps">
+                  Work in Progress
+                </div>
+                <hr class="dropdown-divider" />
+                <a href="/cv/index.html" class="dropdown-item">Professional career</a> <a href="/about-me/index.html"
+                class="dropdown-item">About me</a> <a href="/my-tastes/index.html" class="dropdown-item">My tastes</a>
+                <a href="/my-setup/index.html" class="dropdown-item">Setup of my computer</a> <a href=
+                "/publications/index.html" class="dropdown-item">Publications</a> <a href=
+                "/recreational-maths/index.html" class="dropdown-item">Recreational Maths</a> <a href=
+                "/building-this-website/index.html" class="dropdown-item">Building this website</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section class="section pt-0">
+      <div class="box has-background-primary-bold-invert has-text-primary-bold">
+        <div class="title is-size-2 has-text-centered"></div>
+        <div class="content draft-watermark">
+          <p>
+            Whenever I read material on-line, one of the first things I want to know are the tastes and style of the
+            author. So with that in mind, here are mine.
+          </p>
+          <p>
+            Firstly, I’m a computer scientist and engineer, with an amateur love of mathematics.
+          </p>
+          <p>
+            With regards to the domain of ML, I currently believe in the following general principles and approaches:
+          </p>
+          <ol>
+            <li>Use probability. Use statistical ideas. Be principled. Leverage centuries of research. But also:
+            understand the assumptions behind many results created before the availability of powerful computers and
+            software. Most data isn’t linear, or drawn from independent identical distributions, or normal, etc. Even
+            when these assumptions don’t hold, the results can still work or aid understanding.
+            </li>
+            <li>Appreciate the “curse of dimensionality”. High dimensional space is basically void of data; distance
+            metrics in feature space can be unintuitive or misleading, or say more about the metric than the data;
+            results from algorithms should not change if measurement units are altered; the volume of hyper-spheres
+            contain a vanishing fraction of bounding hyper-cube volume; etc.
+            </li>
+            <li>Models such as Artificial Neural Networks and Kernel-based density estimators are general-purpose
+            parameterised functions which make minimal assumptions about the data. Implicitly they do make assumptions
+            of course, but the hope is that these structural constraints are either harmless or desired. Any
+            inspiration from or analogy with brain function is of minor historical interest only.
+            </li>
+            <li>Use fast (not first order) and mathematically motivated optimisation algorithms such as <a href=
+            "https://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">BFGS</a>.
+            In particular, don’t use slow (first order) algorithms as an implicit way to try to prevent overfitting.
+            Algorithms or models which use an initial random element (parameters or weights or subsets of data etc)
+            should be run multiple times using ideas like cross-validation, regularisation, “bagging”, etc to minimise
+            any variation effects caused by that random seeding. Basically, always try to measure and explicitly deal
+            with this source of variation.
+            </li>
+            <li>Publish reproducible results. I’ve spent the last 20 years using Python for commercial software
+            development, so that will continue to be my go-to tool. Unsurprisingly, Jupyter notebooks will feature too.
+            </li>
+            <li>Make honest assessments using both real datasets (publically available) and artificial pedagogical
+            datasets created with specific and known characteristics.
+            </li>
+          </ol>
+          <p>
+            As this blog evolves, I will try hard to adhere to my own principles!
+          </p>
+          <p>
+            I’m primarily interested in the subset of Machine Learning which is about deciding (and explaining) the
+            category of a datapoint. Examples abound, such as reject or accept a loan application, diagnose a disease,
+            forecast road traffic, or decide the optimal time to plant, subsequently manage, then harvest and clean a
+            crop. I will generally avoid the added complexities of dealing with large quantities of time-series or
+            image data.
+          </p>
+        </div>
+      </div>
+    </section>
+    <footer class="footer pt-4 pb-4">
+      <div class="has-text-centered">
+        <p>
+          <span class="icon-text"><span class="icon"><i class="fa-regular fa-copyright"></i></span> <span>Timothy
+          Corbett-Clark, 2025</span></span>
+        </p>
+        <p>
+          Website (<a href="https://github.com/tcorbettclark/tcorbettclark.github.io" target="_blank">src</a>) built
+          using <a href="https://www.python.org/" target="_blank">Python</a>, <a href=
+          "https://jinja.palletsprojects.com/" target="_blank">Jinja</a>, <a href=
+          "https://daringfireball.net/projects/markdown/" target="_blank">Markdown</a>, and <a href="https://bulma.io/"
+          target="_blank">Bulma</a>.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
