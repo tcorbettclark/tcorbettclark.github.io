@@ -1,7 +1,7 @@
 {% extends "../_base.html" %}
 
 {% block links_to_extra_css %}
-    <link rel="stylesheet" type="text/css" href="me.css"/>
+    <link rel="stylesheet" type="text/css" href="me.css" integrity="sha384-{{ 'me.css' | sha() }}">
 {% endblock links_to_extra_css %}
 
 {% block content %}

@@ -26,6 +26,7 @@ My personal website.
 
 # TODO - technical
 
+- me.css has SRI, but not listed in the CSP. Fortunately doesn't matter, but the base template should support extensions.
 - Reduce font size of h2
 - DYLD_LIBRARY_PATH is only correct for me because I installed brew in /usr/local. The default is /opt/...
 - Some kind of floating and automatic TOC on all main pages. And document on approach page.

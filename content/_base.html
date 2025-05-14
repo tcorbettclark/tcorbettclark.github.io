@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
         <meta http-equiv="Content-Security-Policy" content="
             default-src 'none';
             require-trusted-types-for 'script';
@@ -39,14 +39,16 @@
         ">
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="{{ AUTHOR }}" />
-        <meta name="description" content="{{ SITEDESCRIPTION }}" />
+        <meta name="author" content="{{ AUTHOR }}">
+        <meta name="description" content="{{ SITEDESCRIPTION }}">
+        {% block extra_meta %}{% endblock extra_meta %}
+
         <title>{{ SITENAME }}</title>
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="manifest" href="/manifest.json">
 
         <link rel="stylesheet" type="text/css" href="{{ KATEX_CSS }}" integrity="{{ KATEX_CSS_SHA }}" crossorigin="anonymous">
@@ -55,7 +57,7 @@
         <link rel="stylesheet" type="text/css" href="/main.css" integrity="sha384-{{ '/main.css' | sha() }}">
         {% block links_to_extra_css %}{% endblock links_to_extra_css %}
 
-        <script src="{{ FONTAWESOME_JS }}" integrity="{{ FONTAWESOME_JS_SHA }}" crossorigin="anonymous"></script>
+        <script defer src="{{ FONTAWESOME_JS }}" integrity="{{ FONTAWESOME_JS_SHA }}" crossorigin="anonymous"></script>
         <script defer src="{{ KATEX_JS }}" integrity="{{ KATEX_JS_SHA }}" crossorigin="anonymous"></script>
         <script defer src="{{ HIGHLIGHT_JS }}" integrity="{{ HIGHLIGHT_JS_SHA }}" crossorigin="anonymous"></script>
 
