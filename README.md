@@ -26,12 +26,13 @@ My personal website.
 
 # TODO - technical
 
+- DYLD_LIBRARY_PATH is only correct for me because I installed brew in /usr/local. The default is /opt/...
+- Some kind of floating and automatic TOC on all main pages. And document on approach page.
+- Decide on all markdown plugins.
 - Use tomllib from the standard library rather than separate toml library?
   Allow merging lists across TOML files, e.g. to better manage sitemap files.
   And inject a special variable into the TOML for the current directory to make relocatable.
-- Some kind of floating and automatic TOC on all main pages. And document on approach page.
 - Find way to allow editor (Zed) find the virtualenv magically created by uv when running script
-- Decide on all markdown plugins.
 - Find a way to deliver a 404 on the dev server (currently just returns empty files!).
 - Submit sitemap to search engines (once?).
 - Fontawesome:
