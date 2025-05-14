@@ -16,7 +16,9 @@
 # ///
 
 import asyncio
+import base64
 import glob
+import hashlib
 import logging
 import os
 import pathlib
@@ -150,16 +152,42 @@ class Builder:
             md.use(markdown_deflist_plugin)
             md.enable(["replacements", "smartquotes", "table"])
             log("Converted markdown from: {}", markdown_filename)
-            with open(markdown_filename, "r") as f:
+            with markdown_filename.open() as f:
                 return md.render(f.read())
 
         env.filters["markdown"] = convert_markdown
+
+    def _add_sha_filter(self, env):
+        algorithms = {
+            "256": hashlib.sha256,
+            "384": hashlib.sha384,
+            "512": hashlib.sha512,
+        }
+
+        @jinja2.pass_context
+        def make_sha(context, value, algorithm="384"):
+            assert algorithm in algorithms
+            value = pathlib.Path(value)
+            if value.is_absolute():
+                # Absolute, so combine with output_dir.
+                filename = self.output_dir / value.relative_to("/")
+            else:
+                # Relative, so use directory of calling template file.
+                filename = (
+                    self.output_dir / pathlib.Path(context.name).parent / value
+                )
+            return base64.b64encode(
+                algorithms[algorithm](filename.read_bytes()).digest()
+            ).decode()
+
+        env.filters["sha"] = make_sha
 
     def render_templates(self):
         loader = jinja2.FileSystemLoader(self.output_dir)
         env = _RelativeEnvironment(loader=loader)
         self._add_template_data(env)
         self._add_markdown_filter(env)
+        self._add_sha_filter(env)
         template_filenames = env.list_templates(
             filter_func=self._is_template_filename
         )
@@ -286,6 +314,14 @@ class Server:
 
         app = aiohttp.web.Application()
         app.router.add_static("/", self.directory, show_index=True)
+
+        async def hack(request, response):
+            response.headers["Content-Security-Policy"] = (
+                "style-src 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk';"
+            )
+            response.headers["Access-Control-Allow-Origin"] = "*"
+
+        # app.on_response_prepare.append(hack)
         app.router.add_get("/ws", websocket_handler)
         self._runner = aiohttp.web.AppRunner(
             app,
