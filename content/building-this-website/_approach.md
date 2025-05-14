@@ -377,6 +377,8 @@ https://www.w3.org/TR/CSP3/#external-hash
 
 To enable web sockets: connect-src 'self'
 
+Use different browsers, because (a) they may behave differently, and (b) when things don't work they give different diagnostic information (some more helpful thatn others)
+
 # Deployment on GitHub pages
 
 It is easy and convenient to host static content on [GitHub pages](https://pages.github.com).
