@@ -321,63 +321,141 @@ Notable issues I could not address include:
 
 Primarily I following the findings from MDN's [Observatory tool](https://developer.mozilla.org/en-US/observatory).
 
-First, was to implement a Content Security Policy, see [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) and [here](https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html). A CSP instructs browsers to place restrictions on what the code can do, to defend against cross-site-scripting (CSS) attacks in which an attacker injects malicious code; to defend against clickjacking; and helping ensure the site loads over HTTPS.
+## Content Security Policy (CSP)
 
-We start with a default directive which declares all resources must be provided from the serving host:
+A [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) instructs browsers to place restrictions on what loaded code can do. This is to defend against cross-site-scripting (CSS) and clickjacking in which an attacker finds ways to inject malicious code.
+
+A related concept is [SubResource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), which makes browsers only accept resources when they match the hash contained in the `integrity` attribute. This attribute is notably available on `<script>` and `<link rel="stylesheet">` tags. So SRI helps to prevent security problems from source file tampering.
+
+CSP is configured using the `Content-Security-Policy` HTTP Header. Since this is a static site I use the `http-equiv` meta tag in every HTML file:
 
 ```HTML
-<meta http-equiv="content-security-policy" content="default-src 'self'">
+<meta http-equiv="...name of HTTP Header..." content="...HTTP header contents">
 ```
 
-Then block all `<object>` and `<embed>` resources, since we won't use them:
+My approach is:
+- Denying everything by default before adding in permissions as needed.
+- Always use SRI, including for local (or `'self'`) files. Note that [AWG](awg.html) provides a Jinja filter to make it easy to generate the hashes (such has sha384) from the source files.
+- Check validity using tools such as [CSP Evaluator](https://csp-evaluator.withgoogle.com).
+
+In annotated outline, the CSP is as follows:
+```text
+default-src 'none';                                 <-- Default fallback is deny
+require-trusted-types-for 'script';                 <-- See link below
+base-uri 'self';                                    <-- Don't allow the base URL to change
+img-src 'self';                                     <-- Only allow images served up from self
+manifest-src 'self';                                <-- Only allow manifest served up from self
+script-src-elem
+    'strict-dynamic'                                <-- Trusted scripts (i.e. javascript) are trusted to use other scripts
+    'sha384-kri+HXDJ8qm2+...'                       <-- Trust scripts with the following hashes
+    ...etc
+    ;
+connect-src
+    'self'                                          <-- Allow connections to self e.g. for websockets (used by hot reloader)
+    https://ka-f.fontawesome.com                    <-- Allow Fontawesome to make connections
+    ;
+font-src
+    https://cdn.jsdelivr.net                        <-- Allow fonts (e.g. for Katex) from jsDelivr CDN
+    https://ka-f.fontawesome.com                    <-- Allow Fontawesome fonts
+    ;
+style-src
+    'self'                                          <-- Allow loading of CSS files from self
+    https://cdn.jsdelivr.net                        <-- Allow CSS files from jsDelivr CDN
+    'sha384-vpayKGwduWhgY...'                       <-- Permit CSS with following hashes (does not seem to do anything!)
+    ...etc
+    ;
 ```
-object-src 'none'
+
+(Link for [require-trusted-types-for](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for).)
+
+I discovered a few helpful things along the way:
+
+- Safari does not read `style-src-elem`, but allows it to exist. Chrome does read it. Hence using `style-src`.
+- The fallback from say `style-src-elem` to `style-src` to `default-src` does not mean keep trying until one passes, but use the most specific provided.
+- The `style-src` section does not do anything with hashes for link files. It neither checks or complains if present. This could be about CSP level 2 vs level 3. See [here](https://stackoverflow.com/questions/77338818/content-security-policy-hashes-for-files-dont-seem-to-work). I've kept the hashes in because I believe it should work like this, and doing so appears harmless.
+- If script hashes are provided in `script-src` then SRI must also be used (i.e. the `integrity` attribute set to the hash).
+- For both CSS and javascript, if the SRI is present (using the `integrity` attribute), then it is checked and must pass. Hence independently of CSP, SRI seems uniformly implemented.
+- Test on different browsers, because (a) they may behave differently, and (b) when things don't work they give different diagnostic information (some more helpful than others).
+
+In practice, using template data reduces maintenance overhead and helps document what is going on and where things are from. For example:
+
+```HTML
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+    <head>
+        ...
+        <meta http-equiv="Content-Security-Policy" content="
+            ...
+            script-src-elem
+                'strict-dynamic'
+                '{{ KATEX_JS_SHA }}'
+                '{{ FONTAWESOME_JS_SHA }}'
+                '{{ HIGHLIGHT_JS_SHA }}'
+                'sha384-{{ '/hot-reloader.js' | sha() }}'
+                'sha384-{{ '/render-maths.js' | sha() }}'
+                'sha384-{{ '/render-code.js' | sha() }}'
+                ;
+            ...
+            style-src
+                'self'
+                https://cdn.jsdelivr.net
+                {%- for sha in FONTAWESOME_INLINE_CSS_SHAs %}
+                '{{ sha }}'
+                {%- endfor %}
+                '{{ BULMA_CSS_SHA }}'
+                '{{ KATEX_CSS_SHA }}'
+                '{{ GRUVBOX_CSS_SHA }}'
+                'sha384-{{ '/main.css' | sha() }}'
+                ;
+        ">
+        ...
+
+        <link rel="stylesheet" type="text/css" href="{{ KATEX_CSS }}" integrity="{{ KATEX_CSS_SHA }}" crossorigin="anonymous">
+        ...
+        <script defer src="{{ KATEX_JS }}" integrity="{{ KATEX_JS_SHA }}" crossorigin="anonymous"></script>
+        ...
+        <script defer src="/hot-reloader.js" integrity="sha384-{{ '/hot-reloader.js' | sha() }}" async></script>
+        ...
+    </head>
+    ...
+</html>
 ```
 
-Then only allow https:
+Note:
+
+- The `crossorigin="anonymous"` attribute on the `<link>` and `<script>` tags is needed to make the browser send the appropriate CORS headers to fetch external resources without leaking user credentials - see [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/crossorigin).
+- The `sha()` Jinja filter is used to statically compute hashes of local content. It is done in two places for each file: the CSP header and the SRI integrity attribute.
+- Jinja variables help show meaning and aid re-use. They are kept in a TOML file, e.g. as follows:
+
+```TOML
+# Maths
+KATEX_CSS = "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
+KATEX_CSS_SHA = "sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
+KATEX_JS = "https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"
+KATEX_JS_SHA = "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6"
+
+# Theme for highlight.js
+HIGHLIGHT_JS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
+HIGHLIGHT_JS_SHA = "sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp"
+GRUVBOX_CSS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css"
+GRUVBOX_CSS_SHA = "sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd"
+
+# Framework
+BULMA_CSS = "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+BULMA_CSS_SHA = "sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX"
+
+# Fonts
+FONTAWESOME_JS = "https://kit.fontawesome.com/39e34b83e1.js"
+FONTAWESOME_JS_SHA = "sha384-yTB2wx6UBfG/vVmw00WOL5kU63/nWDZTw1KXg6BapzYP+xoYMMDemsecEoIJEK5h"
+FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources.
+    "sha256-E2q5uhm+T8+yRPO91kGFCPrb999m9YzwEB9sWmKzTwk=",
+    "sha256-xyO8S5xWOAtczCCfbCiMJgKOLsrQ0neV9mX7Aan06aw=",
+    "sha256-bi2K0pOjkFvwpWy9QI9qM3EUJiA+VcVJ5GGZIwSEFhQ=",
+    "sha256-0Y0YoXQ0nmYkphSjq+iyr2TWsiF2CUw7gsn8mpwIUog=",
+]
 ```
-Content-Security-Policy: default-src https:
-```
-
-All our resources are coming from a reputable CDN, so this is a low friction protection:
-
-```
-Content-Security-Policy: cdn.jsdelivr.net
-```
-
-Disallow embedding in a nested browsing context such as an `<iframe>` (effective protection against clickjacking):
-```
-Content-Security-Policy: frame-ancestors 'none'
-```
-
-Putting it all together:
-```html
-<meta http-equiv="content-security-policy" content="default-src https: 'self' cdn.jsdelivr.net; object-src 'none'; frame-ancestors 'none'">
-```
-
-Before uploading and testing from the live website, this [CSP Evaluator](https://csp-evaluator.withgoogle.com) allow testing by pasting in the rul.
-
-Gotcha: There is no inheritance. If a script-src directive is explicitly specified, for example, then the value of default-src has no influence on script requests.
-Gotcha: Safari does not seem to read script-src-elem (but allows it to exist).
-
-NB: not using the integrity hashes...?
-
-TODO: Use validation tools (esp MDN Overservatory) and http-equv-header in meta tag.
 
 
-"Strict CSP" is a mode of CSP operation, and changes how the CSP directives are interpreted.
-
-I could not make strict hash based CSP work for stylesheets loaded using link tags. Possibly not the only one - see [here](https://stackoverflow.com/questions/77338818/content-security-policy-hashes-for-files-dont-seem-to-work).
-
-So instead I use subresource integrity (SRI) and white list...? HMMMMSSMSMSMM
-
-Maybe it is a CSP2 vs CSP3 thing. Also, Safari only recently supported SRI.
-
-https://www.w3.org/TR/CSP3/#external-hash
-
-To enable web sockets: connect-src 'self'
-
-Use different browsers, because (a) they may behave differently, and (b) when things don't work they give different diagnostic information (some more helpful thatn others)
 
 # Deployment on GitHub pages
 

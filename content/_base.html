@@ -4,12 +4,11 @@
         <meta charset="utf-8" />
         <meta http-equiv="Content-Security-Policy" content="
             default-src 'none';
-            object-src 'none';
+            require-trusted-types-for 'script';
             base-uri 'self';
             img-src 'self';
             manifest-src 'self';
-            script-src
-                'self'
+            script-src-elem
                 'strict-dynamic'
                 '{{ KATEX_JS_SHA }}'
                 '{{ FONTAWESOME_JS_SHA }}'
