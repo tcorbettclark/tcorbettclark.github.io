@@ -467,93 +467,188 @@ Watching for changes in: example
           </p>
           <p>
             More details explaining how this works are in the implementation section, below.
-          </p><!--
-# Implementation details
+          </p>
+          <h1>
+            Implementation details
+          </h1>
+          <h2>
+            Code overview
+          </h2>
+          <p>
+            In essence there are 3 classes with orthogonal responsibilities:
+          </p>
+          <ul>
+            <li>
+              <code>Builder</code> - Build the files by applying templates using data from TOML etc.
+            </li>
+            <li>
+              <code>Watcher</code> - Watch for file changes.
+            </li>
+            <li>
+              <code>Server</code> - Serve up the content over HTTP and the simple hot reloader protocol over a
+              websocket.
+            </li>
+          </ul>
+          <p>
+            The Watcher and Server are both async; the Builder is synchronous. The main loop is clean (simplified
+            slightly to show approach):
+          </p>
+          <pre><code class=
+          "language-Python">builder = Builder(content_dir, output_dir, working_file_regex, template_extensions)
+watcher = Watcher(content_dir)
+server = Server(host, port, output_dir)
 
-TODO How it works and how to develop further.
+builder.rebuild()
+await watcher.start()
+await server.start()
+try:
+    while True:
+        await watcher.wait_for_change()
+        builder.rebuild()
+        await server.signal_hot_reloaders()
+except asyncio.CancelledError:
+    await watcher.stop()
+    await server.stop()
+    log("Bye")
+</code></pre>
+          <p>
+            Everything is in the single file: <a href=
+            "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py">awg.py</a>.
+          </p>
+          <h2>
+            Hot reloading
+          </h2>
+          <p>
+            In theory, hot reloading is simple:
+          </p>
+          <ul>
+            <li>use a <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket">websocket</a> to notify a
+            small piece javascript running in the browser that it should reload the page.
+            </li>
+          </ul>
+          <p>
+            In practice, there are some complications:
+          </p>
+          <ul>
+            <li>making it obvious to the user when the hot reloader is not running (e.g. after stopping/starting AWG,
+            for whatever reason);
+            </li>
+            <li>reconnecting after the page has been reloaded (prompted either by the hot reloader or by the user);
+            </li>
+            <li>handling <a href="https://developer.chrome.com/docs/web-platform/page-lifecycle-api">page lifecycle</a>
+            complexities such as history navigation, browsers putting tabs to sleep, etc;
+            </li>
+            <li>discouraging browsers from closing websockets due to inactivity;
+            </li>
+            <li>dealing with the fact that the WebSocket javascript object is asynchronous.
+            </li>
+          </ul>
+          <p>
+            The protocol consists of two messages:
+          </p>
+          <ul>
+            <li>the server can send connected clients a <code>reload</code> message;
+            </li>
+            <li>connected clients can send the server a <code>keep-alive-ping</code> message.
+            </li>
+          </ul>
+          <p>
+            For the failure handling strategy, note first that opening a socket with <code>new WebSocket()</code> is
+            asynchronous. It does not raise an exception on failure to connect. Also, the <code>onerror</code> signal
+            can occur even under normal use, e.g. if the user navigates browser history with forward/back buttons, or
+            if the browser suspends/resumes the page.
+          </p>
+          <p>
+            The most robust approach seems to be to use the <code>onclose</code> signal, differentiating between
+            whether or not the connection has ever opened ok.
+          </p>
+          <ul>
+            <li>If <strong>yes</strong>, try to restart it (this could happen after visibility change or freeze/resume
+            cycle).
+            </li>
+            <li>If <strong>no</strong>, then there was a bigger problem, so show a blocking alert to the user. After
+            that blocking alert is dismissed, reload the whole page (and hence start the cycle again).
+            </li>
+          </ul>
+          <p>
+            With that all in mind, the javascript is clean:
+          </p>
+          <pre><code class="language-Javascript">function start_hot_reloader() {
+  var ws = new WebSocket("ws://localhost:8000/ws");
 
-## Hot reloading
+  ws.onclose = function close_without_having_opened() {
+    // We will replace this function after successfully opening the connection.
+    // Hence if we reach here, the websocket closed without ever having opened
+    // and so failed to connect/open in the first place.
+    alert(
+      "Hot reloader failed. Is the local server running?\n\nClose this window to try again.",
+    );
+    // Best to reload because the server content may have changed in the interim.
+    window.location.reload(true);
+  };
 
-https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+  ws.onopen = function on_open() {
+    console.log("Hot reloader: websocket connection open");
+    // Start a keep-alive pinger to encourage the browser to keep the websocket open.
+    var pinger_id = setInterval(() =&gt; {
+      ws.send("keep-alive-ping");
+    }, 5000);
+    // Now that we have opened the connection, replace the onclose function.
+    ws.onclose = function close_after_opened_ok() {
+      clearInterval(pinger_id);
+      console.log("Hot reloader: websocket connection closed");
+      setTimeout(start_hot_reloader, 50);
+    };
+  };
 
-Need to be able to handle:
-1 Browser refresh/reload by hand
-1 Browser refresh/reload triggered from server following change
-1 Navigating away to a page on another site which exists
-1 Navigating away to a page on another site which does not exist (404)
-1 Navigating to another page on my site which exists
-1 Navigating to another page on my site which does not exist (404)
-1 Back button
-1 Forward button
-1 Close tab
-1 Close browser
+  ws.onmessage = function on_message(event) {
+    if (event.data == "reload") {
+      window.location.reload(true);
+    } else {
+      console.log(`Hot reloader websocket received: {event.data}`);
+    }
+  };
+}
 
-Tools:
-1 Server detecting connection has dropped
-1 Client detecting connection has dropped
-1 Client side localstorage
-1 Browser detecting a reload/refresh is about to happen
-event beforeunload
-event pagehide and pageshow
-event visibilitychange
-event freeze and resume
+addEventListener("load", (event) =&gt; {
+  if (window.location.hostname == "localhost") {
+    start_hot_reloader();
+  }
+});
+</code></pre>
+          <h2>
+            Tool development
+          </h2>
+          <p>
+            Used in the recommended way described above, <code>uv</code> creates a disposable but cached virtualenv in
+            which to install the dependencies and run the tool.
+          </p>
+          <p>
+            During any development of the tool, it is helpful to have a consistent virtual env in <code>.venv</code>
+            which editors can use for appropriate checking and code completion etc with the installed libraries. This
+            can be achieved as follows:
+          </p>
+          <pre><code class="language-bash"># Create virtualenv in .venv
+uv venv
 
-See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
+# Activate it
+source .venv/bin/activate.fish
 
-new WebSocket does not raise an exception on failure to connect because it is asynchronous.
-onerror can occur even under normal use, e.g. using the browser history forward/back buttons, and having the page freeze/resume etc.
+# Run tool with the active virtualenv rather than create a new/hidden one.
+uv run --active --script awg.py ./content/ ./docs/
 
-Most robust approach is to trap onclose and differentiate between whether the connection has ever opened ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it hasn't opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we reload the whole page (and hence start the cycle again).
+# Add/remove packages, updating the metadata in both the tool and the active virtualenv.
+uv add --active --script awg.py &lt;package&gt;
+uv remove --active --script awg.py &lt;package&gt;
 
-## Code overview
+# Upgrade packages in the development virtualenv (does not change awg.py)
+uv sync --upgrade --active --script awg.py
 
-TODO: include simplified snippets.
-
-For example
-
-```Python
-class Watcher:
-    def __init__(self, directory):
-        self.directory = directory
-        self._change_event = asyncio.Event()
-
-    async def _start(self):
-        log("Watching for changes in: {}", self.directory)
-        async for changes in watchfiles.awatch(self.directory):
-            for change, filename in list(changes):
-                filename = pathlib.Path(filename)
-                if change == watchfiles.Change.added:
-                    log("Noticed file added: {}", filename)
-                elif change == watchfiles.Change.deleted:
-                    log("Noticed file deleted: {}", filename)
-                elif change == watchfiles.Change.modified:
-                    log("Noticed file modified: {}", filename)
-            self._change_event.set()
-
-    async def start(self):
-        return asyncio.create_task(self._start())
-
-    async def wait_for_change(self):
-        await self._change_event.wait()
-        self._change_event.clear()
-```
-
-## Tool development
-
-So that your editor can pick up the scripts' virtual enviroment, symlink `.venv` e.g. something like:
-
-???
-
-```bash
-ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
-```
-
-To add or remove packages needed by `awg.py`,
-
-```bash
-uv add \-\-script awg.py <package>
-uv remove \-\-script awg.py <package>
-``` -->
+# View packages in active virtualenv
+# NB uv tree uses hidden cached virtualenv, so best to use pip subcommand.
+uv pip list
+uv pip tree
+</code></pre>
           <hr class="footnotes-sep" />
           <section class="footnotes">
             <ol class="footnotes-list">

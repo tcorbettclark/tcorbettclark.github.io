@@ -95,7 +95,11 @@ And from [mdit-py-plugins](https://mdit-py-plugins.readthedocs.io):
 
 ## Computing hashes e.g. for SRI and CSP
 
-TODO: explain the `sha()` filter.
+[Subresource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) and [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) both use file hashes. To make it easier to maintain these hashes, AWG adds a Jinja filter `sha("256"|"384"|"512")` (with a default of `"384"`) to create SHA hashes of local files. For example, to create SHA384 integrity attributes for SRI,
+
+```html
+<script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
+```
 
 ## Summary: the AWG content interface
 
@@ -203,90 +207,132 @@ Note that it only does anything when being served up over `localhost`, so is fin
 
 More details explaining how this works are in the implementation section, below.
 
-<!--
 # Implementation details
-
-TODO How it works and how to develop further.
-
-## Hot reloading
-
-https://developer.chrome.com/docs/web-platform/page-lifecycle-api
-
-Need to be able to handle:
-1 Browser refresh/reload by hand
-1 Browser refresh/reload triggered from server following change
-1 Navigating away to a page on another site which exists
-1 Navigating away to a page on another site which does not exist (404)
-1 Navigating to another page on my site which exists
-1 Navigating to another page on my site which does not exist (404)
-1 Back button
-1 Forward button
-1 Close tab
-1 Close browser
-
-Tools:
-1 Server detecting connection has dropped
-1 Client detecting connection has dropped
-1 Client side localstorage
-1 Browser detecting a reload/refresh is about to happen
-event beforeunload
-event pagehide and pageshow
-event visibilitychange
-event freeze and resume
-
-See https://developer.chrome.com/docs/web-platform/page-lifecycle-api
-
-new WebSocket does not raise an exception on failure to connect because it is asynchronous.
-onerror can occur even under normal use, e.g. using the browser history forward/back buttons, and having the page freeze/resume etc.
-
-Most robust approach is to trap onclose and differentiate between whether the connection has ever opened ok. If it has, try to restart it (this could happen after visibility change or freeze/resume cycle); if it hasn't opened ok then there was a bigger problem, so we show a blocking alert to the user, after which we reload the whole page (and hence start the cycle again).
 
 ## Code overview
 
-TODO: include simplified snippets.
+In essence there are 3 classes with orthogonal responsibilities:
+- `Builder` - Build the files by applying templates using data from TOML etc.
+- `Watcher` - Watch for file changes.
+- `Server` - Serve up the content over HTTP and the simple hot reloader protocol over a websocket.
 
-For example
+The Watcher and Server are both async; the Builder is synchronous. The main loop is clean (simplified slightly to show approach):
 
 ```Python
-class Watcher:
-    def __init__(self, directory):
-        self.directory = directory
-        self._change_event = asyncio.Event()
+builder = Builder(content_dir, output_dir, working_file_regex, template_extensions)
+watcher = Watcher(content_dir)
+server = Server(host, port, output_dir)
 
-    async def _start(self):
-        log("Watching for changes in: {}", self.directory)
-        async for changes in watchfiles.awatch(self.directory):
-            for change, filename in list(changes):
-                filename = pathlib.Path(filename)
-                if change == watchfiles.Change.added:
-                    log("Noticed file added: {}", filename)
-                elif change == watchfiles.Change.deleted:
-                    log("Noticed file deleted: {}", filename)
-                elif change == watchfiles.Change.modified:
-                    log("Noticed file modified: {}", filename)
-            self._change_event.set()
+builder.rebuild()
+await watcher.start()
+await server.start()
+try:
+    while True:
+        await watcher.wait_for_change()
+        builder.rebuild()
+        await server.signal_hot_reloaders()
+except asyncio.CancelledError:
+    await watcher.stop()
+    await server.stop()
+    log("Bye")
+```
 
-    async def start(self):
-        return asyncio.create_task(self._start())
+Everything is in the single file: [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py).
 
-    async def wait_for_change(self):
-        await self._change_event.wait()
-        self._change_event.clear()
+## Hot reloading
+
+In theory, hot reloading is simple:
+- use a [websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) to notify a small piece javascript running in the browser that it should reload the page.
+
+In practice, there are some complications:
+- making it obvious to the user when the hot reloader is not running (e.g. after stopping/starting AWG, for whatever reason);
+- reconnecting after the page has been reloaded (prompted either by the hot reloader or by the user);
+- handling [page lifecycle](https://developer.chrome.com/docs/web-platform/page-lifecycle-api) complexities such as history navigation, browsers putting tabs to sleep, etc;
+- discouraging browsers from closing websockets due to inactivity;
+- dealing with the fact that the WebSocket javascript object is asynchronous.
+
+The protocol consists of two messages:
+- the server can send connected clients a `reload` message;
+- connected clients can send the server a `keep-alive-ping` message.
+
+For the failure handling strategy, note first that opening a socket with `new WebSocket()` is asynchronous. It does not raise an exception on failure to connect. Also, the `onerror` signal can occur even under normal use, e.g. if the user navigates browser history with forward/back buttons, or if the browser suspends/resumes the page.
+
+The most robust approach seems to be to use the `onclose` signal, differentiating between whether or not the connection has ever opened ok.
+- If **yes**, try to restart it (this could happen after visibility change or freeze/resume cycle).
+- If **no**, then there was a bigger problem, so show a blocking alert to the user. After that blocking alert is dismissed, reload the whole page (and hence start the cycle again).
+
+With that all in mind, the javascript is clean:
+
+```Javascript
+function start_hot_reloader() {
+  var ws = new WebSocket("ws://localhost:8000/ws");
+
+  ws.onclose = function close_without_having_opened() {
+    // We will replace this function after successfully opening the connection.
+    // Hence if we reach here, the websocket closed without ever having opened
+    // and so failed to connect/open in the first place.
+    alert(
+      "Hot reloader failed. Is the local server running?\n\nClose this window to try again.",
+    );
+    // Best to reload because the server content may have changed in the interim.
+    window.location.reload(true);
+  };
+
+  ws.onopen = function on_open() {
+    console.log("Hot reloader: websocket connection open");
+    // Start a keep-alive pinger to encourage the browser to keep the websocket open.
+    var pinger_id = setInterval(() => {
+      ws.send("keep-alive-ping");
+    }, 5000);
+    // Now that we have opened the connection, replace the onclose function.
+    ws.onclose = function close_after_opened_ok() {
+      clearInterval(pinger_id);
+      console.log("Hot reloader: websocket connection closed");
+      setTimeout(start_hot_reloader, 50);
+    };
+  };
+
+  ws.onmessage = function on_message(event) {
+    if (event.data == "reload") {
+      window.location.reload(true);
+    } else {
+      console.log(`Hot reloader websocket received: {event.data}`);
+    }
+  };
+}
+
+addEventListener("load", (event) => {
+  if (window.location.hostname == "localhost") {
+    start_hot_reloader();
+  }
+});
 ```
 
 ## Tool development
 
-So that your editor can pick up the scripts' virtual enviroment, symlink `.venv` e.g. something like:
+Used in the recommended way described above, `uv` creates a disposable but cached virtualenv in which to install the dependencies and run the tool.
 
-???
+During any development of the tool, it is helpful to have a consistent virtual env in `.venv` which editors can use for appropriate checking and code completion etc with the installed libraries. This can be achieved as follows:
 
 ```bash
-ln -s /Users/tcorbettclark/.cache/uv/environments-v2/run-f69dfe2b9a396a65 .venv
+# Create virtualenv in .venv
+uv venv
+
+# Activate it
+source .venv/bin/activate.fish
+
+# Run tool with the active virtualenv rather than create a new/hidden one.
+uv run --active --script awg.py ./content/ ./docs/
+
+# Add/remove packages, updating the metadata in both the tool and the active virtualenv.
+uv add --active --script awg.py <package>
+uv remove --active --script awg.py <package>
+
+# Upgrade packages in the development virtualenv (does not change awg.py)
+uv sync --upgrade --active --script awg.py
+
+# View packages in active virtualenv
+# NB uv tree uses hidden cached virtualenv, so best to use pip subcommand.
+uv pip list
+uv pip tree
 ```
-
-To add or remove packages needed by `awg.py`,
-
-```bash
-uv add \-\-script awg.py <package>
-uv remove \-\-script awg.py <package>
-``` -->
