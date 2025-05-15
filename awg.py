@@ -368,6 +368,9 @@ class Watcher:
     async def start(self):
         return asyncio.create_task(self._start())
 
+    async def stop(self):
+        pass  # Nothing needs to be done, but keep for symmetry.
+
     async def wait_for_change(self):
         await self._change_event.wait()
         self._change_event.clear()
@@ -391,15 +394,13 @@ async def run(
     try:
         while True:
             await watcher.wait_for_change()
-            await asyncio.sleep(
-                0.1
-            )  # Hack to wait for editors tracking of file changes e.g. for git
             builder.rebuild()
             await server.signal_hot_reloaders()
     except asyncio.CancelledError:
         # asyncio raises CancelledError on ctrl-c signal
         # (see https://docs.python.org/3/library/asyncio-runner.html#handling-keyboard-interruption).
         # We take responsibility for cleanup and swallow the exception.
+        await watcher.stop()
         await server.stop()
         log("Bye")
 
