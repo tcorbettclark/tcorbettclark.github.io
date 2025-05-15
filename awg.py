@@ -262,18 +262,22 @@ class Builder:
 
 class _ServerAccessLogger(aiohttp.abc.AbstractAccessLogger):
     # Use a hand-crafted aiohttp access logger to better control the detail.
-    # In particular, to unpack the User-Agent string.
+    # In particular, to unpack the User-Agent string if present.
 
     def log(self, request, response, time):
-        ua = user_agents.parse(request.headers["User-Agent"])
-        browser = ua.browser.family
-        version = ua.browser.version_string
-        if version:
-            browser += "-" + version
-        device = ua.device.family
-        log(
-            f"Completed request from client {browser} on {device}: {request.path}"
-        )
+        try:
+            ua = user_agents.parse(request.headers["User-Agent"])
+            browser = ua.browser.family
+            version = ua.browser.version_string
+            if version:
+                browser += "-" + version
+            device = ua.device.family
+            log(
+                f"Completed request from client {browser} on {device}: {request.path}"
+            )
+        except KeyError:
+            # Because "User-Agent" was not provided in the request header.
+            log(f"Completed request from client: {request.path}")
 
 
 class Server:
