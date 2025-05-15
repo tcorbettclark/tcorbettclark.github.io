@@ -8,4 +8,16 @@
         <loc>https://www.corbettclark.com/welcome/index.html</loc>
         <changefreq>weekly</changefreq>
     </url>
+    <url>
+        <loc>https://www.corbettclark.com/building-this-site/index.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/building-this-site/awg.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/building-this-site/approach.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
 </urlset>

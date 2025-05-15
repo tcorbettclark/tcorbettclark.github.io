@@ -2,10 +2,18 @@
 name = "index.html"
 change_frequency = "weekly"
 
-# TODO note that this data could come from TOML files within the other directories.
-# (although it will require full pathnames)
-# Trade-off...
-
 [[SITEMAP_FILENAMES]]
 name = "welcome/index.html"
+change_frequency = "weekly"
+
+[[SITEMAP_FILENAMES]]
+name = "building-this-site/index.html"
+change_frequency = "weekly"
+
+[[SITEMAP_FILENAMES]]
+name = "building-this-site/awg.html"
+change_frequency = "weekly"
+
+[[SITEMAP_FILENAMES]]
+name = "building-this-site/approach.html"
 change_frequency = "weekly"
