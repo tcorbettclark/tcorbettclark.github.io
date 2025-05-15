@@ -26,6 +26,7 @@ My personal website.
 
 # TODO - technical
 
+- host on https so can complete security additions.
 - me.css has SRI, but not listed in the CSP. Fortunately doesn't matter, but the base template should support extensions.
 - Reduce font size of h2
 - DYLD_LIBRARY_PATH is only correct for me because I installed brew in /usr/local. The default is /opt/...
@@ -33,7 +34,6 @@ My personal website.
 - Decide on all markdown plugins.
 - Allow merging lists across TOML files, e.g. to better manage sitemap files.
   And inject a special variable into the TOML for the current directory to make relocatable.
-- Find way to allow editor (Zed) find the virtualenv magically created by uv when running script
 - Find a way to deliver a 404 on the dev server (currently just returns empty files!).
 - Submit sitemap to search engines (once?).
 - Fontawesome:
