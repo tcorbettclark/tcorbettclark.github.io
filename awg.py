@@ -8,7 +8,6 @@
 #     "jinja2",
 #     "markdown-it-py",
 #     "mdit-py-plugins",
-#     "toml",
 #     "user-agents",
 #     "utidylib",
 #     "watchfiles",
@@ -31,7 +30,7 @@ import aiohttp.web
 import click
 import jinja2
 import markdown_it
-import toml
+import tomllib
 import user_agents
 import watchfiles
 from mdit_py_plugins.attrs import (
@@ -126,7 +125,8 @@ class Builder:
         ):
             filename = self.output_dir / filename
             log("Reading template data from: {}", filename)
-            data = toml.load(filename)
+            with filename.open("rb") as f:
+                data = tomllib.load(f)
             overlap = set(data.keys()).intersection(env.globals.keys())
             if overlap:
                 abort(
