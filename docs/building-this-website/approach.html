@@ -471,8 +471,47 @@ code.hljs {
             Draft / wip mode
           </h1>
           <p>
-            TODO
+            Given the purpose of this website, many files are constantly being revised and refactored. New content
+            could be excluded from the build until completely ready, but a “softer and more organic” approach is to
+            include it with a DRAFT watermark and delay linking to such pages or adding them to the sitemap until more
+            ready. Then such content can be viewed if you know it is there but is not readily discovered otherwise; and
+            if seen then it is obvious that it is work-in-progress.
           </p>
+          <p>
+            To control this watermark, the <code>/_page.html</code> template adds a CSS class if a <code>draft</code>
+            variable is set:
+          </p>
+          <pre><code class="language-html">&lt;div class="content {% if draft %}draft-watermark{% endif %}"&gt;
+    {% block page %}{% endblock page %}
+&lt;/div&gt;
+</code></pre>
+          <p>
+            The corresponding CSS is:
+          </p>
+          <pre><code class="language-css">.draft-watermark {
+    background-image: url("draft-watermark.svg");
+}
+</code></pre>
+          <p>
+            and the corresponding <code>draft-watermark.svg</code> contains
+          </p>
+          <pre><code class=
+          "language-SVG">&lt;svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="170px" width="210px"&gt;
+    &lt;text transform="translate(0, 40) rotate(30)" fill="rgba(245,5,5,0.05)" font-size="60px"&gt;
+        DRAFT
+    &lt;/text&gt;
+&lt;/svg&gt;
+</code></pre>
+          <p>
+            Hence to mark a page as in-draft/work-in-progress, set the <code>draft</code> variable at the top of the
+            template as follows:
+          </p>
+          <pre><code class="language-HTML">{% set draft = true %}
+
+{% extends "../_page.html" %}
+
+...etc
+</code></pre>
           <h1>
             XML sitemap and the robots.txt file
           </h1>
@@ -567,15 +606,15 @@ change_frequency = "weekly"
 &lt;link href="https://foo.bar.baz/"&gt;
 </code></pre>This isn’t a problem so long as we always quote href’s.
             </li>
-            <li>TODO more…
+            <li>…
             </li>
           </ol>
           <h1>
             Security
           </h1>
           <p>
-            Primarily I following the findings from MDN’s <a href=
-            "https://developer.mozilla.org/en-US/observatory">Observatory tool</a>.
+            To find security weaknesses and information about how to address them, I follow the findings from MDN’s
+            <a href="https://developer.mozilla.org/en-US/observatory">Observatory tool</a>.
           </p>
           <h2>
             Content Security Policy (CSP)
@@ -604,41 +643,40 @@ change_frequency = "weekly"
             My approach is:
           </p>
           <ul>
-            <li>Denying everything by default before adding in permissions as needed.
+            <li>To deny everything by default before adding in permissions as needed.
             </li>
-            <li>Always use SRI, including for local (or <code>'self'</code>) files. Note that <a href=
+            <li>To always use SRI, including for local (or <code>'self'</code>) files. Note that <a href=
             "awg.html">AWG</a> provides a Jinja filter to make it easy to generate the hashes (such has sha384) from
             the source files.
             </li>
-            <li>Check validity using tools such as <a href="https://csp-evaluator.withgoogle.com">CSP Evaluator</a>.
+            <li>To check validity using tools such as <a href="https://csp-evaluator.withgoogle.com">CSP Evaluator</a>.
             </li>
           </ul>
           <p>
             In annotated outline, the CSP is as follows:
           </p>
-          <pre><code class=
-          "language-text">default-src 'none';                                 &lt;-- Default fallback is deny
-require-trusted-types-for 'script';                 &lt;-- See link below
-base-uri 'self';                                    &lt;-- Don't allow the base URL to change
-img-src 'self';                                     &lt;-- Only allow images served up from self
-manifest-src 'self';                                &lt;-- Only allow manifest served up from self
+          <pre><code class="language-text">default-src 'none';                          &lt;-- Default fallback is deny
+require-trusted-types-for 'script';          &lt;-- See link below
+base-uri 'self';                             &lt;-- Don't allow the base URL to change from self
+img-src 'self';                              &lt;-- Only allow images served up from self
+manifest-src 'self';                         &lt;-- Only allow manifest served up from self
 script-src-elem
-    'strict-dynamic'                                &lt;-- Trusted scripts (i.e. javascript) are trusted to use other scripts
-    'sha384-kri+HXDJ8qm2+...'                       &lt;-- Trust scripts with the following hashes
+    'strict-dynamic'                         &lt;-- Trusted scripts (i.e. javascript) are trusted to use other scripts
+    'sha384-kri+HXDJ8qm2+...'                &lt;-- Trust scripts with the following hashes
     ...etc
     ;
 connect-src
-    'self'                                          &lt;-- Allow connections to self e.g. for websockets (used by hot reloader)
-    https://ka-f.fontawesome.com                    &lt;-- Allow Fontawesome to make connections
+    'self'                                   &lt;-- Allow connections to self e.g. for websockets (used by hot reloader)
+    https://ka-f.fontawesome.com             &lt;-- Allow Fontawesome to make connections
     ;
 font-src
-    https://cdn.jsdelivr.net                        &lt;-- Allow fonts (e.g. for Katex) from jsDelivr CDN
-    https://ka-f.fontawesome.com                    &lt;-- Allow Fontawesome fonts
+    https://cdn.jsdelivr.net                 &lt;-- Allow fonts (e.g. for Katex) from jsDelivr CDN
+    https://ka-f.fontawesome.com             &lt;-- Allow Fontawesome fonts
     ;
 style-src
-    'self'                                          &lt;-- Allow loading of CSS files from self
-    https://cdn.jsdelivr.net                        &lt;-- Allow CSS files from jsDelivr CDN
-    'sha384-vpayKGwduWhgY...'                       &lt;-- Permit CSS with following hashes (does not seem to do anything!)
+    'self'                                   &lt;-- Allow loading of CSS files from self
+    https://cdn.jsdelivr.net                 &lt;-- Allow CSS files from jsDelivr CDN
+    'sha384-vpayKGwduWhgY...'                &lt;-- Permit CSS with following hashes (does not seem to do anything!)
     ...etc
     ;
 </code></pre>
@@ -658,13 +696,13 @@ style-src
             does not mean keep trying until one passes, but use the most specific provided.
             </li>
             <li>The <code>style-src</code> section does not do anything with hashes for link files. It neither checks
-            or complains if present. This could be about CSP level 2 vs level 3. See <a href=
+            the hashes or complains if present. This could be about CSP level 2 vs level 3. See also, <a href=
             "https://stackoverflow.com/questions/77338818/content-security-policy-hashes-for-files-dont-seem-to-work">
               here</a>. I’ve kept the hashes in because I believe it should work like this, and doing so appears
               harmless.
             </li>
             <li>If script hashes are provided in <code>script-src</code> then SRI must also be used (i.e. the
-            <code>integrity</code> attribute set to the hash).
+            <code>integrity</code> attribute should exist and contain the hash).
             </li>
             <li>For both CSS and javascript, if the SRI is present (using the <code>integrity</code> attribute), then
             it is checked and must pass. Hence independently of CSP, SRI seems uniformly implemented.
@@ -726,8 +764,8 @@ style-src
             external resources without leaking user credentials - see <a href=
             "https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/crossorigin">here</a>.
             </li>
-            <li>The <code>sha()</code> Jinja filter is used to statically compute hashes of local content. It is done
-            in two places for each file: the CSP header and the SRI integrity attribute.
+            <li>The <code>sha()</code> Jinja filter provided by AWG is used to statically compute hashes of local
+            content. It is done in two places for each file: the CSP header and the SRI integrity attribute.
             </li>
             <li>Jinja variables help show meaning and aid re-use. They are kept in a TOML file, e.g. as follows:
             </li>
@@ -762,12 +800,13 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
             Strict Transport Security (HSTS)
           </h2>
           <p>
-            This site can use HTTPS throughout, and so to help prevent manipulator-in-the-middle (MiTM) attacks I set
-            the <code>Strict-Transport-Security</code> HTTP Header and the <code>upgrade-insecure-requests</code>
-            directive in the CSP.
+            This site can use HTTPS throughout. To help prevent manipulator-in-the-middle (MiTM) attacks, the
+            <code>Strict-Transport-Security</code> HTTP Header should be set, together with the
+            <code>upgrade-insecure-requests</code> directive in the CSP.
           </p>
           <p>
-            TODO: unfortunately this breaks http: on localhost for development!
+            Unfortunately this breaks use of <code>http://localhost</code>, so I have left unset for now. I’ve
+            configured GitHub Pages to only serve HTTPS anyway.
           </p>
           <h2>
             Deny embedding
@@ -777,7 +816,7 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
             by setting the <code>frame-ancestors</code> and the <code>X-Frame-Options</code> header. See <a href=
             "https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking">here</a>
             for details. But unfortunately neither can be done using <code>http-equiv</code> and I don’t have control
-            of actual server HTTP Headers…
+            over the server HTTP Headers.
           </p>
           <h2>
             Referrer policy
@@ -787,7 +826,7 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
             "https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy">here</a>),
             I set the HTTP header as follows:
           </p>
-          <pre><code class="language-HTML5">...
+          <pre><code class="language-HTML">...
 &lt;meta http-equiv="Referrer-Policy" content="no-referrer"&gt;
 ...
 </code></pre>
@@ -800,7 +839,7 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
             <code>nosniff</code> as explained <a href=
             "https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types">here</a>:
           </p>
-          <pre><code class="language-HTML5">...
+          <pre><code class="language-HTML">...
 &lt;meta http-equiv="X-Content-Type-Options" content="nosniff"&gt;
 ...
 </code></pre>

@@ -252,7 +252,40 @@ Lastly, remember to coordinate the colour choices across the Bulma setting, the 
 
 # Draft / wip mode
 
-TODO
+Given the purpose of this website, many files are constantly being revised and refactored. New content could be excluded from the build until completely ready, but a "softer and more organic" approach is to include it with a DRAFT watermark and delay linking to such pages or adding them to the sitemap until more ready. Then such content can be viewed if you know it is there but is not readily discovered otherwise; and if seen then it is obvious that it is work-in-progress.
+
+To control this watermark, the `/_page.html` template adds a CSS class if a `draft` variable is set:
+
+```html
+<div class="content {% if draft %}draft-watermark{% endif %}">
+    {% block page %}{% endblock page %}
+</div>
+```
+
+The corresponding CSS is:
+```css
+.draft-watermark {
+    background-image: url("draft-watermark.svg");
+}
+```
+
+and the corresponding `draft-watermark.svg` contains
+```SVG
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="170px" width="210px">
+    <text transform="translate(0, 40) rotate(30)" fill="rgba(245,5,5,0.05)" font-size="60px">
+        DRAFT
+    </text>
+</svg>
+```
+
+Hence to mark a page as in-draft/work-in-progress, set the `draft` variable at the top of the template as follows:
+```HTML
+{% set draft = true %}
+
+{% extends "../_page.html" %}
+
+...etc
+```
 
 # XML sitemap and the robots.txt file
 
@@ -315,11 +348,11 @@ Notable issues I could not address include:
    <link href="https://foo.bar.baz/">
    ```
    This isn't a problem so long as we always quote href's.
-1. TODO more...
+1. ...
 
 # Security
 
-Primarily I following the findings from MDN's [Observatory tool](https://developer.mozilla.org/en-US/observatory).
+To find security weaknesses and information about how to address them, I follow the findings from MDN's [Observatory tool](https://developer.mozilla.org/en-US/observatory).
 
 ## Content Security Policy (CSP)
 
@@ -334,34 +367,34 @@ CSP is configured using the `Content-Security-Policy` HTTP Header. Since this is
 ```
 
 My approach is:
-- Denying everything by default before adding in permissions as needed.
-- Always use SRI, including for local (or `'self'`) files. Note that [AWG](awg.html) provides a Jinja filter to make it easy to generate the hashes (such has sha384) from the source files.
-- Check validity using tools such as [CSP Evaluator](https://csp-evaluator.withgoogle.com).
+- To deny everything by default before adding in permissions as needed.
+- To always use SRI, including for local (or `'self'`) files. Note that [AWG](awg.html) provides a Jinja filter to make it easy to generate the hashes (such has sha384) from the source files.
+- To check validity using tools such as [CSP Evaluator](https://csp-evaluator.withgoogle.com).
 
 In annotated outline, the CSP is as follows:
 ```text
-default-src 'none';                                 <-- Default fallback is deny
-require-trusted-types-for 'script';                 <-- See link below
-base-uri 'self';                                    <-- Don't allow the base URL to change
-img-src 'self';                                     <-- Only allow images served up from self
-manifest-src 'self';                                <-- Only allow manifest served up from self
+default-src 'none';                          <-- Default fallback is deny
+require-trusted-types-for 'script';          <-- See link below
+base-uri 'self';                             <-- Don't allow the base URL to change from self
+img-src 'self';                              <-- Only allow images served up from self
+manifest-src 'self';                         <-- Only allow manifest served up from self
 script-src-elem
-    'strict-dynamic'                                <-- Trusted scripts (i.e. javascript) are trusted to use other scripts
-    'sha384-kri+HXDJ8qm2+...'                       <-- Trust scripts with the following hashes
+    'strict-dynamic'                         <-- Trusted scripts (i.e. javascript) are trusted to use other scripts
+    'sha384-kri+HXDJ8qm2+...'                <-- Trust scripts with the following hashes
     ...etc
     ;
 connect-src
-    'self'                                          <-- Allow connections to self e.g. for websockets (used by hot reloader)
-    https://ka-f.fontawesome.com                    <-- Allow Fontawesome to make connections
+    'self'                                   <-- Allow connections to self e.g. for websockets (used by hot reloader)
+    https://ka-f.fontawesome.com             <-- Allow Fontawesome to make connections
     ;
 font-src
-    https://cdn.jsdelivr.net                        <-- Allow fonts (e.g. for Katex) from jsDelivr CDN
-    https://ka-f.fontawesome.com                    <-- Allow Fontawesome fonts
+    https://cdn.jsdelivr.net                 <-- Allow fonts (e.g. for Katex) from jsDelivr CDN
+    https://ka-f.fontawesome.com             <-- Allow Fontawesome fonts
     ;
 style-src
-    'self'                                          <-- Allow loading of CSS files from self
-    https://cdn.jsdelivr.net                        <-- Allow CSS files from jsDelivr CDN
-    'sha384-vpayKGwduWhgY...'                       <-- Permit CSS with following hashes (does not seem to do anything!)
+    'self'                                   <-- Allow loading of CSS files from self
+    https://cdn.jsdelivr.net                 <-- Allow CSS files from jsDelivr CDN
+    'sha384-vpayKGwduWhgY...'                <-- Permit CSS with following hashes (does not seem to do anything!)
     ...etc
     ;
 ```
@@ -372,8 +405,8 @@ I discovered a few helpful things along the way:
 
 - Safari does not read `style-src-elem`, but allows it to exist. Chrome does read it. Hence using `style-src`.
 - The fallback from say `style-src-elem` to `style-src` to `default-src` does not mean keep trying until one passes, but use the most specific provided.
-- The `style-src` section does not do anything with hashes for link files. It neither checks or complains if present. This could be about CSP level 2 vs level 3. See [here](https://stackoverflow.com/questions/77338818/content-security-policy-hashes-for-files-dont-seem-to-work). I've kept the hashes in because I believe it should work like this, and doing so appears harmless.
-- If script hashes are provided in `script-src` then SRI must also be used (i.e. the `integrity` attribute set to the hash).
+- The `style-src` section does not do anything with hashes for link files. It neither checks the hashes or complains if present. This could be about CSP level 2 vs level 3. See also, [here](https://stackoverflow.com/questions/77338818/content-security-policy-hashes-for-files-dont-seem-to-work). I've kept the hashes in because I believe it should work like this, and doing so appears harmless.
+- If script hashes are provided in `script-src` then SRI must also be used (i.e. the `integrity` attribute should exist and contain the hash).
 - For both CSS and javascript, if the SRI is present (using the `integrity` attribute), then it is checked and must pass. Hence independently of CSP, SRI seems uniformly implemented.
 - Test on different browsers, because (a) they may behave differently, and (b) when things don't work they give different diagnostic information (some more helpful than others).
 
@@ -424,7 +457,7 @@ In practice, using template data reduces maintenance overhead and helps document
 Note:
 
 - The `crossorigin="anonymous"` attribute on the `<link>` and `<script>` tags is needed to make the browser send the appropriate CORS headers to fetch external resources without leaking user credentials - see [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Attributes/crossorigin).
-- The `sha()` Jinja filter is used to statically compute hashes of local content. It is done in two places for each file: the CSP header and the SRI integrity attribute.
+- The `sha()` Jinja filter provided by AWG is used to statically compute hashes of local content. It is done in two places for each file: the CSP header and the SRI integrity attribute.
 - Jinja variables help show meaning and aid re-use. They are kept in a TOML file, e.g. as follows:
 
 ```TOML
@@ -457,19 +490,19 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
 
 ## Strict Transport Security (HSTS)
 
-This site can use HTTPS throughout, and so to help prevent manipulator-in-the-middle (MiTM) attacks I set the `Strict-Transport-Security` HTTP Header and the `upgrade-insecure-requests` directive in the CSP.
+This site can use HTTPS throughout. To help prevent manipulator-in-the-middle (MiTM) attacks, the `Strict-Transport-Security` HTTP Header should be set, together with the `upgrade-insecure-requests` directive in the CSP.
 
-TODO: unfortunately this breaks http: on localhost for development!
+Unfortunately this breaks use of `http://localhost`, so I have left unset for now. I've configured GitHub Pages to only serve HTTPS anyway.
 
 ## Deny embedding
 
-A clickjacking approach relies on embedding sites in other sites. Ideally this would be prevented using CSP by setting the `frame-ancestors` and the `X-Frame-Options` header. See [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking) for details. But unfortunately neither can be done using `http-equiv` and I don't have control of actual server HTTP Headers...
+A clickjacking approach relies on embedding sites in other sites. Ideally this would be prevented using CSP by setting the `frame-ancestors` and the `X-Frame-Options` header. See [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking) for details. But unfortunately neither can be done using `http-equiv` and I don't have control over the server HTTP Headers.
 
 ## Referrer policy
 
 To stop leaking information about where outbound links are coming from (see [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy)), I set the HTTP header as follows:
 
-```HTML5
+```HTML
 ...
 <meta http-equiv="Referrer-Policy" content="no-referrer">
 ...
@@ -479,7 +512,7 @@ To stop leaking information about where outbound links are coming from (see [her
 
 To inform browsers not to load scripts and stylesheets unless the server indicates the correct MIME type, I set the `X-Content-Type-Options` header using the `<meta>` tag to `nosniff` as explained [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types):
 
-```HTML5
+```HTML
 ...
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 ...

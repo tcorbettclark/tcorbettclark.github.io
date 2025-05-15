@@ -291,8 +291,15 @@
             Computing hashes e.g. for SRI and CSP
           </h2>
           <p>
-            TODO: explain the <code>sha()</code> filter.
+            <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">Subresource Integrity
+            (SRI)</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">Content Security
+            Policy (CSP)</a> both use file hashes. To make it easier to maintain these hashes, AWG adds a Jinja filter
+            <code>sha("256"|"384"|"512")</code> (with a default of <code>"384"</code>) to create SHA hashes of local
+            files. For example, to create SHA384 integrity attributes for SRI,
           </p>
+          <pre><code class=
+          "language-html">&lt;script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"&gt;&lt;/script&gt;
+</code></pre>
           <h2>
             Summary: the AWG content interface
           </h2>
