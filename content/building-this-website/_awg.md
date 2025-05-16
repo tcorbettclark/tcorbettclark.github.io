@@ -89,7 +89,7 @@ And from [mdit-py-plugins](https://mdit-py-plugins.readthedocs.io):
 - `attrs` and `attrs_block` - to support CSS attributes, including on spanned text e.g. to allow [Smallcaps]{.smallcaps}
 - `deflist` - for definition lists
 - `footnotes` - to render footnotes like this[^1]
-- `math` - so maths can be written in \$ or \$\$ marks and converted into sensible HTML tags with escaped content
+- `dollarmath` - so maths can be written in \$ or \$\$ marks and converted into sensible HTML tags with escaped content
 
 [^1]: Demo footnote.
 

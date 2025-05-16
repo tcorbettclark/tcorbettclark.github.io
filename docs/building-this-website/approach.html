@@ -175,7 +175,7 @@
           </h1>
           <p>
             There are many to choose from, but I selected <a href="https://bulma.io">Bulma</a> because it is CSS only
-            (no javascript), looks good, is well documented, very popular, and actively maintained. I like it’s
+            (no javascript), looks good, is well documented, very popular, and actively maintained. I like the
             responsive layout and support for colour management.
           </p>
           <p>
@@ -592,6 +592,10 @@ change_frequency = "weekly"
             Security
           </h1>
           <p>
+            Excellent references on web security can be found on <a href="https://web.dev/explore/secure">Google
+            web.dev</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Security">Mozzila’s MDN</a>.
+          </p>
+          <p>
             To find security weaknesses and information about how to address them, I follow the findings from MDN’s
             <a href="https://developer.mozilla.org/en-US/observatory">Observatory tool</a>.
           </p>
@@ -794,10 +798,11 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
 &lt;meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains"&gt;
 </code></pre>
           <p>
-            (the <code>max-age</code> is set to the recommended 2 years).
+            (<code>max-age</code> is set to the recommended 2 years).
           </p>
           <p>
-            See CSP directive is explained in the Content Security Section above.
+            The <code>upgrade-insecure-requests</code> CSP directive is explained in the Content Security Section
+            above.
           </p>
           <p>
             I’ve also configured GitHub Pages to only serve HTTPS.

@@ -55,7 +55,7 @@ To make editing easy with language specific editing/formatting/colourising modes
 
 # Choice of web framework
 
-There are many to choose from, but I selected [Bulma](https://bulma.io) because it is CSS only (no javascript), looks good, is well documented, very popular, and actively maintained. I like it's responsive layout and support for colour management.
+There are many to choose from, but I selected [Bulma](https://bulma.io) because it is CSS only (no javascript), looks good, is well documented, very popular, and actively maintained. I like the responsive layout and support for colour management.
 
 The two closest alternatives were:
 
@@ -352,6 +352,8 @@ Notable issues I could not address include:
 
 # Security
 
+Excellent references on web security can be found on [Google web.dev](https://web.dev/explore/secure) and [Mozzila's MDN](https://developer.mozilla.org/en-US/docs/Web/Security).
+
 To find security weaknesses and information about how to address them, I follow the findings from MDN's [Observatory tool](https://developer.mozilla.org/en-US/observatory).
 
 ## Content Security Policy (CSP)
@@ -499,10 +501,9 @@ Hence the following are added in the `_base.html` template to the `<head>` tag.
 <meta http-equiv="Upgrade-Insecure-Requests" content="1">
 <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains">
 ```
+(`max-age` is set to the recommended 2 years).
 
-(the `max-age` is set to the recommended 2 years).
-
-See CSP directive is explained in the Content Security Section above.
+The `upgrade-insecure-requests` CSP directive is explained in the Content Security Section above.
 
 I've also configured GitHub Pages to only serve HTTPS.
 
