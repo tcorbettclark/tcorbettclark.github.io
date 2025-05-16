@@ -23,6 +23,7 @@ import os
 import pathlib
 import re
 import shutil
+import ssl
 
 import aiohttp
 import aiohttp.abc
@@ -281,10 +282,12 @@ class _ServerAccessLogger(aiohttp.abc.AbstractAccessLogger):
 
 
 class Server:
-    def __init__(self, host, port, directory):
+    def __init__(self, directory, host, port, certfile=None, keyfile=None):
+        self.directory = directory
         self.host = host
         self.port = port
-        self.directory = directory
+        self.certfile = certfile
+        self.keyfile = keyfile
         self.web_sockets = set()
 
     async def signal_hot_reloaders(self):
@@ -336,8 +339,21 @@ class Server:
             handler_cancellation=True,
         )
         await self._runner.setup()
-        site = aiohttp.web.TCPSite(self._runner, self.host, self.port)
-        log(f"Starting local server on http://{self.host}:{self.port}")
+        ssl_context = None
+        if self.certfile and self.keyfile:
+            log("Using SSL certfile: {}", self.certfile)
+            log("Using SSL keyfile: {}", self.keyfile)
+            ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+            ssl_context.load_cert_chain(self.certfile, self.keyfile)
+            log(f"Starting local server on https://{self.host}:{self.port}")
+        else:
+            log(f"Starting local server on http://{self.host}:{self.port}")
+        site = aiohttp.web.TCPSite(
+            self._runner,
+            host=self.host,
+            port=self.port,
+            ssl_context=ssl_context,
+        )
         log("Serving files from: {}", self.directory)
         await site.start()
 
@@ -377,7 +393,14 @@ class Watcher:
 
 
 async def run(
-    content_dir, output_dir, working_file_regex, template_extensions, host, port
+    content_dir,
+    output_dir,
+    working_file_regex,
+    template_extensions,
+    host,
+    port,
+    certfile,
+    keyfile,
 ):
     content_dir = pathlib.Path(content_dir).absolute()
     output_dir = pathlib.Path(output_dir).absolute()
@@ -386,7 +409,7 @@ async def run(
         content_dir, output_dir, working_file_regex, template_extensions
     )
     watcher = Watcher(content_dir)
-    server = Server(host, port, output_dir)
+    server = Server(output_dir, host, port, certfile, keyfile)
 
     builder.rebuild()
     await watcher.start()
@@ -438,6 +461,16 @@ async def run(
     show_default=True,
     help="Serve on this port",
 )
+@click.option(
+    "--certfile",
+    default=None,
+    help="Filename containing SSL certfile (needed for HTTPS)",
+)
+@click.option(
+    "--keyfile",
+    default=None,
+    help="Filename containing SSL keyfile (needed for HTTPS)",
+)
 def main(
     content_dir,
     output_dir,
@@ -445,12 +478,16 @@ def main(
     template_extensions,
     host,
     port,
+    certfile,
+    keyfile,
 ):
     """AWG = Agnostic Website Generator.
 
     CONTENT_DIR is the directory of source web contents. It is never altered.
 
     OUTPUT_DIR is the new directory into which the website will be built. It is destroyed before every build.
+
+    The optional certfile and keyfile will switch to serving up over HTTPS. Generate e.g. using the mkcert tool.
 
     """
     asyncio.run(
@@ -461,6 +498,8 @@ def main(
             template_extensions,
             host,
             port,
+            certfile,
+            keyfile,
         )
     )
 

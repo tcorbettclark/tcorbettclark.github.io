@@ -373,6 +373,7 @@ My approach is:
 
 In annotated outline, the CSP is as follows:
 ```text
+upgrade-insecure-requests;                   <-- Instruct browser to switch site HTTP urls to HTTPS
 default-src 'none';                          <-- Default fallback is deny
 require-trusted-types-for 'script';          <-- See link below
 base-uri 'self';                             <-- Don't allow the base URL to change from self
@@ -490,9 +491,22 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
 
 ## Strict Transport Security (HSTS)
 
-This site can use HTTPS throughout. To help prevent manipulator-in-the-middle (MiTM) attacks, the `Strict-Transport-Security` HTTP Header should be set, together with the `upgrade-insecure-requests` directive in the CSP.
+This site can use HTTPS throughout. To help prevent manipulator-in-the-middle (MiTM) attacks, the [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security) HTTP Header should be set, together with the [upgrade-insecure-requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/upgrade-insecure-requests) directive in the CSP.
 
-Unfortunately this breaks use of `http://localhost`, so I have left unset for now. I've configured GitHub Pages to only serve HTTPS anyway.
+Hence the following are added in the `_base.html` template to the `<head>` tag.
+
+```html
+<meta http-equiv="Upgrade-Insecure-Requests" content="1">
+<meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains">
+```
+
+(the `max-age` is set to the recommended 2 years).
+
+See CSP directive is explained in the Content Security Section above.
+
+I've also configured GitHub Pages to only serve HTTPS.
+
+**NB:** The presence of these security settings means that AWG must be run in HTTPS mode.
 
 ## Deny embedding
 

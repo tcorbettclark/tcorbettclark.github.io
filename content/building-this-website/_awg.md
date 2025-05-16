@@ -156,12 +156,16 @@ Usage: awg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
 
   OUTPUT_DIR is the new directory into which the website will be built. It is destroyed before every build.
 
+  The optional certfile and keyfile will switch to serving up over HTTPS. Generate e.g. using the mkcert tool.
+
 Options:
   -w, --working-file-regex TEXT  Regex to match working files.  [default: \_.*]
   -t, --template-extension TEXT  Extension identifying files to template with Jinja  [default: .html, .xml, .txt]
   -h, --host TEXT                Serve on this host  [default: localhost]
   -p, --port INTEGER             Serve on this port  [default: 8000]
-  --help                         Show this message and exit.
+  --certfile TEXT                Filename containing SSL certfile (needed for HTTPS)
+  --keyfile TEXT                 Filename containing SSL keyfile (needed for HTTPS)
+  --help                         Show this message and exit
 ```
 
 The two mandatory arguments are the content and output directories. Providing them results in an output like this:
@@ -187,6 +191,27 @@ Watching for changes in: example
 The tool is now watching for changes to the source content, after which it will rebuild and notify all browsers subscribed for hot reloading (see below) before waiting again for more changes. Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
 
 **Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files). A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`. If the content changed then the site will be rebuilt and browser(s) told to reload.
+
+## Using HTTPS
+
+By default AWG will serve up over HTTP. To use HTTPS one needs certificates for `localhost` signed by a Certificate Authority (CA) registered on your machine.
+
+The easiest approach is to use [mkcert](https://mkcert.dev/), e.g.
+```bash
+# Install mkcert tool
+brew install mkcert
+
+# Use to create and install a local (self-signed) CA
+mkcert -install
+
+# Use new CA to create the cert and key files for localhost
+# (generates localhost.pem and localhost-key.pem in the current directory)
+mkcert localhost
+
+# Run AWG in HTTPS mode
+./awg.py contents/ docs/ --certfile localhost.pem --keyfile localhost-key.pem
+# ...etc
+```
 
 ## Hot reloading
 
@@ -265,7 +290,9 @@ With that all in mind, the javascript is clean:
 
 ```Javascript
 function start_hot_reloader() {
-  var ws = new WebSocket("ws://localhost:8000/ws");
+  const host = window.location.host;
+  const protocol = window.location.protocol == "https:" ? "wss" : "ws";
+  const ws = new WebSocket(`${protocol}://${host}/ws`);
 
   ws.onclose = function close_without_having_opened() {
     // We will replace this function after successfully opening the connection.

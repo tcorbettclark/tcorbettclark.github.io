@@ -26,7 +26,6 @@ My personal website.
 
 # TODO - technical
 
-- host on https so can complete security additions.
 - me.css has SRI, but not listed in the CSP. Fortunately doesn't matter, but the base template should support extensions.
 - Reduce font size of h2
 - DYLD_LIBRARY_PATH is only correct for me because I installed brew in /usr/local. The default is /opt/...

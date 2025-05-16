@@ -1,5 +1,7 @@
 function start_hot_reloader() {
-  var ws = new WebSocket("ws://localhost:8000/ws");
+  const host = window.location.host;
+  const protocol = window.location.protocol == "https:" ? "wss" : "ws";
+  const ws = new WebSocket(`${protocol}://${host}/ws`);
 
   ws.onclose = function close_without_having_opened() {
     // We will replace this function after successfully opening the connection.
