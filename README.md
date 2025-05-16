@@ -1,6 +1,6 @@
 # README
 
-My personal website.
+My personal website. For details, see https://www.corbettclark.com/building-this-website/index.html.
 
 # TODO - content
 
@@ -26,15 +26,17 @@ My personal website.
 
 # TODO - technical
 
+- Navigation
+  - Some kind of floating and automatic TOC on all main pages. And document on approach page.
+  - Make header tags linkable
+  - Provide fast return to top, and/or keep navigation bar always visible
 - me.css has SRI, but not listed in the CSP. Fortunately doesn't matter, but the base template should support extensions.
 - Reduce font size of h2 (especially poor on phone).
 - DYLD_LIBRARY_PATH is only correct for me because I installed brew in /usr/local. The default is /opt/...
-- Some kind of floating and automatic TOC on all main pages. And document on approach page.
 - Decide on all markdown plugins.
 - Allow merging lists across TOML files, e.g. to better manage sitemap files.
-  And inject a special variable into the TOML for the current directory to make relocatable.
 - Find a way to deliver a 404 on the dev server (currently just returns empty files!).
-- Submit sitemap to search engines (once?).
+- Submit sitemap to various search engines (once?).
 - Fontawesome:
   - Find an alternative. Maybe.
   - I'm using the free plan which has a monthly limit of 10,000 views.
