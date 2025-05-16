@@ -255,7 +255,7 @@ $$
               maths like
             </p>
             <div class="math block">
-              \sum_{k=1}^n { k! \over (1+k)^2 }
+              \sum\_{k=1}^n { k! \over (1+k)^2 }
             </div>
           </blockquote>
           <h1>
@@ -463,14 +463,14 @@ code.hljs {
             variable is set:
           </p>
           <pre><code class="language-html">&lt;div class="content {% if draft %}draft-watermark{% endif %}"&gt;
-    {% block page %}{% endblock page %}
+  {% block page %}{% endblock page %}
 &lt;/div&gt;
 </code></pre>
           <p>
             The corresponding CSS is:
           </p>
           <pre><code class="language-css">.draft-watermark {
-    background-image: url("draft-watermark.svg");
+  background-image: url("draft-watermark.svg");
 }
 </code></pre>
           <p>
@@ -797,8 +797,11 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
           <p>
             Hence the following are added in the <code>_base.html</code> template to the <code>&lt;head&gt;</code> tag.
           </p>
-          <pre><code class="language-html">&lt;meta http-equiv="Upgrade-Insecure-Requests" content="1"&gt;
-&lt;meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains"&gt;
+          <pre><code class="language-html">&lt;meta http-equiv="Upgrade-Insecure-Requests" content="1" /&gt;
+&lt;meta
+  http-equiv="Strict-Transport-Security"
+  content="max-age=63072000; includeSubDomains"
+/&gt;
 </code></pre>
           <p>
             (<code>max-age</code> is set to the recommended 2 years).
@@ -874,7 +877,8 @@ FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources
             In short, my workflow is:
           </p>
           <ul>
-            <li>Start up <a href="awg.html">AWG</a> with <code>./awg.py content/ docs/</code>
+            <li>Start up <a href="awg.html">AWG</a> with <code>./awg.py content/ docs/ --certfile localhost.pem
+            --keyfile localhost-key.pem</code>
             </li>
             <li>Repeat until ready to publish:
               <ul>

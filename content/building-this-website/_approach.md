@@ -258,18 +258,20 @@ To control this watermark, the `/_page.html` template adds a CSS class if a `dra
 
 ```html
 <div class="content {% if draft %}draft-watermark{% endif %}">
-    {% block page %}{% endblock page %}
+  {% block page %}{% endblock page %}
 </div>
 ```
 
 The corresponding CSS is:
+
 ```css
 .draft-watermark {
-    background-image: url("draft-watermark.svg");
+  background-image: url("draft-watermark.svg");
 }
 ```
 
 and the corresponding `draft-watermark.svg` contains
+
 ```SVG
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="170px" width="210px">
     <text transform="translate(0, 40) rotate(30)" fill="rgba(245,5,5,0.05)" font-size="60px">
@@ -279,6 +281,7 @@ and the corresponding `draft-watermark.svg` contains
 ```
 
 Hence to mark a page as in-draft/work-in-progress, set the `draft` variable at the top of the template as follows:
+
 ```HTML
 {% set draft = true %}
 
@@ -292,9 +295,11 @@ Hence to mark a page as in-draft/work-in-progress, set the `draft` variable at t
 To support search engine indexing and SEO, the `robots.txt` file and related sitemap file (in `sitemap.xml`) are used to hint to search engines what pages they should index. See Google's descriptions of [robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
 
 For this site I just use the `robots.txt` file to point to the sitemap:
+
 ```
 Sitemap: {{ SITEURL }}/sitemap.xml
 ```
+
 (the `SITEURL` is set in a template data TOML file).
 
 The `sitemap.xml` file will also be run though Jinja by [AWG](awg.html) because it has an `.xml` extension. Hence it is a template:
@@ -369,11 +374,13 @@ CSP is configured using the `Content-Security-Policy` HTTP Header. Since this is
 ```
 
 My approach is:
+
 - To deny everything by default and add specific permissions as needed.
 - To always use SRI, including for local (or `'self'`) files. Note that [AWG](awg.html) provides a Jinja filter to make it easy to generate the hashes (such as sha384) from the source files.
 - To check validity using tools such as [CSP Evaluator](https://csp-evaluator.withgoogle.com).
 
 In annotated outline, the CSP is as follows:
+
 ```text
 upgrade-insecure-requests;                   <-- Instruct browser to switch site HTTP urls to HTTPS
 default-src 'none';                          <-- Default fallback is deny
@@ -498,9 +505,13 @@ This site can use HTTPS throughout. To help prevent manipulator-in-the-middle (M
 Hence the following are added in the `_base.html` template to the `<head>` tag.
 
 ```html
-<meta http-equiv="Upgrade-Insecure-Requests" content="1">
-<meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains">
+<meta http-equiv="Upgrade-Insecure-Requests" content="1" />
+<meta
+  http-equiv="Strict-Transport-Security"
+  content="max-age=63072000; includeSubDomains"
+/>
 ```
+
 (`max-age` is set to the recommended 2 years).
 
 The `upgrade-insecure-requests` CSP directive is explained in the Content Security Section above.
@@ -533,8 +544,6 @@ To inform browsers not to load scripts and stylesheets unless the server indicat
 ...
 ```
 
-
-
 # Deployment on GitHub pages
 
 It is easy and convenient to host static content on [GitHub pages](https://pages.github.com).
@@ -547,7 +556,7 @@ The default GitHub action detects code commits and deploys on their infrastructu
 
 As I'm the only person making changes, I mostly dispense with creating a branch and making a pull request to myself ([GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)), but instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub. In short, my workflow is:
 
-- Start up [AWG](awg.html) with `./awg.py content/ docs/`
+- Start up [AWG](awg.html) with `./awg.py content/ docs/ --certfile localhost.pem --keyfile localhost-key.pem`
 - Repeat until ready to publish:
   - Make changes and check in local browser without leaving my editor (because of hot reload).
   - Commit locally using git.
