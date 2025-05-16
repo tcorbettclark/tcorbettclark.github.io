@@ -1,1 +1,1 @@
-Sitemap: {{ SITEURL }}/sitemap.xml
+Sitemap: https://www.corbettclark.com/sitemap.xml
