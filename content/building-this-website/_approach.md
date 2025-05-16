@@ -352,7 +352,7 @@ Notable issues I could not address include:
 
 # Security
 
-Excellent references on web security can be found on [Google web.dev](https://web.dev/explore/secure) and [Mozzila's MDN](https://developer.mozilla.org/en-US/docs/Web/Security).
+Excellent references on web security can be found on [Google's web.dev](https://web.dev/explore/secure) and [Mozzila's MDN](https://developer.mozilla.org/en-US/docs/Web/Security).
 
 To find security weaknesses and information about how to address them, I follow the findings from MDN's [Observatory tool](https://developer.mozilla.org/en-US/observatory).
 
@@ -365,12 +365,12 @@ A related concept is [SubResource Integrity (SRI)](https://developer.mozilla.org
 CSP is configured using the `Content-Security-Policy` HTTP Header. Since this is a static site I use the `http-equiv` meta tag in every HTML file:
 
 ```HTML
-<meta http-equiv="...name of HTTP Header..." content="...HTTP header contents">
+<meta http-equiv="...name of HTTP Header..." content="...HTTP header contents...">
 ```
 
 My approach is:
-- To deny everything by default before adding in permissions as needed.
-- To always use SRI, including for local (or `'self'`) files. Note that [AWG](awg.html) provides a Jinja filter to make it easy to generate the hashes (such has sha384) from the source files.
+- To deny everything by default and add specific permissions as needed.
+- To always use SRI, including for local (or `'self'`) files. Note that [AWG](awg.html) provides a Jinja filter to make it easy to generate the hashes (such as sha384) from the source files.
 - To check validity using tools such as [CSP Evaluator](https://csp-evaluator.withgoogle.com).
 
 In annotated outline, the CSP is as follows:
@@ -407,7 +407,7 @@ style-src
 I discovered a few helpful things along the way:
 
 - Safari does not read `style-src-elem`, but allows it to exist. Chrome does read it. Hence using `style-src`.
-- The fallback from say `style-src-elem` to `style-src` to `default-src` does not mean keep trying until one passes, but use the most specific provided.
+- The fallback from say `style-src-elem` to `style-src` to `default-src` does not mean keep trying until one passes, but use the most specific provided. If the most specific fails then the permission is denied.
 - The `style-src` section does not do anything with hashes for link files. It neither checks the hashes or complains if present. This could be about CSP level 2 vs level 3. See also, [here](https://stackoverflow.com/questions/77338818/content-security-policy-hashes-for-files-dont-seem-to-work). I've kept the hashes in because I believe it should work like this, and doing so appears harmless.
 - If script hashes are provided in `script-src` then SRI must also be used (i.e. the `integrity` attribute should exist and contain the hash).
 - For both CSS and javascript, if the SRI is present (using the `integrity` attribute), then it is checked and must pass. Hence independently of CSP, SRI seems uniformly implemented.

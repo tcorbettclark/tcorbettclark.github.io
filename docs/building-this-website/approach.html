@@ -594,7 +594,7 @@ change_frequency = "weekly"
             Security
           </h1>
           <p>
-            Excellent references on web security can be found on <a href="https://web.dev/explore/secure">Google
+            Excellent references on web security can be found on <a href="https://web.dev/explore/secure">Google’s
             web.dev</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Security">Mozzila’s MDN</a>.
           </p>
           <p>
@@ -622,17 +622,17 @@ change_frequency = "weekly"
             use the <code>http-equiv</code> meta tag in every HTML file:
           </p>
           <pre><code class=
-          "language-HTML">&lt;meta http-equiv="...name of HTTP Header..." content="...HTTP header contents"&gt;
+          "language-HTML">&lt;meta http-equiv="...name of HTTP Header..." content="...HTTP header contents..."&gt;
 </code></pre>
           <p>
             My approach is:
           </p>
           <ul>
-            <li>To deny everything by default before adding in permissions as needed.
+            <li>To deny everything by default and add specific permissions as needed.
             </li>
             <li>To always use SRI, including for local (or <code>'self'</code>) files. Note that <a href=
-            "awg.html">AWG</a> provides a Jinja filter to make it easy to generate the hashes (such has sha384) from
-            the source files.
+            "awg.html">AWG</a> provides a Jinja filter to make it easy to generate the hashes (such as sha384) from the
+            source files.
             </li>
             <li>To check validity using tools such as <a href="https://csp-evaluator.withgoogle.com">CSP Evaluator</a>.
             </li>
@@ -680,7 +680,8 @@ style-src
             using <code>style-src</code>.
             </li>
             <li>The fallback from say <code>style-src-elem</code> to <code>style-src</code> to <code>default-src</code>
-            does not mean keep trying until one passes, but use the most specific provided.
+            does not mean keep trying until one passes, but use the most specific provided. If the most specific fails
+            then the permission is denied.
             </li>
             <li>The <code>style-src</code> section does not do anything with hashes for link files. It neither checks
             the hashes or complains if present. This could be about CSP level 2 vs level 3. See also, <a href=
