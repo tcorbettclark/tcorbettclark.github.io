@@ -12,6 +12,17 @@ https://fishshell.com/docs/current/design.html
 
 Check fish_delta
 
+TODO explain where I installed brew (and find out if that was actually a good idea!)
+
+brew install lsd
+alias la 'ls -a'
+alias ll 'ls -l'
+alias lla 'ls -la'
+alias ls lsd
+alias lt 'ls --tree'
+
+https://gist.github.com/jamesmurdza/6e5f86bae7d3b3db4201a52045a5e477#see-dependency-tree
+
 # Odds
 
 [AutoRaise application](https://github.com/sbmpost/AutoRaise)

@@ -21,7 +21,7 @@ The essential features are:
 
 Then, to create a fast iterative loop:
 
-5. Serving up content on a local http webserver (for review during development).
+5. Serving up content on a local http(s) webserver (for review during development).
 6. Watching for source file changes and rebuilding automatically.
 7. Notifying browser(s) of new builds (e.g. to trigger a "hot reload").
 
@@ -215,7 +215,7 @@ mkcert localhost
 
 ## Hot reloading
 
-The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload. This feature can be used with a small amount of javascript e.g. in [hot-reloader.js](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
+The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload. This feature can be used with a small amount of javascript e.g. [hot-reloader.js](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
 
 ```Html
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
@@ -228,9 +228,7 @@ The AWG tool provides a simple websocket API to "push notify" any browsers open 
 </html>
 ```
 
-Note that it only does anything when being served up over `localhost`, so is fine to keep in production (when it does nothing). Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
-
-More details explaining how this works are in the implementation section, below.
+The javascript only runs when served up over `localhost`, so is fine to leave in for production. Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
 
 # Implementation details
 
@@ -246,7 +244,7 @@ The Watcher and Server are both async; the Builder is synchronous. The main loop
 ```Python
 builder = Builder(content_dir, output_dir, working_file_regex, template_extensions)
 watcher = Watcher(content_dir)
-server = Server(host, port, output_dir)
+server = Server(host, port, output_dir, certfile, keyfile)
 
 builder.rebuild()
 await watcher.start()
@@ -254,15 +252,16 @@ await server.start()
 try:
     while True:
         await watcher.wait_for_change()
-        builder.rebuild()
-        await server.signal_hot_reloaders()
+        if builder.rebuild():
+            await server.signal_hot_reloaders()
 except asyncio.CancelledError:
     await watcher.stop()
     await server.stop()
+    builder.cleanup()
     log("Bye")
 ```
 
-Everything is in the single file: [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py).
+The entire tool is a single file: [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py). About half of it is just logging what it is doing.
 
 ## Hot reloading
 

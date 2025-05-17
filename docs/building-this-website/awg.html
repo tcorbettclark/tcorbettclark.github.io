@@ -120,7 +120,7 @@
             Then, to create a fast iterative loop:
           </p>
           <ol start="5">
-            <li>Serving up content on a local http webserver (for review during development).
+            <li>Serving up content on a local http(s) webserver (for review during development).
             </li>
             <li>Watching for source file changes and rebuilding automatically.
             </li>
@@ -462,9 +462,8 @@ mkcert localhost
           </h2>
           <p>
             The AWG tool provides a simple websocket API to “push notify” any browsers open on a page that the source
-            has changed and they should reload. This feature can be used with a small amount of javascript e.g. in
-            <a href=
-            "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js">hot-reloader.js</a>,
+            has changed and they should reload. This feature can be used with a small amount of javascript e.g.
+            <a href="https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js">hot-reloader.js</a>,
             configured to load from the <code>&lt;head&gt;</code> tag:
           </p>
           <pre><code class="language-Html">&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"&gt;
@@ -477,12 +476,9 @@ mkcert localhost
 &lt;/html&gt;
 </code></pre>
           <p>
-            Note that it only does anything when being served up over <code>localhost</code>, so is fine to keep in
-            production (when it does nothing). Also, not using this javascript or equivalent is fine, but the browser
-            will need to be reloaded/refreshed by hand after changes.
-          </p>
-          <p>
-            More details explaining how this works are in the implementation section, below.
+            The javascript only runs when served up over <code>localhost</code>, so is fine to leave in for production.
+            Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed
+            by hand after changes.
           </p>
           <h1>
             Implementation details
@@ -512,7 +508,7 @@ mkcert localhost
           <pre><code class=
           "language-Python">builder = Builder(content_dir, output_dir, working_file_regex, template_extensions)
 watcher = Watcher(content_dir)
-server = Server(host, port, output_dir)
+server = Server(host, port, output_dir, certfile, keyfile)
 
 builder.rebuild()
 await watcher.start()
@@ -520,16 +516,18 @@ await server.start()
 try:
     while True:
         await watcher.wait_for_change()
-        builder.rebuild()
-        await server.signal_hot_reloaders()
+        if builder.rebuild():
+            await server.signal_hot_reloaders()
 except asyncio.CancelledError:
     await watcher.stop()
     await server.stop()
+    builder.cleanup()
     log("Bye")
 </code></pre>
           <p>
-            Everything is in the single file: <a href=
-            "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py">awg.py</a>.
+            The entire tool is a single file: <a href=
+            "https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py">awg.py</a>. About half of it
+            is just logging what it is doing.
           </p>
           <h2>
             Hot reloading
