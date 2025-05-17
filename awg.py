@@ -297,35 +297,19 @@ class Builder:
             ),
             self.working_dir,
         )
-        log(f"Total number of changes: {n_deltas}")
-
-        # n_changed_files = 0
-        # for root, dirs, files in self.working_dir.walk():
-        #     for name in dirs:
-        #         p = self.output_dir / (root / name).relative_to(
-        #             self.working_dir
-        #         )
-        #         if p.exists() and not p.is_dir():
-        #             p.unlink()
-        #         if not p.exists():
-        #             p.mkdir()
-        #     for name in files:
-        #         input = self.working_dir / root / name
-        #         output = self.output_dir / input.relative_to(self.working_dir)
-        #         if output.is_dir():
-        #             shutil.rmtree(output)
-        #         if not output.exists():
-        #             n_changed_files += 1
-        #             shutil.copyfile(input, output)
-        # log(f"Number of files changed: {n_changed_files}")
+        if n_deltas > 0:
+            log(f"Total number of changes to files and directories: {n_deltas}")
+            log(f"Updated: {self.output_dir}")
+        else:
+            log(f"No changes required to: {self.output_dir}")
+        return n_deltas > 0
 
     def rebuild(self):
         self.create_fresh_output_directory()
         self.render_templates()
         self.remove_working_files()
         self.tidy_html_files()
-        self.publish_to_output()
-        log(f"Rebuilt all files in: {self.output_dir}")
+        return self.publish_to_output()
 
     def cleanup(self):
         log("Removing tempory working directory")
@@ -492,8 +476,8 @@ async def run(
     try:
         while True:
             await watcher.wait_for_change()
-            builder.rebuild()
-            await server.signal_hot_reloaders()
+            if builder.rebuild():
+                await server.signal_hot_reloaders()
     except asyncio.CancelledError:
         # asyncio raises CancelledError on ctrl-c signal
         # (see https://docs.python.org/3/library/asyncio-runner.html#handling-keyboard-interruption).
