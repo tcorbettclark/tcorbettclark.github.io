@@ -26,6 +26,7 @@ My personal website. For details, see https://www.corbettclark.com/building-this
 
 # TODO - technical
 
+- Separate (and colour) the output e.g. into Builder, Server, Watcher categories. But maybe more.
 - Navigation
   - Some kind of floating and automatic TOC on all main pages. And document on approach page.
   - Make header tags linkable
