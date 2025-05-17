@@ -1,7 +1,7 @@
 #!/usr/bin/env -S DYLD_LIBRARY_PATH=/usr/local/lib uv run --script
 
 # /// script
-# requires-python = ">=3.12"
+# requires-python = ">=3.13"
 # dependencies = [
 #     "aiohttp",
 #     "click",
@@ -16,6 +16,7 @@
 
 import asyncio
 import base64
+import filecmp
 import glob
 import hashlib
 import logging
@@ -24,6 +25,7 @@ import pathlib
 import re
 import shutil
 import ssl
+import tempfile
 
 import aiohttp
 import aiohttp.abc
@@ -50,20 +52,12 @@ logging.getLogger("watchfiles.main").setLevel(
 )  # Stop watchfiles from logging file changes, as we do it instead.
 
 
-def log(message, *args, level=logging.INFO):
-    # Make all pathlib.Path args relative to current working directory.
-    cwd = os.getcwd()
-    tmp = [
-        str(pathlib.Path(arg).relative_to(cwd))
-        if isinstance(arg, pathlib.Path)
-        else arg
-        for arg in args
-    ]
-    logger.log(level, message.format(*tmp))
+def log(message, *, level=logging.INFO):
+    logger.log(msg=message, level=level)
 
 
-def abort(message, *args):
-    log(message, *args, level=logging.ERROR)
+def abort(message):
+    log(message, level=logging.ERROR)
     log("Aborting!", level=logging.ERROR)
     quit()
 
@@ -86,15 +80,20 @@ class Builder:
     def __init__(
         self, content_dir, output_dir, working_file_regex, template_extensions
     ):
-        self.output_dir = output_dir
         self.content_dir = content_dir
+        self.working_dir = pathlib.Path(tempfile.mkdtemp())
+        self.output_dir = output_dir
         self.working_file_regex = re.compile(working_file_regex)
         self.template_extensions = template_extensions
         log(f"Working files match regex: {working_file_regex}")
         log(
-            "Template files have extension(s): {}",
-            ", ".join(self.template_extensions),
+            "Template files have extension(s): "
+            + ", ".join(self.template_extensions),
         )
+
+    def _log(self, message, *paths):
+        tmp = [str(p.relative_to(self.working_dir)) for p in paths]
+        log(message.format(*tmp))
 
     def _is_working_filename(self, filename):
         return (
@@ -111,21 +110,17 @@ class Builder:
         )
 
     def create_fresh_output_directory(self):
-        log(f"Using content from: {self.content_dir} ({{}})", self.content_dir)
-        if os.path.exists(self.output_dir):
-            shutil.rmtree(self.output_dir)
-        shutil.copytree(self.content_dir, self.output_dir)
-        log(
-            f"Cloned content into fresh output directory: {self.output_dir} ({{}})",
-            self.output_dir,
-        )
+        self._log(f"Using content from: {self.content_dir}")
+        shutil.rmtree(self.working_dir)
+        shutil.copytree(self.content_dir, self.working_dir)
+        log("Cloned content into fresh working directory")
 
     def _add_template_data(self, env):
         for filename in glob.glob(
-            "**/*.toml", root_dir=self.output_dir, recursive=True
+            "**/*.toml", root_dir=self.working_dir, recursive=True
         ):
-            filename = self.output_dir / filename
-            log("Reading template data from: {}", filename)
+            filename = self.working_dir / filename
+            self._log("Reading template data from: {}", filename)
             with filename.open("rb") as f:
                 data = tomllib.load(f)
             overlap = set(data.keys()).intersection(env.globals.keys())
@@ -140,7 +135,7 @@ class Builder:
         def convert_markdown(context, value):
             # Always relative to template file.
             markdown_filename = (
-                self.output_dir / pathlib.Path(context.name).parent / value
+                self.working_dir / pathlib.Path(context.name).parent / value
             )
             md = markdown_it.MarkdownIt(
                 "commonmark",
@@ -152,7 +147,7 @@ class Builder:
             md.use(markdown_attrs_block_plugin)
             md.use(markdown_deflist_plugin)
             md.enable(["replacements", "smartquotes", "table"])
-            log("Converted markdown from: {}", markdown_filename)
+            self._log("Converted markdown from: {}", markdown_filename)
             with markdown_filename.open() as f:
                 return md.render(f.read())
 
@@ -171,11 +166,11 @@ class Builder:
             value = pathlib.Path(value)
             if value.is_absolute():
                 # Absolute, so combine with output_dir.
-                filename = self.output_dir / value.relative_to("/")
+                filename = self.working_dir / value.relative_to("/")
             else:
                 # Relative, so use directory of calling template file.
                 filename = (
-                    self.output_dir / pathlib.Path(context.name).parent / value
+                    self.working_dir / pathlib.Path(context.name).parent / value
                 )
             return base64.b64encode(
                 algorithms[algorithm](filename.read_bytes()).digest()
@@ -184,7 +179,7 @@ class Builder:
         env.filters["sha"] = make_sha
 
     def render_templates(self):
-        loader = jinja2.FileSystemLoader(self.output_dir)
+        loader = jinja2.FileSystemLoader(self.working_dir)
         env = _RelativeEnvironment(loader=loader)
         self._add_template_data(env)
         self._add_markdown_filter(env)
@@ -194,15 +189,15 @@ class Builder:
         )
         for template_filename in template_filenames:
             template = env.get_template(template_filename)
-            p = self.output_dir / template_filename
+            p = self.working_dir / template_filename
             with open(p, "w") as f:
                 f.write(template.render())
-            log("Rendered template: {}", p)
+            self._log("Rendered template: {}", p)
 
     def remove_working_files(self):
         n_files = 0
         n_dirs = 0
-        for root, dirs, files in self.output_dir.walk(top_down=False):
+        for root, dirs, files in self.working_dir.walk(top_down=False):
             for name in files:
                 p = root / name
                 if self._is_working_filename(p):
@@ -227,7 +222,7 @@ class Builder:
             )
             log(f"  (Exception: {str(e)})")
             return
-        for root, dirs, files in self.output_dir.walk():
+        for root, dirs, files in self.working_dir.walk():
             for name in files:
                 p = root / name
                 if p.suffix == ".html":
@@ -241,24 +236,100 @@ class Builder:
                     errors = doc.get_errors()
                     if errors:
                         for e in errors:
-                            log(f"Html-tidy found problem in {{}}: {e}", p)
+                            self._log(
+                                f"Html-tidy found problem in {{}}: {e}", p
+                            )
                         output_filename = p.with_suffix(".tidy.html")
-                        log(
-                            "Not updating file, but see tidy version in {}",
+                        self._log(
+                            "Not updating file, but see tidy version in: {}",
                             output_filename,
                         )
                     else:
                         output_filename = p
-                        log("Html-tidy ok: {}", p)
+                        self._log("Html-tidy ok: {}", p)
                     with open(output_filename, "w") as fp:
                         fp.write(doc.gettext())
+
+    def publish_to_output(self):
+        def publish(dcmp, working_path):
+            assert len(dcmp.common_funny) == 0  # TODO
+            assert len(dcmp.funny_files) == 0  # TODO
+            output_path = self.output_dir / working_path.relative_to(
+                self.working_dir
+            )
+            for name in dcmp.left_only:
+                wp, op = working_path / name, output_path / name
+                if wp.is_dir():
+                    op.mkdir()
+                elif wp.is_file():
+                    self._log("Adding new file: {}", wp)
+                    shutil.copyfile(wp, op)
+
+            for name in dcmp.right_only:
+                wp, op = working_path / name, output_path / name
+                if wp.is_dir():
+                    if op.exists():
+                        shutil.rmtree(op)
+                elif wp.is_file():
+                    self._log("Removing file: {}", wp)
+                    if op.exists():
+                        op.unlink()
+
+            for name in dcmp.diff_files:
+                wp, op = working_path / name, output_path / name
+                self._log("Modifying existing file: {}", wp)
+                shutil.copyfile(wp, op)
+
+            n_deltas = (
+                len(dcmp.left_only)
+                + len(dcmp.right_only)
+                + len(dcmp.diff_files)
+            )
+            for name, sub_dcmp in dcmp.subdirs.items():
+                n_deltas += publish(sub_dcmp, working_path / name)
+            return n_deltas
+
+        n_deltas = publish(
+            filecmp.dircmp(
+                self.working_dir,
+                self.output_dir,
+                ignore=filecmp.DEFAULT_IGNORES + [".DS_Store"],
+            ),
+            self.working_dir,
+        )
+        log(f"Total number of changes: {n_deltas}")
+
+        # n_changed_files = 0
+        # for root, dirs, files in self.working_dir.walk():
+        #     for name in dirs:
+        #         p = self.output_dir / (root / name).relative_to(
+        #             self.working_dir
+        #         )
+        #         if p.exists() and not p.is_dir():
+        #             p.unlink()
+        #         if not p.exists():
+        #             p.mkdir()
+        #     for name in files:
+        #         input = self.working_dir / root / name
+        #         output = self.output_dir / input.relative_to(self.working_dir)
+        #         if output.is_dir():
+        #             shutil.rmtree(output)
+        #         if not output.exists():
+        #             n_changed_files += 1
+        #             shutil.copyfile(input, output)
+        # log(f"Number of files changed: {n_changed_files}")
 
     def rebuild(self):
         self.create_fresh_output_directory()
         self.render_templates()
         self.remove_working_files()
         self.tidy_html_files()
-        log("Rebuilt all files in: {}", self.output_dir)
+        self.publish_to_output()
+        log(f"Rebuilt all files in: {self.output_dir}")
+
+    def cleanup(self):
+        log("Removing tempory working directory")
+        shutil.rmtree(self.working_dir)
 
 
 class _ServerAccessLogger(aiohttp.abc.AbstractAccessLogger):
@@ -341,8 +412,8 @@ class Server:
         await self._runner.setup()
         ssl_context = None
         if self.certfile and self.keyfile:
-            log("Using SSL certfile: {}", self.certfile)
-            log("Using SSL keyfile: {}", self.keyfile)
+            log(f"Using SSL certfile: {self.certfile}")
+            log(f"Using SSL keyfile: {self.keyfile}")
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
             ssl_context.load_cert_chain(self.certfile, self.keyfile)
             log(f"Starting local server on https://{self.host}:{self.port}")
@@ -354,7 +425,7 @@ class Server:
             port=self.port,
             ssl_context=ssl_context,
         )
-        log("Serving files from: {}", self.directory)
+        log(f"Serving files from: {self.directory}")
         await site.start()
 
     async def stop(self):
@@ -368,17 +439,21 @@ class Watcher:
         self.directory = directory
         self._change_event = asyncio.Event()
 
+    def _log(self, message, *paths):
+        tmp = [str(pathlib.Path(p).relative_to(self.directory)) for p in paths]
+        log(message.format(*tmp))
+
     async def _start(self):
-        log("Watching for changes in: {}", self.directory)
+        log(f"Watching for changes in: {self.directory}")
         async for changes in watchfiles.awatch(self.directory):
             for change, filename in list(changes):
                 filename = pathlib.Path(filename)
                 if change == watchfiles.Change.added:
-                    log("Noticed file added: {}", filename)
+                    self._log("Noticed file added: {}", filename)
                 elif change == watchfiles.Change.deleted:
-                    log("Noticed file deleted: {}", filename)
+                    self._log("Noticed file deleted: {}", filename)
                 elif change == watchfiles.Change.modified:
-                    log("Noticed file modified: {}", filename)
+                    self._log("Noticed file modified: {}", filename)
             self._change_event.set()
 
     async def start(self):
@@ -425,6 +500,7 @@ async def run(
         # We take responsibility for cleanup and swallow the exception.
         await watcher.stop()
         await server.stop()
+        builder.cleanup()
         log("Bye")
 
 
