@@ -8,4 +8,4 @@ $$
 
 I posted an answer on Twitter/X, [here](https://x.com/tcorbettclark/status/1682357430011805698).
 
-Solution [here](solution.pdf), which also generalises to other roots of unity (i.e. $x^n=1, x \neq 1$).
+Solution [here](solution.pdf), which also discusses generalising to other roots of unity (i.e. $x^n=1, x \neq 1$).
