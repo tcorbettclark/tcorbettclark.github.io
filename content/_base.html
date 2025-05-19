@@ -27,8 +27,8 @@
                 https://ka-f.fontawesome.com
                 ;
             font-src
+                'self'
                 https://cdn.jsdelivr.net
-                https://ka-f.fontawesome.com
                 ;
             style-src
                 'self'
@@ -59,10 +59,13 @@
         <link rel="stylesheet" type="text/css" href="{{ KATEX_CSS }}" integrity="{{ KATEX_CSS_SHA }}" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ GRUVBOX_CSS }}" integrity="{{ GRUVBOX_CSS_SHA }}" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ BULMA_CSS }}" integrity="{{ BULMA_CSS_SHA }}" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/fontawesome/fontawesome.min.css" integrity="sha384-{{ '/fontawesome/fontawesome.min.css' | sha() }}">
+        <link rel="stylesheet" type="text/css" href="/fontawesome/brands.min.css" integrity="sha384-{{ '/fontawesome/brands.min.css' | sha() }}">
+        <link rel="stylesheet" type="text/css" href="/fontawesome/regular.min.css" integrity="sha384-{{ '/fontawesome/regular.min.css' | sha() }}">
+        <link rel="stylesheet" type="text/css" href="/fontawesome/solid.min.css" integrity="sha384-{{ '/fontawesome/solid.min.css' | sha() }}">
         <link rel="stylesheet" type="text/css" href="/main.css" integrity="sha384-{{ '/main.css' | sha() }}">
         {% block links_to_extra_css %}{% endblock links_to_extra_css %}
 
-        <script defer src="{{ FONTAWESOME_JS }}" integrity="{{ FONTAWESOME_JS_SHA }}" crossorigin="anonymous"></script>
         <script defer src="{{ KATEX_JS }}" integrity="{{ KATEX_JS_SHA }}" crossorigin="anonymous"></script>
         <script defer src="{{ HIGHLIGHT_JS }}" integrity="{{ HIGHLIGHT_JS_SHA }}" crossorigin="anonymous"></script>
 
