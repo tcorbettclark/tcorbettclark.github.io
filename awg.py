@@ -267,10 +267,10 @@ class Builder:
 
             for name in dcmp.right_only:
                 wp, op = working_path / name, output_path / name
-                if wp.is_dir():
+                if op.is_dir():
                     if op.exists():
                         shutil.rmtree(op)
-                elif wp.is_file():
+                elif op.is_file():
                     self._log("Removing file: {}", wp)
                     if op.exists():
                         op.unlink()
