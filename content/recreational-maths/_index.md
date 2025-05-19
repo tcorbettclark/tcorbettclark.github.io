@@ -7,6 +7,7 @@ Here are some of the more interesting, surprising, and/or fun. My answers are wr
 
 * [Problem 1](problem-1/index.html)
 * [Problem 2](problem-2/index.html)
+* [Problem 3](problem-3/index.html)
 * _More soon!_
 
 <!--
@@ -14,7 +15,6 @@ JD Cook.
 All my puzzle books...
 
 And others from Twitter
-* https://x.com/tcorbettclark/status/1676132727966375936
 * https://x.com/tcorbettclark/status/1675758858831011841
 * https://x.com/tcorbettclark/status/1660174431535202309
 * https://x.com/tcorbettclark/status/1586618640295682048
