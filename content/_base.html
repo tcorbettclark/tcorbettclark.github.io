@@ -69,7 +69,7 @@
         <script defer src="{{ KATEX_JS }}" integrity="{{ KATEX_JS_SHA }}" crossorigin="anonymous"></script>
         <script defer src="{{ HIGHLIGHT_JS }}" integrity="{{ HIGHLIGHT_JS_SHA }}" crossorigin="anonymous"></script>
 
-        <script defer src="/hot-reloader.js" integrity="sha384-{{ '/hot-reloader.js' | sha() }}" async></script>
+        <script defer src="/hot-reloader.js" integrity="sha384-{{ '/hot-reloader.js' | sha() }}"></script>
         <script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
         <script defer src="/render-code.js" integrity="sha384-{{ '/render-code.js' | sha() }}"></script>
         {% block script_tags_to_extra_js %}{% endblock script_tags_to_extra_js %}
