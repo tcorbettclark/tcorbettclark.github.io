@@ -10,7 +10,7 @@ I've chosen to move the boundary so that the build tool has minimal opinion of w
 Hence,
 
 - see my [AWG tool](awg.html) to understand what it does, what it doesn't do, and how it works;
-- see my [content approach](approach.html) for a systematic walk-through of how I structured the content, my choice of web framework and libraries, how I generate the sitemap, notes to achieve colour consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, etc;
+- see my [content approach](approach.html) for a systematic walk-through of how I structure the content, my choice of web framework and libraries, how I generate the sitemap, notes to achieve colour consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, etc;
 - leaving the content (mostly markdown files) to be found in the [source repository](https://github.com/tcorbettclark/tcorbettclark.github.io/tree/master/content) for this website.
 
 [^1]: Yes, another one - see [this list](https://jamstack.org/generators/) for example.
