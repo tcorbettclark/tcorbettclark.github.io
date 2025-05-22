@@ -228,6 +228,21 @@ Lastly, the base template (in `_base.html`) indicates the principal favicons and
 </html>
 ```
 
+# Icons
+
+I use [Font Awesome](https://fontawesome.com) for icons. I found that loading them from Font Awesome produced rendering lag (the icons flickered as they appeared), and also suffered from fragile SRI settings. Hence I host directly. To keep things self-contained, the fonts and CSS are all in a top level `/fontawesome/` directory.
+
+The `head` section in the `_base.html` template loads the CSS using:
+
+```html
+<link rel="stylesheet" type="text/css" href="/fontawesome/css/fontawesome.min.css" integrity="sha384-{{ '/fontawesome/css/fontawesome.min.css' | sha() }}">
+<link rel="stylesheet" type="text/css" href="/fontawesome/css/brands.min.css" integrity="sha384-{{ '/fontawesome/css/brands.min.css' | sha() }}">
+<link rel="stylesheet" type="text/css" href="/fontawesome/css/regular.min.css" integrity="sha384-{{ '/fontawesome/css/regular.min.css' | sha() }}">
+<link rel="stylesheet" type="text/css" href="/fontawesome/css/solid.min.css" integrity="sha384-{{ '/fontawesome/css/solid.min.css' | sha() }}">
+```
+
+The main `fontawesome.min.css` fetches the required fonts from `/fontawesome/webfonts/`.
+
 # Colour, styling, and light/dark mode
 
 Colours are both technical and personal. I found these useful to get started:
@@ -395,11 +410,10 @@ script-src-elem
     ;
 connect-src
     'self'                                   <-- Allow connections to self e.g. for websockets (used by hot reloader)
-    https://ka-f.fontawesome.com             <-- Allow Fontawesome to make connections
     ;
 font-src
+    'self'                                   <-- Allow fonts from self, e.g. Fontawesome.
     https://cdn.jsdelivr.net                 <-- Allow fonts (e.g. for Katex) from jsDelivr CDN
-    https://ka-f.fontawesome.com             <-- Allow Fontawesome fonts
     ;
 style-src
     'self'                                   <-- Allow loading of CSS files from self
@@ -432,7 +446,6 @@ In practice, using template data reduces maintenance overhead and helps document
             script-src-elem
                 'strict-dynamic'
                 '{{ KATEX_JS_SHA }}'
-                '{{ FONTAWESOME_JS_SHA }}'
                 '{{ HIGHLIGHT_JS_SHA }}'
                 'sha384-{{ '/hot-reloader.js' | sha() }}'
                 'sha384-{{ '/render-maths.js' | sha() }}'
@@ -442,9 +455,6 @@ In practice, using template data reduces maintenance overhead and helps document
             style-src
                 'self'
                 https://cdn.jsdelivr.net
-                {%- for sha in FONTAWESOME_INLINE_CSS_SHAs %}
-                '{{ sha }}'
-                {%- endfor %}
                 '{{ BULMA_CSS_SHA }}'
                 '{{ KATEX_CSS_SHA }}'
                 '{{ GRUVBOX_CSS_SHA }}'
@@ -486,16 +496,6 @@ GRUVBOX_CSS_SHA = "sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj
 # Framework
 BULMA_CSS = "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
 BULMA_CSS_SHA = "sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX"
-
-# Fonts
-FONTAWESOME_JS = "https://kit.fontawesome.com/39e34b83e1.js"
-FONTAWESOME_JS_SHA = "sha384-yTB2wx6UBfG/vVmw00WOL5kU63/nWDZTw1KXg6BapzYP+xoYMMDemsecEoIJEK5h"
-FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources.
-    "sha256-E2q5uhm+T8+yRPO91kGFCPrb999m9YzwEB9sWmKzTwk=",
-    "sha256-xyO8S5xWOAtczCCfbCiMJgKOLsrQ0neV9mX7Aan06aw=",
-    "sha256-bi2K0pOjkFvwpWy9QI9qM3EUJiA+VcVJ5GGZIwSEFhQ=",
-    "sha256-0Y0YoXQ0nmYkphSjq+iyr2TWsiF2CUw7gsn8mpwIUog=",
-]
 ```
 
 ## Strict Transport Security (HSTS)

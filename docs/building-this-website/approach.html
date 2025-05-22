@@ -8,7 +8,7 @@
     <meta http-equiv="Upgrade-Insecure-Requests" content="1" />
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains" />
     <meta http-equiv="Content-Security-Policy" content=
-    "upgrade-insecure-requests; default-src 'none'; require-trusted-types-for 'script'; base-uri 'self'; img-src 'self'; manifest-src 'self'; script-src-elem 'strict-dynamic' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' '' 'sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp' 'sha384-nq/jJqKHx2Beq2PLdLsH/0zMwhVN8i9yl8mm8MikpU3k2nTuAJIWXQdIKTyhGQ0w' 'sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS' 'sha384-Yfa985Z0LorjBya15TjALqmYYUOLsdk67u37ToLE+xJAfmJ8G78yGxNkv4zPJsBI' ; connect-src 'self' https://ka-f.fontawesome.com ; font-src 'self' https://cdn.jsdelivr.net ; style-src 'self' https://cdn.jsdelivr.net 'sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX' 'sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP' 'sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd' 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk' ;" />
+    "upgrade-insecure-requests; default-src 'none'; require-trusted-types-for 'script'; base-uri 'self'; img-src 'self'; manifest-src 'self'; script-src-elem 'strict-dynamic' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' 'sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp' 'sha384-nq/jJqKHx2Beq2PLdLsH/0zMwhVN8i9yl8mm8MikpU3k2nTuAJIWXQdIKTyhGQ0w' 'sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS' 'sha384-Yfa985Z0LorjBya15TjALqmYYUOLsdk67u37ToLE+xJAfmJ8G78yGxNkv4zPJsBI' ; connect-src 'self' ; font-src 'self' https://cdn.jsdelivr.net ; style-src 'self' https://cdn.jsdelivr.net 'sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX' 'sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP' 'sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd' 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk' ;" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Timothy Corbett-Clark" />
     <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
@@ -403,6 +403,28 @@ code.hljs {
 &lt;/html&gt;
 </code></pre>
           <h1>
+            Icons
+          </h1>
+          <p>
+            I use <a href="https://fontawesome.com">Font Awesome</a> for icons. I found that loading them from Font
+            Awesome produced rendering lag (the icons flickered as they appeared), and also suffered from fragile SRI
+            settings. Hence I host directly. To keep things self-contained, the fonts and CSS are all in a top level
+            <code>/fontawesome/</code> directory.
+          </p>
+          <p>
+            The <code>head</code> section in the <code>_base.html</code> template loads the CSS using:
+          </p>
+          <pre><code class=
+          "language-html">&lt;link rel="stylesheet" type="text/css" href="/fontawesome/css/fontawesome.min.css" integrity="sha384-{{ '/fontawesome/css/fontawesome.min.css' | sha() }}"&gt;
+&lt;link rel="stylesheet" type="text/css" href="/fontawesome/css/brands.min.css" integrity="sha384-{{ '/fontawesome/css/brands.min.css' | sha() }}"&gt;
+&lt;link rel="stylesheet" type="text/css" href="/fontawesome/css/regular.min.css" integrity="sha384-{{ '/fontawesome/css/regular.min.css' | sha() }}"&gt;
+&lt;link rel="stylesheet" type="text/css" href="/fontawesome/css/solid.min.css" integrity="sha384-{{ '/fontawesome/css/solid.min.css' | sha() }}"&gt;
+</code></pre>
+          <p>
+            The main <code>fontawesome.min.css</code> fetches the required fonts from
+            <code>/fontawesome/webfonts/</code>.
+          </p>
+          <h1>
             Colour, styling, and light/dark mode
           </h1>
           <p>
@@ -660,11 +682,10 @@ script-src-elem
     ;
 connect-src
     'self'                                   &lt;-- Allow connections to self e.g. for websockets (used by hot reloader)
-    https://ka-f.fontawesome.com             &lt;-- Allow Fontawesome to make connections
     ;
 font-src
+    'self'                                   &lt;-- Allow fonts from self, e.g. Fontawesome.
     https://cdn.jsdelivr.net                 &lt;-- Allow fonts (e.g. for Katex) from jsDelivr CDN
-    https://ka-f.fontawesome.com             &lt;-- Allow Fontawesome fonts
     ;
 style-src
     'self'                                   &lt;-- Allow loading of CSS files from self
@@ -718,7 +739,6 @@ style-src
             script-src-elem
                 'strict-dynamic'
                 '{{ KATEX_JS_SHA }}'
-                '{{ FONTAWESOME_JS_SHA }}'
                 '{{ HIGHLIGHT_JS_SHA }}'
                 'sha384-{{ '/hot-reloader.js' | sha() }}'
                 'sha384-{{ '/render-maths.js' | sha() }}'
@@ -728,9 +748,6 @@ style-src
             style-src
                 'self'
                 https://cdn.jsdelivr.net
-                {%- for sha in FONTAWESOME_INLINE_CSS_SHAs %}
-                '{{ sha }}'
-                {%- endfor %}
                 '{{ BULMA_CSS_SHA }}'
                 '{{ KATEX_CSS_SHA }}'
                 '{{ GRUVBOX_CSS_SHA }}'
@@ -779,16 +796,6 @@ GRUVBOX_CSS_SHA = "sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj
 # Framework
 BULMA_CSS = "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
 BULMA_CSS_SHA = "sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX"
-
-# Fonts
-FONTAWESOME_JS = "https://kit.fontawesome.com/39e34b83e1.js"
-FONTAWESOME_JS_SHA = "sha384-yTB2wx6UBfG/vVmw00WOL5kU63/nWDZTw1KXg6BapzYP+xoYMMDemsecEoIJEK5h"
-FONTAWESOME_INLINE_CSS_SHAs = [ # Fontawesome subsequently uses inline resources.
-    "sha256-E2q5uhm+T8+yRPO91kGFCPrb999m9YzwEB9sWmKzTwk=",
-    "sha256-xyO8S5xWOAtczCCfbCiMJgKOLsrQ0neV9mX7Aan06aw=",
-    "sha256-bi2K0pOjkFvwpWy9QI9qM3EUJiA+VcVJ5GGZIwSEFhQ=",
-    "sha256-0Y0YoXQ0nmYkphSjq+iyr2TWsiF2CUw7gsn8mpwIUog=",
-]
 </code></pre>
           <h2>
             Strict Transport Security (HSTS)

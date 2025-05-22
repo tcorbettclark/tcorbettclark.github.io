@@ -16,7 +16,6 @@
             script-src-elem
                 'strict-dynamic'
                 '{{ KATEX_JS_SHA }}'
-                '{{ FONTAWESOME_JS_SHA }}'
                 '{{ HIGHLIGHT_JS_SHA }}'
                 'sha384-{{ '/hot-reloader.js' | sha() }}'
                 'sha384-{{ '/render-maths.js' | sha() }}'
@@ -24,7 +23,6 @@
                 ;
             connect-src
                 'self'
-                https://ka-f.fontawesome.com
                 ;
             font-src
                 'self'
@@ -33,9 +31,6 @@
             style-src
                 'self'
                 https://cdn.jsdelivr.net
-                {%- for sha in FONTAWESOME_INLINE_CSS_SHAs %}
-                '{{ sha }}'
-                {%- endfor %}
                 '{{ BULMA_CSS_SHA }}'
                 '{{ KATEX_CSS_SHA }}'
                 '{{ GRUVBOX_CSS_SHA }}'
