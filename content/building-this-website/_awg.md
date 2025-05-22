@@ -266,7 +266,7 @@ The entire tool is a single file: [awg.py](https://github.com/tcorbettclark/tcor
 ## Hot reloading
 
 In theory, hot reloading is simple:
-- use a [websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) to notify a small piece javascript running in the browser that it should reload the page.
+- use a [websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) to notify a small piece of javascript running in the browser that it should reload the page.
 
 In practice, there are some complications:
 - making it obvious to the user when the hot reloader is not running (e.g. after stopping/starting AWG, for whatever reason);

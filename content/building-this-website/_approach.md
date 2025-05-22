@@ -1,4 +1,4 @@
-This page explains how I structured all the web files, templates, and data to achieve this website. It also contains my notes on hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, adding a draft/wip mode, ...
+This page explains the structure of all the web files, templates, and data to achieve this website. It also contains notes on hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, adding a draft/wip mode, ...
 
 Hence this page provides _recipes_ for how to achieve the various features of a website. They are mostly independent of one another, allowing for easy modification, substitution, or ommission (and the agnostic nature of [AWG](awg.html) means that nothing is left behind).
 
@@ -244,7 +244,7 @@ Then the following helped me experiment with different palettes:
 
 One gotcha I encountered was that there are different variants/standards of RGB.
 
-[Bulma](https://bulma.io) has a "customizer" popup built-in to their own website, which allows colours (and other style aspects) to be tried out before exporting as CSS settings. Because it [automatically derives shades](https://bulma.io/documentation/features/color-palettes/), the main task is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
+[Bulma](https://bulma.io) has a "customizer" popup on its website which allows colours (and other style aspects) to be tried out before exporting as CSS settings. Because it [automatically derives shades](https://bulma.io/documentation/features/color-palettes/), the main task is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
 
 Bulma also automatically derives and manages the colour variations between light and dark mode. For that to work, one needs to use the "soft" and "bold" colour classes for those elements which should be a function of light/dark mode. For example, I use the `has-background-primary-bold-invert` and `has-text-primary-bold` classes for the main page section. See the [Bulma docs](https://bulma.io/documentation/features/dark-mode/) for details.
 
