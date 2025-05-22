@@ -7,7 +7,7 @@ They are an invitation to explore.
 
 Here are some of the more interesting, surprising, and/or fun. My answers are written up as PDFs.
 
-* [Problem 1](problem-1/index.html) - sum of squared distances from polygon to enclosed circle
+* [Problem 1](problem-1/index.html) - sum of squared distances from polygon corners to enclosed circle
 * [Problem 2](problem-2/index.html) - an expression invariant for all roots of unity
 * [Problem 3](problem-3/index.html) - a power bound on factorial
 * _More soon!_
