@@ -3,10 +3,6 @@ name = "Professional career"
 url = "/cv/index.html"
 
 [[WIP_PAGES]]
-name = "About me"
-url = "/about-me/index.html"
-
-[[WIP_PAGES]]
 name = "My tastes"
 url = "/my-tastes/index.html"
 
