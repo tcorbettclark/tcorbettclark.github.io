@@ -52,13 +52,15 @@ logging.getLogger("watchfiles.main").setLevel(
 )  # Stop watchfiles from logging file changes, as we do it instead.
 
 
-def log(message, *, level=logging.INFO):
+def log(message, *, level=logging.INFO, colour=None):
+    if colour:
+        message = click.style(message, fg=colour)
     logger.log(msg=message, level=level)
 
 
 def abort(message):
-    log(message, level=logging.ERROR)
-    log("Aborting!", level=logging.ERROR)
+    log(message, level=logging.ERROR, colour="red")
+    log("Aborting!", level=logging.ERROR, colour="red")
     quit()
 
 
@@ -85,15 +87,15 @@ class Builder:
         self.output_dir = output_dir
         self.working_file_regex = re.compile(working_file_regex)
         self.template_extensions = template_extensions
-        log(f"Working files match regex: {working_file_regex}")
-        log(
+        self._log(f"Working files match regex: {working_file_regex}")
+        self._log(
             "Template files have extension(s): "
-            + ", ".join(self.template_extensions),
+            + ", ".join(self.template_extensions)
         )
 
     def _log(self, message, *paths):
         tmp = [str(p.relative_to(self.working_dir)) for p in paths]
-        log(message.format(*tmp))
+        log(message.format(*tmp), colour="green")
 
     def _is_working_filename(self, filename):
         return (
@@ -113,7 +115,7 @@ class Builder:
         self._log(f"Using content from: {self.content_dir}")
         shutil.rmtree(self.working_dir)
         shutil.copytree(self.content_dir, self.working_dir)
-        log("Cloned content into fresh working directory")
+        self._log("Cloned content into fresh working directory")
 
     def _add_template_data(self, env):
         for filename in glob.glob(
@@ -208,7 +210,7 @@ class Builder:
                 if len(list(p.iterdir())) == 0:
                     n_dirs += 1
                     os.rmdir(p)
-        log(
+        self._log(
             f"Removed {n_files} working files and {n_dirs} empty directories from output directory"
         )
 
@@ -218,9 +220,10 @@ class Builder:
         except Exception as e:
             log(
                 "Unable to load libtidy (html-tidy). Check your library paths "
-                "LD_LIBRARY_PATH / DYLD_LIBRARY_PATH"
+                "LD_LIBRARY_PATH / DYLD_LIBRARY_PATH",
+                colour="red",
             )
-            log(f"  (Exception: {str(e)})")
+            log(f"  (Exception: {str(e)})", colour="red")
             return
         for root, dirs, files in self.working_dir.walk():
             for name in files:
@@ -298,10 +301,12 @@ class Builder:
             self.working_dir,
         )
         if n_deltas > 0:
-            log(f"Total number of changes to files and directories: {n_deltas}")
-            log(f"Updated: {self.output_dir}")
+            self._log(
+                f"Total number of changes to files and directories: {n_deltas}"
+            )
+            self._log(f"Updated: {self.output_dir}")
         else:
-            log(f"No changes required to: {self.output_dir}")
+            self._log(f"No changes required to: {self.output_dir}")
         return n_deltas > 0
 
     def rebuild(self):
@@ -312,7 +317,7 @@ class Builder:
         return self.publish_to_output()
 
     def cleanup(self):
-        log("Removing tempory working directory")
+        self._log("Removing tempory working directory")
         shutil.rmtree(self.working_dir)
 
 
@@ -329,11 +334,15 @@ class _ServerAccessLogger(aiohttp.abc.AbstractAccessLogger):
                 browser += "-" + version
             device = ua.device.family
             log(
-                f"Completed request from client {browser} on {device}: {request.path}"
+                f"Completed request from client {browser} on {device}: {request.path}",
+                colour="yellow",
             )
         except KeyError:
             # Because "User-Agent" was not provided in the request header.
-            log(f"Completed request from client: {request.path}")
+            log(
+                f"Completed request from client: {request.path}",
+                colour="yellow",
+            )
 
 
 class Server:
@@ -345,13 +354,16 @@ class Server:
         self.keyfile = keyfile
         self.web_sockets = set()
 
+    def _log(self, message):
+        log(message, colour="blue")
+
     async def signal_hot_reloaders(self):
-        log(f"Signalling to {len(self.web_sockets)} hot reloaders")
+        self._log(f"Signalling to {len(self.web_sockets)} hot reloaders")
         for ws in list(self.web_sockets):
             await ws.send_str("reload")
 
     async def _close_hot_reloaders(self):
-        log(f"Closing {len(self.web_sockets)} hot reloaders")
+        self._log(f"Closing {len(self.web_sockets)} hot reloaders")
         for ws in list(self.web_sockets):
             await ws.close()
 
@@ -368,16 +380,16 @@ class Server:
             ws = aiohttp.web.WebSocketResponse()
             self.web_sockets.add(ws)
             await ws.prepare(request)
-            log("New hot reloader connected")
+            self._log("New hot reloader connected")
             try:
                 async for msg in ws:
                     if msg.type == aiohttp.WSMsgType.TEXT:
                         if msg.data != "keep-alive-ping":
-                            log(
+                            self._log(
                                 f"Received unexpected message over hot reloader websocket: {msg.data}"
                             )
             finally:
-                log("Hot reloader closed")
+                self._log("Hot reloader closed")
                 await ws.close()
                 self.web_sockets.remove(ws)
             return ws
@@ -396,24 +408,28 @@ class Server:
         await self._runner.setup()
         ssl_context = None
         if self.certfile and self.keyfile:
-            log(f"Using SSL certfile: {self.certfile}")
-            log(f"Using SSL keyfile: {self.keyfile}")
+            self._log(f"Using SSL certfile: {self.certfile}")
+            self._log(f"Using SSL keyfile: {self.keyfile}")
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
             ssl_context.load_cert_chain(self.certfile, self.keyfile)
-            log(f"Starting local server on https://{self.host}:{self.port}")
+            self._log(
+                f"Starting local server on https://{self.host}:{self.port}"
+            )
         else:
-            log(f"Starting local server on http://{self.host}:{self.port}")
+            self._log(
+                f"Starting local server on http://{self.host}:{self.port}"
+            )
         site = aiohttp.web.TCPSite(
             self._runner,
             host=self.host,
             port=self.port,
             ssl_context=ssl_context,
         )
-        log(f"Serving files from: {self.directory}")
+        self._log(f"Serving files from: {self.directory}")
         await site.start()
 
     async def stop(self):
-        log("Stopping server")
+        self._log("Stopping server")
         await self._close_hot_reloaders()
         await self._runner.cleanup()
 
@@ -425,10 +441,10 @@ class Watcher:
 
     def _log(self, message, *paths):
         tmp = [str(pathlib.Path(p).relative_to(self.directory)) for p in paths]
-        log(message.format(*tmp))
+        log(message.format(*tmp), colour="magenta")
 
     async def _start(self):
-        log(f"Watching for changes in: {self.directory}")
+        self._log(f"Watching for changes in: {self.directory}")
         async for changes in watchfiles.awatch(self.directory):
             for change, filename in list(changes):
                 filename = pathlib.Path(filename)
