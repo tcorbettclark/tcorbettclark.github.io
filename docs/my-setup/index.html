@@ -81,7 +81,7 @@
                   <hr class="dropdown-divider" />
                   <a href="/cv/index.html" class="dropdown-item">Professional career</a> <a href=
                   "/my-tastes/index.html" class="dropdown-item">My tastes</a> <a href="/my-setup/index.html" class=
-                  "dropdown-item">Setup of my computer</a> <a href="/publications/index.html" class=
+                  "dropdown-item">My computer setup and tools</a> <a href="/publications/index.html" class=
                   "dropdown-item">Publications</a> <a href="/recreational-maths/index.html" class=
                   "dropdown-item">Recreational Maths</a>
                 </div>
@@ -93,45 +93,191 @@
     </section>
     <section class="section pt-0 has-background-primary-bold-invert has-text-primary-bold">
       <div class="box">
-        <div class="title is-size-2 has-text-centered"></div>
+        <div class="title is-size-2 has-text-centered">
+          My computer setup and tools
+        </div>
         <div class="content draft-watermark">
           <p>
-            TODO: Refer/raid my github for computer configuration
+            This page documents the setup of my main computer, my primary tools, and some useful tips.
           </p>
           <h1>
-            Editor and Terminal
+            Hardware
+          </h1>
+          <ul>
+            <li>Computer: iMac Retina 5k, 27 inch, 2019
+            </li>
+            <li>Keyboard: Durgod Taurus K320, configured using <a href=
+            "https://karabiner-elements.pqrs.org">Karabiner-Elements</a>.
+            </li>
+            <li>Resource monitoring: <a href="https://usage.pro">Usage</a>
+            </li>
+          </ul>
+          <h1>
+            Software management
+          </h1>
+          <ul>
+            <li>Package management: <a href="https://brew.sh">brew</a>
+            </li>
+            <li>Python versions and virtualenv: <a href="https://docs.astral.sh/uv/">uv</a>
+            </li>
+            <li>Containers / virtual machines: <a href="https://github.com/abiosoft/colima">colima</a>, <a href=
+            "https://www.docker.com">docker</a>, and <a href="https://www.qemu.org">qemu</a>
+            </li>
+          </ul>
+          <h1>
+            Desktop
+          </h1>
+          <ul>
+            <li>Window management: <a href="https://rectangleapp.com">Rectangle</a> and <a href=
+            "https://github.com/sbmpost/AutoRaise">AutoRaise</a>
+            </li>
+            <li>Launcher (Spotlight replacement): <a href="https://www.raycast.com">Raycast</a>
+            </li>
+          </ul>
+          <h1>
+            Programming
+          </h1>
+          <ul>
+            <li>Editor: <a href="https://zed.dev">zed</a>
+            </li>
+            <li>Terminal : <a href="https://alacritty.org">alacritty</a>
+            </li>
+            <li>Shell: <a href="https://fishshell.com">fish</a>
+            </li>
+            <li>Terminal prompt: <a href="https://starship.rs">starship</a>
+            </li>
+            <li>Python code quality: <a href="https://docs.astral.sh/ruff/">ruff</a> and <a href=
+            "https://github.com/astral-sh/ty">ty</a>
+            </li>
+            <li>Python notebooks: <a href="https://marimo.io">marimo</a>
+            </li>
+          </ul>
+          <h1>
+            Researching and writing
+          </h1>
+          <ul>
+            <li>Writing: <a href="https://typst.app">typst</a>
+            </li>
+            <li>Research notes: <a href="https://www.zotero.org">Zotero</a>
+            </li>
+            <li>General notes: Apple notes (but looking to explore <a href="https://obsidian.md">Obsidian</a>)
+            </li>
+            <li>Local AI models: <a href="https://ollama.ai">ollama</a> and <a href=
+            "https://llm.datasette.io/en/stable/">llm</a>
+            </li>
+          </ul>
+          <h1>
+            Apps
           </h1>
           <p>
-            Zed
+            To install all apps (list created using <code>brew list --casks -1</code>):
           </p>
+          <pre><code class="language-bash">brew install -q --cask \
+    alacritty \
+    font-fira-code \
+    font-fira-code-nerd-font \
+    font-noto-emoji \
+    karabiner-elements \
+    raycast \
+    rectangle
+</code></pre>
           <p>
-            Not iterm2 any more, because never used all the features, but alacritty.org Often just use the terminal
-            built into Zed (which is alacritty) See .alacritty.toml
-          </p>
-          <p>
-            https://fishshell.com/docs/current/design.html
-          </p>
-          <p>
-            Check fish_delta
-          </p>
-          <p>
-            TODO explain where I installed brew (and find out if that was actually a good idea!)
-          </p>
-          <p>
-            brew install lsd alias la ‘ls -a’ alias ll ‘ls -l’ alias lla ‘ls -la’ alias ls lsd alias lt ‘ls --tree’
-          </p>
-          <p>
-            https://gist.github.com/jamesmurdza/6e5f86bae7d3b3db4201a52045a5e477#see-dependency-tree
+            Note this includes the <a href="https://github.com/tonsky/FiraCode">Fira Code</a> font with programming
+            ligatures.
           </p>
           <h1>
-            Odds
+            Commandline tools
           </h1>
           <p>
-            <a href="https://github.com/sbmpost/AutoRaise">AutoRaise application</a>
+            To install all my usual packages (list created using <code>brew leaves -r</code>):
           </p>
+          <pre><code class="language-bash">brew install -q \
+    bat \
+    bottom \
+    colima \
+    curl \
+    docker \
+    duckdb \
+    dust \
+    eza \
+    fastfetch \
+    ffmpeg \
+    fish \
+    git \
+    jq \
+    libffi \
+    mkcert \
+    node \
+    qemu \
+    sqlite \
+    starship \
+    tidy-html5 \
+    uv \
+    zlib
+</code></pre>
+          <p>
+            Note the better versions of standard tools:
+          </p>
+          <ul>
+            <li>
+              <code>cat</code> → <a href="https://github.com/sharkdp/bat">bat</a>
+            </li>
+            <li>
+              <code>ls</code> → <a href="https://eza.rocks">eza</a>
+            </li>
+            <li>
+              <code>du</code> → <a href="https://github.com/bootandy/dust">dust</a>
+            </li>
+            <li>
+              <code>top</code> → <a href="https://clementtsang.github.io/bottom/stable/">bottom (btm)</a>
+            </li>
+          </ul>
           <h1>
+            Configuration
+          </h1>
+          <h2>
+            Alacritty
+          </h2>
+          <p>
+            Alacritty is configured in <code>~/.alacritty.toml</code> with:
+          </p>
+          <pre><code class="language-toml">[window]
+padding = { x = 5, y = 5 }
+dynamic_padding = true
+opacity = 0.9
+
+[font]
+size = 12
+normal = { family = "FiraCode Nerd Font", style = "Regular" }
+
+[bell]
+animation = "Ease"
+duration = 200
+</code></pre>
+          <h2>
             Keyboard
-          </h1>
+          </h2>
+          <p>
+            I remap the modifier keys on my Durgod K320 using <code>Karabiner-Elements</code> so that:
+          </p>
+          <ul>
+            <li>The Windows button is Command/Cmd (was Option/Alt).
+            </li>
+            <li>The Alt button is Option/Alt (was Command/Cmd).
+            </li>
+            <li>The Application button is (right) option.
+            </li>
+            <li>(The Fn key is not seen by the computer but the keyboard itself modifies the function keys).
+            </li>
+          </ul>
+          <p>
+            So the keys across the bottom row become:
+          </p>
+          <pre><code>Ctrl   ⌥   ⌘   &lt;spacebar&gt;   ⌘   🌐︎   ⌥   Ctrl
+</code></pre>
+          <p>
+            where
+          </p>
           <ul>
             <li>⌥ is Option/Alt
             </li>
@@ -141,37 +287,95 @@
             </li>
           </ul>
           <p>
-            Use Karabiner-eventviewer to watch events Also https://keycode.info/
+            Use <code>Karabiner-eventviewer</code> to watch events. See also <a href=
+            "https://keycode.info">keycode.info</a>.
           </p>
           <p>
-            I have configured using Karabiner to make
+            Make sure keyboard is set to British, and not for example to Unicode Hex Input.
           </p>
-          <ul>
-            <li>The Windows button into Command/Cmd (was Option/Alt)
-            </li>
-            <li>The Alt button into Option/Alt (was Command/Cmd)
-            </li>
-            <li>The Application button into (right) option.
-            </li>
-            <li>(The Fn key does nothing)
-            </li>
-          </ul>
+          <h2>
+            Fish
+          </h2>
           <p>
-            So the modifier buttons are now:
+            The main <code>~/.config/fish/config.fish</code> contains:
           </p>
+          <pre><code>if status --is-login
+    # For brew
+    brew shellenv fish | source
+
+    # For uv
+    uv generate-shell-completion fish | source
+
+    # Add standard unix paths
+    fish_add_path -P /usr/local/sbin /usr/sbin /sbin /usr/local/bin /usr/bin /bin
+
+    # Add path to brew-installed curl
+    fish_add_path -P /usr/local/opt/curl/bin
+
+    # Add path to anything I have installed locally (e.g. by `uv tool`)
+    fish_add_path -P /Users/tcorbettclark/.local/bin
+
+    # Set library path and dynamic library path
+    set -x -g LD_LIBRARY_PATH (brew --prefix)/opt/curl/lib (brew --prefix)/lib /usr/lib /lib
+    set -x -g DYLD_LIBRARY_PATH (brew --prefix)/opt/curl/lib (brew --prefix)/lib /usr/lib /lib
+end
+
+# Make starfish manage the prompt always.
+starship init fish | source
+</code></pre>
           <p>
-            Ctrl ⌥ ⌘ &lt;space&gt; ⌘ Fn ⌥ Ctrl
+            Some handy aliases:
           </p>
-          <p>
-            And make sure keyboard is set to British, and not to Unicode Hex Input!
-          </p>
+          <pre><code class="language-bash">alias --save ls eza
+alias --save la 'ls -a'
+alias --save ll 'ls -l'
+alias --save lla 'ls -la'
+alias --save lt 'ls --tree'
+alias --save va 'source .venv/bin/activate.fish'
+alias --save copy-latest-pdf-download 'cp (ls --sort created ~/Downloads/*.pdf | tail -1)'
+</code></pre>
           <h1>
-            Shell
+            Tips
           </h1>
+          <h2>
+            Brew
+          </h2>
           <p>
-            bat - syntax aware cat eza - (instead of lsd) for smarter ls dust - better du to understand disk usage
-            bottom (btm) - better top
+            Add the <a href="https://github.com/ten0s/homebrew-brew-cache">brew-cache</a> extension so we can find
+            which packages own which files:
           </p>
+          <pre><code class="language-bash">brew tap ten0s/homebrew-brew-cache
+brew install brew-cache
+</code></pre>
+          <p>
+            In addition to the usual <code>brew update/upgrade/install/uninstall/list/info</code>, the following are
+            useful:
+          </p>
+          <pre><code class="language-bash">brew cache -u                             # Create/update cache of files
+brew cache -s &lt;file pattern&gt;              # Find packages containing files/directories matching pattern
+
+brew leaves                               # Packages which are not dependencies of other packages
+brew leaves -r                            # ...installed manually
+brew leaves -p                            # ...installed as dependencies
+
+brew deps --tree &lt;package&gt;                # Dependencies of &lt;package&gt;
+brew deps --tree --installed              # ...all packages
+brew deps --tree (brew leaves -r)         # ...all manually installed packages, avoiding duplications
+brew deps --tree (brew list --casks -1)   # ...all casks
+
+brew autoremove --dry-run                 # Remove (dry run) packages no longer required
+brew cleanup -s                           # Remove old versions of packages and cache files
+
+brew doctor                               # Find potential issues
+</code></pre>
+          <h2>
+            Fish
+          </h2>
+          <p>
+            Find changes made to fish configuration, functions, completions etc since installation:
+          </p>
+          <pre><code class="language-bash">fish_delta
+</code></pre>
         </div>
       </div>
     </section>

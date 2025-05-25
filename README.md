@@ -4,25 +4,23 @@ My personal website. For details, see https://www.corbettclark.com/building-this
 
 # TODO - content
 
-- Write up my Apple notes.
-- On intellectual side:
-  - Puzzles - recreational, bite-sized
-  - Investigations - more specialist, deeper and more extensive write-up trying to answer "why". For example, logarithms, or complex numbers.
-  - Experiments - code e.g complexity.
-  - Research projects - programmes of work. Largest sized. Could reference investigations.
-- My productivity tools
-  - cloud and locally installed software
-- My computer setup
-  - Low level, Rectangle, RayCast
-  - Keyboard mapping
-  - fastfetch output
-  - Ref github repo
-- Create a now page. See https://nownownow.com/about
+- About me (academic, profressional, personal)
+- Bio/CV
+- Research interests, starting with tastes
+- Thoughts on... AI, intellectual life (CTRL), and see my Apple notes
+- Recreational mathematics - bite-sized puzzles with exploration
+- Investigations - more specialist/deeper trying to answer "why", e.g. logarithms, complex numbers.
+- Experiments - code e.g complexity. Armchair universe.
+- My computer setup and tools
+- Building this website
+
+# TODO - other content
+
+- A "now" page. See https://nownownow.com/about
 - Find a link to the PDF for my "Choosing an appropriate model for novelty detection" paper.
   - Perhaps? https://ieeexplore.ieee.org/document/607503
 - Look for other content ideas from:
   - https://bastian.rieck.me
-  - https://theoryandpractice.org
 
 # TODO technical site
 
@@ -38,7 +36,6 @@ My personal website. For details, see https://www.corbettclark.com/building-this
 # TODO - technical awg
 
 - Separate (and colour) the output e.g. into Builder, Server, Watcher categories. But maybe more.
-- DYLD_LIBRARY_PATH is only correct for me because I installed brew in /usr/local. The default is /opt/...
 - Decide on all markdown plugins.
 - Allow merging lists across TOML files, e.g. to better manage sitemap files.
 - Find a way to deliver a 404 on the dev server (currently just returns empty files!).

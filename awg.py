@@ -1,4 +1,5 @@
 #!/usr/bin/env -S DYLD_LIBRARY_PATH=/usr/local/lib uv run --script
+# (may need DYLD_LIBRARY_PATH=/opt/homebrew/lib on Apple silicon).
 
 # /// script
 # requires-python = ">=3.13"
@@ -219,8 +220,9 @@ class Builder:
             import tidy
         except Exception as e:
             log(
-                "Unable to load libtidy (html-tidy). Check your library paths "
-                "LD_LIBRARY_PATH / DYLD_LIBRARY_PATH",
+                "Unable to load libtidy (html-tidy).\n"
+                "Check your library paths LD_LIBRARY_PATH / DYLD_LIBRARY_PATH.\n"
+                "See also first line of this program.",
                 colour="red",
             )
             log(f"  (Exception: {str(e)})", colour="red")
