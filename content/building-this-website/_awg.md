@@ -43,7 +43,7 @@ Note however that due to the tool's lack of opinion in this regard, content can 
 
 ## Templating and template data
 
-To provide templating, AWG uses [Jinja](https://jinja.palletsprojects.com), a hugely popular and mature templating library.
+To provide templating, AWG uses [Jinja](https://jinja.palletsprojects.com), a popular and mature templating library.
 
 Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming directories), and discourages "by-purpose" organisation of the files. Hence AWG overrides the Jinja environment so that including or extending other files is *relative to the loading template file*. For example, here is a consistent location of 3 files:
 
