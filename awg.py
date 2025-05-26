@@ -447,7 +447,6 @@ class Watcher:
         log(message.format(*tmp), colour="magenta")
 
     async def _start(self):
-        self._log(f"Watching for changes in: {self.directory}")
         async for changes in watchfiles.awatch(self.directory):
             for change, filename in list(changes):
                 filename = pathlib.Path(filename)
@@ -466,6 +465,7 @@ class Watcher:
         pass  # Nothing needs to be done, but keep for symmetry.
 
     async def wait_for_change(self):
+        self._log(f"Watching for changes in: {self.directory}")
         await self._change_event.wait()
         self._change_event.clear()
 
