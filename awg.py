@@ -294,6 +294,7 @@ class Builder:
                 n_deltas += publish(sub_dcmp, working_path / name)
             return n_deltas
 
+        self.output_dir.mkdir(exist_ok=True)
         n_deltas = publish(
             filecmp.dircmp(
                 self.working_dir,
@@ -563,7 +564,7 @@ def main(
 
     CONTENT_DIR is the directory of source web contents. It is never altered.
 
-    OUTPUT_DIR is the new directory into which the website will be built. It is destroyed before every build.
+    OUTPUT_DIR is the new directory into which the website will be built, altering files and directories as required.
 
     The optional certfile and keyfile will switch to serving up over HTTPS. Generate e.g. using the mkcert tool.
 

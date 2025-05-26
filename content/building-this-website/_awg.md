@@ -154,7 +154,7 @@ Usage: awg.py [OPTIONS] CONTENT_DIR OUTPUT_DIR
 
   CONTENT_DIR is the directory of source web contents. It is never altered.
 
-  OUTPUT_DIR is the new directory into which the website will be built. It is destroyed before every build.
+  OUTPUT_DIR is the new directory into which the website will be built, altering files and directories as required.
 
   The optional certfile and keyfile will switch to serving up over HTTPS. Generate e.g. using the mkcert tool.
 
@@ -174,18 +174,21 @@ The two mandatory arguments are the content and output directories. Providing th
 ❯ ./awg.py example/ output/
 Working files match regex: \_.*
 Template files have extension(s): .html, .xml, .txt
-Using content from: /Users/tcorbettclark/Projects/tcorbettclark.github.io/example (example)
-Cloned content into fresh output directory: /Users/tcorbettclark/Projects/tcorbettclark.github.io/output (output)
-Reading template data from: output/_important_points.toml
-Reading template data from: output/_config.toml
-Converted markdown from: output/_hello.md
-Rendered template: output/index.html
+Using content from: /Users/tcorbettclark/Projects/tcorbettclark.github.io/example
+Cloned content into fresh working directory
+Reading template data from: _important_points.toml
+Reading template data from: _config.toml
+Converted markdown from: _hello.md
+Rendered template: index.html
 Removed 3 working files and 0 empty directories from output directory
-Html-tidy ok: output/index.html
-Rebuilt all files in: output
+Html-tidy ok: index.html
+Adding new file: hot-reloader.js
+Adding new file: index.html
+Total number of changes to files and directories: 2
+Updated: /Users/tcorbettclark/Projects/tcorbettclark.github.io/output
 Starting local server on http://localhost:8000
-Serving files from: output
-Watching for changes in: example
+Serving files from: /Users/tcorbettclark/Projects/tcorbettclark.github.io/output
+Watching for changes in: /Users/tcorbettclark/Projects/tcorbettclark.github.io/example
 ```
 
 The tool is now watching for changes to the source content, after which it will rebuild and notify all browsers subscribed for hot reloading (see below) before waiting again for more changes. Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
