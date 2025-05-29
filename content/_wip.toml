@@ -7,13 +7,5 @@ name = "My tastes"
 url = "/my-tastes/index.html"
 
 [[WIP_PAGES]]
-name = "My computer setup and tools"
-url = "/my-setup/index.html"
-
-[[WIP_PAGES]]
 name = "Publications"
 url = "/publications/index.html"
-
-[[WIP_PAGES]]
-name = "Recreational Maths"
-url = "/recreational-maths/index.html"

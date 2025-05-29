@@ -5,7 +5,6 @@ My personal website. For details, see https://www.corbettclark.com/building-this
 # TODO - content
 
 - About me (academic, profressional, personal)
-- Bio/CV
 - Research interests, starting with tastes
 - Thoughts on... AI, intellectual life (CTRL), and see my Apple notes
 - Recreational mathematics - bite-sized puzzles with exploration
@@ -13,6 +12,7 @@ My personal website. For details, see https://www.corbettclark.com/building-this
 - Experiments - code e.g complexity. Armchair universe.
 - My computer setup and tools
 - Building this website
+- Bio/CV
 
 # TODO - other content
 
