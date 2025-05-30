@@ -28,8 +28,8 @@ This page helps me when setting up a new computer, and provides an overview to a
 # Data Science
 
 - Python notebooks: [Marimo](https://marimo.io)
-- Dataframes - [Polars](https://pola.rs) and [DuckDB](https://duckdb.org)
-- Visualisations - [Vega-Altair](https://altair-viz.github.io)
+- Dataframes: [Polars](https://pola.rs) and [DuckDB](https://duckdb.org)
+- Visualisations: [Vega-Altair](https://altair-viz.github.io)
 
 # LLMs
 
