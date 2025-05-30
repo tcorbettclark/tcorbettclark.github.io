@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-I put this javascript in the file `/render-maths.js` and load it in the `<head>` tag of the base template. This is also where we load the KaTeX library (both javascript and CSS) from the [jsDelivr CDN](https://cdn.jsdelivr.net):
+I put this javascript in the file `/render-maths.js` and load it in the `<head>` tag of the base template along with the KaTeX library (both javascript and CSS) from the [jsDelivr CDN](https://cdn.jsdelivr.net):
 
 ```HTML
 <head>
@@ -130,7 +130,7 @@ Highlighting code is easy with [highlight.js](https://highlightjs.org). This wil
 
 The Common Markdown standard used by [AWG](awg.html) has [fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks) which produces tags with CSS classes exactly like this.
 
-So we just need to pull in the Javascript and chosen theme CSS (in this case, `gruvbox-light-hard`) from a CDN, and ask it to render once the page has loaded. Hence the `<head>` section of the base template contains:
+Hence the `<head>` section of the base template pulls in the highlight Javascript and chosen theme CSS (in this case, `gruvbox-light-hard`) from a CDN, and instructs the browser to render code once the page has loaded:
 
 ```HTML
 <head>
@@ -201,10 +201,10 @@ The [Web Application Manifest](https://www.w3.org/TR/appmanifest/) is a `JSON` f
 
 Favicons appear as the icons in browser url bars, tabs, bookmark menus. And also in the "add to home screen" feature of touch screen devices.
 
-So we need to:
+Adding favicons involves:
 
-- Create a set of favicons, and ensure the colours are coordinated with the colour theme of the website.
-- Tell browsers where to find all the favicons, noting that some are expected in "standard" locations anyway.
+- Creating a set of favicons, ensuring the colours are coordinated with the colour theme of the website.
+- Telling browsers where to find all the favicons, noting that some are expected in "standard" locations anyway.
 
 I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma. These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
 
@@ -367,7 +367,7 @@ Notable issues I could not address include:
    <link href="https://foo.bar.baz"/>
    <link href="https://foo.bar.baz/">
    ```
-   This isn't a problem so long as we always quote href's.
+   This isn't a problem so long as href's are always quoted.
 1. ...
 
 # Security

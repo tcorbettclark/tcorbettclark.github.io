@@ -1,4 +1,4 @@
-This page documents the setup of my main computer, my primary tools, and provides a few useful tips. This helps when setting up a new computer, is an expression of my tastes and interests, and provides an overview to assess for consistency and compatibility.
+This page helps me when setting up a new computer, and provides an overview to assess for consistency and compatibility.
 
 # Hardware
 
@@ -29,7 +29,7 @@ This page documents the setup of my main computer, my primary tools, and provide
 
 - Python notebooks: [Marimo](https://marimo.io)
 - Dataframes - [Polars](https://pola.rs) and [DuckDB](https://duckdb.org)
-- Graphs - [Vega-Altair](https://altair-viz.github.io)
+- Visualisations - [Vega-Altair](https://altair-viz.github.io)
 
 # LLMs
 
@@ -186,7 +186,7 @@ alias --save copy-latest-pdf-download 'cp (ls --sort created ~/Downloads/*.pdf |
 
 ## Brew
 
-Add the [brew-cache](https://github.com/ten0s/homebrew-brew-cache) extension so we can find which packages own which files:
+Add the [brew-cache](https://github.com/ten0s/homebrew-brew-cache) extension to make it easy to find which packages own which files:
 
 ```bash
 brew tap ten0s/homebrew-brew-cache

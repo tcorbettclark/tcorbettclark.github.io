@@ -229,8 +229,8 @@
 </code></pre>
           <p>
             I put this javascript in the file <code>/render-maths.js</code> and load it in the
-            <code>&lt;head&gt;</code> tag of the base template. This is also where we load the KaTeX library (both
-            javascript and CSS) from the <a href="https://cdn.jsdelivr.net">jsDelivr CDN</a>:
+            <code>&lt;head&gt;</code> tag of the base template along with the KaTeX library (both javascript and CSS)
+            from the <a href="https://cdn.jsdelivr.net">jsDelivr CDN</a>:
           </p>
           <pre><code class="language-HTML">&lt;head&gt;
     ...
@@ -283,9 +283,9 @@ $$
             CSS classes exactly like this.
           </p>
           <p>
-            So we just need to pull in the Javascript and chosen theme CSS (in this case,
-            <code>gruvbox-light-hard</code>) from a CDN, and ask it to render once the page has loaded. Hence the
-            <code>&lt;head&gt;</code> section of the base template contains:
+            Hence the <code>&lt;head&gt;</code> section of the base template pulls in the highlight Javascript and
+            chosen theme CSS (in this case, <code>gruvbox-light-hard</code>) from a CDN, and instructs the browser to
+            render code once the page has loaded:
           </p>
           <pre><code class="language-HTML">&lt;head&gt;
     ...
@@ -365,12 +365,12 @@ code.hljs {
             screen” feature of touch screen devices.
           </p>
           <p>
-            So we need to:
+            Adding favicons involves:
           </p>
           <ul>
-            <li>Create a set of favicons, and ensure the colours are coordinated with the colour theme of the website.
+            <li>Creating a set of favicons, ensuring the colours are coordinated with the colour theme of the website.
             </li>
-            <li>Tell browsers where to find all the favicons, noting that some are expected in “standard” locations
+            <li>Telling browsers where to find all the favicons, noting that some are expected in “standard” locations
             anyway.
             </li>
           </ul>
@@ -613,7 +613,7 @@ change_frequency = "weekly"
               <pre><code>&lt;link href=https://foo.bar.baz/&gt;
 &lt;link href="https://foo.bar.baz"/&gt;
 &lt;link href="https://foo.bar.baz/"&gt;
-</code></pre>This isn’t a problem so long as we always quote href’s.
+</code></pre>This isn’t a problem so long as href’s are always quoted.
             </li>
             <li>…
             </li>

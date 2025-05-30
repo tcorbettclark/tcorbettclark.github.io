@@ -1,6 +1,6 @@
 The purpose of this website is to encourage me to write and think clearly, to share things I find interesting, and to present who I am. This isn't a blog; it's a living space of content where I am continually adding, refining, and refactoring as needed.
 
-As a technical person, I like to Create, Think, Research, and Learn (CTRL). I find it helpful to be aware of these 4 activity modes at every scale - from playing with tiny puzzles and problems, investigating random ideas, working on personal or commercial projects, and thinking about topics I have found interesting over many years.
+As a technical person, I like to Create, Think, Research, and Learn (CTRL). I find it helpful to be aware of these 4 activity modes (or mental states) at every scale - from playing with tiny puzzles and problems, investigating random ideas, working on personal or commercial projects, and thinking about topics that have interested me for years.
 
 Achieving genuine originality is unimportant and unlikely, but it needs to be original to me and synthesised with clarity. The factors I value most are:
 
