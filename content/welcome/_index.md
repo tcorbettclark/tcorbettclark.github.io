@@ -11,4 +11,4 @@ Achieving genuine originality is unimportant and unlikely, but it needs to be or
 
 I also remain alert for commercial opportunities.
 
-Publishing in this form is a new initiative. I am working my way through a backlog of notes made over the years. So far I have written up some solutions to recreational [maths problems](../maths-problems/index.html), documented [my computer setup](../my-setup/index.html), and explained how I made [this website](../building-this-website/index.html).
+Publishing in this form is a new initiative. I am working my way through a backlog of notes made over decades. So far I have written up some solutions to recreational [maths problems](../maths-problems/index.html), documented [my computer setup](../my-setup/index.html), and explained how I made [this website](../building-this-website/index.html).

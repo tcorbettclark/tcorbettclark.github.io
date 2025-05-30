@@ -238,9 +238,9 @@ The javascript only runs when served up over `localhost`, so is fine to leave in
 ## Code overview
 
 In essence there are 3 classes with orthogonal responsibilities:
-- `Builder` - Build the files by applying templates using data from TOML etc.
+- `Builder` - Build the files by applying templates using data from TOML.
 - `Watcher` - Watch for file changes.
-- `Server` - Serve up the content over HTTP and the simple hot reloader protocol over a websocket.
+- `Server` - Serve up the content over http(s) and the simple hot reloader protocol over a websocket.
 
 The Watcher and Server are both async; the Builder is synchronous. The main loop is clean (simplified slightly to show approach):
 
