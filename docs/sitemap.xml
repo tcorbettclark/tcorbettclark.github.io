@@ -20,4 +20,36 @@
         <loc>https://www.corbettclark.com/building-this-site/approach.html</loc>
         <changefreq>weekly</changefreq>
     </url>
+    <url>
+        <loc>https://www.corbettclark.com/my-setup/index.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/maths-problems/index.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/maths-problems/problem-1/index.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/maths-problems/problem-1/solution.pdf</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/maths-problems/problem-2/index.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/maths-problems/problem-2/solution.pdf</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/maths-problems/problem-3/index.html</loc>
+        <changefreq>weekly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/maths-problems/problem-3/solution.pdf</loc>
+        <changefreq>weekly</changefreq>
+    </url>
 </urlset>
