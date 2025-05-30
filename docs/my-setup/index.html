@@ -76,7 +76,9 @@
         </div>
         <div class="content">
           <p>
-            This page documents the setup of my main computer, my primary tools, and some useful tips.
+            This page documents the setup of my main computer, my primary tools, and provides a few useful tips. This
+            helps when setting up a new computer, is an expression of my tastes and interests, and provides an overview
+            to assess for consistency and compatibility.
           </p>
           <h1>
             Hardware
@@ -116,18 +118,36 @@
             Programming
           </h1>
           <ul>
-            <li>Editor: <a href="https://zed.dev">zed</a>
+            <li>Editor: <a href="https://zed.dev">Zed</a>
             </li>
-            <li>Terminal : <a href="https://alacritty.org">alacritty</a>
+            <li>Terminal : <a href="https://alacritty.org">Alacritty</a>
             </li>
-            <li>Shell: <a href="https://fishshell.com">fish</a>
+            <li>Shell: <a href="https://fishshell.com">Fish</a>
             </li>
-            <li>Terminal prompt: <a href="https://starship.rs">starship</a>
+            <li>Terminal prompt: <a href="https://starship.rs">Starship</a>
             </li>
-            <li>Python code quality: <a href="https://docs.astral.sh/ruff/">ruff</a> and <a href=
+            <li>Python code quality: <a href="https://docs.astral.sh/ruff/">Ruff</a> and <a href=
             "https://github.com/astral-sh/ty">ty</a>
             </li>
-            <li>Python notebooks: <a href="https://marimo.io">marimo</a>
+          </ul>
+          <h1>
+            Data Science
+          </h1>
+          <ul>
+            <li>Python notebooks: <a href="https://marimo.io">Marimo</a>
+            </li>
+            <li>Dataframes - <a href="https://pola.rs">Polars</a> and <a href="https://duckdb.org">DuckDB</a>
+            </li>
+            <li>Graphs - <a href="https://altair-viz.github.io">Vega-Altair</a>
+            </li>
+          </ul>
+          <h1>
+            LLMs
+          </h1>
+          <ul>
+            <li>Running local models: <a href="https://ollama.ai">Ollama</a>
+            </li>
+            <li>Command line (local and remote): <a href="https://llm.datasette.io">LLM</a>
             </li>
           </ul>
           <h1>
@@ -139,9 +159,6 @@
             <li>Research notes: <a href="https://www.zotero.org">Zotero</a>
             </li>
             <li>General notes: Apple notes (but looking to explore <a href="https://obsidian.md">Obsidian</a>)
-            </li>
-            <li>Local AI models: <a href="https://ollama.ai">ollama</a> and <a href=
-            "https://llm.datasette.io/en/stable/">llm</a>
             </li>
           </ul>
           <h1>
@@ -326,8 +343,7 @@ alias --save copy-latest-pdf-download 'cp (ls --sort created ~/Downloads/*.pdf |
 brew install brew-cache
 </code></pre>
           <p>
-            In addition to the usual <code>brew update/upgrade/install/uninstall/list/info</code>, the following are
-            useful:
+            In addition to the usual <code>brew update/upgrade/install/uninstall/list/info</code>:
           </p>
           <pre><code class="language-bash">brew cache -u                             # Create/update cache of files
 brew cache -s &lt;file pattern&gt;              # Find packages containing files/directories matching pattern

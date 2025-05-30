@@ -1,4 +1,4 @@
-This page documents the setup of my main computer, my primary tools, and some useful tips.
+This page documents the setup of my main computer, my primary tools, and provides a few useful tips. This helps when setting up a new computer, is an expression of my tastes and interests, and provides an overview to assess for consistency and compatibility.
 
 # Hardware
 
@@ -19,19 +19,28 @@ This page documents the setup of my main computer, my primary tools, and some us
 
 # Programming
 
-- Editor: [zed](https://zed.dev)
-- Terminal : [alacritty](https://alacritty.org)
-- Shell: [fish](https://fishshell.com)
-- Terminal prompt: [starship](https://starship.rs)
-- Python code quality: [ruff](https://docs.astral.sh/ruff/) and [ty](https://github.com/astral-sh/ty)
-- Python notebooks: [marimo](https://marimo.io)
+- Editor: [Zed](https://zed.dev)
+- Terminal : [Alacritty](https://alacritty.org)
+- Shell: [Fish](https://fishshell.com)
+- Terminal prompt: [Starship](https://starship.rs)
+- Python code quality: [Ruff](https://docs.astral.sh/ruff/) and [ty](https://github.com/astral-sh/ty)
+
+# Data Science
+
+- Python notebooks: [Marimo](https://marimo.io)
+- Dataframes - [Polars](https://pola.rs) and [DuckDB](https://duckdb.org)
+- Graphs - [Vega-Altair](https://altair-viz.github.io)
+
+# LLMs
+
+- Running local models: [Ollama](https://ollama.ai)
+- Command line (local and remote): [LLM](https://llm.datasette.io)
 
 # Researching and writing
 
 - Writing: [typst](https://typst.app)
 - Research notes: [Zotero](https://www.zotero.org)
 - General notes: Apple notes (but looking to explore [Obsidian](https://obsidian.md))
-- Local AI models: [ollama](https://ollama.ai) and [llm](https://llm.datasette.io/en/stable/)
 
 # Apps
 
@@ -184,7 +193,7 @@ brew tap ten0s/homebrew-brew-cache
 brew install brew-cache
 ```
 
-In addition to the usual `brew update/upgrade/install/uninstall/list/info`, the following are useful:
+In addition to the usual `brew update/upgrade/install/uninstall/list/info`:
 
 ```bash
 brew cache -u                             # Create/update cache of files
