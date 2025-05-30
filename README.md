@@ -6,16 +6,14 @@ My personal website. For details, see https://www.corbettclark.com/building-this
 
 - About me (academic, profressional, personal)
 - Research interests, starting with tastes
-- Thoughts on... AI, intellectual life (CTRL), and see my Apple notes
-- Recreational mathematics - bite-sized puzzles with exploration
-- Investigations - more specialist/deeper trying to answer "why", e.g. logarithms, complex numbers.
-- Experiments - code e.g complexity. Armchair universe.
-- My computer setup and tools
-- Building this website
+  - Recreational mathematics - bite-sized puzzles with exploration
+  - Investigations - more specialist/deeper trying to answer "why", e.g. logarithms, complex numbers.
+  - Experiments - code e.g complexity. Armchair universe.
 - Bio/CV
 
 # TODO - other content
 
+- Written styleguide, e.g. avoid 3rd person "we", short sentences, run through an LLM for suggestions, ...
 - A "now" page. See https://nownownow.com/about
 - Find a link to the PDF for my "Choosing an appropriate model for novelty detection" paper.
   - Perhaps? https://ieeexplore.ieee.org/document/607503
