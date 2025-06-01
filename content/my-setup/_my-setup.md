@@ -24,6 +24,7 @@ This page helps me when setting up a new computer, and provides an overview to a
 - Shell: [Fish](https://fishshell.com)
 - Terminal prompt: [Starship](https://starship.rs)
 - Python code quality: [Ruff](https://docs.astral.sh/ruff/) and [ty](https://github.com/astral-sh/ty)
+- Javascript/Typescript: [Bun](https://bun.sh)
 
 # Data Science
 
@@ -79,7 +80,7 @@ brew install -q \
     jq \
     libffi \
     mkcert \
-    node \
+    oven-sh/bun/bun \
     qemu \
     sqlite \
     starship \
