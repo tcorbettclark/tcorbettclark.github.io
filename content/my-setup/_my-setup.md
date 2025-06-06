@@ -39,9 +39,9 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 # Researching and writing
 
-- Writing: [typst](https://typst.app)
+- Writing (PDFs): [typst](https://typst.app)
 - Research notes: [Zotero](https://www.zotero.org)
-- General notes: Apple notes (but looking to explore [Obsidian](https://obsidian.md))
+- General notes: Apple notes
 
 # Apps
 
@@ -54,8 +54,10 @@ brew install -q --cask \
     font-fira-code-nerd-font \
     font-noto-emoji \
     karabiner-elements \
+    ollama \
     raycast \
-    rectangle
+    rectangle \
+    zotero
 ```
 
 Note this includes the [Fira Code](https://github.com/tonsky/FiraCode) font with programming ligatures.
