@@ -11,4 +11,4 @@ While geniune originality is neither my primary goal nor a likely outcome, it mu
 
 I remain alert for possible commercial opportunities. However, I've reached a stage in my life where this is less important, raising the threshold needed to pique my interest and time.
 
-Publishing in this form is a new endeavor. I am working my way through a backlog of notes compiled over decades. I have started by writing up some solutions to recreational [maths problems](../maths-problems/index.html), documenting [my computer setup](../my-setup/index.html), and explaining the building and maintaining of [this website](../building-this-website/index.html).
+Publishing in this form is a new endeavor. I am working my way through a backlog of notes compiled over decades, finding my voice by writing up some solutions to recreational [maths problems](../maths-problems/index.html), documenting [my computer setup](../my-setup/index.html), and explaining the building and maintaining of [this website](../building-this-website/index.html).
