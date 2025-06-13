@@ -212,7 +212,7 @@ mkcert -install
 mkcert localhost
 
 # Run AWG in HTTPS mode
-./awg.py contents/ docs/ --certfile localhost.pem --keyfile localhost-key.pem
+./awg.py content/ docs/ --certfile localhost.pem --keyfile localhost-key.pem
 # ...etc
 ```
 
