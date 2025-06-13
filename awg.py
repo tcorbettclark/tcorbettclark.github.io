@@ -1,4 +1,5 @@
-#!/usr/bin/env -S DYLD_LIBRARY_PATH=/usr/local/lib uv run --script
+#!/usr/bin/env -S DYLD_LIBRARY_PATH=/opt/homebrew/lib uv run --script
+# (may need DYLD_LIBRARY_PATH=/usr/local/lib on Apple intel).
 # (may need DYLD_LIBRARY_PATH=/opt/homebrew/lib on Apple silicon).
 
 # /// script
