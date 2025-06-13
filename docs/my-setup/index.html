@@ -88,8 +88,6 @@
             <li>Keyboard: Durgod Taurus K320, configured using <a href=
             "https://karabiner-elements.pqrs.org">Karabiner-Elements</a>.
             </li>
-            <li>Resource monitoring: <a href="https://usage.pro">Usage</a>
-            </li>
           </ul>
           <h1>
             Software management
@@ -234,25 +232,6 @@
             Configuration
           </h1>
           <h2>
-            Alacritty
-          </h2>
-          <p>
-            Alacritty is configured in <code>~/.alacritty.toml</code> with:
-          </p>
-          <pre><code class="language-toml">[window]
-padding = { x = 5, y = 5 }
-dynamic_padding = true
-opacity = 0.9
-
-[font]
-size = 12
-normal = { family = "FiraCode Nerd Font", style = "Regular" }
-
-[bell]
-animation = "Ease"
-duration = 200
-</code></pre>
-          <h2>
             Keyboard
           </h2>
           <p>
@@ -299,6 +278,7 @@ duration = 200
           </p>
           <pre><code>if status --is-login
     # For brew
+    fish_add_path -P /opt/homebrew/bin
     brew shellenv fish | source
 
     # For uv
@@ -308,7 +288,7 @@ duration = 200
     fish_add_path -P /usr/local/sbin /usr/sbin /sbin /usr/local/bin /usr/bin /bin
 
     # Add path to brew-installed curl
-    fish_add_path -P /usr/local/opt/curl/bin
+    fish_add_path -P (brew --prefix)/opt/curl/bin
 
     # Add path to anything I have installed locally (e.g. by `uv tool`)
     fish_add_path -P /Users/tcorbettclark/.local/bin
@@ -343,7 +323,6 @@ alias --save copy-latest-pdf-download 'cp (ls --sort created ~/Downloads/*.pdf |
             find which packages own which files:
           </p>
           <pre><code class="language-bash">brew tap ten0s/homebrew-brew-cache
-brew install brew-cache
 </code></pre>
           <p>
             In addition to the usual <code>brew update/upgrade/install/uninstall/list/info</code>:

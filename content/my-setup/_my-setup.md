@@ -4,7 +4,6 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 - Computer: iMac Retina 5k, 27 inch, 2019
 - Keyboard: Durgod Taurus K320, configured using [Karabiner-Elements](https://karabiner-elements.pqrs.org).
-- Resource monitoring: [Usage](https://usage.pro)
 
 # Software management
 
@@ -99,25 +98,6 @@ Note the better versions of standard tools:
 
 # Configuration
 
-## Alacritty
-
-Alacritty is configured in `~/.alacritty.toml` with:
-
-```toml
-[window]
-padding = { x = 5, y = 5 }
-dynamic_padding = true
-opacity = 0.9
-
-[font]
-size = 12
-normal = { family = "FiraCode Nerd Font", style = "Regular" }
-
-[bell]
-animation = "Ease"
-duration = 200
-```
-
 ## Keyboard
 
 I remap the modifier keys on my Durgod K320 using `Karabiner-Elements` so that:
@@ -150,6 +130,7 @@ The main `~/.config/fish/config.fish` contains:
 ```
 if status --is-login
     # For brew
+    fish_add_path -P /opt/homebrew/bin
     brew shellenv fish | source
 
     # For uv
@@ -159,7 +140,7 @@ if status --is-login
     fish_add_path -P /usr/local/sbin /usr/sbin /sbin /usr/local/bin /usr/bin /bin
 
     # Add path to brew-installed curl
-    fish_add_path -P /usr/local/opt/curl/bin
+    fish_add_path -P (brew --prefix)/opt/curl/bin
 
     # Add path to anything I have installed locally (e.g. by `uv tool`)
     fish_add_path -P /Users/tcorbettclark/.local/bin
@@ -193,7 +174,6 @@ Add the [brew-cache](https://github.com/ten0s/homebrew-brew-cache) extension to 
 
 ```bash
 brew tap ten0s/homebrew-brew-cache
-brew install brew-cache
 ```
 
 In addition to the usual `brew update/upgrade/install/uninstall/list/info`:
