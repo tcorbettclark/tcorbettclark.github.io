@@ -2,14 +2,16 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 # Hardware
 
-- Computer: iMac Retina 5k, 27 inch, 2019
+- Computer: Mac Mini (2024) M4 10 core, 32GB RAM, 512GB SSD
+- Monitor: BenQ PD27305
 - Keyboard: Durgod Taurus K320, configured using [Karabiner-Elements](https://karabiner-elements.pqrs.org).
+<!-- - Keyboard: NuPhy Air75 V2 -->
 
 # Software management
 
 - Package management: [brew](https://brew.sh)
 - Python versions and virtualenv: [uv](https://docs.astral.sh/uv/)
-- Containers / virtual machines: [colima](https://github.com/abiosoft/colima), [docker](https://www.docker.com), and [qemu](https://www.qemu.org)
+- Containers / virtual machines: [container](https://github.com/apple/container), [colima](https://github.com/abiosoft/colima), [docker](https://www.docker.com), and [qemu](https://www.qemu.org)
 
 # Desktop
 
