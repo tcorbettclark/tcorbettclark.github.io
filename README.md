@@ -4,7 +4,7 @@ My personal website. For details, see https://www.corbettclark.com/building-this
 
 # TODO - content
 
-- About me (academic, profressional, personal)
+- About me (academic, professional, personal)
 - Research interests, starting with tastes
   - Recreational mathematics - bite-sized puzzles with exploration
   - Investigations - more specialist/deeper trying to answer "why", e.g. logarithms, complex numbers.
