@@ -4,8 +4,7 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 - Computer: Mac Mini (2024) M4 10 core, 32GB RAM, 512GB SSD
 - Monitor: BenQ PD27305
-- Keyboard: Durgod Taurus K320, configured using [Karabiner-Elements](https://karabiner-elements.pqrs.org).
-<!-- - Keyboard: NuPhy Air75 V2 -->
+- Keyboard: NuPhy Air75 V2, with caps-lock configured as escape
 
 # Software management
 
@@ -15,15 +14,16 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 # Desktop
 
-- Window management: [Rectangle](https://rectangleapp.com) and [AutoRaise](https://github.com/sbmpost/AutoRaise)
+- Focus behaviour: [AutoRaise](https://github.com/sbmpost/AutoRaise)
 - Launcher (Spotlight replacement): [Raycast](https://www.raycast.com)
 
 # Programming
 
-- Editor: [Zed](https://zed.dev)
-- Terminal : [Alacritty](https://alacritty.org)
+- Editor: [Helix](https://helix-editor.com)
+- Terminal : [Ghostty](https://ghostty.org)
 - Shell: [Fish](https://fishshell.com)
 - Terminal prompt: [Starship](https://starship.rs)
+- Git: [LazyGit](https://github.com/jesseduffield/lazygit)
 - Python code quality: [Ruff](https://docs.astral.sh/ruff/) and [ty](https://github.com/astral-sh/ty)
 - Javascript/Typescript: [Bun](https://bun.sh)
 
@@ -35,8 +35,10 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 # LLMs
 
-- Running local models: [Ollama](https://ollama.ai)
-- Command line (local and remote): [LLM](https://llm.datasette.io)
+- Local models: [Ollama](https://ollama.ai)
+- Commandline: [LLM](https://llm.datasette.io)
+- Programming: [Aider](https://aider.chat)
+- Models: [OpenRouter](https://openrouter.ai)
 
 # Researching and writing
 
@@ -50,14 +52,11 @@ To install all apps (list created using `brew list --casks -1`):
 
 ```bash
 brew install -q --cask \
-    alacritty \
     font-fira-code \
     font-fira-code-nerd-font \
     font-noto-emoji \
-    karabiner-elements \
-    ollama \
+    ghostty \
     raycast \
-    rectangle \
     zotero
 ```
 
@@ -77,19 +76,25 @@ brew install -q \
     dust \
     eza \
     fastfetch \
+    fd \
     ffmpeg \
     fish \
+    fzf \
     git \
+    helix \
     jq \
+    lazygit \
     libffi \
     mkcert \
+    neovim \
     oven-sh/bun/bun \
     qemu \
+    ripgrep \
     sqlite \
     starship \
     tidy-html5 \
     uv \
-    zlib
+    zlib 
 ```
 
 Note the better versions of standard tools:
@@ -97,34 +102,19 @@ Note the better versions of standard tools:
 - `ls` → [eza](https://eza.rocks)
 - `du` → [dust](https://github.com/bootandy/dust)
 - `top` → [bottom (btm)](https://clementtsang.github.io/bottom/stable/)
+- `grep` → [fzf](https://junegunn.github.io/fzf) and [ripgrep](https://github.com/BurntSushi/ripgrep)
+- `find` → [fd](https://github.com/sharkdp/fd)
 
 # Configuration
 
-## Keyboard
+## Ghostty
 
-I remap the modifier keys on my Durgod K320 using `Karabiner-Elements` so that:
-
-- The Windows button is Command/Cmd (was Option/Alt).
-- The Alt button is Option/Alt (was Command/Cmd).
-- The Application button is (right) option.
-- (The Fn key is not seen by the computer but the keyboard itself modifies the function keys).
-
-So the keys across the bottom row become:
-
+Open settings to set:
 ```
-Ctrl   ⌥   ⌘   <spacebar>   ⌘   🌐︎   ⌥   Ctrl
+macos-option-as-alt = left
+split-divider-color = white
 ```
-
-where
-
-- ⌥ is Option/Alt
-- ⌘ is Command/Cmd
-- 🌐︎ is Fn/Globe
-
-Use `Karabiner-eventviewer` to watch events. See also [keycode.info](https://keycode.info).
-
-Make sure keyboard is set to British, and not for example to Unicode Hex Input.
-
+    
 ## Fish
 
 The main `~/.config/fish/config.fish` contains:

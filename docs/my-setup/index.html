@@ -87,10 +87,9 @@
             </li>
             <li>Monitor: BenQ PD27305
             </li>
-            <li>Keyboard: Durgod Taurus K320, configured using <a href=
-            "https://karabiner-elements.pqrs.org">Karabiner-Elements</a>.
+            <li>Keyboard: NuPhy Air75 V2, with caps-lock configured as escape
             </li>
-          </ul><!-- - Keyboard: NuPhy Air75 V2 -->
+          </ul>
           <h1>
             Software management
           </h1>
@@ -108,8 +107,7 @@
             Desktop
           </h1>
           <ul>
-            <li>Window management: <a href="https://rectangleapp.com">Rectangle</a> and <a href=
-            "https://github.com/sbmpost/AutoRaise">AutoRaise</a>
+            <li>Focus behaviour: <a href="https://github.com/sbmpost/AutoRaise">AutoRaise</a>
             </li>
             <li>Launcher (Spotlight replacement): <a href="https://www.raycast.com">Raycast</a>
             </li>
@@ -118,13 +116,15 @@
             Programming
           </h1>
           <ul>
-            <li>Editor: <a href="https://zed.dev">Zed</a>
+            <li>Editor: <a href="https://helix-editor.com">Helix</a>
             </li>
-            <li>Terminal : <a href="https://alacritty.org">Alacritty</a>
+            <li>Terminal : <a href="https://ghostty.org">Ghostty</a>
             </li>
             <li>Shell: <a href="https://fishshell.com">Fish</a>
             </li>
             <li>Terminal prompt: <a href="https://starship.rs">Starship</a>
+            </li>
+            <li>Git: <a href="https://github.com/jesseduffield/lazygit">LazyGit</a>
             </li>
             <li>Python code quality: <a href="https://docs.astral.sh/ruff/">Ruff</a> and <a href=
             "https://github.com/astral-sh/ty">ty</a>
@@ -147,9 +147,13 @@
             LLMs
           </h1>
           <ul>
-            <li>Running local models: <a href="https://ollama.ai">Ollama</a>
+            <li>Local models: <a href="https://ollama.ai">Ollama</a>
             </li>
-            <li>Command line (local and remote): <a href="https://llm.datasette.io">LLM</a>
+            <li>Commandline: <a href="https://llm.datasette.io">LLM</a>
+            </li>
+            <li>Programming: <a href="https://aider.chat">Aider</a>
+            </li>
+            <li>Models: <a href="https://openrouter.ai">OpenRouter</a>
             </li>
           </ul>
           <h1>
@@ -170,14 +174,11 @@
             To install all apps (list created using <code>brew list --casks -1</code>):
           </p>
           <pre><code class="language-bash">brew install -q --cask \
-    alacritty \
     font-fira-code \
     font-fira-code-nerd-font \
     font-noto-emoji \
-    karabiner-elements \
-    ollama \
+    ghostty \
     raycast \
-    rectangle \
     zotero
 </code></pre>
           <p>
@@ -200,19 +201,25 @@
     dust \
     eza \
     fastfetch \
+    fd \
     ffmpeg \
     fish \
+    fzf \
     git \
+    helix \
     jq \
+    lazygit \
     libffi \
     mkcert \
+    neovim \
     oven-sh/bun/bun \
     qemu \
+    ripgrep \
     sqlite \
     starship \
     tidy-html5 \
     uv \
-    zlib
+    zlib 
 </code></pre>
           <p>
             Note the better versions of standard tools:
@@ -230,49 +237,26 @@
             <li>
               <code>top</code> → <a href="https://clementtsang.github.io/bottom/stable/">bottom (btm)</a>
             </li>
+            <li>
+              <code>grep</code> → <a href="https://junegunn.github.io/fzf">fzf</a> and <a href=
+              "https://github.com/BurntSushi/ripgrep">ripgrep</a>
+            </li>
+            <li>
+              <code>find</code> → <a href="https://github.com/sharkdp/fd">fd</a>
+            </li>
           </ul>
           <h1>
             Configuration
           </h1>
           <h2>
-            Keyboard
+            Ghostty
           </h2>
           <p>
-            I remap the modifier keys on my Durgod K320 using <code>Karabiner-Elements</code> so that:
+            Open settings to set:
           </p>
-          <ul>
-            <li>The Windows button is Command/Cmd (was Option/Alt).
-            </li>
-            <li>The Alt button is Option/Alt (was Command/Cmd).
-            </li>
-            <li>The Application button is (right) option.
-            </li>
-            <li>(The Fn key is not seen by the computer but the keyboard itself modifies the function keys).
-            </li>
-          </ul>
-          <p>
-            So the keys across the bottom row become:
-          </p>
-          <pre><code>Ctrl   ⌥   ⌘   &lt;spacebar&gt;   ⌘   🌐︎   ⌥   Ctrl
+          <pre><code>macos-option-as-alt = left
+split-divider-color = white
 </code></pre>
-          <p>
-            where
-          </p>
-          <ul>
-            <li>⌥ is Option/Alt
-            </li>
-            <li>⌘ is Command/Cmd
-            </li>
-            <li>🌐︎ is Fn/Globe
-            </li>
-          </ul>
-          <p>
-            Use <code>Karabiner-eventviewer</code> to watch events. See also <a href=
-            "https://keycode.info">keycode.info</a>.
-          </p>
-          <p>
-            Make sure keyboard is set to British, and not for example to Unicode Hex Input.
-          </p>
           <h2>
             Fish
           </h2>
