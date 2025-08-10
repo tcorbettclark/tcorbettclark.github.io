@@ -36,9 +36,9 @@ This page helps me when setting up a new computer, and provides an overview to a
 # LLMs
 
 - Local models: [Ollama](https://ollama.ai)
+- Remote models: [OpenRouter](https://openrouter.ai)
 - Commandline: [LLM](https://llm.datasette.io)
 - Programming: [Aider](https://aider.chat)
-- Models: [OpenRouter](https://openrouter.ai)
 
 # Researching and writing
 
