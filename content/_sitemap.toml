@@ -1,57 +1,57 @@
 [[SITEMAP_FILENAMES]]
 name = "index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "welcome/index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 # Building this site
 
 [[SITEMAP_FILENAMES]]
 name = "building-this-site/index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "building-this-site/awg.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "building-this-site/approach.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 # My Computer setup
 
 [[SITEMAP_FILENAMES]]
 name = "my-setup/index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 # Maths problems
 
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/problem-1/index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/problem-1/solution.pdf"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/problem-2/index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/problem-2/solution.pdf"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/problem-3/index.html"
-change_frequency = "weekly"
+change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/problem-3/solution.pdf"
-change_frequency = "weekly"
+change_frequency = "monthly"
