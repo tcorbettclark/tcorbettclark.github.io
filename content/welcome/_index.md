@@ -2,7 +2,7 @@ The purpose of this site is to encourage me to write and think clearly, to share
 
 I have realised that it is productive to spend time in each of the following modes: Create, Think, Research, and Learn (CTRL). Doing so helps me make progress at every scale - when playing with tiny puzzles and problems, investigating ad hoc ideas, working on personal or commercial projects, and developing long-standing interests.
 
-While geniune originality is neither my primary goal nor a likely outcome, it must be original to me and synthesised with clarity. The factors I value most are:
+Geniune originality is neither my primary goal nor a likely outcome, but it must be original to me and synthesised with clarity. The factors I value most are:
 
 - **Rigorous understanding**: Validated by writing full explanations, addressing the "why" as much as the "what".
 - **Tangible output**: Experimental results, algorithms, code, tools, visualisations, papers, etc.
