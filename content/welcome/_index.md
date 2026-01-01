@@ -1,4 +1,4 @@
-The purpose of this website is to encourage me to write and think clearly, to share things I find interesting, and to present who I am. This isn't a blog; it's a living space of content where I add, refine, and refactor as needed.
+The purpose of this site is to encourage me to write and think clearly, to share things I find interesting, and to present who I am. This isn't a blog; it's a living space of content where I add, refine, and refactor as needed.
 
 I have realised that it is productive to spend time in each of the following modes: Create, Think, Research, and Learn (CTRL). Doing so helps me make progress at every scale - when playing with tiny puzzles and problems, investigating ad hoc ideas, working on personal or commercial projects, and developing long-standing interests.
 
