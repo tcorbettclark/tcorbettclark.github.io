@@ -2,10 +2,6 @@
 
 My personal website. For details, see https://www.corbettclark.com/building-this-website/index.html.
 
-# TODO - fix
-
-- Backlinks from PDFs are broken.
-
 # TODO - content
 
 - About me (academic, professional, personal)
