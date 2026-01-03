@@ -85,8 +85,8 @@ brew install -q \
     jq \
     lazygit \
     libffi \
+    marksman \
     mkcert \
-    neovim \
     oven-sh/bun/bun \
     qemu \
     ripgrep \
@@ -109,7 +109,7 @@ Note the better versions of standard tools:
 
 ## Ghostty
 
-Open settings to set:
+Settings:
 ```
 macos-option-as-alt = left
 split-divider-color = white
@@ -131,8 +131,9 @@ if status --is-login
     # Add standard unix paths
     fish_add_path -P /usr/local/sbin /usr/sbin /sbin /usr/local/bin /usr/bin /bin
 
-    # Add path to brew-installed curl
+    # Add path to keg-only brew-installed packages
     fish_add_path -P (brew --prefix)/opt/curl/bin
+    fish_add_path -P (brew --prefix)/opt/sqlite/bin
 
     # Add path to anything I have installed locally (e.g. by `uv tool`)
     fish_add_path -P /Users/tcorbettclark/.local/bin
