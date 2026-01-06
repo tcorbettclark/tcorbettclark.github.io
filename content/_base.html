@@ -9,6 +9,7 @@
         <meta http-equiv="Content-Security-Policy" content="
             upgrade-insecure-requests;
             default-src 'none';
+            trusted-types dompurify highlightjs-policy;
             require-trusted-types-for 'script';
             base-uri 'self';
             img-src 'self';
@@ -17,6 +18,7 @@
                 'strict-dynamic'
                 '{{ KATEX_JS_SHA }}'
                 '{{ HIGHLIGHT_JS_SHA }}'
+                'sha384-{{ '/purify.min.js' | sha() }}'
                 'sha384-{{ '/hot-reloader.js' | sha() }}'
                 'sha384-{{ '/render-maths.js' | sha() }}'
                 'sha384-{{ '/render-code.js' | sha() }}'
@@ -64,6 +66,7 @@
         <script defer src="{{ KATEX_JS }}" integrity="{{ KATEX_JS_SHA }}" crossorigin="anonymous"></script>
         <script defer src="{{ HIGHLIGHT_JS }}" integrity="{{ HIGHLIGHT_JS_SHA }}" crossorigin="anonymous"></script>
 
+        <script defer src="/purify.min.js" integrity="sha384-{{ '/purify.min.js' | sha() }}"></script>
         <script defer src="/hot-reloader.js" integrity="sha384-{{ '/hot-reloader.js' | sha() }}"></script>
         <script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
         <script defer src="/render-code.js" integrity="sha384-{{ '/render-code.js' | sha() }}"></script>
