@@ -8,7 +8,7 @@
     <meta http-equiv="Upgrade-Insecure-Requests" content="1" />
     <meta http-equiv="Strict-Transport-Security" content="max-age=63072000; includeSubDomains" />
     <meta http-equiv="Content-Security-Policy" content=
-    "upgrade-insecure-requests; default-src 'none'; require-trusted-types-for 'script'; base-uri 'self'; img-src 'self'; manifest-src 'self'; script-src-elem 'strict-dynamic' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' 'sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp' 'sha384-nq/jJqKHx2Beq2PLdLsH/0zMwhVN8i9yl8mm8MikpU3k2nTuAJIWXQdIKTyhGQ0w' 'sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS' 'sha384-Yfa985Z0LorjBya15TjALqmYYUOLsdk67u37ToLE+xJAfmJ8G78yGxNkv4zPJsBI' ; connect-src 'self' ; font-src 'self' https://cdn.jsdelivr.net ; style-src 'self' https://cdn.jsdelivr.net 'sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX' 'sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP' 'sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd' 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk' ;" />
+    "upgrade-insecure-requests; default-src 'none'; trusted-types dompurify highlightjs-policy; require-trusted-types-for 'script'; base-uri 'self'; img-src 'self'; manifest-src 'self'; script-src-elem 'strict-dynamic' 'sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6' 'sha384-RH2xi4eIQ/gjtbs9fUXM68sLSi99C7ZWBRX1vDrVv6GQXRibxXLbwO2NGZB74MbU' 'sha384-80VlBZnyAwkkqtSfg5NhPyZff6nU4K/qniLBL8Jnm4KDv6jZhLiYtJbhglg/i9ww' 'sha384-nq/jJqKHx2Beq2PLdLsH/0zMwhVN8i9yl8mm8MikpU3k2nTuAJIWXQdIKTyhGQ0w' 'sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS' 'sha384-fbQ39/oKi1PttS/8oIE/Jkphlv5wDfmKpIB982H7mRGz1GAlF3w1GjyPA842YEtn' ; connect-src 'self' ; font-src 'self' https://cdn.jsdelivr.net ; style-src 'self' https://cdn.jsdelivr.net 'sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX' 'sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP' 'sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd' 'sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk' ;" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Timothy Corbett-Clark" />
     <meta name="description" content="Personal website of Dr Timothy Corbett-Clark" />
@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
     integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href=
-    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css"
+    "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/base16/gruvbox-light-hard.min.css"
     integrity="sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css" integrity=
     "sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX" crossorigin="anonymous" />
@@ -40,15 +40,17 @@
     "sha384-6tuxMr6N8BYhY1MziAiDxbBp7gb26fGRPr8qQoxo6b6wrAZ15oleECL9OBf2NJjk" />
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js" integrity=
     "sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6" crossorigin="anonymous"></script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"
-    integrity="sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp" crossorigin=
+    <script defer="defer" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js"
+    integrity="sha384-RH2xi4eIQ/gjtbs9fUXM68sLSi99C7ZWBRX1vDrVv6GQXRibxXLbwO2NGZB74MbU" crossorigin=
     "anonymous"></script>
+    <script defer="defer" src="/purify.min.js" integrity=
+    "sha384-80VlBZnyAwkkqtSfg5NhPyZff6nU4K/qniLBL8Jnm4KDv6jZhLiYtJbhglg/i9ww"></script>
     <script defer="defer" src="/hot-reloader.js" integrity=
     "sha384-nq/jJqKHx2Beq2PLdLsH/0zMwhVN8i9yl8mm8MikpU3k2nTuAJIWXQdIKTyhGQ0w"></script>
     <script defer="defer" src="/render-maths.js" integrity=
     "sha384-H2o0JdK+a6Nv0Bq7U4BlXJ36aFpF5pw1X/JWhzWBYGGNZQQVFqBTD9hUrk0IuIIS"></script>
     <script defer="defer" src="/render-code.js" integrity=
-    "sha384-Yfa985Z0LorjBya15TjALqmYYUOLsdk67u37ToLE+xJAfmJ8G78yGxNkv4zPJsBI"></script>
+    "sha384-fbQ39/oKi1PttS/8oIE/Jkphlv5wDfmKpIB982H7mRGz1GAlF3w1GjyPA842YEtn"></script>
   </head>
   <body>
     <header class="hero is-small is-primary">
