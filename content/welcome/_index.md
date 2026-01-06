@@ -1,7 +1,7 @@
 The purpose of this site is to encourage me to write.
 This isn't a blog; it's a living space of content where I add, refine, and refactor as needed.
 
-I find it productive to spend quality time in each of the following distinct activity modes: Creating, Thinking, Researching, and Learning (CTRL).
+I have found it important to spend quality time in each of the following distinct activity modes: Creating, Thinking, Researching, and Learning (CTRL).
 Doing so helps me make progress at every scale - when playing with tiny puzzles and problems, investigating ad hoc ideas, working on personal or commercial projects, and developing long-standing interests.
 
 Geniune originality is neither my primary goal nor a likely outcome, but it must be original to me and synthesised with clarity.

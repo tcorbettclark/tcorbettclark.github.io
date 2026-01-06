@@ -1,6 +1,8 @@
 # Introduction
 
-Assuming a willingness to understand the necessary web technologies, why not create static websites _by hand_? The main problems are around inefficient repetition and cumbersome syntax. For example,
+Assuming a willingness to understand the necessary web technologies, why not create static websites _by hand_?
+The main problems are around inefficient repetition and cumbersome syntax.
+For example,
 
 - copy-and-paste maintenance of the same content e.g. in headers and footers;
 - copy-and-paste maintenance of the same formatting/styling tags around repeated lists of things;
@@ -10,7 +12,8 @@ These pain points can be ameliorated by using a markup language (like [markdown]
 
 ## Features / anti-features
 
-My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few others such as the manifest.json, robots.txt, and sitemap.xml). **It is a scaffolding tool with no fundamental opinion about these web files**.
+My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few others such as the manifest.json, robots.txt, and sitemap.xml).
+**It is a scaffolding tool with no fundamental opinion about these web files**.
 
 The essential features are:
 
@@ -25,27 +28,39 @@ Then, to create a fast iterative loop:
 6. Watching for source file changes and rebuilding automatically.
 7. Notifying browser(s) of new builds (e.g. to trigger a "hot reload").
 
-Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc. Many of these are easy to achieve using the tool's machinery without explicit native support.
+Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc.
+Many of these are easy to achieve using the tool's machinery without explicit native support.
 
 ## Zero config
 
-With the exception of a few command line options to tell the tool where to find the content and put the output, **there is no configuration**. There are no required files or directory structures, and so (degenerately) **the tool will run fine on an empty directory**. There is a simple `example/` content directory in the [GitHub repository](https://github.com/tcorbettclark/tcorbettclark.github.io) to demo some of the functionality and provide a learning sandpit to play in.
+With the exception of a few command line options to tell the tool where to find the content and put the output, **there is no configuration.
+There are no required files or directory structures, and so (degenerately) **the tool will run fine on an empty directory**.
+There is a simple `example/` content directory in the [GitHub repository](https://github.com/tcorbettclark/tcorbettclark.github.io) to demo some of the functionality and provide a learning sandpit to play in.
 
 ## Subtractive approach
 
-Instead of copying and creating files and directories from various sources and processes, the tool takes a "subtractive" approach. The build process starts by cloning a given content directory into a new output directory. After running the build process, all "working files" are deleted from this output directory. By default,
+Instead of copying and creating files and directories from various sources and processes, the tool takes a "subtractive" approach.
+The build process starts by cloning a given content directory into a new output directory.
+After running the build process, all "working files" are deleted from this output directory.
+By default,
 - _working files_ are identified as filenames starting with an underscore, and
 - _template files_ are identified as *not* being a working file and having an extension of `.html`, `.xml`, and `.txt`.
 
-In addition to removing mystery around how an output is generated, this approach allows maintenance effort to be reduced by grouping related content. For example, all HTML, Markdown, template data, Javascript, etc relating to a particular page or section of the site **can be kept together in the same directory**. This localisation of content means that after changes, removal, or replacement, the chances of things being left behind afterwards are much reduced.
+In addition to removing mystery around how an output is generated, this approach allows maintenance effort to be reduced by grouping related content.
+For example, all HTML, Markdown, template data, Javascript, etc relating to a particular page or section of the site **can be kept together in the same directory**.
+This localisation of content means that after changes, removal, or replacement, the chances of things being left behind afterwards are much reduced.
 
-Note however that due to the tool's lack of opinion in this regard, content can still be grouped by type in the traditional fashion if desired (all the javascript in one directory, all the CSS in another, etc). Or a mixed by-purpose/by-type strategy used. Regardless, the files and structure is all explicit and visible.
+Note however that due to the tool's lack of opinion in this regard, content can still be grouped by type in the traditional fashion if desired (all the javascript in one directory, all the CSS in another, etc).
+Or a mixed by-purpose/by-type strategy used.
+Regardless, the files and structure is all explicit and visible.
 
 ## Templating and template data
 
 To provide templating, AWG uses [Jinja](https://jinja.palletsprojects.com), a popular and mature templating library.
 
-Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming directories), and discourages "by-purpose" organisation of the files. Hence AWG overrides the Jinja environment so that including or extending other files is *relative to the loading template file*. For example, here is a consistent location of 3 files:
+Jinja uses absolute file paths, which makes it harder to maintain source directory structure (e.g. renaming directories), and discourages "by-purpose" organisation of the files.
+Hence AWG overrides the Jinja environment so that including or extending other files is *relative to the loading template file*.
+For example, here is a consistent location of 3 files:
 
 ```html
 <!-- in /a/b/c.html -->
@@ -59,17 +74,25 @@ Jinja uses absolute file paths, which makes it harder to maintain source directo
 ...some includable content...
 ```
 
-Note that both `_foo.html` and `_bar.html` are working files (because of the leading underscore), and therefore won't be run through Jinja directly. Anything included by a Jinja template should almost certainly be a working file.
+Note that both `_foo.html` and `_bar.html` are working files (because of the leading underscore), and therefore won't be run through Jinja directly.
+Anything included by a Jinja template should almost certainly be a working file.
 
 Templating can make use of data, for example to generate lists of things, pull out into one place something which is used in multiple places, or just self-document the meaning of something better.
 
-AWG reads data from all TOML files (`*.toml`), combining everything into a single namespace. This allows the data to be kept near to where it is used. Although tempting to have separate namespaces, doing so from a hierarchy of such files (including multiple files in the same directory) seems overly complex and could even *increase* the maintenance overhead. Using meaningful names and having the tool check for name collisions is both practical and easy to understand.
+AWG reads data from all TOML files (`*.toml`), combining everything into a single namespace.
+This allows the data to be kept near to where it is used.
+Although tempting to have separate namespaces, doing so from a hierarchy of such files (including multiple files in the same directory) seems overly complex and could even *increase* the maintenance overhead.
+Using meaningful names and having the tool check for name collisions is both practical and easy to understand.
 
 ## Markdown
 
-There are many flavours of Markdown. I have chosen to use [CommonMark](https://commonmark.org), implemented using the [markdown-it-py](https://markdown-it-py.readthedocs.io) Python library.
+There are many flavours of Markdown.
+I have chosen to use [CommonMark](https://commonmark.org), implemented using the [markdown-it-py](https://markdown-it-py.readthedocs.io) Python library.
 
-To allow markdown to be incorporated into the HTML, AWG adds a "filter" to the Jinja environment. Although an abuse of filters, it is easy to implement and convenient to use. The input to the filter is the name of the file which should be converted from Markdown into HTML and included in the document at that point. For example:
+To allow markdown to be incorporated into the HTML, AWG adds a "filter" to the Jinja environment.
+Although an abuse of filters, it is easy to implement and convenient to use.
+The input to the filter is the name of the file which should be converted from Markdown into HTML and included in the document at that point.
+For example:
 
  ```html
  {{ "<filename>.md" | markdown() }}
@@ -95,13 +118,15 @@ And from [mdit-py-plugins](https://mdit-py-plugins.readthedocs.io):
 
 ## Computing hashes e.g. for SRI and CSP
 
-[Subresource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) and [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) both use file hashes. To make it easier to maintain these hashes, AWG adds a Jinja filter `sha("256"|"384"|"512")` (with a default of `"384"`) to create SHA hashes of local files. For example, to create SHA384 integrity attributes for SRI,
+[Subresource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) and [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) both use file hashes.
+To make it easier to maintain these hashes, AWG adds a Jinja filter `sha("256"|"384"|"512")` (with a default of `"384"`) to create SHA hashes of local files.
+For example, to create SHA384 integrity attributes for SRI,
 
 ```html
 <script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
 ```
 
-## Summary: the AWG content interface
+## Summary: the AWG content interface    
 
 The AWG tool recognises 3 types of file:
 
@@ -130,13 +155,17 @@ The build process is as follows:
 
 The tool requires no particular file or directory structure, and will work (degenerately) on an empty source directory.
 
-**Note:** The HTML generated from the markdown is the point of "maximum opinion" for AWG. It is the only aspect of the output which is not under the complete control of the author (in the sense that it contains HTML tags determined by the markdown library). Some of those tags need additional CSS to style (such as definition lists), and code or maths excerpts need even more substantial processing. How that can be done and more is explained in my [content approach](approach.html).
+**Note:** The HTML generated from the markdown is the point of "maximum opinion" for AWG.
+It is the only aspect of the output which is not under the complete control of the author (in the sense that it contains HTML tags determined by the markdown library).
+Some of those tags need additional CSS to style (such as definition lists), and code or maths excerpts need even more substantial processing.
+How that can be done and more is explained in my [content approach](approach.html).
 
 # How to use
 
 ## Dependencies
 
-The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tidy](https://www.html-tidy.org). For example, to set things up on a Mac using [Homebrew](https://brew.sh):
+The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tidy](https://www.html-tidy.org).
+For example, to set things up on a Mac using [Homebrew](https://brew.sh):
 
 ```bash
 ❯ brew install uv tidy-html5
@@ -144,7 +173,9 @@ The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tid
 
 ## Running the tool
 
-The tool itself is a single file Python script, [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py). It uses [inline script metadata](https://peps.python.org/pep-0723) to declare Python and Python package dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies). Then due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), the tool is conveniently runnable as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
+The tool itself is a single file Python script, [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py).
+It uses [inline script metadata](https://peps.python.org/pep-0723) to declare Python and Python package dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies).
+Then due to the [shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>), the tool is conveniently runnable as an executable, hiding all the magic of `uv` installing a valid version of Python and required packages in a virtualenv.
 
 ```console
 ❯ ./awg.py --help
@@ -168,7 +199,8 @@ Options:
   --help                         Show this message and exit
 ```
 
-The two mandatory arguments are the content and output directories. Providing them results in an output like this:
+The two mandatory arguments are the content and output directories.
+Providing them results in an output like this:
 
 ```console
 ❯ ./awg.py example/ output/
@@ -191,13 +223,17 @@ Serving files from: /Users/tcorbettclark/Projects/tcorbettclark.github.io/output
 Watching for changes in: /Users/tcorbettclark/Projects/tcorbettclark.github.io/example
 ```
 
-The tool is now watching for changes to the source content, after which it will rebuild and notify all browsers subscribed for hot reloading (see below) before waiting again for more changes. Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
+The tool is now watching for changes to the source content, after which it will rebuild and notify all browsers subscribed for hot reloading (see below) before waiting again for more changes.
+Every build is a full clean build without any caching or incremental behaviour, avoiding penalties from complexity and gotchas.
 
-**Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files). A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`. If the content changed then the site will be rebuilt and browser(s) told to reload.
+**Hint**: Content changes sometimes temporarily break the templating mechanism (for example, after renaming files).
+A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`.
+If the content changed then the site will be rebuilt and browser(s) told to reload.
 
 ## Using HTTPS
 
-By default AWG will serve up over HTTP. To use HTTPS one needs certificates for `localhost` signed by a Certificate Authority (CA) registered on your machine.
+By default AWG will serve up over HTTP.
+To use HTTPS one needs certificates for `localhost` signed by a Certificate Authority (CA) registered on your machine.
 
 The easiest approach is to use [mkcert](https://mkcert.dev/), e.g.
 ```bash
@@ -218,7 +254,8 @@ mkcert localhost
 
 ## Hot reloading
 
-The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload. This feature can be used with a small amount of javascript e.g. [hot-reloader.js](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
+The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload.
+This feature can be used with a small amount of javascript e.g. [hot-reloader.js](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
 
 ```Html
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
@@ -231,7 +268,8 @@ The AWG tool provides a simple websocket API to "push notify" any browsers open 
 </html>
 ```
 
-The javascript only runs when served up over `localhost`, so is fine to leave in for production. Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
+The javascript only runs when served up over `localhost`, so is fine to leave in for production.
+Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
 
 # Implementation details
 
@@ -242,7 +280,8 @@ In essence there are 3 classes with orthogonal responsibilities:
 - `Watcher` - Watch for file changes.
 - `Server` - Serve up the content over http(s) and the simple hot reloader protocol over a websocket.
 
-The Watcher and Server are both async; the Builder is synchronous. The main loop is clean (simplified slightly to show approach):
+The Watcher and Server are both async; the Builder is synchronous.
+The main loop is clean (simplified slightly to show approach):
 
 ```Python
 builder = Builder(content_dir, output_dir, working_file_regex, template_extensions)
@@ -264,7 +303,8 @@ except asyncio.CancelledError:
     log("Bye")
 ```
 
-The entire tool is a single file: [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py). About half of it is just logging what it is doing.
+The entire tool is a single file: [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py).
+About half of it is just logging what it is doing.
 
 ## Hot reloading
 
@@ -282,7 +322,9 @@ The protocol consists of two messages:
 - the server can send connected clients a `reload` message;
 - connected clients can send the server a `keep-alive-ping` message.
 
-For the failure handling strategy, note first that opening a socket with `new WebSocket()` is asynchronous. It does not raise an exception on failure to connect. Also, the `onerror` signal can occur even under normal use, e.g. if the user navigates browser history with forward/back buttons, or if the browser suspends/resumes the page.
+For the failure handling strategy, note first that opening a socket with `new WebSocket()` is asynchronous.
+It does not raise an exception on failure to connect.
+Also, the `onerror` signal can occur even under normal use, e.g. if the user navigates browser history with forward/back buttons, or if the browser suspends/resumes the page.
 
 The most robust approach seems to be to use the `onclose` signal, differentiating between whether or not the connection has ever opened ok.
 - If **yes**, try to restart it (this could happen after visibility change or freeze/resume cycle).
@@ -341,7 +383,8 @@ addEventListener("load", (event) => {
 
 Used in the recommended way described above, `uv` creates a disposable but cached virtualenv in which to install the dependencies and run the tool.
 
-During any development of the tool, it is helpful to have a consistent virtual env in `.venv` which editors can use for appropriate checking and code completion etc with the installed libraries. This can be achieved as follows:
+During any development of the tool, it is helpful to have a consistent virtual env in `.venv` which editors can use for appropriate checking and code completion etc with the installed libraries.
+This can be achieved as follows:
 
 ```bash
 # Create virtualenv in .venv

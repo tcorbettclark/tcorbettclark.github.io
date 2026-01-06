@@ -1,6 +1,8 @@
-This page explains the structure of all the web files, templates, and data to achieve this website. It also contains notes on hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, adding a draft/wip mode, ...
+This page explains the structure of all the web files, templates, and data to achieve this website.
+It also contains notes on hosting, validation, security, selecting libraries, rendering maths and code nicely, making the navigation breadcrumb, choosing colours, creating the favicon and app manifest, making the XML sitemap, adding a draft/wip mode, ...
 
-Hence this page provides _recipes_ for how to achieve the various features of a website. They are mostly independent of one another, allowing for easy modification, substitution, or ommission (and the agnostic nature of [AWG](awg.html) means that nothing is left behind).
+Hence this page provides _recipes_ for how to achieve the various features of a website.
+They are mostly independent of one another, allowing for easy modification, substitution, or ommission (and the agnostic nature of [AWG](awg.html) means that nothing is left behind).
 
 # File structure
 
@@ -20,7 +22,8 @@ This translates into the following principles:
 
 Even though it is traditional, I don't organise files by type (all javascript in `/js/`, all css in `/css/`, etc).
 
-The result is quite a few files in the root directory, but with the benefit that they are all visible. And then each page has its own directory, with child pages in child directories, etc.
+The result is quite a few files in the root directory, but with the benefit that they are all visible.
+And then each page has its own directory, with child pages in child directories, etc.
 
 The template inheritance hierarchy is simple:
 
@@ -30,7 +33,9 @@ The template inheritance hierarchy is simple:
 
 # Indentation management
 
-All HTML files are indented for clarity during editing. On output after templating, they are all formatted properly by [AWG](awg.html), so there is no need to try to generate properly indented HTML within the templates (avoiding fiddly whitespace management with "-" in e.g. `{%- ... %}`). For example, the indentation below is entirely to aid readability at the template stage (rather than final HTML).
+All HTML files are indented for clarity during editing.
+On output after templating, they are all formatted properly by [AWG](awg.html), so there is no need to try to generate properly indented HTML within the templates (avoiding fiddly whitespace management with "-" in e.g. `{%- ... %}`).
+For example, the indentation below is entirely to aid readability at the template stage (rather than final HTML).
 
 ```HTML
 {% extends "../_page.html" %}
@@ -51,7 +56,8 @@ All HTML files are indented for clarity during editing. On output after templati
 {% endblock page %}
 ```
 
-To make editing easy with language specific editing/formatting/colourising modes, I avoid files containing a mixture of languages. Hence there are separate files for each piece of markdown, no "frontmatter" TOML/YAML within markdown files, javascript is always included from `.js` files, etc.
+To make editing easy with language specific editing/formatting/colourising modes, I avoid files containing a mixture of languages.
+Hence there are separate files for each piece of markdown, no "frontmatter" TOML/YAML within markdown files, javascript is always included from `.js` files, etc.
 
 # Choice of web framework
 
@@ -118,7 +124,8 @@ to be displayed as
 
 # Code
 
-Highlighting code is easy with [highlight.js](https://highlightjs.org). This will colour many different programming languages in any of a number of different themes, expecting HTML markup like
+Highlighting code is easy with [highlight.js](https://highlightjs.org).
+This will colour many different programming languages in any of a number of different themes, expecting HTML markup like
 
 ```HTML
 <pre>
@@ -152,7 +159,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 ```
 
-The highlight colour theme was chosen to be close to my colour theme, but although close the background isn't a perfect match. I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to access bulma's derived colours), and also style with a fine border:
+The highlight colour theme was chosen to be close to my colour theme, but although close the background isn't a perfect match.
+I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to access bulma's derived colours), and also style with a fine border:
 
 ```CSS
 /* Fix up the style of the code blocks e.g. consistent background colour. */
@@ -167,7 +175,8 @@ Of course, the above demonstrates the end-result of formatting some HTML and Jav
 
 # Navigation breadcrumb
 
-The navigation breadcrumb works by sub-templating, calling `{{ super() }}` to retain the navigation from above. So the pattern is as follows (ignoring all styling).
+The navigation breadcrumb works by sub-templating, calling `{{ super() }}` to retain the navigation from above.
+So the pattern is as follows (ignoring all styling).
 
 ```HTML
 <!-- This is the base template: /_page.html -->
@@ -197,16 +206,19 @@ The navigation breadcrumb works by sub-templating, calling `{{ super() }}` to re
 
 # Manifest and favicons
 
-The [Web Application Manifest](https://www.w3.org/TR/appmanifest/) is a `JSON` file containing metadata about a web application. Although this site is not a web app as such, it improves user experience to use the manifest to document the location of all the favicons and theme colours.
+The [Web Application Manifest](https://www.w3.org/TR/appmanifest/) is a `JSON` file containing metadata about a web application.
+Although this site is not a web app as such, it improves user experience to use the manifest to document the location of all the favicons and theme colours.
 
-Favicons appear as the icons in browser url bars, tabs, bookmark menus. And also in the "add to home screen" feature of touch screen devices.
+Favicons appear as the icons in browser url bars, tabs, bookmark menus.
+And also in the "add to home screen" feature of touch screen devices.
 
 Adding favicons involves:
 
 - Creating a set of favicons, ensuring the colours are coordinated with the colour theme of the website.
 - Telling browsers where to find all the favicons, noting that some are expected in "standard" locations anyway.
 
-I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma. These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
+I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma.
+These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
 
 The manifest then points to these favicons, and is itself put in the root directory as `/manifest.json` (see [here](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json)).
 
@@ -230,7 +242,10 @@ Lastly, the base template (in `_base.html`) indicates the principal favicons and
 
 # Icons
 
-I use [Font Awesome](https://fontawesome.com) for icons. I found that loading them from Font Awesome produced rendering lag (the icons flickered as they appeared), and also suffered from fragile SRI settings. Hence I host directly. To keep things self-contained, the fonts and CSS are all in a top level `/fontawesome/` directory.
+I use [Font Awesome](https://fontawesome.com) for icons.
+I found that loading them from Font Awesome produced rendering lag (the icons flickered as they appeared), and also suffered from fragile SRI settings.
+Hence I host directly.
+To keep things self-contained, the fonts and CSS are all in a top level `/fontawesome/` directory.
 
 The `head` section in the `_base.html` template loads the CSS using:
 
@@ -245,7 +260,8 @@ The main `fontawesome.min.css` fetches the required fonts from `/fontawesome/web
 
 # Colour, styling, and light/dark mode
 
-Colours are both technical and personal. I found these useful to get started:
+Colours are both technical and personal.
+I found these useful to get started:
 
 - [The HSB Colour System](https://www.learnui.design/blog/the-hsb-color-system-practicioners-primer.html)
 - [Colour in UI Design](https://www.learnui.design/blog/color-in-ui-design-a-practical-framework.html)
@@ -259,15 +275,21 @@ Then the following helped me experiment with different palettes:
 
 One gotcha I encountered was that there are different variants/standards of RGB.
 
-[Bulma](https://bulma.io) has a "customizer" popup on its website which allows colours (and other style aspects) to be tried out before exporting as CSS settings. Because it [automatically derives shades](https://bulma.io/documentation/features/color-palettes/), the main task is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
+[Bulma](https://bulma.io) has a "customizer" popup on its website which allows colours (and other style aspects) to be tried out before exporting as CSS settings.
+Because it [automatically derives shades](https://bulma.io/documentation/features/color-palettes/), the main task is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
 
-Bulma also automatically derives and manages the colour variations between light and dark mode. For that to work, one needs to use the "soft" and "bold" colour classes for those elements which should be a function of light/dark mode. For example, I use the `has-background-primary-bold-invert` and `has-text-primary-bold` classes for the main page section. See the [Bulma docs](https://bulma.io/documentation/features/dark-mode/) for details.
+Bulma also automatically derives and manages the colour variations between light and dark mode.
+For that to work, one needs to use the "soft" and "bold" colour classes for those elements which should be a function of light/dark mode.
+For example, I use the `has-background-primary-bold-invert` and `has-text-primary-bold` classes for the main page section.
+See the [Bulma docs](https://bulma.io/documentation/features/dark-mode/) for details.
 
 Lastly, remember to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
 
 # Draft / wip mode
 
-Given the purpose of this website, many files are constantly being revised and refactored. New content could be excluded from the build until completely ready, but a "softer and more organic" approach is to include it with a DRAFT watermark and delay linking to such pages or adding them to the sitemap until more ready. Then such content can be viewed if you know it is there but is not readily discovered otherwise; and if seen then it is obvious that it is work-in-progress.
+Given the purpose of this website, many files are constantly being revised and refactored.
+New content could be excluded from the build until completely ready, but a "softer and more organic" approach is to include it with a DRAFT watermark and delay linking to such pages or adding them to the sitemap until more ready.
+Then such content can be viewed if you know it is there but is not readily discovered otherwise; and if seen then it is obvious that it is work-in-progress.
 
 To control this watermark, the `/_page.html` template adds a CSS class if a `draft` variable is set:
 
@@ -307,7 +329,8 @@ Hence to mark a page as in-draft/work-in-progress, set the `draft` variable at t
 
 # XML sitemap and the robots.txt file
 
-To support search engine indexing and SEO, the `robots.txt` file and related sitemap file (in `sitemap.xml`) are used to hint to search engines what pages they should index. See Google's descriptions of [robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
+To support search engine indexing and SEO, the `robots.txt` file and related sitemap file (in `sitemap.xml`) are used to hint to search engines what pages they should index.
+See Google's descriptions of [robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
 
 For this site I just use the `robots.txt` file to point to the sitemap:
 
@@ -317,7 +340,8 @@ Sitemap: {{ SITEURL }}/sitemap.xml
 
 (the `SITEURL` is set in a template data TOML file).
 
-The `sitemap.xml` file will also be run though Jinja by [AWG](awg.html) because it has an `.xml` extension. Hence it is a template:
+The `sitemap.xml` file will also be run though Jinja by [AWG](awg.html) because it has an `.xml` extension.
+Hence it is a template:
 
 ```XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -348,11 +372,13 @@ name = "welcome/index.html"
 change_frequency = "weekly"
 ```
 
-This isn't too cumbersomb to maintain (e.g. by listing all candidates with `ls -1 **.html`). It is also possible to put the different entries in different `.toml` files in respective directories.
+This isn't too cumbersomb to maintain (e.g. by listing all candidates with `ls -1 **.html`).
+It is also possible to put the different entries in different `.toml` files in respective directories.
 
 # Validation
 
-Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and learn about the web world. For example:
+Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and learn about the web world.
+For example:
 
 - [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview)
 - [W3 Validator](https://validator.w3.org/nu/)
@@ -378,11 +404,15 @@ To find security weaknesses and information about how to address them, I follow 
 
 ## Content Security Policy (CSP)
 
-A [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) instructs browsers to place restrictions on what loaded code can do. This is to defend against cross-site-scripting (CSS) and clickjacking in which an attacker finds ways to inject malicious code.
+A [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) instructs browsers to place restrictions on what loaded code can do.
+This is to defend against cross-site-scripting (CSS) and clickjacking in which an attacker finds ways to inject malicious code.
 
-A related concept is [SubResource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), which makes browsers only accept resources when they match the hash contained in the `integrity` attribute. This attribute is notably available on `<script>` and `<link rel="stylesheet">` tags. So SRI helps to prevent security problems from source file tampering.
+A related concept is [SubResource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity), which makes browsers only accept resources when they match the hash contained in the `integrity` attribute.
+This attribute is notably available on `<script>` and `<link rel="stylesheet">` tags.
+So SRI helps to prevent security problems from source file tampering.
 
-CSP is configured using the `Content-Security-Policy` HTTP Header. Since this is a static site I use the `http-equiv` meta tag in every HTML file:
+CSP is configured using the `Content-Security-Policy` HTTP Header.
+Since this is a static site I use the `http-equiv` meta tag in every HTML file:
 
 ```HTML
 <meta http-equiv="...name of HTTP Header..." content="...HTTP header contents...">
@@ -399,6 +429,7 @@ In annotated outline, the CSP is as follows:
 ```text
 upgrade-insecure-requests;                   <-- Instruct browser to switch site HTTP urls to HTTPS
 default-src 'none';                          <-- Default fallback is deny
+trusted-types dompurify highlightjs-policy;  <-- See link below
 require-trusted-types-for 'script';          <-- See link below
 base-uri 'self';                             <-- Don't allow the base URL to change from self
 img-src 'self';                              <-- Only allow images served up from self
@@ -423,7 +454,7 @@ style-src
     ;
 ```
 
-(Link for [require-trusted-types-for](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for).)
+(Links for [trusted-types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/trusted-types) and [require-trusted-types-for](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for).)
 
 I discovered a few helpful things along the way:
 
@@ -434,7 +465,8 @@ I discovered a few helpful things along the way:
 - For both CSS and javascript, if the SRI is present (using the `integrity` attribute), then it is checked and must pass. Hence independently of CSP, SRI seems uniformly implemented.
 - Test on different browsers, because (a) they may behave differently, and (b) when things don't work they give different diagnostic information (some more helpful than others).
 
-In practice, using template data reduces maintenance overhead and helps document what is going on and where things are from. For example:
+In practice, using template data reduces maintenance overhead and helps document what is going on and where things are from.
+For example:
 
 ```HTML
 <!DOCTYPE html>
@@ -500,7 +532,8 @@ BULMA_CSS_SHA = "sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww7
 
 ## Strict Transport Security (HSTS)
 
-This site can use HTTPS throughout. To help prevent manipulator-in-the-middle (MiTM) attacks, the [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security) HTTP Header should be set, together with the [upgrade-insecure-requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/upgrade-insecure-requests) directive in the CSP.
+This site can use HTTPS throughout.
+To help prevent manipulator-in-the-middle (MiTM) attacks, the [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security) HTTP Header should be set, together with the [upgrade-insecure-requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/upgrade-insecure-requests) directive in the CSP.
 
 Hence the following are added in the `_base.html` template to the `<head>` tag.
 
@@ -522,7 +555,10 @@ I've also configured GitHub Pages to only serve HTTPS.
 
 ## Deny embedding
 
-A clickjacking approach relies on embedding sites in other sites. Ideally this would be prevented using CSP by setting the `frame-ancestors` and the `X-Frame-Options` header. See [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking) for details. But unfortunately neither can be done using `http-equiv` and I don't have control over the server HTTP Headers.
+A clickjacking approach relies on embedding sites in other sites.
+Ideally this would be prevented using CSP by setting the `frame-ancestors` and the `X-Frame-Options` header.
+See [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking) for details.
+But unfortunately neither can be done using `http-equiv` and I don't have control over the server HTTP Headers.
 
 ## Referrer policy
 
@@ -548,13 +584,16 @@ To inform browsers not to load scripts and stylesheets unless the server indicat
 
 It is easy and convenient to host static content on [GitHub pages](https://pages.github.com).
 
-One can either use files from a git branch, the root directory of the repository, or a directory called `docs/`. It would be nice to be able to use a different directory name, but so be it. I just use the `docs/` directory on the master branch.
+One can either use files from a git branch, the root directory of the repository, or a directory called `docs/`.
+It would be nice to be able to use a different directory name, but so be it.
+I just use the `docs/` directory on the master branch.
 
 A custom domain can be used by creating a `CNAME` file containing the full domain (in my case, `www.corbettclark.com`).
 
 The default GitHub action detects code commits and deploys on their infrastructure, making the result visible within a couple of minutes (often faster).
 
-As I'm the only person making changes, I mostly dispense with creating a branch and making a pull request to myself ([GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)), but instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub. In short, my workflow is:
+As I'm the only person making changes, I mostly dispense with creating a branch and making a pull request to myself ([GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)), but instead just make a number of meaningful commits locally. Then when ready to publish, I git push to GitHub.
+In short, my workflow is:
 
 - Start up [AWG](awg.html) with `./awg.py content/ docs/ --certfile localhost.pem --keyfile localhost-key.pem`
 - Repeat until ready to publish:
