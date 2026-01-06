@@ -91,8 +91,7 @@ class Builder:
         self.template_extensions = template_extensions
         self._log(f"Working files match regex: {working_file_regex}")
         self._log(
-            "Template files have extension(s): "
-            + ", ".join(self.template_extensions)
+            "Template files have extension(s): " + ", ".join(self.template_extensions)
         )
 
     def _log(self, message, *paths):
@@ -100,18 +99,12 @@ class Builder:
         log(message.format(*tmp), colour="green")
 
     def _is_working_filename(self, filename):
-        return (
-            self.working_file_regex.match(pathlib.Path(filename).name)
-            is not None
-        )
+        return self.working_file_regex.match(pathlib.Path(filename).name) is not None
 
     def _is_template_filename(self, filename):
         # A template file has a non-working filename with a template extension.
         p = pathlib.Path(filename)
-        return (
-            p.suffix in self.template_extensions
-            and not self._is_working_filename(p)
-        )
+        return p.suffix in self.template_extensions and not self._is_working_filename(p)
 
     def create_fresh_output_directory(self):
         self._log(f"Using content from: {self.content_dir}")
@@ -129,9 +122,7 @@ class Builder:
                 data = tomllib.load(f)
             overlap = set(data.keys()).intersection(env.globals.keys())
             if overlap:
-                abort(
-                    f"Duplicated key(s) in template data: {', '.join(overlap)}"
-                )
+                abort(f"Duplicated key(s) in template data: {', '.join(overlap)}")
             env.globals.update(data)
 
     def _add_markdown_filter(self, env):
@@ -173,9 +164,7 @@ class Builder:
                 filename = self.working_dir / value.relative_to("/")
             else:
                 # Relative, so use directory of calling template file.
-                filename = (
-                    self.working_dir / pathlib.Path(context.name).parent / value
-                )
+                filename = self.working_dir / pathlib.Path(context.name).parent / value
             return base64.b64encode(
                 algorithms[algorithm](filename.read_bytes()).digest()
             ).decode()
@@ -188,9 +177,7 @@ class Builder:
         self._add_template_data(env)
         self._add_markdown_filter(env)
         self._add_sha_filter(env)
-        template_filenames = env.list_templates(
-            filter_func=self._is_template_filename
-        )
+        template_filenames = env.list_templates(filter_func=self._is_template_filename)
         for template_filename in template_filenames:
             template = env.get_template(template_filename)
             p = self.working_dir / template_filename
@@ -242,9 +229,7 @@ class Builder:
                     errors = doc.get_errors()
                     if errors:
                         for e in errors:
-                            self._log(
-                                f"Html-tidy found problem in {{}}: {e}", p
-                            )
+                            self._log(f"Html-tidy found problem in {{}}: {e}", p)
                         output_filename = p.with_suffix(".tidy.html")
                         self._log(
                             "Not updating file, but see tidy version in: {}",
@@ -260,9 +245,7 @@ class Builder:
         def publish(dcmp, working_path):
             assert len(dcmp.common_funny) == 0  # TODO
             assert len(dcmp.funny_files) == 0  # TODO
-            output_path = self.output_dir / working_path.relative_to(
-                self.working_dir
-            )
+            output_path = self.output_dir / working_path.relative_to(self.working_dir)
             for name in dcmp.left_only:
                 wp, op = working_path / name, output_path / name
                 if wp.is_dir():
@@ -286,11 +269,7 @@ class Builder:
                 self._log("Modifying existing file: {}", wp)
                 shutil.copyfile(wp, op)
 
-            n_deltas = (
-                len(dcmp.left_only)
-                + len(dcmp.right_only)
-                + len(dcmp.diff_files)
-            )
+            n_deltas = len(dcmp.left_only) + len(dcmp.right_only) + len(dcmp.diff_files)
             for name, sub_dcmp in dcmp.subdirs.items():
                 n_deltas += publish(sub_dcmp, working_path / name)
             return n_deltas
@@ -305,9 +284,7 @@ class Builder:
             self.working_dir,
         )
         if n_deltas > 0:
-            self._log(
-                f"Total number of changes to files and directories: {n_deltas}"
-            )
+            self._log(f"Total number of changes to files and directories: {n_deltas}")
             self._log(f"Updated: {self.output_dir}")
         else:
             self._log(f"No changes required to: {self.output_dir}")
@@ -416,13 +393,9 @@ class Server:
             self._log(f"Using SSL keyfile: {self.keyfile}")
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
             ssl_context.load_cert_chain(self.certfile, self.keyfile)
-            self._log(
-                f"Starting local server on https://{self.host}:{self.port}"
-            )
+            self._log(f"Starting local server on https://{self.host}:{self.port}")
         else:
-            self._log(
-                f"Starting local server on http://{self.host}:{self.port}"
-            )
+            self._log(f"Starting local server on http://{self.host}:{self.port}")
         site = aiohttp.web.TCPSite(
             self._runner,
             host=self.host,
@@ -484,9 +457,7 @@ async def run(
     content_dir = pathlib.Path(content_dir).absolute()
     output_dir = pathlib.Path(output_dir).absolute()
 
-    builder = Builder(
-        content_dir, output_dir, working_file_regex, template_extensions
-    )
+    builder = Builder(content_dir, output_dir, working_file_regex, template_extensions)
     watcher = Watcher(content_dir)
     server = Server(output_dir, host, port, certfile, keyfile)
 
