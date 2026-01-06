@@ -105,6 +105,16 @@ Note the better versions of standard tools:
 - `grep` → [fzf](https://junegunn.github.io/fzf) and [ripgrep](https://github.com/BurntSushi/ripgrep)
 - `find` → [fd](https://github.com/sharkdp/fd)
 
+
+And global python tools managed by uv:
+```bash
+uv tool install \
+    aider \
+    llm \
+    ruff \
+    ty
+```
+
 # Configuration
 
 ## Ghostty
@@ -119,7 +129,7 @@ split-divider-color = white
 
 The main `~/.config/fish/config.fish` contains:
 
-```
+```fish
 if status --is-login
     # For brew
     fish_add_path -P /opt/homebrew/bin
@@ -149,7 +159,7 @@ starship init fish | source
 
 Some handy aliases:
 
-```bash
+```fish
 alias --save ls eza
 alias --save la 'ls -a'
 alias --save ll 'ls -l'
