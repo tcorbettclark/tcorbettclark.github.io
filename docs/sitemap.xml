@@ -25,6 +25,10 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
+        <loc>https://www.corbettclark.com/skiing/index.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
         <loc>https://www.corbettclark.com/maths-problems/index.html</loc>
         <changefreq>monthly</changefreq>
     </url>
