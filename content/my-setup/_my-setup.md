@@ -106,7 +106,7 @@ Note the better versions of standard tools:
 - `find` → [fd](https://github.com/sharkdp/fd)
 
 
-And global python tools managed by uv:
+Global python tools managed by uv:
 ```bash
 uv tool install \
     aider \
