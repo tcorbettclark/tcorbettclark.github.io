@@ -26,8 +26,12 @@ change_frequency = "monthly"
 name = "my-setup/index.html"
 change_frequency = "monthly"
 
-# Maths problems
+# Skiing
+[[SITEMAP_FILENAMES]]
+name = "skiing/index.html"
+change_frequency = "monthly"
 
+# Maths problems
 [[SITEMAP_FILENAMES]]
 name = "maths-problems/index.html"
 change_frequency = "monthly"
