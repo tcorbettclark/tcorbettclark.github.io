@@ -108,5 +108,16 @@ And the arms, hands, and poles all play a key part in balance and control.
 
 Identifying the type of turn helps prevent advice from appearing contradictory.
 
-1. Short turns have greater separation of upper and lower body, putting tension in the body to help initiate the next turn. Skis are closer together. It starts with the legs. You turn the skis.
-1. Long carving turns have greater alignment of upper and lower body, with a slower transition movement. Skis are shoulder-width apart. It starts with the ankles. The skis turn you.
+Short turns have
+* greater separation of upper and lower body,
+* puts tension in the body to help initiate the next turn,
+* skis are closer together,
+* it starts with the legs, and
+* you turn the skis.
+
+Long carving turns have
+* greater alignment of upper and lower body,
+* with a slower transition movement,
+* skis are shoulder-width apart,
+* it starts with the ankles, and
+* the skis turn you.

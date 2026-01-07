@@ -1,8 +1,8 @@
 The purpose of this site is to encourage me to write.
-This isn't a blog; it's a living space of content where I add, refine, and refactor as needed.
+This isn't a blog; it's a living space of considered content where I add, refine, and refactor as needed.
 
 As a technical person, I have found it productive to spend quality time on 4 distinct activity modes.
-Deliberate rotation between Creating, Thinking, Researching, and Learning (CTRL) helps to make progress at every scale - from playing with tiny puzzles and problems, investigating ad hoc ideas, working on personal or commercial projects, to developing long-standing interests.
+Deliberately switching between Creating, Thinking, Researching, and Learning (CTRL) helps to make progress at every scale - from playing with tiny puzzles and problems, investigating ad hoc ideas, working on personal or commercial projects, to developing long-standing interests.
 
 Deep originality is neither a primary goal nor a likely outcome, but it must be original to me and synthesised with clarity.
 The factors I value most are:
