@@ -1,7 +1,7 @@
 I only started skiing in my mid 30s, which is probably too late to build any real intuition due to fear of injury (and long recovery times).
 Here are my latest thoughts and links on how I am trying to improve.
 
-# Overall
+# Overall Thoughts
 
 1. Ski with (personal) style. Play with gravity. Be athletic, dynamic, and carry the energy. See [YouTube](https://youtu.be/-uKnYj_vhgg?si=HfFOSSOgC9l1QyCC).
 1. On steeps, think of the slope as the horizon and “down” as orthogonal to the slope. Look to centre of curvature, especially for wider radius turns.
@@ -52,7 +52,7 @@ Suspension and much of the control of the pressure/edge comes from the coiling a
 
 # On Body Position and Balance
 
-Continuing on from flex and extension...
+The position of the body and how it stays in dynamic balance is key to being efficient.
 
 1. Be centred, kneel forward, with forward hips.
 1. Stable upper body. No unnecessary movement. Posture reset.
@@ -65,7 +65,7 @@ Continuing on from flex and extension...
 
 # On Arms, Hands, and Poles
 
-And the arms, hands, and poles all play a key part in balance and control.
+The arms, hands, and poles all play a key part in balance and control.
 
 1. Hands forward and in an athletic position.
 1. Arms wider and bent at the elbow.
@@ -76,48 +76,42 @@ And the arms, hands, and poles all play a key part in balance and control.
 
 # On Carving Turns
 
+This section is rather repetitive since, as with all of skiing, there are lots of variations in the way we describe what the body needs to do.
+Different word variations connect at different times.
+
 1. Transition weight release by lifting legs up. Ski under. Don’t just pull skis back, or just lean forward, but do both. Pivot about your centre to become perpendicular.
-1. Relax and flex ankles, knees, and hips. Don’t turn with ankles, but flex and roll the ankles. The edge change starts with the ankles. Feel your feet. Roll over to other edges, without pushing off from old downhill ski. Simultaneous edge change. See YouTube.
-1. Flatten skis with edge release on steeper slopes. Practice with controlled start/stop pivot slips. Higher edges on steeps puts too much weight on the inside ski! No “over-edging”. Don’t “push” or “stand up” on the new uphill ski, but release the old downhill ski. Stay low and be efficient.
-1. Femur rotation and ankle rotation (foot side). See YouTube.
-1. Retraction extension turns. Turn when low, tip to other edge, engage new edges, and THEN extend. So NOT standing to initiate the turn, but “standing” (extending) to drive the edge round the turn. Start all low. Then add extension. Also practice extension traversal - lift up and move down the downhill ski and let it rise back up to connect. Can also do all low drill with a non carve turn (harder). No pole plant - just balance hands. See YouTube.
-1. Heel Heavy Transition. Knees go back at start and come forward as reach the next transition.
-1. Early edge is different from early pressure. Aim for early edge and allow pressure to follow slowly.
-1. Roll ankles before you reach the fall line to engage edges earlier.
+1. Relax and flex ankles, knees, and hips. Don’t turn with ankles, but flex and roll the ankles. The edge change starts with the ankles. Feel your feet. Roll over to the other edges, without pushing off from old downhill ski. Aim for simultaneous edge change. See [YouTube](https://youtu.be/H7m3D3-NUfA?si=2pfE0DDLdZVUJU4j).
+1. Flatten skis with edge release on steeper slopes. Higher edges on steeps puts too much weight on the inside ski! Avoid “over-edging”. Don’t “push” or “stand up” on the new uphill ski, but release the old downhill ski. Stay low and be efficient.
+1. Femur rotation and ankle rotation (foot side). See [YouTube](https://youtu.be/Iw1pnQZyeek?si=C_d49UgDa1WfbVdC).
+1. Retraction extension turns. Turn when low, tip to other edge, engage new edges, and then extend. So not standing to initiate the turn, but standing (i.e. extending) to drive the edge round the turn. Start all low. Then add extension. Also practice extension traversal - lift up and move down the downhill ski and let it rise back up to connect. Can also do all low drill with a non carve turn (harder). No pole plant - just balance hands. See [YouTube](https://youtu.be/hQAePluhRSc?si=a3wxEa3d-XPBW9zT).
+1. Early edge is different from early pressure. Aim for early edge and only then allow the pressure to gradually follow.
+1. Roll ankles before reaching the fall line in order to engage edges earlier.
 1. Think of tip of ski as your own toe, and engage it in the snow at start of turn. Do this by moving hips forward and pulling skis back. It’s only a small movement!
-1. Centred stance throughout turn. Stay over your feet. Aim upper body for apex of turn. And apply pressure on balls of feet.
-1. Gradual, not sudden.
+1. Use a centred stance throughout turn. Stay over your feet. Aim upper body for apex of turn. And apply pressure on balls of feet.
 1. Look ahead, at least as far as the apex. Don't look at where you are going to turn as it causes zigzag.
-1. Where you look should be independent of where your skis point, shoulders indicate, etc.
-1. Start next turn before the previous is finished. Release at the apex!
-1. First turn is hardest, so only do one!
-1. Early weight transfer. Much earlier. Relax downhill ski to take off weight, but still with simultaneous edge release.
-1. Don’t rush any part because always changing, so no need to catch up the movement!
-1. S shape is all turning.
-1. Breathe!
+1. Start next turn before the end of the previous turn. Release at the apex!
+1. The first turn is the hardest, so only do one!
+1. An s-shape is continuous turning.
 1. Slow down to turn; don’t turn to slow down. So be at the right speed for each turn. If necessary, break at the end of the turn (never the start).
-1. Always move with flow.
-1. Modern carving skis steer from the tips and the tails.
 1. Early edging means inside ski angle acceleration.
 1. Don’t turn the skis but leave them pointing as for transition for longer. Maintain contact.
 1. Change from one edge to the other before changing direction.
-1. Simultaneous release.
 1. Release pressure earlier to enable topple. Stay low and don’t stand for too long on downhill ski.
 
-# Describing the Two Types of Turn
+# Two Types of Turn
 
-Identifying the type of turn helps prevent advice from appearing contradictory.
+Clearly identifying the type of turn helps prevent advice from appearing contradictory.
 
-Short turns have
-* greater separation of upper and lower body,
-* puts tension in the body to help initiate the next turn,
+Short turns
+* have greater separation of upper and lower body,
+* put tension in the body to help initiate the next turn,
 * skis are closer together,
 * it starts with the legs, and
-* you turn the skis.
+* you turn the skis (more or less).
 
-Long carving turns have
-* greater alignment of upper and lower body,
+Long carving turns 
+* have greater alignment of upper and lower body,
 * with a slower transition movement,
 * skis are shoulder-width apart,
 * it starts with the ankles, and
-* the skis turn you.
+* the skis turn you (entirely).
