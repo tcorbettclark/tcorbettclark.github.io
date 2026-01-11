@@ -1,11 +1,17 @@
+<!-- vale Microsoft.FirstPerson = NO -->
+<!-- vale Microsoft.We = NO -->
+<!-- vale Microsoft.Headings = NO -->
+<!-- vale Microsoft.Quotes = NO -->
+
 I only started skiing in my mid 30s, which is probably too late to build any real intuition due to fear of injury (and long recovery times).
+I am passionate about improving, and find the learning process fascinating.
 Here are my latest thoughts and links on how I am trying to improve.
 
 # Overall Thoughts
 
 1. Ski with (personal) style. Play with gravity. Be athletic, dynamic, and carry the energy. See [YouTube](https://youtu.be/-uKnYj_vhgg?si=HfFOSSOgC9l1QyCC).
 1. On steeps, think of the slope as the horizon and “down” as orthogonal to the slope. Look to centre of curvature, especially for wider radius turns.
-1. Consciously adjust the width of stance (wider for carving and narrower for short turns/moguls). Think of it as one of the control channels.
+1. Consciously adjust the width of stance (i.e. wider for carving and narrower for short turns/moguls). Think of it as one of the "control channels".
 1. Avoid unnecessary movement. Make smooth, progressive, economic, balanced, and committed movements.
 
 # Drills - for Short Turns
@@ -32,7 +38,7 @@ Here are my latest thoughts and links on how I am trying to improve.
 1. Drill bounce on the tip of the boot, flexing the ankles.
 1. Jump up and down on traverse. The landing position should be most stable overall posture.
 1. Practice staying too far forward; practice staying too far back; then practice Goldilocks!
-1. When stationary, lift one ski, see how it hangs naturally and what's required to bring it parallel. Then do same but with skis on edge. Use this to work out muscles needed to keep inside ski parallel and engaged fully.
+1. When stationary, lift one ski, see how it hangs and what's required to bring it parallel. Then do same but with skis on edge. Use this to work out muscles needed to keep inside ski parallel and engaged fully.
 1. Hold poles firmly, at arms length in front, always in contact with snow. Encourages constant forward weight/pressure.
 1. Garland pivot exercises to align edge engagement between feet and start the turn by rolling the ankles.
     * Start with a traverse: Ski across the hill on a gentle slope, keeping a light edge to hold the traverse. Ski’s further apart!
@@ -76,16 +82,16 @@ The arms, hands, and poles all play a key part in balance and control.
 
 # On Carving Turns
 
-This section is rather repetitive since, as with all of skiing, there are lots of variations in the way we describe what the body needs to do.
+This section is rather repetitive since, as with all skiing, there are lots of variations in the way we describe what the body needs to do.
 Different word variations connect at different times.
 
 1. Transition weight release by lifting legs up. Ski under. Don’t just pull skis back, or just lean forward, but do both. Pivot about your centre to become perpendicular.
 1. Relax and flex ankles, knees, and hips. Don’t turn with ankles, but flex and roll the ankles. The edge change starts with the ankles. Feel your feet. Roll over to the other edges, without pushing off from old downhill ski. Aim for simultaneous edge change. See [YouTube](https://youtu.be/H7m3D3-NUfA?si=2pfE0DDLdZVUJU4j).
 1. Flatten skis with edge release on steeper slopes. Higher edges on steeps puts too much weight on the inside ski! Avoid “over-edging”. Don’t “push” or “stand up” on the new uphill ski, but release the old downhill ski. Stay low and be efficient.
 1. Femur rotation and ankle rotation (foot side). See [YouTube](https://youtu.be/Iw1pnQZyeek?si=C_d49UgDa1WfbVdC).
-1. Retraction extension turns. Turn when low, tip to other edge, engage new edges, and then extend. So not standing to initiate the turn, but standing (i.e. extending) to drive the edge round the turn. Start all low. Then add extension. Also practice extension traversal - lift up and move down the downhill ski and let it rise back up to connect. Can also do all low drill with a non carve turn (harder). No pole plant - just balance hands. See [YouTube](https://youtu.be/hQAePluhRSc?si=a3wxEa3d-XPBW9zT).
+1. Retraction extension turns. Turn when low, tip to other edge, engage new edges, and then extend. So not standing to initiate the turn, but standing (i.e. extending) to drive the edge round the turn. Start all low. Then add extension. Also practice extension traversal - lift and move down the downhill ski and let it rise back up to connect. Can also do all low drill with a non carve turn (harder). No pole plant - just balance hands. See [YouTube](https://youtu.be/hQAePluhRSc?si=a3wxEa3d-XPBW9zT).
 1. Early edge is different from early pressure. Aim for early edge and only then allow the pressure to gradually follow.
-1. Roll ankles before reaching the fall line in order to engage edges earlier.
+1. Roll ankles before reaching the fall line to engage edges earlier.
 1. Think of tip of ski as your own toe, and engage it in the snow at start of turn. Do this by moving hips forward and pulling skis back. It’s only a small movement!
 1. Use a centred stance throughout turn. Stay over your feet. Aim upper body for apex of turn. And apply pressure on balls of feet.
 1. Look ahead, at least as far as the apex. Don't look at where you are going to turn as it causes zigzag.
@@ -103,15 +109,15 @@ Different word variations connect at different times.
 Clearly identifying the type of turn helps prevent advice from appearing contradictory.
 
 Short turns
-* have greater separation of upper and lower body,
-* put tension in the body to help initiate the next turn,
-* skis are closer together,
-* it starts with the legs, and
-* you turn the skis (more or less).
+* Have greater separation of upper and lower body.
+* Put tension in the body to help initiate the next turn.
+* Skis are closer together.
+* It starts with the legs.
+* You turn the skis (more or less).
 
-Long carving turns 
-* have greater alignment of upper and lower body,
-* with a slower transition movement,
-* skis are shoulder-width apart,
-* it starts with the ankles, and
-* the skis turn you (entirely).
+Long carving turns
+* Have greater alignment of upper and lower body.
+* With a slower transition movement.
+* Skis are shoulder-width apart.
+* It starts with the ankles.
+* The skis turn you (entirely).
