@@ -38,7 +38,7 @@ This page helps me when setting up a new computer, and provides an overview to a
 - Local models: [Ollama](https://ollama.ai)
 - Remote models: [OpenRouter](https://openrouter.ai)
 - Commandline: [LLM](https://llm.datasette.io)
-- Programming: [Aider](https://aider.chat)
+- Programming: [Pi](https://pi.dev), [Claude](https://code.claude.com/docs), [Aider](https://aider.chat)
 
 # Researching and writing
 
@@ -81,6 +81,7 @@ brew install -q \
     fish \
     fzf \
     git \
+    harper \
     helix \
     jq \
     lazygit \
@@ -112,7 +113,8 @@ uv tool install \
     aider \
     llm \
     ruff \
-    ty
+    ty \
+    vale
 ```
 
 # Configuration
@@ -147,10 +149,6 @@ if status --is-login
 
     # Add path to anything I have installed locally (e.g. by `uv tool`)
     fish_add_path -P /Users/tcorbettclark/.local/bin
-
-    # Set library path and dynamic library path
-    set -x -g LD_LIBRARY_PATH (brew --prefix)/opt/curl/lib (brew --prefix)/lib /usr/lib /lib
-    set -x -g DYLD_LIBRARY_PATH (brew --prefix)/opt/curl/lib (brew --prefix)/lib /usr/lib /lib
 end
 
 # Make starfish manage the prompt always.
