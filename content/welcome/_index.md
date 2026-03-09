@@ -13,8 +13,8 @@ I have reached a stage in my life where commercial activity is less important th
 Nevertheless, I remain alert to interesting venture opportunities where my experiences and skills could have value.
 
 Publishing in this form is a new endeavor.
-I have started by working my way through a backlog of notes compiled over decades, finding my voice by writing up some solutions to recreational [maths problems](../maths-problems/index.html), documenting [my computer setup](../my-setup/index.html), and explaining the building and maintaining of [this website](../building-this-website/index.html).
+I have started by working my way through a backlog of notes compiled over decades, finding my voice by writing up some solutions to recreational [maths problems](../maths-problems/index.html), documenting my [computer setup](../my-setup/index.html), and explaining the building and maintaining of [this website](../building-this-website/index.html).
 
 
-I have also written up my latest thoughts on [my productivity](../my-productivity/index.html) and improving [my skiing](../skiing/index.html).
+I have also written up my latest thoughts on my [mental habits](../mental-habits/index.html) and improving my [skiing](../skiing/index.html).
 
