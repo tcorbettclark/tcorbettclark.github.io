@@ -3,16 +3,38 @@
 <!-- vale Microsoft.Headings = NO -->
 <!-- vale Microsoft.Quotes = NO -->
 
-I only started skiing in my mid 30s, which is probably too late to build any real intuition due to fear of injury (and long recovery times).
-I am passionate about improving, and find the learning process fascinating.
-Here are my latest thoughts and links on how I am trying to improve.
+I started skiing in my mid 30s.
+This is too late to build any real intuition due to fear of injury (and long recovery times).
+But I am determined to keep improving for style, efficiency, safety, and to allow me to keep skiing for as long as possible.
+As with learning other sports (or musical instruments like the cello or violin), different words, phrases, and ideas connect as you become more proficient, so it's useful to have a selection to draw from.
 
-# Overall Thoughts
+# General Thoughts
 
 1. Ski with (personal) style. Play with gravity. Be athletic, dynamic, and carry the energy. See [YouTube](https://youtu.be/-uKnYj_vhgg?si=HfFOSSOgC9l1QyCC).
-1. On steeps, think of the slope as the horizon and “down” as orthogonal to the slope. Look to centre of curvature, especially for wider radius turns.
-1. Consciously adjust the width of stance (i.e. wider for carving and narrower for short turns/moguls). Think of it as one of the "control channels".
-1. Avoid unnecessary movement. Make smooth, progressive, economic, balanced, and committed movements.
+1. Think of the slope as the horizon and “down” as orthogonal to the slope.
+1. Don't make "maneuvers"; make smooth, progressive, economic, balanced, and committed *movements*.
+1. Upper body and back should be much more upright than you think, with legs and ankles creating the suspension. Visualise a "quaver" (as in musical notation).
+1. Headlights coming out of both knees, showing where you want to go.
+1. Grip sticks firmly to help create stable upper body.
+1. Within the overall forward and back movement, always keep the hips ahead of the feet by retracting the legs and feet. This loads the hips and engages the edges.
+1. Always look ahead beyond the turn - at least a half wavelength ahead.
+1. Be dynamic but think "slow" to give time to feel and observe.
+1. Consciously adjust the width of stance (wider for carving and narrower for short turns/moguls). Think of it as one of the "control channels".
+
+Specific thoughts to correct some of my bad habits:
+1. Use a wider stance. When needed, boots can touch, but knees should never touch! Don't risk developing an "A frame".
+1. Stop dragging my left pole. Actively think about poles being symmetric. Arms out sideways in a natural way for balance, not robotically "forward".
+1. Stop picking up my inside ski, which happens because I pressure (or push away) the new outside ski too early in the turn. Instead, relax the downhill ski to allow the weight transfer. This keeps the body low, is more efficient, and gives time for the new edges to engage resulting in a smoother curve instead of "Z turns". Only once the edges have engaged can the outside leg be extended (still keeping it behind the hips even as it moves forward), to power the turn and progressively increase the edge angle.
+1. Don't let the new downhill ski lag behind or the inside ski lead ahead. Keep boots aligned forward/back as I drive the turn (decreasing radius), while keeping hips ahead.
+
+# Drills - to Warm Up
+
+To activate the right muscles and remind oneself of the right feelings:
+1. Side slips with punctuated edge grips. Point the knees. Also do one legged.
+1. Falling leaf, by moving legs forward/back, not the upper body.
+1. Braquage (pivot) turns 180 degrees in each direction, rotating legs with hips remaining down the hill. Upper body and hands remain pointing down the slope.
+1. Skating down the hill, making clean tracks.
+1. Hockey stops to build stopping confidence and large edge angles. Key is making a wide sweep before the stop.
 
 # Drills - for Short Turns
 
@@ -32,11 +54,13 @@ Here are my latest thoughts and links on how I am trying to improve.
 1. In-rigger leg. Wide stance. Feel early toppling and getting low with safety of stabilisers. Flat stabiliser ski. Progressive edging through the turn. Only move the stabiliser ski by shortening that inside leg. Don’t twist either ski, but especially not the active one. The edge does all the turning. See [YouTube](https://youtu.be/iK4ECXkwqMY?si=pO4dRLiD_hPdq0mv).
 1. Skate turn with maintained contact. See [YouTube](https://youtube.com/shorts/O8smJ7EIF5I?si=9nqwJJwOE2-D5tUd).
 1. White pass turns. See [YouTube](https://youtu.be/C-94kbKGbtU?si=MBuFRrzlxo3GcdaN).
+1. Practice railroad tracks, driving the inside knee to keep shins aligned and skis parallel. It is easier to tip the inside ski if the boots are aligned forward/back.
+1. Push the inside knee inwards by hand to make the knee resist and push outwards (when the hand isn't there). Supinating the foot at the same time gives the knee muscles more force.
 
 # Drills - General
 
 1. Drill bounce on the tip of the boot, flexing the ankles.
-1. Jump up and down on traverse. The landing position should be most stable overall posture.
+1. Jump up and down on traverse. The landing position should be the most stable overall posture.
 1. Practice staying too far forward; practice staying too far back; then practice Goldilocks!
 1. When stationary, lift one ski, see how it hangs and what's required to bring it parallel. Then do same but with skis on edge. Use this to work out muscles needed to keep inside ski parallel and engaged fully.
 1. Hold poles firmly, at arms length in front, always in contact with snow. Encourages constant forward weight/pressure.
@@ -73,20 +97,16 @@ The position of the body and how it stays in dynamic balance is key to being eff
 
 The arms, hands, and poles all play a key part in balance and control.
 
-1. Hands forward and in an athletic position.
-1. Arms wider and bent at the elbow.
-1. Hands should be in the bottom two corners of the “TV”.
+1. Arms and hands out sideways and forward, in an athletic position. The bottom two corners of the “TV”.
 1. Arms and shoulders relaxed and actively helping balance.
 1. Pole plant, if any, should be small and from the wrist. Use a calm and optimised position. No shoulder movement. Don't let the pole plant knock the body out of balance.
-1. Hold the points of the sticks outwards like a hovercraft, with palms down and held consistent height. Feel slow to make rounded short turns.
+1. Hold the points of the sticks outwards like a hovercraft, with palms down and held consistent height.
 
 # On Carving Turns
 
-This section is rather repetitive since, as with all skiing, there are lots of variations in the way we describe what the body needs to do.
-Different word variations connect at different times.
-
 1. Transition weight release by lifting legs up. Ski under. Don’t just pull skis back, or just lean forward, but do both. Pivot about your centre to become perpendicular.
 1. Relax and flex ankles, knees, and hips. Don’t turn with ankles, but flex and roll the ankles. The edge change starts with the ankles. Feel your feet. Roll over to the other edges, without pushing off from old downhill ski. Aim for simultaneous edge change. See [YouTube](https://youtu.be/H7m3D3-NUfA?si=2pfE0DDLdZVUJU4j).
+1. Don't start the turn by standing on the new downhill ski, but relax the downhill ski to make smoother and rounder turns. Only once the edges have engaged should the new downhill leg be extended to power the turn.
 1. Flatten skis with edge release on steeper slopes. Higher edges on steeps puts too much weight on the inside ski! Avoid “over-edging”. Don’t “push” or “stand up” on the new uphill ski, but release the old downhill ski. Stay low and be efficient.
 1. Femur rotation and ankle rotation (foot side). See [YouTube](https://youtu.be/Iw1pnQZyeek?si=C_d49UgDa1WfbVdC).
 1. Retraction extension turns. Turn when low, tip to other edge, engage new edges, and then extend. So not standing to initiate the turn, but standing (i.e. extending) to drive the edge round the turn. Start all low. Then add extension. Also practice extension traversal - lift and move down the downhill ski and let it rise back up to connect. Can also do all low drill with a non carve turn (harder). No pole plant - just balance hands. See [YouTube](https://youtu.be/hQAePluhRSc?si=a3wxEa3d-XPBW9zT).
@@ -104,20 +124,27 @@ Different word variations connect at different times.
 1. Change from one edge to the other before changing direction.
 1. Release pressure earlier to enable topple. Stay low and don’t stand for too long on downhill ski.
 
+# Tips for ice
+
+Like driving a car in icy conditions, key to skiing on ice is avoiding sudden movements or changes in direction.
+
+* Stay squat and more stacked, with a lower centre of mass and feet wider apart. It's safer to have a more static equilibrium than the dynamic balance needed on snow.
+* Don't rush the turn but allow the edge to engage. Soft start.
+* Never let the hips to go back. Keep them forward to keep the edges engaged.
+* Ultimately it is all about downhill ski pressure.
+
 # Two Types of Turn
 
 Clearly identifying the type of turn helps prevent advice from appearing contradictory.
 
 Short turns
-* Have greater separation of upper and lower body.
+* Have greater (rotational) separation of upper and lower body.
 * Put tension in the body to help initiate the next turn.
 * Skis are closer together.
-* It starts with the legs.
-* You turn the skis (more or less).
+* Starts by actively moving the body and centre of mass, followed by sweeping the legs.
 
 Long carving turns
-* Have greater alignment of upper and lower body.
+* Have greater (rotational) alignment of upper and lower body.
 * With a slower transition movement.
 * Skis are shoulder-width apart.
-* It starts with the ankles.
-* The skis turn you (entirely).
+* Starts by relaxing the downhill leg, followed by ankle flexion.
