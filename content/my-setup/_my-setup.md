@@ -125,6 +125,7 @@ Settings:
 ```
 macos-option-as-alt = left
 split-divider-color = white
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
 ```
     
 ## Fish
