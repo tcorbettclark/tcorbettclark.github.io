@@ -22,6 +22,8 @@
                 'sha384-{{ '/hot-reloader.js' | sha() }}'
                 'sha384-{{ '/render-maths.js' | sha() }}'
                 'sha384-{{ '/render-code.js' | sha() }}'
+                'sha384-{{ '/nav-toggle.js' | sha() }}'
+                'sha384-{{ '/toc.js' | sha() }}'
                 ;
             connect-src
                 'self'
@@ -33,10 +35,13 @@
             style-src
                 'self'
                 https://cdn.jsdelivr.net
-                '{{ BULMA_CSS_SHA }}'
                 '{{ KATEX_CSS_SHA }}'
                 '{{ GRUVBOX_CSS_SHA }}'
                 'sha384-{{ '/main.css' | sha() }}'
+                'sha384-{{ '/fontawesome/css/fontawesome.min.css' | sha() }}'
+                'sha384-{{ '/fontawesome/css/brands.min.css' | sha() }}'
+                'sha384-{{ '/fontawesome/css/regular.min.css' | sha() }}'
+                'sha384-{{ '/fontawesome/css/solid.min.css' | sha() }}'
                 ;
         ">
 
@@ -55,7 +60,6 @@
 
         <link rel="stylesheet" type="text/css" href="{{ KATEX_CSS }}" integrity="{{ KATEX_CSS_SHA }}" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ GRUVBOX_CSS }}" integrity="{{ GRUVBOX_CSS_SHA }}" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ BULMA_CSS }}" integrity="{{ BULMA_CSS_SHA }}" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="/fontawesome/css/fontawesome.min.css" integrity="sha384-{{ '/fontawesome/css/fontawesome.min.css' | sha() }}">
         <link rel="stylesheet" type="text/css" href="/fontawesome/css/brands.min.css" integrity="sha384-{{ '/fontawesome/css/brands.min.css' | sha() }}">
         <link rel="stylesheet" type="text/css" href="/fontawesome/css/regular.min.css" integrity="sha384-{{ '/fontawesome/css/regular.min.css' | sha() }}">
@@ -70,6 +74,8 @@
         <script defer src="/hot-reloader.js" integrity="sha384-{{ '/hot-reloader.js' | sha() }}"></script>
         <script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
         <script defer src="/render-code.js" integrity="sha384-{{ '/render-code.js' | sha() }}"></script>
+        <script defer src="/nav-toggle.js" integrity="sha384-{{ '/nav-toggle.js' | sha() }}"></script>
+        <script defer src="/toc.js" integrity="sha384-{{ '/toc.js' | sha() }}"></script>
         {% block script_tags_to_extra_js %}{% endblock script_tags_to_extra_js %}
     </head>
     <body>
