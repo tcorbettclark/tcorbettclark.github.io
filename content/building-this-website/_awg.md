@@ -1,4 +1,4 @@
-# Introduction
+## Introduction
 
 Assuming a willingness to understand the necessary web technologies, why not create static websites _by hand_?
 The main problems are around inefficient repetition and cumbersome syntax.
@@ -10,7 +10,7 @@ For example,
 
 These pain points can be ameliorated by using a markup language (like [markdown](https://commonmark.org)), templating (e.g. with [Jinja](https://jinja.palletsprojects.com)), and writing data/metadata in a data-oriented syntax (such as [TOML](https://toml.io/)).
 
-## Features / anti-features
+### Features / anti-features
 
 My tool makes it easier to create a static website of the usual HTML, CSS, and Javascript files (plus a few others such as the manifest.json, robots.txt, and sitemap.xml).
 **It is a scaffolding tool with no fundamental opinion about these web files**.
@@ -31,13 +31,13 @@ Then, to create a fast iterative loop:
 Note the absence of themes, plugins, blog posts, tags, articles, Atom or RSS feeds etc.
 Many of these are easy to achieve using the tool's machinery without explicit native support.
 
-## Zero config
+### Zero config
 
 With the exception of a few command line options to tell the tool where to find the content and put the output, **there is no configuration.
 There are no required files or directory structures, and so (degenerately) **the tool will run fine on an empty directory**.
 There is a simple `example/` content directory in the [GitHub repository](https://github.com/tcorbettclark/tcorbettclark.github.io) to demo some of the functionality and provide a learning sandpit to play in.
 
-## Subtractive approach
+### Subtractive approach
 
 Instead of copying and creating files and directories from various sources and processes, the tool takes a "subtractive" approach.
 The build process starts by cloning a given content directory into a new output directory.
@@ -54,7 +54,7 @@ Note however that due to the tool's lack of opinion in this regard, content can 
 Or a mixed by-purpose/by-type strategy used.
 Regardless, the files and structure is all explicit and visible.
 
-## Templating and template data
+### Templating and template data
 
 To provide templating, AWG uses [Jinja](https://jinja.palletsprojects.com), a popular and mature templating library.
 
@@ -84,7 +84,7 @@ This allows the data to be kept near to where it is used.
 Although tempting to have separate namespaces, doing so from a hierarchy of such files (including multiple files in the same directory) seems overly complex and could even *increase* the maintenance overhead.
 Using meaningful names and having the tool check for name collisions is both practical and easy to understand.
 
-## Markdown
+### Markdown
 
 There are many flavours of Markdown.
 I have chosen to use [CommonMark](https://commonmark.org), implemented using the [markdown-it-py](https://markdown-it-py.readthedocs.io) Python library.
@@ -116,7 +116,7 @@ And from [mdit-py-plugins](https://mdit-py-plugins.readthedocs.io):
 
 [^1]: Demo footnote.
 
-## Computing hashes e.g. for SRI and CSP
+### Computing hashes e.g. for SRI and CSP
 
 [Subresource Integrity (SRI)](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) and [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) both use file hashes.
 To make it easier to maintain these hashes, AWG adds a Jinja filter `sha("256"|"384"|"512")` (with a default of `"384"`) to create SHA hashes of local files.
@@ -126,7 +126,7 @@ For example, to create SHA384 integrity attributes for SRI,
 <script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
 ```
 
-## Summary: the AWG content interface    
+### Summary: the AWG content interface    
 
 The AWG tool recognises 3 types of file:
 
@@ -160,9 +160,9 @@ It is the only aspect of the output which is not under the complete control of t
 Some of those tags need additional CSS to style (such as definition lists), and code or maths excerpts need even more substantial processing.
 How that can be done and more is explained in my [content approach](approach.html).
 
-# How to use
+## How to use
 
-## Dependencies
+### Dependencies
 
 The dependencies are [uv](https://docs.astral.sh/uv/) and (optionally) [html-tidy](https://www.html-tidy.org).
 For example, to set things up on a Mac using [Homebrew](https://brew.sh):
@@ -171,7 +171,7 @@ For example, to set things up on a Mac using [Homebrew](https://brew.sh):
 ❯ brew install uv tidy-html5
 ```
 
-## Running the tool
+### Running the tool
 
 The tool itself is a single file Python script, [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py).
 It uses [inline script metadata](https://peps.python.org/pep-0723) to declare Python and Python package dependencies which `uv` can [read](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies).
@@ -230,7 +230,7 @@ Every build is a full clean build without any caching or incremental behaviour, 
 A simple solution is to suspend the tool with `ctrl-z`, make the changes, and then foreground it with `fg`.
 If the content changed then the site will be rebuilt and browser(s) told to reload.
 
-## Using HTTPS
+### Using HTTPS
 
 By default AWG will serve up over HTTP.
 To use HTTPS one needs certificates for `localhost` signed by a Certificate Authority (CA) registered on your machine.
@@ -252,7 +252,7 @@ mkcert localhost
 # ...etc
 ```
 
-## Hot reloading
+### Hot reloading
 
 The AWG tool provides a simple websocket API to "push notify" any browsers open on a page that the source has changed and they should reload.
 This feature can be used with a small amount of javascript e.g. [hot-reloader.js](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/hot-reloader.js), configured to load from the `<head>` tag:
@@ -271,9 +271,9 @@ This feature can be used with a small amount of javascript e.g. [hot-reloader.js
 The javascript only runs when served up over `localhost`, so is fine to leave in for production.
 Also, not using this javascript or equivalent is fine, but the browser will need to be reloaded/refreshed by hand after changes.
 
-# Implementation details
+## Implementation details
 
-## Code overview
+### Code overview
 
 In essence there are 3 classes with orthogonal responsibilities:
 - `Builder` - Build the files by applying templates using data from TOML.
@@ -306,7 +306,7 @@ except asyncio.CancelledError:
 The entire tool is a single file: [awg.py](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/awg.py).
 About half of it is just logging what it is doing.
 
-## Hot reloading
+### Hot reloading
 
 In theory, hot reloading is simple:
 - use a [websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSocket) to notify a small piece of javascript running in the browser that it should reload the page.
@@ -379,7 +379,7 @@ addEventListener("load", (event) => {
 });
 ```
 
-## Tool development
+### Tool development
 
 Used in the recommended way described above, `uv` creates a disposable but cached virtualenv in which to install the dependencies and run the tool.
 

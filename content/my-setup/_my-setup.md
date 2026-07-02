@@ -1,23 +1,23 @@
 This page helps me when setting up a new computer, and provides an overview to assess for consistency and compatibility.
 
-# Hardware
+## Hardware
 
 - Computer: Mac Mini (2024) M4 10 core, 32GB RAM, 512GB SSD
 - Monitor: BenQ PD27305
 - Keyboard: NuPhy Air75 V2, with caps-lock configured as escape
 
-# Software management
+## Software management
 
 - Package management: [brew](https://brew.sh)
 - Python versions and virtualenv: [uv](https://docs.astral.sh/uv/)
 - Containers / virtual machines: [container](https://github.com/apple/container), [colima](https://github.com/abiosoft/colima), [docker](https://www.docker.com), and [qemu](https://www.qemu.org)
 
-# Desktop
+## Desktop
 
 - Focus behaviour: [AutoRaise](https://github.com/sbmpost/AutoRaise)
 - Launcher (Spotlight replacement): [Raycast](https://www.raycast.com)
 
-# Programming
+## Programming
 
 - Editor: [Helix](https://helix-editor.com)
 - Terminal : [Ghostty](https://ghostty.org)
@@ -27,26 +27,26 @@ This page helps me when setting up a new computer, and provides an overview to a
 - Python code quality: [Ruff](https://docs.astral.sh/ruff/) and [ty](https://github.com/astral-sh/ty)
 - Javascript/Typescript: [Bun](https://bun.sh)
 
-# Data Science
+## Data Science
 
 - Python notebooks: [Marimo](https://marimo.io)
 - Dataframes: [Polars](https://pola.rs) and [DuckDB](https://duckdb.org)
 - Visualisations: [Vega-Altair](https://altair-viz.github.io)
 
-# LLMs
+## LLMs
 
 - Local models: [Ollama](https://ollama.ai)
 - Remote models: [OpenRouter](https://openrouter.ai)
 - Commandline: [LLM](https://llm.datasette.io)
 - Programming: [Pi](https://pi.dev), [Claude](https://code.claude.com/docs), [Aider](https://aider.chat)
 
-# Researching and writing
+## Researching and writing
 
 - Writing (PDFs): [typst](https://typst.app)
 - Research notes: [Zotero](https://www.zotero.org)
 - General notes: Apple notes
 
-# Apps
+## Apps
 
 To install all apps (list created using `brew list --casks -1`):
 
@@ -62,7 +62,7 @@ brew install -q --cask \
 
 Note this includes the [Fira Code](https://github.com/tonsky/FiraCode) font with programming ligatures.
 
-# Commandline tools
+## Commandline tools
 
 To install all my usual packages (list created using `brew leaves -r`):
 ```bash
@@ -117,9 +117,9 @@ uv tool install \
     vale
 ```
 
-# Configuration
+## Configuration
 
-## Ghostty
+### Ghostty
 
 Settings:
 ```
@@ -128,7 +128,7 @@ split-divider-color = white
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 ```
     
-## Fish
+### Fish
 
 The main `~/.config/fish/config.fish` contains:
 
@@ -152,7 +152,7 @@ if status --is-login
     fish_add_path -P /Users/tcorbettclark/.local/bin
 end
 
-# Make starfish manage the prompt always.
+## Make starfish manage the prompt always.
 starship init fish | source
 ```
 
@@ -168,9 +168,9 @@ alias --save va 'source .venv/bin/activate.fish'
 alias --save copy-latest-pdf-download 'cp (ls --sort created ~/Downloads/*.pdf | tail -1)'
 ```
 
-# Tips
+## Tips
 
-## Brew
+### Brew
 
 Add the [brew-cache](https://github.com/ten0s/homebrew-brew-cache) extension to make it easy to find which packages own which files:
 
@@ -199,7 +199,7 @@ brew cleanup -s                           # Remove old versions of packages and 
 brew doctor                               # Find potential issues
 ```
 
-## Fish
+### Fish
 
 Find changes made to fish configuration, functions, completions etc since installation:
 

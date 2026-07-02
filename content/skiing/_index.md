@@ -8,7 +8,7 @@ This is too late to build any real intuition due to fear of injury (and long rec
 But I am determined to keep improving for style, efficiency, safety, and to allow me to keep skiing for as long as possible.
 As with learning other sports (or musical instruments like the cello or violin), different words, phrases, and ideas connect as you become more proficient, so it's useful to have a selection to draw from.
 
-# General Thoughts
+## General Thoughts
 
 1. Ski with (personal) style. Play with gravity. Be athletic, dynamic, and carry the energy. See [YouTube](https://youtu.be/-uKnYj_vhgg?si=HfFOSSOgC9l1QyCC).
 1. Think of the slope as the horizon and “down” as orthogonal to the slope.
@@ -27,7 +27,7 @@ Specific thoughts to correct some of my bad habits:
 1. Stop picking up my inside ski, which happens because I pressure (or push away) the new outside ski too early in the turn. Instead, relax the downhill ski to allow the weight transfer. This keeps the body low, is more efficient, and gives time for the new edges to engage resulting in a smoother curve instead of "Z turns". Only once the edges have engaged can the outside leg be extended (still keeping it behind the hips even as it moves forward), to power the turn and progressively increase the edge angle.
 1. Don't let the new downhill ski lag behind or the inside ski lead ahead. Keep boots aligned forward/back as I drive the turn (decreasing radius), while keeping hips ahead.
 
-# Drills - to Warm Up
+## Drills - to Warm Up
 
 To activate the right muscles and remind oneself of the right feelings:
 1. Side slips with punctuated edge grips. Point the knees. Also do one legged.
@@ -36,7 +36,7 @@ To activate the right muscles and remind oneself of the right feelings:
 1. Skating down the hill, making clean tracks.
 1. Hockey stops to build stopping confidence and large edge angles. Key is making a wide sweep before the stop.
 
-# Drills - for Short Turns
+## Drills - for Short Turns
 
 1. Roll ankles before reaching the fall line to engage edges and grip earlier. See [YouTube](https://www.youtube.com/watch?v=8vkEM0KUElk).
 1. Short turns from snowplow. Edge lock. Hips on the inside. See [YouTube](https://youtu.be/o8oDVHT1kws?si=CINdja8W-op1pP0G).
@@ -44,7 +44,7 @@ To activate the right muscles and remind oneself of the right feelings:
 1. Linked “hockey slows” - a 90% "hockey stop" with 2 pole plants and little hip rotation (only legs), leading with ankle and knee. Then reduce to 80% off, 70% off, etc. See [YouTube](https://www.youtube.com/watch?v=ZGznuGbSeSs).
 1. One leg ski traverse release / garlands. See [YouTube](https://youtu.be/C6BGdf-2J00?si=Xs3vFBd0ejuPx5hH).
 
-# Drills - for Carving
+## Drills - for Carving
 
 1. Slow bend and stretch on every turn, so changing edges in a low position. See [YouTube](https://youtube.com/shorts/1dmiRfvmSlI?si=10rHO-TWKAUbtgJl).
 1. Flexed through edge change. Extend only when edges engaged. See [YouTube](https://youtube.com/shorts/qGFYI-0UK6A?si=zCfD3MLX9aFmyXZN).
@@ -57,7 +57,7 @@ To activate the right muscles and remind oneself of the right feelings:
 1. Practice railroad tracks, driving the inside knee to keep shins aligned and skis parallel. It is easier to tip the inside ski if the boots are aligned forward/back.
 1. Push the inside knee inwards by hand to make the knee resist and push outwards (when the hand isn't there). Supinating the foot at the same time gives the knee muscles more force.
 
-# Drills - General
+## Drills - General
 
 1. Drill bounce on the tip of the boot, flexing the ankles.
 1. Jump up and down on traverse. The landing position should be the most stable overall posture.
@@ -71,7 +71,7 @@ To activate the right muscles and remind oneself of the right feelings:
     * Reengage the edge: Roll the ankles and knees back into the slope to bring the skis across the hill again.
     * Repeat: Release → small arc → reengage.
 
-# On Flex and Extension
+## On Flex and Extension
 
 Suspension and much of the control of the pressure/edge comes from the coiling and uncoiling of the whole body.
 
@@ -80,7 +80,7 @@ Suspension and much of the control of the pressure/edge comes from the coiling a
 1. Always movement; always dynamic.
 1. Flex in the transition. Only extend once the skis have engaged. Then flex again to release. Flex starting from the knees (“toilet position”), not just the waist.
 
-# On Body Position and Balance
+## On Body Position and Balance
 
 The position of the body and how it stays in dynamic balance is key to being efficient.
 
@@ -93,7 +93,7 @@ The position of the body and how it stays in dynamic balance is key to being eff
 1. Don’t lean forward too much.
 1. Don’t have too much pressure on shins throughout as it restricts release movement.
 
-# On Arms, Hands, and Poles
+## On Arms, Hands, and Poles
 
 The arms, hands, and poles all play a key part in balance and control.
 
@@ -102,7 +102,7 @@ The arms, hands, and poles all play a key part in balance and control.
 1. Pole plant, if any, should be small and from the wrist. Use a calm and optimised position. No shoulder movement. Don't let the pole plant knock the body out of balance.
 1. Hold the points of the sticks outwards like a hovercraft, with palms down and held consistent height.
 
-# On Carving Turns
+## On Carving Turns
 
 1. Transition weight release by lifting legs up. Ski under. Don’t just pull skis back, or just lean forward, but do both. Pivot about your centre to become perpendicular.
 1. Relax and flex ankles, knees, and hips. Don’t turn with ankles, but flex and roll the ankles. The edge change starts with the ankles. Feel your feet. Roll over to the other edges, without pushing off from old downhill ski. Aim for simultaneous edge change. See [YouTube](https://youtu.be/H7m3D3-NUfA?si=2pfE0DDLdZVUJU4j).
@@ -124,7 +124,7 @@ The arms, hands, and poles all play a key part in balance and control.
 1. Change from one edge to the other before changing direction.
 1. Release pressure earlier to enable topple. Stay low and don’t stand for too long on downhill ski.
 
-# Tips for ice
+## Tips for ice
 
 Like driving a car in icy conditions, key to skiing on ice is avoiding sudden movements or changes in direction.
 
@@ -133,7 +133,7 @@ Like driving a car in icy conditions, key to skiing on ice is avoiding sudden mo
 * Never let the hips to go back. Keep them forward to keep the edges engaged.
 * Ultimately it is all about downhill ski pressure.
 
-# Two Types of Turn
+## Two Types of Turn
 
 Clearly identifying the type of turn helps prevent advice from appearing contradictory.
 

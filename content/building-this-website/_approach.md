@@ -4,7 +4,7 @@ It also contains notes on hosting, validation, security, selecting libraries, re
 Hence this page provides _recipes_ for how to achieve the various features of a website.
 They are mostly independent of one another, allowing for easy modification, substitution, or ommission (and the agnostic nature of [AWG](awg.html) means that nothing is left behind).
 
-# File structure
+## File structure
 
 Organisational considerations include:
 
@@ -31,7 +31,7 @@ The template inheritance hierarchy is simple:
 - The page template is in `/_page.html`, extends the base template, and adds blocks for the breadcrumb, title, page content, and the "page is draft" additions (see below).
 - Most concrete pages then extend the page template (the welcome page being an exception, as it alters the layout to have a sidebar card).
 
-# Indentation management
+## Indentation management
 
 All HTML files are indented for clarity during editing.
 On output after templating, they are all formatted properly by [AWG](awg.html), so there is no need to try to generate properly indented HTML within the templates (avoiding fiddly whitespace management with "-" in e.g. `{%- ... %}`).
@@ -42,11 +42,8 @@ For example, the indentation below is entirely to aid readability at the templat
 
 {% block breadcrumb %}
     {{ super() }}
-    <div class="level-item">
-        <span class="tag">
-            <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to: Building this website</a>
-        </span>
-    </div>
+    <span class="breadcrumb-sep">/</span>
+    <a href="index.html">Building this website</a>
 {% endblock breadcrumb %}
 
 {% block title %} Content approach {% endblock title %}
@@ -59,16 +56,19 @@ For example, the indentation below is entirely to aid readability at the templat
 To make editing easy with language specific editing/formatting/colourising modes, I avoid files containing a mixture of languages.
 Hence there are separate files for each piece of markdown, no "frontmatter" TOML/YAML within markdown files, javascript is always included from `.js` files, etc.
 
-# Choice of web framework
+## Choice of CSS approach
 
-There are many to choose from, but I selected [Bulma](https://bulma.io) because it is CSS only (no javascript), looks good, is well documented, very popular, and actively maintained. I like the responsive layout and support for colour management.
+Having previously used [Bulma](https://bulma.io) (a CSS framework), I decided to write my own CSS from scratch.
 
-The two closest alternatives were:
+The primary motivation was to have full control over the design and to understand every line of styling — consistent with the same philosophy that led me to write my own static site generator.
+A secondary motivation was to reduce the total CSS payload and to avoid unused styles.
 
-- [Bootstrap](https://getbootstrap.com), which is older, bit boring looking now, and slightly heavier weight than I need.
-- [UIkit](https://getuikit.com), which looks slick, but is perhaps more intended for applications. Also there is less support e.g. for colours.
+The result is a single `main.css` file that uses [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) for the entire design system: colours, typography, spacing, and light/dark mode via `prefers-color-scheme`.
+This makes the site easy to maintain and modify, and the dark mode support came at very little additional cost.
 
-# Maths
+I use a system font stack for typography (fast, zero-dependency, native-looking on every platform) and [Font Awesome](https://fontawesome.com) for icons (self-hosted to avoid rendering lag and SRI fragility).
+
+## Maths
 
 For any substantial maths I create PDFs using [Typst](https://typst.app), but for immediately visible maths in the browser I use the javascript library, [KaTeX](https://katex.org). Other libraries exist but Katex is well maintained, popular, and fast.
 
@@ -122,7 +122,7 @@ to be displayed as
 >
 > $$ \sum_{k=1}^n { k! \over (1+k)^2 } $$
 
-# Code
+## Code
 
 Highlighting code is easy with [highlight.js](https://highlightjs.org).
 This will colour many different programming languages in any of a number of different themes, expecting HTML markup like
@@ -160,20 +160,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
 ```
 
 The highlight colour theme was chosen to be close to my colour theme, but although close the background isn't a perfect match.
-I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to access bulma's derived colours), and also style with a fine border:
+I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to set the background to match the site's colour scheme), and also style with a fine border:
 
 ```CSS
-/* Fix up the style of the code blocks e.g. consistent background colour. */
-code.hljs {
-    border: 1px solid grey;
-    border-radius: 0px;
-    background: var(--bulma-primary-95);
+pre {
+    margin: 1rem 0;
+    padding: 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-code-bg);
+    line-height: 1.5;
+}
+
+pre code {
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    font-size: 0.875rem;
 }
 ```
 
 Of course, the above demonstrates the end-result of formatting some HTML and Javascript code.
 
-# Navigation breadcrumb
+## Navigation breadcrumb
 
 The navigation breadcrumb works by sub-templating, calling `{{ super() }}` to retain the navigation from above.
 So the pattern is as follows (ignoring all styling).
@@ -204,7 +214,7 @@ So the pattern is as follows (ignoring all styling).
 {% endblock breadcrumb%}
 ```
 
-# Manifest and favicons
+## Manifest and favicons
 
 The [Web Application Manifest](https://www.w3.org/TR/appmanifest/) is a `JSON` file containing metadata about a web application.
 Although this site is not a web app as such, it improves user experience to use the manifest to document the location of all the favicons and theme colours.
@@ -217,7 +227,7 @@ Adding favicons involves:
 - Creating a set of favicons, ensuring the colours are coordinated with the colour theme of the website.
 - Telling browsers where to find all the favicons, noting that some are expected in "standard" locations anyway.
 
-I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colours as configured in Bulma.
+I created a set of favicons using an online [favicon generator](https://favicon.io/favicon-generator/), using the same primary colour as configured in the site's CSS custom properties.
 These are all copied into the root (`/`) directory of the site according to the file structure principles described above.
 
 The manifest then points to these favicons, and is itself put in the root directory as `/manifest.json` (see [here](https://github.com/tcorbettclark/tcorbettclark.github.io/blob/master/content/manifest.json)).
@@ -240,7 +250,7 @@ Lastly, the base template (in `_base.html`) indicates the principal favicons and
 </html>
 ```
 
-# Icons
+## Icons
 
 I use [Font Awesome](https://fontawesome.com) for icons.
 I found that loading them from Font Awesome produced rendering lag (the icons flickered as they appeared), and also suffered from fragile SRI settings.
@@ -258,7 +268,7 @@ The `head` section in the `_base.html` template loads the CSS using:
 
 The main `fontawesome.min.css` fetches the required fonts from `/fontawesome/webfonts/`.
 
-# Colour, styling, and light/dark mode
+## Colour, styling, and light/dark mode
 
 Colours are both technical and personal.
 I found these useful to get started:
@@ -275,17 +285,42 @@ Then the following helped me experiment with different palettes:
 
 One gotcha I encountered was that there are different variants/standards of RGB.
 
-[Bulma](https://bulma.io) has a "customizer" popup on its website which allows colours (and other style aspects) to be tried out before exporting as CSS settings.
-Because it [automatically derives shades](https://bulma.io/documentation/features/color-palettes/), the main task is to decide a Primary colour, a Link colour, and colours for Info, Success, Warning, and Danger.
+All colours and other design tokens are defined as [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) in `/main.css`.
+This makes the design system easy to understand and modify, and the entire colour scheme is defined in one place:
 
-Bulma also automatically derives and manages the colour variations between light and dark mode.
-For that to work, one needs to use the "soft" and "bold" colour classes for those elements which should be a function of light/dark mode.
-For example, I use the `has-background-primary-bold-invert` and `has-text-primary-bold` classes for the main page section.
-See the [Bulma docs](https://bulma.io/documentation/features/dark-mode/) for details.
+```CSS
+:root {
+    --color-bg: #fafaf8;
+    --color-text: #1a1a1a;
+    --color-text-muted: #666;
+    --color-accent: hsl(45, 85%, 45%);
+    --color-accent-subtle: hsl(45, 85%, 93%);
+    --color-border: #e0e0d8;
+    --color-code-bg: hsl(45, 30%, 96%);
+    --color-link: hsl(220, 100%, 45%);
+    ...
+}
 
-Lastly, remember to coordinate the colour choices across the Bulma setting, the manifest, and the favicons.
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #1a1a18;
+        --color-text: #e0e0d8;
+        --color-text-muted: #999;
+        --color-accent: hsl(45, 80%, 55%);
+        --color-accent-subtle: hsl(45, 25%, 18%);
+        ...
+    }
+}
+```
 
-# Draft / wip mode
+The golden-yellow accent colour (`hsl(45, 85%, 45%)`) is used sparingly — for the header rule, the page title underline, the draft banner, and link highlights — rather than as a dominant background colour.
+This gives the site a warm feel without being overwhelming.
+
+Light and dark mode is handled entirely by the CSS `prefers-color-scheme` media query, which means the site respects the user's operating system preference automatically with no JavaScript required.
+
+Lastly, remember to coordinate the colour choices across the CSS custom properties, the manifest, and the favicons.
+
+## Draft / wip mode
 
 Given the purpose of this website, many files are constantly being revised and refactored.
 New content could be excluded from the build until completely ready, but a "softer and more organic" approach is to include it with a DRAFT watermark and delay linking to such pages or adding them to the sitemap until more ready.
@@ -327,7 +362,7 @@ Hence to mark a page as in-draft/work-in-progress, set the `draft` variable at t
 ...etc
 ```
 
-# XML sitemap and the robots.txt file
+## XML sitemap and the robots.txt file
 
 To support search engine indexing and SEO, the `robots.txt` file and related sitemap file (in `sitemap.xml`) are used to hint to search engines what pages they should index.
 See Google's descriptions of [robots.txt](https://developers.google.com/search/docs/crawling-indexing/robots/intro) and [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview).
@@ -375,7 +410,7 @@ change_frequency = "weekly"
 This isn't too cumbersomb to maintain (e.g. by listing all candidates with `ls -1 **.html`).
 It is also possible to put the different entries in different `.toml` files in respective directories.
 
-# Validation
+## Validation
 
 Iterating with various (free) validation sites makes it easy to check for correctness, best practice, and learn about the web world.
 For example:
@@ -396,13 +431,13 @@ Notable issues I could not address include:
    This isn't a problem so long as href's are always quoted.
 1. ...
 
-# Security
+## Security
 
 Excellent references on web security can be found on [Google's web.dev](https://web.dev/explore/secure) and [Mozzila's MDN](https://developer.mozilla.org/en-US/docs/Web/Security).
 
 To find security weaknesses and information about how to address them, I follow the findings from MDN's [Observatory tool](https://developer.mozilla.org/en-US/observatory).
 
-## Content Security Policy (CSP)
+### Content Security Policy (CSP)
 
 A [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP) instructs browsers to place restrictions on what loaded code can do.
 This is to defend against cross-site-scripting (CSS) and clickjacking in which an attacker finds ways to inject malicious code.
@@ -487,10 +522,10 @@ For example:
             style-src
                 'self'
                 https://cdn.jsdelivr.net
-                '{{ BULMA_CSS_SHA }}'
                 '{{ KATEX_CSS_SHA }}'
                 '{{ GRUVBOX_CSS_SHA }}'
                 'sha384-{{ '/main.css' | sha() }}'
+                'sha384-{{ '/fontawesome/css/fontawesome.min.css' | sha() }}'
                 ;
         ">
         ...
@@ -524,13 +559,9 @@ HIGHLIGHT_JS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build
 HIGHLIGHT_JS_SHA = "sha384-F/bZzf7p3Joyp5psL90p/p89AZJsndkSoGwRpXcZhleCWhd8SnRuoYo4d0yirjJp"
 GRUVBOX_CSS = "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/base16/gruvbox-light-hard.min.css"
 GRUVBOX_CSS_SHA = "sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj0mjrMVPxdd"
-
-# Framework
-BULMA_CSS = "https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
-BULMA_CSS_SHA = "sha384-tl5h4XuWmVzPeVWU0x8bx0j/5iMwCBduLEgZ+2lH4Wjda+4+q3mpCww74dgAB3OX"
 ```
 
-## Strict Transport Security (HSTS)
+### Strict Transport Security (HSTS)
 
 This site can use HTTPS throughout.
 To help prevent manipulator-in-the-middle (MiTM) attacks, the [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security) HTTP Header should be set, together with the [upgrade-insecure-requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/upgrade-insecure-requests) directive in the CSP.
@@ -553,14 +584,14 @@ I've also configured GitHub Pages to only serve HTTPS.
 
 **NB:** The presence of these security settings means that AWG must be run in HTTPS mode.
 
-## Deny embedding
+### Deny embedding
 
 A clickjacking approach relies on embedding sites in other sites.
 Ideally this would be prevented using CSP by setting the `frame-ancestors` and the `X-Frame-Options` header.
 See [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Clickjacking) for details.
 But unfortunately neither can be done using `http-equiv` and I don't have control over the server HTTP Headers.
 
-## Referrer policy
+### Referrer policy
 
 To stop leaking information about where outbound links are coming from (see [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy)), I set the HTTP header as follows:
 
@@ -570,7 +601,7 @@ To stop leaking information about where outbound links are coming from (see [her
 ...
 ```
 
-## MIME types
+### MIME types
 
 To inform browsers not to load scripts and stylesheets unless the server indicates the correct MIME type, I set the `X-Content-Type-Options` header using the `<meta>` tag to `nosniff` as explained [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types):
 
@@ -580,7 +611,7 @@ To inform browsers not to load scripts and stylesheets unless the server indicat
 ...
 ```
 
-# Deployment on GitHub pages
+## Deployment on GitHub pages
 
 It is easy and convenient to host static content on [GitHub pages](https://pages.github.com).
 

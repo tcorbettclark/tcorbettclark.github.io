@@ -1,4 +1,4 @@
-# Publications
+## Publications
 
 The following PDF papers are[^1] all rather old...
 
