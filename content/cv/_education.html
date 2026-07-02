@@ -1,12 +1,16 @@
 {% if MY_EDUCATION %}
-    <div class="block">
+    <section class="cv-section">
         <h2>Education</h2>
         {% for education in MY_EDUCATION %}
-            <div class="item">
-       	    <h4 class="degree">{{ education['degree'] }}</h4>
-       	    <h5 class="meta">{{ education['meta'] }}</h5>
-       	    <div class="time">{{ education['time'] }}</div>
-       	</div>
+        <div class="cv-item">
+            <div class="cv-meta">
+                <div class="cv-title">{{ education['degree'] }}</div>
+                <div class="cv-time">{{ education['time'] }}</div>
+            </div>
+            {% if education.get('meta') %}
+            <div class="cv-company">{{ education['meta'] }}</div>
+            {% endif %}
+        </div>
         {% endfor %}
-    </div>
+    </section>
 {% endif %}

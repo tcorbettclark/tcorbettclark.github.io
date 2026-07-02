@@ -1,28 +1,15 @@
 {% extends "../_base.html" %}
 
-{% block links_to_extra_css %}
-    <link rel="stylesheet" type="text/css" href="me.css" integrity="sha384-{{ 'me.css' | sha() }}">
-{% endblock links_to_extra_css %}
-
 {% block content %}
-    <section class="section has-background-primary-bold-invert has-text-primary-bold">
-        <div class="columns">
-            <div class="column">
-                <div class="box">
-                    <div class="title is-size-2 has-text-centered ">
-                        <i class="fa-solid fa-angles-right"></i>
-                        Welcome
-                        <i class="fa-solid fa-angles-left"></i>
-                        <!-- <i class="fa-solid fa-person-digging"></i> Under construction! -->
-                    </div>
-                    <div class="content">
-                        {{ "_index.md" | markdown() }}
-                    </div>
-                </div>
-            </div>
-            <div class="column is-narrow">
-                {% include "_profile.html" %}
-            </div>
+<main class="welcome-layout">
+    <article class="welcome-content">
+        <h1 class="page-title">Welcome</h1>
+        <div class="content">
+            {{ "_index.md" | markdown() }}
         </div>
-    </section>
+    </article>
+    <aside class="welcome-sidebar">
+        {% include "_profile.html" %}
+    </aside>
+</main>
 {% endblock content %}

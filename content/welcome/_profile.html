@@ -1,29 +1,19 @@
-<div class="box mb-0">
-    <div class="card mb-0">
-        <div class="card-image">
-            <figure class="image">
-                <img id="photo-of-me" src="me.jpg" alt="My profile picture" />
-            </figure>
-        </div>
-    </div>
-    <hr class="mt-4 mb-3">
-   	<div class="title is-size-4 has-text-centered mb-3">Pursuits</div>
-    <div class="container">
-       	<ul>
-      		{% for interest in MY_INTERESTS %}
-       	    <li>
-     			<span class="icon-text">
-     			    <span class="icon"><i class="fa-solid {{interest.fa_class}}"></i></span>
-    				<span>{{ interest.topic }}</span>
-     			</span>
-      		</li>
-      		{% endfor %}
-       	</ul>
-    </div>
-    <hr class="mt-4 mb-3">
-    <div class="container has-text-centered has-text-link">
+<div class="profile-card">
+    <img id="photo-of-me" src="me.jpg" alt="My profile picture" />
+    <h2 class="profile-heading">Pursuits</h2>
+    <ul class="pursuits-list">
+        {% for interest in MY_INTERESTS %}
+        <li>
+            <i class="fa-solid {{interest.fa_class}}"></i>
+            <span>{{ interest.topic }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <div class="social-links">
         {% for ms in MY_SOCIALS %}
-        <a class="my-socials" href="{{ ms.url }}" target="_blank"><i class="fa-brands {{ms.fa_class}}"></i></a>
+        <a class="social-link" href="{{ ms.url }}" target="_blank" rel="noopener" aria-label="{{ ms.fa_class }}">
+            <i class="fa-brands {{ms.fa_class}}"></i>
+        </a>
         {% endfor %}
     </div>
 </div>

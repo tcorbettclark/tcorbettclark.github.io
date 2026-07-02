@@ -1,15 +1,11 @@
 {% if MY_PROJECTS %}
-    <section class="section projects-section">
-        <h2 class="section-title"><i class="fa fa-archive"></i>Projects</h2>
-        <div class="intro">
-            <p>{{ MY_PROJECT_INTRO }}</p>
-        </div>
+    <section class="cv-section">
+        <h2><i class="fa fa-archive"></i> Projects</h2>
+        <p>{{ MY_PROJECT_INTRO }}</p>
         {% for project in MY_PROJECTS %}
-            <div class="item">
-                <span class="project-title">
-                    <a href="#hook">{{ project['title'] }}</a>
-                </span> - <span class="project-tagline">{{ project['tagline'] }}</span>
-            </div>
+        <div class="cv-item">
+            <span class="cv-title"><a href="#hook">{{ project['title'] }}</a></span> — <span>{{ project['tagline'] }}</span>
+        </div>
         {% endfor %}
     </section>
 {% endif %}
