@@ -1,6 +1,22 @@
-<header class="hero is-small is-primary">
-    <div class="hero-body">
-        <p class="title">{{MY_NAME}}</p>
-        <p class="subtitle">{{MY_TAGLINE}}</p>
+<header class="site-header">
+    <div class="site-header-inner">
+        <div class="site-brand">
+            <p class="site-name"><a href="/welcome/index.html">{{MY_NAME}}</a></p>
+            <p class="site-tagline">{{MY_TAGLINE}}</p>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+        <nav class="site-nav" aria-label="Main navigation">
+            <a href="/welcome/index.html">Welcome</a>
+            <a href="/maths-problems/index.html">Maths</a>
+            <a href="/my-setup/index.html">Setup</a>
+            <a href="/skiing/index.html">Skiing</a>
+            <a href="/mental-habits/index.html">Habits</a>
+            <a href="/building-this-website/index.html">Website</a>
+        </nav>
     </div>
+    <hr class="site-header-rule">
 </header>
