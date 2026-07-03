@@ -6,47 +6,49 @@
  * meaning later layers always override earlier ones regardless
  * of selector specificity.
  *
-*/
+ * Layer order: reset → tokens → base → typography → code →
+ *   blockquotes → tables → definition-lists → footnotes → math →
+ *   header-nav → layout → content → page-chrome → toc →
+ *   welcome → cv → math-problems → utilities → responsive → print
+ *
+ * The page-chrome layer also includes the site footer.
+ *
+ * Cascade Layers are a Baseline Widely Available feature (CSS Cascading
+ * and Inheritance Level 5) supported in all modern browsers since
+ * early 2022 (Chrome 99, Firefox 97, Safari 15.4).
+ */
 
 @layer reset, tokens, base, typography, code, blockquotes, tables,
        definition-lists, footnotes, math, header-nav, layout,
        content, page-chrome, toc, welcome, cv, math-problems,
        utilities, responsive, print;
 
-
-/* ==========================================================================
-   @layer reset
-   Purpose: Universal box-sizing reset to the border-box model.
-   Standard: Widely adopted convention popularised by Paul Irish (2011).
-     Ensures padding and border are included in element dimensions,
-     matching how CSS box-sizing is most intuitively understood.
-   ========================================================================== */
-
 @layer reset {
-
+    /* ==========================================================================
+       @layer reset
+       Purpose: Universal box-sizing reset to the border-box model.
+       Standard: Widely adopted convention popularised by Paul Irish (2011).
+         Ensures padding and border are included in element dimensions,
+         matching how CSS box-sizing is most intuitively understood.
+       ========================================================================== */
     *,
     *::before,
     *::after {
         box-sizing: border-box;
     }
-
 }
-
-
-/* ==========================================================================
-   @layer tokens
-   Purpose: Design tokens as CSS custom properties — the single source of
-     truth for colours, spacing, typography, and layout dimensions used
-     across all layers.
-   Notes: Dark mode overrides are co-located with each token group for
-     maintainability. Custom properties cascade through layers via var()
-     so layer order does not affect their resolution; the layer is
-     primarily for structural documentation.
-   Standard: CSS Custom Properties (CSS Variables, Level 1).
-   ========================================================================== */
-
 @layer tokens {
-
+    /* ==========================================================================
+       @layer tokens
+       Purpose: Design tokens as CSS custom properties — the single source of
+         truth for colours, spacing, typography, and layout dimensions used
+         across all layers.
+       Notes: Dark mode overrides are co-located with each token group for
+         maintainability. Custom properties cascade through layers via var()
+         so layer order does not affect their resolution; the layer is
+         primarily for structural documentation.
+       Standard: CSS Custom Properties (CSS Variables, Level 1).
+       ========================================================================== */
     :root {
         --color-bg: #fafaf8;
         --color-text: #1a1a1a;
@@ -74,7 +76,7 @@
         --space-xl: 3rem;
         --space-2xl: 5rem;
 
-        --border-radius: 4px;
+        --border-radius: 8px;
     }
 
     /* Dark mode overrides.
@@ -96,20 +98,16 @@
             --color-selection-text: #e0e0d8;
         }
     }
-
 }
-
-
-/* ==========================================================================
-   @layer base
-   Purpose: Root-level element styles and global pseudo-elements that set
-     the foundation for all subsequent layers.
-   Notes: -webkit-text-size-adjust is a Safari/iOS workaround that
-     prevents the browser from inflating font sizes on orientation change.
-     Standard: text-size-adjust is specified in CSS Text Size Adjustment.
-   ========================================================================== */
-
 @layer base {
+    /* ==========================================================================
+       @layer base
+       Purpose: Root-level element styles and global pseudo-elements that set
+         the foundation for all subsequent layers.
+       Notes: -webkit-text-size-adjust is a Safari/iOS workaround that
+         prevents the browser from inflating font sizes on orientation change.
+         Standard: text-size-adjust is specified in CSS Text Size Adjustment.
+       ========================================================================== */
 
     html {
         scroll-behavior: smooth;
@@ -131,17 +129,14 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer typography
-   Purpose: Base typographic styles for headings, paragraphs, links, lists,
-     horizontal rules, and images. These apply site-wide and can be
-     overridden by more specific component layers.
-   Standard: CSS Fonts Level 4, CSS Text Level 3.
-   ========================================================================== */
-
 @layer typography {
+    /* ==========================================================================
+       @layer typography
+       Purpose: Base typographic styles for headings, paragraphs, links, lists,
+         horizontal rules, and images. These apply site-wide and can be
+         overridden by more specific component layers.
+       Standard: CSS Fonts Level 4, CSS Text Level 3.
+       ========================================================================== */
 
     h1, h2, h3, h4, h5, h6 {
         font-weight: 400;
@@ -193,15 +188,12 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer code
-   Purpose: Styles for inline code and preformatted blocks, including
-     syntax-highlighted code blocks rendered by render-code.js.
-   ========================================================================== */
-
 @layer code {
+    /* ==========================================================================
+       @layer code
+       Purpose: Styles for inline code and preformatted blocks, including
+         syntax-highlighted code blocks rendered by render-code.js.
+       ========================================================================== */
 
     code {
         font-family: var(--font-mono);
@@ -227,17 +219,13 @@
         background: none;
         font-size: 0.875rem;
     }
-
 }
-
-
-/* ==========================================================================
-   @layer blockquotes
-   Purpose: Styles for block-level quotations rendered from Markdown
-     blockquote syntax (> prefix).
-   ========================================================================== */
-
 @layer blockquotes {
+    /* ==========================================================================
+       @layer blockquotes
+       Purpose: Styles for block-level quotations rendered from Markdown
+         blockquote syntax (> prefix).
+       ========================================================================== */
 
     blockquote {
         margin: var(--space-md) 0;
@@ -251,14 +239,11 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer tables
-   Purpose: Styles for data tables rendered from Markdown pipe tables.
-   ========================================================================== */
-
 @layer tables {
+    /* ==========================================================================
+       @layer tables
+       Purpose: Styles for data tables rendered from Markdown pipe tables.
+       ========================================================================== */
 
     table {
         border-collapse: collapse;
@@ -278,15 +263,12 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer definition-lists
-   Purpose: Styles for definition lists (<dl>, <dt>, <dd>) used in
-     structured content like glossaries or metadata listings.
-   ========================================================================== */
-
 @layer definition-lists {
+    /* ==========================================================================
+       @layer definition-lists
+       Purpose: Styles for definition lists (<dl>, <dt>, <dd>) used in
+         structured content like glossaries or metadata listings.
+       ========================================================================== */
 
     dl {
         margin: var(--space-md) 0;
@@ -303,17 +285,14 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer footnotes
-   Purpose: Styles for footnote markup generated by the
-     markdown-it-footnote plugin. The footnotes section is rendered as
-     an <ol> inside a <div class="footnotes"> at the bottom of the page,
-     with superscript <sup> references inline in the text.
-   ========================================================================== */
-
 @layer footnotes {
+    /* ==========================================================================
+       @layer footnotes
+       Purpose: Styles for footnote markup generated by the
+         markdown-it-footnote plugin. The footnotes section is rendered as
+         an <ol> inside a <div class="footnotes"> at the bottom of the page,
+         with superscript <sup> references inline in the text.
+       ========================================================================== */
 
     .footnotes {
         font-size: 0.9rem;
@@ -338,16 +317,13 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer math
-   Purpose: Styles for mathematical content rendered by KaTeX
-     (render-maths.js). Block-level math is centred and horizontally
-     scrollable; inline math inherits the monospace font.
-   ========================================================================== */
-
 @layer math {
+    /* ==========================================================================
+       @layer math
+       Purpose: Styles for mathematical content rendered by KaTeX
+         (render-maths.js). Block-level math is centred and horizontally
+         scrollable; inline math inherits the monospace font.
+       ========================================================================== */
 
     .math {
         font-family: var(--font-mono);
@@ -361,22 +337,19 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer header-nav
-   Purpose: Site-wide header, branding, navigation, and mobile hamburger
-     menu. The header is sticky with a translucent backdrop-blur effect.
-   Notes: -webkit-backdrop-filter is a Safari workaround required for
-     Safari versions < 18 (which dropped the prefix). The solid
-     background-color declaration before the color-mix() declaration
-     serves as a progressive-enhancement fallback for browsers that
-     don't support color-mix().
-   Standard: backdrop-filter (CSS Backdrop Filter Level 1);
-     color-mix() (CSS Color Level 5).
-   ========================================================================== */
-
 @layer header-nav {
+    /* ==========================================================================
+       @layer header-nav
+       Purpose: Site-wide header, branding, navigation, and mobile hamburger
+         menu. The header is sticky with a translucent backdrop-blur effect.
+       Notes: -webkit-backdrop-filter is a Safari workaround required for
+         Safari versions < 18 (which dropped the prefix). The solid
+         background-color declaration before the color-mix() declaration
+         serves as a progressive-enhancement fallback for browsers that
+         don't support color-mix().
+       Standard: backdrop-filter (CSS Backdrop Filter Level 1);
+         color-mix() (CSS Color Level 5).
+       ========================================================================== */
 
     .site-header {
         position: sticky;
@@ -469,19 +442,16 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer layout
-   Purpose: Page-level grid layout that positions the main content area
-     alongside a sticky table-of-contents sidebar. On narrow screens the
-     sidebar is hidden and the layout collapses to a single column.
-   Notes: The .welcome-layout variant is a similar grid but wider, used
-     only on the homepage.
-   Standard: CSS Grid Layout Level 2.
-   ========================================================================== */
-
 @layer layout {
+    /* ==========================================================================
+       @layer layout
+       Purpose: Page-level grid layout that positions the main content area
+         alongside a sticky table-of-contents sidebar. On narrow screens the
+         sidebar is hidden and the layout collapses to a single column.
+       Notes: The .welcome-layout variant is a similar grid but wider, used
+         only on the homepage.
+       Standard: CSS Grid Layout Level 2.
+       ========================================================================== */
 
     .page-layout {
         display: grid;
@@ -504,19 +474,16 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer content
-   Purpose: Styles for the primary Markdown-rendered content area.
-     Headings, paragraphs, and other elements inside .content receive
-     more specific sizing than the base typography layer to suit
-     long-form reading.
-   Notes: scroll-margin-top on heading IDs ensures that in-page anchor
-     links scroll past the sticky header.
-   ========================================================================== */
-
 @layer content {
+    /* ==========================================================================
+       @layer content
+       Purpose: Styles for the primary Markdown-rendered content area.
+         Headings, paragraphs, and other elements inside .content receive
+         more specific sizing than the base typography layer to suit
+         long-form reading.
+       Notes: scroll-margin-top on heading IDs ensures that in-page anchor
+         links scroll past the sticky header.
+       ========================================================================== */
 
     .content {
         max-width: var(--max-width);
@@ -554,15 +521,12 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer page-chrome
-   Purpose: Supplementary page elements that frame the main content —
-     site footer, breadcrumbs, page titles, and draft-status banners.
-   ========================================================================== */
-
 @layer page-chrome {
+    /* ==========================================================================
+       @layer page-chrome
+       Purpose: Supplementary page elements that frame the main content —
+         site footer, breadcrumbs, page titles, and draft-status banners.
+       ========================================================================== */
 
     /* Footer */
     .site-footer {
@@ -625,17 +589,14 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer toc
-   Purpose: Table of contents sidebar — a sticky, hierarchical outline
-     shown alongside the main content on wide screens. Hidden entirely
-     on screens narrower than 960px (see layout layer).
-   Standard: CSS Position Sticky.
-   ========================================================================== */
-
 @layer toc {
+    /* ==========================================================================
+       @layer toc
+       Purpose: Table of contents sidebar — a sticky, hierarchical outline
+         shown alongside the main content on wide screens. Hidden entirely
+         on screens narrower than 960px (see layout layer).
+       Standard: CSS Position Sticky.
+       ========================================================================== */
 
     .page-toc {
         position: sticky;
@@ -698,18 +659,15 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer welcome
-   Purpose: Homepage-specific layout and components: the two-column welcome
-     grid, profile card, pursuits list, and social links.
-   Notes: The welcome sidebar uses position:sticky below the header.
-     On narrow screens the layout collapses to a single column and the
-     profile card image is constrained to 150px.
-   ========================================================================== */
-
 @layer welcome {
+    /* ==========================================================================
+       @layer welcome
+       Purpose: Homepage-specific layout and components: the two-column welcome
+         grid, profile card, pursuits list, and social links.
+       Notes: The welcome sidebar uses position:sticky below the header.
+         On narrow screens the layout collapses to a single column and the
+         profile card image is constrained to 150px.
+       ========================================================================== */
 
     .welcome-layout {
         display: grid;
@@ -799,15 +757,12 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer cv
-   Purpose: Curriculum vitae / résumé page styles — section headings,
-     item layout, and meta information (title, company, dates).
-   ========================================================================== */
-
 @layer cv {
+    /* ==========================================================================
+       @layer cv
+       Purpose: Curriculum vitae / résumé page styles — section headings,
+         item layout, and meta information (title, company, dates).
+       ========================================================================== */
 
     .cv-section {
         margin: var(--space-xl) 0;
@@ -857,53 +812,44 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer math-problems
-   Purpose: Styles specific to the maths problems section — currently just
-     a small-image class for constraining diagram widths.
-   ========================================================================== */
-
 @layer math-problems {
+    /* ==========================================================================
+       @layer math-problems
+       Purpose: Styles specific to the maths problems section — currently just
+         a small-image class for constraining diagram widths.
+       ========================================================================== */
 
     .small-image {
         width: 200px;
     }
 
 }
-
-
-/* ==========================================================================
-   @layer utilities
-   Purpose: Small single-purpose utility classes that should override all
-     component styles. Kept in their own high-precedence layer.
-   ========================================================================== */
-
 @layer utilities {
+    /* ==========================================================================
+       @layer utilities
+       Purpose: Small single-purpose utility classes that should override all
+         component styles. Kept in their own high-precedence layer.
+       ========================================================================== */
 
     .smallcaps {
         font-variant: small-caps;
     }
 
 }
-
-
-/* ==========================================================================
-   @layer responsive
-   Purpose: Responsive overrides that must win over component layers.
-     Two breakpoints:
-     - ≤768px: mobile navigation (hamburger toggle, collapsed nav).
-     - ≤480px: small-screen type scaling for the narrowest devices.
-   Notes: Layout and TOC breakpoints (≤960px) and the welcome sidebar
-     breakpoint (≤768px) are co-located with their respective components
-     in the layout, toc, and welcome layers. Those are lower-precedence
-     layers but still work correctly because the selectors only target
-     their own components.
-   Standard: CSS Media Queries Level 4.
-   ========================================================================== */
-
 @layer responsive {
+    /* ==========================================================================
+       @layer responsive
+       Purpose: Responsive overrides that must win over component layers.
+         Two breakpoints:
+         - ≤768px: mobile navigation (hamburger toggle, collapsed nav).
+         - ≤480px: small-screen type scaling for the narrowest devices.
+       Notes: Layout and TOC breakpoints (≤960px) and the welcome sidebar
+         breakpoint (≤768px) are co-located with their respective components
+         in the layout, toc, and welcome layers. Those are lower-precedence
+         layers but still work correctly because the selectors only target
+         their own components.
+       Standard: CSS Media Queries Level 4.
+       ========================================================================== */
 
     /* Mobile navigation — hamburger toggle and collapsed nav.
        At ≤768px the horizontal nav is hidden and a toggle button appears.
@@ -945,19 +891,16 @@
     }
 
 }
-
-
-/* ==========================================================================
-   @layer print
-   Purpose: Print stylesheet that hides navigation, sidebars, and
-     interactive elements; simplifies colours to black on white; and
-     prevents code blocks from being split across page breaks.
-   Notes: This is the highest-precedence layer, ensuring print rules
-     always override screen styles.
-   Standard: CSS Paged Media Level 3.
-   ========================================================================== */
-
 @layer print {
+    /* ==========================================================================
+       @layer print
+       Purpose: Print stylesheet that hides navigation, sidebars, and
+         interactive elements; simplifies colours to black on white; and
+         prevents code blocks from being split across page breaks.
+       Notes: This is the highest-precedence layer, ensuring print rules
+         always override screen styles.
+       Standard: CSS Paged Media Level 3.
+       ========================================================================== */
 
     @media print {
         body {
