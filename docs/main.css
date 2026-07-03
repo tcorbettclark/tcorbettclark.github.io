@@ -1,725 +1,999 @@
-/* Design tokens */
-:root {
-    --color-bg: #fafaf8;
-    --color-text: #1a1a1a;
-    --color-text-muted: #666;
-    --color-accent: hsl(45, 85%, 45%);
-    --color-accent-subtle: hsl(45, 85%, 93%);
-    --color-border: #e0e0d8;
-    --color-code-bg: hsl(45, 30%, 96%);
-    --color-link: hsl(220, 100%, 45%);
-    --color-link-hover: hsl(220, 100%, 35%);
+/*
+ * main.css — Stylesheet for tcorbettclark.github.io
+ *
+ * Structure is organised using CSS Cascade Layers (@layer).
+ * Layers are declared below from lowest to highest precedence,
+ * meaning later layers always override earlier ones regardless
+ * of selector specificity.
+ *
+*/
 
-    --color-selection-bg: hsl(45, 85%, 85%);
-    --color-selection-text: #1a1a1a;
+@layer reset, tokens, base, typography, code, blockquotes, tables,
+       definition-lists, footnotes, math, header-nav, layout,
+       content, page-chrome, toc, welcome, cv, math-problems,
+       utilities, responsive, print;
 
-    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    --font-mono: "Fira Code", "SF Mono", "Cascadia Code", ui-monospace, monospace;
-    --font-size-base: 1rem;
-    --line-height: 1.65;
-    --max-width: 680px;
 
-    --space-xs: 0.25rem;
-    --space-sm: 0.5rem;
-    --space-md: 1rem;
-    --space-lg: 2rem;
-    --space-xl: 3rem;
-    --space-2xl: 5rem;
+/* ==========================================================================
+   @layer reset
+   Purpose: Universal box-sizing reset to the border-box model.
+   Standard: Widely adopted convention popularised by Paul Irish (2011).
+     Ensures padding and border are included in element dimensions,
+     matching how CSS box-sizing is most intuitively understood.
+   ========================================================================== */
 
-    --border-radius: 4px;
+@layer reset {
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
 }
 
-@media (prefers-color-scheme: dark) {
+
+/* ==========================================================================
+   @layer tokens
+   Purpose: Design tokens as CSS custom properties — the single source of
+     truth for colours, spacing, typography, and layout dimensions used
+     across all layers.
+   Notes: Dark mode overrides are co-located with each token group for
+     maintainability. Custom properties cascade through layers via var()
+     so layer order does not affect their resolution; the layer is
+     primarily for structural documentation.
+   Standard: CSS Custom Properties (CSS Variables, Level 1).
+   ========================================================================== */
+
+@layer tokens {
+
     :root {
-        --color-bg: #1a1a18;
-        --color-text: #e0e0d8;
-        --color-text-muted: #999;
-        --color-accent: hsl(45, 80%, 55%);
-        --color-accent-subtle: hsl(45, 25%, 18%);
-        --color-border: #333;
-        --color-code-bg: hsl(45, 10%, 15%);
-        --color-link: hsl(220, 80%, 65%);
-        --color-link-hover: hsl(220, 80%, 75%);
-    
-        --color-selection-bg: hsl(45, 60%, 30%);
-        --color-selection-text: #e0e0d8;
-    }
-}
+        --color-bg: #fafaf8;
+        --color-text: #1a1a1a;
+        --color-text-muted: #666;
+        --color-accent: hsl(45, 85%, 45%);
+        --color-accent-subtle: hsl(45, 85%, 93%);
+        --color-border: #e0e0d8;
+        --color-code-bg: hsl(45, 30%, 96%);
+        --color-link: hsl(220, 100%, 45%);
+        --color-link-hover: hsl(220, 100%, 35%);
 
-/* Reset */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+        --color-selection-bg: hsl(45, 85%, 85%);
+        --color-selection-text: #1a1a1a;
 
-/* Base */
-html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-}
+        --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        --font-mono: "Fira Code", "SF Mono", "Cascadia Code", ui-monospace, monospace;
+        --font-size-base: 1rem;
+        --line-height: 1.65;
+        --max-width: 680px;
 
-body {
-    margin: 0;
-    font-family: var(--font-body);
-    font-size: var(--font-size-base);
-    line-height: var(--line-height);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-}
+        --space-xs: 0.25rem;
+        --space-sm: 0.5rem;
+        --space-md: 1rem;
+        --space-lg: 2rem;
+        --space-xl: 3rem;
+        --space-2xl: 5rem;
 
-::selection {
-    background-color: var(--color-selection-bg);
-    color: var(--color-selection-text);
-}
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
-    line-height: 1.3;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-sm);
-}
-
-h1 { font-size: 1.75rem; }
-h2 { font-size: 1.4rem; }
-h3 { font-size: 1.2rem; }
-h4 { font-size: 1.05rem; }
-h5, h6 { font-size: 1rem; }
-
-p {
-    margin-top: 0;
-    margin-bottom: var(--space-md);
-}
-
-a {
-    color: var(--color-link);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-}
-
-a:hover {
-    color: var(--color-link-hover);
-}
-
-ul, ol {
-    padding-left: var(--space-lg);
-    margin-top: 0;
-    margin-bottom: var(--space-md);
-}
-
-li {
-    margin-bottom: var(--space-xs);
-}
-
-hr {
-    border: none;
-    border-top: 1px solid var(--color-border);
-    margin: var(--space-lg) 0;
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
-/* Code */
-code {
-    font-family: var(--font-mono);
-    font-size: 0.9em;
-    padding: 0.15em 0.35em;
-    border-radius: var(--border-radius);
-    background-color: var(--color-code-bg);
-}
-
-pre {
-    margin: var(--space-md) 0;
-    padding: var(--space-md);
-    overflow-x: auto;
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius);
-    background-color: var(--color-code-bg);
-    line-height: 1.5;
-}
-
-pre code {
-    padding: 0;
-    border-radius: 0;
-    background: none;
-    font-size: 0.875rem;
-}
-
-/* Blockquotes */
-blockquote {
-    margin: var(--space-md) 0;
-    padding-left: var(--space-md);
-    border-left: 3px solid var(--color-accent);
-    color: var(--color-text-muted);
-}
-
-blockquote p:last-child {
-    margin-bottom: 0;
-}
-
-/* Tables */
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: var(--space-md) 0;
-}
-
-th, td {
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid var(--color-border);
-    text-align: left;
-}
-
-th {
-    font-weight: 600;
-    background-color: var(--color-accent-subtle);
-}
-
-/* Definition lists */
-dl {
-    margin: var(--space-md) 0;
-}
-
-dt {
-    font-weight: 600;
-    margin-top: var(--space-md);
-}
-
-dd {
-    margin-left: var(--space-md);
-    margin-bottom: var(--space-sm);
-}
-
-/* Header and navigation */
-.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background-color: var(--color-bg);
-    background-color: color-mix(in srgb, var(--color-bg) 92%, transparent);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-}
-
-.site-header-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: var(--space-sm) var(--space-md);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-}
-
-.site-brand {
-    min-width: 0;
-}
-
-.site-name {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1.3;
-}
-
-.site-name a {
-    color: var(--color-text);
-    text-decoration: none;
-}
-
-.site-name a:hover {
-    color: var(--color-accent);
-}
-
-.site-tagline {
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-}
-
-.site-header-rule {
-    border: none;
-    border-top: 2px solid var(--color-accent);
-    margin: 0;
-}
-
-/* Nav toggle (mobile hamburger) */
-.nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--space-sm);
-    z-index: 101;
-}
-
-.nav-toggle-bar {
-    display: block;
-    width: 20px;
-    height: 2px;
-    margin: 4px 0;
-    background-color: var(--color-text);
-    border-radius: 1px;
-    transition: transform 0.2s, opacity 0.2s;
-}
-
-/* Navigation links */
-.site-nav {
-    display: flex;
-    gap: var(--space-md);
-    font-size: 0.85rem;
-}
-
-.site-nav a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    white-space: nowrap;
-}
-
-.site-nav a:hover {
-    color: var(--color-accent);
-}
-
-/* Mobile nav */
-@media (max-width: 768px) {
-    .nav-toggle {
-        display: block;
+        --border-radius: 4px;
     }
 
-    .site-nav {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        gap: 0;
-        padding: var(--space-sm) 0;
-        border-top: 1px solid var(--color-border);
+    /* Dark mode overrides.
+       Standard: prefers-color-scheme media query (CSS Media Queries Level 5).
+       Browsers that don't support it will ignore this block entirely. */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --color-bg: #1a1a18;
+            --color-text: #e0e0d8;
+            --color-text-muted: #999;
+            --color-accent: hsl(45, 80%, 55%);
+            --color-accent-subtle: hsl(45, 25%, 18%);
+            --color-border: #333;
+            --color-code-bg: hsl(45, 10%, 15%);
+            --color-link: hsl(220, 80%, 65%);
+            --color-link-hover: hsl(220, 80%, 75%);
+
+            --color-selection-bg: hsl(45, 60%, 30%);
+            --color-selection-text: #e0e0d8;
+        }
     }
 
-    .site-nav-open {
-        display: flex;
+}
+
+
+/* ==========================================================================
+   @layer base
+   Purpose: Root-level element styles and global pseudo-elements that set
+     the foundation for all subsequent layers.
+   Notes: -webkit-text-size-adjust is a Safari/iOS workaround that
+     prevents the browser from inflating font sizes on orientation change.
+     Standard: text-size-adjust is specified in CSS Text Size Adjustment.
+   ========================================================================== */
+
+@layer base {
+
+    html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%; /* Safari/iOS workaround: prevents font-size inflation on orientation change */
     }
-
-    .site-nav a {
-        padding: var(--space-sm) 0;
-    }
-}
-
-/* Footer */
-.site-footer {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: var(--space-lg) var(--space-md);
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    text-align: center;
-}
-
-.site-footer p {
-    margin-bottom: var(--space-xs);
-}
-
-/* Page layout (main + TOC sidebar) */
-.page-layout {
-    display: grid;
-    grid-template-columns: 1fr 220px;
-    gap: var(--space-xl);
-    max-width: 920px;
-    margin: 0 auto;
-    padding: var(--space-md) var(--space-md) var(--space-2xl);
-    align-items: start;
-}
-
-@media (max-width: 960px) {
-    .page-layout {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Main content area */
-.page-main {
-    min-width: 0;
-}
-
-/* Breadcrumb */
-.breadcrumb {
-    margin: 0 0 var(--space-sm);
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-}
-
-.breadcrumb a {
-    color: var(--color-text-muted);
-}
-
-.breadcrumb a:hover {
-    color: var(--color-accent);
-}
-
-.breadcrumb-sep {
-    margin: 0 var(--space-xs);
-    opacity: 0.5;
-}
-
-/* Page title */
-.page-title {
-    font-size: 1.5rem;
-    font-weight: 400;
-    margin-top: 0;
-    margin-bottom: var(--space-lg);
-    padding-bottom: var(--space-sm);
-    border-bottom: 2px solid var(--color-accent);
-}
-
-/* Draft banner */
-.draft-banner {
-    margin-bottom: var(--space-md);
-    padding: var(--space-sm) var(--space-md);
-    border-left: 3px solid var(--color-accent);
-    background-color: var(--color-accent-subtle);
-    font-size: 0.85rem;
-}
-
-.draft-banner a {
-    color: var(--color-text);
-    font-weight: 600;
-}
-
-/* Content area (markdown output) */
-.content {
-    max-width: var(--max-width);
-    line-height: var(--line-height);
-}
-
-.content h1,
-.content h2,
-.content h3 {
-    font-weight: 400;
-}
-
-.content h1 {
-    font-size: 1.5rem;
-}
-
-.content h2 {
-    font-size: 1.3rem;
-    margin-top: var(--space-xl);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.content h3 {
-    font-size: 1.1rem;
-}
-
-/* Headings with id should be linkable */
-.content h1[id],
-.content h2[id],
-.content h3[id],
-.content h4[id] {
-    scroll-margin-top: var(--space-lg);
-}
-
-/* Footnotes (from markdown-it-footnote plugin) */
-.footnotes {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    border-top: 1px solid var(--color-border);
-    margin-top: var(--space-xl);
-    padding-top: var(--space-md);
-}
-
-.footnotes hr {
-    display: none;
-}
-
-.footnotes ol {
-    padding-left: var(--space-lg);
-}
-
-/* Footnote references */
-sup a.footnote-ref {
-    color: var(--color-accent);
-    text-decoration: none;
-    font-weight: 600;
-}
-
-/* Math (KaTeX) */
-.math {
-    font-family: var(--font-mono);
-}
-
-.math.block {
-    display: block;
-    text-align: center;
-    margin: var(--space-md) 0;
-    overflow-x: auto;
-}
-
-/* Draft watermark */
-.draft-watermark {
-    background-image: url("draft-watermark.svg");
-}
-
-/* Utility */
-.smallcaps {
-    font-variant: small-caps;
-}
-
-/* Welcome page layout */
-.welcome-layout {
-    display: grid;
-    grid-template-columns: 1fr 260px;
-    gap: var(--space-xl);
-    max-width: 900px;
-    margin: 0 auto;
-    padding: var(--space-md) var(--space-md) var(--space-2xl);
-    align-items: start;
-}
-
-@media (max-width: 768px) {
-    .welcome-layout {
-        grid-template-columns: 1fr;
-    }
-}
-
-.welcome-content {
-    min-width: 0;
-}
-
-.welcome-sidebar {
-    position: sticky;
-    top: 5rem;
-}
-
-/* Profile card */
-.profile-card {
-    text-align: center;
-}
-
-.profile-card img {
-    width: 100%;
-    max-width: 200px;
-    border-radius: var(--border-radius);
-}
-
-@media (max-width: 768px) {
-    .profile-card img {
-        max-width: unset;
-        width: 150px;
-    }
-}
-
-.profile-heading {
-    font-size: 1rem;
-    font-weight: 600;
-    font-variant: small-caps;
-    margin: var(--space-lg) 0 var(--space-sm);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.pursuits-list {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-}
-
-.pursuits-list li {
-    margin-bottom: var(--space-xs);
-}
-
-.pursuits-list li i {
-    width: 1.5em;
-    text-align: center;
-    color: var(--color-accent);
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-sm);
-    margin-top: var(--space-lg);
-    padding-top: var(--space-sm);
-    border-top: 1px solid var(--color-border);
-}
-
-.social-link {
-    color: var(--color-text-muted);
-    font-size: 1.2rem;
-    text-decoration: none;
-    padding: var(--space-xs);
-}
-
-.social-link:hover {
-    color: var(--color-accent);
-}
-
-/* Maths problems - small images */
-.small-image {
-    width: 200px;
-}
-
-/* CV section styles */
-.cv-section {
-    margin: var(--space-xl) 0;
-}
-
-.cv-section h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    font-variant: small-caps;
-    margin-bottom: var(--space-md);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.cv-item {
-    margin-bottom: var(--space-md);
-}
-
-.cv-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: var(--space-sm);
-}
-
-.cv-title {
-    font-weight: 600;
-}
-
-.cv-time {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-}
-
-.cv-company {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-}
-
-.cv-details {
-    margin-top: var(--space-xs);
-}
-
-.cv-intro {
-    margin-bottom: var(--space-md);
-}
-
-/* Table of contents sidebar */
-.page-toc {
-    position: sticky;
-    top: 5rem;
-    font-size: 0.85rem;
-    line-height: 1.4;
-}
-
-@media (max-width: 960px) {
-    .page-toc {
-        display: none;
-    }
-}
-
-.toc-title {
-    font-weight: 600;
-    font-variant: small-caps;
-    margin: 0 0 var(--space-sm);
-    padding-bottom: var(--space-xs);
-    border-bottom: 1px solid var(--color-border);
-    color: var(--color-text-muted);
-}
-
-.toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.toc-list li {
-    margin-bottom: var(--space-xs);
-}
-
-.toc-h2 {
-    padding-left: 0;
-}
-
-.toc-h3 {
-    padding-left: var(--space-md);
-    font-size: 0.8rem;
-}
-
-.toc-sublist {
-    list-style: none;
-    padding: 0;
-    margin: var(--space-xs) 0 0;
-}
-
-.toc-sublist li {
-    margin-bottom: var(--space-xs);
-}
-
-.toc-list a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-}
-
-.toc-list a:hover {
-    color: var(--color-accent);
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-    h1 { font-size: 1.4rem; }
-    h2 { font-size: 1.2rem; }
-    h3 { font-size: 1.05rem; }
-
-    .page-title { font-size: 1.3rem; }
 
     body {
-        font-size: 0.95rem;
+        margin: 0;
+        font-family: var(--font-body);
+        font-size: var(--font-size-base);
+        line-height: var(--line-height);
+        color: var(--color-text);
+        background-color: var(--color-bg);
     }
+
+    ::selection {
+        background-color: var(--color-selection-bg);
+        color: var(--color-selection-text);
+    }
+
 }
 
-/* Print */
-@media print {
-    body {
-        color: #000;
-        background: #fff;
+
+/* ==========================================================================
+   @layer typography
+   Purpose: Base typographic styles for headings, paragraphs, links, lists,
+     horizontal rules, and images. These apply site-wide and can be
+     overridden by more specific component layers.
+   Standard: CSS Fonts Level 4, CSS Text Level 3.
+   ========================================================================== */
+
+@layer typography {
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 400;
+        line-height: 1.3;
+        margin-top: var(--space-lg);
+        margin-bottom: var(--space-sm);
     }
 
-    .site-header,
-    .site-footer,
-    .breadcrumb,
-    .draft-banner,
-    .page-toc,
-    .nav-toggle {
-        display: none;
-    }
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.4rem; }
+    h3 { font-size: 1.2rem; }
+    h4 { font-size: 1.05rem; }
+    h5, h6 { font-size: 1rem; }
 
-    .page-main,
-    .welcome-layout,
-    .page-layout {
-        max-width: 100%;
-        padding: 0;
-    }
-
-    .page-layout {
-        display: block;
+    p {
+        margin-top: 0;
+        margin-bottom: var(--space-md);
     }
 
     a {
-        color: #000;
-        text-decoration: underline;
+        color: var(--color-link);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+    }
+
+    a:hover {
+        color: var(--color-link-hover);
+    }
+
+    ul, ol {
+        padding-left: var(--space-lg);
+        margin-top: 0;
+        margin-bottom: var(--space-md);
+    }
+
+    li {
+        margin-bottom: var(--space-xs);
+    }
+
+    hr {
+        border: none;
+        border-top: 1px solid var(--color-border);
+        margin: var(--space-lg) 0;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer code
+   Purpose: Styles for inline code and preformatted blocks, including
+     syntax-highlighted code blocks rendered by render-code.js.
+   ========================================================================== */
+
+@layer code {
+
+    code {
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+        padding: 0.15em 0.35em;
+        border-radius: var(--border-radius);
+        background-color: var(--color-code-bg);
     }
 
     pre {
-        border: 1px solid #ccc;
-        page-break-inside: avoid;
+        margin: var(--space-md) 0;
+        padding: var(--space-md);
+        overflow-x: auto;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        background-color: var(--color-code-bg);
+        line-height: 1.5;
     }
+
+    pre code {
+        padding: 0;
+        border-radius: 0;
+        background: none;
+        font-size: 0.875rem;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer blockquotes
+   Purpose: Styles for block-level quotations rendered from Markdown
+     blockquote syntax (> prefix).
+   ========================================================================== */
+
+@layer blockquotes {
+
+    blockquote {
+        margin: var(--space-md) 0;
+        padding-left: var(--space-md);
+        border-left: 3px solid var(--color-accent);
+        color: var(--color-text-muted);
+    }
+
+    blockquote p:last-child {
+        margin-bottom: 0;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer tables
+   Purpose: Styles for data tables rendered from Markdown pipe tables.
+   ========================================================================== */
+
+@layer tables {
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: var(--space-md) 0;
+    }
+
+    th, td {
+        padding: var(--space-sm) var(--space-md);
+        border: 1px solid var(--color-border);
+        text-align: left;
+    }
+
+    th {
+        font-weight: 600;
+        background-color: var(--color-accent-subtle);
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer definition-lists
+   Purpose: Styles for definition lists (<dl>, <dt>, <dd>) used in
+     structured content like glossaries or metadata listings.
+   ========================================================================== */
+
+@layer definition-lists {
+
+    dl {
+        margin: var(--space-md) 0;
+    }
+
+    dt {
+        font-weight: 600;
+        margin-top: var(--space-md);
+    }
+
+    dd {
+        margin-left: var(--space-md);
+        margin-bottom: var(--space-sm);
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer footnotes
+   Purpose: Styles for footnote markup generated by the
+     markdown-it-footnote plugin. The footnotes section is rendered as
+     an <ol> inside a <div class="footnotes"> at the bottom of the page,
+     with superscript <sup> references inline in the text.
+   ========================================================================== */
+
+@layer footnotes {
+
+    .footnotes {
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+        border-top: 1px solid var(--color-border);
+        margin-top: var(--space-xl);
+        padding-top: var(--space-md);
+    }
+
+    .footnotes hr {
+        display: none;
+    }
+
+    .footnotes ol {
+        padding-left: var(--space-lg);
+    }
+
+    sup a.footnote-ref {
+        color: var(--color-accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer math
+   Purpose: Styles for mathematical content rendered by KaTeX
+     (render-maths.js). Block-level math is centred and horizontally
+     scrollable; inline math inherits the monospace font.
+   ========================================================================== */
+
+@layer math {
+
+    .math {
+        font-family: var(--font-mono);
+    }
+
+    .math.block {
+        display: block;
+        text-align: center;
+        margin: var(--space-md) 0;
+        overflow-x: auto;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer header-nav
+   Purpose: Site-wide header, branding, navigation, and mobile hamburger
+     menu. The header is sticky with a translucent backdrop-blur effect.
+   Notes: -webkit-backdrop-filter is a Safari workaround required for
+     Safari versions < 18 (which dropped the prefix). The solid
+     background-color declaration before the color-mix() declaration
+     serves as a progressive-enhancement fallback for browsers that
+     don't support color-mix().
+   Standard: backdrop-filter (CSS Backdrop Filter Level 1);
+     color-mix() (CSS Color Level 5).
+   ========================================================================== */
+
+@layer header-nav {
+
+    .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background-color: var(--color-bg);
+        background-color: color-mix(in srgb, var(--color-bg) 92%, transparent); /* Progressive enhancement: fallback is the solid background above */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px); /* Safari workaround: prefix required for Safari < 18 */
+    }
+
+    .site-header-inner {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: var(--space-sm) var(--space-md);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .site-brand {
+        min-width: 0;
+    }
+
+    .site-name {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .site-name a {
+        color: var(--color-text);
+        text-decoration: none;
+    }
+
+    .site-name a:hover {
+        color: var(--color-accent);
+    }
+
+    .site-tagline {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+    }
+
+    .site-header-rule {
+        border: none;
+        border-top: 2px solid var(--color-accent);
+        margin: 0;
+    }
+
+    /* Hamburger toggle button — visible only on narrow screens.
+       See the responsive layer for the @media rule that shows it. */
+    .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: var(--space-sm);
+        z-index: 101;
+    }
+
+    .nav-toggle-bar {
+        display: block;
+        width: 20px;
+        height: 2px;
+        margin: 4px 0;
+        background-color: var(--color-text);
+        border-radius: 1px;
+        transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .site-nav {
+        display: flex;
+        gap: var(--space-md);
+        font-size: 0.85rem;
+    }
+
+    .site-nav a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .site-nav a:hover {
+        color: var(--color-accent);
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer layout
+   Purpose: Page-level grid layout that positions the main content area
+     alongside a sticky table-of-contents sidebar. On narrow screens the
+     sidebar is hidden and the layout collapses to a single column.
+   Notes: The .welcome-layout variant is a similar grid but wider, used
+     only on the homepage.
+   Standard: CSS Grid Layout Level 2.
+   ========================================================================== */
+
+@layer layout {
+
+    .page-layout {
+        display: grid;
+        grid-template-columns: 1fr 220px;
+        gap: var(--space-xl);
+        max-width: 920px;
+        margin: 0 auto;
+        padding: var(--space-md) var(--space-md) var(--space-2xl);
+        align-items: start;
+    }
+
+    @media (max-width: 960px) {
+        .page-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .page-main {
+        min-width: 0;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer content
+   Purpose: Styles for the primary Markdown-rendered content area.
+     Headings, paragraphs, and other elements inside .content receive
+     more specific sizing than the base typography layer to suit
+     long-form reading.
+   Notes: scroll-margin-top on heading IDs ensures that in-page anchor
+     links scroll past the sticky header.
+   ========================================================================== */
+
+@layer content {
+
+    .content {
+        max-width: var(--max-width);
+        line-height: var(--line-height);
+    }
+
+    .content h1,
+    .content h2,
+    .content h3 {
+        font-weight: 400;
+    }
+
+    .content h1 {
+        font-size: 1.5rem;
+    }
+
+    .content h2 {
+        font-size: 1.3rem;
+        margin-top: var(--space-xl);
+        padding-bottom: var(--space-xs);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .content h3 {
+        font-size: 1.1rem;
+    }
+
+    /* Headings with an id attribute are linkable anchors.
+       scroll-margin-top ensures anchor scrolls clear the sticky header. */
+    .content h1[id],
+    .content h2[id],
+    .content h3[id],
+    .content h4[id] {
+        scroll-margin-top: var(--space-lg);
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer page-chrome
+   Purpose: Supplementary page elements that frame the main content —
+     site footer, breadcrumbs, page titles, and draft-status banners.
+   ========================================================================== */
+
+@layer page-chrome {
+
+    /* Footer */
+    .site-footer {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: var(--space-lg) var(--space-md);
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        text-align: center;
+    }
+
+    .site-footer p {
+        margin-bottom: var(--space-xs);
+    }
+
+    .breadcrumb {
+        margin: 0 0 var(--space-sm);
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+    }
+
+    .breadcrumb a {
+        color: var(--color-text-muted);
+    }
+
+    .breadcrumb a:hover {
+        color: var(--color-accent);
+    }
+
+    .breadcrumb-sep {
+        margin: 0 var(--space-xs);
+        opacity: 0.5;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-top: 0;
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-sm);
+        border-bottom: 2px solid var(--color-accent);
+    }
+
+    .draft-banner {
+        margin-bottom: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+        border-left: 3px solid var(--color-accent);
+        background-color: var(--color-accent-subtle);
+        font-size: 0.85rem;
+    }
+
+    .draft-banner a {
+        color: var(--color-text);
+        font-weight: 600;
+    }
+
+    /* Background watermark for draft pages, referencing an SVG file. */
+    .draft-watermark {
+        background-image: url("draft-watermark.svg");
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer toc
+   Purpose: Table of contents sidebar — a sticky, hierarchical outline
+     shown alongside the main content on wide screens. Hidden entirely
+     on screens narrower than 960px (see layout layer).
+   Standard: CSS Position Sticky.
+   ========================================================================== */
+
+@layer toc {
+
+    .page-toc {
+        position: sticky;
+        top: 5rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    @media (max-width: 960px) {
+        .page-toc {
+            display: none;
+        }
+    }
+
+    .toc-title {
+        font-weight: 600;
+        font-variant: small-caps;
+        margin: 0 0 var(--space-sm);
+        padding-bottom: var(--space-xs);
+        border-bottom: 1px solid var(--color-border);
+        color: var(--color-text-muted);
+    }
+
+    .toc-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .toc-list li {
+        margin-bottom: var(--space-xs);
+    }
+
+    .toc-h2 {
+        padding-left: 0;
+    }
+
+    .toc-h3 {
+        padding-left: var(--space-md);
+        font-size: 0.8rem;
+    }
+
+    .toc-sublist {
+        list-style: none;
+        padding: 0;
+        margin: var(--space-xs) 0 0;
+    }
+
+    .toc-sublist li {
+        margin-bottom: var(--space-xs);
+    }
+
+    .toc-list a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+    }
+
+    .toc-list a:hover {
+        color: var(--color-accent);
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer welcome
+   Purpose: Homepage-specific layout and components: the two-column welcome
+     grid, profile card, pursuits list, and social links.
+   Notes: The welcome sidebar uses position:sticky below the header.
+     On narrow screens the layout collapses to a single column and the
+     profile card image is constrained to 150px.
+   ========================================================================== */
+
+@layer welcome {
+
+    .welcome-layout {
+        display: grid;
+        grid-template-columns: 1fr 260px;
+        gap: var(--space-xl);
+        max-width: 900px;
+        margin: 0 auto;
+        padding: var(--space-md) var(--space-md) var(--space-2xl);
+        align-items: start;
+    }
+
+    @media (max-width: 768px) {
+        .welcome-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .welcome-content {
+        min-width: 0;
+    }
+
+    .welcome-sidebar {
+        position: sticky;
+        top: 5rem;
+    }
+
+    .profile-card {
+        text-align: center;
+    }
+
+    .profile-card img {
+        width: 100%;
+        max-width: 200px;
+        border-radius: var(--border-radius);
+    }
+
+    @media (max-width: 768px) {
+        .profile-card img {
+            max-width: unset;
+            width: 150px;
+        }
+    }
+
+    .profile-heading {
+        font-size: 1rem;
+        font-weight: 600;
+        font-variant: small-caps;
+        margin: var(--space-lg) 0 var(--space-sm);
+        padding-bottom: var(--space-xs);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .pursuits-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+
+    .pursuits-list li {
+        margin-bottom: var(--space-xs);
+    }
+
+    .pursuits-list li i {
+        width: 1.5em;
+        text-align: center;
+        color: var(--color-accent);
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-sm);
+        margin-top: var(--space-lg);
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .social-link {
+        color: var(--color-text-muted);
+        font-size: 1.2rem;
+        text-decoration: none;
+        padding: var(--space-xs);
+    }
+
+    .social-link:hover {
+        color: var(--color-accent);
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer cv
+   Purpose: Curriculum vitae / résumé page styles — section headings,
+     item layout, and meta information (title, company, dates).
+   ========================================================================== */
+
+@layer cv {
+
+    .cv-section {
+        margin: var(--space-xl) 0;
+    }
+
+    .cv-section h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        font-variant: small-caps;
+        margin-bottom: var(--space-md);
+        padding-bottom: var(--space-xs);
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .cv-item {
+        margin-bottom: var(--space-md);
+    }
+
+    .cv-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .cv-title {
+        font-weight: 600;
+    }
+
+    .cv-time {
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+    }
+
+    .cv-company {
+        font-size: 0.9rem;
+        color: var(--color-text-muted);
+    }
+
+    .cv-details {
+        margin-top: var(--space-xs);
+    }
+
+    .cv-intro {
+        margin-bottom: var(--space-md);
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer math-problems
+   Purpose: Styles specific to the maths problems section — currently just
+     a small-image class for constraining diagram widths.
+   ========================================================================== */
+
+@layer math-problems {
+
+    .small-image {
+        width: 200px;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer utilities
+   Purpose: Small single-purpose utility classes that should override all
+     component styles. Kept in their own high-precedence layer.
+   ========================================================================== */
+
+@layer utilities {
+
+    .smallcaps {
+        font-variant: small-caps;
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer responsive
+   Purpose: Responsive overrides that must win over component layers.
+     Two breakpoints:
+     - ≤768px: mobile navigation (hamburger toggle, collapsed nav).
+     - ≤480px: small-screen type scaling for the narrowest devices.
+   Notes: Layout and TOC breakpoints (≤960px) and the welcome sidebar
+     breakpoint (≤768px) are co-located with their respective components
+     in the layout, toc, and welcome layers. Those are lower-precedence
+     layers but still work correctly because the selectors only target
+     their own components.
+   Standard: CSS Media Queries Level 4.
+   ========================================================================== */
+
+@layer responsive {
+
+    /* Mobile navigation — hamburger toggle and collapsed nav.
+       At ≤768px the horizontal nav is hidden and a toggle button appears.
+       The .site-nav-open class is toggled by nav-toggle.js. */
+    @media (max-width: 768px) {
+        .nav-toggle {
+            display: block;
+        }
+
+        .site-nav {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            gap: 0;
+            padding: var(--space-sm) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .site-nav-open {
+            display: flex;
+        }
+
+        .site-nav a {
+            padding: var(--space-sm) 0;
+        }
+    }
+
+    /* Small-screen type scaling for the narrowest devices. */
+    @media (max-width: 480px) {
+        h1 { font-size: 1.4rem; }
+        h2 { font-size: 1.2rem; }
+        h3 { font-size: 1.05rem; }
+
+        .page-title { font-size: 1.3rem; }
+
+        body {
+            font-size: 0.95rem;
+        }
+    }
+
+}
+
+
+/* ==========================================================================
+   @layer print
+   Purpose: Print stylesheet that hides navigation, sidebars, and
+     interactive elements; simplifies colours to black on white; and
+     prevents code blocks from being split across page breaks.
+   Notes: This is the highest-precedence layer, ensuring print rules
+     always override screen styles.
+   Standard: CSS Paged Media Level 3.
+   ========================================================================== */
+
+@layer print {
+
+    @media print {
+        body {
+            color: #000;
+            background: #fff;
+        }
+
+        .site-header,
+        .site-footer,
+        .breadcrumb,
+        .draft-banner,
+        .page-toc,
+        .nav-toggle {
+            display: none;
+        }
+
+        .page-main,
+        .welcome-layout,
+        .page-layout {
+            max-width: 100%;
+            padding: 0;
+        }
+
+        .page-layout {
+            display: block;
+        }
+
+        a {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        pre {
+            border: 1px solid #ccc;
+            page-break-inside: avoid;
+        }
+    }
+
 }
