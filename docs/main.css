@@ -739,10 +739,6 @@
     .social-links {
         display: flex;
         justify-content: center;
-        gap: var(--space-sm);
-        margin-top: var(--space-lg);
-        padding-top: var(--space-sm);
-        border-top: 1px solid var(--color-border);
     }
 
     .social-link {
