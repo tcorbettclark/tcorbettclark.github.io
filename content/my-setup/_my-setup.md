@@ -14,12 +14,13 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 ## Desktop
 
-- Focus behaviour: [AutoRaise](https://github.com/sbmpost/AutoRaise)
 - Launcher (Spotlight replacement): [Raycast](https://www.raycast.com)
+- Sleep control: [Jolt of Caffeine](https://apps.apple.com/gb/app/jolt-of-caffeine/id1437130425?mt=12)
+- Focus behaviour: [AutoRaise](https://github.com/sbmpost/AutoRaise)
 
 ## Programming
 
-- Editor: [Helix](https://helix-editor.com)
+- Editor: [Zed](https://zed.dev)
 - Terminal : [Ghostty](https://ghostty.org)
 - Shell: [Fish](https://fishshell.com)
 - Terminal prompt: [Starship](https://starship.rs)
@@ -35,10 +36,10 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 ## LLMs
 
-- Local models: [Ollama](https://ollama.ai)
-- Remote models: [OpenRouter](https://openrouter.ai)
+- Local models: [Ollama](https://ollama.com)
+- Remote models: [Ollama](https://ollama.com) and [OpenRouter](https://openrouter.ai)
 - Commandline: [LLM](https://llm.datasette.io)
-- Programming: [Pi](https://pi.dev), [Claude](https://code.claude.com/docs), [Aider](https://aider.chat)
+- Programming: [OpenCode](https://opencode.ai) and [Pi](https://pi.dev)
 
 ## Researching and writing
 
