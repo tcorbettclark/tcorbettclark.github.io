@@ -1,17 +1,17 @@
-As a technical person, I have found it productive to spend quality time in 4 distinct activity modes.
-Self-consciously switching between Creating, Thinking, Researching, and Learning, makes progress at every scale - from playing with tiny puzzles and problems, investigating ad-hoc ideas, working on personal or commercial projects, to developing long-standing interests.
-The switching of scale also keeps things fresh and flowing. Giving it the name CTRLS (Create, Think, Research, and Learn at all Scales) helps with personal discipline.
+Over time I have noticed how productive it can be to spend quality time in 4 distinct activity **modes**: Creating, Thinking, Researching, and Learning.
 
-Speaking of discipline, "getting stuff done" involves 3 obvious phases: Intention, Action, and Completion.
-Less obvious are the skills required in each phase.
-If progress stalls, the reason could be due to a deficient skill.
+This seems to work at every **scale**: from playing with tiny puzzles and problems, investigating ad-hoc ideas, working on personal or commercial projects, to developing long-standing interests.
 
-1. *Intention* is about determining precisely what you want to achieve.
-The key skills are discernment, articulation, planning, and confidence.
+Although a bit "cute", it helps to give it a name: CTRLS (Create, Think, Research, and Learn at all Scales).
 
-2. *Action* is where intention meets momentum. The key skills are decisiveness, pro activity, self-regulation, and focus.
-Proceed with imperfect information and course correct.
+Within these modes and scales, progress involves 3 **phases**: Intention, Action, and Completion. Each phase requires different **skills**. If progress stalls, the solution could involve doubling down on the weak skill.
 
-3. *Completion* is where execution produces results.
-The key skills are resourcefulness, rigor, social acuity, and fortitude.
+1. *Intention* is about determining precisely what I want to achieve.
+The key skills seem to be about discernment, articulation, and planning.
 
+2. *Action* is about actually getting things done. The key skills are staying power, self-regulation, and focus.
+It's fine to proceed with imperfect information and course correct.
+
+3. *Completion* is about the "last mile", often taking a disproportionately amount of time. Here the key skills are fortitude, determination, and resourcefulness.
+
+The naming of these modes, phases, and skills helps to stay self-aware and in control. Visualising them as dimensions and progress as a path within that space helps to keep me fresh and productive.
