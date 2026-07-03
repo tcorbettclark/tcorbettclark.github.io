@@ -1,5 +1,12 @@
 <div class="profile-card">
     <img id="photo-of-me" src="me.jpg" alt="My profile picture" />
+    <div class="social-links">
+        {% for ms in MY_SOCIALS %}
+        <a class="social-link" href="{{ ms.url }}" target="_blank" rel="noopener" aria-label="{{ ms.fa_class }}">
+            <i class="fa-brands {{ms.fa_class}}"></i>
+        </a>
+        {% endfor %}
+    </div>
     <h2 class="profile-heading">Pursuits</h2>
     <ul class="pursuits-list">
         {% for interest in MY_INTERESTS %}
@@ -9,11 +16,4 @@
         </li>
         {% endfor %}
     </ul>
-    <div class="social-links">
-        {% for ms in MY_SOCIALS %}
-        <a class="social-link" href="{{ ms.url }}" target="_blank" rel="noopener" aria-label="{{ ms.fa_class }}">
-            <i class="fa-brands {{ms.fa_class}}"></i>
-        </a>
-        {% endfor %}
-    </div>
 </div>
