@@ -58,13 +58,11 @@ Hence there are separate files for each piece of markdown, no "frontmatter" TOML
 
 ## Choice of CSS approach
 
-Having previously used [Bulma](https://bulma.io) (a CSS framework), I decided to write my own CSS from scratch.
+I decided to write my own CSS from scratch, with lots of help from LLMs to generate the initial styles, provide design guidance, document the design system and specific details (e.g. workarounds for particular browsers), and maintain over time (e.g. remove unused styles). 
 
-The primary motivation was to have full control over the design and to understand every line of styling — consistent with the same philosophy that led me to write my own static site generator.
-A secondary motivation was to reduce the total CSS payload and to avoid unused styles.
+The primary motivation was to have full control over the design and to understand every line of styling even though I would not have been able to write it myself - the "CSS world" involves many subtle details as well as constantly evolving.
 
-The result is a single `main.css` file that uses [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) for the entire design system: colours, typography, spacing, and light/dark mode via `prefers-color-scheme`.
-This makes the site easy to maintain and modify, and the dark mode support came at very little additional cost.
+The result is a single `main.css` file that uses [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) for the entire design system: colours, typography, spacing, and light/dark mode via `prefers-color-scheme`. The dark mode support came at very little additional cost. Then by organising in [cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade_layers), I avoid run-time polution regardless of inheritance, and the CSS is structured in semantically named containers (analagous to using functions in code merely to name a collection of logically grouped statements).
 
 I use a system font stack for typography (fast, zero-dependency, native-looking on every platform) and [Font Awesome](https://fontawesome.com) for icons (self-hosted to avoid rendering lag and SRI fragility).
 
