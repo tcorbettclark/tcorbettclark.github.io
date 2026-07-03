@@ -52,13 +52,5 @@ fa_class = "fa-quora"
 url = "https://quora.com/Timothy-Corbett-Clark"
 
 [[MY_SOCIALS]]
-fa_class = "fa-stack-overflow"
-url = "https://stackoverflow.com/users/1980944/timothy-corbett-clark"
-
-[[MY_SOCIALS]]
-fa_class = "fa-bluesky"
-url = "https://bluesky.app/@tcorbettclark"
-
-[[MY_SOCIALS]]
 fa_class = "fa-orcid"
 url = "https://orcid.org/0009-0004-7391-744X"
