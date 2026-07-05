@@ -1,4 +1,4 @@
-{% extends "../_page.html" %}
+{% extends "../_project.html" %}
 
 {% block breadcrumb %}
     {{ super() }}
@@ -6,8 +6,8 @@
     <a href="index.html">Building this website</a>
 {% endblock breadcrumb %}
 
-{% block title %} Agnostic Website Generator - AWG {% endblock title %}
+{% block title %} Configuring DNS {% endblock title %}
 
 {% block page %}
-    {{ "_awg.md" | markdown() }}
+    {{ "_dns.md" | markdown() }}
 {% endblock page %}

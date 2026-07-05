@@ -12,6 +12,7 @@ This makes the choice of web technology explicit, with freedom to upgrade, refac
 - [AWG tool](awg.html) explains what the tool does, what it doesn't do, and how it works;
 - [Content approach](approach.html) provides a systematic walk-through of how I structure the content, my choice of web framework and libraries, how I generate the sitemap, notes to achieve colour consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, etc;
 - The content (primarily markdown files) can be found in the [source repository](https://github.com/tcorbettclark/tcorbettclark.github.io/tree/master/content).
+- I've also written a short guide on [configuring DNS](dns.html).
 
 [^1]: Yes, another one - see [this list](https://jamstack.org/generators/) for example.
 [^2]: As explained later, the strongest coupling comes from the use of Markdown.

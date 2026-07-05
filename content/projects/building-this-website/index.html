@@ -1,0 +1,7 @@
+{% extends "../_project.html" %}
+
+{% block title %} Building this website {% endblock title %}
+
+{% block page %}
+    {{ "_index.md" | markdown() }}
+{% endblock page %}
