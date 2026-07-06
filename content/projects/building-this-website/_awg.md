@@ -33,7 +33,7 @@ Many of these are easy to achieve using the tool's machinery without explicit na
 
 ### Zero config
 
-With the exception of a few command line options to tell the tool where to find the content and put the output, **there is no configuration.
+With the exception of a few command line options to tell the tool where to find the content and put the output, there is no configuration.
 There are no required files or directory structures, and so (degenerately) **the tool will run fine on an empty directory**.
 There is a simple `example/` content directory in the [GitHub repository](https://github.com/tcorbettclark/tcorbettclark.github.io) to demo some of the functionality and provide a learning sandpit to play in.
 

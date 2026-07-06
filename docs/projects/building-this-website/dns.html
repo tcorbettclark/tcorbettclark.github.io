@@ -86,17 +86,25 @@
           </h1>
           <div class="content">
             <p>
-              Configuring DNS is complex and messy due to lots of history and changes in attitude towards security.
+              Configuring DNS is complex and messy due to lots of improvements to the internet over a long time, and an
+              arms race between malevolent misuse and attempts to defend.
             </p>
             <p>
-              This mini-guide covers XXX and the basics of DNS configuration for email.
+              This mini-guide covers XXX-TODO-XXX and the basics of DNS configuration for email. Be prepared for some
+              alphabet soup!
+            </p>
+            <h2>
+              DNS Configuration for XXX-TODO-XXX
+            </h2>
+            <p>
+              TODO
             </p>
             <h2>
               DNS Configuration for Email
             </h2>
             <p>
-              To understand how to configure the relevant DNS records, first we need to understand the basics of how
-              email works.
+              To understand the configuration of the relevant DNS records, it is helpful first to understand the basics
+              of email delivery.
             </p>
             <h3>
               The MUA, MSA, MTA, MDA, and MRA components
@@ -161,21 +169,14 @@
               </li>
             </ol>
             <h3>
-              The email headers and the envelope headers
+              The envelope headers
             </h3>
             <p>
-              Emails have metadata headers at the top. They accompany the message payload throughout its entire
-              lifecycle. Examples include <code>From:</code>, <code>To:</code>, <code>Subject:</code>,
-              <code>Date:</code>, <code>Message-ID:</code>, and <code>DKIM-Signature:</code>.
+              The <strong>envelope headers</strong> are part of the SMTP handshake between MTAs. They only live in
+              memory. But some envelope headers are copied into (differently named) headers in the email (see below).
             </p>
             <p>
-              The protocol layer (SMTP) also involves headers in the “email envelope” which are exchanged between MTAs.
-              The envelope only lives in memory, although some headers in the envelope are copied into (differently
-              named) headers in the email. Example envelope headers include <code>MAIL FROM</code> and <code>RCPT
-              TO</code>.
-            </p>
-            <p>
-              So the envelope headers at the start of the handshake might contain:
+              Example envelope headers are:
             </p>
             <ul>
               <li>
@@ -185,13 +186,20 @@
                 <code>RCPT TO</code> e.g. bob@customer.com
               </li>
             </ul>
+            <h3>
+              The email headers
+            </h3>
             <p>
-              And the email headers might contain::
+              Emails have metadata headers before the body text. They accompany the message payload throughout its
+              entire lifecycle. Examples include <code>From:</code>, <code>To:</code>, <code>Subject:</code>,
+              <code>Date:</code>, <code>Message-ID:</code>, and <code>DKIM-Signature:</code>.
+            </p>
+            <p>
+              Example email headers are:
             </p>
             <ul>
               <li>
-                <code>Return-Path:</code> e.g. marketing@some-company.com (added automatically by the destination MDA
-                from the <code>MAIL FROM</code> envelope header)
+                <code>Return-Path:</code> e.g. marketing@some-company.com
               </li>
               <li>
                 <code>From:</code> e.g. ceo@some-company.com
@@ -201,9 +209,22 @@
               </li>
             </ul>
             <p>
-              An important email header is the <code>Received:</code> header. The various components add to this header
-              as they process and pass around the email. The most recent entry is at the top. The standard template
-              governed by RFC 5321 is:
+              Some headers are created at source by the MUA, and some are added by the MTAs in transit or by the MDA on
+              arrival.
+            </p>
+            <p>
+              The <code>Return-Path:</code> header only exists upon final delivery, when it is added by the MDA (Mail
+              Delivery Agent) just before storage. It is copied from the final <code>MAIL FROM</code> envelope header
+              in the final SMTP transaction with the destination MTA. Usually the <code>MAIL FROM</code> is passed on
+              unchanged down the chain from the original sender. But it can be different, for example when using
+              mailing lists or forwarders (more on this later). The <code>Return-Path:</code> header is only used by
+              the systems under various failures to deliver. A user replying to an email will use the
+              <code>From:</code> header (or the <code>Reply-To:</code> header if set).
+            </p>
+            <p>
+              An important email header is the <code>Received:</code> header. The various components (MRAs, MTAs, MDAs,
+              secure gateways, mailing list managers, proxies etc) add to this header as they process and pass around
+              the email. The most recent entry is at the top. The standard template governed by RFC 5321 is:
             </p>
             <pre><code>Received: from [Sending Server Name/IP] 
           by [Receiving Server Name] 
@@ -213,14 +234,46 @@
           [Timestamp]
 </code></pre>
             <p>
-              Note that different software may use slight variants of this format. Also, some corporate systems may
-              scrub the <code>Received:</code> header e.g. for privacy reasons.
+              Different software may use slight variants of this format. Also, some corporate systems may scrub the
+              <code>Received:</code> header e.g. for privacy reasons.
+            </p>
+            <h3>
+              MX records
+            </h3>
+            <h4>
+              What is it?
+            </h4>
+            <p>
+              A DNS MX record providing a target hostname (destination MTA) along with a priority number. Multiple MX
+              records can be specified, with the lower numbered (higher priority) servers being tried first.
+            </p>
+            <h4>
+              How does it work?
+            </h4>
+            <p>
+              The receiving MTA takes the domain from the <code>RECPT TO</code> in the SMTP envelope, looks up the
+              corresponding MX record in DNS, and uses the target hostname(s) to connect to the destination MTA. Note
+              that for reasons of scale, this isn’t usually point-to-point but will involve relay or gateway MTAs along
+              the way.
+            </p>
+            <h4>
+              Example
+            </h4>
+            <p>
+              An example MX record for the <code>example.com</code> zone might be:
+            </p>
+            <pre><code>example.com. IN MX 10 mail.example.com.
+</code></pre>
+            <p>
+              Note the trailing dots. Without them, the values are interpreted as relative to the zone, i.e.
+              <code>example.com</code> in the example above. Then <code>mail.example.com</code> (without the trailing
+              dot) would be interpreted as <code>mail.example.com.example.com</code>.
             </p>
             <h3>
               SPF (Sender Policy Framework)
             </h3>
             <p>
-              This is the first of the DNS settings relating to email.
+              This is the first of the DNS settings relating to email security.
             </p>
             <h4>
               What is it?
@@ -288,31 +341,112 @@
               <code>&lt;selector&gt;._domainkey.&lt;domain&gt;</code>.
             </p>
             <p>
-              TODO: CNAME or TXT record?
+              The “selector” part is a short string used to refer to a signing server. In a large organisation,
+              multiple servers may all be signing email for the same domain (e.g. for scale, but also by vendors for
+              different purpose such as marketing). Obviously we don’t want to share the same private key, so the
+              selector approach means we can have multiple signing servers each with their own key. Selectors are also
+              used to rotate keys without invalidating existing signatures by creating new keys with new selectors,
+              waiting for DNS propagation to complete, and then removing the old selectors.
             </p>
             <p>
-              The “selector” part is a short string used to name the signing server. In a large organisation, multiple
-              servers may all be signing email for the same domain (e.g. for scale, but also by vendors for different
-              purpose such as marketing). Obviously we don’t want to share the same private key. Further, selectors are
-              used to rotate keys without invalidating existing signatures by creating new keys with new selectors,
-              waiting for DNS propagation to complete, before removing the old selectors.
+              The DKIM record can be in a TXT record or use a CNAME record pointing to a TXT record on another domain
+              managing DKIM on your behalf (e.g. Google Workspace or Mailchip). This also allows the the third party to
+              rotate keys without you needing to update your DNS records.
             </p>
             <h4>
               Example
             </h4>
-            <pre><code>v=DKIM1; k=rsa; p=
+            <p>
+              A 2048 bit RSA key DKIM DNS TXT record called <code>s1._domain.example.com</code> will look like this (it
+              is a single line, but shown split across multiple lines for readability)
+            </p>
+            <pre><code>v=DKIM1; 
+k=rsa;
+p=MIIBIjANBgkqhkiG9...[truncated for brevity]...vQIDAQAB
 </code></pre>
             <p>
-              DKIM-Signature:
+              Breakdown of the fields:
             </p>
-            <pre><code>DKIM-Signature: v=DKIM1; k=rsa; p=
+            <ul>
+              <li>
+                <code>v=DKIM1</code> indicates the version of DKIM being used.
+              </li>
+              <li>
+                <code>k=rsa</code> indicates the key type (RSA).
+              </li>
+              <li>
+                <code>p=</code> is the base64-encoded public key.
+              </li>
+            </ul>
+            <p>
+              The <code>DKIM-Signature</code> email header will look like this:
+            </p>
+            <pre><code>DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=s1;
+     h=from:to:subject:date:message-id:cc;
+     bh=2jmj7l5rSw0yVb/vlWAYkK/YBwk=;
+     b=cXBlcmllbmNl...
 </code></pre>
+            <p>
+              (unlike DNS records, line breaks are allowed in email headers so long as they follow the “Header Folding”
+              rules)
+            </p>
+            <p>
+              The fields break down as follows:
+            </p>
+            <ul>
+              <li>
+                <code>v=1</code> indicates the version of DKIM being used.
+              </li>
+              <li>
+                <code>a=rsa-sha256</code> indicates the algorithm used for signing.
+              </li>
+              <li>
+                <code>c=relaxed/relaxed</code> indicates the canonicalization algorithm used to format the email
+                headers and body before signing.
+              </li>
+              <li>
+                <code>d=example.com</code> is the domain being signed.
+              </li>
+              <li>
+                <code>s=s1</code> is the selector used in the DNS record to find the public key.
+              </li>
+              <li>
+                <code>h=from:to:subject:date:message-id:cc</code> are the headers included in the signature.
+              </li>
+              <li>
+                <code>bh=2jmj7l5rSw0yVb/vlWAYkK/YBwk=</code> is the base64-encoded hash of the canonicalized email body
+                (no headers).
+              </li>
+              <li>
+                <code>b=cXBlcmllbmNl...</code> is the base64-encoded signature of the headers listed in the
+                <code>h=</code> field and the <code>bh=</code> string.
+              </li>
+            </ul>
+            <p>
+              The <code>h</code> field can contain duplicates, e.g.
+              <code>h=from:from:to:subject:date:message-id:cc</code>, even when there is only a single
+              <code>From</code> header in the email. This approach detects “header injection” attacks, when a malicious
+              actor adds duplicate headers to an email to trick the recipient into thinking the email came from a
+              different domain. This works because the signing algorithm includes missing headers as nulls in the hash.
+            </p>
+            <p>
+              Note that altered headers causes the signature to fail verification. Altered body content will pass the
+              signature verification because it uses the <code>bh=</code> value, but the hash of the body will be
+              different. This is still considered an overall DKIM verification failure.
+            </p>
             <h4>
               Weakness
             </h4>
             <p>
-              DKIM prooves that a domain signed the message, but it does not prove that the signing domains matches the
-              domain the human sees (e.g. from the <code>From:</code>: header).
+              DKIM proves that the original domain signed the message, but it does not prove that the signing domain
+              matches the domain seen by humans (e.g. in the <code>From:</code>: header). An attacker could sign an
+              email from a domain that is a different from the domain in the <code>From:</code> header. In other words,
+              the domain in the <code>d=</code> field does not have to match the domain in the <code>From:</code>
+              header for the DKIM verification to pass.
+            </p>
+            <p>
+              Also, DKIM gives a false negative in the case of valid email body alteration, such as a mailing list
+              adding a footer or a security gateway cleaning an email.
             </p>
             <h3>
               DMARC (Domain-based Message Authentication, Reporting, and Conformance)
@@ -330,38 +464,86 @@
               <li>provides a policy on what to do if an email fails DMARC alignment.
               </li>
             </ul>
+            <p>
+              Alignment can be strict (exact match of domain in the DKIM <code>d=</code> field and the email
+              <code>From:</code> header) or relaxed (subdomain match e.g. <code>d=mail.yourbank.com</code> aligns with
+              <code>From: yourbank.com</code>). The default is relaxed alignment.
+            </p>
             <h4>
               How does it work?
             </h4>
             <p>
-              A DNS TXT recortd (<code>_dmarc.&lt;domain&gt;</code>) specifies the policy for email delivery. When a
+              A DNS TXT record (<code>_dmarc.&lt;domain&gt;</code>) specifies the policy for email delivery. When a
               receiving email server checks for DMARC alignment, it uses this policy to determine if or how to report
               failures to the domain owner.
             </p>
             <h4>
               Example
             </h4>
-            <pre><code>v=DMARC1; p=none; rua=mailto:
+            <p>
+              A typical DNS TXT <code>_dmarc.&lt;domain&gt;</code> record is as follows (actually one line, but split
+              here for readability):
+            </p>
+            <pre><code>v=DMARC1;
+p=quarantine;
+pct=100;
+rua=mailto:dmarc-reports@example.com;
+ruf=mailto:dmarc-failures@example.com;
+aspf=r;
+adkim=s
 </code></pre>
+            <p>
+              The fields break down as follows:
+            </p>
+            <ul>
+              <li>
+                <code>v=DMARC1</code> indicates the protocol version (mandatory, must be first tag, must be uppercase)
+              </li>
+              <li>
+                <code>p=quarantine</code> indicates the policy for failed DMARC validation: none (monitor only),
+                quarantine (spam folder), or reject (block)
+              </li>
+              <li>
+                <code>pct=100</code> indicates the percentage of failing messages the policy applies to (default 100)
+              </li>
+              <li>
+                <code>rua=mailto:...</code> indicates where receivers send daily aggregate reports (optional but
+                recommended)
+              </li>
+              <li>
+                <code>ruf=mailto:...</code> indicates where receivers send per-message forensic reports (optional,
+                often unsupported due to privacy regulations)
+              </li>
+              <li>
+                <code>aspf=r</code> indicates SPF alignment strictness: r (relaxed, allows subdomain matches) or s
+                (strict, exact match)
+              </li>
+              <li>
+                <code>adkim=r</code> indicates DKIM alignment strictness: r (relaxed, allows subdomain matches) or s
+                (strict, exact match)
+              </li>
+            </ul>
+            <p>
+              Both DKIM and SPF aligment compare against the <code>From:</code> email header. DKIM takes the domain
+              from the <code>d=</code> tag in the DKIM signature, while SPF takes the domain from the <code>MAIN
+              FROM</code> envelope header (or equivalently, the <code>Return-Path:</code> email header).
+            </p>
+            <h4>
+              Weakness
+            </h4>
+            <p>
+              Inherits the weakness of DKIM - giving false negatives in the case of valid email body changes.
+            </p>
             <h3>
               Sender Rewriting Scheme (SRS) and Authenticated Received Chain (ARC)
             </h3>
             <p>
-              To understand SRS and ARC, it’s helpful to first understand how <code>Return-Path:</code> email header.
-            </p>
-            <p>
-              The <code>Return-Path:</code> header does not exist until final delivery. It is added by the MDA (Mail
-              Delivery Agent) just before storage. It is taken from the final <code>MAIL FROM</code> envelope header in
-              the SMTP transaction, which was passed along from MTA to MTA. Usually the <code>MAIL FROM</code> is
-              unchanged down the chain from the original sender. But it can be different, for example when using
-              mailing lists or forwarders.
-            </p>
-            <p>
-              Forwarders will use a Sender Rewriting Scheme (SRS) protocol so that the SPF check passes for the
-              handshake from the forwarder to the next MTA. Without it, the receiever would reject the email because
-              the forwarder is not authorized to send on behalf of the original sender. SRS rewrites the <code>MAIL
-              FROM</code> header to a temporary address that passes the SPF check, so that the next MTA can verify the
-              handshake.
+              Although it does not affect any further DNS settings, the above SPF+DKIM+DMARC does not work with
+              forwarders. This is where SRS and ARC come in. Forwarders will use a Sender Rewriting Scheme (SRS)
+              protocol so that the SPF check passes for the handshake from the forwarder to the next MTA. Without it,
+              the receiever would reject the email because the forwarder is not authorized to send on behalf of the
+              original sender. SRS rewrites the <code>MAIL FROM</code> header to a temporary address that passes the
+              SPF check, so that the next MTA can verify the handshake.
             </p>
             <p>
               The ARC header is added by the MDA after SRS rewriting, and is used to verify the integrity of the email
@@ -370,33 +552,20 @@
             <h4>
               Example
             </h4>
-            <pre><code>ARC-Message-Signature: 
+            <p>
+              TODO: SRS
+            </p>
+            <p>
+              Example ARC email header:
+            </p>
+            <pre><code>ARC-Message-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=arc; t=1628712000;
+    h=from:to:subject:date:message-id:arc-authentication-results;
+    bh=;
+    b=
 </code></pre>
-            <hr />
-            <h2>
-              TODO
-            </h2>
-            <h3>
-              How does DKIM work if MTAs add headers to the email? Won’t this break the signature?
-            </h3>
             <p>
-              TODO
-            </p>
-            <h3>
-              How does all this solves the email forwarding problem?
-            </h3>
-            <p>
-              TODO
-            </p>
-            <p>
-              What should a forwarding email do with the <code>Return-Path:</code> header? Does reply to email use it
-              or the <code>From:</code> header?
-            </p>
-            <p>
-              MX records?!
-            </p>
-            <p>
-              RECPT TO?
+              Return to question about email body being changed, perhaps legitimately by MTD stripping dodgy
+              attachments or adding extra content with a corporate message.
             </p>
           </div>
         </article>

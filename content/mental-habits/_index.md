@@ -1,4 +1,4 @@
-Over time I have noticed how productive it can be to spend quality time in 4 distinct activity **modes**: Creating, Thinking, Researching, and Learning.
+Over time I have noticed how productive it can be to spend deliberate time in 4 distinct activity **modes**: Creating, Thinking, Researching, and Learning.
 
 This seems to work at every **scale**: from playing with tiny puzzles and problems, investigating ad-hoc ideas, working on personal or commercial projects, to developing long-standing interests.
 
@@ -14,4 +14,4 @@ It's fine to proceed with imperfect information and course correct.
 
 3. *Completion* is about the "last mile", often taking a disproportionately amount of time. Here the key skills are fortitude, determination, and resourcefulness.
 
-The naming of these modes, phases, and skills helps to stay self-aware and in control. Visualising them as dimensions and progress as a path within that space helps to keep me fresh and productive.
+The naming of these modes, phases, and skills helps me stay self-aware and in control. Imagining them as dimensions and progress as a path within that space helps to keep me empowered and motivated: there is always something I can do to make progress.
