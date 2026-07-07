@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
             var list = document.createElement("ul");
             list.className = "toc-list";
             var lastH2 = null;
+            var headingLiMap = [];
             for (var i = 0; i < headings.length; i++) {
                 var h = headings[i];
                 if (!h.id) {
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 a.href = "#" + h.id;
                 a.textContent = h.textContent;
                 li.appendChild(a);
+                headingLiMap.push({ heading: h, li: li });
                 if (h.tagName === "H3" && lastH2) {
                     var subList = lastH2.querySelector("ul");
                     if (!subList) {
@@ -36,8 +38,67 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
             toc.appendChild(list);
+            initScrollSpy(headingLiMap);
         } else {
             toc.style.display = "none";
         }
     }
 });
+
+function initScrollSpy(headingLiMap) {
+    var currentActive = null;
+
+    function setActive(li) {
+        if (currentActive === li) return;
+        if (currentActive) currentActive.classList.remove("toc-active");
+        li.classList.add("toc-active");
+        currentActive = li;
+    }
+
+    var scrollOffsetRem = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--scroll-offset")) || 5;
+    var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+    var scrollOffsetPx = Math.round(scrollOffsetRem * rootFontSize) + 5;
+
+    function updateActiveHeading() {
+        var activeLi = null;
+        for (var i = 0; i < headingLiMap.length; i++) {
+            if (headingLiMap[i].heading.getBoundingClientRect().top <= scrollOffsetPx) {
+                activeLi = headingLiMap[i].li;
+            }
+        }
+        if (activeLi) {
+            setActive(activeLi);
+            var link = activeLi.querySelector("a");
+            if (link) {
+                var hash = link.getAttribute("href");
+                if (hash && hash.charAt(0) === "#" && location.hash !== hash) {
+                    history.replaceState(null, "", hash);
+                }
+            }
+        }
+    }
+
+    var observer = new IntersectionObserver(function () {
+        updateActiveHeading();
+    }, {
+        rootMargin: "-" + scrollOffsetPx + "px 0px -60% 0px",
+        threshold: 0
+    });
+
+    for (var m = 0; m < headingLiMap.length; m++) {
+        observer.observe(headingLiMap[m].heading);
+    }
+
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(function () {
+                updateActiveHeading();
+                ticking = false;
+            });
+        }
+    }, { passive: true });
+
+    updateActiveHeading();
+}
