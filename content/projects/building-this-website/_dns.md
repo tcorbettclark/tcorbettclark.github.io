@@ -5,8 +5,8 @@ Configuring DNS is complex and messy due to
 - the need to keep operating through these changes; and
 - an arms race between malevolent misuse and attempts to defend.
 
-My aim here is to explain enough to understand the DNS settings needed for a website with email.
-I try not to get too bogged down in the multifarious edge cases, but still cover those areas which confused me initially, such as: _What's going on the with the trailing dot? Why can't there be muliple CNAME records? Do we need to quote the value of a TXT record, and why? Why doesn't changing the email headers during transit break DKIM signatures?_.
+My aim here is to systematically explain enough to understand the DNS settings needed for a website with email.
+I try not to get too bogged down in the multifarious edge cases, but still cover those areas which confused me initially, such as: _What's going on the `@` or the trailing dot on domains? Why can't there be muliple CNAME records? Do we need to quote the value of a TXT record, and why? Why do we have SPF, DKIM, and DMARC records? Why doesn't changing the email headers during transit break DKIM signatures?_.
 
 ## DNS for website content
 
