@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     createHTML: (input) => DOMPurify.sanitize(input, {RETURN_TRUSTED_TYPE: false}),
   });
   document.querySelectorAll("pre code").forEach((el) => {
-    formatted_code = hljs.highlightAuto(el.textContent);
+    let language = (el.getAttribute("class") ?? "language-text").replace("language-", "");
+    let formatted_code = hljs.highlight(el.textContent, {language});
     el.innerHTML = policy.createHTML(formatted_code.value);
   });
 });
