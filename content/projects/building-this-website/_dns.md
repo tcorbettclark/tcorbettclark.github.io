@@ -5,7 +5,8 @@ Configuring DNS is complex and messy due to
 - the need to keep operating through these changes; and
 - an arms race between malevolent misuse and attempts to defend.
 
-My aim here is to explain enough to understand the DNS settings needed for a website with email, but without getting too bogged down in the multifarious edge cases.
+My aim here is to explain enough to understand the DNS settings needed for a website with email.
+I try not to get too bogged down in the multifarious edge cases, but still cover those areas which confused me initially, such as: _What's going on the with the trailing dot? Why can't there be muliple CNAME records? Do we need to quote the value of a TXT record, and why? Why doesn't changing the email headers during transit break DKIM signatures?_.
 
 ## DNS for website content
 
@@ -43,7 +44,7 @@ These rules about the `@` and trailing dots apply to all DNS record types, not j
 
 ### CNAME records
 
-A DNS `CNAME` record is a "DNS alias" to direct a lookup to another domain.
+A DNS `CNAME` record is a "DNS alias" to redirect a lookup to another domain.
 For example,
 ```
 www.corbettclark.com. CNAME corbettclark.com
@@ -60,7 +61,7 @@ For example,
 _github-pages-challenge-<username>.example.com. TXT <some string provided by GitHub>
 ```
 
-To use GitHub Pages as I do on this website, [follow these instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) to configure the appropriate `A` and `CNAME` records.
+To use GitHub Pages to host content as I do on this website, [follow these instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
 
 ### Google
 
@@ -413,7 +414,7 @@ DNSSEC is configured by signing your zone and publishing DS records via your reg
 
 ## A complete example
 
-Here are the essential DNS records for this website (with email).
+Here are the essential DNS records with annotations for this website (with email).
 
 ### Website
 
