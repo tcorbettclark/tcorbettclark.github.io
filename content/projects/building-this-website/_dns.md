@@ -7,9 +7,44 @@ Configuring DNS is complex and messy due to
 
 My aim here is to explain enough to understand the DNS settings needed for a website with email, but without getting too bogged down in the multifarious edge cases.
 
-## DNS for XXX-TODO-XXX
+## DNS for website content
 
-TODO
+This is the most common DNS configuration, and involves the `A` and `CNAME` records needed to resolve the domain name to an IP address.
+
+For example,
+```
+@ A 188.166.138.147
+www A 188.166.138.147
+```
+
+The `@` record is the root domain and the `www` record is a subdomain.
+Both resolve to the same IP address hosting the website contents.
+
+### GitHub
+
+To prove to GitHub that you own the domain, you need to add a `TXT` record for the root domain.
+For example,
+```
+_github-pages-challenge-<username> TXT <some string provided by GitHub>
+```
+
+To use GitHub Pages as I do on this website, [follow these instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) to configure the appropriate `A` and `CNAME` records.
+
+### Google
+
+To prove to Google that you own the domain and hence unlock use of the [Google search console](https://search.google.com/search-console), you need to add a `TXT` record for the root domain.
+For example:
+```
+@ TXT google-site-verification=<some string provided by Google>
+```
+
+### Apple
+
+To prove to Apple that you own the domain e.g. to use custom email domains, you need to add a `TXT` record for the root domain. 
+For example:
+```
+@ TXT apple-domain=<some string provided by Apple>
+```
 
 ## DNS for Email
 
