@@ -413,21 +413,35 @@ DNSSEC is configured by signing your zone and publishing DS records via your reg
 
 ## A complete example
 
-Here are the essential DNS records for this website:
+Here are the essential DNS records for this website (with email).
+
+### Website
 
 {.table-sm}
 | Type | Name | Value | Description |
 |------|------|-------|-|
+| CNAME | www | corbettclark.com | Redirect to the main domain |
 | A | @ | 185.199.108.153 | GitHub Pages |
 | A | @ | 185.199.109.153 | GitHub Pages |
 | A | @ | 185.199.110.153 | GitHub Pages |
 | A | @ | 185.199.111.153 | GitHub Pages |
-| CNAME | sig1._domainkey | sig1.dkim.corbettclark.com.at.icloudmailadmin.com | DKIM for outbound Apple email |
-| CNAME | www | corbettclark.com | Redirect to the main domain |
+
+### Proof of Ownership
+
+{.table-sm}
+| Type | Name | Value | Description |
+|------|------|-------|-|
+| TXT | _github-pages-challenge-tcorbettclark | 06641c751f43ce63675aeb4e0f2e7c | Verify ownership for GitHub |
+| TXT | @ | google-site-verification=ZH-EAeAUJNCippUlct13h5H5gwloTQVM5xDVu42tSgI | Verify ownership for Google |
+| TXT | @ | apple-domain=pVgsR3iHhOa4Hw46 | Verify ownership for Apple |
+
+### Email
+
+{.table-sm}
+| Type | Name | Value | Description |
+|------|------|-------|-|
 | MX | @ | mx01.mail.icloud.com (10) | MX record for inbound Apple email |
 | MX | @ | mx02.mail.icloud.com (10) | MX record for inbound Apple email |
-| TXT | @ | apple-domain=pVgsR3iHhOa4Hw46 | Verify ownership for Apple |
 | TXT | @ | v=spf1 include:icloud.com ~all | SPF for outbound Apple email |
-| TXT | @ | google-site-verification=ZH-EAeAUJNCippUlct13h5H5gwloTQVM5xDVu42tSgI | Verify ownership for Google |
+| CNAME | sig1._domainkey | sig1.dkim.corbettclark.com.at.icloudmailadmin.com | DKIM for outbound Apple email |
 | TXT | _dmarc | v=DMARC1; p=quarantine | DMARC record for outbound Apple Mail |
-| TXT | _github-pages-challenge-tcorbettclark | 06641c751f43ce63675aeb4e0f2e7c | Verify ownership for GitHub |
