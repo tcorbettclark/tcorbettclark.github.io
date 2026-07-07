@@ -11,11 +11,15 @@ My aim here is to explain enough to understand the DNS settings needed for a web
 
 This is the most common DNS configuration, and involves the `A` and `CNAME` records needed to resolve the domain name to an IP address.
 
+### A records
+
+The DNS `A` record maps a domain name to an IP address.
+
 For example,
 ```
 @ A 188.166.138.147
 www.example.com. A 188.166.138.147
-blog A 123.456.789.123
+blog A 198.51.100.1
 ```
 
 The first column (`@`, `www.example.com.`, `blog`) represents the domain name or subdomain being configured.
@@ -32,26 +36,28 @@ So the above example could have been written as:
 ```
 example.com. A 188.166.138.147
 www.example.com. A 188.166.138.147
-blog.example.com A 123.456.789.123
+blog.example.com A 198.51.100.1
 ```
 
 These rules about the `@` and trailing dots apply to all DNS record types, not just the A records.
 
-A CNAME is a "DNS alias" to direct a lookup to another domain.
+### CNAME records
+
+A DNS `CNAME` record is a "DNS alias" to direct a lookup to another domain.
 For example,
 ```
 www.corbettclark.com. CNAME corbettclark.com
 ```
 
 This indirection applies to all DNS record types, not just the A records.
-So if a CNAME exists for a hostname, no other records for that hostname can be defined.
+So if a CNAME exists for a hostname, essentially no other records for that hostname can be defined.
 
 ### GitHub
 
-To prove to GitHub that you own the domain, you need to add a `TXT` record for the root domain.
+To prove to GitHub that you own the domain, you need to add a `TXT` record whose hostname is `_github-pages-challenge-<username>.<your-domain>`.
 For example,
 ```
-_github-pages-challenge-<username> TXT <some string provided by GitHub>
+_github-pages-challenge-<username>.example.com. TXT <some string provided by GitHub>
 ```
 
 To use GitHub Pages as I do on this website, [follow these instructions](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site) to configure the appropriate `A` and `CNAME` records.
@@ -69,7 +75,7 @@ For example:
 To prove to Apple that you own the domain e.g. to use custom email domains, you need to add a `TXT` record for the root domain. 
 For example:
 ```
-@ TXT apple-domain=<some string provided by Apple>
+@ TXT apple-domain-verification=<some string provided by Apple>
 ```
 
 ## DNS for Email
@@ -148,7 +154,7 @@ Received: from [Sending Server Name/IP]
 Different software may use slight variants of this format.
 Also, some corporate systems may scrub the `Received:` header e.g. for privacy reasons.
 
-### MX record
+### MX records
 
 DNS MX records are the address book for email delivery.
 
@@ -159,7 +165,7 @@ Multiple MX records can be specified, with the lower numbered (higher priority) 
 
 #### How does it work?
 
-The receiving MTA takes the domain from the `RECPT TO` in the SMTP envelope, looks up the corresponding MX record in DNS, and uses the target hostname(s) to connect to the destination MTA. Note that for reasons of scale, this isn't usually point-to-point but will involve relay or gateway MTAs along the way.
+The receiving MTA takes the domain from the `RCPT TO` in the SMTP envelope, looks up the corresponding MX record in DNS, and uses the target hostname(s) to connect to the destination MTA. Note that for reasons of scale, this isn't usually point-to-point but will involve relay or gateway MTAs along the way.
 
 #### Example
 
@@ -169,6 +175,8 @@ An example MX record for the `example.com` zone might be:
 ```
 
 This means email for the `example.com` domain should be delivered to `mail.example.com` with priority 10.
+
+If no MX records exist for a domain, MTAs fall back to using the domain's A record (RFC 5321).
 
 ### SPF
 
@@ -195,7 +203,7 @@ Breaking this down:
 - `v=spf1` - The version of the SPF record.
 - `ip4:192.0.2.0/24` - Allows IPs in the 192.0.2.0/24 range.
 - `include:_spf.google.com` - Includes the Google SPF record.
-- `~all` - Allow even if the sender's IP does not match the record, but mark with a SoftFail flag in the `Received-SPF` email header.
+- `~all` - Accept the message but flag it as probably unauthorized (SoftFail) in the `Received-SPF` email header; the sender's IP does not match the record.
 
 Note that in the underlying zone file, the DNS TXT value must be quoted because the file uses a format based upon space-separated columns.
 Missing quotes causes the spaces in the TXT value to be treated as different columns.
@@ -264,9 +272,8 @@ The `h` field can contain duplicates, e.g. `h=from:from:to:subject:date:message-
 This approach detects "header injection" attacks, when a malicious actor adds duplicate headers to an email to trick the recipient into thinking the email came from a different domain.
 The duplicate field approach works because the signing algorithm uses nulls for missing headers in the hash.
 
-Note that altered headers causes the signature to fail verification.
-Altered *body* content will still pass because signature verification uses the `bh=` value, but the hash of the body will be different.
-But this is still considered an overall DKIM verification failure.
+Note that altered headers cause the signature to fail verification.
+Altered *body* content will also cause verification failure because the recomputed body hash will not match the `bh=` value stored in the signature.
 
 #### Weakness
 
@@ -307,7 +314,7 @@ pct=100;
 rua=mailto:dmarc-reports@example.com;
 ruf=mailto:dmarc-failures@example.com;
 aspf=r;
-adkim=s
+adkim=r
 ```
 
 The fields break down as follows:
@@ -360,8 +367,8 @@ SRS0 = <Signature> = <Timestamp> = <Original Domain> = <Original Local-Part> @ f
 
 The fields break down as follows:
 - `SRS0`: The protocol tag indicating this is a primary forward.
-- `<Signature>`: A small, unique cryptographic hash (typically the first 4 characters of an HMAC-SHA1 or HMAC-SHA256 token). This hash is generated by combining a secret key known only to the forwarding server with the timestamp, original domain, and original local-part.
-- `<Timestamp>`: A cyclic, time-encrypted string indicating when the rewrite happened (usually tracking days since an epoch).
+- `<Signature>`: A small, unique cryptographic hash (typically the first 4 characters of a base64-encoded HMAC-SHA1 token). This hash is generated by combining a secret key known only to the forwarding server with the timestamp, original domain, and original local-part.
+- `<Timestamp>`: A cyclic, base-32-encoded day counter (2 characters) indicating when the rewrite happened (Unix time / 86400 mod 2^10, giving a ~3.5 year cycle).
 - `<Original Domain>` & `<Original Local-Part>`: The complete data needed to reconstruct the original sender address.
 
 ### ARC
@@ -380,10 +387,20 @@ When the destination MTA receives the email, it sees a DMARC failure.
 However, instead of instantly rejecting the mail, it looks for the ARC headers.
 If these verify ok and the MTA trusts the intermediaries, it overrides the DMARC failure and delivers the mail to the MDA.
 
+## DNS propagation and TTL
 
-<!--
-TODO:
-- No DNS propagation/TTL discussion: DNS changes take time to propagate, which is critical when configuring DNS records (especially for DKIM key rotation, mentioned on line 212).
-- No PTR/rDNS records: Reverse DNS is important for email deliverability but is not mentioned.
-- No DNSSEC: DNSSEC is relevant to DNS security for email but is omitted.
--->
+Every DNS record has a Time To Live (TTL) value (in seconds) that tells caching resolvers how long to keep the record before re-fetching it.
+This means changes to DNS records can take up to the TTL duration to propagate across the internet.
+This is especially important for DKIM key rotation: you should publish the new key under a new selector, wait at least the TTL of the old record, and only then remove the old selector.
+
+## PTR (reverse DNS)
+
+A PTR record maps an IP address back to a hostname (the reverse of an A record).
+Many receiving MTAs reject or penalise email from IPs that lack a matching PTR record, so reverse DNS is important for email deliverability.
+PTR records are configured by the owner of the IP address (usually your hosting provider), not in your domain's DNS zone.
+
+## DNSSEC
+
+DNSSEC adds cryptographic signatures to DNS records, allowing resolvers to verify that responses have not been tampered with.
+For email, DNSSEC strengthens the chain of trust for DKIM and DMARC lookups: without it, an attacker who can forge DNS responses could substitute their own public key or policy record.
+DNSSEC is configured by signing your zone and publishing DS records via your registrar, but adoption remains limited.
