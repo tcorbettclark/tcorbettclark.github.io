@@ -82,6 +82,8 @@
         --space-xl: 3rem;
         --space-2xl: 5rem;
 
+        --scroll-offset: 5rem;
+        --content-scroll-offset: 30rem;
         --border-radius: 8px;
     }
 
@@ -492,6 +494,7 @@
     .content {
         max-width: var(--max-width);
         line-height: var(--line-height);
+        padding-bottom: calc(100vh - var(--content-scroll-offset));
     }
 
     .content h2 {
@@ -501,12 +504,15 @@
     }
 
     /* Headings with an id attribute are linkable anchors.
-       scroll-margin-top ensures anchor scrolls clear the sticky header. */
+       scroll-margin-top ensures anchor scrolls clear the sticky header
+       and must match the IntersectionObserver rootMargin top offset
+       used by the TOC scroll-spy in toc.js. Both read the same
+       --scroll-offset token from :root. */
     .content h1[id],
     .content h2[id],
     .content h3[id],
     .content h4[id] {
-        scroll-margin-top: var(--space-lg);
+        scroll-margin-top: var(--scroll-offset);
     }
 
     /* Table styles e.g. in Markdown */
@@ -653,6 +659,13 @@
 
     .toc-list a:hover {
         color: var(--color-accent);
+    }
+
+    .toc-active > a {
+        color: var(--color-accent);
+        font-weight: 600;
+        border-left: 2px solid var(--color-accent);
+        padding-left: 0.4rem;
     }
 
 }
