@@ -86,17 +86,17 @@ To understand the configuration of the relevant DNS records for email, it is hel
 
 Email creation, transmission, and delivery involves several components, each with a specific role:
 
-- The Mail User Agent (MUA) is the email client, such as Outlook or Gmail on the user's phone.
+- The Mail User Agent (**MUA**) is the email client, such as Outlook or Gmail on the user's phone.
 
-- The Mail Submission Agent (MSA) listens for incoming connections over the SMTP protocol from MUAs (on a different port to that used for MTA-to-MTA communication), authenticates the user and sanitises the email headers, and then hands it off to the MTA.
+- The Mail Submission Agent (**MSA**) listens for incoming connections over the SMTP protocol from MUAs (on a different port to that used for MTA-to-MTA communication), authenticates the user and sanitises the email headers, and then hands it off to the MTA.
 
-- A Mail Transport Agent (MTA) takes new emails from the MSA and also listens for incoming connections from other MTAs using the SMTP protocol.
+- The Mail Transport Agent (**MTA**) takes new emails from the MSA and also listens for incoming connections from other MTAs using the SMTP protocol.
   It either forwards the message to the next MTA or delivers it to the MDA if it is destined for the local domain.
 
-- The Mail Delivery Agent (MDA) takes email from the local MTA for delivery to local recipients.
+- The Mail Delivery Agent (**MDA**) takes email from the local MTA for delivery to local recipients.
   It applies spam filtering, inbox sorting rules, and stores the email.
 
-- The Mail Retrieval Agent (MRA) listens for connections from MUAs using protocols such as IMAP or POP3 to allow authenticated users download or read their stored emails.
+- The Mail Retrieval Agent (**MRA**) listens for connections from MUAs using protocols such as IMAP or POP3 to allow authenticated users download or read their stored emails.
 
 An "email server" consists of some combination of these components.
 Most often it is used informally to refer to the MTA component.
@@ -184,7 +184,7 @@ The Sender Policy Framework (SPF) gives rise to the first of the DNS records rel
 
 #### What is it?
 
-A DNS TXT record listing the IP addresses authorised to send email for the domain.
+A DNS TXT record describing the IP addresses authorised to send email for the domain.
 
 #### How does it work?
 
@@ -220,7 +220,7 @@ DomainKeys Identified Mail (DKIM) gives rise to the second DNS record used for e
 
 #### What is it?
 
-A cryptographic signature that confirms an email was created by the sender's domain and has not been tampered with.
+A cryptographic signature that confirms an email was created by the sender's domain and has not been tampered with since.
 
 #### How does it work?
 
@@ -250,7 +250,9 @@ Breakdown of the fields:
 
 The `DKIM-Signature` email header will look like this:
 ```
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=s1;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+     d=example.com;
+     s=s1;
      h=from:to:subject:date:message-id:cc;
      bh=2jmj7l5rSw0yVb/vlWAYkK/YBwk=;
      b=cXBlcmllbmNl...
@@ -268,7 +270,11 @@ The fields break down as follows:
 - `bh=2jmj7l5rSw0yVb/vlWAYkK/YBwk=` is the base64-encoded hash of the canonicalized email body (no headers).
 - `b=cXBlcmllbmNl...` is the base64-encoded signature of the headers listed in the `h=` field and the `bh=` string.
 
-The `h` field can contain duplicates, e.g. `h=from:from:to:subject:date:message-id:cc`, even when there is only a single `From:` header in the email.
+The `h=` field can contain duplicates, e.g. 
+```
+h=from:from:to:subject:date:message-id:cc
+```
+even when there is only a single `From:` header in the email.
 This approach detects "header injection" attacks, when a malicious actor adds duplicate headers to an email to trick the recipient into thinking the email came from a different domain.
 The duplicate field approach works because the signing algorithm uses nulls for missing headers in the hash.
 
@@ -318,7 +324,7 @@ adkim=r
 ```
 
 The fields break down as follows:
-- `v=DMARC1` indicates the protocol version (mandatory, must be first tag, must be uppercase)
+- `v=DMARC1` indicates the protocol version
 - `p=quarantine` indicates the policy for failed DMARC validation: none (monitor only), quarantine (spam folder), or reject (block)
 - `pct=100` indicates the percentage of failing messages the policy applies to (default 100)
 - `rua=mailto:...` indicates where receivers send daily aggregate reports (optional but recommended)
@@ -346,7 +352,7 @@ The Sender Rewriting Scheme (SRS) is a protocol used by forwarders to pass the S
 
 Forwarders use the SRS protocol to rewrite the `MAIL FROM` envelope header so that it comes from the forwarder's domain.
 
-Upon arrival at the MDA, the `Return-Path` email header is copied from this modified `MAIL FROM` header.
+Upon arrival at the MDA, the `Return-Path` email header is copied from this modified `MAIL FROM` envelope header.
 SRS passes DKIM verification because it only results in changes to the `Return-Path` email header, which is not included in the `h=` field list of the DKIM signature.
 
 The SRS protocol is stateless in the sense that the forwarder does not need to maintain any state about the original sender.
@@ -404,3 +410,24 @@ PTR records are configured by the owner of the IP address (usually your hosting 
 DNSSEC adds cryptographic signatures to DNS records, allowing resolvers to verify that responses have not been tampered with.
 For email, DNSSEC strengthens the chain of trust for DKIM and DMARC lookups: without it, an attacker who can forge DNS responses could substitute their own public key or policy record.
 DNSSEC is configured by signing your zone and publishing DS records via your registrar, but adoption remains limited.
+
+## A complete example
+
+Here are the essential DNS records for this website:
+
+{.table-sm}
+| Type | Name | Value | Description |
+|------|------|-------|-|
+| A | @ | 185.199.108.153 | GitHub Pages |
+| A | @ | 185.199.109.153 | GitHub Pages |
+| A | @ | 185.199.110.153 | GitHub Pages |
+| A | @ | 185.199.111.153 | GitHub Pages |
+| CNAME | sig1._domainkey | sig1.dkim.corbettclark.com.at.icloudmailadmin.com | DKIM for outbound Apple email |
+| CNAME | www | corbettclark.com | Redirect to the main domain |
+| MX | @ | mx01.mail.icloud.com (10) | MX record for inbound Apple email |
+| MX | @ | mx02.mail.icloud.com (10) | MX record for inbound Apple email |
+| TXT | @ | apple-domain=pVgsR3iHhOa4Hw46 | Verify ownership for Apple |
+| TXT | @ | v=spf1 include:icloud.com ~all | SPF for outbound Apple email |
+| TXT | @ | google-site-verification=ZH-EAeAUJNCippUlct13h5H5gwloTQVM5xDVu42tSgI | Verify ownership for Google |
+| TXT | _dmarc | v=DMARC1; p=quarantine | DMARC record for outbound Apple Mail |
+| TXT | _github-pages-challenge-tcorbettclark | 06641c751f43ce63675aeb4e0f2e7c | Verify ownership for GitHub |
