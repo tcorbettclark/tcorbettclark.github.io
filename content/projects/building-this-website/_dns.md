@@ -1,6 +1,6 @@
 Configuring DNS is complex and messy due to
 - its origin before the internet was a global network;
-- changes to how the internet is used, both of type and scale;
+- changes in how the internet is used;
 - improvements to the internet infrastructure;
 - the need to keep operating through these changes; and
 - an arms race between malevolent misuse and attempts to defend.
@@ -14,11 +14,37 @@ This is the most common DNS configuration, and involves the `A` and `CNAME` reco
 For example,
 ```
 @ A 188.166.138.147
-www A 188.166.138.147
+www.example.com. A 188.166.138.147
+blog A 123.456.789.123
 ```
 
-The `@` record is the root domain and the `www` record is a subdomain.
-Both resolve to the same IP address hosting the website contents.
+The first column (`@`, `www.example.com.`, `blog`) represents the domain name or subdomain being configured.
+
+The `@` symbol represents the "zone origin", which is a value set in the DNS zone file.
+It is usually set to the root domain, e.g. with 
+```dns
+$ORIGIN example.com.
+```
+
+A name with a trailing dot (`example.com.`) is a fully qualified domain name (FQDN), while a name without a trailing dot (`blog`) is relative to the zone origin.
+
+So the above example could have been written as:
+```
+example.com. A 188.166.138.147
+www.example.com. A 188.166.138.147
+blog.example.com A 123.456.789.123
+```
+
+These rules about the `@` and trailing dots apply to all DNS record types, not just the A records.
+
+A CNAME is a "DNS alias" to direct a lookup to another domain.
+For example,
+```
+www.corbettclark.com. CNAME corbettclark.com
+```
+
+This indirection applies to all DNS record types, not just the A records.
+So if a CNAME exists for a hostname, no other records for that hostname can be defined.
 
 ### GitHub
 
@@ -50,7 +76,7 @@ For example:
 
 To understand the configuration of the relevant DNS records for email, it is helpful first to understand the basics of email delivery.
 
-### Mxx components
+### Components
 
 Email creation, transmission, and delivery involves several components, each with a specific role:
 
@@ -69,7 +95,7 @@ Email creation, transmission, and delivery involves several components, each wit
 An "email server" consists of some combination of these components.
 Most often it is used informally to refer to the MTA component.
 
-The lifecycle of a typical email is as follows:
+The lifecycle of a typical email as it moves between these components is as follows:
 
 1. The sender's MUA sends an email to the sender's MSA.
 2. The MSA sanitises the email headers and hands it off to the MTA.
@@ -78,12 +104,11 @@ The lifecycle of a typical email is as follows:
 5. The destination MTA passes the email to the MDA, which stores it in the user's mailbox.
 6. The MRA waits for users to connect and ask to download or read their stored emails.
 
-
 ### Envelope headers
 
-The **envelope headers** are part of the SMTP handshake between MTAs.
+The **envelope headers** are exchanged as part of the SMTP handshake between MTAs.
 They only live in memory.
-But some envelope headers are copied into (differently named) headers in the email headers (see below).
+But some envelope headers are copied into (differently named) email headers (see below).
 Example envelope headers are:
 - `MAIL FROM` e.g. marketing@some-company.com
 - `RCPT TO` e.g. bob@customer.com
@@ -107,7 +132,7 @@ The `Return-Path:` header is only used by the systems under various failures to 
 A user replying to an email will use the `From:` header (or the `Reply-To:` header if set).
 
 An important email header is the `Received:` header.
-The various components (MRAs, MTAs, MDAs, secure gateways, mailing list managers, proxies etc) add to this header as they process and pass around the email.
+The various components (MTAs, MDAs, secure gateways, mailing list managers, proxies etc) add to this header as they process and pass around the email.
 The most recent entry is at the top.
 The standard template governed by RFC 5321 is:
 
@@ -140,22 +165,10 @@ The receiving MTA takes the domain from the `RECPT TO` in the SMTP envelope, loo
 
 An example MX record for the `example.com` zone might be:
 ```
-example.com. MX 10 mail.example.com.
+@ MX 10 mail.example.com.
 ```
 
 This means email for the `example.com` domain should be delivered to `mail.example.com` with priority 10.
-
-Note the trailing dots.
-Without them, the values are interpreted as relative to the "zone origin", which is a value set in the DNS zone file e.g. with 
-```dns
-$ORIGIN example.com.
-```
-Then `mail.example.com` (without the trailing dot) would be interpreted as `mail.example.com.example.com`.
-
-The `@` symbol can also be used to indicate the zone origin, so the previous example MX record could have been written:
-```
-@ MX 10 mail.example.com.
-```
 
 ### SPF
 
@@ -182,9 +195,9 @@ Breaking this down:
 - `v=spf1` - The version of the SPF record.
 - `ip4:192.0.2.0/24` - Allows IPs in the 192.0.2.0/24 range.
 - `include:_spf.google.com` - Includes the Google SPF record.
-- `~all` - Allows any IP that passes the SPF check, but does not require it.
+- `~all` - Allow even if the sender's IP does not match the record, but mark with a SoftFail flag in the `Received-SPF` email header.
 
-Note that in the underlying zone file, the DNS TXT value must be quoted because the file uses a format based upon space separated columns.
+Note that in the underlying zone file, the DNS TXT value must be quoted because the file uses a format based upon space-separated columns.
 Missing quotes causes the spaces in the TXT value to be treated as different columns.
 Whether quotes are needed depends on the interface used to set the TXT record i.e. some interfaces add the quotes for you.
 
@@ -211,7 +224,7 @@ In a large organisation, multiple servers may all be signing email for the same 
 Obviously we don't want to share the same private key, so the selector approach means we can have multiple signing servers each with their own key.
 Selectors are also used to rotate keys without invalidating existing signatures by creating new keys with new selectors, waiting for DNS propagation to complete, and then removing the old selectors.
 
-The DKIM record can be in a TXT record or use a CNAME record pointing to a TXT record on another domain managing DKIM on your behalf (e.g. Google Workspace or Mailchip). This also allows the the third party to rotate keys without you needing to update your DNS records.
+The DKIM record can be in a TXT record or use a CNAME record pointing to a TXT record on another domain managing DKIM on your behalf (e.g. Google Workspace or Mailchimp). This also allows the the third party to rotate keys without you needing to update your DNS records.
 
 #### Example
 
@@ -235,7 +248,7 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=s1;
      b=cXBlcmllbmNl...
 ```
 
-(Unlike DNS records, line breaks are allowed in email headers so long as they follow the "Header Folding" rules. This optional formating for humans consequently requires canonicalisation of the headers and body before signing.)
+(Unlike DNS records, line breaks are allowed in email headers so long as they follow the "Header Folding" rules. This optional formatting for humans consequently requires canonicalisation of the headers and body before signing.)
 
 The fields break down as follows:
 - `v=1` indicates the version of DKIM being used.
@@ -252,14 +265,14 @@ This approach detects "header injection" attacks, when a malicious actor adds du
 The duplicate field approach works because the signing algorithm uses nulls for missing headers in the hash.
 
 Note that altered headers causes the signature to fail verification.
-Altered *body* content will pass the signature verification because it uses the `bh=` value, but the hash of the body will be different.
+Altered *body* content will still pass because signature verification uses the `bh=` value, but the hash of the body will be different.
 But this is still considered an overall DKIM verification failure.
 
 #### Weakness
 
 DKIM proves that the original domain signed the message, but it does not prove that the signing domain matches the domain seen by humans (e.g. in the `From:`: header).
 An attacker could sign an email from a domain that is a different from the domain in the `From:` header.
-So DKIM verification can pass even if the domain in the `d=` field does not have to match the domain in the `From:` header.
+So DKIM verification can pass even if the domain in the `d=` field fails to match the domain in the `From:` header.
 
 Also, DKIM gives a false negative in the case of valid email body alteration, such as a mailing list adding a footer or a security gateway cleaning an email by removing a dangerous attachment.
 
@@ -275,8 +288,8 @@ DMARC has two aspects:
 
 The policy is specified in a DNS TXT record, `_dmarc.<domain>`.
 
-Both DKIM and SPF aligment compare against the `From:` email header.
-DKIM takes the domain from the `d=` tag in the DKIM signature, while SPF takes the domain from the `MAIN FROM` envelope header (or equivalently, the `Return-Path:` email header).
+Both DKIM and SPF alignment compare against the `From:` email header.
+DKIM takes the domain from the `d=` tag in the DKIM signature, while SPF takes the domain from the `MAIL FROM` envelope header (or equivalently, the `Return-Path:` email header).
 Alignment can be strict or relaxed.
 Relaxed alignment allows for the DKIM or SPF domain to be a subdomain of the `From:` domain, while strict alignment requires an exact match.
 
@@ -314,7 +327,6 @@ DMARC inherits the weakness of DKIM i.e. giving false negatives in the case of v
 
 The above SPF+DKIM+DMARC combination does not work with forwarders for several reasons:
 - if the forwarder uses the original `MAIL FROM` envelope header, it will not pass the SPF check,
-- if the forwarder uses a rewritten `MAIL FROM` envelope header, it will not pass the DKIM verification,
 - the forwarder may validly alter the email body and so cause DKIM verification to fail.
 
 The solution does not involve any further DNS records, but I may as well complete the story as it is (a) mildly interesting and (b) you may come across SRS and ARC.
@@ -327,8 +339,8 @@ The Sender Rewriting Scheme (SRS) is a protocol used by forwarders to pass the S
 
 Forwarders use the SRS protocol to rewrite the `MAIL FROM` envelope header so that it comes from the forwarder's domain.
 
-Upon arrival at the MDA, the `Return-Path` mail header is copied from this modified `MAIL FROM` header.
-SRS passes DKIM verification because it only results in changes to the `Return-Path` mail header, which is not included in the `h=` field list of the DKIM signature.
+Upon arrival at the MDA, the `Return-Path` email header is copied from this modified `MAIL FROM` header.
+SRS passes DKIM verification because it only results in changes to the `Return-Path` email header, which is not included in the `h=` field list of the DKIM signature.
 
 The SRS protocol is stateless in the sense that the forwarder does not need to maintain any state about the original sender.
 The rewritten `MAIL FROM` header contains all the information needed to (for example) return a bounced email.
@@ -367,3 +379,11 @@ If multiple such modifying MTAs are involved, multiple sets of ARC headers are c
 When the destination MTA receives the email, it sees a DMARC failure.
 However, instead of instantly rejecting the mail, it looks for the ARC headers.
 If these verify ok and the MTA trusts the intermediaries, it overrides the DMARC failure and delivers the mail to the MDA.
+
+
+<!--
+TODO:
+- No DNS propagation/TTL discussion: DNS changes take time to propagate, which is critical when configuring DNS records (especially for DKIM key rotation, mentioned on line 212).
+- No PTR/rDNS records: Reverse DNS is important for email deliverability but is not mentioned.
+- No DNSSEC: DNSSEC is relevant to DNS security for email but is omitted.
+-->
