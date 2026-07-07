@@ -509,6 +509,14 @@
         scroll-margin-top: var(--space-lg);
     }
 
+    /* Table styles e.g. in Markdown */
+    .table-sm {
+        font-size: 0.85rem;
+    }
+    .table-sm th,
+    .table-sm td {
+        padding: var(--space-xs) var(--space-sm);
+    }
 }
 @layer page-chrome {
     /* ==========================================================================
