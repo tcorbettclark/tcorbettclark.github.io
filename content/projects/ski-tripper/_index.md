@@ -3,9 +3,12 @@
 <!-- vale Microsoft.Headings = NO -->
 <!-- vale Microsoft.Quotes = NO -->
 
-[Ski Tripper](https://ski-tripper.com) helps a ski group find and agree on a great ski destination without the "entertaining" chaos of a WhatsApp debate.
+## What is it?
 
+[Ski Tripper](https://ski-tripper.com) is a web application that helps a ski group find and agree on a great ski destination without the "entertaining" chaos of a WhatsApp debate.
 Built-in AI uses everyone’s ski holiday preferences to guide searches of an enriched catalogue and generate narrative assessments on who will (or won’t) enjoy a resort; everyone creates proposals and enters them into voting rounds to reach a collective decision.
+
+## Why did I build it?
 
 At a technical level, I created it to gain hands-on experience with LLMs.
 Although a small application, it exercises the full stack and lifecycle so gives me ideas about how AI should be used on serious, large-scale software projects.
@@ -16,7 +19,9 @@ In particular, it covers:
 - Full set of unit tests and end-to-end tests (using [Playwright](https://playwright.dev/)).
 - Fully automated server build, configuration and deployment to [DigitalOcean](https://www.digitalocean.com/) (using [xec](https://github.com/tcorbettclark/xec)).
 
-LLMs were used throughout the project:
+## How was AI used?
+
+LLM and related technologies were used throughout the project:
 
 1. To **build the application**. I experimented with a number of agentic tools, models, local or cloud-based providers, and configurations (skills, MCPs, etc), settling on [OpenCode](https://opencode.ai/) and open source models running in [Ollama cloud](https://ollama.com/) so I can track new models and updates. Much of ski-tripper was written with the help of [GLM5.1](https://huggingface.co/THUDM/glm-5.1).
 2. To **create a rich catalogue of resorts with standardised fields and descriptions**. This involves a pipeline which seeds a list, enriches from qualified sources, assesses quality, and fixes inconsistencies using an independent model.
