@@ -37,7 +37,7 @@ So the above example could have been written as:
 ```
 example.com. A 188.166.138.147
 www.example.com. A 188.166.138.147
-blog.example.com A 198.51.100.1
+blog.example.com. A 198.51.100.1
 ```
 
 These rules about the `@` and trailing dots apply to all DNS record types, not just the A records.
