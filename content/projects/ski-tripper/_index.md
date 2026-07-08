@@ -3,10 +3,16 @@
 <!-- vale Microsoft.Headings = NO -->
 <!-- vale Microsoft.Quotes = NO -->
 
+[Ski Tripper](https://ski-tripper.com) is a web application that helps a ski group find and agree on a great ski destination without the "entertaining" chaos of a WhatsApp debate.
+
+See the project's [GitHub repository](https://github.com/tcorbettclark/ski-tripper) for details.
+Below is just a brief overview.
+
 ## What is it?
 
-[Ski Tripper](https://ski-tripper.com) is a web application that helps a ski group find and agree on a great ski destination without the "entertaining" chaos of a WhatsApp debate.
-Built-in AI uses everyone’s ski holiday preferences to guide searches of an enriched catalogue and generate narrative assessments on who will (or won’t) enjoy a resort; everyone creates proposals and enters them into voting rounds to reach a collective decision.
+Built-in AI uses everyone’s ski holiday preferences to guide searches of an enriched catalogue of resorts, and to generate narrative assessments on who will (or won’t) enjoy a resort.
+Everyone creates proposals and enters them into voting rounds to reach a collective decision.
+Rinse and repeat.
 
 ## Why did I build it?
 
@@ -29,6 +35,3 @@ LLM and related technologies were used throughout the project:
 4. To **generate resort search text from participant preferences**. An LLM is fed everyone's preferences and instructed to generate search text to run against the embedding model (previous), and so make it easier to find candidate resorts the group will enjoy.
 5. To **assess a proposal against the likes/dislikes of the participants**. An LLM is used to create a narative assessment of the match between a proposal and the likes/dislikes of the participants, trying to identify who would especially like a resort and who might find it less appealing.
 6. To **automate the testing of the applicaton UI** by performing user interactions using a headless browser, looking for bugs and increasing confidence that the application behaves in a reasonable way.
-
-
-For technical details, see the project's [GitHub repository](https://github.com/tcorbettclark/ski-tripper).
