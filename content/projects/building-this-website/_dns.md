@@ -27,7 +27,7 @@ The first column (`@`, `www.example.com.`, `blog`) represents the domain name or
 
 The `@` symbol represents the "zone origin", which is a value set in the DNS zone file.
 It is usually set to the root domain, e.g. with 
-```dns
+```
 $ORIGIN example.com.
 ```
 
@@ -89,7 +89,7 @@ Email creation, transmission, and delivery involves several components, each wit
 
 - The Mail User Agent (**MUA**) is the email client, such as Outlook or Gmail on the user's phone.
 
-- The Mail Submission Agent (**MSA**) listens for incoming connections over the SMTP protocol from MUAs (on a different port to that used for MTA-to-MTA communication), authenticates the user and sanitises the email headers, and then hands it off to the MTA.
+- The Mail Submission Agent (**MSA**) listens for incoming connections over the SMTP protocol from MUAs (on a different port to that used by MTAs), authenticates the user and sanitises the email headers, and then hands it off to the MTA.
 
 - The Mail Transport Agent (**MTA**) takes new emails from the MSA and also listens for incoming connections from other MTAs using the SMTP protocol.
   It either forwards the message to the next MTA or delivers it to the MDA if it is destined for the local domain.
@@ -97,7 +97,9 @@ Email creation, transmission, and delivery involves several components, each wit
 - The Mail Delivery Agent (**MDA**) takes email from the local MTA for delivery to local recipients.
   It applies spam filtering, inbox sorting rules, and stores the email.
 
-- The Mail Retrieval Agent (**MRA**) listens for connections from MUAs using protocols such as IMAP or POP3 to allow authenticated users download or read their stored emails.
+- The Mail Access Agent (**MAA**) listens for connections from MUAs using protocols such as IMAP or POP3 to allow authenticated users download or read their stored emails.
+
+- A Mail Retrieval Agent (**MRA**) acts as an automated client, fetching emails from the MAA on behalf of the user e.g. so they are available locally or to pull emails from multiple systems into a single mailbox.
 
 An "email server" consists of some combination of these components.
 Most often it is used informally to refer to the MTA component.
@@ -109,11 +111,18 @@ The lifecycle of a typical email as it moves between these components is as foll
 3. The MTA reads the envelope, looks up the destination DNS MX records, and forwards the message to the next MTA.
 4. The MTA-to-MTA hops continue until the email arrives at the destination MTA.
 5. The destination MTA passes the email to the MDA, which stores it in the user's mailbox.
-6. The MRA waits for users to connect and ask to download or read their stored emails.
+6. The MAA waits for MUAs to connect, authenticate, and ask to view or download stored emails.
+
+There are other names for components with similarly functionality and purpose to those in the Mxx model.
+For some, it's debatable whether they are aliases, extensions, or new component types.
+- **Mailing List Managers (MLM)** expand a single incoming alias into multiple recipient addresses before the email is handed off to the MTA.
+- **Secure Email Gateway** often includes an MTA but provides additional security features such as encryption and edge security filtering.
+- **SMTP Proxy** does not handle queuing or independent routing (like an MTA), but inspects or filters traffic for spam or malware before passing it on.
+- **Email Forwarders** take an incoming email sent to one address and immediately re-sends ("forwards") it to another address.
 
 ### Envelope headers
 
-The **envelope headers** are exchanged as part of the SMTP handshake between MTAs.
+The **envelope headers** are exchanged as part of the SMTP handshake e.g. between MTAs.
 They only live in memory.
 But some envelope headers are copied into (differently named) email headers (see below).
 Example envelope headers are:
@@ -129,17 +138,17 @@ Example email headers are:
 - `From:` e.g. ceo@some-company.com
 - `To:` e.g. bob@customer.com
 
-Some headers are created at source by the MUA, some are added by the MTAs in transit, and some are added by the MDA on arrival.
+Some headers are created at source by the MUA, some are added by the MTAs and other components in transit, and some are added by the MDA on arrival.
 
-The `Return-Path:` header only exists upon final delivery, when it is added by the MDA (Mail Delivery Agent) just before the email is stored.
-It is copied from the final `MAIL FROM` envelope header in the final SMTP transaction with the destination MTA.
+The `Return-Path:` header is created by the MDA just before the email is stored.
+It is copied from the `MAIL FROM` envelope header in the final SMTP transaction with the destination MTA.
 Usually the `MAIL FROM` is passed on unchanged down the chain from the original sender.
 But it can be different, for example when using mailing lists or forwarders (more on this later).
 The `Return-Path:` header is only used by the systems under various failures to deliver.
 A user replying to an email will use the `From:` header (or the `Reply-To:` header if set).
 
 An important email header is the `Received:` header.
-The various components (MTAs, MDAs, secure gateways, mailing list managers, proxies etc) add to this header as they process and pass around the email.
+The various components (MTAs, MDAs, secure email gateways, mailing list managers, proxies etc) add to this header as they process and pass around the email.
 The most recent entry is at the top.
 The standard template governed by RFC 5321 is:
 
@@ -155,6 +164,13 @@ Received: from [Sending Server Name/IP]
 Different software may use slight variants of this format.
 Also, some corporate systems may scrub the `Received:` header e.g. for privacy reasons.
 
+Other examples of email headers being added or modified:
+- Mailing List Managers will add `List-Id:`, `List-Unsubscribe:`, etc headers to the email. Also adjust the `Reply-To:` to the list address so user replies go to the list, and adjust the `Return-Path:` header so bounces go to the MLM.
+- Email Proxies will add headers like `X-Proxied-By` and `X-Original-Client-IP`.
+- Secure Email Gateways will add headers like `X-Spam-Status:` and `X-Spam-Level:`, `X-Virus-Scanned` to record scores and virus detection results. They may also strip headers like `Received:` to hinder reconnaissance by attackers.
+
+Beware that despite appearances, "Envelope-From" is *not* an email header but a casual reference to the `MAIL FROM` envelope header.
+
 ### MX records
 
 DNS MX records are the address book for email delivery.
@@ -166,7 +182,7 @@ Multiple MX records can be specified, with the lower numbered (higher priority) 
 
 #### How does it work?
 
-The receiving MTA takes the domain from the `RCPT TO` in the SMTP envelope, looks up the corresponding MX record in DNS, and uses the target hostname(s) to connect to the destination MTA. Note that for reasons of scale, this isn't usually point-to-point but will involve relay or gateway MTAs along the way.
+The receiving MTA takes the domain from the `RCPT TO` in the SMTP envelope, looks up the corresponding MX record in DNS, and uses the target hostname(s) to connect to the destination MTA (or Secure Email Gateways, Proxies, etc).
 
 #### Example
 
@@ -420,7 +436,7 @@ Here are the essential DNS records with annotations for this website (with email
 
 {.table-sm}
 | Type | Name | Value | Description |
-|------|------|-------|-|
+|------|------|-------|-------------|
 | CNAME | www | corbettclark.com | Redirect to the main domain |
 | A | @ | 185.199.108.153 | GitHub Pages |
 | A | @ | 185.199.109.153 | GitHub Pages |
@@ -431,7 +447,7 @@ Here are the essential DNS records with annotations for this website (with email
 
 {.table-sm}
 | Type | Name | Value | Description |
-|------|------|-------|-|
+|------|------|-------|-------------|
 | TXT | _github-pages-challenge-tcorbettclark | 06641c751f43ce63675aeb4e0f2e7c | Verify ownership for GitHub |
 | TXT | @ | google-site-verification=ZH-EAeAUJNCippUlct13h5H5gwloTQVM5xDVu42tSgI | Verify ownership for Google |
 | TXT | @ | apple-domain=pVgsR3iHhOa4Hw46 | Verify ownership for Apple |
@@ -440,7 +456,7 @@ Here are the essential DNS records with annotations for this website (with email
 
 {.table-sm}
 | Type | Name | Value | Description |
-|------|------|-------|-|
+|------|------|-------|-------------|
 | MX | @ | mx01.mail.icloud.com (10) | MX record for inbound Apple email |
 | MX | @ | mx02.mail.icloud.com (10) | MX record for inbound Apple email |
 | TXT | @ | v=spf1 include:icloud.com ~all | SPF for outbound Apple email |

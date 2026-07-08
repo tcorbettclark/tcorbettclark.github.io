@@ -136,7 +136,7 @@ blog A 198.51.100.1
               The <code>@</code> symbol represents the “zone origin”, which is a value set in the DNS zone file. It is
               usually set to the root domain, e.g. with
             </p>
-            <pre><code class="language-dns">$ORIGIN example.com.
+            <pre><code>$ORIGIN example.com.
 </code></pre>
             <p>
               A name with a trailing dot (<code>example.com.</code>) is a fully qualified domain name (FQDN), while a
@@ -221,8 +221,8 @@ blog.example.com A 198.51.100.1
               <li>
                 <p>
                   The Mail Submission Agent (<strong>MSA</strong>) listens for incoming connections over the SMTP
-                  protocol from MUAs (on a different port to that used for MTA-to-MTA communication), authenticates the
-                  user and sanitises the email headers, and then hands it off to the MTA.
+                  protocol from MUAs (on a different port to that used by MTAs), authenticates the user and sanitises
+                  the email headers, and then hands it off to the MTA.
                 </p>
               </li>
               <li>
@@ -240,8 +240,15 @@ blog.example.com A 198.51.100.1
               </li>
               <li>
                 <p>
-                  The Mail Retrieval Agent (<strong>MRA</strong>) listens for connections from MUAs using protocols
-                  such as IMAP or POP3 to allow authenticated users download or read their stored emails.
+                  The Mail Access Agent (<strong>MAA</strong>) listens for connections from MUAs using protocols such
+                  as IMAP or POP3 to allow authenticated users download or read their stored emails.
+                </p>
+              </li>
+              <li>
+                <p>
+                  A Mail Retrieval Agent (<strong>MRA</strong>) acts as an automated client, fetching emails from the
+                  MAA on behalf of the user e.g. so they are available locally or to pull emails from multiple systems
+                  into a single mailbox.
                 </p>
               </li>
             </ul>
@@ -264,16 +271,38 @@ blog.example.com A 198.51.100.1
               </li>
               <li>The destination MTA passes the email to the MDA, which stores it in the user’s mailbox.
               </li>
-              <li>The MRA waits for users to connect and ask to download or read their stored emails.
+              <li>The MAA waits for MUAs to connect, authenticate, and ask to view or download stored emails.
               </li>
             </ol>
+            <p>
+              There are other names for components with similarly functionality and purpose to those in the Mxx model.
+              For some, it’s debatable whether they are aliases, extensions, or new component types.
+            </p>
+            <ul>
+              <li>
+                <strong>Mailing List Managers (MLM)</strong> expand a single incoming alias into multiple recipient
+                addresses before the email is handed off to the MTA.
+              </li>
+              <li>
+                <strong>Secure Email Gateway</strong> often includes an MTA but provides additional security features
+                such as encryption and edge security filtering.
+              </li>
+              <li>
+                <strong>SMTP Proxy</strong> does not handle queuing or independent routing (like an MTA), but inspects
+                or filters traffic for spam or malware before passing it on.
+              </li>
+              <li>
+                <strong>Email Forwarders</strong> take an incoming email sent to one address and immediately re-sends
+                (“forwards”) it to another address.
+              </li>
+            </ul>
             <h3>
               Envelope headers
             </h3>
             <p>
-              The <strong>envelope headers</strong> are exchanged as part of the SMTP handshake between MTAs. They only
-              live in memory. But some envelope headers are copied into (differently named) email headers (see below).
-              Example envelope headers are:
+              The <strong>envelope headers</strong> are exchanged as part of the SMTP handshake e.g. between MTAs. They
+              only live in memory. But some envelope headers are copied into (differently named) email headers (see
+              below). Example envelope headers are:
             </p>
             <ul>
               <li>
@@ -302,22 +331,22 @@ blog.example.com A 198.51.100.1
               </li>
             </ul>
             <p>
-              Some headers are created at source by the MUA, some are added by the MTAs in transit, and some are added
-              by the MDA on arrival.
+              Some headers are created at source by the MUA, some are added by the MTAs and other components in
+              transit, and some are added by the MDA on arrival.
             </p>
             <p>
-              The <code>Return-Path:</code> header only exists upon final delivery, when it is added by the MDA (Mail
-              Delivery Agent) just before the email is stored. It is copied from the final <code>MAIL FROM</code>
-              envelope header in the final SMTP transaction with the destination MTA. Usually the <code>MAIL
-              FROM</code> is passed on unchanged down the chain from the original sender. But it can be different, for
-              example when using mailing lists or forwarders (more on this later). The <code>Return-Path:</code> header
-              is only used by the systems under various failures to deliver. A user replying to an email will use the
-              <code>From:</code> header (or the <code>Reply-To:</code> header if set).
+              The <code>Return-Path:</code> header is created by the MDA just before the email is stored. It is copied
+              from the <code>MAIL FROM</code> envelope header in the final SMTP transaction with the destination MTA.
+              Usually the <code>MAIL FROM</code> is passed on unchanged down the chain from the original sender. But it
+              can be different, for example when using mailing lists or forwarders (more on this later). The
+              <code>Return-Path:</code> header is only used by the systems under various failures to deliver. A user
+              replying to an email will use the <code>From:</code> header (or the <code>Reply-To:</code> header if
+              set).
             </p>
             <p>
               An important email header is the <code>Received:</code> header. The various components (MTAs, MDAs,
-              secure gateways, mailing list managers, proxies etc) add to this header as they process and pass around
-              the email. The most recent entry is at the top. The standard template governed by RFC 5321 is:
+              secure email gateways, mailing list managers, proxies etc) add to this header as they process and pass
+              around the email. The most recent entry is at the top. The standard template governed by RFC 5321 is:
             </p>
             <pre><code class="language-text">Received: from [Sending Server Name/IP] 
           by [Receiving Server Name] 
@@ -329,6 +358,25 @@ blog.example.com A 198.51.100.1
             <p>
               Different software may use slight variants of this format. Also, some corporate systems may scrub the
               <code>Received:</code> header e.g. for privacy reasons.
+            </p>
+            <p>
+              Other examples of email headers being added or modified:
+            </p>
+            <ul>
+              <li>Mailing List Managers will add <code>List-Id:</code>, <code>List-Unsubscribe:</code>, etc headers to
+              the email. Also adjust the <code>Reply-To:</code> to the list address so user replies go to the list, and
+              adjust the <code>Return-Path:</code> header so bounces go to the MLM.
+              </li>
+              <li>Email Proxies will add headers like <code>X-Proxied-By</code> and <code>X-Original-Client-IP</code>.
+              </li>
+              <li>Secure Email Gateways will add headers like <code>X-Spam-Status:</code> and
+              <code>X-Spam-Level:</code>, <code>X-Virus-Scanned</code> to record scores and virus detection results.
+              They may also strip headers like <code>Received:</code> to hinder reconnaissance by attackers.
+              </li>
+            </ul>
+            <p>
+              Beware that despite appearances, “Envelope-From” is <em>not</em> an email header but a casual reference
+              to the <code>MAIL FROM</code> envelope header.
             </p>
             <h3>
               MX records
@@ -348,9 +396,8 @@ blog.example.com A 198.51.100.1
             </h4>
             <p>
               The receiving MTA takes the domain from the <code>RCPT TO</code> in the SMTP envelope, looks up the
-              corresponding MX record in DNS, and uses the target hostname(s) to connect to the destination MTA. Note
-              that for reasons of scale, this isn’t usually point-to-point but will involve relay or gateway MTAs along
-              the way.
+              corresponding MX record in DNS, and uses the target hostname(s) to connect to the destination MTA (or
+              Secure Email Gateways, Proxies, etc).
             </p>
             <h4>
               Example
