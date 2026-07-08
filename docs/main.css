@@ -83,7 +83,7 @@
         --space-2xl: 5rem;
 
         --scroll-offset: 5rem;
-        --content-scroll-offset: 30rem;
+
         --border-radius: 8px;
     }
 
@@ -494,7 +494,7 @@
     .content {
         max-width: var(--max-width);
         line-height: var(--line-height);
-        padding-bottom: calc(100vh - var(--content-scroll-offset));
+
     }
 
     .content h2 {
