@@ -133,7 +133,7 @@ keybind = global:ctrl+grave_accent=toggle_quick_terminal
 
 The main `~/.config/fish/config.fish` contains:
 
-```fish
+```bash
 if status --is-login
     # For brew
     fish_add_path -P /opt/homebrew/bin
@@ -159,7 +159,7 @@ starship init fish | source
 
 Some handy aliases:
 
-```fish
+```bash
 alias --save ls eza
 alias --save la 'ls -a'
 alias --save ll 'ls -l'
