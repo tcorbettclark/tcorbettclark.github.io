@@ -672,6 +672,21 @@
         text-decoration-thickness: 2px;
     }
 
+    /* On touch devices, tapping a TOC link focuses it. When the scroll spy
+       later moves .toc-active to a different heading, the previously-tapped
+       link loses .toc-active (so the underline vanishes) but retains :focus,
+       leaving a lone yellow heading. Override :focus to match the default
+       style so it doesn't linger. */
+    .toc-list a:focus {
+        color: var(--color-text-muted);
+        outline: none;
+    }
+
+    /* Re-apply the accent colour when the focused link is also active. */
+    .toc-active > a:focus {
+        color: var(--color-accent);
+    }
+
 }
 @layer welcome {
     /* ==========================================================================
