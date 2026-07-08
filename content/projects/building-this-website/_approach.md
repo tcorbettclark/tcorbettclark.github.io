@@ -58,9 +58,8 @@ Hence there are separate files for each piece of markdown, no "frontmatter" TOML
 
 ## Choice of CSS approach
 
-I decided to write my own CSS from scratch, with lots of help from LLMs to generate the initial styles, provide design guidance, document the design system and specific details (e.g. workarounds for particular browsers), and maintain over time (e.g. remove unused styles). 
-
-The primary motivation was to have full control over the design and to understand every line of styling even though I would not have been able to write it myself - the "CSS world" involves many subtle details as well as constantly evolving.
+I decided not to use a CSS library but create custom CSS with lots of help from LLMs to generate the initial styles, provide design guidance, document the design system and specific details (e.g. workarounds for particular browsers), and maintain over time (e.g. remove unused styles). 
+The primary motivation was to have full control over the design and to understand every line of styling even though I would not have been able to write it myself.
 
 The result is a single `main.css` file that uses [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) for the entire design system: colours, typography, spacing, and light/dark mode via `prefers-color-scheme`. The dark mode support came at very little additional cost. Then by organising in [cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Cascade_layers), I avoid run-time polution regardless of inheritance, and the CSS is structured in semantically named containers (analagous to using functions in code merely to name a collection of logically grouped statements).
 
@@ -149,37 +148,12 @@ Hence the `<head>` section of the base template pulls in the highlight Javascrip
 </head>
 ```
 
-and the contents of `/render-code.js` runs the highlighter after all the DOM content is present and correct:
-
-```Javascript
-document.addEventListener("DOMContentLoaded", (event) => {
-  hljs.highlightAll();
-});
-```
+The Javascript in `/render-code.js` runs the highlighter after all the DOM content is present and correct.
+A little dance is required to use trusted types.
 
 The highlight colour theme was chosen to be close to my colour theme, but although close the background isn't a perfect match.
-I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to set the background to match the site's colour scheme), and also style with a fine border:
+I fix this with some CSS in `/main.css` (using [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties) to set the background to match the site's colour scheme), and also style with a fine border.
 
-```CSS
-pre {
-    margin: 1rem 0;
-    padding: 1rem;
-    overflow-x: auto;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background-color: var(--color-code-bg);
-    line-height: 1.5;
-}
-
-pre code {
-    padding: 0;
-    border-radius: 0;
-    background: none;
-    font-size: 0.875rem;
-}
-```
-
-Of course, the above demonstrates the end-result of formatting some HTML and Javascript code.
 
 ## Navigation breadcrumb
 
@@ -287,6 +261,7 @@ All colours and other design tokens are defined as [CSS custom properties](https
 This makes the design system easy to understand and modify, and the entire colour scheme is defined in one place:
 
 ```CSS
+
 :root {
     --color-bg: #fafaf8;
     --color-text: #1a1a1a;
@@ -296,8 +271,40 @@ This makes the design system easy to understand and modify, and the entire colou
     --color-border: #e0e0d8;
     --color-code-bg: hsl(45, 30%, 96%);
     --color-link: hsl(220, 100%, 45%);
-    ...
+    --color-link-hover: hsl(220, 100%, 35%);
+
+    --color-selection-bg: hsl(45, 85%, 85%);
+    --color-selection-text: #1a1a1a;
+
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-mono: "Fira Code", "SF Mono", "Cascadia Code", ui-monospace, monospace;
+    --font-size-base: 1rem;
+    --font-size-h1: 1.8rem;
+    --font-size-h2: 1.35rem;
+    --font-size-h3: 1.15rem;
+    --font-size-h4: 1.05rem;
+    --font-size-h5: 1rem;
+    --font-size-h6: 1rem;
+    --line-height: 1.65;
+    --max-width: 680px;
+
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-2xl: 5rem;
+
+    --scroll-offset: 5rem;
+
+    --border-radius: 8px;
 }
+```
+
+
+Dark mode is handled entirely by the CSS `prefers-color-scheme` media query, which means the site respects the user's operating system preference automatically with no JavaScript required.
+
+```CSS
 
 @media (prefers-color-scheme: dark) {
     :root {
@@ -306,15 +313,16 @@ This makes the design system easy to understand and modify, and the entire colou
         --color-text-muted: #999;
         --color-accent: hsl(45, 80%, 55%);
         --color-accent-subtle: hsl(45, 25%, 18%);
-        ...
+        --color-border: #333;
+        --color-code-bg: hsl(45, 10%, 15%);
+        --color-link: hsl(220, 80%, 65%);
+        --color-link-hover: hsl(220, 80%, 75%);
+
+        --color-selection-bg: hsl(45, 60%, 30%);
+        --color-selection-text: #e0e0d8;
     }
 }
 ```
-
-The golden-yellow accent colour (`hsl(45, 85%, 45%)`) is used sparingly — for the header rule, the page title underline, the draft banner, and link highlights — rather than as a dominant background colour.
-This gives the site a warm feel without being overwhelming.
-
-Light and dark mode is handled entirely by the CSS `prefers-color-scheme` media query, which means the site respects the user's operating system preference automatically with no JavaScript required.
 
 Lastly, remember to coordinate the colour choices across the CSS custom properties, the manifest, and the favicons.
 
