@@ -58,6 +58,7 @@ brew install -q --cask \
     font-noto-emoji \
     ghostty \
     raycast \
+    zed \
     zotero
 ```
 
@@ -70,9 +71,13 @@ To install all my usual packages (list created using `brew leaves -r`):
 brew install -q \
     bat \
     bottom \
+    caddy \
     colima \
     curl \
     docker \
+    docker-buildx \
+    docker-compose \
+    doctl \
     duckdb \
     dust \
     eza \
@@ -81,14 +86,17 @@ brew install -q \
     ffmpeg \
     fish \
     fzf \
+    gh \
     git \
     harper \
-    helix \
     jq \
     lazygit \
-    libffi \
+    libiconv \
+    mailpit \
     marksman \
     mkcert \
+    node \
+    nss \
     oven-sh/bun/bun \
     qemu \
     ripgrep \
@@ -96,6 +104,7 @@ brew install -q \
     starship \
     tidy-html5 \
     uv \
+    worktrunk \
     zlib 
 ```
 
@@ -111,9 +120,10 @@ Note the better versions of standard tools:
 Global python tools managed by uv:
 ```bash
 uv tool install \
-    aider \
     llm \
+    rapid-mlx \
     ruff \
+    semble \
     ty \
     vale
 ```
@@ -126,7 +136,7 @@ Settings:
 ```
 macos-option-as-alt = left
 split-divider-color = white
-keybind = global:ctrl+grave_accent=toggle_quick_terminal
+desktop-notifications = true
 ```
     
 ### Fish
@@ -139,22 +149,26 @@ if status --is-login
     fish_add_path -P /opt/homebrew/bin
     brew shellenv fish | source
 
-    # For uv
-    uv generate-shell-completion fish | source
-
     # Add standard unix paths
     fish_add_path -P /usr/local/sbin /usr/sbin /sbin /usr/local/bin /usr/bin /bin
 
-    # Add path to keg-only brew-installed packages
+    # Add path to keg-only brew-installed curl and sqlite
     fish_add_path -P (brew --prefix)/opt/curl/bin
     fish_add_path -P (brew --prefix)/opt/sqlite/bin
 
     # Add path to anything I have installed locally (e.g. by `uv tool`)
     fish_add_path -P /Users/tcorbettclark/.local/bin
+
+    # Add path for "global" bun installs
+    fish_add_path -P /Users/tcorbettclark/.bun/bin
+
+    # For uv
+    uv generate-shell-completion fish | source
 end
 
-## Make starfish manage the prompt always.
+# Make starfish manage the prompt always.
 starship init fish | source
+
 ```
 
 Some handy aliases:
