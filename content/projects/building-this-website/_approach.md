@@ -625,7 +625,7 @@ One can either use files from a git branch, the root directory of the repository
 It would be nice to be able to use a different directory name, but so be it.
 I just use the `docs/` directory on the master branch.
 
-A custom domain can be used by creating a `CNAME` file containing the full domain (in my case, `www.corbettclark.com`).
+A custom domain can be used by creating a `CNAME` file containing the full domain (in my case, `corbettclark.com`) and [Configuring DNS](./dns.html) correctly.
 
 The default GitHub action detects code commits and deploys on their infrastructure, making the result visible within a couple of minutes (often faster).
 
