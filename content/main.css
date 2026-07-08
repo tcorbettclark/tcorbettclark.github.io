@@ -255,7 +255,10 @@
        ========================================================================== */
 
     table {
-        border-collapse: collapse;
+        display: block; /* Required for overflow-x: auto on the table itself */
+        overflow-x: auto; /* Scroll wide tables individually instead of overflowing the page */
+        border-collapse: separate; /* Separate model required since display:block breaks border-collapse:collapse */
+        border-spacing: 0; /* Visually identical to border-collapse:collapse with separate model */
         width: 100%;
         margin: var(--space-md) 0;
     }
@@ -269,6 +272,7 @@
     th {
         font-weight: 600;
         background-color: var(--color-accent-subtle);
+        white-space: nowrap; /* Prevent headers wrapping so wide tables trigger horizontal scroll */
     }
 
 }
@@ -494,7 +498,7 @@
     .content {
         max-width: var(--max-width);
         line-height: var(--line-height);
-
+        overflow-wrap: anywhere; /* Allow long unbreakable strings to wrap at any character */
     }
 
     .content h2 {
