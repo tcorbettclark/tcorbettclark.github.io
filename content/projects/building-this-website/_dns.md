@@ -437,11 +437,13 @@ Here are the essential DNS records with annotations for this website (with email
 {.table-sm}
 | Type | Name | Value | Description |
 |------|------|-------|-------------|
-| CNAME | www | corbettclark.com | Redirect to the main domain |
+| CNAME | www | tcorbettclark.github.io | Redirect to the main domain |
 | A | @ | 185.199.108.153 | GitHub Pages |
 | A | @ | 185.199.109.153 | GitHub Pages |
 | A | @ | 185.199.110.153 | GitHub Pages |
 | A | @ | 185.199.111.153 | GitHub Pages |
+
+With the `CNAME` file containing `corbettclark.com` and the above DNS records, `corbettclark.com` is canonical and `www.corbettclark.com` redirects.
 
 ### Proof of Ownership
 
