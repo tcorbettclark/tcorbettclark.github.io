@@ -45,7 +45,7 @@ These rules about the `@` and trailing dots apply to all DNS record types, not j
 ### CNAME records
 
 A DNS `CNAME` record is a "DNS alias" to redirect a lookup to another domain.
-For example,
+For example, to make `www.corbettclark.com` lookups use the DNS records from `corbettclark.com`,
 ```
 www.corbettclark.com. CNAME corbettclark.com
 ```
