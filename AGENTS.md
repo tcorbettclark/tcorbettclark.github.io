@@ -17,6 +17,7 @@ Wait for specific instruction before committing.
 
 ## Auto-generated content
 
-Only edit files in `content/`. Never edit files in `docs/` directly.
-
-The `awg.py` tool automatically creates the entire `docs/` directory. Assume that it is always running and watching for changes in `content/`.
+All the content source files are in `content/`.
+Never edit files in the automatically generated `docs/` directory.
+Never read or commit files in `docs/`.
+Never run `awg.py`. You can assume it is always running and watching for changes in `content/` to automatically update `docs/`.
