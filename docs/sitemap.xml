@@ -9,15 +9,31 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://www.corbettclark.com/building-this-site/index.html</loc>
+        <loc>https://www.corbettclark.com/mental-habits/index.html</loc>
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://www.corbettclark.com/building-this-site/awg.html</loc>
+        <loc>https://www.corbettclark.com/projects/index.html</loc>
         <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://www.corbettclark.com/building-this-site/approach.html</loc>
+        <loc>https://www.corbettclark.com/projects/building-this-site/index.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/projects/building-this-site/awg.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/projects/building-this-site/approach.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/projects/building-this-site/dns.html</loc>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
+        <loc>https://www.corbettclark.com/projects/ski-tripper/index.html</loc>
         <changefreq>monthly</changefreq>
     </url>
     <url>

@@ -6,30 +6,54 @@ change_frequency = "monthly"
 name = "welcome/index.html"
 change_frequency = "monthly"
 
+
+# Mental habits
+[[SITEMAP_FILENAMES]]
+name = "mental-habits/index.html"
+change_frequency = "monthly"
+
+
+# Projects index
+[[SITEMAP_FILENAMES]]
+name = "projects/index.html"
+change_frequency = "monthly"
+
+
 # Building this site
-
 [[SITEMAP_FILENAMES]]
-name = "building-this-site/index.html"
+name = "projects/building-this-site/index.html"
 change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
-name = "building-this-site/awg.html"
+name = "projects/building-this-site/awg.html"
 change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
-name = "building-this-site/approach.html"
+name = "projects/building-this-site/approach.html"
 change_frequency = "monthly"
+
+[[SITEMAP_FILENAMES]]
+name = "projects/building-this-site/dns.html"
+change_frequency = "monthly"
+
+
+# Ski-Tripper
+[[SITEMAP_FILENAMES]]
+name = "projects/ski-tripper/index.html"
+change_frequency = "monthly"
+
 
 # My Computer setup
-
 [[SITEMAP_FILENAMES]]
 name = "my-setup/index.html"
 change_frequency = "monthly"
+
 
 # Skiing
 [[SITEMAP_FILENAMES]]
 name = "skiing/index.html"
 change_frequency = "monthly"
+
 
 # Maths problems
 [[SITEMAP_FILENAMES]]
