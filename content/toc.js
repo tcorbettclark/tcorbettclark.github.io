@@ -1,49 +1,61 @@
-document.addEventListener("DOMContentLoaded", function () {
-    var toc = document.getElementById("toc");
-    var content = document.querySelector(".content");
-    if (toc && content) {
-        var headings = content.querySelectorAll("h2, h3");
-        if (headings.length > 0) {
-            var title = document.createElement("p");
-            title.className = "toc-title";
-            title.textContent = "Contents";
-            toc.appendChild(title);
-            var list = document.createElement("ul");
-            list.className = "toc-list";
-            var lastH2 = null;
-            var headingLiMap = [];
-            for (var i = 0; i < headings.length; i++) {
-                var h = headings[i];
-                if (!h.id) {
-                    h.id = h.textContent.toLowerCase().replace(/[^\w]+/g, "-").replace(/^-|-$/g, "");
-                }
-                var li = document.createElement("li");
-                li.className = "toc-" + h.tagName.toLowerCase();
-                var a = document.createElement("a");
-                a.href = "#" + h.id;
-                a.textContent = h.textContent;
-                li.appendChild(a);
-                headingLiMap.push({ heading: h, li: li });
-                if (h.tagName === "H3" && lastH2) {
-                    var subList = lastH2.querySelector("ul");
-                    if (!subList) {
-                        subList = document.createElement("ul");
-                        subList.className = "toc-sublist";
-                        lastH2.appendChild(subList);
-                    }
-                    subList.appendChild(li);
-                } else {
-                    list.appendChild(li);
-                    lastH2 = li;
-                }
-            }
-            toc.appendChild(list);
-            initScrollSpy(headingLiMap);
+function slugify(text) {
+    return text.toLowerCase().replace(/[^\w]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function ensureUniqueIds(headings) {
+    var counts = {};
+    for (var i = 0; i < headings.length; i++) {
+        var id = headings[i].id;
+        if (counts[id]) {
+            counts[id]++;
+            headings[i].id = id + "-" + counts[id];
         } else {
-            toc.style.display = "none";
+            counts[id] = 1;
         }
     }
-});
+}
+
+function assignHeadingIds(headings) {
+    for (var i = 0; i < headings.length; i++) {
+        if (!headings[i].id) {
+            headings[i].id = slugify(headings[i].textContent);
+        }
+    }
+    ensureUniqueIds(headings);
+}
+
+function buildTocList(headings) {
+    var list = document.createElement("ul");
+    list.className = "toc-list";
+    var lastH2 = null;
+    var headingLiMap = [];
+
+    for (var i = 0; i < headings.length; i++) {
+        var h = headings[i];
+        var li = document.createElement("li");
+        li.className = "toc-" + h.tagName.toLowerCase();
+        var a = document.createElement("a");
+        a.href = "#" + h.id;
+        a.textContent = h.textContent;
+        li.appendChild(a);
+        headingLiMap.push({ heading: h, li: li });
+
+        if (h.tagName === "H3" && lastH2) {
+            var subList = lastH2.querySelector("ul");
+            if (!subList) {
+                subList = document.createElement("ul");
+                subList.className = "toc-sublist";
+                lastH2.appendChild(subList);
+            }
+            subList.appendChild(li);
+        } else {
+            list.appendChild(li);
+            lastH2 = li;
+        }
+    }
+
+    return { list: list, headingLiMap: headingLiMap };
+}
 
 function initScrollSpy(headingLiMap) {
     var currentActive = null;
@@ -102,3 +114,29 @@ function initScrollSpy(headingLiMap) {
 
     updateActiveHeading();
 }
+
+function main() {
+    var toc = document.getElementById("toc");
+    var content = document.querySelector(".content");
+    if (!toc || !content) return;
+
+    var headings = content.querySelectorAll("h2, h3");
+    if (headings.length === 0) {
+        toc.style.display = "none";
+        return;
+    }
+
+    assignHeadingIds(headings);
+
+    var title = document.createElement("p");
+    title.className = "toc-title";
+    title.textContent = "Contents";
+    toc.appendChild(title);
+
+    var result = buildTocList(headings);
+    toc.appendChild(result.list);
+
+    initScrollSpy(result.headingLiMap);
+}
+
+document.addEventListener("DOMContentLoaded", main);
