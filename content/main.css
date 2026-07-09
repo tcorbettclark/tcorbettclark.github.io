@@ -836,6 +836,27 @@
         margin-bottom: var(--space-md);
     }
 
+
+    #cv-experience {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 1rem;
+    }
+
+    /*#cv-experience > div > ul {
+        margin-bottom: 0;
+    }*/
+
+    .cv-experience-year {
+        font-weight: bold;
+        color: var(--color-accent);
+    }
+
+    .cv-experience-detail {
+        color: var(--color-accent);
+    }
+
+
 }
 @layer math-problems {
     /* ==========================================================================
