@@ -3,8 +3,9 @@
 {% extends "../_page.html" %}
 
 {% block page %}
-    {% include "_career-profile.html" %}
+    <!--{% include "_career-profile.html" %}
     {% include "_experience.html" %}
     {% include "_education.html" %}
-    {% include "_projects.html" %}
+    {% include "_projects.html" %}-->
+    {{ "_index.md" | markdown() }}
 {% endblock page %}
