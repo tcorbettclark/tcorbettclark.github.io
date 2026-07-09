@@ -2,10 +2,10 @@
 
 2021 - 2025
 : Chief Technology Officer at Aixial.
-: Guided senior executive team during acquisition and integration.
-: Set the AI strategy.
+: Responsible for integration and structural changes following acquisition.
 : Negotiated the orderly exit from multiple client and vendor contracts.
-: Closed the Encapsia Business Unit.
+: Advised senior executive team.
+: Set the AI strategy.
 
 2002 - 2021
 : Chief Technology Officer at Cmed Group.
@@ -56,19 +56,20 @@ My software skills started at secondary school, when my father and I wrote and s
 
 After reading Engineering and Computer Science at Oxford (concluding with a double first), I completed a DPhil in "Explanation from Artificial Neural Networks". The focus was on algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators (i.e. a Neural Network).
 
-After a careful exploration of different business areas, I co-founded a company to provide worldwide clinical trial data collection and analysis systems to the Life Sciences sector.
+Following a careful exploration of different business areas, I co-founded a company to provide worldwide clinical trial data collection and analysis systems to the Life Sciences sector.
 I was responsible for the data platform backbone which collected data from tens of thousands of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.
 
 We sold the business in May 2021, but I opted to stay on part time to help support the transition, the staff, the customers and their trials.
 
-Since the start of 2026 I have engaged in a much deeper exploration of AI foundations and applications. I feel extremely fortunate to have the experience, and now the time, to take advantage of this exciting revolution.
+Since the start of 2026 I have engaged in a much deeper exploration of AI foundations and applications.
+I feel extremely fortunate to have the experience, and now the time, to take advantage of this exciting revolution.
 
-I approach problems analytically and thoughtfully; people trust me, which helps me be a confident and natural leader. But I especially enjoy working closely with smart and hard working people, with skills and experience which complement my own.
+I approach problems analytically and thoughtfully, and people trust me, which helps me be a confident and natural leader. I enjoy lively collaboration, working closely with smart and hard working colleages, with skills and experience which complement my own.
 
 
 ## Other Interests
 
-I have learnt the violin my whole life, and hence had the privilege to play extraordinary classical music in many orchestras and chamber groups. A few years ago I decided to pause the violin and take up the cello. The new perspective has been hugely rewarding, and I have now reached a level where I am playing in orchestras and string quartets again. My new journey has only just started!
+I have learnt the violin my whole life, and hence enjoyed the privilege of playing extraordinary classical music in many orchestras and chamber groups. A few years ago I decided to pause the violin and take up the cello. The new perspective has been hugely rewarding, and I have now reached a level where I am playing in orchestras and string quartets again. My new journey has only just started!
 
 I chaired the Horsham Symphony Orchestra for a number of years, guiding it through several delicate transitions.
 
