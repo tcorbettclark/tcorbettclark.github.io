@@ -1,6 +1,6 @@
 ## Professional Experience
 
-2021 - 2025 (part time)
+2021 - 2025
 : Chief Technology Officer at Aixial.
 : Guided senior executive team during acquisition and integration.
 : Set the AI strategy.
@@ -26,25 +26,24 @@
 : Produced fully working demo system in 3 months.
 : Successfully pitched for fund-raising to create ThirdPhase Ltd.
 
-## Education
-
 1998 - 1999
 : Research Assistant at Department of Engineering Science, University of Oxford.
+: College Lecturer in Engineering.
 : Applying non-linear dynamical methods and Independent Component Analysis (ICA) to novelty detection in time-series data, and for the visualisation and analysis of ECG and EEG traces.
 
-1995 – 1998
-: Graduate at University of Oxford.
-: DPhil in Artificial Neural Networks.
+## Qualifications
+
+DPhil (PhD) in Explanation from Artificial Neural Networks (1998)
+: University of Oxford.
 : CASE award from Rolls Royce.
 
-1991 – 1995
-: Undergraduate at University of Oxford, St. Edmund Hall.
-: BA, MA in Engineering and Computing Science.
+BA, MA in Engineering and Computing Science (1995)
+: University of Oxford.
 : First class with Honours in Moderations, Finals Part I, and Finals Part II.
 : Academic Scholar throughout.
 : Faculty project prize for multi-processor simulation of small mobile robot.
 
-1980 – 1991
+A levels and GCSEs (1980-1991)
 : Haberdashers’ Aske’s School, Elstree.
 : A levels in Maths, Further Maths, Physics, Electronics (4 A's).
 : GCSEs (7 A’s, 2 B’s, 1 C).
@@ -62,9 +61,9 @@ I was responsible for the data platform backbone which collected data from tens 
 
 We sold the business in May 2021, but I opted to stay on part time to help support the transition, the staff, the customers and their trials.
 
-Since the start of 2026 I have engaged in a much deeper exploration of AI foundations and applications. I feel extremely fortunate to have had the experience, and now the time, to take advantage of this revolutionary era.
+Since the start of 2026 I have engaged in a much deeper exploration of AI foundations and applications. I feel extremely fortunate to have the experience, and now the time, to take advantage of this exciting revolution.
 
-I approach problems analytically and thoughtfully, and people trust me, which helps me be a confident and natural leader. But I especially enjoy working closely with smart and hard working people, with skills and experience which complement my own.
+I approach problems analytically and thoughtfully; people trust me, which helps me be a confident and natural leader. But I especially enjoy working closely with smart and hard working people, with skills and experience which complement my own.
 
 
 ## Other Interests
