@@ -19,6 +19,7 @@
 : Co-founder and Chief Technology Officer of ThirdPhase Ltd.
 : Responsible for all technology development and the design of innovative clinical trial system architecture.
 : Significantly involved in the raising of venture capital and the public face of the company.
+: ThirdPhase was then acquired and became Cmed Technology, a subsidiary of Cmed Group.
 
 1999 - 2000
 : Software Engineer (Freelance).
