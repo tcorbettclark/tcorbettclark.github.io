@@ -2,6 +2,12 @@
 
 {% block title %} Building this website {% endblock title %}
 
+{% block breadcrumb %}
+    {{ super() }}
+    <span class="breadcrumb-sep">/</span>
+    <a href="../index.html">Projects</a>
+{% endblock breadcrumb %}
+
 {% block page %}
     {{ "_index.md" | markdown }}
 {% endblock page %}

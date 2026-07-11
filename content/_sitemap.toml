@@ -32,16 +32,14 @@ change_frequency = "monthly"
 name = "projects/building-this-site/dns.html"
 change_frequency = "monthly"
 
+# My Computer setup
+[[SITEMAP_FILENAMES]]
+name = "projects/my-setup.html"
+change_frequency = "monthly"
 
 # Ski-Tripper
 [[SITEMAP_FILENAMES]]
-name = "projects/ski-tripper/index.html"
-change_frequency = "monthly"
-
-
-# My Computer setup
-[[SITEMAP_FILENAMES]]
-name = "my-setup/index.html"
+name = "projects/ski-tripper.html"
 change_frequency = "monthly"
 
 

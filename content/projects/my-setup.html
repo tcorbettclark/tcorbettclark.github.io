@@ -1,0 +1,13 @@
+{% extends "_project.html" %}
+
+{% block title %} My computer setup, tools, and tips {% endblock title %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    <span class="breadcrumb-sep">/</span>
+    <a href="index.html">Projects</a>
+{% endblock breadcrumb %}
+
+{% block page %}
+    {{ "_my-setup.md" | markdown }}
+{% endblock page %}
