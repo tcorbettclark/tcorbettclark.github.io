@@ -95,7 +95,7 @@ The input to the filter is the name of the file which should be converted from M
 For example:
 
  ```html
- {{ "<filename>.md" | markdown() }}
+ {{ "<filename>.md" | markdown }}
  ```
 
 As with Jinja includes/extends (see above), the path to the file is relative to the calling template.
@@ -149,7 +149,7 @@ The build process is as follows:
 1. Clone the source directory afresh for every build. The source directory is never changed (although it is watched).
 1. Load all **data files** into a single namespace. Any name clashes (attempts to set the same variable more than once) is considered an error, causing the tool to abort.
 1. Run all **template files** through Jinja, producing files of the same name.
-1. During templating, the contents of Markdown files can be rendered into HTML through use of the `markdown()` Jinja filter.
+1. During templating, the contents of Markdown files can be rendered into HTML through use of the `markdown` Jinja filter.
 1. Run all HTML files (`*.html`) through [HTML tidy](http://html-tidy.org), reporting any warnings, and standardising the formatting (e.g. indentation).
 1. Delete all **working files**, and afterwards delete any leftover empty directories.
 

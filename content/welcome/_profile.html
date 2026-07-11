@@ -1,5 +1,5 @@
 <div class="profile-card">
-    <img id="photo-of-me" src="me.jpg" alt="My profile picture" />
+    <img id="photo-of-me" src="{{ "me.jpg" | rel_to_abs_path }}" alt="My profile picture" />
     <div class="social-links">
         {% for ms in MY_SOCIALS %}
         <a class="social-link" href="{{ ms.url }}" target="_blank" rel="noopener" aria-label="{{ ms.fa_class }}">

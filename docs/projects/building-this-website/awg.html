@@ -58,7 +58,7 @@
       <div class="site-header-inner">
         <div class="site-brand">
           <p class="site-name">
-            <a href="/welcome/index.html">Dr Timothy Corbett‑Clark</a>
+            <a href="/index.html">Dr Timothy Corbett‑Clark</a>
           </p>
           <p class="site-tagline">
             CTO, Researcher, Developer, Philomath
@@ -66,9 +66,9 @@
         </div><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span class=
         "nav-toggle-bar"></span> <span class="nav-toggle-bar"></span> <span class="nav-toggle-bar"></span></button>
         <nav class="site-nav" aria-label="Main navigation">
-          <a href="/welcome/index.html">Welcome</a> <a href="/maths-problems/index.html">Maths</a> <a href=
-          "/my-setup/index.html">Setup</a> <a href="/skiing/index.html">Skiing</a> <a href=
-          "/mental-habits/index.html">Habits</a> <a href="/projects/index.html">Projects</a>
+          <a href="/maths-problems/index.html">Maths</a> <a href="/my-setup/index.html">Setup</a> <a href=
+          "/skiing/index.html">Skiing</a> <a href="/mental-habits/index.html">Habits</a> <a href=
+          "/projects/index.html">Projects</a>
         </nav>
       </div>
       <hr class="site-header-rule" />
@@ -76,9 +76,8 @@
     <div class="page-layout">
       <main class="page-main">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/welcome/index.html">Home</a> <span class="breadcrumb-sep">/</span> <a href=
-          "../index.html">Projects</a> <span class="breadcrumb-sep">/</span> <a href="index.html">Building this
-          website</a>
+          <a href="/index.html">Home</a> <span class="breadcrumb-sep">/</span> <a href="../index.html">Projects</a>
+          <span class="breadcrumb-sep">/</span> <a href="index.html">Building this website</a>
         </nav>
         <article>
           <h1 class="page-title">
@@ -238,7 +237,7 @@
               the name of the file which should be converted from Markdown into HTML and included in the document at
               that point. For example:
             </p>
-            <pre><code class="language-html">{{ "&lt;filename&gt;.md" | markdown() }}
+            <pre><code class="language-html">{{ "&lt;filename&gt;.md" | markdown }}
 </code></pre>
             <p>
               As with Jinja includes/extends (see above), the path to the file is relative to the calling template.
@@ -350,7 +349,7 @@
               <li>Run all <strong>template files</strong> through Jinja, producing files of the same name.
               </li>
               <li>During templating, the contents of Markdown files can be rendered into HTML through use of the <code>
-                markdown()</code> Jinja filter.
+                markdown</code> Jinja filter.
               </li>
               <li>Run all HTML files (<code>*.html</code>) through <a href="http://html-tidy.org">HTML tidy</a>,
               reporting any warnings, and standardising the formatting (e.g. indentation).

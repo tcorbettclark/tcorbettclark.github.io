@@ -49,7 +49,7 @@ For example, the indentation below is entirely to aid readability at the templat
 {% block title %} Content approach {% endblock title %}
 
 {% block page %}
-    {{ "_approach.md" | markdown() }}
+    {{ "_approach.md" | markdown }}
 {% endblock page %}
 ```
 
@@ -409,7 +409,7 @@ name = "index.html"
 change_frequency = "monthly"
 
 [[SITEMAP_FILENAMES]]
-name = "welcome/index.html"
+name = "/index.html"
 change_frequency = "weekly"
 ```
 
