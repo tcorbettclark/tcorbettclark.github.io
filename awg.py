@@ -171,12 +171,22 @@ class Builder:
 
         env.filters["sha"] = make_sha
 
+    def _add_rel_to_abs_path_filter(self, env):
+        @jinja2.pass_context
+        def rel_to_abs_path(context, value):
+            template_dir = pathlib.Path(context.name).parent
+            resolved = os.path.normpath(pathlib.Path(template_dir) / value)
+            return "/" + resolved
+
+        env.filters["rel_to_abs_path"] = rel_to_abs_path
+
     def render_templates(self):
         loader = jinja2.FileSystemLoader(self.working_dir)
         env = _RelativeEnvironment(loader=loader)
         self._add_template_data(env)
         self._add_markdown_filter(env)
         self._add_sha_filter(env)
+        self._add_rel_to_abs_path_filter(env)
         template_filenames = env.list_templates(filter_func=self._is_template_filename)
         for template_filename in template_filenames:
             template = env.get_template(template_filename)
