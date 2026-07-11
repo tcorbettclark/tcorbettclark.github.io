@@ -1,0 +1,13 @@
+{% extends "../_page.html" %}
+
+{% block title %} My skiing {% endblock title %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    <span class="breadcrumb-sep">/</span>
+    <a href="index.html">Interests</a>
+{% endblock breadcrumb %}
+
+{% block page %}
+    {{ "_skiing.md" | markdown }}
+{% endblock page %}
