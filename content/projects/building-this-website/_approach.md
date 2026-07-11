@@ -266,19 +266,19 @@ This makes the design system easy to understand and modify, and the entire colou
     --color-bg: #fafaf8;
     --color-text: #1a1a1a;
     --color-text-muted: #666;
-    --color-accent: hsl(45, 85%, 45%);
-    --color-accent-subtle: hsl(45, 85%, 93%);
-    --color-border: #e0e0d8;
-    --color-code-bg: hsl(45, 30%, 96%);
-    --color-link: hsl(220, 100%, 45%);
-    --color-link-hover: hsl(220, 100%, 35%);
+    --color-accent: hsl(168, 40%, 28%);
+    --color-accent-subtle: hsl(168, 25%, 93%);
+    --color-border: #d8e0df;
+    --color-code-bg: hsl(168, 12%, 96%);
+    --color-link: hsl(168, 40%, 28%);
+    --color-link-hover: hsl(168, 40%, 20%);
 
-    --color-selection-bg: hsl(45, 85%, 85%);
+    --color-selection-bg: hsl(168, 35%, 85%);
     --color-selection-text: #1a1a1a;
 
-    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --font-body: "Literata", Georgia, "Times New Roman", serif;
     --font-mono: "Fira Code", "SF Mono", "Cascadia Code", ui-monospace, monospace;
-    --font-size-base: 1rem;
+    --font-size-base: 1.125rem;
     --font-size-h1: 1.8rem;
     --font-size-h2: 1.35rem;
     --font-size-h3: 1.15rem;
@@ -311,14 +311,14 @@ Dark mode is handled entirely by the CSS `prefers-color-scheme` media query, whi
         --color-bg: #1a1a18;
         --color-text: #e0e0d8;
         --color-text-muted: #999;
-        --color-accent: hsl(45, 80%, 55%);
-        --color-accent-subtle: hsl(45, 25%, 18%);
+        --color-accent: hsl(168, 40%, 45%);
+        --color-accent-subtle: hsl(168, 20%, 18%);
         --color-border: #333;
-        --color-code-bg: hsl(45, 10%, 15%);
-        --color-link: hsl(220, 80%, 65%);
-        --color-link-hover: hsl(220, 80%, 75%);
+        --color-code-bg: hsl(168, 8%, 14%);
+        --color-link: hsl(168, 40%, 55%);
+        --color-link-hover: hsl(168, 40%, 65%);
 
-        --color-selection-bg: hsl(45, 60%, 30%);
+        --color-selection-bg: hsl(168, 30%, 30%);
         --color-selection-text: #e0e0d8;
     }
 }

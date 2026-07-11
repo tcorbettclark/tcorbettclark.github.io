@@ -23,6 +23,38 @@
        content, page-chrome, toc, welcome, cv, math-problems,
        utilities, responsive, print;
 
+@font-face {
+    font-family: "Literata";
+    src: url("/fonts/literata-latin-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Literata";
+    src: url("/fonts/literata-latin-400-italic.woff2") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Literata";
+    src: url("/fonts/literata-latin-600-normal.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Literata";
+    src: url("/fonts/literata-latin-600-italic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
 @layer reset {
     /* ==========================================================================
        @layer reset
@@ -53,19 +85,20 @@
         --color-bg: #fafaf8;
         --color-text: #1a1a1a;
         --color-text-muted: #666;
-        --color-accent: hsl(45, 85%, 45%);
-        --color-accent-subtle: hsl(45, 85%, 93%);
-        --color-border: #e0e0d8;
-        --color-code-bg: hsl(45, 30%, 96%);
-        --color-link: hsl(220, 100%, 45%);
-        --color-link-hover: hsl(220, 100%, 35%);
+        --color-accent: hsl(168, 40%, 28%);
+        --color-accent-subtle: hsl(168, 25%, 93%);
+        --color-header-bg: hsl(168, 40%, 28%);
+        --color-border: #d8e0df;
+        --color-code-bg: hsl(168, 12%, 96%);
+        --color-link: hsl(168, 40%, 28%);
+        --color-link-hover: hsl(168, 40%, 20%);
 
-        --color-selection-bg: hsl(45, 85%, 85%);
+        --color-selection-bg: hsl(168, 35%, 85%);
         --color-selection-text: #1a1a1a;
 
-        --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        --font-body: "Literata", Georgia, "Times New Roman", serif;
         --font-mono: "Fira Code", "SF Mono", "Cascadia Code", ui-monospace, monospace;
-        --font-size-base: 1rem;
+        --font-size-base: 1.125rem;
         --font-size-h1: 1.8rem;
         --font-size-h2: 1.35rem;
         --font-size-h3: 1.15rem;
@@ -95,14 +128,15 @@
             --color-bg: #1a1a18;
             --color-text: #e0e0d8;
             --color-text-muted: #999;
-            --color-accent: hsl(45, 80%, 55%);
-            --color-accent-subtle: hsl(45, 25%, 18%);
+            --color-accent: hsl(168, 40%, 45%);
+            --color-accent-subtle: hsl(168, 20%, 18%);
+            --color-header-bg: hsl(168, 30%, 15%);
             --color-border: #333;
-            --color-code-bg: hsl(45, 10%, 15%);
-            --color-link: hsl(220, 80%, 65%);
-            --color-link-hover: hsl(220, 80%, 75%);
+            --color-code-bg: hsl(168, 8%, 14%);
+            --color-link: hsl(168, 40%, 55%);
+            --color-link-hover: hsl(168, 40%, 65%);
 
-            --color-selection-bg: hsl(45, 60%, 30%);
+            --color-selection-bg: hsl(168, 30%, 30%);
             --color-selection-text: #e0e0d8;
         }
     }
@@ -154,8 +188,8 @@
     }
 
     h1 { font-size: var(--font-size-h1); }
-    h2 { font-size: var(--font-size-h2); }
-    h3 { font-size: var(--font-size-h3); }
+    h2 { font-size: var(--font-size-h2); color: var(--color-accent); }
+    h3 { font-size: var(--font-size-h3); color: var(--color-accent); }
     h4 { font-size: var(--font-size-h4); }
     h5 { font-size: var(--font-size-h5); }
     h6 { font-size: var(--font-size-h6); }
@@ -353,25 +387,17 @@
 @layer header-nav {
     /* ==========================================================================
        @layer header-nav
-       Purpose: Site-wide header, branding, navigation, and mobile hamburger
-         menu. The header is sticky with a translucent backdrop-blur effect.
-       Notes: -webkit-backdrop-filter is a Safari workaround required for
-         Safari versions < 18 (which dropped the prefix). The solid
-         background-color declaration before the color-mix() declaration
-         serves as a progressive-enhancement fallback for browsers that
-         don't support color-mix().
-       Standard: backdrop-filter (CSS Backdrop Filter Level 1);
-         color-mix() (CSS Color Level 5).
+        Purpose: Site-wide header, branding, navigation, and mobile hamburger
+          menu. The header is sticky with a solid accent-coloured background
+          and white text.
+        Standard: CSS Position Sticky.
        ========================================================================== */
 
     .site-header {
         position: sticky;
         top: 0;
         z-index: 100;
-        background-color: var(--color-bg);
-        background-color: color-mix(in srgb, var(--color-bg) 92%, transparent); /* Progressive enhancement: fallback is the solid background above */
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px); /* Safari workaround: prefix required for Safari < 18 */
+        background-color: var(--color-header-bg);
     }
 
     .site-header-inner {
@@ -392,28 +418,29 @@
     .site-name {
         margin: 0;
         font-size: 1.1rem;
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1.3;
     }
 
     .site-name a {
-        color: var(--color-text);
+        color: #fff;
         text-decoration: none;
     }
 
     .site-name a:hover {
-        color: var(--color-accent);
+        color: hsl(168, 25%, 75%);
     }
 
     .site-tagline {
         margin: 0;
         font-size: 0.8rem;
-        color: var(--color-text-muted);
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
     }
 
     .site-header-rule {
         border: none;
-        border-top: 2px solid var(--color-accent);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
         margin: 0;
     }
 
@@ -433,7 +460,7 @@
         width: 20px;
         height: 2px;
         margin: 4px 0;
-        background-color: var(--color-text);
+        background-color: #fff;
         border-radius: 1px;
         transition: transform 0.2s, opacity 0.2s;
     }
@@ -445,13 +472,13 @@
     }
 
     .site-nav a {
-        color: var(--color-text-muted);
+        color: rgba(255, 255, 255, 0.75);
         text-decoration: none;
         white-space: nowrap;
     }
 
     .site-nav a:hover {
-        color: var(--color-accent);
+        color: #fff;
     }
 
 }
@@ -675,8 +702,8 @@
     /* On touch devices, tapping a TOC link focuses it. When the scroll spy
        later moves .toc-active to a different heading, the previously-tapped
        link loses .toc-active (so the underline vanishes) but retains :focus,
-       leaving a lone yellow heading. Override :focus to match the default
-       style so it doesn't linger. */
+       leaving a lone accent-coloured heading. Override :focus to match the
+       default style so it doesn't linger. */
     .toc-list a:focus {
         color: var(--color-text-muted);
         outline: none;
@@ -803,7 +830,7 @@
     }
 
     .cv-item {
-        margin-bottom: var(--space-md);
+        margin-bottom: var(--space-lg);
     }
 
     .cv-meta {
@@ -831,32 +858,6 @@
     .cv-details {
         margin-top: var(--space-xs);
     }
-
-    .cv-intro {
-        margin-bottom: var(--space-md);
-    }
-
-
-    #cv-experience {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        row-gap: 1rem;
-    }
-
-    /*#cv-experience > div > ul {
-        margin-bottom: 0;
-    }*/
-
-    .cv-experience-year {
-        font-weight: bold;
-        color: var(--color-accent);
-    }
-
-    .cv-experience-detail {
-        color: var(--color-accent);
-    }
-
-
 }
 @layer math-problems {
     /* ==========================================================================
@@ -911,7 +912,7 @@
             width: 100%;
             gap: 0;
             padding: var(--space-sm) 0;
-            border-top: 1px solid var(--color-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .site-nav-open {
