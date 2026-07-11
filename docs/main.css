@@ -531,7 +531,7 @@
     .content h2 {
         margin-top: var(--space-xl);
         padding-bottom: var(--space-xs);
-        border-bottom: 1px solid var(--color-border);
+        border-bottom: 2px solid var(--color-border);
     }
 
     /* Headings with an id attribute are linkable anchors.
