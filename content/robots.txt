@@ -1,1 +1,3 @@
+User-agent: Google-Extended
+Allow: /
 Sitemap: {{ SITEURL }}/sitemap.xml
