@@ -1,0 +1,79 @@
+MY_CAREER_SUMMARY = "TODO copy from LinkedIn"
+
+[[MY_EDUCATION]]
+degree = "DPhil (PhD) in Explanation from Artificial Neural Networks"
+time = "1998"
+institution = "University of Oxford."
+details = [
+    "CASE award from Rolls Royce."
+]
+
+[[MY_EDUCATION]]
+degree = "BA, MA in Engineering and Computing Science"
+time = "1995"
+institution = "University of Oxford."
+details = [
+    "First class with Honours in Moderations, Finals Part I, and Finals Part II.",
+    "Academic Scholar throughout.",
+    "Faculty project prize for multi-processor simulation of small mobile robot."
+]
+
+[[MY_EDUCATION]]
+degree = "A levels and GCSEs"
+time = "1980 - 1991"
+institution = "Haberdashers' Aske's School, Elstree."
+details = [
+    "A levels in Maths, Further Maths, Physics, Electronics (4 A's).",
+    "GCSEs (7 A's, 2 B's, 1 C)."
+]
+
+[[MY_EXPERIENCE]]
+job_title = "Chief Technology Officer"
+time = "2021 - 2025"
+company = "Aixial"
+details = [
+    "Responsible for integration and structural changes following acquisition.",
+    "Negotiated the orderly exit from multiple client and vendor contracts.",
+    "Advised senior executive team.",
+    "Set the AI strategy."
+]
+
+[[MY_EXPERIENCE]]
+job_title = "Chief Technology Officer"
+time = "2002 - 2021"
+company = "Cmed Group"
+details = [
+    "Designed, built, and supported the Clinical Trial technology which was used to run almost all work undertaken by Cmed.",
+    "Led and was responsible for all Technology R&D, System Support, and Corporate IT.",
+    "The external and internal figurehead for all Technology innovation.",
+    "A key leader and board member."
+]
+
+[[MY_EXPERIENCE]]
+job_title = "Co-founder and Chief Technology Officer"
+time = "2000 - 2002"
+company = "ThirdPhase Ltd"
+details = [
+    "Responsible for all technology development and the design of innovative clinical trial system architecture.",
+    "Significantly involved in the raising of venture capital and the public face of the company.",
+    "ThirdPhase was then acquired and became Cmed Technology, a subsidiary of Cmed Group."
+]
+
+[[MY_EXPERIENCE]]
+job_title = "Software Engineer"
+time = "1999 - 2000"
+company = "Freelance"
+details = [
+    "Built a prototype e-commerce system utilising encryption technologies. This integrated peripheral hardware including fingerprint devices, mobile phones, barcode scanners and printers, ECG, vital signs and spirometry medical devices.",
+    "Produced fully working demo system in 3 months.",
+    "Successfully pitched for fund-raising to create ThirdPhase Ltd."
+]
+
+[[MY_EXPERIENCE]]
+job_title = "Research Assistant"
+time = "1998 - 1999"
+company = "Department of Engineering Science, University of Oxford"
+details = [
+    "College Lecturer in Engineering.",
+    "Applying non-linear dynamical methods and Independent Component Analysis (ICA) to novelty detection in time-series data, and for the visualisation and analysis of ECG and EEG traces."
+]

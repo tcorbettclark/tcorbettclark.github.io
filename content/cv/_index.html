@@ -1,11 +1,24 @@
-{% set draft = true %}
+{% extends "../_base.html" %}
 
-{% extends "../_page.html" %}
-
-{% block page %}
-    <!--{% include "_career-profile.html" %}
-    {% include "_experience.html" %}
-    {% include "_education.html" %}
-    {% include "_projects.html" %}-->
-    {{ "_index.md" | markdown }}
-{% endblock page %}
+{% block content %}
+<div class="page-layout">
+    <main class="page-main">
+        <!--<nav class="breadcrumb" aria-label="Breadcrumb">
+            {% block breadcrumb %}
+                <a href="/index.html">Home</a>
+            {% endblock breadcrumb %}
+        </nav>-->
+        <article>
+            <!--<h1 class="page-title">{% block title %}{% endblock title %}</h1>-->
+            <div class="content">
+                <!--{% include "_career-profile.html" %}-->
+                {% include "_experience.html" %}
+                {% include "_education.html" %}
+                {% include "_my_story.html" %}
+                {% include "_other_interests.html" %}
+            </div>
+        </article>
+    </main>
+    <aside class="page-toc" id="toc" aria-label="Table of contents"></aside>
+</div>
+{% endblock content %}
