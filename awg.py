@@ -366,6 +366,25 @@ class Server:
 
         app.on_response_prepare.append(permissive_cors_for_testing)
 
+    async def _serve_file(self, request):
+        rel_path = request.match_info.get("path", "")
+        file_path = (pathlib.Path(self.directory) / rel_path).resolve()
+        directory_resolved = pathlib.Path(self.directory).resolve()
+
+        if not file_path.is_relative_to(directory_resolved):
+            raise aiohttp.web.HTTPNotFound()
+
+        if file_path.is_dir():
+            file_path = file_path / "index.html"
+
+        if file_path.is_file():
+            return aiohttp.web.FileResponse(file_path)
+
+        path_404 = directory_resolved / "404.html"
+        if path_404.is_file():
+            return aiohttp.web.FileResponse(path_404, status=404)
+        raise aiohttp.web.HTTPNotFound()
+
     async def start(self):
         async def websocket_handler(request):
             ws = aiohttp.web.WebSocketResponse()
@@ -386,9 +405,9 @@ class Server:
             return ws
 
         app = aiohttp.web.Application()
-        app.router.add_static("/", self.directory, show_index=True)
         self._add_permissive_cores(app)
         app.router.add_get("/ws", websocket_handler)
+        app.router.add_get("/{path:.*}", self._serve_file)
         self._runner = aiohttp.web.AppRunner(
             app,
             access_log_class=_ServerAccessLogger,
