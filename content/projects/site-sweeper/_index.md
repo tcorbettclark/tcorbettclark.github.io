@@ -1,8 +1,6 @@
 ## What is it?
 
-A command-line tool to sweep a website for all internal links, take screenshots, generate sitemap data, and check for broken links and canonical tag issues.
-
-Uses [Playwright](https://playwright.dev/python/) (headless Chromium) to render pages, extract links, verify canonical tags, and capture screenshots.
+A command-line tool to sweep all the pages of a website, checking for broken links and canonical tag issues, taking screenshots, and generating sitemap data.
 
 ![Site Sweeper demo output](demo.svg)
 
