@@ -16,7 +16,7 @@
     <title>
       Dr Timothy Corbett-Clark
     </title>
-    <link rel="canonical" href="https://corbettclark.com/projects/" />
+    <link rel="canonical" href="https://corbettclark.com/projects/site-sweeper/" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -77,26 +77,59 @@
     <div class="page-layout">
       <main class="page-main">
         <nav class="breadcrumb" aria-label="Breadcrumb">
-          <a href="/">Home</a>
+          <a href="/">Home</a> <span class="breadcrumb-sep">/</span> <a href="../">Projects</a>
         </nav>
         <article>
           <h1 class="page-title">
-            Projects
+            Site Sweeper
           </h1>
           <div class="content">
+            <h2>
+              What is it?
+            </h2>
             <p>
-              Some of my more developed projects:
+              A command-line tool to sweep a website for all internal links, take screenshots, generate sitemap data,
+              and check for broken links and canonical tag issues.
             </p>
+            <p>
+              Uses <a href="https://playwright.dev/python/">Playwright</a> (headless Chromium) to render pages, extract
+              links, verify canonical tags, and capture screenshots.
+            </p>
+            <p>
+              <img src="demo.svg" alt="Site Sweeper demo output" />
+            </p>
+            <h2>
+              Features
+            </h2>
             <ul>
-              <li>How I built <a href="building-this-website/">this website</a>
+              <li>
+                <strong>Crawl &amp; traverse</strong> — recursively follows all internal links from a starting URL
               </li>
-              <li>A <a href="site-sweeper/">Site Sweeper</a> tool to help maintain websites
+              <li>
+                <strong>Broken link detection</strong> — identifies internal pages returning 4xx/5xx status codes
               </li>
-              <li>My <a href="ski-tripper.html">Ski-Tripper</a> application
+              <li>
+                <strong>Canonical tag validation</strong> — checks for missing, mismatched, or malformed <code>&lt;link
+                rel="canonical"&gt;</code> tags
+              </li>
+              <li>
+                <strong>Non-canonical link detection</strong> — flags internal links that point to non-canonical URLs
+                (e.g. linking to <code>/page</code> when the canonical is <code>/page/</code>)
+              </li>
+              <li>
+                <strong>External link checking</strong> — optionally verifies that external links are reachable
+              </li>
+              <li>
+                <strong>Screenshots</strong> — captures page screenshots at configurable viewport sizes (mobile,
+                tablet, desktop, desktop-lg)
+              </li>
+              <li>
+                <strong>Canonical links file</strong> — writes a list of canonicalised internal paths for sitemap
+                generation
               </li>
             </ul>
             <p>
-              I document <a href="my-setup.html">my setup</a> so I can maintain and rebuild my computer more easily.
+              For details, see the <a href="https://github.com/tcorbettclark/site-sweeper">GitHub repository</a>.
             </p>
           </div>
         </article>

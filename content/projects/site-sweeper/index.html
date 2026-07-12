@@ -1,0 +1,13 @@
+{% extends "../_project.html" %}
+
+{% block title %} Site Sweeper {% endblock title %}
+
+{% block breadcrumb %}
+    {{ super() }}
+    <span class="breadcrumb-sep">/</span>
+    <a href="../">Projects</a>
+{% endblock breadcrumb %}
+
+{% block page %}
+    {{ "_index.md" | markdown }}
+{% endblock page %}
