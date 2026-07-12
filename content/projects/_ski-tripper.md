@@ -24,7 +24,7 @@ In particular, it covers:
 - The backend (small TypeScript server and [pocketbase](https://pocketbase.io/)).
 - Web scraping data extraction, enrichment, verification pipeline.
 - Full set of unit tests and end-to-end tests (using [Playwright](https://playwright.dev/)).
-- Fully automated server build, configuration and deployment to [DigitalOcean](https://www.digitalocean.com/) (using [xec](https://github.com/tcorbettclark/xec)).
+- Fully automated server build, configuration and deployment to [DigitalOcean](https://www.digitalocean.com/) (using [xec](https://xec.sh)).
 
 ## How was AI used?
 
