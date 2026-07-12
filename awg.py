@@ -5,14 +5,14 @@
 # /// script
 # requires-python = ">=3.13"
 # dependencies = [
-#     "aiohttp",
-#     "click",
-#     "jinja2",
-#     "markdown-it-py",
-#     "mdit-py-plugins",
-#     "user-agents",
-#     "utidylib",
-#     "watchfiles",
+#     "aiohttp>=3.12,<3.14",
+#     "click>=8.2,<8.3",
+#     "jinja2>=3.1,<4",
+#     "markdown-it-py>=3.0,<4",
+#     "mdit-py-plugins>=0.4,<0.5",
+#     "user-agents>=2.2,<3",
+#     "utidylib>=0.10,<1",
+#     "watchfiles>=1.0,<2",
 # ]
 # ///
 
