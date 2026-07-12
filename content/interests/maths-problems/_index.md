@@ -6,9 +6,9 @@ I enjoy mathematical nuggets and puzzles, e.g. from:
 Here are some of the more interesting, surprising, and/or fun.
 My answers with discussion and extensions are written up as PDFs.
 
-* [Problem 1](problem-1/index.html) - sum of squared distances from polygon corners to enclosed circle
-* [Problem 2](problem-2/index.html) - an invariant expression for all roots of unity
-* [Problem 3](problem-3/index.html) - a power bound on factorial
+* [Problem 1](problem-1/) - sum of squared distances from polygon corners to enclosed circle
+* [Problem 2](problem-2/) - an invariant expression for all roots of unity
+* [Problem 3](problem-3/) - a power bound on factorial
 
 <!--
 JD Cook.

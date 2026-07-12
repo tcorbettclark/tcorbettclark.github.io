@@ -43,7 +43,7 @@ For example, the indentation below is entirely to aid readability at the templat
 {% block breadcrumb %}
     {{ super() }}
     <span class="breadcrumb-sep">/</span>
-    <a href="index.html">Building this website</a>
+    <a href="./">Building this website</a>
 {% endblock breadcrumb %}
 
 {% block title %} Content approach {% endblock title %}
@@ -182,7 +182,7 @@ So the pattern is as follows (ignoring all styling).
 
 {% block breadcrumb %}
     {{ super() }}
-    <a href="../index.html">Back to Recreational Maths</a>
+    <a href="../">Back to Recreational Maths</a>
 {% endblock breadcrumb%}
 ```
 
