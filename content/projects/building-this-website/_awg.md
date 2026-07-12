@@ -126,6 +126,34 @@ For example, to create SHA384 integrity attributes for SRI,
 <script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"></script>
 ```
 
+### Canonical URLs
+
+A [canonical URL](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls) tells search engines which version of a page is the preferred one, avoiding duplicate content issues when the same content is accessible from multiple URLs.
+
+AWG adds a Jinja filter `canonical` to generate canonical URLs from a base URL and the current template's output path.
+This makes it easy to add canonical link tags to every page.
+The base URL is typically provided as template data from a TOML file, e.g. `SITEURL = "https://corbettclark.com"` in `_config.toml`.
+
+The canonical URL is determined by the final template's output path, not the path of the file containing the `canonical` filter.
+This matters because the filter is usually placed in a shared base template (a working file) that other templates extend.
+For example, in `_base.html`:
+
+```html
+<link rel="canonical" href="{{ SITEURL | canonical }}">
+```
+
+When `about.html` extends `_base.html`, the canonical URL is `https://corbettclark.com/about.html` — derived from the output path `about.html`, not from `_base.html`.
+
+The filter strips trailing slashes from the base URL and handles `index.html` files by converting `index.html` to the root path and removing `/index.html` suffixes from other paths, so that directories produce clean canonical URLs without `index.html` in the path.
+For example, with `SITEURL = "https://corbettclark.com"`:
+
+| Template output path | Canonical URL |
+|---|---|
+| `index.html` | `https://corbettclark.com/` |
+| `about.html` | `https://corbettclark.com/about.html` |
+| `projects/index.html` | `https://corbettclark.com/projects/` |
+| `interests/maths-problems/index.html` | `https://corbettclark.com/interests/maths-problems/` |
+
 ### Summary: the AWG content interface    
 
 The AWG tool recognises 3 types of file:
