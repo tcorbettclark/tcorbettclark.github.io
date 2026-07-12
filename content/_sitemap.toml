@@ -18,6 +18,7 @@ SITEMAP_FILENAMES = [
     "/projects/building-this-website/awg.html",
     "/projects/building-this-website/dns.html",
     "/projects/my-setup.html",
+    "/projects/site-sweeper/",
     "/projects/ski-tripper.html",
     "/research/",
     "/research/ica_extensions_pt1.pdf",
