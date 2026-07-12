@@ -13,4 +13,4 @@ We sold the business in May 2021, but I opted to stay on part time to help suppo
 Since the start of 2026 I have engaged in a much deeper exploration of AI foundations and applications.
 I feel extremely fortunate to have the experience, and now the time, to take advantage of this exciting revolution.
 
-I approach problems analytically and thoughtfully, and people trust me, which helps me be a confident and natural leader. I enjoy lively collaboration, working closely with smart and hard working colleages who have skills and experience complementing my own.
+I approach problems analytically and thoughtfully, and people trust me, which helps me be a confident and natural leader. I enjoy lively collaboration, working closely with smart and hard working colleagues who have skills and experience complementing my own.

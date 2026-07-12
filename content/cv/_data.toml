@@ -27,6 +27,15 @@ details = [
     "A levels in Maths, Further Maths, Physics, Electronics (4 A's)."
 ]
 
+
+[[MY_EXPERIENCE]]
+job_title = "Independent AI Researcher and board member/advisor"
+time = "2026 - Present"
+company = "Freelance"
+details = [
+    "Only interested in part-time/contract work which is challenging, stimulating, and mutually beneficial."
+]
+
 [[MY_EXPERIENCE]]
 job_title = "Chief Technology Officer"
 time = "2021 - 2025"
@@ -43,9 +52,9 @@ job_title = "Chief Technology Officer"
 time = "2002 - 2021"
 company = "Cmed Group"
 details = [
-    "Designed, built, and supported the Clinical Trial technology which was used to deliver almost all clinical trial data work.",
+    "Designed, built, and supported the technology which collected data from tens of thousands of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.",
     "Ran private cloud of multi-level redundant virtualised data centre servers (~500), later migrated to public cloud (AWS, Azure).",
-    "Unique features included eSource, built-in Analytics (R, Python), Actionable Visualisations (tech to the data).",
+    "Unique features included eSource, built-in Analytics (R, Python), Actionable Visualisations (tech to the data), zero downtime.",
     "All backed by unavoidable audit trail over single source of truth (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).",
     "Early adoptor of Python for all server-side infrastructure/code.",
     "Responsible for all R&D, System Support, and Corporate IT.",
