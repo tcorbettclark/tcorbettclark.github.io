@@ -1,3 +1,3 @@
 # README
 
-My personal website. How it works is documented on the site itself: [https://www.corbettclark.com](https://www.corbettclark.com).
+My personal website. How it works is documented on the site itself: [https://corbettclark.com](https://corbettclark.com).
