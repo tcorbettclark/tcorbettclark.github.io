@@ -5,7 +5,7 @@
 # /// script
 # requires-python = ">=3.13"
 # dependencies = [
-#     "aiohttp>=3.12,<3.14",
+#     "aiohttp>=3.12,<3.15",
 #     "click>=8.2,<8.5",
 #     "jinja2>=3.1,<4",
 #     "markdown-it-py>=3.0,<4",
