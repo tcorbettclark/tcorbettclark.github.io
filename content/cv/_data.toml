@@ -1,18 +1,18 @@
-MY_CAREER_SUMMARY = "TODO copy from LinkedIn"
+MY_CAREER_SUMMARY = "Technology leader with 25+ years' experience spanning AI research, clinical trial systems, and enterprise software. As CTO of Cmed Group, built and scaled the data platform behind ~1000 clinical trials for ~150 pharma and biotech customers, backed by two patents. Oxford DPhil in explainable AI; now part time, focused on independent AI research and advisory/board work."
 
 [[MY_EDUCATION]]
 degree = "DPhil (Ph.D) in Explanation from Artificial Neural Networks"
 time = "1998"
-institution = "University of Oxford."
+institution = "University of Oxford"
 details = [
     "Algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators.",
-    "CASE award from Rolls Royce."
+    "CASE award from Rolls-Royce."
 ]
 
 [[MY_EDUCATION]]
 degree = "BA, MA in Engineering and Computing Science"
 time = "1995"
-institution = "University of Oxford."
+institution = "University of Oxford"
 details = [
     "First class (1st) Honours.",
     "Academic Scholar throughout.",
@@ -21,20 +21,20 @@ details = [
 
 [[MY_EDUCATION]]
 degree = "A levels"
-time = "1980 - 1991"
-institution = "Haberdashers' Aske's School, Elstree."
+time = "1989 - 1991"
+institution = "Haberdashers' Aske's School, Elstree"
 details = [
     "A levels in Maths, Further Maths, Physics, Electronics (4 A's)."
 ]
 
 
-[[MY_EXPERIENCE]]
-job_title = "Independent AI Researcher and board member/advisor"
-time = "2026 - Present"
-company = "Freelance"
-details = [
-    "Only interested in part-time/contract work which is challenging, stimulating, and mutually beneficial."
-]
+# [[MY_EXPERIENCE]]
+# job_title = "Independent AI Researcher and board member/advisor"
+# time = "2026 - Present"
+# company = "Freelance"
+# details = [
+#     "Only interested in part-time/contract work which is challenging, stimulating, and mutually beneficial."
+# ]
 
 [[MY_EXPERIENCE]]
 job_title = "Chief Technology Officer"
@@ -54,10 +54,10 @@ company = "Cmed Group"
 details = [
     "Designed, built, and supported the technology which collected data from tens of thousands of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.",
     "Ran private cloud of multi-level redundant virtualised data centre servers (~500), later migrated to public cloud (AWS, Azure).",
-    "Unique features included eSource, built-in Analytics (R, Python), Actionable Visualisations (tech to the data), zero downtime.",
+    "Unique features included eSource, built-in Analytics (R, Python), Actionable Visualisations (bringing the technology to the data to eliminate lag and upstream/downstream mapping issues), and zero downtime globally.",
     "All backed by unavoidable audit trail over single source of truth (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).",
-    "Early adoptor of Python for all server-side infrastructure/code.",
-    "Responsible for all R&D, System Support, and Corporate IT.",
+    "Early adopter of Python for all server-side infrastructure/code.",
+    "Responsible for all R&amp;D, System Support, and Corporate IT.",
     "Head of SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
     "The external and internal figurehead for all Technology innovation.",
     "A key leader and board member for the group."
