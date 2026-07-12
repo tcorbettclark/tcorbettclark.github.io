@@ -11,7 +11,7 @@
 #     "markdown-it-py>=3.0,<4",
 #     "mdit-py-plugins>=0.4,<0.5",
 #     "user-agents>=2.2,<3",
-#     "utidylib>=0.10,<1",
+#     "utidylib>=0.10,<2",
 #     "watchfiles>=1.0,<2",
 # ]
 # ///
