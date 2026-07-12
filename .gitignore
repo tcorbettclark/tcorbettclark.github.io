@@ -5,3 +5,5 @@ __pycache__/
 .zed/
 localhost.pem
 localhost-key.pem
+screenshots/
+canonical_links.txt
