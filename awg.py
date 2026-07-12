@@ -180,6 +180,19 @@ class Builder:
 
         env.filters["rel_to_abs_path"] = rel_to_abs_path
 
+    def _add_canonical_filter(self, env):
+        @jinja2.pass_context
+        def canonical(context, base_url):
+            path = context.get("_output_path", context.name)
+            if path == "index.html":
+                path = ""
+            elif path.endswith("/index.html"):
+                path = path[: -len("index.html")]
+            base_url = base_url.rstrip("/")
+            return f"{base_url}/{path}"
+
+        env.filters["canonical"] = canonical
+
     def render_templates(self):
         loader = jinja2.FileSystemLoader(self.working_dir)
         env = _RelativeEnvironment(loader=loader)
@@ -187,12 +200,13 @@ class Builder:
         self._add_markdown_filter(env)
         self._add_sha_filter(env)
         self._add_rel_to_abs_path_filter(env)
+        self._add_canonical_filter(env)
         template_filenames = env.list_templates(filter_func=self._is_template_filename)
         for template_filename in template_filenames:
             template = env.get_template(template_filename)
             p = self.working_dir / template_filename
             with open(p, "w") as f:
-                f.write(template.render())
+                f.write(template.render(_output_path=template_filename))
             self._log("Rendered template: {}", p)
 
     def remove_working_files(self):
