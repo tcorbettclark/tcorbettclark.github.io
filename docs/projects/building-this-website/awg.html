@@ -295,6 +295,85 @@
             "language-html">&lt;script defer src="/render-maths.js" integrity="sha384-{{ '/render-maths.js' | sha() }}"&gt;&lt;/script&gt;
 </code></pre>
             <h3>
+              Canonical URLs
+            </h3>
+            <p>
+              A <a href=
+              "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls">canonical
+              URL</a> tells search engines which version of a page is the preferred one, avoiding duplicate content
+              issues when the same content is accessible from multiple URLs.
+            </p>
+            <p>
+              AWG adds a Jinja filter <code>canonical</code> to generate canonical URLs from a base URL and the current
+              template’s output path. This makes it easy to add canonical link tags to every page. The base URL is
+              typically provided as template data from a TOML file, e.g. <code>SITEURL =
+              "https://corbettclark.com"</code> in <code>_config.toml</code>.
+            </p>
+            <p>
+              The canonical URL is determined by the final template’s output path, not the path of the file containing
+              the <code>canonical</code> filter. This matters because the filter is usually placed in a shared base
+              template (a working file) that other templates extend. For example, in <code>_base.html</code>:
+            </p>
+            <pre><code class="language-html">&lt;link rel="canonical" href="{{ SITEURL | canonical }}"&gt;
+</code></pre>
+            <p>
+              When <code>about.html</code> extends <code>_base.html</code>, the canonical URL is
+              <code>https://corbettclark.com/about.html</code> — derived from the output path <code>about.html</code>,
+              not from <code>_base.html</code>.
+            </p>
+            <p>
+              The filter strips trailing slashes from the base URL and handles <code>index.html</code> files by
+              converting <code>index.html</code> to the root path and removing <code>/index.html</code> suffixes from
+              other paths, so that directories produce clean canonical URLs without <code>index.html</code> in the
+              path. For example, with <code>SITEURL = "https://corbettclark.com"</code>:
+            </p>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    Template output path
+                  </th>
+                  <th>
+                    Canonical URL
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <code>index.html</code>
+                  </td>
+                  <td>
+                    <code>https://corbettclark.com/</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>about.html</code>
+                  </td>
+                  <td>
+                    <code>https://corbettclark.com/about.html</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>projects/index.html</code>
+                  </td>
+                  <td>
+                    <code>https://corbettclark.com/projects/</code>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>interests/maths-problems/index.html</code>
+                  </td>
+                  <td>
+                    <code>https://corbettclark.com/interests/maths-problems/</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <h3>
               Summary: the AWG content interface
             </h3>
             <p>
