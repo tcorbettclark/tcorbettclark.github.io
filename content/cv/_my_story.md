@@ -2,7 +2,8 @@ My interest in computers and electronics started at an early age back in the lat
 
 My software skills started at secondary school, when my father and I wrote and sold Physics teaching software to schools. I focused on optimising BBC 6502 Assembler for key routines.
 
-After reading Engineering and Computer Science at Oxford (concluding with a double first), I completed a DPhil in "Explanation from Artificial Neural Networks". The focus was on algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators (i.e. a Neural Network).
+After reading Engineering and Computer Science at Oxford (concluding with a double first), I completed a DPhil in "Explanation from Artificial Neural Networks".
+The focus was on algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators (i.e. a Neural Network).
 
 Following a careful exploration of different business areas, I co-founded a company to provide worldwide clinical trial data collection and analysis systems to the Life Sciences sector.
 I was responsible for the data platform backbone which collected data from tens of thousands of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.

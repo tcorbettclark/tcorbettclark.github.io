@@ -1,10 +1,11 @@
 MY_CAREER_SUMMARY = "TODO copy from LinkedIn"
 
 [[MY_EDUCATION]]
-degree = "DPhil (PhD) in Explanation from Artificial Neural Networks"
+degree = "DPhil (Ph.D) in Explanation from Artificial Neural Networks"
 time = "1998"
 institution = "University of Oxford."
 details = [
+    "Algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators.",
     "CASE award from Rolls Royce."
 ]
 
@@ -13,18 +14,17 @@ degree = "BA, MA in Engineering and Computing Science"
 time = "1995"
 institution = "University of Oxford."
 details = [
-    "First class with Honours in Moderations, Finals Part I, and Finals Part II.",
+    "First class (1st) Honours.",
     "Academic Scholar throughout.",
     "Faculty project prize for multi-processor simulation of small mobile robot."
 ]
 
 [[MY_EDUCATION]]
-degree = "A levels and GCSEs"
+degree = "A levels"
 time = "1980 - 1991"
 institution = "Haberdashers' Aske's School, Elstree."
 details = [
-    "A levels in Maths, Further Maths, Physics, Electronics (4 A's).",
-    "GCSEs (7 A's, 2 B's, 1 C)."
+    "A levels in Maths, Further Maths, Physics, Electronics (4 A's)."
 ]
 
 [[MY_EXPERIENCE]]
@@ -43,10 +43,15 @@ job_title = "Chief Technology Officer"
 time = "2002 - 2021"
 company = "Cmed Group"
 details = [
-    "Designed, built, and supported the Clinical Trial technology which was used to run almost all work undertaken by Cmed.",
-    "Led and was responsible for all Technology R&D, System Support, and Corporate IT.",
+    "Designed, built, and supported the Clinical Trial technology which was used to deliver almost all clinical trial data work.",
+    "Ran private cloud of multi-level redundant virtualised data centre servers (~500), later migrated to public cloud (AWS, Azure).",
+    "Unique features included eSource, built-in Analytics (R, Python), Actionable Visualisations (tech to the data).",
+    "All backed by unavoidable audit trail over single source of truth (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).",
+    "Early adoptor of Python for all server-side infrastructure/code.",
+    "Responsible for all R&D, System Support, and Corporate IT.",
+    "Head of SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
     "The external and internal figurehead for all Technology innovation.",
-    "A key leader and board member."
+    "A key leader and board member for the group."
 ]
 
 [[MY_EXPERIENCE]]
@@ -54,7 +59,7 @@ job_title = "Co-founder and Chief Technology Officer"
 time = "2000 - 2002"
 company = "ThirdPhase Ltd"
 details = [
-    "Responsible for all technology development and the design of innovative clinical trial system architecture.",
+    "Responsible for all technology development and the design of innovative clinical trial system architecture (<a href=\"https://patents.google.com/patent/US20040025030A1/\">patent US20040025030A1</a>).",
     "Significantly involved in the raising of venture capital and the public face of the company.",
     "ThirdPhase was then acquired and became Cmed Technology, a subsidiary of Cmed Group."
 ]
