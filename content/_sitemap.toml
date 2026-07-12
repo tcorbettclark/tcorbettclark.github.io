@@ -1,79 +1,26 @@
-[[SITEMAP_FILENAMES]]
-name = "index.html"
-change_frequency = "monthly"
-
-
-# Mental habits
-[[SITEMAP_FILENAMES]]
-name = "mental-habits/index.html"
-change_frequency = "monthly"
-
-
-# Projects index
-[[SITEMAP_FILENAMES]]
-name = "projects/index.html"
-change_frequency = "monthly"
-
-
-# Building this site
-[[SITEMAP_FILENAMES]]
-name = "projects/building-this-site/index.html"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "projects/building-this-site/awg.html"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "projects/building-this-site/approach.html"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "projects/building-this-site/dns.html"
-change_frequency = "monthly"
-
-# My Computer setup
-[[SITEMAP_FILENAMES]]
-name = "projects/my-setup.html"
-change_frequency = "monthly"
-
-# Ski-Tripper
-[[SITEMAP_FILENAMES]]
-name = "projects/ski-tripper.html"
-change_frequency = "monthly"
-
-
-# Skiing
-[[SITEMAP_FILENAMES]]
-name = "skiing/index.html"
-change_frequency = "monthly"
-
-
-# Maths problems
-[[SITEMAP_FILENAMES]]
-name = "maths-problems/index.html"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "maths-problems/problem-1/index.html"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "maths-problems/problem-1/solution.pdf"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "maths-problems/problem-2/index.html"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "maths-problems/problem-2/solution.pdf"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "maths-problems/problem-3/index.html"
-change_frequency = "monthly"
-
-[[SITEMAP_FILENAMES]]
-name = "maths-problems/problem-3/solution.pdf"
-change_frequency = "monthly"
+SITEMAP_FILENAMES = [
+    "/",
+    "/about.html",
+    "/cv.html",
+    "/interests/",
+    "/interests/intro_to_logs.pdf",
+    "/interests/maths-problems/",
+    "/interests/maths-problems/problem-1/",
+    "/interests/maths-problems/problem-1/solution.pdf",
+    "/interests/maths-problems/problem-2/",
+    "/interests/maths-problems/problem-2/solution.pdf",
+    "/interests/maths-problems/problem-3/",
+    "/interests/maths-problems/problem-3/solution.pdf",
+    "/interests/skiing.html",
+    "/projects/",
+    "/projects/building-this-website/",
+    "/projects/building-this-website/approach.html",
+    "/projects/building-this-website/awg.html",
+    "/projects/building-this-website/dns.html",
+    "/projects/my-setup.html",
+    "/projects/ski-tripper.html",
+    "/research/",
+    "/research/ica_extensions_pt1.pdf",
+    "/research/ica_introduction.pdf",
+    "/research/thesis.pdf",
+]

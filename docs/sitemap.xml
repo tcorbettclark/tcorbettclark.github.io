@@ -1,71 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://corbettclark.com/index.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/mental-habits/index.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/about.html</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/projects/index.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/cv.html</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/projects/building-this-site/index.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/interests/</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/projects/building-this-site/awg.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/interests/intro_to_logs.pdf</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/projects/building-this-site/approach.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/interests/maths-problems/</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/projects/building-this-site/dns.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/interests/maths-problems/problem-1/</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/interests/maths-problems/problem-1/solution.pdf</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/interests/maths-problems/problem-2/</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/interests/maths-problems/problem-2/solution.pdf</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/interests/maths-problems/problem-3/</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/interests/maths-problems/problem-3/solution.pdf</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/interests/skiing.html</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/projects/</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/projects/building-this-website/</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/projects/building-this-website/approach.html</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/projects/building-this-website/awg.html</loc>
+    </url>
+    <url>
+        <loc>https://corbettclark.com/projects/building-this-website/dns.html</loc>
     </url>
     <url>
         <loc>https://corbettclark.com/projects/my-setup.html</loc>
-        <changefreq>monthly</changefreq>
     </url>
     <url>
         <loc>https://corbettclark.com/projects/ski-tripper.html</loc>
-        <changefreq>monthly</changefreq>
     </url>
     <url>
-        <loc>https://corbettclark.com/skiing/index.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/research/</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/maths-problems/index.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/research/ica_extensions_pt1.pdf</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/maths-problems/problem-1/index.html</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/research/ica_introduction.pdf</loc>
     </url>
     <url>
-        <loc>https://corbettclark.com/maths-problems/problem-1/solution.pdf</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://corbettclark.com/maths-problems/problem-2/index.html</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://corbettclark.com/maths-problems/problem-2/solution.pdf</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://corbettclark.com/maths-problems/problem-3/index.html</loc>
-        <changefreq>monthly</changefreq>
-    </url>
-    <url>
-        <loc>https://corbettclark.com/maths-problems/problem-3/solution.pdf</loc>
-        <changefreq>monthly</changefreq>
+        <loc>https://corbettclark.com/research/thesis.pdf</loc>
     </url>
 </urlset>
