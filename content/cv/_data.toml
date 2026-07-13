@@ -38,10 +38,12 @@ company = "Cmed Group"
 sections = [
     { title = "Technical | Product | Validation", details = [
         """Designed, built, and supported the technology stack which collected data from tens of thousands
-           of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers
-           ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.""",
-        "Preferred provider for oncology top-3 Pharma, innovation group top-3 Pharma, and eSource top-3 Pharma Japan.",
-        """Differentiating features included unified EDC and eSource, built-in Analytics (R, Python), actionable insights,
+           of subjects across ~1000 clinical trials, delivering regulatory compliant results for
+           ~150 customers ranging from top-ten pharma to much smaller innovative biotech.""",
+        """Preferred technology provider to a top-3 pharma company's oncology division,
+           a top-3 pharma's innovation group, and a top-3 Japanese pharma for eSource.""",
+        """Differentiating features included unified Electronic Data Capture (EDC) and eSource,
+           built-in Analytics (R, Python), actionable insights,
            and seamless off-line operation (e.g. vaccine data in remote Africa).""",
         """Designed and operated a private cloud comprising approximately 500 virtualised servers
             across geographically distributed data centres, later leading its migration to AWS and Azure to
