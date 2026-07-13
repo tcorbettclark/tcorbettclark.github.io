@@ -14,16 +14,8 @@ institution = "University of Oxford"
 details = [
     "First class (1st) Honours.",
     "Academic Scholar throughout.",
-    "Faculty project prize for multi-processor simulation of small mobile robot."
+    "Faculty prize for multi-processor simulation of small mobile robot."
 ]
-
-# [[MY_EDUCATION]]
-# degree = "A levels"
-# time = "1989 - 1991"
-# institution = "Haberdashers' Aske's School, Elstree"
-# details = [
-#     "A levels in Maths, Further Maths, Physics, Electronics (4 A's)."
-# ]
 
 
 [[MY_EXPERIENCE]]
