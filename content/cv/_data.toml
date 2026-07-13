@@ -27,7 +27,7 @@ highlights = [
     "Led engineering organisations of 50+ staff.",
     "Founder and CTO for 25+ years.",
     "Inventor on two patents.",
-    "DPhil in Explainable AI, University of Oxford."
+    "Architected and migrated a global SaaS platform from private cloud to AWS and Azure."
 ]
 
 
@@ -57,15 +57,15 @@ sections = [
           150 pharmaceutical and biotechnology organisations.""",
         """Preferred technology provider to the oncology division of a top-three global pharmaceutical company,
            the innovation group of another top-three pharmaceutical company, and
-           a top-three Japanese pharmaceutical company for eSource.""",
-        """Differentiating features included unified Electronic Data Capture (EDC) and electronic source (eSource),
+           a top-three Japanese pharmaceutical company for electronic source (eSource).""",
+        """Differentiating features included unified Electronic Data Capture (EDC) and eSource,
            built-in analytics (R, Python), actionable insights,
            and seamless offline operation (e.g. vaccine data in remote Africa).""",
         """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
             later leading migration to AWS and Azure while reducing operating costs and allowing the company
             to focus on its core business.""",
         "Achieved high availability (HA) with zero downtime globally over 20+ years.",
-        """Built around an immutable and unavoidable audit trail over single source of truth for FDA regulatory compliance
+        """Built around an immutable audit trail and a single source of truth, supporting FDA regulatory compliance.
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
         "Early adopter of Python for all server-side infrastructure/code.",
     ]},
@@ -86,7 +86,7 @@ sections = [
         """Built and led technology development and the design of innovative clinical trial system architecture
            (<a href=\"https://patents.google.com/patent/US20040025030A1/\">patent US20040025030A1</a>).""",
        "Played a leading role in securing venture capital and representing the company to investors.",
-       "ThirdPhase was then acquired and became Cmed Technology, a subsidiary of Cmed Group."
+       "Following acquisition, ThirdPhase became Cmed Technology, a subsidiary of Cmed Group."
     ]}
 ]
 
@@ -99,7 +99,7 @@ sections = [
         """Built a prototype e-commerce system with immutable audit trail and encryption,
            integrating peripheral hardware such as fingerprint readers, mobile phones,
            barcode scanners and printers, ECG, vital signs and spirometry medical devices.""",
-       "Delivered a fully functional prototype system in three months.",
+       "Delivered a fully functional prototype system within three months.",
        "Successfully secured venture funding through investor presentations.",
        "Co-founded ThirdPhase Ltd."
     ]}
@@ -111,7 +111,7 @@ time = "1998–1999"
 company = "Department of Engineering Science, University of Oxford"
 sections = [
     { title = "", details = [
-        """College Lecturer in Engineering, while conducting research into machine learning,
+        """College Lecturer in Engineering while conducting research into machine learning,
            nonlinear dynamical systems, and Independent Component Analysis (ICA) for novelty detection
            and biomedical signal analysis."""
     ]}
