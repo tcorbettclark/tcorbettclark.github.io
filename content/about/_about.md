@@ -68,3 +68,19 @@ Of particular application to the field of AI, I believe in the following general
 4. Publish reproducible results. I’ve spent the last 25 years using Python for commercial software development, so that will continue to be my go-to tool. Unsurprisingly, Jupyter/Marimo notebooks will feature too.
 
 5. Make honest assessments using both real datasets (publically available) and artificial pedagogical datasets created with specific and known characteristics.
+
+
+
+## Music
+
+Learning a musical instrument to a high standard is a demanding yet deeply rewarding pursuit. Having played the violin my whole life, I’ve long known the joy of performing classical music in orchestras and chamber ensembles.
+
+A few years ago, I paused the violin to take up the cello.
+My daughter had learned from an early age, and having sat in on her lessons with an inspiring teacher, I was already captivated.
+The cello repertoire is immense (not *just* the ethereal Bach suites!).
+More so than the violin, the cello occupies multifarious roles in classical music.
+Her teacher launched my transition, and today, my daughter offers her own sharp, constructive critiques and encouragement.
+
+This new perspective has been immensely fulfilling;
+I’ve already returned to playing in orchestras and string quartets.
+My new musical journey has only just begun…
