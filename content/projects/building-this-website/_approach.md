@@ -459,6 +459,8 @@ Since this is a static site I use the `http-equiv` meta tag in every HTML file:
 <meta http-equiv="...name of HTTP Header..." content="...HTTP header contents...">
 ```
 
+Unsurprisingly, only a subset of headers can be set this way. See [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/meta/http-equiv).
+
 My approach is:
 
 - To deny everything by default and add specific permissions as needed.
@@ -570,23 +572,13 @@ GRUVBOX_CSS_SHA = "sha384-vpayKGwduWhgY00faoPtbmJwz8TjOLnnDuqvy+xWy2DWuIVxIt0dxj
 ### Strict Transport Security (HSTS)
 
 This site can use HTTPS throughout.
-To help prevent manipulator-in-the-middle (MiTM) attacks, the [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security) HTTP Header should be set, together with the [upgrade-insecure-requests](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/upgrade-insecure-requests) directive in the CSP.
+To help prevent manipulator-in-the-middle (MiTM) attacks, the [Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security) HTTP Header should be set.
+I don't control the web server headers because I use GitHub pages (see more below).
+Unfortunately, `Strict-Transport-Security` cannot be set in the HTML `meta http-equiv`.
 
-Hence the following are added in the `_base.html` template to the `<head>` tag.
+But you can tell GitHub Pages to only serve HTTPS.
 
-```html
-<meta http-equiv="Upgrade-Insecure-Requests" content="1" />
-<meta
-  http-equiv="Strict-Transport-Security"
-  content="max-age=63072000; includeSubDomains"
-/>
-```
-
-(`max-age` is set to the recommended 2 years).
-
-The `upgrade-insecure-requests` CSP directive is explained in the Content Security Section above.
-
-I've also configured GitHub Pages to only serve HTTPS.
+The `upgrade-insecure-requests` CSP directive can be set in the HTML, and is explained in the Content Security Section above.
 
 **NB:** The presence of these security settings means that AWG must be run in HTTPS mode.
 
@@ -599,23 +591,18 @@ But unfortunately neither can be done using `http-equiv` and I don't have contro
 
 ### Referrer policy
 
-To stop leaking information about where outbound links are coming from (see [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy)), I set the HTTP header as follows:
+To stop leaking information about where outbound links are coming from (see [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/Referrer_policy)), I set an HTML meta tag as follows:
 
 ```HTML
 ...
-<meta http-equiv="Referrer-Policy" content="no-referrer">
+<meta name="referrer" content="no-referrer">
 ...
 ```
 
 ### MIME types
 
-To inform browsers not to load scripts and stylesheets unless the server indicates the correct MIME type, I set the `X-Content-Type-Options` header using the `<meta>` tag to `nosniff` as explained [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types):
-
-```HTML
-...
-<meta http-equiv="X-Content-Type-Options" content="nosniff">
-...
-```
+To inform browsers not to load scripts and stylesheets unless the server indicates the correct MIME type, I would like to set the `X-Content-Type-Options` header to `nosniff` as explained [here](https://developer.mozilla.org/en-US/docs/Web/Security/Practical_implementation_guides/MIME_types) and [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options).
+Unfortunately this cannot be set in the `meta http-equiv` and I don't control the server, so I have to accept it as is.
 
 ## Deployment on GitHub pages
 
