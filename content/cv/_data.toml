@@ -1,8 +1,9 @@
 [[MY_EDUCATION]]
-degree = "DPhil (PhD) in Explanation from Artificial Neural Networks"
+degree = "DPhil (PhD) in Explainable AI"
 time = "1998"
 institution = "University of Oxford"
 details = [
+    "Thesis: Explanation from Neural Networks.",
     "Algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators.",
     "CASE award from Rolls-Royce."
 ]
@@ -20,7 +21,7 @@ details = [
 
 [[MY_EXPERIENCE]]
 job_title = "Chief Technology Officer"
-time = "2021 - 2025"
+time = "2021–2025"
 company = "Aixial"
 sections = [
     { title = "", details = [
@@ -28,64 +29,63 @@ sections = [
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
         """Advised executive leadership during post-acquisition integration,
            helping reshape organisation and operating model.""",
-        """Defined enterprise AI Strategy, Governance, and established more confident organisational
-           understanding and adoption in this highly regulated industry."""
+        """Defined enterprise AI strategy and governance, enabling responsible adoption across a highly regulated organisation."""
     ]}
 ]
 
 [[MY_EXPERIENCE]]
 job_title = "Chief Technology Officer"
-time = "2002 - 2021"
+time = "2002–2021"
 company = "Cmed Group"
 sections = [
     { title = "Technical | Product | Validation", details = [
         """Designed, built, and supported the technology platform underpinning the business,
            collecting, validating, and managing data from tens of thousands of participants across
-           approximately 1,000 clinical trials.""",
-        """Used to deliver regulatory-compliant datasets for over 150 pharmaceutical and biotechnology organisations,
-           from top-ten global pharmaceutical companies to innovative biotechs.""",
-        """Preferred technology provider to a top-3 pharmaceutical company's oncology division,
-           a top-3 pharmaceutical company's innovation group, and a top-3 Japanese pharmaceutical for eSource.""",
+           approximately 1,000 clinical trials, delivering regulatory-compliant datasets for over
+          150 pharmaceutical and biotechnology organisations.""",
+        """Preferred technology provider to the oncology division of a top-three global pharmaceutical company,
+           the innovation group of another top-three pharmaceutical company, and
+           a top-three Japanese pharmaceutical company for eSource.""",
         """Differentiating features included unified Electronic Data Capture (EDC) and eSource,
            built-in Analytics (R, Python), actionable insights,
            and seamless offline operation (e.g. vaccine data in remote Africa).""",
         """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
             later leading migration to AWS and Azure while reducing operating costs and allowing the business
             to focus on its core expertise.""",
-        "Achieved High Availability (HA) with zero downtime globally over 20+ years.",
-        """Backed by unavoidable audit trail over single source of truth for FDA regulatory compliance
+        "Achieved high availability (HA) with zero downtime globally over 20+ years.",
+        """Backed by immutable and unavoidable audit trail over single source of truth for FDA regulatory compliance
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
         "Early adopter of Python for all server-side infrastructure/code.",
     ]},
     { title = "Management | Leadership | Strategy", details = [
         "Led R&amp;D, Engineering, System Operations, and Corporate IT across 50+ staff.",
-        "Head of SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
-        "Executive technology spokesperson for customers, partners, investors and internal stakeholders.",
+        "Head of the SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
+        "Executive technology spokesperson for customers, partners, investors, and internal stakeholders.",
         "Key leader and board member for the group, with particular focus on technical strategy."
     ]},
 ]
 
 [[MY_EXPERIENCE]]
 job_title = "Co-founder and Chief Technology Officer"
-time = "2000 - 2002"
+time = "2000–2002"
 company = "ThirdPhase Ltd"
 sections = [
     { title = "", details = [
         """Built and led technology development and the design of innovative clinical trial system architecture
            (<a href=\"https://patents.google.com/patent/US20040025030A1/\">patent US20040025030A1</a>).""",
-       "Significantly involved in the raising of venture capital and the public face of the company.",
+       "Played a leading role in securing venture capital and representing the company to investors.",
        "ThirdPhase was then acquired and became Cmed Technology, a subsidiary of Cmed Group."
     ]}
 ]
 
 [[MY_EXPERIENCE]]
 job_title = "Software Engineer"
-time = "1999 - 2000"
+time = "1999–2000"
 company = "Freelance"
 sections = [
     { title = "", details = [
-        """Built a prototype e-commerce system with unavoidable audit trail and encryption,
-           integrating peripheral hardware such as fingerprint devices, mobile phones,
+        """Built a prototype e-commerce system with immutable audit trail and encryption,
+           integrating peripheral hardware such as fingerprint readers, mobile phones,
            barcode scanners and printers, ECG, vital signs and spirometry medical devices.""",
        "Delivered a fully functional prototype system in 3 months.",
        "Successfully secured venture funding through investor presentations.",
@@ -95,7 +95,7 @@ sections = [
 
 [[MY_EXPERIENCE]]
 job_title = "Research Assistant"
-time = "1998 - 1999"
+time = "1998–1999"
 company = "Department of Engineering Science, University of Oxford"
 sections = [
     { title = "", details = [
