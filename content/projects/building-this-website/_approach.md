@@ -472,7 +472,6 @@ In annotated outline, the CSP is as follows:
 ```text
 upgrade-insecure-requests;                   <-- Instruct browser to switch site HTTP urls to HTTPS
 default-src 'none';                          <-- Default fallback is deny
-frame-ancestors 'none';                      <-- Don't allow any site to embed this one
 form-action 'self';                          <-- Only allow form submission to self
 trusted-types dompurify highlightjs-policy;  <-- See link below
 require-trusted-types-for 'script';          <-- See link below
@@ -500,6 +499,8 @@ style-src
 ```
 
 (Links for [trusted-types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/trusted-types) and [require-trusted-types-for](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for).)
+
+I would like to include `frame-ancestors 'none'` to prevent sites embedding this one, but it only works when in the HTTP header.
 
 I discovered a few helpful things along the way:
 

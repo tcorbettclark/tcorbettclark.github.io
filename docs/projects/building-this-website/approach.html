@@ -725,7 +725,6 @@ change_frequency = "weekly"
             <pre><code class=
             "language-text">upgrade-insecure-requests;                   &lt;-- Instruct browser to switch site HTTP urls to HTTPS
 default-src 'none';                          &lt;-- Default fallback is deny
-frame-ancestors 'none';                      &lt;-- Don't allow any site to embed this one
 form-action 'self';                          &lt;-- Only allow form submission to self
 trusted-types dompurify highlightjs-policy;  &lt;-- See link below
 require-trusted-types-for 'script';          &lt;-- See link below
@@ -757,6 +756,10 @@ style-src
               trusted-types</a> and <a href=
               "https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/require-trusted-types-for">
               require-trusted-types-for</a>.)
+            </p>
+            <p>
+              I would like to include <code>frame-ancestors 'none'</code> to prevent sites embedding this one, but it
+              only works when in the HTTP header.
             </p>
             <p>
               I discovered a few helpful things along the way:
