@@ -4,4 +4,4 @@ Technology executive with over 25 years' experience leading software engineering
 
 DPhil in Explainable AI from the University of Oxford. Expertise spans AI, distributed systems, cloud platforms, data science, and regulated software. Inventor on two patents.
 
-Now focused on AI research, technology advisory, board roles, and fractional CTO engagements.
+Now focused on AI research and application; open for technology advisory, board roles, and fractional CTO engagements.
