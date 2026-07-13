@@ -105,6 +105,7 @@
         --font-size-h4: 1.05rem;
         --font-size-h5: 1rem;
         --font-size-h6: 1rem;
+        --font-size-sm: 0.85rem;
         --line-height: 1.65;
         --max-width: 680px;
 
@@ -821,7 +822,7 @@
     }
 
     .cv-section h2 {
-        font-size: 1.8rem;
+        font-size: var(--font-size-h1);
         font-weight: 600;
         font-variant: small-caps;
         margin-bottom: var(--space-md);
@@ -843,16 +844,11 @@
 
     .cv-title {
         font-weight: 600;
-        font-size: 1.15rem;
-    }
-
-    .cv-time {
-        font-size: 0.85rem;
-        color: var(--color-text-muted);
+        font-size: var(--font-size-h3);
     }
 
     .cv-company {
-        font-size: 0.9rem;
+        font-size: var(--font-size-sm);
         color: var(--color-text-muted);
     }
 
@@ -861,6 +857,7 @@
     }
 
     .cv-experience-section {
+        font-variant: small-caps;
         text-decoration: underline;
         color: var(--color-text-muted);
         text-align: center;

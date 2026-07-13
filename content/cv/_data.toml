@@ -32,7 +32,7 @@ time = "2021 - 2025"
 company = "Aixial"
 sections = [
     { title = "", details = [
-        "Responsible for various integration and restructuring following acquisition.",
+        "Responsible for technical integration and management restructuring aspects following acquisition.",
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
         "Trusted advisor to executive leadership during significant changes.",
         "Set the AI strategy."
@@ -51,8 +51,9 @@ sections = [
         "Preferred provider for oncology top-3 Pharma, innovation group top-3 Pharma, and eSource top-3 Pharma Japan.",
         """Differentiating features included unified EDC and eSource, built-in Analytics (R, Python), actionable insights,
            and seamless off-line operation (e.g. vaccine data in remote Africa).""",
-        """Designed and ran a private cloud of redundant multi-level distributed system of virtualised data centre servers (~500),
-           later migrated to public cloud (AWS, Azure).""",
+        """Designed and operated a private cloud comprising approximately 500 virtualised servers
+            across geographically distributed data centres, later leading its migration to AWS and Azure to
+            reduce costs and focus business on its core expertise.""",
         "Achieved High Availability (HA) with zero downtime globally over 20+ years.",
         """Backed by unavoidable audit trail over single source of truth for FDA regulatory compliance
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
@@ -97,9 +98,11 @@ sections = [
 job_title = "Research Assistant"
 time = "1998 - 1999"
 company = "Department of Engineering Science, University of Oxford"
-details = [
-    "College Lecturer in Engineering.",
-    """Applying non-linear dynamical methods and Independent Component Analysis (ICA)
-       to novelty detection in time-series data, and for the visualisation and analysis
-       of ECG and EEG traces."""
+sections = [
+    { title = "", details = [
+        "College Lecturer in Engineering.",
+        """Applying non-linear dynamical methods and Independent Component Analysis (ICA)
+           to novelty detection in time-series data, and for the visualisation and analysis
+           of ECG and EEG traces."""
+    ]}
 ]
