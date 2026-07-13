@@ -25,7 +25,7 @@ highlights = [
     "Trusted by 150+ pharmaceutical and biotechnology organisations.",
     "20+ years of globally deployed zero-downtime SaaS.",
     "Led engineering organisations of 50+ staff.",
-    "Founder and CTO for 25+ years.",
+    "CTO and founder, 25+ years.",
     "Inventor on two patents.",
     "Architected and migrated a global SaaS platform from private cloud to AWS and Azure."
 ]
@@ -72,7 +72,7 @@ sections = [
     { title = "Management | Leadership | Strategy", details = [
         "Led R&amp;D, Engineering, System Operations, and Corporate IT across 50+ staff.",
         "Head of the SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
-        "Executive technology spokesperson for customers, partners, investors, and internal stakeholders.",
+        "Executive technology spokesperson for group customers, partners, investors, and internal stakeholders.",
         "Key leader and board member for the group, with particular focus on technical strategy."
     ]},
 ]
