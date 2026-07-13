@@ -3,6 +3,7 @@ Founder, CTO and Board Director who built and led one of the earliest cloud-nati
 Technology executive with more than 25 years' experience leading software engineering, cloud infrastructure, cybersecurity, AI, and product strategy in highly regulated industries, including the growth of engineering organisations to more than 50 staff and the operation of globally deployed, high-availability SaaS platforms.
 
 DPhil in Explainable AI from the University of Oxford.
-Expertise spans AI, data science, cloud platforms, distributed systems, and regulated software. Inventor on two patents.
 
-Now focused on AI research, technology advisory, and strategic board roles.
+Expertise spans AI, distributed systems, cloud platforms, data science, and regulated software. Inventor on two patents.
+
+Now focused on AI research, technology advisory, board roles, and fractional CTO engagements.

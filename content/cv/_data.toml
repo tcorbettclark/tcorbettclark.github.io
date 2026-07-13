@@ -21,12 +21,11 @@ details = [
 
 [MY_CAREER_HIGHLIGHTS]
 highlights = [
-    "Founder and CTO for 25+ years.",
-    "Board Director.",
     "Platform used in ~1,000 clinical trials.",
-    "150+ pharmaceutical and biotechnology customers.",
+    "Trusted by 150+ pharmaceutical and biotechnology organisations.",
     "20+ years of globally deployed zero-downtime SaaS.",
     "Led engineering organisations of 50+ staff.",
+    "Founder and CTO for 25+ years.",
     "Inventor on two patents.",
     "DPhil in Explainable AI, University of Oxford."
 ]
@@ -38,7 +37,7 @@ time = "2021–2025"
 company = "Aixial"
 sections = [
     { title = "", details = [
-        "Responsible for technical integration and management restructuring aspects following acquisition.",
+        "Led technical integration and management restructuring aspects following acquisition.",
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
         """Advised executive leadership during post-acquisition integration,
            helping reshape organisation and operating model.""",
@@ -59,14 +58,14 @@ sections = [
         """Preferred technology provider to the oncology division of a top-three global pharmaceutical company,
            the innovation group of another top-three pharmaceutical company, and
            a top-three Japanese pharmaceutical company for eSource.""",
-        """Differentiating features included unified Electronic Data Capture (EDC) and electronic source (eSource) data capture.,
-           built-in Analytics (R, Python), actionable insights,
+        """Differentiating features included unified Electronic Data Capture (EDC) and electronic source (eSource),
+           built-in analytics (R, Python), actionable insights,
            and seamless offline operation (e.g. vaccine data in remote Africa).""",
         """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
             later leading migration to AWS and Azure while reducing operating costs and allowing the company
-            to increase focus on its core expertise.""",
+            to focus on its core business.""",
         "Achieved high availability (HA) with zero downtime globally over 20+ years.",
-        """Backed by immutable and unavoidable audit trail over single source of truth for FDA regulatory compliance
+        """Built around an immutable and unavoidable audit trail over single source of truth for FDA regulatory compliance
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
         "Early adopter of Python for all server-side infrastructure/code.",
     ]},
@@ -112,9 +111,8 @@ time = "1998–1999"
 company = "Department of Engineering Science, University of Oxford"
 sections = [
     { title = "", details = [
-        "College Lecturer in Engineering while conducting research in machine learning.",
-        """Applying non-linear dynamical methods and Independent Component Analysis (ICA)
-           to novelty detection in time-series data, and for the visualisation and analysis
-           of ECG and EEG traces."""
+        """College Lecturer in Engineering, while conducting research into machine learning,
+           nonlinear dynamical systems, and Independent Component Analysis (ICA) for novelty detection
+           and biomedical signal analysis."""
     ]}
 ]
