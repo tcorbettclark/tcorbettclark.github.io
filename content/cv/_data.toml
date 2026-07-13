@@ -4,7 +4,7 @@ time = "1998"
 institution = "University of Oxford"
 details = [
     "Thesis: Explanation from Neural Networks.",
-    "Algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators.",
+    "Algorithms to derive human-interpretable and quantifiably trustworthy explanations from general purpose probability estimators.",
     "CASE award from Rolls-Royce."
 ]
 
@@ -16,6 +16,19 @@ details = [
     "First class (1st) Honours.",
     "Academic Scholar throughout.",
     "Faculty prize for multi-processor simulation of small mobile robot."
+]
+
+
+[MY_CAREER_HIGHLIGHTS]
+highlights = [
+    "Founder and CTO for 25+ years.",
+    "Board Director.",
+    "Platform used in ~1,000 clinical trials.",
+    "150+ pharmaceutical and biotechnology customers.",
+    "20+ years of globally deployed zero-downtime SaaS.",
+    "Led engineering organisations of 50+ staff.",
+    "Inventor on two patents.",
+    "DPhil in Explainable AI, University of Oxford."
 ]
 
 
@@ -46,12 +59,12 @@ sections = [
         """Preferred technology provider to the oncology division of a top-three global pharmaceutical company,
            the innovation group of another top-three pharmaceutical company, and
            a top-three Japanese pharmaceutical company for eSource.""",
-        """Differentiating features included unified Electronic Data Capture (EDC) and eSource,
+        """Differentiating features included unified Electronic Data Capture (EDC) and electronic source (eSource) data capture.,
            built-in Analytics (R, Python), actionable insights,
            and seamless offline operation (e.g. vaccine data in remote Africa).""",
         """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
-            later leading migration to AWS and Azure while reducing operating costs and allowing the business
-            to focus on its core expertise.""",
+            later leading migration to AWS and Azure while reducing operating costs and allowing the company
+            to increase focus on its core expertise.""",
         "Achieved high availability (HA) with zero downtime globally over 20+ years.",
         """Backed by immutable and unavoidable audit trail over single source of truth for FDA regulatory compliance
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
@@ -87,7 +100,7 @@ sections = [
         """Built a prototype e-commerce system with immutable audit trail and encryption,
            integrating peripheral hardware such as fingerprint readers, mobile phones,
            barcode scanners and printers, ECG, vital signs and spirometry medical devices.""",
-       "Delivered a fully functional prototype system in 3 months.",
+       "Delivered a fully functional prototype system in three months.",
        "Successfully secured venture funding through investor presentations.",
        "Co-founded ThirdPhase Ltd."
     ]}
@@ -99,7 +112,7 @@ time = "1998–1999"
 company = "Department of Engineering Science, University of Oxford"
 sections = [
     { title = "", details = [
-        "College Lecturer in Engineering.",
+        "College Lecturer in Engineering while conducting research in machine learning.",
         """Applying non-linear dynamical methods and Independent Component Analysis (ICA)
            to novelty detection in time-series data, and for the visualisation and analysis
            of ECG and EEG traces."""

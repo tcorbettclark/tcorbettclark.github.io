@@ -1,4 +1,4 @@
-Cello, violin, orchestral performance, chamber music, skiing, chess and recreational mathematics.
+Cello, violin, orchestral performance, chamber music, skiing, chess and mathematics.
 
 Former Chair of Horsham Symphony Orchestra, guiding it through several delicate transitions.
 

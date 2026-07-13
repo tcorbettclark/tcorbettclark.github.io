@@ -1,0 +1,12 @@
+<section class="cv-section">
+    <h2><i class="fa-solid fa-lightbulb"></i> Career Highlights</h2>
+    <div class="cv-item">
+        <div class="cv-details">
+            <ul>
+                {% for detail in MY_CAREER_HIGHLIGHTS["highlights"] %}
+                <li>{{ detail }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
