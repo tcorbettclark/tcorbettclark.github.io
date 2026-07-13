@@ -30,57 +30,67 @@ details = [
 job_title = "Chief Technology Officer"
 time = "2021 - 2025"
 company = "Aixial"
-details = [
-    "Responsible for various integration and restructuring following acquisition.",
-    "Controlled financial and regulatory risks by negotiating the orderly exit from multiple client and vendor contracts.",
-    "Advised and supported senior executive team during significant changes.",
-    "Set the AI strategy."
+sections = [
+    { title = "", details = [
+        "Responsible for various integration and restructuring following acquisition.",
+        "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
+        "Trusted advisor to executive leadership during significant changes.",
+        "Set the AI strategy."
+    ]}
 ]
 
 [[MY_EXPERIENCE]]
 job_title = "Chief Technology Officer"
 time = "2002 - 2021"
 company = "Cmed Group"
-details = [
-    """Designed, built, and supported the technology which collected data from tens of thousands
-       of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers
-       ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.""",
-    "Preferred provider for Oncology top-3 Pharma, innovation group top-3 Pharma, and eSource top-3 Pharma Japan.",
-    """Differentiating features included unified EDC and eSource, built-in Analytics (R, Python), actionable insights,
-       and seamless off-line operation (e.g. vaccine data in remote Africa).""",
-    """Designed and ran a private cloud of redundant multi-level distributed system of virtualised data centre servers (~500),
-       later migrated to public cloud (AWS, Azure).""",
-    "Achieved High Availability (HA) with zero downtime globally over 20+ years.",
-    """Backed by unavoidable audit trail over single source of truth for FDA regulatory compliance
-       (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
-    "Early adopter of Python for all server-side infrastructure/code.",
-    "Led R&amp;D, Engineering, System Operations, and Corporate IT.",
-    "Head of SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
-    "External and internal figurehead for all Technology innovation.",
-    "Key leader and board member for the group, with particular focus on technical strategy."
+sections = [
+    { title = "Technical | Product | Validation", details = [
+        """Designed, built, and supported the technology stack which collected data from tens of thousands
+           of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers
+           ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.""",
+        "Preferred provider for oncology top-3 Pharma, innovation group top-3 Pharma, and eSource top-3 Pharma Japan.",
+        """Differentiating features included unified EDC and eSource, built-in Analytics (R, Python), actionable insights,
+           and seamless off-line operation (e.g. vaccine data in remote Africa).""",
+        """Designed and ran a private cloud of redundant multi-level distributed system of virtualised data centre servers (~500),
+           later migrated to public cloud (AWS, Azure).""",
+        "Achieved High Availability (HA) with zero downtime globally over 20+ years.",
+        """Backed by unavoidable audit trail over single source of truth for FDA regulatory compliance
+           (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
+        "Early adopter of Python for all server-side infrastructure/code.",
+    ]},
+    { title = "Management | Leadership | Strategy", details = [
+        "Led R&amp;D, Engineering, System Operations, and Corporate IT across 50+ staff.",
+        "Head of SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
+        "Executive technology spokesperson for customers, partners, investors and internal stakeholders.",
+        "Key leader and board member for the group, with particular focus on technical strategy."
+    ]},
 ]
 
 [[MY_EXPERIENCE]]
 job_title = "Co-founder and Chief Technology Officer"
 time = "2000 - 2002"
 company = "ThirdPhase Ltd"
-details = [
-    """Built and led technology development and the design of innovative clinical trial system architecture
-       (<a href=\"https://patents.google.com/patent/US20040025030A1/\">patent US20040025030A1</a>).""",
-    "Significantly involved in the raising of venture capital and the public face of the company.",
-    "ThirdPhase was then acquired and became Cmed Technology, a subsidiary of Cmed Group."
+sections = [
+    { title = "", details = [
+        """Built and led technology development and the design of innovative clinical trial system architecture
+           (<a href=\"https://patents.google.com/patent/US20040025030A1/\">patent US20040025030A1</a>).""",
+       "Significantly involved in the raising of venture capital and the public face of the company.",
+       "ThirdPhase was then acquired and became Cmed Technology, a subsidiary of Cmed Group."
+    ]}
 ]
 
 [[MY_EXPERIENCE]]
 job_title = "Software Engineer"
 time = "1999 - 2000"
 company = "Freelance"
-details = [
-    """Built a prototype e-commerce system with unavoidable audit trail and encryption,
-       integrating peripheral hardware such as fingerprint devices, mobile phones,
-       barcode scanners and printers, ECG, vital signs and spirometry medical devices.""",
-    "Produced fully working demo system in 3 months.",
-    "Successfully pitched for fund-raising to create ThirdPhase Ltd."
+sections = [
+    { title = "", details = [
+        """Built a prototype e-commerce system with unavoidable audit trail and encryption,
+           integrating peripheral hardware such as fingerprint devices, mobile phones,
+           barcode scanners and printers, ECG, vital signs and spirometry medical devices.""",
+       "Produced fully working demo system in 3 months.",
+       "Successfully pitched for fund-raising to create ThirdPhase Ltd."
+    ]}
 ]
 
 [[MY_EXPERIENCE]]

@@ -9,11 +9,16 @@
             </div>
             <div class="cv-company">{{ experience['company'] }}</div>
             <div class="cv-details">
+                {% for section in experience['sections'] %}
+                {% if section['title'] %}
+                <div class="cv-experience-section">{{ section['title'] }}</div>
+                {% endif %}
                 <ul>
-                {% for detail in experience['details'] %}
-                <li>{{ detail }}</li>
-                {% endfor %}
+                    {% for detail in section['details'] %}
+                    <li>{{ detail }}</li>
+                    {% endfor %}
                 </ul>
+                {% endfor %}
             </div>
         </div>
         {% endfor %}

@@ -843,6 +843,7 @@
 
     .cv-title {
         font-weight: 600;
+        font-size: 1.15rem;
     }
 
     .cv-time {
@@ -857,6 +858,12 @@
 
     .cv-details {
         margin-top: var(--space-xs);
+    }
+
+    .cv-experience-section {
+        text-decoration: underline;
+        color: var(--color-text-muted);
+        text-align: center;
     }
 }
 @layer math-problems {
