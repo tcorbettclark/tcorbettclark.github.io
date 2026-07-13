@@ -472,6 +472,8 @@ In annotated outline, the CSP is as follows:
 ```text
 upgrade-insecure-requests;                   <-- Instruct browser to switch site HTTP urls to HTTPS
 default-src 'none';                          <-- Default fallback is deny
+frame-ancestors 'none';                      <-- Don't allow any site to embed this one
+form-action 'self';                          <-- Only allow form submission to self
 trusted-types dompurify highlightjs-policy;  <-- See link below
 require-trusted-types-for 'script';          <-- See link below
 base-uri 'self';                             <-- Don't allow the base URL to change from self
