@@ -1,5 +1,5 @@
 [[MY_EDUCATION]]
-degree = "DPhil (Ph.D) in Explanation from Artificial Neural Networks"
+degree = "DPhil (PhD) in Explanation from Artificial Neural Networks"
 time = "1998"
 institution = "University of Oxford"
 details = [
@@ -26,8 +26,10 @@ sections = [
     { title = "", details = [
         "Responsible for technical integration and management restructuring aspects following acquisition.",
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
-        "Trusted advisor to executive leadership during significant changes.",
-        "Set the AI strategy."
+        """Advised executive leadership during post-acquisition integration,
+           helping reshape organisation and operating model.""",
+        """Defined enterprise AI Strategy, Governance, and established more confident organisational
+           understanding and adoption in this highly regulated industry."""
     ]}
 ]
 
@@ -37,17 +39,19 @@ time = "2002 - 2021"
 company = "Cmed Group"
 sections = [
     { title = "Technical | Product | Validation", details = [
-        """Designed, built, and supported the technology stack which collected data from tens of thousands
-           of subjects across ~1000 clinical trials, delivering regulatory compliant results for
-           ~150 customers ranging from top-ten pharma to much smaller innovative biotech.""",
-        """Preferred technology provider to a top-3 pharma company's oncology division,
-           a top-3 pharma's innovation group, and a top-3 Japanese pharma for eSource.""",
+        """Designed, built, and supported the technology platform underpinning the business,
+           collecting, validating, and managing data from tens of thousands of participants across
+           approximately 1,000 clinical trials.""",
+        """Used to deliver regulatory-compliant datasets for over 150 pharmaceutical and biotechnology organisations,
+           from top-ten global pharmaceutical companies to innovative biotechs.""",
+        """Preferred technology provider to a top-3 pharmaceutical company's oncology division,
+           a top-3 pharmaceutical company's innovation group, and a top-3 Japanese pharmaceutical for eSource.""",
         """Differentiating features included unified Electronic Data Capture (EDC) and eSource,
            built-in Analytics (R, Python), actionable insights,
-           and seamless off-line operation (e.g. vaccine data in remote Africa).""",
-        """Designed and operated a private cloud comprising approximately 500 virtualised servers
-            across geographically distributed data centres, later leading its migration to AWS and Azure to
-            reduce costs and focus business on its core expertise.""",
+           and seamless offline operation (e.g. vaccine data in remote Africa).""",
+        """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
+            later leading migration to AWS and Azure while reducing operating costs and allowing the business
+            to focus on its core expertise.""",
         "Achieved High Availability (HA) with zero downtime globally over 20+ years.",
         """Backed by unavoidable audit trail over single source of truth for FDA regulatory compliance
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
@@ -83,8 +87,9 @@ sections = [
         """Built a prototype e-commerce system with unavoidable audit trail and encryption,
            integrating peripheral hardware such as fingerprint devices, mobile phones,
            barcode scanners and printers, ECG, vital signs and spirometry medical devices.""",
-       "Produced fully working demo system in 3 months.",
-       "Successfully pitched for fund-raising to create ThirdPhase Ltd."
+       "Delivered a fully functional prototype system in 3 months.",
+       "Successfully secured venture funding through investor presentations.",
+       "Co-founded ThirdPhase Ltd."
     ]}
 ]
 
