@@ -70,7 +70,6 @@ Of particular application to the field of AI, I believe in the following general
 5. Make honest assessments using both real datasets (publically available) and artificial pedagogical datasets created with specific and known characteristics.
 
 
-
 ## Music
 
 Learning a musical instrument to a high standard is a demanding yet deeply rewarding pursuit. Having played the violin my whole life, I’ve long known the joy of performing classical music in orchestras and chamber ensembles.
