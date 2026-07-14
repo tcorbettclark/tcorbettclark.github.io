@@ -1,4 +1,7 @@
 This website is built using my own[^1] static site generator.
+
+## Why?
+
 My justification for "reinventing the wheel" is as follows:
 
 - I personally enjoy the deeper understanding that comes from creation;
@@ -9,10 +12,12 @@ My justification for "reinventing the wheel" is as follows:
 I've chosen to position the boundary so that the build tool has minimal[^2] opinion of web technologies and content structure.
 This makes the choice of web technology explicit, with freedom to upgrade, refactor, or remove over time; and the fundamental content is easy to write, (re)organise, and maintain.
 
+## How?
+
 - [AWG tool](awg.html) explains what the tool does, what it doesn't do, and how it works;
-- [Content approach](approach.html) provides a systematic walk-through of how I structure the content, my choice of web framework and libraries, how I generate the sitemap, notes to achieve colour consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, etc;
-- The content (primarily markdown files) can be found in the [source repository](https://github.com/tcorbettclark/tcorbettclark.github.io/tree/master/content).
-- I've also written a short guide on [configuring DNS](dns.html).
+- [Content approach](approach.html) provides a systematic walk-through of how I structure the content, my choice of libraries, how I generate the sitemap, notes to achieve colour consistency, publishing on GitHub pages, checking and achieving validity and reasonable security, etc;
+- The content (primarily markdown files) can be found in the [source repository](https://github.com/tcorbettclark/tcorbettclark.github.io/tree/master/content);
+- To eliminate my own confusion, I've written a short guide on [configuring DNS](dns.html).
 
 [^1]: Yes, another one - see [this list](https://jamstack.org/generators/) for example.
 [^2]: As explained later, the strongest coupling comes from the use of Markdown.
