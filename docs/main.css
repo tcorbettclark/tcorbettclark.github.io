@@ -878,6 +878,80 @@
         color: var(--color-text-muted);
         text-align: center;
     }
+
+    .cv-profile-layout {
+        display: flex;
+        gap: var(--space-lg);
+        align-items: flex-start;
+    }
+
+    .cv-profile-text {
+        flex: 3;
+        min-width: 0;
+    }
+
+    .cv-profile-sidebar {
+        flex: 2;
+        flex-shrink: 0;
+    }
+
+    .cv-snapshot {
+    }
+
+    .cv-snapshot-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 0.9em;
+    }
+
+    .cv-snapshot-list li {
+        margin-bottom: var(--space-md);
+        line-height: 1.8;
+    }
+
+    .cv-snapshot-label {
+        display: flex;
+        align-items: baseline;
+        gap: var(--space-xs);
+    }
+
+    .cv-snapshot-label i {
+        color: var(--color-accent);
+        opacity: 0.55;
+        width: 1.5em;
+        text-align: center;
+        flex-shrink: 0;
+    }
+
+    .cv-snapshot-label strong {
+        font-variant: small-caps;
+    }
+
+    .cv-snapshot-detail {
+        padding-left: 1.5em;
+    }
+
+    @media (max-width: 768px) {
+        .cv-profile-layout {
+            flex-direction: column-reverse;
+        }
+
+        .cv-profile-sidebar {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .cv-snapshot-label {
+            justify-content: center;
+        }
+
+        .cv-snapshot-detail {
+            padding-left: 0;
+            text-align: center;
+        }
+    }
 }
 @layer math-problems {
     /* ==========================================================================
