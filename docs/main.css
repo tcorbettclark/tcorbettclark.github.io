@@ -437,6 +437,7 @@
         font-size: 1.1rem;
         font-weight: 700;
         line-height: 1.3;
+        letter-spacing: 0.04em;
     }
 
     .site-name a {
@@ -453,6 +454,7 @@
         font-size: 0.8rem;
         font-weight: 500;
         color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.01em;
     }
 
     .site-header-rule {
