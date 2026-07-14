@@ -41,7 +41,7 @@ fa_class = "fa-clock"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
 label = "Leadership"
-detail = "Scaled engineering organisations to 50+ staff"
+detail = "Built and led engineering organisations of 50+ staff"
 fa_class = "fa-users"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
@@ -64,7 +64,7 @@ sections = [
         """Chose to step back from full-time executive leadership following the successful acquisition
            and integration of Cmed in order to pursue independent research and selective advisory work.""",
         """Independent research in explainable AI, probabilistic modelling, complexity theory, and related fields.""",
-        """Exploring agentic AI techniques to create robust software both faster and cheaper, without compromising on quality.""",
+        """Exploring agentic AI techniques to accelerate software development without compromising robustness or quality.""",
         "Developing open-source and personal software projects.",
         "Available for non-executive director/board advisory roles, and fractional CTO engagements.",
     ]}
@@ -79,9 +79,8 @@ sections = [
         """Joined on a part-time basis following the acquisition of Cmed to support technical integration,
            organisational restructuring, and executive transition.""",
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
-        """Advised executive leadership post-acquisition, provided stability, and
-           helping to establish new operating model.""",
-        """Defined enterprise AI strategy and governance, setting up a path for responsible adoption in a highly regulated industry."""
+        """Advised executive leadership, providing continuity and stability during adjustments to the new operating model.""",
+        """Defined enterprise AI strategy and governance, establishing the foundations for responsible adoption in a highly regulated industry."""
     ]}
 ]
 
@@ -104,10 +103,10 @@ sections = [
         """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
             later leading migration to AWS and Azure while reducing operating costs and allowing the company
             to focus on its core business.""",
-        "Maintained greater than 99.99% service availability over more than 20 years of global operation.",
+        "Delivered >99.99% service availability across more than 20 years of continuous global operation.",
         """Built around an immutable audit trail and a single source of truth, supporting FDA regulatory compliance.
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
-        "Early adopter of Python for all server-side infrastructure/code.",
+        "Early adopter of Python across all server-side infrastructure and application development.",
     ]},
     { title = "Management | Leadership | Strategy", details = [
         """Built and led multidisciplinary engineering, support operations, and Corporate IT
