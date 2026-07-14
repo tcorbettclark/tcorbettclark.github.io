@@ -665,12 +665,28 @@
     }
 
     .toc-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
         font-weight: 600;
         font-variant: small-caps;
         margin: 0 0 var(--space-sm);
         padding-bottom: var(--space-xs);
         border-bottom: 1px solid var(--color-border);
         color: var(--color-text-muted);
+    }
+
+    .toc-top-link {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-variant: normal;
+        font-weight: normal;
+        font-size: 0.8rem;
+    }
+
+    .toc-top-link:hover,
+    .toc-top-link.toc-active {
+        color: var(--color-accent);
     }
 
     .toc-list {
@@ -735,7 +751,7 @@
 
     .toc-scroll-links {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-top: var(--space-sm);
         padding-top: var(--space-sm);
         border-top: 1px solid var(--color-border);
