@@ -137,6 +137,27 @@ function main() {
     toc.appendChild(result.list);
 
     initScrollSpy(result.headingLiMap);
+
+    var scrollLinks = document.createElement("div");
+    scrollLinks.className = "toc-scroll-links";
+
+    var topLink = document.createElement("a");
+    topLink.href = "#";
+    var topIcon = document.createElement("i");
+    topIcon.className = "fa-solid fa-arrow-up";
+    topLink.appendChild(topIcon);
+    topLink.appendChild(document.createTextNode(" Top"));
+
+    var bottomLink = document.createElement("a");
+    bottomLink.href = "#footer";
+    var bottomIcon = document.createElement("i");
+    bottomIcon.className = "fa-solid fa-arrow-down";
+    bottomLink.appendChild(bottomIcon);
+    bottomLink.appendChild(document.createTextNode(" Bottom"));
+
+    scrollLinks.appendChild(topLink);
+    scrollLinks.appendChild(bottomLink);
+    toc.appendChild(scrollLinks);
 }
 
 document.addEventListener("DOMContentLoaded", main);

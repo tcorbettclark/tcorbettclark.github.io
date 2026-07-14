@@ -646,10 +646,16 @@
         font-size: 0.85rem;
         line-height: 1.4;
         padding: var(--space-md);
-        background-color: color-mix(in srgb, var(--color-bg) 85%, transparent);
+        background-color: #deded8;
         border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .page-toc {
+            background-color: #2e2e2c;
+        }
     }
 
     @media (max-width: 960px) {
@@ -724,6 +730,24 @@
 
     /* Re-apply the accent colour when the focused link is also active. */
     .toc-active > a:focus {
+        color: var(--color-accent);
+    }
+
+    .toc-scroll-links {
+        display: flex;
+        justify-content: space-between;
+        margin-top: var(--space-sm);
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .toc-scroll-links a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-size: 0.8rem;
+    }
+
+    .toc-scroll-links a:hover {
         color: var(--color-accent);
     }
 
