@@ -609,6 +609,7 @@
         margin-bottom: var(--space-lg);
         padding-bottom: var(--space-sm);
         border-bottom: 2px solid var(--color-accent);
+        max-width: var(--max-width);
     }
 
     .draft-banner {
@@ -782,7 +783,7 @@
 
     .welcome-layout {
         display: grid;
-        grid-template-columns: 1fr 260px;
+        grid-template-columns: 1fr 300px;
         gap: var(--space-xl);
         max-width: 900px;
         margin: 0 auto;
@@ -793,6 +794,10 @@
     @media (max-width: 768px) {
         .welcome-layout {
             grid-template-columns: 1fr;
+        }
+
+        .pursuits-list {
+            columns: 1;
         }
     }
 
@@ -835,6 +840,8 @@
         list-style: none;
         padding: 0;
         text-align: left;
+        columns: 2;
+        column-gap: var(--space-md);
     }
 
     .pursuits-list li {
