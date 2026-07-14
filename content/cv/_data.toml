@@ -55,8 +55,19 @@ detail = "DPhil in Explainable AI (University of Oxford)"
 fa_class = "fa-graduation-cap"
 
 
-
-
+[[MY_EXPERIENCE]]
+job_title = "Independent Researcher &amp; Technology Advisor"
+time = "2025–Present"
+company = ""
+sections = [
+    { title = "", details = [
+        """Independent research in explainable AI, probabilistic modelling, and new
+           software practices with agentic AI.""",
+        "Developing open-source and personal software projects.",
+        "Technology advisor for selected organisations.",
+        "Available for non-executive director, board advisory and fractional CTO engagements.",
+    ]}
+]
 
 [[MY_EXPERIENCE]]
 job_title = "Chief Technology Officer"
@@ -64,7 +75,8 @@ time = "2021–2025"
 company = "Aixial"
 sections = [
     { title = "", details = [
-        "Led technical integration and management restructuring aspects following acquisition.",
+        """Joined on a part-time basis following the acquisition of Cmed to support technical integration,
+           organisational restructuring and executive transition.""",
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
         """Advised executive leadership during post-acquisition integration,
            helping reshape organisation and operating model.""",
