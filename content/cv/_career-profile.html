@@ -1,4 +1,11 @@
 <section class="cv-section">
     <h2><i class="fa-solid fa-user"></i> Executive Profile</h2>
-    {{ "_career-profile.md" | markdown }}
+    <div class="cv-profile-layout">
+        <div class="cv-profile-text">
+            {{ "_career-profile.md" | markdown }}
+        </div>
+        <div class="cv-profile-sidebar">
+            {% include "_executive-snapshot.html" %}
+        </div>
+    </div>
 </section>

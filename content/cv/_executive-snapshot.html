@@ -1,0 +1,13 @@
+<div class="cv-snapshot">
+    <ul class="cv-snapshot-list">
+        {% for item in MY_EXECUTIVE_SNAPSHOT %}
+        <li>
+            <div class="cv-snapshot-label">
+                <i class="fa-solid {{ item['fa_class'] }}"></i>
+                <strong>{{ item['label'] }}</strong>
+            </div>
+            <div class="cv-snapshot-detail">{{ item['detail'] }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

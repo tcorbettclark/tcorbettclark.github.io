@@ -19,14 +19,43 @@ details = [
 ]
 
 
-[MY_CAREER_HIGHLIGHTS]
-highlights = [
-    "Platform used in ~1,000 clinical trials.",
-    "Trusted by 150+ pharmaceutical and biotechnology organisations.",
-    "20+ years of globally deployed zero-downtime SaaS.",
-    "Led engineering organisations of 50+ staff.",
-    "CTO and founder, 25+ years.",
-]
+[[MY_EXECUTIVE_SNAPSHOT]]
+label = "Tenure"
+detail = "CTO &amp; Founder, 25+ years"
+fa_class = "fa-briefcase"
+
+[[MY_EXECUTIVE_SNAPSHOT]]
+label = "Scale"
+detail = "Disruptive SaaS platform used in ~1,000 clinical trials"
+fa_class = "fa-chart-line"
+
+[[MY_EXECUTIVE_SNAPSHOT]]
+label = "Trust"
+detail = "150+ pharma/biotech"
+fa_class = "fa-handshake"
+
+[[MY_EXECUTIVE_SNAPSHOT]]
+label = "Uptime"
+detail = "20+ years zero-downtime, regulated cloud"
+fa_class = "fa-clock"
+
+[[MY_EXECUTIVE_SNAPSHOT]]
+label = "Leadership"
+detail = "Scaled engineering organizations to 50+ staff"
+fa_class = "fa-users"
+
+[[MY_EXECUTIVE_SNAPSHOT]]
+label = "Innovation"
+detail = "Foundation architecture and category-converging products; 2 patents"
+fa_class = "fa-lightbulb"
+
+[[MY_EXECUTIVE_SNAPSHOT]]
+label = "Education"
+detail = "DPhil in Explainable AI (University of Oxford)"
+fa_class = "fa-graduation-cap"
+
+
+
 
 
 [[MY_EXPERIENCE]]
