@@ -78,7 +78,7 @@ A few years ago, I paused the violin to take up the cello.
 My daughter had learned from an early age, and having sat in on her lessons with an inspiring teacher, I was already captivated.
 The cello repertoire is immense (not *just* the ethereal Bach suites!).
 More so than the violin, the cello occupies multifarious roles in classical music.
-Her teacher launched my transition, and today, my daughter offers her own sharp, constructive critiques and encouragement.
+Her teacher launched my transition, and today, my daughter offers her own sharp, constructive critiques and words of encouragement.
 
 This new perspective has been immensely fulfilling;
 I’ve already returned to playing in orchestras and string quartets.
