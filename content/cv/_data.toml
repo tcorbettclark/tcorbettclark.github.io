@@ -21,7 +21,7 @@ details = [
 
 [[MY_EXECUTIVE_SNAPSHOT]]
 label = "Tenure"
-detail = "CTO &amp; Founder, 25+ years"
+detail = "CTO, Board Director, &amp; Founder, 25+ years"
 fa_class = "fa-briefcase"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
@@ -36,7 +36,7 @@ fa_class = "fa-handshake"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
 label = "Uptime"
-detail = "20+ years zero-downtime, regulated cloud"
+detail = "20+ years >99.99% uptime, regulated cloud"
 fa_class = "fa-clock"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
@@ -46,7 +46,7 @@ fa_class = "fa-users"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
 label = "Innovation"
-detail = "Foundation architecture and category-converging products; 2 patents"
+detail = "Deep architecture and category-shifting products; 2 patents"
 fa_class = "fa-lightbulb"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
@@ -78,29 +78,30 @@ time = "2002–2021"
 company = "Cmed Group"
 sections = [
     { title = "Technical | Product | Validation", details = [
-        """Designed, built, and supported the technology platform underpinning the business,
-           collecting, validating, and managing data from tens of thousands of participants across
+        """Architected and led development of the regulated SaaS platform underpinning the business,
+           used to collect, validate, and manage data from tens of thousands of participants across
            approximately 1,000 clinical trials, delivering regulatory-compliant datasets for over
-          150 pharmaceutical and biotechnology organisations.""",
+           150 pharmaceutical and biotechnology organisations.""",
         """Primary data collection platform for the oncology division of a top-three global pharmaceutical company,
            the innovation group of another top-three pharmaceutical company, and
            a top-three Japanese pharmaceutical company for electronic source (eSource).""",
-        """Differentiating features included unified Electronic Data Capture (EDC) and eSource,
+        """Tecnical innovations enabled differentiating features, such as unified Electronic Data Capture (EDC) and eSource,
            built-in analytics (R, Python), actionable insights,
            and seamless offline operation (e.g. vaccine data in remote Africa).""",
         """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
             later leading migration to AWS and Azure while reducing operating costs and allowing the company
             to focus on its core business.""",
-        "Achieved high availability (HA) with zero downtime globally over 20+ years.",
+        "Achieved high availability (HA) with >99.99% uptime, globally over 20+ years.",
         """Built around an immutable audit trail and a single source of truth, supporting FDA regulatory compliance.
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
         "Early adopter of Python for all server-side infrastructure/code.",
     ]},
     { title = "Management | Leadership | Strategy", details = [
-        "Led R&amp;D, Engineering, System Operations, and Corporate IT across 50+ staff.",
-        "Head of the SaaS Business Unit, responsible for sales, marketing, and financial forecasts.",
+        """Built and led multidisciplinary engineering, support operations, and Corporate IT
+           exceeding 50 staff, enabling sustained global delivery of regulated SaaS platforms.""",
+        "Head of the SaaS Business Unit, responsible for sales, marketing, financial forecasts, P&amp;L.",
         "Executive technology spokesperson for group customers, partners, investors, and internal stakeholders.",
-        "Key leader and board member for the group, with particular focus on technical strategy."
+        "Board Director responsible for long-term technology strategy and governance."
     ]},
 ]
 
@@ -110,7 +111,8 @@ time = "2000–2002"
 company = "ThirdPhase Ltd"
 sections = [
     { title = "", details = [
-        """Built and led technology development and the design of innovative clinical trial system architecture
+        "Co-founded the company and led technology strategy, architecture and engineering.",
+        """Designed innovative clinical trial system architecture
            (<a href=\"https://patents.google.com/patent/US20040025030A1/\">patent US20040025030A1</a>).""",
        "Played a leading role in securing venture capital and representing the company to investors.",
        "Following acquisition, ThirdPhase became Cmed Technology, a subsidiary of Cmed Group."
@@ -138,8 +140,9 @@ time = "1998–1999"
 company = "Department of Engineering Science, University of Oxford"
 sections = [
     { title = "", details = [
-        """College Lecturer in Engineering while conducting research into machine learning,
-           nonlinear dynamical systems, and Independent Component Analysis (ICA) for novelty detection
-           and biomedical signal analysis."""
+        """Conducted research into machine learning, nonlinear dynamical systems,
+           and Independent Component Analysis (ICA) for novelty detection
+           and biomedical signal analysis.""",
+        "College Lecturer in Engineering Science."
     ]}
 ]
