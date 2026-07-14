@@ -63,8 +63,8 @@ sections = [
     { title = "", details = [
         """Chose to step back from full-time executive leadership following the successful acquisition
            and integration of Cmed in order to pursue independent research and selective advisory work.""",
-        """Independent research in explainable AI, probabilistic modelling, and exploiting
-           agentic AI to create robust software at a fraction of the cost, in a fraction of the time.""",
+        """Independent research in explainable AI, probabilistic modelling, complexity theory, and related fields.""",
+        """Exploring agentic AI techniques to create robust software both faster and cheaper, without compromising on quality.""",
         "Developing open-source and personal software projects.",
         "Available for non-executive director/board advisory roles, and fractional CTO engagements.",
     ]}
@@ -77,11 +77,11 @@ company = "Aixial"
 sections = [
     { title = "", details = [
         """Joined on a part-time basis following the acquisition of Cmed to support technical integration,
-           organisational restructuring and executive transition.""",
+           organisational restructuring, and executive transition.""",
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
-        """Advised executive leadership during post-acquisition integration,
-           helping reshape organisational structure and operating model.""",
-        """Defined enterprise AI strategy and governance, enabling responsible adoption in a highly regulated industry."""
+        """Advised executive leadership post-acquisition, provided stability, and
+           helping to establish new operating model.""",
+        """Defined enterprise AI strategy and governance, setting up a path for responsible adoption in a highly regulated industry."""
     ]}
 ]
 
