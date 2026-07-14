@@ -1,11 +1,11 @@
-Similar to elsewhere across this site, I have lots of material to add here.
+Similar to elsewhere across this site, I have lots of material to add here over time...
 
 ## Some of my research when at Oxford
 
 * My [DPhil](https://uni-of-oxford.custhelp.com/app/answers/detail/a_id/185/~/what-is-a-dphil) thesis, [Explanation from Neural Networks](thesis.pdf).
 * Introductory notes on Independent Component Analysis and the Blind Separation of Sources problem: [ICA introduction](ica_introduction.pdf).
 * Extending the basic ICA model Part 1: reducing the number of souces: [ICA extensions part 1](ica_extensions_pt1.pdf).
-* Choosing an appropriate model for novelty detection: *link pending, once I can find it!*
+* Choosing an appropriate model for [novelty detection](model_for_novelty_detection.pdf).
 
 
 <!--## Particular research focus

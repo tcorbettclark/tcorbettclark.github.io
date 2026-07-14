@@ -80,6 +80,6 @@ The cello repertoire is immense (not *just* the ethereal Bach suites!).
 More so than the violin, the cello occupies multifarious roles in classical music.
 Her teacher launched my transition, and today, my daughter offers her own sharp, constructive critiques and words of encouragement.
 
-This new perspective has been immensely fulfilling;
-I’ve returned to playing in orchestras and string quartets, but in a different seat holding a different instrument.
+This new perspective has been immensely fulfilling.
+I’ve returned to playing in orchestras and string quartets, but now in a different seat and holding a different instrument :-)
 My new musical journey has only just begun…
