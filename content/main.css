@@ -609,6 +609,7 @@
         margin-bottom: var(--space-lg);
         padding-bottom: var(--space-sm);
         border-bottom: 2px solid var(--color-accent);
+        max-width: var(--max-width);
     }
 
     .draft-banner {
