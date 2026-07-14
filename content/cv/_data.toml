@@ -1,5 +1,5 @@
 [[MY_EDUCATION]]
-degree = "DPhil (PhD) in Explainable AI"
+degree = "DPhil (PhD) in Neural Networks / AI"
 time = "1998"
 institution = "University of Oxford"
 details = [
@@ -41,7 +41,7 @@ fa_class = "fa-clock"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
 label = "Leadership"
-detail = "Scaled engineering organizations to 50+ staff"
+detail = "Scaled engineering organisations to 50+ staff"
 fa_class = "fa-users"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
@@ -51,7 +51,7 @@ fa_class = "fa-lightbulb"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
 label = "Education"
-detail = "DPhil in Explainable AI (University of Oxford)"
+detail = "DPhil in Neural Networks / AI (University of Oxford)"
 fa_class = "fa-graduation-cap"
 
 
@@ -61,11 +61,13 @@ time = "2025–Present"
 company = ""
 sections = [
     { title = "", details = [
-        """Independent research in explainable AI, probabilistic modelling, and new
-           software practices with agentic AI.""",
+        """Chose to step back from full-time executive leadership following the successful acquisition
+           and integration of Cmed in order to pursue independent research and selective advisory work.""",
+        """Independent research in explainable AI, probabilistic modelling, and exploiting
+           agentic AI to create robust software at a fraction of the cost, in a fraction of the time.""",
         "Developing open-source and personal software projects.",
-        "Technology advisor for selected organisations.",
-        "Available for non-executive director, board advisory and fractional CTO engagements.",
+        "Technology advisor to selected organisations.",
+        "Available for non-executive director/board advisory roles, and fractional CTO engagements.",
     ]}
 ]
 
@@ -79,7 +81,7 @@ sections = [
            organisational restructuring and executive transition.""",
         "Reduced financial and regulatory exposure by negotiating orderly exits from major customer and supplier contracts.",
         """Advised executive leadership during post-acquisition integration,
-           helping reshape organisation and operating model.""",
+           helping reshape organisational structure and operating model.""",
         """Defined enterprise AI strategy and governance, enabling responsible adoption across a highly regulated organisation."""
     ]}
 ]
@@ -97,13 +99,13 @@ sections = [
         """Primary data collection platform for the oncology division of a top-three global pharmaceutical company,
            the innovation group of another top-three pharmaceutical company, and
            a top-three Japanese pharmaceutical company for electronic source (eSource).""",
-        """Tecnical innovations enabled differentiating features, such as unified Electronic Data Capture (EDC) and eSource,
+        """Technical innovations included unified Electronic Data Capture (EDC) and eSource,
            built-in analytics (R, Python), actionable insights,
            and seamless offline operation (e.g. vaccine data in remote Africa).""",
         """Architected and operated a geographically distributed private cloud of ~500 virtualised servers,
             later leading migration to AWS and Azure while reducing operating costs and allowing the company
             to focus on its core business.""",
-        "Achieved high availability (HA) with >99.99% uptime, globally over 20+ years.",
+        "Maintained greater than 99.99% service availability over more than 20 years of global operation.",
         """Built around an immutable audit trail and a single source of truth, supporting FDA regulatory compliance.
            (<a href=\"https://patents.google.com/patent/US20040177090A1/\">patent US20040177090A1</a>).""",
         "Early adopter of Python for all server-side infrastructure/code.",
