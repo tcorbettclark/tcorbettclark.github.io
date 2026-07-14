@@ -81,5 +81,5 @@ More so than the violin, the cello occupies multifarious roles in classical musi
 Her teacher launched my transition, and today, my daughter offers her own sharp, constructive critiques and words of encouragement.
 
 This new perspective has been immensely fulfilling;
-I’ve already returned to playing in orchestras and string quartets.
+I’ve returned to playing in orchestras and string quartets, but in a different seat holding a different instrument.
 My new musical journey has only just begun…
