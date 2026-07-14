@@ -502,28 +502,16 @@
 @layer layout {
     /* ==========================================================================
        @layer layout
-       Purpose: Page-level grid layout that positions the main content area
-         alongside a sticky table-of-contents sidebar. On narrow screens the
-         sidebar is hidden and the layout collapses to a single column.
-       Notes: The .welcome-layout variant is a similar grid but wider, used
-         only on the homepage.
+       Purpose: Page-level container that centres the main content area.
+         The table-of-contents sidebar is now a floating card (see toc layer)
+         rather than a grid column, so no layout breakpoint is needed here.
        Standard: CSS Grid Layout Level 2.
        ========================================================================== */
 
     .page-layout {
-        display: grid;
-        grid-template-columns: 1fr 220px;
-        gap: var(--space-xl);
-        max-width: 920px;
+        max-width: 900px;
         margin: 0 auto;
         padding: var(--space-md) var(--space-md) var(--space-2xl);
-        align-items: start;
-    }
-
-    @media (max-width: 960px) {
-        .page-layout {
-            grid-template-columns: 1fr;
-        }
     }
 
     .page-main {
@@ -643,17 +631,31 @@
 @layer toc {
     /* ==========================================================================
        @layer toc
-       Purpose: Table of contents sidebar — a sticky, hierarchical outline
-         shown alongside the main content on wide screens. Hidden entirely
-         on screens narrower than 960px (see layout layer).
-       Standard: CSS Position Sticky.
+       Purpose: Table of contents — a fixed floating card in the right margin
+         on screens wider than 960px. Hidden entirely on narrower screens.
+       Standard: CSS Position Fixed.
        ========================================================================== */
 
     .page-toc {
-        position: sticky;
-        top: 5rem;
+        position: fixed;
+        top: 6rem;
+        right: 1.5rem;
+        width: 220px;
+        max-height: calc(100vh - 8rem);
+        overflow-y: auto;
         font-size: 0.85rem;
         line-height: 1.4;
+        padding: var(--space-md);
+        background-color: #deded8;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .page-toc {
+            background-color: #2e2e2c;
+        }
     }
 
     @media (max-width: 960px) {
@@ -663,12 +665,28 @@
     }
 
     .toc-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
         font-weight: 600;
         font-variant: small-caps;
         margin: 0 0 var(--space-sm);
         padding-bottom: var(--space-xs);
         border-bottom: 1px solid var(--color-border);
         color: var(--color-text-muted);
+    }
+
+    .toc-top-link {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-variant: normal;
+        font-weight: normal;
+        font-size: 0.8rem;
+    }
+
+    .toc-top-link:hover,
+    .toc-top-link.toc-active {
+        color: var(--color-accent);
     }
 
     .toc-list {
@@ -728,6 +746,24 @@
 
     /* Re-apply the accent colour when the focused link is also active. */
     .toc-active > a:focus {
+        color: var(--color-accent);
+    }
+
+    .toc-scroll-links {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: var(--space-sm);
+        padding-top: var(--space-sm);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .toc-scroll-links a {
+        color: var(--color-text-muted);
+        text-decoration: none;
+        font-size: 0.8rem;
+    }
+
+    .toc-scroll-links a:hover {
         color: var(--color-accent);
     }
 
@@ -984,9 +1020,9 @@
          Two breakpoints:
          - ≤768px: mobile navigation (hamburger toggle, collapsed nav).
          - ≤480px: small-screen type scaling for the narrowest devices.
-       Notes: Layout and TOC breakpoints (≤960px) and the welcome sidebar
-         breakpoint (≤768px) are co-located with their respective components
-         in the layout, toc, and welcome layers. Those are lower-precedence
+       Notes: The TOC floating card breakpoint (≤960px) and the welcome
+         sidebar breakpoint (≤768px) are co-located with their respective
+         components in the toc and welcome layers. Those are lower-precedence
          layers but still work correctly because the selectors only target
          their own components.
        Standard: CSS Media Queries Level 4.
@@ -1066,10 +1102,6 @@
         .page-layout {
             max-width: 100%;
             padding: 0;
-        }
-
-        .page-layout {
-            display: block;
         }
 
         a {

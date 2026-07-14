@@ -60,59 +60,63 @@ function buildTocList(headings) {
 function initScrollSpy(headingLiMap) {
     var currentActive = null;
 
-    function setActive(li) {
-        if (currentActive === li) return;
+    function setActive(el) {
+        if (currentActive === el) return;
         if (currentActive) currentActive.classList.remove("toc-active");
-        li.classList.add("toc-active");
-        currentActive = li;
+        el.classList.add("toc-active");
+        currentActive = el;
     }
 
     var scrollOffsetRem = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--scroll-offset")) || 5;
     var rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
     var scrollOffsetPx = Math.round(scrollOffsetRem * rootFontSize) + 5;
 
-    function updateActiveHeading() {
+    function updateActiveHeading(updateHash) {
         var activeLi = null;
         for (var i = 0; i < headingLiMap.length; i++) {
+            if (headingLiMap[i].isTop) {
+                continue;
+            }
             if (headingLiMap[i].heading.getBoundingClientRect().top <= scrollOffsetPx) {
                 activeLi = headingLiMap[i].li;
             }
         }
+        if (!activeLi) {
+            var topEntry = headingLiMap.filter(function (e) { return e.isTop; })[0];
+            if (topEntry) activeLi = topEntry.li;
+        }
         if (activeLi) {
             setActive(activeLi);
-            var link = activeLi.querySelector("a");
-            if (link) {
-                var hash = link.getAttribute("href");
-                if (hash && hash.charAt(0) === "#" && location.hash !== hash) {
-                    history.replaceState(null, "", hash);
+            if (updateHash) {
+                var link = activeLi.tagName === "A" ? activeLi : activeLi.querySelector("a");
+                if (link) {
+                    var hash = link.getAttribute("href");
+                    if (hash && hash.charAt(0) === "#" && location.hash !== hash) {
+                        history.replaceState(null, "", hash);
+                    }
                 }
             }
         }
     }
 
-    var observer = new IntersectionObserver(function () {
-        updateActiveHeading();
-    }, {
-        rootMargin: "-" + scrollOffsetPx + "px 0px -60% 0px",
-        threshold: 0
-    });
-
-    for (var m = 0; m < headingLiMap.length; m++) {
-        observer.observe(headingLiMap[m].heading);
-    }
-
     var ticking = false;
+    var settleTimer = null;
+
     window.addEventListener("scroll", function () {
         if (!ticking) {
             ticking = true;
             requestAnimationFrame(function () {
-                updateActiveHeading();
+                updateActiveHeading(false);
                 ticking = false;
             });
         }
+        if (settleTimer) clearTimeout(settleTimer);
+        settleTimer = setTimeout(function () {
+            updateActiveHeading(true);
+        }, 150);
     }, { passive: true });
 
-    updateActiveHeading();
+    updateActiveHeading(true);
 }
 
 function main() {
@@ -128,15 +132,45 @@ function main() {
 
     assignHeadingIds(headings);
 
-    var title = document.createElement("p");
+    var title = document.createElement("div");
     title.className = "toc-title";
-    title.textContent = "Contents";
+
+    var titleText = document.createElement("span");
+    titleText.textContent = "Contents";
+    title.appendChild(titleText);
+
+    var topA = document.createElement("a");
+    topA.href = "#";
+    topA.className = "toc-top-link";
+    topA.appendChild(document.createTextNode("Top"));
+    var topIcon = document.createElement("i");
+    topIcon.className = "fa-solid fa-angles-up";
+    topIcon.style.marginLeft = "0.3em";
+    topA.appendChild(topIcon);
+    title.appendChild(topA);
+
     toc.appendChild(title);
 
     var result = buildTocList(headings);
     toc.appendChild(result.list);
 
+    var topEntry = { isTop: true, li: topA };
+    result.headingLiMap.unshift(topEntry);
     initScrollSpy(result.headingLiMap);
+
+    var scrollLinks = document.createElement("div");
+    scrollLinks.className = "toc-scroll-links";
+
+    var bottomLink = document.createElement("a");
+    bottomLink.href = "#footer";
+    bottomLink.appendChild(document.createTextNode("Bottom"));
+    var bottomIcon = document.createElement("i");
+    bottomIcon.className = "fa-solid fa-angles-down";
+    bottomIcon.style.marginLeft = "0.3em";
+    bottomLink.appendChild(bottomIcon);
+
+    scrollLinks.appendChild(bottomLink);
+    toc.appendChild(scrollLinks);
 }
 
 document.addEventListener("DOMContentLoaded", main);
