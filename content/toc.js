@@ -142,7 +142,9 @@ function main() {
     var topA = document.createElement("a");
     topA.href = "#";
     topA.className = "toc-top-link";
-    topA.appendChild(document.createTextNode("Top"));
+    var topEm = document.createElement("em");
+    topEm.appendChild(document.createTextNode("Top"));
+    topA.appendChild(topEm);
     var topIcon = document.createElement("i");
     topIcon.className = "fa-solid fa-angles-up";
     topIcon.style.marginLeft = "0.3em";
@@ -163,7 +165,9 @@ function main() {
 
     var bottomLink = document.createElement("a");
     bottomLink.href = "#footer";
-    bottomLink.appendChild(document.createTextNode("Bottom"));
+    var bottomEm = document.createElement("em");
+    bottomEm.appendChild(document.createTextNode("Bottom"));
+    bottomLink.appendChild(bottomEm);
     var bottomIcon = document.createElement("i");
     bottomIcon.className = "fa-solid fa-angles-down";
     bottomIcon.style.marginLeft = "0.3em";
@@ -171,6 +175,17 @@ function main() {
 
     scrollLinks.appendChild(bottomLink);
     toc.appendChild(scrollLinks);
+
+    function updateScrollbarClass() {
+        if (document.documentElement.scrollHeight > document.documentElement.clientHeight) {
+            toc.classList.add("has-scrollbar");
+        } else {
+            toc.classList.remove("has-scrollbar");
+        }
+    }
+
+    updateScrollbarClass();
+    window.addEventListener("resize", updateScrollbarClass);
 }
 
 document.addEventListener("DOMContentLoaded", main);
