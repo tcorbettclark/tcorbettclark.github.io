@@ -1,4 +1,4 @@
-The purpose of this site is to encourage me to write and share things I find interesting.
+The purpose of this site is to encourage me to write and to share things I find interesting.
 This isn't a blog; it's a living space of considered content where I add, refine, and refactor as needed.
 
 I have reached a stage in my life where commercial activity is less important than intellectual stimulation.
