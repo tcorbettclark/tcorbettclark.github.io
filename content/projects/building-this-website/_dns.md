@@ -113,7 +113,7 @@ The lifecycle of a typical email as it moves between these components is as foll
 5. The destination MTA passes the email to the MDA, which stores it in the user's mailbox.
 6. The MAA waits for MUAs to connect, authenticate, and ask to view or download stored emails.
 
-There are other names for components with similarly functionality and purpose to those in the Mxx model.
+There are other names for components with similar functionality and purpose to those in the Mxx model.
 For some, it's debatable whether they are aliases, extensions, or new component types.
 - **Mailing List Managers (MLM)** expand a single incoming alias into multiple recipient addresses before the email is handed off to the MTA.
 - **Secure Email Gateway** often includes an MTA but provides additional security features such as encryption and edge security filtering.
@@ -148,7 +148,7 @@ The `Return-Path:` header is only used by the systems under various failures to 
 A user replying to an email will use the `From:` header (or the `Reply-To:` header if set).
 
 An important email header is the `Received:` header.
-The various components (MTAs, MDAs, secure email gateways, mailing list managers, proxies etc) add to this header as they process and pass around the email.
+The various components (MTAs, MDAs, secure email gateways, mailing list managers, proxies etc) each add a new `Received:` header as they process and pass around the email.
 The most recent entry is at the top.
 The standard template governed by RFC 5321 is:
 

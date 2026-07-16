@@ -272,7 +272,7 @@ blog.example.com. A 198.51.100.1
               </li>
             </ol>
             <p>
-              There are other names for components with similarly functionality and purpose to those in the Mxx model.
+              There are other names for components with similar functionality and purpose to those in the Mxx model.
               For some, it’s debatable whether they are aliases, extensions, or new component types.
             </p>
             <ul>
@@ -342,8 +342,9 @@ blog.example.com. A 198.51.100.1
             </p>
             <p>
               An important email header is the <code>Received:</code> header. The various components (MTAs, MDAs,
-              secure email gateways, mailing list managers, proxies etc) add to this header as they process and pass
-              around the email. The most recent entry is at the top. The standard template governed by RFC 5321 is:
+              secure email gateways, mailing list managers, proxies etc) each add a new <code>Received:</code> header
+              as they process and pass around the email. The most recent entry is at the top. The standard template
+              governed by RFC 5321 is:
             </p>
             <pre><code class="language-text">Received: from [Sending Server Name/IP] 
           by [Receiving Server Name] 
