@@ -33,7 +33,7 @@ To activate the right muscles and remind oneself of the right feelings:
 1. Side slips with punctuated edge grips. Point the knees. Also do one legged.
 1. Falling leaf, by moving legs forward/back, not the upper body.
 1. Braquage (pivot) turns 180 degrees in each direction, rotating legs with hips remaining down the hill. Upper body and hands remain pointing down the slope.
-1. Skating down the hill, making clean tracks.
+1. Skating down the hill with clean tracks, feeling the early edge engagement, then transitioning to railtracks _while keeping that early edge engagement_. 
 1. Hockey stops to build stopping confidence and large edge angles. Key is making a wide sweep before the stop.
 
 ## Drills - for Short Turns
