@@ -20,7 +20,7 @@ I approach problems analytically and thoughtfully, and people trust me, which he
 
 ## Epistemic Standards
 
-Deep originality is secondary to absolute clarity of synthesis. Every line of code I ship or idea I publish must aim to satisfy four directives:
+In my research, deep originality is secondary to absolute clarity of synthesis. I aim to satisfy four directives:
 
 Rigorous Understanding
 : Validating the "why" behind an algorithm or idea by writing exhaustive, first-principles explanations.
