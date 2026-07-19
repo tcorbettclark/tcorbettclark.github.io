@@ -91,9 +91,8 @@ company = "Cmed Group"
 sections = [
     { title = "Technical | Product | Validation", details = [
         """Architected and led development of the regulated SaaS platform underpinning the business,
-           used to collect, validate, and manage data from tens of thousands of participants across
-           approximately 1,000 clinical trials, delivering regulatory-compliant datasets for over
-           150 pharmaceutical and biotechnology organisations.""",
+           used to collect, validate, and manage data from approximately 1,000 clinical trials, delivering
+           regulatory-compliant datasets for over 150 pharmaceutical and biotechnology organisations.""",
         """Primary data collection platform for the oncology division of a top-three global pharmaceutical company,
            the innovation group of another top-three pharmaceutical company, and
            a top-three Japanese pharmaceutical company for electronic source (eSource).""",

@@ -8,7 +8,7 @@ After reading Engineering and Computer Science at Oxford (concluding with a doub
 The focus was on algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators (i.e. a Neural Network).
 
 Following a careful exploration of different business areas, I co-founded a company to provide worldwide clinical trial data collection and analysis systems to the Life Sciences sector.
-I was responsible for the data platform backbone which collected data from tens of thousands of subjects across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.
+I was responsible for the data platform backbone which collected data across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.
 
 We sold the business in May 2021, but I opted to stay on part time to help support the transition, the staff, the customers and their trials.
 
