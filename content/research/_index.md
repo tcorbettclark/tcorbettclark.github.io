@@ -1,5 +1,9 @@
 Similar to elsewhere across this site, I have lots of material to add here over time...
 
+## Guides
+
+* Bewildered by the terms specificity, sensitivity, selectivity, precision, recall? Ever wondered about the reasons behind the $F_\beta$ score or the Jaccard index? Check out my guide on [Binary Classification Metrics](binary_classification_metrics.pdf).
+
 ## Some of my research when at Oxford
 
 * My [DPhil](https://uni-of-oxford.custhelp.com/app/answers/detail/a_id/185/~/what-is-a-dphil) thesis, [Explanation from Neural Networks](thesis.pdf).
