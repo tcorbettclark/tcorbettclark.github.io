@@ -1,4 +1,4 @@
-Cello, violin, orchestral performance, chamber music, skiing, chess and mathematics.
+Cello, violin, orchestral performance, chamber music, skiing, chess, and mathematics.
 
 Former committee member of Holbrook Sports and Leisure Club.
 
