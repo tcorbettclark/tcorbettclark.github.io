@@ -5,18 +5,17 @@ My interest in computers and electronics started at an early age back in the lat
 My software skills started at secondary school, when my father and I wrote and sold Physics teaching software to schools. I focused on optimising BBC 6502 Assembler for key routines.
 
 After reading Engineering and Computer Science at Oxford (concluding with a double first), I completed a DPhil in "Explanation from Artificial Neural Networks".
-The focus was on algorithms to derive human interpretable and quantifiably trustworthy explanations from general purpose probability estimators (i.e. a Neural Network).
+The focus was on algorithms to derive human-interpretable and quantifiably trustworthy explanations from general-purpose probability estimators (i.e. a neural network).
 
-Following a careful exploration of different business areas, I co-founded a company to provide worldwide clinical trial data collection and analysis systems to the Life Sciences sector.
-I was responsible for the data platform backbone which collected data across ~1000 clinical trials, delivering regulatory compliant results for ~150 customers ranging from top-ten Pharmaceutical companies to much smaller innovative Biotech.
+Following a careful exploration of different business areas, I co-founded a company to provide worldwide clinical trial data collection and analysis systems to the life sciences sector.
+I was responsible for the data platform backbone which collected data across ~1000 clinical trials, delivering regulatory-compliant results for ~150 customers ranging from top-ten pharmaceutical companies to much smaller innovative biotech.
 
-We sold the business in May 2021, but I opted to stay on part time to help support the transition, the staff, the customers and their trials.
+We sold the business in May 2021, but I opted to stay on part-time to help support the transition, the staff, the customers and their trials.
 
 Since the start of 2026 I have engaged in a much deeper exploration of AI foundations and applications.
-I feel extremely fortunate to have the experience, and now the time, to take advantage of this exciting revolution.
+I feel extremely fortunate to have the experience and training, and now the time, to be able to properly think about and leverage this exciting technology.
 
-I approach problems analytically and thoughtfully, and people trust me, which helps me be a confident and natural leader. I enjoy lively collaboration, working closely with smart and hard working colleagues who have skills and experience complementing my own.
-
+I approach problems analytically and thoughtfully, and people trust me: qualities that help me be a confident and natural leader. I enjoy lively collaboration, working closely with smart and hard-working colleagues who have skills and experience complementing my own.
 
 ## Epistemic Standards
 
@@ -26,7 +25,7 @@ Rigorous Understanding
 : Validating the "why" behind an algorithm or idea by writing exhaustive, first-principles explanations.
 
 Tangible Output
-: Reproducible results, algorithms, tools, visualizations, theory, or clean implementations.
+: Reproducible results, algorithms, tools, visualisations, theory, or clean implementations.
 
 Refined Intuition
 : Distilling complex feature spaces into enlightening and persuasive insights.
@@ -37,7 +36,7 @@ Overarching Themes
 
 ## The CTRLS Framework
 
-Across both commercial projects and foundational research, I categorize my focus into four distinct activity modes and apply them across all scales of work: **Creating**, **Thinking**, **Researching**, and **Learning** at all **Scales** (CTRLS).
+Across both commercial projects and foundational research, I categorise my focus into four distinct activity modes: **Creating**, **Thinking**, **Researching**, and **Learning**; and apply them at all **Scales** (CTRLS).
 
 Every project moves through three distinct phases, each requiring a specific cognitive toolkit:
 
@@ -52,33 +51,33 @@ Completion
 
 
 The naming of these meta ideas (modes, phases, cognitive toolkit) allows me to be much more self-aware.
-Thinking of them as dimensions, and progress as a path within that space, keeps me empowered and motivated: _there is always something I can do to make progress_.
+Thinking of them as dimensions, and of progress as a path within that space, keeps me empowered and motivated: _there is always something I can do to make progress_.
 
 
 ## Principles and Tastes
 
-Of particular application to the field of AI, I believe in the following general principles and approaches:
+With particular application to the field of AI, I believe in the following general principles and approaches:
 
-1. Use probability. Use statistical ideas. Be principled. Leverage centuries of research. But also: understand the assumptions behind many results created before the availability of powerful computers and software. Most data isn’t linear, or drawn from independent identical distributions, or normal, etc. Even when these assumptions don’t hold, the results can still work or aid understanding.
+1. Use probability. Use statistical ideas. Be principled. Leverage centuries of research. But also: understand the assumptions behind many results created before the availability of powerful computers and software. Most data isn’t linear, or drawn from independent and identically distributed (i.i.d.) sources, or normal, etc. Even when these assumptions don’t hold, the results can still work or aid understanding.
 
-2. Appreciate the “curse of dimensionality”. High dimensional space is basically void of data; distance metrics in feature space can be unintuitive or misleading, or say more about the metric than the data; results from algorithms should not change if measurement units are altered; the volume of hyper-spheres contain a vanishing fraction of bounding hyper-cube volume; etc.
+2. Appreciate the “curse of dimensionality”. High dimensional space is basically devoid of data; distance metrics in feature space can be unintuitive or misleading, or say more about the metric than the data; results from algorithms should not change if measurement units are altered; the volume of hyperspheres contain a vanishing fraction of bounding hypercube volume; etc.
 
-3. Models such as Deep Neural Networks and Kernel-based density estimators are general-purpose parameterised functions which make minimal assumptions about the data. Implicitly they do make assumptions of course, but the hope is that these structural constraints are either harmless or desired. Any inspiration from or analogy with brain function is of minor historical interest only.
+3. Models such as deep neural networks are general-purpose parameterised functions which make minimal assumptions about the data. Implicitly they do make assumptions of course, but the hope is that these structural constraints are either harmless or desired. Any inspiration from or analogy with brain function is of minor historical interest only.
 
-4. Publish reproducible results. I’ve spent the last 25 years using Python for commercial software development, so that will continue to be my go-to tool. Unsurprisingly, Jupyter/Marimo notebooks will feature too.
+4. Publish reproducible results. I’ve spent the past 25 years using Python for commercial software development, so that will continue to be my go-to tool. Unsurprisingly, Jupyter/Marimo notebooks will feature too.
 
-5. Make honest assessments using both real datasets (publically available) and artificial pedagogical datasets created with specific and known characteristics.
+5. Make honest assessments using both real datasets (publicly available) and artificial pedagogical datasets created with specific and known characteristics.
 
 
 ## Music
 
-Learning a musical instrument to a high standard is a demanding yet deeply rewarding pursuit. Having played the violin my whole life, I’ve long known the joy of performing classical music in orchestras and chamber ensembles.
+Learning a musical instrument to a high standard is a demanding yet deeply rewarding pursuit. Having played the violin my whole life, I’ve long known the joy of performing in orchestras and chamber ensembles.
 
 A few years ago, I paused the violin to take up the cello.
 My daughter had learned from an early age, and having sat in on her lessons with an inspiring teacher, I was already captivated.
 The cello repertoire is immense (not *just* the ethereal Bach suites!).
 More so than the violin, the cello occupies multifarious roles in classical music.
-Her teacher launched my transition, and today, my daughter offers her own sharp, constructive critiques and words of encouragement.
+Her teacher sparked my transition, and today, my daughter offers her own sharp, constructive critiques and words of encouragement.
 
 This new perspective has been immensely fulfilling.
 I’ve returned to playing in orchestras and string quartets, but now in a different seat and holding a different instrument :-)
