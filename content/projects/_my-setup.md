@@ -1,5 +1,7 @@
 This page helps me when setting up a new computer, and provides an overview to assess for consistency and compatibility.
 
+My main development is done using [my devbox](https://github.com/tcorbettclark/devbox) to provide a consistent environment using Apple container machines.
+
 ## Hardware
 
 - Computer: Mac Mini (2024) M4 10 core, 32GB RAM, 512GB SSD
@@ -10,13 +12,14 @@ This page helps me when setting up a new computer, and provides an overview to a
 
 - Package management: [brew](https://brew.sh)
 - Python versions and virtualenv: [uv](https://docs.astral.sh/uv/)
-- Containers / virtual machines: [container](https://github.com/apple/container), [colima](https://github.com/abiosoft/colima), [docker](https://www.docker.com), and [qemu](https://www.qemu.org)
+- Containers/VMs: [container](https://github.com/apple/container) (using my [devbox](https://github.com/tcorbettclark/devbox))
 
 ## Desktop
 
+- Computer monitoring: [Stats](https://github.com/exelban/stats)
+- Display management: [Betterdisplay](https://github.com/waydabber/betterdisplay)
 - Launcher (Spotlight replacement): [Raycast](https://www.raycast.com)
 - Sleep control: [Jolt of Caffeine](https://apps.apple.com/gb/app/jolt-of-caffeine/id1437130425?mt=12)
-- Focus behaviour: [AutoRaise](https://github.com/sbmpost/AutoRaise)
 
 ## Programming
 
@@ -39,7 +42,7 @@ This page helps me when setting up a new computer, and provides an overview to a
 - Local models: [Ollama](https://ollama.com)
 - Remote models: [Ollama](https://ollama.com) and [OpenRouter](https://openrouter.ai)
 - Commandline: [LLM](https://llm.datasette.io)
-- Programming: [OpenCode](https://opencode.ai) and [Pi](https://pi.dev)
+- Programming: [Pi](https://pi.dev)
 
 ## Researching and writing
 
@@ -53,11 +56,16 @@ To install all apps (list created using `brew list --casks -1`):
 
 ```bash
 brew install -q --cask \
+    betterdisplay \
+    caskhub \
     font-fira-code \
     font-fira-code-nerd-font \
     font-noto-emoji \
     ghostty \
+    mos \
     raycast \
+    shottr \
+    stats \
     zed \
     zotero
 ```
@@ -69,14 +77,13 @@ Note this includes the [Fira Code](https://github.com/tonsky/FiraCode) font with
 To install all my usual packages (list created using `brew leaves -r`):
 ```bash
 brew install -q \
+    agg \
     bat \
     bottom \
     caddy \
-    colima \
+    chezmoi \
+    container \
     curl \
-    docker \
-    docker-buildx \
-    docker-compose \
     doctl \
     duckdb \
     dust \
@@ -89,23 +96,20 @@ brew install -q \
     gh \
     git \
     harper \
+    herdr \
     jq \
     lazygit \
     libiconv \
     mailpit \
-    marksman \
     mkcert \
     node \
     nss \
     oven-sh/bun/bun \
-    qemu \
     ripgrep \
-    sqlite \
     starship \
-    tidy-html5 \
     uv \
     worktrunk \
-    zlib 
+    zlib
 ```
 
 Note the better versions of standard tools:
@@ -124,64 +128,14 @@ uv tool install \
     rapid-mlx \
     ruff \
     semble \
+    site-sweeper-cli \
     ty \
     vale
 ```
 
 ## Configuration
 
-### Ghostty
-
-Settings:
-```
-macos-option-as-alt = left
-split-divider-color = white
-desktop-notifications = true
-```
-    
-### Fish
-
-The main `~/.config/fish/config.fish` contains:
-
-```bash
-if status --is-login
-    # For brew
-    fish_add_path -P /opt/homebrew/bin
-    brew shellenv fish | source
-
-    # Add standard unix paths
-    fish_add_path -P /usr/local/sbin /usr/sbin /sbin /usr/local/bin /usr/bin /bin
-
-    # Add path to keg-only brew-installed curl and sqlite
-    fish_add_path -P (brew --prefix)/opt/curl/bin
-    fish_add_path -P (brew --prefix)/opt/sqlite/bin
-
-    # Add path to anything I have installed locally (e.g. by `uv tool`)
-    fish_add_path -P /Users/tcorbettclark/.local/bin
-
-    # Add path for "global" bun installs
-    fish_add_path -P /Users/tcorbettclark/.bun/bin
-
-    # For uv
-    uv generate-shell-completion fish | source
-end
-
-# Make starfish manage the prompt always.
-starship init fish | source
-
-```
-
-Some handy aliases:
-
-```bash
-alias --save ls eza
-alias --save la 'ls -a'
-alias --save ll 'ls -l'
-alias --save lla 'ls -la'
-alias --save lt 'ls --tree'
-alias --save va 'source .venv/bin/activate.fish'
-alias --save copy-latest-pdf-download 'cp (ls --sort created ~/Downloads/*.pdf | tail -1)'
-```
+My dotfiles configuration is managed by [chezmoi](https://www.chezmoi.io) in [tcorbettclark/dotfiles](https://github.com/tcorbettclark/dotfiles).
 
 ## Tips
 
