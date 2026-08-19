@@ -3,7 +3,7 @@
 __pycache__/
 .ruff_cache/
 .zed/
-localhost.pem
-localhost-key.pem
+*.pem
+*-key.pem
 screenshots/
 canonical_links.txt
