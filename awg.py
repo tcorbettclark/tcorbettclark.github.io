@@ -377,6 +377,10 @@ class Server:
         # Mostly for edge-case testing, e.g. serving on localhost and accessing files on 127.0.0.1.
         async def permissive_cors_for_testing(request, response):
             response.headers["Access-Control-Allow-Origin"] = "*"
+            # Mark every response as served by AWG so the in-browser hot
+            # reloader can detect the dev server (rather than guessing from the
+            # hostname, which breaks under e.g. container-machine forwarding).
+            response.headers["X-Served-By"] = "awg"
 
         app.on_response_prepare.append(permissive_cors_for_testing)
 
