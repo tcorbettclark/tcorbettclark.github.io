@@ -38,7 +38,24 @@ function start_hot_reloader() {
 }
 
 addEventListener("load", (event) => {
-  if (window.location.hostname == "localhost") {
-    start_hot_reloader();
-  }
+  // Only start the hot reloader if this page is being served by AWG (the local
+  // dev server). AWG marks every response with the `X-Served-By: awg` header,
+  // so we probe the current URL and check for it. In production (e.g. GitHub
+  // Pages) the header is absent, so the reloader stays inactive and no
+  // websocket is ever attempted (no blocking alert, no console noise).
+  //
+  // This is same-origin, so all response headers are readable without any
+  // Access-Control-Expose-Headers configuration, and CSP `connect-src 'self'`
+  // already permits the fetch.
+  fetch(window.location.href, { method: "HEAD", cache: "no-store" })
+    .then((response) => {
+      if (response.headers.get("X-Served-By") === "awg") {
+        start_hot_reloader();
+      }
+    })
+    .catch(() => {
+      // Network error probing for the dev server: safest to do nothing. If the
+      // page actually loaded, a fetch of its own URL failing entirely is
+      // unlikely, and we must never assume the dev server is present.
+    });
 });
