@@ -1,0 +1,35 @@
+# Configuration for awg.py — the Agnostic Website Generator.
+#
+# awg.py reads this file automatically when it sits next to the script.
+# Values here act as defaults: command-line switches take precedence
+# over this file, which takes precedence over built-in defaults.
+# (Run `uv run --script ./awg.py --help` for the full list of switches.)
+#
+# Relative path values (content_dir, output_dir, certfile, keyfile)
+# resolve against this file's directory.
+
+content_dir = "content"
+output_dir = "docs"
+
+[build]
+working_file_regex = "\\_.*"
+template_extensions = [".html", ".xml", ".txt"]
+
+[server]
+host = "0.0.0.0"
+port = 8000
+# The .pem files are gitignored; the server falls back to HTTP if they
+# are missing.
+certfile = "alice.machine.pem"
+keyfile = "alice.machine-key.pem"
+
+[tidy]
+# aria-current (ARIA 1.1) and other post-ARIA-1.0 aria-* attributes are
+# valid in HTML5 but missing from tidy's attribute table, so tidy flags
+# them as "proprietary attribute" warnings. Silence that false-positive
+# warning class; genuine attribute errors are still caught by tidy.
+warn_proprietary_attributes = false
+indent = true
+wrap = 120
+drop_empty_elements = false
+wrap_sections = false

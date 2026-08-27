@@ -6,10 +6,11 @@
 # requires-python = ">=3.13"
 # dependencies = [
 #     "aiohttp>=3.12,<3.15",
-#     "click>=8.2,<8.5",
 #     "jinja2>=3.1,<4",
 #     "markdown-it-py>=3.0,<5",
 #     "mdit-py-plugins>=0.4,<0.7",
+#     "pydantic>=2.13,<3",
+#     "pydantic-settings>=2.15,<3",
 #     "user-agents>=2.2,<3",
 #     "utidylib>=0.10,<2",
 #     "watchfiles>=1.0,<2",
@@ -32,7 +33,6 @@ import tempfile
 import aiohttp
 import aiohttp.abc
 import aiohttp.web
-import click
 import jinja2
 import markdown_it
 import tomllib
@@ -45,6 +45,13 @@ from mdit_py_plugins.attrs import attrs_plugin as markdown_attrs_plugin
 from mdit_py_plugins.deflist import deflist_plugin as markdown_deflist_plugin
 from mdit_py_plugins.dollarmath import dollarmath_plugin as markdown_math_plugin
 from mdit_py_plugins.footnote import footnote_plugin as markdown_footnote_plugin
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
+from pydantic_settings import (
+    BaseSettings,
+    CliSettingsSource,
+    SettingsConfigDict,
+    TomlConfigSettingsSource,
+)
 
 # Configure Logging.
 logger = logging.getLogger(__name__)
@@ -54,9 +61,21 @@ logging.getLogger("watchfiles.main").setLevel(
 )  # Stop watchfiles from logging file changes, as we do it instead.
 
 
+_ANSI_CODES = {
+    "red": "\x1b[31m",
+    "green": "\x1b[32m",
+    "yellow": "\x1b[33m",
+    "blue": "\x1b[34m",
+    "magenta": "\x1b[35m",
+    "cyan": "\x1b[36m",
+}
+
+
 def log(message, *, level=logging.INFO, colour=None):
     if colour:
-        message = click.style(message, fg=colour)
+        code = _ANSI_CODES.get(colour)
+        if code:
+            message = f"{code}{message}\x1b[0m"
     logger.log(msg=message, level=level)
 
 
@@ -64,6 +83,111 @@ def abort(message):
     log(message, level=logging.ERROR, colour="red")
     log("Aborting!", level=logging.ERROR, colour="red")
     quit()
+
+
+SCRIPT_DIR = pathlib.Path(__file__).resolve().parent
+
+
+class TidyConfig(BaseModel):
+    """[tidy] section: options for the tidy pass (utidylib)."""
+
+    model_config = ConfigDict(extra="forbid")
+    indent: bool = True
+    wrap: int = Field(120, ge=0)
+    drop_empty_elements: bool = False
+    wrap_sections: bool = False
+    warn_proprietary_attributes: bool = False
+
+
+class BuildConfig(BaseModel):
+    """[build] section: template rendering and output handling."""
+
+    model_config = ConfigDict(extra="forbid")
+    working_file_regex: str = r"\_.*"
+    template_extensions: list[str] = [".html", ".xml", ".txt"]
+
+
+class ServerConfig(BaseModel):
+    """[server] section: local preview server."""
+
+    model_config = ConfigDict(extra="forbid")
+    host: str = "localhost"
+    port: int = Field(8000, ge=1, le=65535)
+    certfile: pathlib.Path | None = None
+    keyfile: pathlib.Path | None = None
+
+
+class Config(BaseSettings):
+    """Effective settings for a build.
+
+    Constructed once in main(), then threaded through run(), Builder,
+    Server, and the startup log. Values come from command-line switches
+    (--content-dir, --build.working-file-regex, ...), awg.toml next to
+    this script, or the built-in defaults above, in that order of
+    precedence. Relative path values resolve against this script's
+    directory.
+    """
+
+    model_config = SettingsConfigDict(
+        cli_parse_args=True,
+        cli_kebab_case=True,
+        cli_hide_none_type=True,
+        extra="forbid",
+    )
+    content_dir: pathlib.Path
+    output_dir: pathlib.Path
+    build: BuildConfig = BuildConfig()
+    server: ServerConfig = ServerConfig()
+    tidy: TidyConfig = TidyConfig()
+
+    @classmethod
+    def settings_customise_sources(
+        cls,
+        settings_cls,
+        init_settings,
+        env_settings,
+        dotenv_settings,
+        file_secret_settings,
+    ):
+        # Sources in priority order. Env/dotenv/secrets are deliberately
+        # excluded so stray environment variables cannot override config.
+        return (
+            CliSettingsSource(settings_cls),
+            init_settings,
+            TomlConfigSettingsSource(settings_cls, toml_file=SCRIPT_DIR / "awg.toml"),
+        )
+
+    @model_validator(mode="after")
+    def _check_certfile_keyfile_pair(self):
+        if bool(self.server.certfile) != bool(self.server.keyfile):
+            raise ValueError("certfile and keyfile must be given together")
+        return self
+
+    @model_validator(mode="after")
+    def _resolve_relative_paths(self):
+        for name in ("content_dir", "output_dir"):
+            value = getattr(self, name)
+            if not value.is_absolute():
+                setattr(self, name, SCRIPT_DIR / value)
+        for name in ("certfile", "keyfile"):
+            value = getattr(self.server, name)
+            if value is not None and not value.is_absolute():
+                setattr(self.server, name, SCRIPT_DIR / value)
+        return self
+
+    @property
+    def tidy_options(self) -> dict[str, str | int]:
+        """Tidy options as utidylib string values ("yes"/"no")."""
+        t = self.tidy
+        return {
+            "indent": "yes" if t.indent else "no",
+            "wrap": t.wrap,
+            "drop_empty_elements": "yes" if t.drop_empty_elements else "no",
+            "wrap_sections": "yes" if t.wrap_sections else "no",
+            "warn_proprietary_attributes": (
+                "yes" if t.warn_proprietary_attributes else "no"
+            ),
+        }
 
 
 class _RelativeEnvironment(jinja2.Environment):
@@ -81,17 +205,17 @@ class _RelativeEnvironment(jinja2.Environment):
 
 
 class Builder:
-    def __init__(
-        self, content_dir, output_dir, working_file_regex, template_extensions
-    ):
-        self.content_dir = content_dir
+    def __init__(self, config):
+        self.config = config
+        self.content_dir = config.content_dir
         self.working_dir = pathlib.Path(tempfile.mkdtemp())
-        self.output_dir = output_dir
-        self.working_file_regex = re.compile(working_file_regex)
-        self.template_extensions = template_extensions
-        self._log(f"Working files match regex: {working_file_regex}")
+        self.output_dir = config.output_dir
+        self.working_file_regex = re.compile(config.build.working_file_regex)
+        self.template_extensions = config.build.template_extensions
+        self._log(f"Working files match regex: {config.build.working_file_regex}")
         self._log(
-            "Template files have extension(s): " + ", ".join(self.template_extensions)
+            "Template files have extension(s): "
+            + ", ".join(config.build.template_extensions)
         )
 
     def _log(self, message, *paths):
@@ -243,13 +367,7 @@ class Builder:
             for name in files:
                 p = root / name
                 if p.suffix == ".html":
-                    doc = tidy.parse(
-                        str(p),
-                        indent="yes",
-                        wrap=120,
-                        drop_empty_elements="no",
-                        wrap_sections="no",
-                    )
+                    doc = tidy.parse(str(p), **self.config.tidy_options)
                     errors = doc.get_errors()
                     if errors:
                         for e in errors:
@@ -351,12 +469,13 @@ class _ServerAccessLogger(aiohttp.abc.AbstractAccessLogger):
 
 
 class Server:
-    def __init__(self, directory, host, port, certfile=None, keyfile=None):
-        self.directory = directory
-        self.host = host
-        self.port = port
-        self.certfile = certfile
-        self.keyfile = keyfile
+    def __init__(self, config):
+        self.config = config
+        self.directory = config.output_dir
+        self.host = config.server.host
+        self.port = config.server.port
+        self.certfile = config.server.certfile
+        self.keyfile = config.server.keyfile
         self.web_sockets = set()
 
     def _log(self, message):
@@ -491,22 +610,10 @@ class Watcher:
         self._change_event.clear()
 
 
-async def run(
-    content_dir,
-    output_dir,
-    working_file_regex,
-    template_extensions,
-    host,
-    port,
-    certfile,
-    keyfile,
-):
-    content_dir = pathlib.Path(content_dir).absolute()
-    output_dir = pathlib.Path(output_dir).absolute()
-
-    builder = Builder(content_dir, output_dir, working_file_regex, template_extensions)
-    watcher = Watcher(content_dir)
-    server = Server(output_dir, host, port, certfile, keyfile)
+async def run(config):
+    builder = Builder(config)
+    watcher = Watcher(config.content_dir)
+    server = Server(config)
 
     builder.rebuild()
     await watcher.start()
@@ -526,81 +633,41 @@ async def run(
         log("Bye")
 
 
-@click.command()
-@click.argument("content_dir")
-@click.argument("output_dir")
-@click.option(
-    "-w",
-    "--working-file-regex",
-    default=r"\_.*",
-    show_default=True,
-    help="Regex to match working files.",
-)
-@click.option(
-    "-t",
-    "--template-extension",
-    "template_extensions",
-    default=[".html", ".xml", ".txt"],
-    show_default=True,
-    multiple=True,
-    help="Extension identifying files to template with Jinja",
-)
-@click.option(
-    "-h",
-    "--host",
-    default="localhost",
-    show_default=True,
-    help="Serve on this host",
-)
-@click.option(
-    "-p",
-    "--port",
-    default=8000,
-    show_default=True,
-    help="Serve on this port",
-)
-@click.option(
-    "--certfile",
-    default=None,
-    help="Filename containing SSL certfile (needed for HTTPS)",
-)
-@click.option(
-    "--keyfile",
-    default=None,
-    help="Filename containing SSL keyfile (needed for HTTPS)",
-)
-def main(
-    content_dir,
-    output_dir,
-    working_file_regex,
-    template_extensions,
-    host,
-    port,
-    certfile,
-    keyfile,
-):
+def _log_settings(config):
+    """Log the effective settings, one per line, grouped by config section."""
+    sections = (
+        (
+            "paths",
+            {
+                "content_dir": config.content_dir,
+                "output_dir": config.output_dir,
+            },
+        ),
+        ("build", config.build.model_dump()),
+        ("server", config.server.model_dump()),
+        ("tidy", config.tidy_options),
+    )
+    for section, values in sections:
+        log(f"[{section}]", colour="cyan")
+        for key, value in values.items():
+            log(f"  {key} = {value}", colour="cyan")
+
+
+def main():
     """AWG = Agnostic Website Generator.
 
-    CONTENT_DIR is the directory of source web contents. It is never altered.
-
-    OUTPUT_DIR is the new directory into which the website will be built, altering files and directories as required.
-
-    The optional certfile and keyfile will switch to serving up over HTTPS. Generate e.g. using the mkcert tool.
-
+    Builds the site from the effective settings (command-line switches,
+    awg.toml next to this script, or built-in defaults — in that order),
+    serves it locally, and rebuilds on changes to content. Run with
+    --help for the full list of settings.
     """
-    asyncio.run(
-        run(
-            content_dir,
-            output_dir,
-            working_file_regex,
-            template_extensions,
-            host,
-            port,
-            certfile,
-            keyfile,
-        )
-    )
+    try:
+        config = Config()
+    except ValidationError as e:
+        abort(f"Invalid configuration:\n{e}")
+    _log_settings(config)
+    asyncio.run(run(config))
 
 
 if __name__ == "__main__":
-    main(max_content_width=120)
+    main()
