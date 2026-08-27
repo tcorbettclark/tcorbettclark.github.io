@@ -10,12 +10,12 @@
             <span class="nav-toggle-bar"></span>
         </button>
         <nav class="site-nav" aria-label="Main navigation">
-            <a href="/">Welcome</a>
-            <a href="/cv.html">CV</a>
-            <a href="/projects/">Projects</a>
-            <a href="/research/">Research</a>
-            <a href="/interests/">Interests</a>
-            <a href="/about.html">About</a>
+            <a href="/" {% if _output_path == "index.html" %}aria-current="page"{% endif %}>Welcome</a>
+            <a href="/cv.html" {% if _output_path == "cv.html" %}aria-current="page"{% endif %}>CV</a>
+            <a href="/projects/" {% if _output_path.startswith("projects/") %}aria-current="page"{% endif %}>Projects</a>
+            <a href="/research/" {% if _output_path.startswith("research/") %}aria-current="page"{% endif %}>Research</a>
+            <a href="/interests/" {% if _output_path.startswith("interests/") %}aria-current="page"{% endif %}>Interests</a>
+            <a href="/about.html" {% if _output_path == "about.html" %}aria-current="page"{% endif %}>About</a>
         </nav>
     </div>
     <hr class="site-header-rule">
