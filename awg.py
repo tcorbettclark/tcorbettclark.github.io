@@ -113,8 +113,31 @@ class ServerConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
     host: str = "localhost"
     port: int = Field(8000, ge=1, le=65535)
-    certfile: pathlib.Path | None = None
-    keyfile: pathlib.Path | None = None
+    pem_dir: pathlib.Path | None = SCRIPT_DIR
+
+    def find_pem_pair(self) -> tuple[pathlib.Path, pathlib.Path] | None:
+        """Find the mkcert-style cert/key pair in pem_dir.
+
+        mkcert writes hostname.pem and hostname-key.pem; we look for a
+        *.pem whose matching *-key.pem sits next to it. Returns None
+        when pem_dir is None (HTTPS disabled) or no pair is found, and
+        raises ValueError when more than one pair is found.
+        """
+        if self.pem_dir is None:
+            return None
+        pairs = []
+        for cert in sorted(self.pem_dir.glob("*.pem")):
+            if cert.name.endswith("-key.pem"):
+                continue
+            key = cert.with_name(cert.stem + "-key.pem")
+            if key.exists():
+                pairs.append((cert, key))
+        if len(pairs) > 1:
+            names = ", ".join(f"{cert} + {key}" for cert, key in pairs)
+            raise ValueError(
+                f"Multiple pem pairs found in {self.pem_dir}: {names}"
+            )
+        return pairs[0] if pairs else None
 
 
 class Config(BaseSettings):
@@ -158,21 +181,14 @@ class Config(BaseSettings):
         )
 
     @model_validator(mode="after")
-    def _check_certfile_keyfile_pair(self):
-        if bool(self.server.certfile) != bool(self.server.keyfile):
-            raise ValueError("certfile and keyfile must be given together")
-        return self
-
-    @model_validator(mode="after")
     def _resolve_relative_paths(self):
         for name in ("content_dir", "output_dir"):
             value = getattr(self, name)
             if not value.is_absolute():
                 setattr(self, name, SCRIPT_DIR / value)
-        for name in ("certfile", "keyfile"):
-            value = getattr(self.server, name)
-            if value is not None and not value.is_absolute():
-                setattr(self.server, name, SCRIPT_DIR / value)
+        pem_dir = self.server.pem_dir
+        if pem_dir is not None and not pem_dir.is_absolute():
+            self.server.pem_dir = SCRIPT_DIR / pem_dir
         return self
 
     @property
@@ -474,8 +490,11 @@ class Server:
         self.directory = config.output_dir
         self.host = config.server.host
         self.port = config.server.port
-        self.certfile = config.server.certfile
-        self.keyfile = config.server.keyfile
+        pem_pair = config.server.find_pem_pair()
+        if pem_pair:
+            self.certfile, self.keyfile = pem_pair
+        else:
+            self.certfile = self.keyfile = None
         self.web_sockets = set()
 
     def _log(self, message):
@@ -555,12 +574,17 @@ class Server:
         await self._runner.setup()
         ssl_context = None
         if self.certfile and self.keyfile:
-            self._log(f"Using SSL certfile: {self.certfile}")
-            self._log(f"Using SSL keyfile: {self.keyfile}")
+            self._log(f"Serving HTTPS (cert: {self.certfile}, key: {self.keyfile})")
             ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
             ssl_context.load_cert_chain(self.certfile, self.keyfile)
             self._log(f"Starting local server on https://{self.host}:{self.port}")
         else:
+            if self.config.server.pem_dir is None:
+                self._log("Serving HTTP (pem_dir = none)")
+            else:
+                self._log(
+                    f"Serving HTTP (no pem files found in {self.config.server.pem_dir})"
+                )
             self._log(f"Starting local server on http://{self.host}:{self.port}")
         site = aiohttp.web.TCPSite(
             self._runner,
@@ -663,7 +687,7 @@ def main():
     """
     try:
         config = Config()
-    except ValidationError as e:
+    except (ValidationError, ValueError) as e:
         abort(f"Invalid configuration:\n{e}")
     _log_settings(config)
     asyncio.run(run(config))

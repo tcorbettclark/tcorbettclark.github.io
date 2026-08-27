@@ -5,8 +5,8 @@
 # over this file, which takes precedence over built-in defaults.
 # (Run `uv run --script ./awg.py --help` for the full list of switches.)
 #
-# Relative path values (content_dir, output_dir, certfile, keyfile)
-# resolve against this file's directory.
+# Relative path values (content_dir, output_dir, pem_dir) resolve
+# against this file's directory.
 
 content_dir = "content"
 output_dir = "docs"
@@ -18,10 +18,11 @@ template_extensions = [".html", ".xml", ".txt"]
 [server]
 host = "0.0.0.0"
 port = 8000
-# The .pem files are gitignored; the server falls back to HTTP if they
-# are missing.
-certfile = "alice.machine.pem"
-keyfile = "alice.machine-key.pem"
+# HTTPS: the server looks for an mkcert-style cert/key pair
+# (hostname.pem + hostname-key.pem) in pem_dir, which defaults to this
+# file's directory. If no pair is found the server falls back to plain
+# HTTP. Set pem_dir = none to disable HTTPS explicitly.
+# pem_dir = "."
 
 [tidy]
 # aria-current (ARIA 1.1) and other post-ARIA-1.0 aria-* attributes are
