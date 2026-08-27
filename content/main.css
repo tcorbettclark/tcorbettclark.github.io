@@ -1093,6 +1093,25 @@
         .site-nav a {
             padding: var(--space-sm) 0;
         }
+
+        /* Mobile: the desktop ::after bar would span the full menu width
+           in the column layout, so underline the text itself instead.
+           The bar's hover dead-zone (the reason it exists on desktop)
+           is irrelevant on touch, and text-decoration hugs the text
+           width exactly. offset: ~6px below the baseline centres the
+           2px underline in the 8px (--space-sm) gap between items. */
+        .site-nav a::after {
+            display: none;
+        }
+
+        .site-nav a:hover,
+        .site-nav a[aria-current="page"] {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-decoration-skip-ink: none;
+            text-decoration-color: hsl(168, 25%, 75%);
+            text-underline-offset: 6px;
+        }
     }
 
     /* Small-screen type scaling for the narrowest devices. */
