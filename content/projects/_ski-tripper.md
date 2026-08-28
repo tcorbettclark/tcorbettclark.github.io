@@ -8,6 +8,8 @@
 See the project's [GitHub repository](https://github.com/tcorbettclark/ski-tripper) for details.
 Below is just a brief overview.
 
+(You may also enjoy my [notes on skiing](../interests/skiing.html))
+
 ## What is it?
 
 Built-in AI uses everyone’s ski holiday preferences to guide searches of an enriched catalogue of resorts, and to generate narrative assessments on who will (or won’t) enjoy a resort.
