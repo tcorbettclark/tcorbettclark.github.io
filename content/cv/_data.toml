@@ -61,8 +61,8 @@ time = "2025–Present"
 company = ""
 sections = [
     { title = "", details = [
-        """Chose to step back from full-time executive leadership following the successful acquisition
-           and integration of Cmed in order to pursue independent research and selective advisory work.""",
+        """Chose to step back from full-time executive leadership following the acquisition
+           of Cmed in order to pursue independent research and selective advisory work.""",
         """Independent research in explainable AI, probabilistic modelling, complexity theory, and related fields.""",
         """Exploring agentic AI techniques to accelerate software development without compromising robustness or quality.""",
         "Developing open-source and personal software projects.",
