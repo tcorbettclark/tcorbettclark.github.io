@@ -31,7 +31,7 @@ fa_class = "fa-chart-line"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
 label = "Trust"
-detail = "150+ pharma/biotech"
+detail = "200 pharma/biotech"
 fa_class = "fa-handshake"
 
 [[MY_EXECUTIVE_SNAPSHOT]]
@@ -92,7 +92,7 @@ sections = [
     { title = "Technical | Product | Validation", details = [
         """Architected and led development of the regulated SaaS platform underpinning the business,
            used to collect, validate, and manage data from approximately 1,000 clinical trials, delivering
-           regulatory-compliant datasets for over 150 pharmaceutical and biotechnology organisations.""",
+           regulatory-compliant datasets for 200 pharmaceutical and biotechnology organisations.""",
         """Primary data collection platform for the oncology division of a top-three global pharmaceutical company,
            the innovation group of another top-three pharmaceutical company, and
            a top-three Japanese pharmaceutical company for electronic source (eSource).""",
