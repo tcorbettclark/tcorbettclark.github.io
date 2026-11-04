@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      Classifying Facial Expressions
+    </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity=
+    "sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css" integrity=
+    "sha384-bdAZqRQSbYPyU3eq+GtFu+IEL1M8si5JMNbE9IdTjPxfPgJi+f1qAehnFz/vFzD2">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity=
+    "sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <main>
+      <h1>
+        Classifying Facial Expressions
+      </h1>
+      <p>
+        How can we teach a computer to see? In this exercise, we will take a small step towards this ambitious goal, by
+        building a model that can identify whether someone is smiling from an image.
+      </p>
+      <p>
+        In a computer, an image is usually stored using a fixed rectangular grid of pixels, where each grid element
+        stores three ‘RGB’ values, which measure how much red, green and blue each pixel contains. For greyscale
+        images, storing images is simpler, each grid element simply measures how bright the pixel is, e.g. 0 for black,
+        and 1 for white.
+      </p>
+      <p>
+        <img src="images/pixel-grids.png" alt=
+        "Left: a colour pixel-art smiley where each pixel stores three numbers (R, G, B). Right: a greyscale image of a handwritten 7 storing one number per pixel — a background pixel holds 0.00, a pixel on the edge of the stroke holds 0.52, and a bright stroke pixel holds 1.00.">
+      </p>
+      <p>
+        In this exercise, we will solely work with greyscale images that have a fixed width of 128 pixels and a height
+        of 128 pixels. We will use the notation <span class="math inline">X</span> to refer to the grid of pixel
+        values.
+      </p>
+      <p>
+        Note: In mathematical notation, we often write <span class="math inline">X \in \mathbb{R}^{128 \times
+        128}</span> to indicate that <span class="math inline">X</span> is a 128×128 grid (<em>matrix</em>) of real
+        numbers.
+      </p>
+      <p>
+        <strong>Objective:</strong> Build a system that classifies face images as either <em>smiling</em> or
+        <em>neutral</em>. The goal is to build a classifier that takes the image matrix <span class=
+        "math inline">X</span> and produces an output <span class="math inline">y = 1</span> (‘Yes’) if the image
+        contains a person smiling, and <span class="math inline">y = 0</span> (‘No’) otherwise.
+      </p>
+      <h2>
+        Data
+      </h2>
+      <p>
+        For this exercise, we will use face images collected from three public-domain face databases: the AR Face
+        Database (Aleix Martinez, Purdue), the Yale database, and the Stirling database. To develop and evaluate our
+        model, the images have been randomly divided into a training set (115 images) and a test set (114 images). The
+        faces were prepared by manually selecting four points (eyes and mouth corners) and estimating a similarity
+        transformation to warp the images onto a mean image.
+      </p>
+      <p>
+        The training dataset is shown below with the manually-annotated facial expressions overlaid. Do you agree with
+        the annotations?
+      </p>
+      <div class="row" role="tablist">
+        <button id="tabTrain" aria-pressed="true">Training set (115)</button> <button id="tabTest" aria-pressed="false"
+        title="The test set stays hidden until Step 4 — click to find out why"><span aria-hidden="true">🔒</span> Test
+        set (114)</button>
+      </div>
+      <div class="scroller">
+        <div id="montageData" class="montage"></div>
+      </div>
+      <h2>
+        Step 1 — Feature selection
+      </h2>
+      <p>
+        It’s first useful to think about the <strong>features</strong> we rely on to recognise a smile as humans. In
+        the examples above, common features of smiling include:
+      </p>
+      <ul>
+        <li>Lips curved upwards.
+        </li>
+        <li>Raised eyebrows.
+        </li>
+        <li>Indented cheeks.
+        </li>
+        <li>Teeth on show.
+        </li>
+      </ul>
+      <p>
+        These features are clearer in the images below, which show the <strong>average neutral</strong> (left) and
+        <strong>average smiling</strong> (right) images. Each pixel in these images is an average calculated over the
+        training set. For example, the bottom-left pixel of the average neutral image is calculated by taking the
+        average over all bottom-left pixels from images containing neutral expressions.
+      </p>
+      <!-- Not all of the features listed above are always present in a smiling image. Can you spot examples where one or more features is missing from an image in the training set? -->
+      <p>
+        It is easy for us to look at an image and identify features such as whether teeth are on show, but how can we
+        calculate this mathematically from a computer image?
+      </p>
+      <p>
+        We will use a simple method to calculate features of an image that are correlated with smiling. To do this, we
+        will select different rectangles within the image, and use the average pixel value within each rectangle as a
+        feature to our model. (Later in the practical we will use more than 2 features to improve our model.)
+      </p>
+      <h4>
+        Task
+      </h4>
+      <p>
+        Select a set of rectangles for the features: each rectangle should identify a face region which
+        <em>differs</em> between the two classes. The feature computed from each rectangle is its <strong>mean grey
+        level</strong>.
+      </p>
+      <ul>
+        <li>Choose a feature slot: 1–2, below.
+        </li>
+        <li>
+          <strong>Click and drag</strong> on either face to draw a rectangle.
+        </li>
+        <li>Repeat for the second slot. You can change an existing rectangle by re-drawing with the same feature slot
+        selected.
+        </li>
+      </ul>
+      <div class="scroller">
+        <canvas id="selCanvas" tabindex="0" aria-label="Feature selection canvas: mean neutral and mean smiling faces">
+        </canvas>
+      </div>
+      <div class="row" id="chips"></div>
+      <div class="row">
+        <button id="loadRef">Load reference rectangles</button> <button id="clearAll">Clear all</button>
+      </div>
+      <h2>
+        Step 2 — Feature visualisation
+      </h2>
+      <p>
+        By selecting rectangles and calculating the average pixel value in each rectangle, we have transformed each
+        image into a set of <strong>features</strong>. We will use the notation <span class="math inline">z_1</span>
+        and <span class="math inline">z_2</span> to refer to the two feature values calculated from the pixels within
+        the two rectangles, and <span class="math inline">\mathbf{z} = [z_1, z_2]</span> to refer to the collection of
+        feature values.
+      </p>
+      <p>
+        In machine learning, a collection of feature values <span class="math inline">\mathbf{z}</span> is commonly
+        known as a <strong>feature vector</strong>.
+      </p>
+      <!-- and we can write this mathematically as $z = f(X)$, where $X$ is the image, $z$ is the feature vector, and $f$ is the function that transforms $X$ into $z$, i.e. the function that calculated the average values within the rectangles. -->
+      <p>
+        Why is this useful? The original greyscale image <span class="math inline">X</span> consisted of 128×128=16,384
+        pixels. From these 16,384 numbers we want to produce a single 1/0 output (Yes or No) that tells us whether the
+        image contains a smiling face. By calculating a small number of features, we have dramatically simplified this
+        problem. Transforming each image <span class="math inline">X</span> into <span class="math inline">N = 2</span>
+        features is particularly helpful: we can visualise the entire training set of images on a scatter plot, where
+        each image is a single point <span class="math inline">(z_1, z_2)</span> in a 2-D plot, coloured by whether it
+        is smiling or neutral:
+      </p>
+      <div id="scatterEmptyP" class="placeholder">
+        Select rectangles (or load the reference set) to see the feature space here.
+      </div>
+      <div class="legend" id="scatterLegend" hidden="">
+        <span><span class="mark" style="color:var(--c-neutral)">+</span> neutral (training)</span> <span><span class=
+        "mark" style="color:var(--c-smiling)">×</span> smiling (training)</span>
+      </div>
+      <div id="scatter" class="panelgrid"></div>
+      <p>
+        Go back to Step 1 and watch how the separation changes as you vary the features. Which rectangles are most
+        helpful to separate neutral and smiling expressions? Are any surprising?
+      </p>
+      <details>
+        <summary>
+          Further reading: dimensionality reduction and overfitting
+        </summary>
+        <p>
+          The number of values needed to describe an input is called its <em>dimensionality</em>: the dimensionality of
+          the image <span class="math inline">X</span> is 16,384, while the feature vector <span class=
+          "math inline">\mathbf{z}</span> has dimensionality <span class="math inline">N = 2</span>. In machine
+          learning, if the dimensionality of the input is much larger than the number of labelled examples (we have
+          only 115 training images!), then a model trained on the data is often at risk of
+          <strong>overfitting</strong>: performing well on the training data but poorly on unseen test data. By
+          transforming the 16,384-dimensional image into a small set of features <span class=
+          "math inline">\mathbf{z}</span>, we greatly reduce this risk. This process of using human knowledge to
+          perform dimensionality reduction is known as <strong>feature engineering</strong> in the ML literature.
+        </p>
+        <p>
+          To see why models with many parameters can overfit, it is easiest to think about polynomials. Any 3
+          datapoints <span class="math inline">(x, y)</span> can be fitted <em>exactly</em> by a quadratic, and in
+          general any <span class="math inline">N</span> points can be fitted exactly by a polynomial of degree
+          <span class="math inline">N - 1</span> — the curve simply memorises the data, wiggling through every point,
+          rather than capturing the underlying trend. A classifier whose input has more dimensions than there are
+          training examples can “memorise” the training set in the same way.
+        </p>
+      </details>
+      <h2>
+        Step 3 — Fit a classifier by hand
+      </h2>
+      <p>
+        How can a computer decide which class a point belongs to? We will use a simple linear classifier to do this.
+        With two inputs, <span class="math inline">z_1</span> and <span class="math inline">z_2</span>, a linear
+        classifier works by defining a <strong>straight line</strong> through feature space: points on one side are
+        classified as smiling, points on the other side as neutral. To build the classifier, we choose two
+        <em>weights</em> <span class="math inline">w_1, w_2</span> and a <em>bias</em> <span class=
+        "math inline">b</span>, and for each point compute the number <span class="math inline">w_1 z_1 + w_2 z_2 +
+        b</span>. The classifier’s output <span class="math inline">\hat{y}</span> depends on the <strong>sign</strong>
+        of this number:
+      </p>
+      <div class="math block">
+        \hat{y} = \begin{cases} 1 \; \text{(smiling)} & \text{if } w_1 z_1 + w_2 z_2 + b &gt; 0 \\ 0 \;
+        \text{(neutral)} & \text{if } w_1 z_1 + w_2 z_2 + b \le 0 \end{cases}
+      </div>
+      <p>
+        Here we use the notation <span class="math inline">\hat{y}</span> for the classifier output, which is an
+        estimate of the ground-truth label <span class="math inline">y</span>. The <strong>line</strong> drawn in the
+        plot below is where this expression is exactly <strong>zero</strong>:
+      </p>
+      <div class="math block">
+        w_1 z_1 + w_2 z_2 + b = 0
+      </div>
+      <p>
+        This line is called the <em>decision boundary</em>, because it is where the classification flips from one class
+        to the other. On one side of the line the expression is positive (the red arrow), on the other side it is
+        negative (the blue arrow).
+      </p>
+      <h4>
+        Task
+      </h4>
+      <p>
+        Move the sliders to change <span class="math inline">w_1</span>, <span class="math inline">w_2</span> and
+        <span class="math inline">b</span>, and try to find the line that classifies as much of the training set
+        correctly as possible.
+      </p>
+      <ul>
+        <li>How does each slider change the line?
+        </li>
+        <li>What is the best accuracy you can reach by hand?
+        </li>
+      </ul>
+      <div class="row sliders">
+        <label>w₁ <input type="range" id="mw0" min="-20" max="20" step="0.1" value="5"><span class="slval" id=
+        "mw0v"></span></label> <label>w₂ <input type="range" id="mw1" min="-20" max="20" step="0.1" value=
+        "5"><span class="slval" id="mw1v"></span></label> <label>b <input type="range" id="mb" min="-20" max="20" step=
+        "0.1" value="-5"><span class="slval" id="mbv"></span></label>
+      </div>
+      <div id="manualOut"></div>
+      <p>
+        What you now have is a simple mathematical formula for automatically identifying smiling faces from images,
+        albeit a much less accurate one than you have in your own brain!
+      </p>
+      <h2>
+        Step 4 — Add a third feature
+      </h2>
+      <p>
+        How can we make our classifier better? Two features are rarely enough. Let’s try adding another below, choose
+        slot 3 and draw a third rectangle:
+      </p>
+      <div class="scroller">
+        <canvas id="selCanvas2" tabindex="0" aria-label=
+        "Feature selection canvas (three or more slots): mean neutral and mean smiling faces"></canvas>
+      </div>
+      <div class="row" id="chips2"></div>
+      <div class="row">
+        <button id="loadRef2">Load reference rectangles</button> <button id="clearAll2">Clear all</button>
+      </div>
+      <p>
+        With <span class="math inline">N = 3</span> features, every image can be visualised as a point in a
+        <strong>3-D</strong> feature space, and the decision boundary of a linear classifier is no longer a line but a
+        <strong>plane</strong>. Rotate the plot below to see the structure of the data. Can you tweak the parameters of
+        the plane to separate smiling and neutral images?
+      </p>
+      <div id="scatterEmpty" class="placeholder">
+        Select rectangles (or load the reference set) to see the feature space here.
+      </div>
+      <div id="scatter3dWrap" hidden="">
+        <div class="legend">
+          <span><span class="mark" style="color:var(--c-neutral)">+</span> neutral (training)</span> <span><span class=
+          "mark" style="color:var(--c-smiling)">×</span> smiling (training)</span>
+        </div>
+        <p class="small muted" id="scatter3dNote"></p>
+        <canvas id="scatter3d" aria-label="3-D feature space scatter plot; drag to rotate"></canvas>
+        <p class="small muted">
+          Try to place the <span style="color:var(--boundary)">plane</span> by hand, as you did with the line — now
+          there are four numbers to tune:
+        </p>
+        <div class="row sliders">
+          <label>w₁ <input type="range" id="pw0" min="-20" max="20" step="0.1" value="5"><span class="slval" id=
+          "pw0v"></span></label> <label>w₂ <input type="range" id="pw1" min="-20" max="20" step="0.1" value=
+          "5"><span class="slval" id="pw1v"></span></label> <label>w₃ <input type="range" id="pw2" min="-20" max="20"
+          step="0.1" value="5"><span class="slval" id="pw2v"></span></label> <label>b <input type="range" id="pb" min=
+          "-20" max="20" step="0.1" value="-8"><span class="slval" id="pbv"></span></label>
+        </div>
+        <div id="man3Stat"></div>
+      </div>
+      <p>
+        With two features, there were three parameters that we needed to tune: <span class="math inline">w_1,
+        w_2</span> and a <em>bias</em> <span class="math inline">b</span>. With three features, there are now
+        <em>four</em> numbers to tune (<span class="math inline">w_1, w_2, w_3, b</span>). As we add more and more
+        parameters to our model, it becomes increasingly difficult to manually find the optimal parameters of our
+        classifier. Models like ChatGPT have <strong>trillions</strong> of parameters. We need a way for the computer
+        to find the best weights <strong>automatically</strong>.
+      </p>
+      <h2>
+        Step 5 — Train the classifier with gradient descent
+      </h2>
+      <p>
+        In general, as we add more features, the equation that describes the decision boundary of a linear classifier
+        is given by:
+      </p>
+      <div class="math block">
+        w_1 z_1 + w_2 z_2 + \cdots + w_N z_N + b = 0
+      </div>
+      <p>
+        where <span class="math inline">N</span> is the number of features. This can be written in vector notation as
+        <span class="math inline">\mathbf{w}^\top \mathbf{z} = 0</span>, where <span class="math inline">\mathbf{w} =
+        [w_1, \ldots, w_N, b]</span> is a vector of the parameters and <span class="math inline">\mathbf{z} = [z_1,
+        \ldots, z_N, 1]</span> is the feature vector with a 1 appended. In machine learning, these parameters are often
+        known as the model ‘weights’, hence the letter <span class="math inline">\mathbf{w}</span> is often used.
+      </p>
+      <p>
+        To automatically find better parameters, we first need a metric that measures how ‘good’ a given set of weights
+        are. To do this, we define a <strong>loss function</strong> <span class="math inline">E</span>. In this
+        exercise, our loss function is the sum of squared differences between the classifier’s outputs <span class=
+        "math inline">\hat{y}</span> and the true 0/1 labels <span class="math inline">y</span> over all examples in
+        our training set <span class="math inline">\mathcal{D}</span>. We can write this mathematically as:
+      </p>
+      <div class="math block">
+        E = \sum_{\mathcal{D}} (y - \hat{y})^2
+      </div>
+      <p>
+        For a perfect classifier, <span class="math inline">y = \hat{y}</span> for all examples, and <span class=
+        "math inline">E</span> will be equal to zero. This is just one of many different loss functions used in machine
+        learning. Can you think of any alternatives that might also work?
+      </p>
+      <p>
+        Now that we have a metric, next we need a method to optimise our weights <span class=
+        "math inline">\mathbf{w}</span>. A very popular method to do this is known as <strong>gradient
+        descent</strong>. Every large language model, including ChatGPT, is trained using a variant of this method.
+      </p>
+      <p>
+        How does it work? Much like our feature vector <span class="math inline">\mathbf{z}</span>, we can also think
+        of the weights <span class="math inline">\mathbf{w}</span> as representing a point in an N-dimensional space.
+        From an initial set of weights, gradient descent uses <em>differentiation</em> to calculate the direction in
+        that space that <span class="math inline">\mathbf{w}</span> should move in to decrease the loss function
+        <span class="math inline">E</span>. We then take a small step in that direction.
+      </p>
+      <p>
+        Writing <span class="math inline">\mathbf{w}_t</span> for the weights after <span class="math inline">t</span>
+        updates, the equation for one step of gradient descent is:
+      </p>
+      <div class="math block">
+        \mathbf{w}_{t+1} = \mathbf{w}_t - \eta \nabla \mathbf{w}_t
+      </div>
+      <p>
+        Reading the equation piece by piece:
+      </p>
+      <ul>
+        <li>
+          <span class="math inline">\mathbf{w}_{t+1}</span> are the updated weights after step <span class=
+          "math inline">t + 1</span>.
+        </li>
+        <li>
+          <span class="math inline">\mathbf{w}_t</span> are the current weights at step <span class=
+          "math inline">t</span>.
+        </li>
+        <li>
+          <span class="math inline">\eta</span>, is the <strong>learning rate</strong>, which determines how big each
+          update is: too small and training needs many iterations; too large and the weights and never settle.
+        </li>
+        <li>
+          <span class="math inline">\nabla \mathbf{w}_t</span> is the weight update calculated by differentiating the
+          loss <span class="math inline">E</span> with respect to the weights <span class=
+          "math inline">\mathbf{w}</span>.
+        </li>
+      </ul>
+      <p>
+        Training starts from an initial set of weights. For example, with all weights set to 1: <span class=
+        "math inline">\mathbf{w}_0 = [1, \ldots, 1]</span>. We then iteratively update the weights by taking a fixed
+        number of steps using a fixed learning rate.
+      </p>
+      <p>
+        Press Train and watch the error fall as the classifier is fitted. How does the final accuracy compare with your
+        hand-tuned plane from Step 4? What happens if you change the learning rate <span class=
+        "math inline">\eta</span>? (Try making it 10x smaller or larger)
+      </p>
+      <div class="cols">
+        <div class="col">
+          <div class="row">
+            <label>learning rate η <input id="eta" type="number" step="0.01" min="0.001" value="0.15"></label>
+            <label>iterations <input id="iters" type="number" step="100" min="100" value="300"></label> <button id=
+            "trainBtn" class="primary">Train</button> <span id="trainNote" class="small muted"></span>
+          </div>
+          <div id="trainOut"></div>
+        </div>
+        <div class="col">
+          <div id="scatterEmpty2" class="placeholder">
+            Select rectangles (or load the reference set) to see the feature space here.
+          </div>
+          <div id="scatter3dWrap2" hidden="">
+            <div class="legend">
+              <span><span class="mark" style="color:var(--c-neutral)">+</span> neutral (training)</span>
+              <span><span class="mark" style="color:var(--c-smiling)">×</span> smiling (training)</span>
+            </div>
+            <p class="small muted" id="scatter3dNote2"></p>
+            <p class="eqline" id="eq3d"></p>
+            <canvas id="scatter3d2" aria-label=
+            "3-D feature space scatter plot with the trained decision plane; drag to rotate"></canvas>
+          </div>
+        </div>
+      </div>
+      <h2>
+        Step 6 — Test the classifier
+      </h2>
+      <p>
+        The unseen test images are classified with the trained model. Rows of the confusion matrix are the
+        <em>desired</em> class; the diagonal counts correct classifications. For each image, the predicted labels are
+        shown above each image and are <span style="color:var(--good)">✓ green</span> when correct and <span style=
+        "color:var(--bad)">✗ red</span> when wrong. Examine the misclassified images and try to understand why your
+        features missed them.
+      </p>
+      <div id="testOut"></div>
+      <h2>
+        Step 7 — Use more features
+      </h2>
+      <p>
+        Now repeat the steps above using <strong>more features</strong>. Draw new rectangles in slots 4–8 and try to
+        improve the classification performance. (Note: we have only used average pixel values within each rectangle,
+        what <em>other</em> types of features might be suitable for this task?)
+      </p>
+      <div class="scroller">
+        <canvas id="selCanvas3" tabindex="0" aria-label=
+        "Feature selection canvas (up to eight slots): mean neutral and mean smiling faces"></canvas>
+      </div>
+      <div class="row" id="chips3"></div>
+      <div class="row">
+        <button id="loadRef3">Load reference rectangles</button> <button id="clearAll3">Clear all</button>
+      </div>
+      <p>
+        Once we have more than <span class="math inline">N = 3</span> features, visualisation becomes more tricky: we
+        cannot simultaneously plot all the feature values at once. Instead, we can plot every <em>pair</em> of features
+        <span class="math inline">z_i</span> against <span class="math inline">z_j</span>, this gives us 2-D views of
+        the N-dimensional feature space:
+      </p>
+      <div id="scatterEmptyP2" class="placeholder">
+        Select rectangles (or load the reference set) to see the feature space here.
+      </div>
+      <div class="legend" id="scatterLegend2" hidden="">
+        <span><span class="mark" style="color:var(--c-neutral)">+</span> neutral (training)</span> <span><span class=
+        "mark" style="color:var(--c-smiling)">×</span> smiling (training)</span>
+      </div>
+      <div id="scatter2" class="panelgrid"></div>
+      <p>
+        Retrain the classifier with all of your features, and check how the results in Step 6 change:
+      </p>
+      <div class="row">
+        <label>learning rate η <input id="eta2" type="number" step="0.01" min="0.001" value="0.15"></label>
+        <label>iterations <input id="iters2" type="number" step="100" min="100" value="300"></label> <button id=
+        "trainBtn2" class="primary">Train</button> <span id="trainNote2" class="small muted"></span>
+      </div>
+      <div id="trainOut2"></div>
+      <details>
+        <summary>
+          Hints
+        </summary>
+        <p>
+          Using 3 rectangles around the mouth area works quite well, e.g. as a white-teeth detector, plus a skin region
+          to calibrate against. The figure shows a solution found for up to 6 rectangles using a greedy search (thanks
+          to Patrick Buehler) — the reference rectangles in Step 1 are a similar machine-found solution.
+        </p><img src="images/greedy-search.png" alt=
+        "Greedy-search solution: six rectangles around the mouth and cheeks, with the resulting feature-space separation">
+        <p>
+          For other feature types: possibilities are measuring the <em>shape</em> of the mouth using edge data, or
+          using all of the mouth/eye regions and PCA.
+        </p>
+      </details>
+      <footer>
+        Ported from the B14 Information Engineering laboratory practical at the University of Oxford. Face data: AR /
+        Yale / Stirling databases.
+      </footer>
+    </main>
+    <script src="data.js" integrity="sha384-RzyVU697Zc5ezvOxLTaT7r2QowDjmsaMygH15FFqIlQgVZ47/VpwsqvBMrnvndBa"></script>
+    
+    <script src="core.js" integrity="sha384-EnfRvnChCEaTsIARdD3EMYfkLgymWsRGH36VehMev7qjgJmgy7HhkcjJ6aQZxtSc"></script>
+    
+    <script src="app.js" integrity="sha384-A9BNVVr6xoSYgxkCZZ6ZQtL7EnOVwF+3snWFpcBJN4tdCCN5kD0ZI1/g9RXZWAcn"></script> 
+    <script>
+
+    // Render the $...$/$$...$$ maths produced by awg's markdown filter.
+    // (Same pattern as the site-wide /render-maths.js, inlined so that this
+    // page stays self-contained. Fires after the deferred KaTeX script above.)
+    document.addEventListener("DOMContentLoaded", (event) => {
+    for (var node of document.getElementsByClassName("math")) {
+      katex.render(node.innerText, node, {
+        displayMode: node.classList.contains("block"), // otherwise assume it is "inline"
+        throwOnError: false,
+      });
+    }
+    });
+    </script>
+  </body>
+</html>
