@@ -400,6 +400,9 @@ class Builder:
                         fp.write(doc.gettext())
 
     def publish_to_output(self):
+        # Names never copied to / removed from the output directory.
+        ignored_names = filecmp.DEFAULT_IGNORES + [".DS_Store"]
+
         def publish(dcmp, working_path):
             assert len(dcmp.common_funny) == 0  # TODO
             assert len(dcmp.funny_files) == 0  # TODO
@@ -407,7 +410,13 @@ class Builder:
             for name in dcmp.left_only:
                 wp, op = working_path / name, output_path / name
                 if wp.is_dir():
-                    op.mkdir()
+                    # Copy whole new directory trees (dircmp's subdirs only covers
+                    # directories common to both trees, so a bare mkdir would leave
+                    # the contents unpublished until the next rebuild).
+                    self._log("Adding new directory: {}", wp)
+                    shutil.copytree(
+                        wp, op, ignore=shutil.ignore_patterns(*ignored_names)
+                    )
                 elif wp.is_file():
                     self._log("Adding new file: {}", wp)
                     shutil.copyfile(wp, op)
@@ -437,7 +446,7 @@ class Builder:
             filecmp.dircmp(
                 self.working_dir,
                 self.output_dir,
-                ignore=filecmp.DEFAULT_IGNORES + [".DS_Store"],
+                ignore=ignored_names,
             ),
             self.working_dir,
         )
