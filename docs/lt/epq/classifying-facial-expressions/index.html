@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity=
     "sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
     <link rel="stylesheet" href="/lt/epq/classifying-facial-expressions/styles.css" integrity=
-    "sha384-uEQX5hrCQJmilIV7x1jH2W4CgUdYd+nyHjkcPAUnpKX5bS9r4m1IK6vdMKbZ9ffv">
+    "sha384-whujjl9u6PltzsdDSdtcmui18i6N2Q5V9KrpK5eYc0VcyT7aNwZa5yiEvDKgLGGF">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity=
     "sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
   </head>
@@ -389,7 +389,8 @@
           <div class="row">
             <label>learning rate η <input id="eta" type="number" step="0.01" min="0.001" value="0.15"></label>
             <label>iterations <input id="iters" type="number" step="100" min="100" value="300"></label> <button id=
-            "trainBtn" class="primary">Train</button> <span id="trainNote" class="small muted"></span>
+            "trainBtn" class="primary">Train</button> <button id="stopBtn">Stop</button> <span id="trainNote" class=
+            "small muted"></span>
           </div>
           <div id="trainOut"></div>
         </div>
@@ -456,7 +457,8 @@
       <div class="row">
         <label>learning rate η <input id="eta2" type="number" step="0.01" min="0.001" value="0.15"></label>
         <label>iterations <input id="iters2" type="number" step="100" min="100" value="300"></label> <button id=
-        "trainBtn2" class="primary">Train</button> <span id="trainNote2" class="small muted"></span>
+        "trainBtn2" class="primary">Train</button> <button id="stopBtn2">Stop</button> <span id="trainNote2" class=
+        "small muted"></span>
       </div>
       <div id="trainOut2"></div>
       <details>
@@ -484,7 +486,7 @@
     <script src="/lt/epq/classifying-facial-expressions/core.js" integrity=
     "sha384-EnfRvnChCEaTsIARdD3EMYfkLgymWsRGH36VehMev7qjgJmgy7HhkcjJ6aQZxtSc"></script> 
     <script src="/lt/epq/classifying-facial-expressions/app.js" integrity=
-    "sha384-A9BNVVr6xoSYgxkCZZ6ZQtL7EnOVwF+3snWFpcBJN4tdCCN5kD0ZI1/g9RXZWAcn"></script> 
+    "sha384-ZIe85K/qilXgI9ZPJ8/kfMCjijRIosoJOYgu4q9HpSD0I3SlpX1cuYaxTvnST1dZ"></script> 
     <script>
 
     // Render the $...$/$$...$$ maths produced by awg's markdown filter.
@@ -492,7 +494,7 @@
     // page stays self-contained. Fires after the deferred KaTeX script above.)
     document.addEventListener("DOMContentLoaded", (event) => {
     for (var node of document.getElementsByClassName("math")) {
-      katex.render(node.innerText, node, {
+      katex.render(node.textContent, node, {
         displayMode: node.classList.contains("block"), // otherwise assume it is "inline"
         throwOnError: false,
       });

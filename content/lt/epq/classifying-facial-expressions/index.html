@@ -26,7 +26,7 @@
   // page stays self-contained. Fires after the deferred KaTeX script above.)
   document.addEventListener("DOMContentLoaded", (event) => {
     for (var node of document.getElementsByClassName("math")) {
-      katex.render(node.innerText, node, {
+      katex.render(node.textContent, node, {
         displayMode: node.classList.contains("block"), // otherwise assume it is "inline"
         throwOnError: false,
       });

@@ -41,6 +41,11 @@
   --font: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     sans-serif;
   --radius: 4px;
+  /* One content width for prose, figures, maths and expanders. It is exactly
+   * as wide as the 11-tile face montage, so nothing overhangs. */
+  --tile-size: 66px;
+  --tile-gap: 6px;
+  --measure: calc(11 * var(--tile-size) + 10 * var(--tile-gap));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -122,6 +127,9 @@ h1, h2, h4 {
   color: var(--ink);
   letter-spacing: -0.01em;
 }
+h1, h2, h4, p, li, footer, details, .placeholder, .stale, table.mat, .eqline {
+  max-width: var(--measure);
+}
 h1 {
   font-size: 2.5rem;
   line-height: 1.2;
@@ -142,7 +150,6 @@ h4 {
 
 p, li {
   color: var(--ink);
-  max-width: 68ch;
 }
 p { margin: 0 0 1rem; }
 li { margin-bottom: 0.25rem; }
@@ -160,8 +167,13 @@ a:hover { color: var(--accent); }
 .small { font-size: 0.85rem; }
 
 math { font-size: 1.06em; }
-/* Display equations: left-aligned with a fixed indent (LaTeX "fleqn" style). */
-.katex-display { margin: 1rem 0 1rem 2.5em; text-align: left; }
+/* Display equations: left-aligned with a fixed indent (LaTeX "fleqn" style),
+ * ending on the same right edge as the prose. */
+.katex-display {
+  margin: 1rem 0 1rem 2.5em;
+  max-width: calc(var(--measure) - 2.5em);
+  text-align: left;
+}
 
 code, kbd {
   background: var(--surface-2);
@@ -255,7 +267,6 @@ label {
   border: 1px dashed var(--border);
   border-radius: var(--radius);
   padding: 1rem 1.25rem;
-  max-width: 60ch;
 }
 
 /* Pale-yellow callout, as used for notices on the Ada site. */
@@ -271,11 +282,11 @@ label {
 /* ---------- montages ---------- */
 .montage {
   display: grid;
-  grid-template-columns: repeat(11, 66px);
-  gap: 6px;
+  grid-template-columns: repeat(11, var(--tile-size));
+  gap: var(--tile-gap);
   width: max-content;
 }
-.tile { width: 66px; }
+.tile { width: var(--tile-size); }
 .tile .lbl {
   font-size: 11px;
   line-height: 1.5;
@@ -478,7 +489,7 @@ details img {
 /* ---------- figures ---------- */
 main > img, main > p > img {
   display: block;
-  max-width: min(100%, 720px);
+  max-width: min(100%, var(--measure));
   height: auto;
   margin: 1.5rem auto;
   border-radius: var(--radius);
