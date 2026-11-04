@@ -202,6 +202,7 @@ Press Train and watch the error fall as the classifier is fitted. How does the f
   <label>learning rate η <input id="eta" type="number" step="0.01" min="0.001" value="0.15"></label>
   <label>iterations <input id="iters" type="number" step="100" min="100" value="300"></label>
   <button id="trainBtn" class="primary">Train</button>
+  <button id="stopBtn">Stop</button>
   <span id="trainNote" class="small muted"></span>
 </div>
 <div id="trainOut"></div>
@@ -257,6 +258,7 @@ Retrain the classifier with all of your features, and check how the results in S
   <label>learning rate η <input id="eta2" type="number" step="0.01" min="0.001" value="0.15"></label>
   <label>iterations <input id="iters2" type="number" step="100" min="100" value="300"></label>
   <button id="trainBtn2" class="primary">Train</button>
+  <button id="stopBtn2">Stop</button>
   <span id="trainNote2" class="small muted"></span>
 </div>
 <div id="trainOut2"></div>

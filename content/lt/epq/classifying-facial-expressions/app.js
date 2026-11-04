@@ -20,7 +20,7 @@ const state = {
   manual3: [5, 5, 5, -8],          // hand-tuned [w1, w2, w3, b] for the 3-D plane step
   active: 0,
   drag: null,
-  model: null,                     // {w, history, rects, eta, iters}
+  testModel: null,                 // model whose results Step 6, the 3-D plane and the photo show
   Xtrain: null, Xtest: null,
   gray: {},                        // decoded spritesheets
   imgs: {},
@@ -224,10 +224,11 @@ function featuresChanged() {
   } else {
     state.Xtrain = state.Xtest = null;
   }
-  // features changed => old fit is stale; show a fresh random initialisation
-  state.model = state.Xtrain ? freshModel() : null;
+  // features changed => both fits are stale; show fresh random initialisations
+  for (const inst of trainInstances) inst.model = state.Xtrain ? freshModel() : null;
+  state.testModel = null;
   renderChips(); drawSelectors(); renderScatterAll(); renderManual();
-  renderManual3Stat(); renderTrain(); renderTest(); renderUpload();
+  renderManual3Stat(); renderTrainAll(); renderTest(); renderUpload();
 }
 
 /* ---------- SVG helpers ---------- */
@@ -383,8 +384,8 @@ function render3dOne(inst) {
   }
   inst.note.innerHTML =
     'With three features every image is a point in 3-D feature space — <strong>drag to rotate</strong>.' +
-    (inst.planeSource === 'model' && state.model && state.model.nf === 3 && X.length === 3
-      ? (state.model.status === 'init'
+    (inst.planeSource === 'model' && state.testModel && state.testModel.nf === 3 && X.length === 3
+      ? (state.testModel.status === 'init'
           ? ' The <span style="color:var(--boundary)">green plane</span> is a randomly initialised decision boundary — press Train to optimise it.'
           : ' The <span style="color:var(--boundary)">green plane</span> is the decision boundary.') : '') +
     (X.length > 3 ? ' <span class="muted">(showing z₁–z₃ only)</span>' : '');
@@ -451,7 +452,7 @@ function render3dOne(inst) {
 
   // decision plane: hand-tuned sliders ('manual') or the trained model ('model' —
   // only when it IS the true boundary, i.e. exactly 3 features)
-  const m = state.model;
+  const m = state.testModel;
   let pw = null;
   if (inst.planeSource === 'manual') pw = state.manual3;
   else if (inst.planeSource === 'model' && m && m.nf === 3 && X.length === 3) {
@@ -687,22 +688,33 @@ const trainInstances = [];
 function createTrainUI(ids) {
   const btn = $(ids.btn);
   if (!btn) return;
-  const inst = { btn, eta: $(ids.eta), iters: $(ids.iters),
-                 note: $(ids.note), out: $(ids.out) };
+  const inst = { btn, stop: $(ids.stop), eta: $(ids.eta), iters: $(ids.iters),
+                 note: $(ids.note), out: $(ids.out), model: null };
   trainInstances.push(inst);
   btn.addEventListener('click', () => train(inst));
+  inst.stop.addEventListener('click', () => stopTraining(inst));
+}
+
+/** Stop this panel's run; the weights fitted so far are kept and tested. */
+function stopTraining(inst) {
+  const m = inst.model;
+  if (m && m.status === 'training') m.stop = true;
 }
 
 function train(srcInst) {
-  if (!state.Xtrain || !state.model) return;
-  if (state.model.status === 'training') return;
-  if (state.model.status === 'done') state.model = freshModel();  // new random start
-  const model = state.model;                     // continue from the shown random init
+  if (!state.Xtrain || !srcInst.model) return;
+  if (srcInst.model.status === 'training') return;
+  // A stopped run resumes from the weights on screen; a completed one restarts.
+  if (srcInst.model.status === 'done' && !srcInst.model.stopped) srcInst.model = freshModel();
+  const model = srcInst.model;                   // continue from the shown random init
+  state.testModel = model;                       // this run feeds Step 6 from now on
   const w = model.w;
   const eta = parseFloat(srcInst.eta.value) || 0.15;
   const iters = Math.max(10, parseInt(srcInst.iters.value) || 300);
   model.iters = iters;
   model.status = 'training';
+  model.stop = false;
+  model.stopped = false;
   const recEvery = Math.max(Math.floor(iters / 100), 1);
 
   function run(nIters) {
@@ -714,19 +726,27 @@ function train(srcInst) {
       }
     }
   }
+  const startIter = model.iter;                  // a resumed run paces from here
   let frameCount = 0;
   function frame() {
-    if (state.model !== model) return;           // features changed mid-run: abort
+    if (srcInst.model !== model) return;         // features changed mid-run: abort
     // constant pacing: ANIM_RATE gradient steps per second, every one visible
     frameCount++;
-    const target = Math.min(iters, Math.floor(frameCount * ANIM_RATE / 60));
+    const target = Math.min(iters, startIter + Math.floor(frameCount * ANIM_RATE / 60));
     run(target - model.iter);
+    if (model.stop) {                            // Stop pressed: keep fitted weights
+      model.stop = false;
+      model.stopped = true;
+      model.status = 'done';
+      renderTrainAll(); renderTest(); renderUpload();
+      return;
+    }
     if (model.iter < iters) {
-      if (frameCount % 3 === 0) renderTrain();   // redraw at ~20 Hz, not every frame
+      if (frameCount % 3 === 0) renderTrainAll(); // redraw at ~20 Hz, not every frame
       requestAnimationFrame(frame);
     } else {
       model.status = 'done';
-      renderTrain(); renderTest(); renderUpload();
+      renderTrainAll(); renderTest(); renderUpload();
     }
   }
   renderTest();                                  // hide stale results while training
@@ -771,48 +791,56 @@ function weightEq(w, nf) {
   return s;
 }
 
-function renderTrain() {
-  const m = state.model;
+/** Render one training panel from its own model. */
+function renderTrain(inst) {
+  const m = inst.model;
   const busy = m && m.status === 'training';
+  const el = inst.out;
+  el.innerHTML = '';
+  inst.btn.disabled = !state.Xtrain || busy;
+  inst.btn.textContent = busy ? 'Training…' : 'Train';
+  inst.stop.disabled = !busy;
+  inst.note.textContent = !state.Xtrain
+    ? 'Select features in Step 1 first.'
+    : busy
+      ? `training… iteration ${m.iter} of ${m.iters} — watch the error fall and the weights settle`
+      : m && m.status === 'init'
+        ? 'The weights are randomly initialised — press Train to begin gradient descent.'
+        : m && m.stopped
+          ? `stopped at iteration ${m.iter} of ${m.iters} — press Train to continue.`
+          : `${state.Xtrain.length} feature(s) selected — training re-runs from a new random initialisation each click.`;
+  if (!m) return;
+  const { w, history, nf } = m;
+  el.appendChild(sseChart(history, m.iters));  // blank axes before training
+  const eq = document.createElement('p');
+  eq.className = 'eqline';
+  eq.innerHTML = `w<sup>T</sup>z + b &nbsp;=&nbsp; ${weightEq(w, nf)}`;
+  el.appendChild(eq);
+  if (nf === 2) {     // with 3+ features the 3-D plot shows the true boundary instead
+    const p = document.createElement('p');
+    p.innerHTML = 'The <span style="color:var(--boundary)">green line</span> is the decision boundary ' +
+      'w<sub>1</sub>z<sub>1</sub> + w<sub>2</sub>z<sub>2</sub> + b = 0 found by training. ' +
+      'Does it separate the two classes?';
+    el.appendChild(p);
+    el.appendChild(scatterPanel(Array.from(state.Xtrain[0]), Array.from(state.Xtrain[1]),
+      DATA.cTrain, zSub(0), zSub(1),
+      (svg, sx, sy, xd, yd) => {
+        const a = w[0], b = w[1], c = w[nf];
+        if (Math.abs(b) < 1e-12) return;
+        const pts = [[xd[0], (-c - a * xd[0]) / b], [xd[1], (-c - a * xd[1]) / b]];
+        svgEl('line', { x1: sx(pts[0][0]), y1: sy(pts[0][1]), x2: sx(pts[1][0]), y2: sy(pts[1][1]),
+                        class: 'boundary' }, svg);
+        decisionSideArrows(svg, sx, sy, xd, yd, a, b, c);
+      }));
+  }
+}
+
+/** Render both panels, the shared equation and the 3-D plane. */
+function renderTrainAll() {
+  const m = state.testModel;
   const eq3 = $('eq3d');
   if (eq3) eq3.innerHTML = m ? `${weightEq(m.w, m.nf)} &nbsp;=&nbsp; 0` : '';
-  for (const inst of trainInstances) {
-    const el = inst.out;
-    el.innerHTML = '';
-    inst.btn.disabled = !state.Xtrain || busy;
-    inst.btn.textContent = busy ? 'Training…' : 'Train';
-    inst.note.textContent = !state.Xtrain
-      ? 'Select features in Step 1 first.'
-      : busy
-        ? `training… iteration ${m.iter} of ${m.iters} — watch the error fall and the weights settle`
-        : m && m.status === 'init'
-          ? 'The weights are randomly initialised — press Train to begin gradient descent.'
-          : `${state.Xtrain.length} feature(s) selected — training re-runs from a new random initialisation each click.`;
-    if (!m) continue;
-    const { w, history, nf } = m;
-    el.appendChild(sseChart(history, state.model.iters));  // blank axes before training
-    const eq = document.createElement('p');
-    eq.className = 'eqline';
-    eq.innerHTML = `w<sup>T</sup>z + b &nbsp;=&nbsp; ${weightEq(w, nf)}`;
-    el.appendChild(eq);
-    if (nf === 2) {     // with 3+ features the 3-D plot shows the true boundary instead
-      const p = document.createElement('p');
-      p.innerHTML = 'The <span style="color:var(--boundary)">green line</span> is the decision boundary ' +
-        'w<sub>1</sub>z<sub>1</sub> + w<sub>2</sub>z<sub>2</sub> + b = 0 found by training. ' +
-        'Does it separate the two classes?';
-      el.appendChild(p);
-      el.appendChild(scatterPanel(Array.from(state.Xtrain[0]), Array.from(state.Xtrain[1]),
-        DATA.cTrain, zSub(0), zSub(1),
-        (svg, sx, sy, xd, yd) => {
-          const a = w[0], b = w[1], c = w[nf];
-          if (Math.abs(b) < 1e-12) return;
-          const pts = [[xd[0], (-c - a * xd[0]) / b], [xd[1], (-c - a * xd[1]) / b]];
-          svgEl('line', { x1: sx(pts[0][0]), y1: sy(pts[0][1]), x2: sx(pts[1][0]), y2: sy(pts[1][1]),
-                          class: 'boundary' }, svg);
-          decisionSideArrows(svg, sx, sy, xd, yd, a, b, c);
-        }));
-    }
-  }
+  trainInstances.forEach(renderTrain);
   render3d();       // keep the 3-D decision plane in sync (animates during training)
 }
 
@@ -820,13 +848,13 @@ function renderTrain() {
 function renderTest() {
   const el = $('testOut');
   el.innerHTML = '';
-  if (!state.model || state.model.status !== 'done') {
-    el.innerHTML = state.model && state.model.status === 'training'
+  if (!state.testModel || state.testModel.status !== 'done') {
+    el.innerHTML = state.testModel && state.testModel.status === 'training'
       ? '<div class="placeholder">Training in progress — results will appear when it finishes…</div>'
       : '<div class="placeholder">Train the classifier to see test results here.</div>';
     return;
   }
-  const q = classify(state.Xtest, state.model.w);
+  const q = classify(state.Xtest, state.testModel.w);
   const m = confusion(DATA.cTest, q);
   const nCorrect = m[0][0] + m[1][1], n = DATA.nTest;
 
@@ -961,7 +989,7 @@ function renderUpload() {
     } else {
       const z = rectFeats(upload.reg, SZ, 1, 1, SZ, rects).map(r => r[0]);
       upload.z = z;
-      const m = state.model;
+      const m = state.testModel;
       if (!m || m.status !== 'done') {
         out.innerHTML = '<div class="stale">Train the classifier to classify this face.</div>';
       } else {
@@ -1005,9 +1033,9 @@ async function boot() {
   if ($('mw0')) initManual();
   if ($('pw0')) initManual3();
   if ($('uploadInput')) initUpload();
-  createTrainUI({ btn: 'trainBtn', eta: 'eta', iters: 'iters',
+  createTrainUI({ btn: 'trainBtn', stop: 'stopBtn', eta: 'eta', iters: 'iters',
                   note: 'trainNote', out: 'trainOut' });
-  createTrainUI({ btn: 'trainBtn2', eta: 'eta2', iters: 'iters2',
+  createTrainUI({ btn: 'trainBtn2', stop: 'stopBtn2', eta: 'eta2', iters: 'iters2',
                   note: 'trainNote2', out: 'trainOut2' });
   featuresChanged();
 }
