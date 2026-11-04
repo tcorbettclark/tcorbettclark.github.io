@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Relative URLs (markdown images, and image URLs built by app.js at runtime)
+     resolve against this page's own directory, whatever URL the page was
+     fetched at. AWG computes the absolute path at build time. -->
+<base href="{{ '.' | rel_to_abs_path }}/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Classifying Facial Expressions</title>
+<link rel="canonical" href="{{ SITEURL | canonical }}">
 <link rel="stylesheet" href="{{ KATEX_CSS }}" integrity="{{ KATEX_CSS_SHA }}" crossorigin="anonymous">
-<link rel="stylesheet" href="styles.css" integrity="sha384-{{ 'styles.css' | sha }}">
+<link rel="stylesheet" href="{{ 'styles.css' | rel_to_abs_path }}" integrity="sha384-{{ 'styles.css' | sha }}">
 <script defer src="{{ KATEX_JS }}" integrity="{{ KATEX_JS_SHA }}" crossorigin="anonymous"></script>
 </head>
 <body>
 <main>
 {{ "_content.md" | markdown }}
 </main>
-<script src="data.js" integrity="sha384-{{ 'data.js' | sha }}"></script>
-<script src="core.js" integrity="sha384-{{ 'core.js' | sha }}"></script>
-<script src="app.js" integrity="sha384-{{ 'app.js' | sha }}"></script>
+<script src="{{ 'data.js' | rel_to_abs_path }}" integrity="sha384-{{ 'data.js' | sha }}"></script>
+<script src="{{ 'core.js' | rel_to_abs_path }}" integrity="sha384-{{ 'core.js' | sha }}"></script>
+<script src="{{ 'app.js' | rel_to_abs_path }}" integrity="sha384-{{ 'app.js' | sha }}"></script>
 <script>
   // Render the $...$/$$...$$ maths produced by awg's markdown filter.
   // (Same pattern as the site-wide /render-maths.js, inlined so that this
