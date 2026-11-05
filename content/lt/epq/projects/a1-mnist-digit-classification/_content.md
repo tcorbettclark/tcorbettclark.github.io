@@ -30,6 +30,11 @@ Your final artefact could be the workflow itself, together with a short user
 guide that lets someone else load a digit image and see the prediction and the
 feature values that produced it.
 
+**What you submit.** The assessed product is a written report: around 5,000
+words for a research project, or at least 1,000 words alongside an artefact
+such as the one described here. The tables, plots and workflow are evidence
+you discuss in the report, not the submission itself.
+
 ## Dataset(s) to be used
 
 A suitable starting point would be the standard MNIST dataset. The

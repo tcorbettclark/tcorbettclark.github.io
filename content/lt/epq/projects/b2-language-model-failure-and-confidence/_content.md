@@ -34,6 +34,11 @@ Your final artefact could be a Python harness, a question set you designed,
 calibration plots for each model, and a written analysis of when confidence is
 useful and when it is misleading.
 
+**What you submit.** The assessed product is a written report: around 5,000
+words for a research project, or at least 1,000 words alongside an artefact
+such as the one described here. The tables, plots and workflow are evidence
+you discuss in the report, not the submission itself.
+
 ## Dataset(s) to be used
 
 The models are the local **BritLLM** MLX quantisations: **3-bit**, **6-bit**

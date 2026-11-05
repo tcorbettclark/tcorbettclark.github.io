@@ -30,6 +30,11 @@ Your final artefact could be the workflow, a labelled field-test set, a
 confusion matrix for each test, and a written analysis of which genera and
 which features cause the confusion.
 
+**What you submit.** The assessed product is a written report: around 5,000
+words for a research project, or at least 1,000 words alongside an artefact
+such as the one described here. The tables, plots and workflow are evidence
+you discuss in the report, not the submission itself.
+
 ## Dataset(s) to be used
 
 A suitable starting point would be the [WMO International Cloud Atlas](https://cloudatlas.wmo.int/).

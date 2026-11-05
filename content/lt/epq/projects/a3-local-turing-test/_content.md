@@ -30,6 +30,11 @@ anonymous judging sheet, a table of judgements, and a written analysis of the
 tells. Your project would be about designing a fair comparison, collecting
 judgements, and interpreting what people noticed.
 
+**What you submit.** The assessed product is a written report: around 5,000
+words for a research project, or at least 1,000 words alongside an artefact
+such as the one described here. The tables, plots and workflow are evidence
+you discuss in the report, not the submission itself.
+
 ## Dataset(s) to be used
 
 The model is **BritLLM**, a 3B parameter language model with a 2048-token

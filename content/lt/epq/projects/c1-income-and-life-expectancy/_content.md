@@ -28,6 +28,11 @@ a residual table naming the biggest exceptions, a comparison of two or three
 models, and a short case study of one over-performing and one under-performing
 country.
 
+**What you submit.** The assessed product is a written report: around 5,000
+words for a research project, or at least 1,000 words alongside an artefact
+such as the one described here. The tables, plots and workflow are evidence
+you discuss in the report, not the submission itself.
+
 ## Dataset(s) to be used
 
 A suitable starting point would be [**Gapminder**](https://www.gapminder.org/),

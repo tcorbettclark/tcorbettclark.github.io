@@ -32,6 +32,11 @@ relevant to phones, laptops and data centres.
 Your final artefact could be a Python benchmark harness, a results table, a set
 of trade-off plots, and a written recommendation for a particular use case.
 
+**What you submit.** The assessed product is a written report: around 5,000
+words for a research project, or at least 1,000 words alongside an artefact
+such as the one described here. The tables, plots and workflow are evidence
+you discuss in the report, not the submission itself.
+
 ## Dataset(s) to be used
 
 The models are the local BritLLM MLX quantisations. The 3B model has a
