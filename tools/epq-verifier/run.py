@@ -81,10 +81,14 @@ def load_rules(path: pathlib.Path) -> list[dict]:
         data = tomllib.load(f)
     rules = data.get("rule", [])
     for r in rules:
-        r.setdefault("scope", "doc")
         r.setdefault("check", "judge")
         assert r["check"] in ("judge", "text"), r["id"]
         assert r["severity"] in SEVERITY_ORDER, r["id"]
+        if r["id"].startswith("PACK-") and r["check"] != "text":
+            raise SystemExit(
+                f"{r['id']}: a PACK- rule is answered once for the whole pack, "
+                "which only the text checks can do"
+            )
     return rules
 
 
@@ -167,7 +171,7 @@ def text_issues(rules: list[dict], docs: dict[str, dict], extra: str = "") -> li
         def matches(text: str) -> bool:
             return all(re.search(p, text) for p in patterns)
 
-        if rule["scope"] == "pack":
+        if rule["id"].startswith("PACK-"):
             found = matches(pack_text)
             if found != expect_present:
                 out.append(
@@ -332,7 +336,13 @@ def self_defeating(quote: str, fix: str, why: str) -> bool:
 
 
 def rules_key(rules: list[dict]) -> str:
-    blob = json.dumps(rules, sort_keys=True).encode()
+    """What the model is told to apply, and nothing else.
+
+    The prompt is built from five fields per rule. Hashing those rather than the
+    whole rule means editing a board locator or a suggested fix - neither of
+    which the judge sees - does not throw away twelve cached opinions.
+    """
+    blob = "\n\n".join(judge_prompt(r) for r in rules).encode()
     return hashlib.sha256(blob).hexdigest()[:16]
 
 
@@ -592,7 +602,7 @@ def main() -> None:
     log(f"{len(docs)} outline(s), {args.n_rules} rules "
         f"({args.n_judge} judged, {args.n_text} text)")
     for slug in docs:
-        log(f"  in scope: {slug}")
+        log(f"  selected: {slug}")
     pack_pages = [pathlib.Path(f) for f in PACK_PAGES]
     extra = "\n\n".join(p.read_text(encoding="utf8") for p in pack_pages if p.exists())
     issues = text_issues(args.rules, docs, extra)

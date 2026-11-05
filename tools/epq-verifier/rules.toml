@@ -3,16 +3,15 @@
 # The six outlines are examples meant to inspire, not instructions to follow.
 # That distinction decides what a rule may ask:
 #
-#   scope = "doc"   the outline may leave anything out, but it must not *mislead*.
-#                   A per-document rule therefore only ever asks: could a student
-#                   read this sentence and infer a practice that would cost them
-#                   marks or fail moderation?
-#   scope = "pack"  what the pack as a whole must state once: the assessed
-#                   product, the word scale, the production log, the
-#                   presentation, ethics, AI declaration. Checked against the
-#                   outlines plus the pages that carry pack-level guidance
-#                   (prerequisites, and the collection's own page), never
-#                   against a single outline.
+#   A rule whose id begins PACK- is about the pack as a whole: what it must say
+#   once - ethics, the board, no restated board figures. It is checked against
+#   the outlines plus the pages that carry pack-level guidance (prerequisites,
+#   and the collection's own page), and fires once rather than once per outline.
+#
+#   Every other rule is about a single outline. It may leave anything out, but
+#   it must not *mislead*: the question is always whether a student could read
+#   a sentence and infer a practice that would cost them marks or fail
+#   moderation.
 #
 # AQA 7993 is the spine (by far the largest EPQ entry). Nothing here is a rule
 # that only AQA imposes: where the boards differ, the rule is silent.
@@ -21,7 +20,6 @@
 #   id        stable identifier; quote it in reports and issues
 #   group     own | evidence | ethics | feas | ai | integ | pack
 #   severity  high | med | low      (high = could damage a student's chances)
-#   scope     doc (default) or pack
 #   check     judge | text
 #   source    specification or guidance URL
 #   locator   section or page within that source
@@ -269,7 +267,6 @@ expect = "absent"
 id = "PACK-BOARD"
 group = "pack"
 severity = "med"
-scope = "pack"
 check = "text"
 title = "The pack never points the student at their board's requirements"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
@@ -284,7 +281,6 @@ all = ["(?i)specification", "(?i)board|awarding body"]
 id = "PACK-NOSPEC"
 group = "pack"
 severity = "med"
-scope = "pack"
 check = "text"
 title = "The pack restates board rules instead of pointing at them"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
@@ -300,7 +296,6 @@ expect = "absent"
 id = "PACK-ETHICS"
 group = "pack"
 severity = "med"
-scope = "pack"
 check = "text"
 title = "The pack never mentions ethics or consent"
 source = "https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF"

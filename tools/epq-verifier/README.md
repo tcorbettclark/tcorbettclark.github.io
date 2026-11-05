@@ -85,8 +85,8 @@ marked down for a requirement it states in its header.
 
 Two layers, both driven by `rules.toml`:
 
-- **text** — deterministic regex checks. Either per document or, with
-  `scope = "pack"`, across the outlines plus `PACK_PAGES`. There is also a
+- **text** — deterministic regex checks. Per document, or — for a rule whose id
+  begins `PACK-` — across the outlines plus `PACK_PAGES`. There is also a
   shingle-overlap pass that flags two outlines likely to produce the same
   artefact.
 - **judge** — the judgement rules, one LLM call per outline. The model must
@@ -119,12 +119,12 @@ Known versions at the time of writing:
 
 ## Adding a rule
 
-Decide first where it belongs. If you want to know whether *an outline* could
-mislead a reader, it is a `scope = "doc"` rule and the question has to be about
-a sentence in that outline. If you want to know whether *the pack* says
-something at all, it is `scope = "pack"` and it should fire once, not six
-times - duplicated completeness findings are what made the first version of
-this tool noisy.
+Decide first where it belongs, and let the id say so. If you want to know
+whether *an outline* could mislead a reader, the question has to be about a
+sentence in that outline, and the id is anything that does not begin `PACK-`. If
+you want to know whether *the pack* says something at all, name it `PACK-...`
+and it fires once, not six times - duplicated completeness findings are what
+made the first version of this tool noisy.
 
 ## What it deliberately does not do
 
