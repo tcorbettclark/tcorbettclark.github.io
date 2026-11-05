@@ -1,10 +1,5 @@
 # Can a model trained on curated cloud photographs recognise the sky above your school?
 
-> One way to run this project, not the only way. Change the question, the
-data, the tool or the artefact to suit what interests you: the choices, and
-the reasons for them, have to be yours before your centre approves the
-proposal.
-
 ## Project overview
 
 You could investigate whether a computer can identify cloud genera from
@@ -192,15 +187,6 @@ questions, you have a stronger evaluation than a single accuracy figure. You cou
 make the model useful for a real user: more local training data, a "not sure"
 option, a clear-sky class, or a different kind of model.
 
-## How this might be assessed
-
-Before you commit, ask yourself how the work would be judged: what would your
-report be arguing, what evidence would you be presenting, and what would you do
-with the answer? Settle that with your supervisor and your board's
-specification — this page does not decide it.
-
-Check with your supervisor that none of this overlaps work you are submitting for
-another qualification.
 
 ## Example artefacts
 

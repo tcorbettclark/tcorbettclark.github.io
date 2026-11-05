@@ -1,10 +1,5 @@
 # Can a no-code image classifier read handwritten digits, and can you explain its mistakes?
 
-> One way to run this project, not the only way. Change the question, the
-data, the tool or the artefact to suit what interests you: the choices, and
-the reasons for them, have to be yours before your centre approves the
-proposal.
-
 ## Project overview
 
 You could investigate whether a computer can recognise handwritten digits from
@@ -174,15 +169,6 @@ figure. If you cannot, that is also a finding about the limits of the feature
 set. You could finish by considering what would change with a convolutional
 network: whether the errors would disappear or move somewhere less visible.
 
-## How this might be assessed
-
-Before you commit, ask yourself how the work would be judged: what would your
-report be arguing, what evidence would you be presenting, and what would you do
-with the answer? Settle that with your supervisor and your board's
-specification — this page does not decide it.
-
-Check with your supervisor that none of this overlaps work you are submitting for
-another qualification.
 
 ## Example artefacts
 

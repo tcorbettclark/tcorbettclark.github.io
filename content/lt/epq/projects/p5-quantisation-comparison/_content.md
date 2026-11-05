@@ -1,10 +1,5 @@
 # How much memory, speed and energy does quantisation save, and what does it cost in quality?
 
-> One way to run this project, not the only way. Change the question, the
-data, the tool or the artefact to suit what interests you: the choices, and
-the reasons for them, have to be yours before your centre approves the
-proposal.
-
 ## Project overview
 
 You could investigate what happens when a language model is compressed.
@@ -215,15 +210,6 @@ if you were shipping a local assistant on a 16 GB laptop, which quantisation
 you would choose, and what evidence would change your mind. You could use that
 comparison to justify a deployment choice.
 
-## How this might be assessed
-
-Before you commit, ask yourself how the work would be judged: what would your
-report be arguing, what evidence would you be presenting, and what would you do
-with the answer? Settle that with your supervisor and your board's
-specification — this page does not decide it.
-
-Check with your supervisor that none of this overlaps work you are submitting for
-another qualification.
 
 ## Example artefacts
 

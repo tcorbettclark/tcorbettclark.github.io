@@ -1,10 +1,5 @@
 # Can a country's income explain how long its people live, and what do the exceptions tell us?
 
-> One way to run this project, not the only way. Change the question, the
-data, the tool or the artefact to suit what interests you: the choices, and
-the reasons for them, have to be yours before your centre approves the
-proposal.
-
 ## Project overview
 
 You could investigate the relationship between a country's income and the life
@@ -213,15 +208,6 @@ used for. It may describe a broad pattern across countries without being reliabl
 enough to guide policy for one country. Articulating that distinction is part of
 the project.
 
-## How this might be assessed
-
-Before you commit, ask yourself how the work would be judged: what would your
-report be arguing, what evidence would you be presenting, and what would you do
-with the answer? Settle that with your supervisor and your board's
-specification — this page does not decide it.
-
-Check with your supervisor that none of this overlaps work you are submitting for
-another qualification.
 
 ## Example artefacts
 

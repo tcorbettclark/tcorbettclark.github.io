@@ -1,10 +1,5 @@
 # Can a small language model tell you when it is likely to be wrong?
 
-> One way to run this project, not the only way. Change the question, the
-data, the tool or the artefact to suit what interests you: the choices, and
-the reasons for them, have to be yours before your centre approves the
-proposal.
-
 ## Project overview
 
 You could investigate whether a language model's own probabilities can warn
@@ -227,15 +222,6 @@ You could finish by reflecting on what confidence would need to be useful in a
 real application: a reliable threshold, a clear cost for deferring, and a way
 to communicate uncertainty to a user.
 
-## How this might be assessed
-
-Before you commit, ask yourself how the work would be judged: what would your
-report be arguing, what evidence would you be presenting, and what would you do
-with the answer? Settle that with your supervisor and your board's
-specification — this page does not decide it.
-
-Check with your supervisor that none of this overlaps work you are submitting for
-another qualification.
 
 ## Example artefacts
 

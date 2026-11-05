@@ -1,10 +1,5 @@
 # Can classmates tell BritLLM's writing from a human's when the human is imitating the machine?
 
-> One way to run this project, not the only way. Change the question, the
-data, the tool or the artefact to suit what interests you: the choices, and
-the reasons for them, have to be yours before your centre approves the
-proposal.
-
 ## Project overview
 
 You could run your own Turing-style test with
@@ -204,15 +199,6 @@ judge's expectations, and what would change if the judges were experts, the
 texts were longer, or the machine were allowed to revise its output. You could
 discuss those questions in your evaluation.
 
-## How this might be assessed
-
-Before you commit, ask yourself how the work would be judged: what would your
-report be arguing, what evidence would you be presenting, and what would you do
-with the answer? Settle that with your supervisor and your board's
-specification — this page does not decide it.
-
-Check with your supervisor that none of this overlaps work you are submitting for
-another qualification.
 
 ## Example artefacts
 
