@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+    <meta charset="utf-8"><!-- Relative URLs (markdown links) resolve against this page's own directory,
+     whatever URL the page was fetched at. AWG computes the absolute path at
+     build time. -->
+    <base href="/lt/epq/projects/p6-language-model-failure-and-confidence/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      Language-model failure and confidence
+    </title>
+    <link rel="canonical" href="https://corbettclark.com/lt/epq/projects/p6-language-model-failure-and-confidence/">
+    <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
+    "sha384-izkQAmHKbBYjZATBsWpAW8fjO2PusufuGpJLPU86Npa2goQBOoXeyDu0CobShkzW">
+  </head>
+  <body>
+    <header class="sitebar">
+      <a class="sitebar-back" href="/lt/epq/">← EPQ</a> <span class="sitebar-title">EPQ on AI</span> <span class=
+      "sitebar-draft">Draft</span>
+    </header>
+    <main>
+      <aside class="needs python">
+        <p class="needs-title">
+          Project dependencies
+        </p>
+        <dl>
+          <dt>
+            Programming
+          </dt>
+          <dd>
+            Python 3.11 or later. You write the harness that scores the model's answers.
+          </dd>
+          <dt>
+            Machine
+          </dt>
+          <dd>
+            An Apple silicon Mac (M-series) with 16 GB of memory.
+          </dd>
+          <dt>
+            Software
+          </dt>
+          <dd>
+            mlx-lm, numpy and matplotlib.
+          </dd>
+          <dt>
+            Downloads
+          </dt>
+          <dd>
+            BritLLM: roughly 1–2 GB per quantisation you test.
+          </dd>
+        </dl>
+        <p class="needs-more">
+          <a href="/lt/epq/prerequisites/">Prerequisites</a> describes the kit in general, and the permissions that
+          take time to arrange.
+        </p>
+      </aside>
+      <h1 id="can-a-small-language-model-tell-you-when-it-is-likely-to-be-wrong">
+        Can a small language model tell you when it is likely to be wrong?
+      </h1>
+      <h2 id="project-overview">
+        Project overview
+      </h2>
+      <p>
+        You could investigate whether a language model’s own probabilities can warn you when its answer is unreliable.
+        A model can sound confident and be wrong. You would then test whether that confidence is measurable, and
+        whether it tracks accuracy. You would run <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a>,
+        the 3B model you would run locally, on a set of questions with known answers. For each question you would score
+        the model’s probability of the correct answer and of the answer it prefers. Then you would check whether high
+        confidence means high accuracy.
+      </p>
+      <p>
+        This would be a project about <strong>calibration</strong>: the relationship between the confidence a model
+        expresses and the proportion of times it is right. You would build <strong>reliability diagrams</strong>,
+        measure <strong>expected calibration error</strong>, and test a practical use of confidence: <strong>selective
+        prediction</strong>. You would test how much accuracy the model gains, and how many questions it has to give
+        up, if it answers only when it is confident. You could compare 3-bit, 6-bit and 8-bit models, and compare
+        different kinds of question.
+      </p>
+      <p>
+        You would measure confidence from the model’s probabilities, not from how confident the text sounds. This is
+        more precise than counting hedging words, and it lets you test whether the model “knows what it knows” in a way
+        that can be checked. You could also compare probability confidence with the model’s verbal confidence, if you
+        can elicit a number from it.
+      </p>
+      <p>
+        You could produce a Python harness, a question set you designed, calibration plots for each model, and a
+        written analysis of when confidence is useful and when it is misleading.
+      </p>
+      <h2 id="dataset-s-to-be-used">
+        Dataset(s) to be used
+      </h2>
+      <p>
+        The models are the local <strong>BritLLM</strong> MLX quantisations: <strong>3-bit</strong>,
+        <strong>6-bit</strong> and <strong>8-bit</strong>. The <a href=
+        "https://huggingface.co/britllm/britllm-3b-v0.1">model card</a> records the licence and context length. The
+        model has 3B parameters and a 2048-token context. All three quantisations run on a 16 GB M-series Mac. Start
+        with one quantisation and add the others once the harness works.
+      </p>
+      <p>
+        Your main dataset is a question set you write yourself. Aim for 100–200 items. Each item needs:
+      </p>
+      <ul>
+        <li>a short prompt, such as <code>The capital of France is</code>
+        </li>
+        <li>a correct answer, such as <code>Paris</code>
+        </li>
+        <li>two or three plausible distractors, such as <code>Lyon</code> and <code>Marseille</code>
+        </li>
+        <li>a category, such as factual recall, arithmetic, science, history, or a made-up entity
+        </li>
+        <li>a difficulty rating, which you assign before you see the model’s results
+        </li>
+        <li>a source for the correct answer, so that you can check it later
+        </li>
+      </ul>
+      <p>
+        A candidate-based format is a good fit for a base model. The model has not been instruction-tuned, so it may
+        continue text rather than answer a question. Asking it to choose between candidates turns the task into a
+        probability comparison, which is exactly what you need for calibration. It also keeps the scoring automatic and
+        reproducible.
+      </p>
+      <p>
+        You could include easy, medium and hard items, and include some questions about things that do not exist, such
+        as a made-up capital city or a fictional chemical element. A model that is confident about a fictional fact is
+        showing you something important. Include questions with ambiguous answers, and decide in advance how you would
+        handle them; ambiguity is part of the phenomenon, but it complicates the scoring.
+      </p>
+      <p>
+        If you want a larger or more standard set, you could use a public multiple-choice dataset such as <a href=
+        "https://huggingface.co/datasets/allenai/ai2_arc"><strong>AI2 Reasoning Challenge</strong></a>
+        (<code>allenai/ai2_arc</code>) or <a href=
+        "https://huggingface.co/datasets/allenai/openbookqa"><strong>OpenBookQA</strong></a>
+        (<code>allenai/openbookqa</code>). Check the dataset card and licence, and consider whether the model may have
+        seen the questions during pre-training. A public benchmark is useful for comparison, but your own questions
+        give you more control over difficulty and contamination.
+      </p>
+      <p>
+        For a general measure of the model’s surprise, use a held-out text: a chapter of a public-domain book such as
+        <em>Alice’s Adventures in Wonderland</em> (<a href="https://www.gutenberg.org/ebooks/11">Project Gutenberg
+        ebook 11</a>), or a Wikipedia article you record by title, revision date and URL. Compute perplexity on it for
+        each quantisation. This is not a confidence measure for individual answers, but it tells you whether the model
+        is generally more or less uncertain after compression.
+      </p>
+      <p>
+        If you use Wikipedia, check the licence and attribute it; a public-domain text avoids the question entirely.
+      </p>
+      <p>
+        If you also want to compare verbal confidence, you need prompts that ask the model to state a probability, such
+        as <code>How confident are you, from 0 to 100?</code>. A base model may not follow that instruction reliably.
+        You could treat verbal confidence as a separate, optional experiment, and say clearly that it is a different
+        measurement.
+      </p>
+      <h2 id="example-research-questions-or-hypothesis">
+        Example research questions or hypothesis
+      </h2>
+      <p>
+        For example:
+      </p>
+      <blockquote>
+        <p>
+          Can the token probabilities of a small language model be used to predict when its answers are wrong, and how
+          well calibrated is that confidence across task types and quantisation levels?
+        </p>
+      </blockquote>
+      <p>
+        You could develop this into more specific questions, such as whether high confidence implies high accuracy,
+        whether 3-bit is less calibrated than 8-bit, whether the model is more overconfident on rare facts or on
+        arithmetic, or whether selective prediction can give a useful accuracy gain at a reasonable coverage.
+      </p>
+      <p>
+        You could test whether the model is well calibrated on easy, common facts and overconfident on hard or rare
+        ones. You could test that by grouping the questions by difficulty and category and plotting a separate
+        reliability diagram for each group.
+      </p>
+      <h2 id="key-data-science-statistical-and-machine-learning-concepts">
+        Key data science, statistical and machine learning concepts
+      </h2>
+      <p>
+        Your project could involve:
+      </p>
+      <ul>
+        <li>probability, log-probability and the softmax function
+        </li>
+        <li>scoring a fixed answer by summing the log-probabilities of its tokens
+        </li>
+        <li>length normalisation and why answer length is important
+        </li>
+        <li>accuracy, confidence and the difference between them
+        </li>
+        <li>calibration and <strong>reliability diagrams</strong>
+        </li>
+        <li>
+          <strong>expected calibration error</strong> (ECE) and the <strong>Brier score</strong>
+        </li>
+        <li>selective prediction, coverage and the <strong>risk-coverage curve</strong>
+        </li>
+        <li>baselines: random choice, the most frequent answer, and always answering
+        </li>
+        <li>sampling versus scoring: generating an answer versus measuring the probability of a fixed answer
+        </li>
+        <li>temperature and how it changes the distribution
+        </li>
+        <li>tokenisation and multi-token answers
+        </li>
+        <li>question design, candidate sets and difficulty
+        </li>
+        <li>experimental control across quantisations
+        </li>
+        <li>confidence intervals and the uncertainty of a proportion
+        </li>
+        <li>the difference between “the model is uncertain” and “the question is ambiguous”
+        </li>
+        <li>contamination and benchmark leakage
+        </li>
+        <li>verbal confidence and its limits
+        </li>
+      </ul>
+      <p>
+        The central idea is calibration. A model is calibrated if, among all the questions where it says it is 80%
+        confident, it is right about 80% of the time. Perfect calibration is rare. The useful question is how far from
+        calibrated the model is, and whether the gap is stable enough to support a decision.
+      </p>
+      <h2 id="example-approaches-to-data-preparation-analysis-and-modelling">
+        Example approaches to data preparation, analysis and modelling
+      </h2>
+      <p>
+        One quantisation and a pilot question set would show you what the measurement involves; more questions and
+        models can follow.
+      </p>
+      <p>
+        You could begin by building the question set in a spreadsheet or a CSV file. You would keep the prompt, the
+        correct answer, the distractors, the category, the difficulty and the source in separate columns. Write 20
+        pilot items first and run them through the model.
+      </p>
+      <h2 id="potential-limitations-risks-and-sources-of-bias">
+        Potential limitations, risks and sources of bias
+      </h2>
+      <p>
+        The limitations you could consider include:
+      </p>
+      <ul>
+        <li>A language model’s token probability is not a calibrated statement of truth. It reflects the likelihood of
+        the next token given the prompt, which is influenced by phrasing, frequency and the model’s training data.
+        </li>
+        <li>A base model may not treat the candidates as options. It may prefer a continuation that is grammatically
+        likely rather than factually correct. That is part of what you are measuring, but it limits how directly you
+        can read the result as “knowledge”.
+        </li>
+        <li>The question set is small and yours. It may be biased toward facts you know and phrasings the model
+        handles. Public benchmarks may be contaminated.
+        </li>
+        <li>The candidate set affects confidence. Adding a plausible distractor changes the softmax and can make the
+        model look less confident without changing its knowledge.
+        </li>
+        <li>Length normalisation is a choice: dividing by the number of answer tokens can favour short answers, and not
+        dividing can favour long ones. Both should be tried and the sensitivity reported.
+        </li>
+        <li>Tokenisation can split an answer into several tokens, and the boundary between prompt and answer may not
+        align with a token, so the token IDs should be checked by hand for a few examples.
+        </li>
+        <li>Quantisation can change probabilities, but it can also change the speed and the kernel, so differences
+        should not be attributed to bits without checking the configuration.
+        </li>
+        <li>Calibration on one set of questions may not transfer to another, so per-category results are more
+        informative than a single claim that the model is “generally calibrated”.
+        </li>
+        <li>ECE depends on the number and width of the bins, so fixed bins, the number of items per bin and a bootstrap
+        estimate of uncertainty should be reported.
+        </li>
+        <li>The model may have seen the public benchmark questions during pre-training, so your own questions or a
+        held-out set are safer, and the choice should be stated.
+        </li>
+        <li>Verbal confidence is generated text and may be influenced by the prompt, the model’s style, or a desire to
+        please. It is not ground truth.
+        </li>
+        <li>A model that is overconfident on your questions is not necessarily overconfident on all tasks, so the
+        conclusion should be scoped to the model, the questions and the conditions tested.
+        </li>
+        <li>If you conclude that confidence is useful for selective prediction, remember that a wrong answer that is
+        deferred still has a cost. The coverage-accuracy curve shows the trade-off, but it does not make the decision
+        for you.
+        </li>
+      </ul>
+      <p>
+        Think about how these limitations affect the claims you can reasonably make from your model.
+      </p>
+      <h2 id="expected-outcomes-and-opportunities-for-evaluation">
+        Expected outcomes and opportunities for evaluation
+      </h2>
+      <p>
+        The expected outcome would be a Python harness that scores candidate answers, a question set you designed,
+        calibration plots and a coverage-accuracy curve for each quantisation. The size and direction of the
+        miscalibration matter more than a single accuracy figure, and so does whether it is stable enough to be useful.
+      </p>
+      <p>
+        You could evaluate the models on overall accuracy, calibration and selective prediction, and compare the
+        results across task categories and bit widths. You could also compare probability confidence with verbal
+        confidence, and ask whether the two agree. A model whose words and probabilities disagree would be worth
+        discussing.
+      </p>
+      <p>
+        You could pick three questions where the model was confidently wrong and three where it was uncertain and
+        right. You could ask what made the difference, and whether the question was rare, ambiguous, or phrased in an
+        unusual way. Answering that takes you beyond a single calibration score.
+      </p>
+      <p>
+        You could finish by asking what a user would need before acting on the model’s confidence, and what it costs to
+        defer.
+      </p>
+      <h2 id="example-artefacts">
+        Example artefacts
+      </h2>
+      <ul>
+        <li>Reliability diagrams for 3-bit, 6-bit and 8-bit BritLLM, with the number of questions in each bin.
+        </li>
+        <li>A table of accuracy, mean confidence, expected calibration error and Brier score for each quantisation.
+        </li>
+        <li>A coverage-accuracy curve for each quantisation, with the 90% accuracy threshold marked.
+        </li>
+        <li>A table of the three most confidently wrong questions, with the model’s chosen answer and probability.
+        </li>
+        <li>An optional scatter plot comparing verbal confidence with probability-based confidence.
+        </li>
+      </ul>
+      <h2 id="further-reading">
+        Further reading
+      </h2>
+      <ul>
+        <li>
+          <a href="https://arxiv.org/abs/1706.04599">Guo et al., “On Calibration of Modern Neural Networks”</a> (2017)
+          — the source of the reliability diagram and ECE methods used in this project.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2207.05221">Kadavath et al., “Language Models (Mostly) Know What They
+          Know”</a> (2022) — evidence that models can sometimes estimate their own correctness.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2205.14334">Lin, Hilton and Evans, “Teaching Models to Express Their
+          Uncertainty in Words”</a> (2022) — verbal confidence and its limits.
+        </li>
+        <li>
+          <a href="https://www.nature.com/articles/s41586-024-07421-0">Farquhar et al., “Detecting hallucinations in
+          large language models using semantic entropy”</a>, <em>Nature</em> (2024) — optional, an advanced use of
+          sampling consistency.
+        </li>
+        <li>
+          <a href="https://arxiv.org/abs/2202.03629">Ji et al., “Survey of Hallucination in Natural Language
+          Generation”</a> (2023) — a taxonomy of the failures you are trying to detect.
+        </li>
+        <li>The <a href="https://scikit-learn.org/stable/modules/calibration.html">scikit-learn documentation on
+        probability calibration</a> — practical definitions and plots.
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+    <meta charset="utf-8"><!-- Relative URLs (markdown links) resolve against this page's own directory,
+     whatever URL the page was fetched at. AWG computes the absolute path at
+     build time. -->
+    <base href="/lt/epq/projects/p1-mnist-digit-classification/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      MNIST digit classification
+    </title>
+    <link rel="canonical" href="https://corbettclark.com/lt/epq/projects/p1-mnist-digit-classification/">
+    <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
+    "sha384-izkQAmHKbBYjZATBsWpAW8fjO2PusufuGpJLPU86Npa2goQBOoXeyDu0CobShkzW">
+  </head>
+  <body>
+    <header class="sitebar">
+      <a class="sitebar-back" href="/lt/epq/">← EPQ</a> <span class="sitebar-title">EPQ on AI</span> <span class=
+      "sitebar-draft">Draft</span>
+    </header>
+    <main>
+      <aside class="needs">
+        <p class="needs-title">
+          Project dependencies
+        </p>
+        <dl>
+          <dt>
+            Programming
+          </dt>
+          <dd>
+            None. The classifier is built from Orange widgets.
+          </dd>
+          <dt>
+            Machine
+          </dt>
+          <dd>
+            Any laptop that runs Orange Data Mining.
+          </dd>
+          <dt>
+            Software
+          </dt>
+          <dd>
+            Orange Data Mining with the orange3-ai-suite add-on and its image extra (OpenCV).
+          </dd>
+          <dt>
+            Downloads
+          </dt>
+          <dd>
+            A prepared MNIST subset (tens of MB), or the full MNIST dataset.
+          </dd>
+        </dl>
+        <p class="needs-more">
+          <a href="/lt/epq/prerequisites/">Prerequisites</a> describes the kit in general, and the permissions that
+          take time to arrange.
+        </p>
+      </aside>
+      <h1 id="can-a-no-code-image-classifier-read-handwritten-digits-and-can-you-explain-its-mistakes">
+        Can a no-code image classifier read handwritten digits, and can you explain its mistakes?
+      </h1>
+      <h2 id="project-overview">
+        Project overview
+      </h2>
+      <p>
+        You could investigate whether a computer can recognise handwritten digits from a small set of human-readable
+        image measurements, rather than from raw pixels. You would build the classifier in <strong>Orange Data
+        Mining</strong>, using the <strong>Image Features</strong> widget from the <a href=
+        "https://github.com/tcorbettclark/orange3-ai-suite"><code>orange3-ai-suite</code></a> add-on. The widget turns
+        each image into 36 numbers describing brightness, row and column profiles, spatial mass, texture, enclosed
+        holes, stroke crossings and symmetry. Each feature has a one-sentence definition, so you can inspect it before
+        you trust it. A <strong>Neural Network</strong> learns from those numbers, and the <strong>Neural Network
+        Viewer</strong> draws the network and its weights.
+      </p>
+      <p>
+        A convolutional network trained in Python would probably score higher. Your project would be about explaining
+        the classifier: which measurements carry the signal, which digits it confuses, and whether a model trained on a
+        clean teaching dataset recognises digits written by you. You would produce a reusable Orange workflow,
+        evaluation tables and plots, and a written analysis that names the features behind each success and failure.
+      </p>
+      <p>
+        You could produce the workflow itself, together with a short user guide that lets someone else load a digit
+        image and see the prediction and the feature values that produced it.
+      </p>
+      <h2 id="dataset-s-to-be-used">
+        Dataset(s) to be used
+      </h2>
+      <p>
+        A suitable starting point would be the standard MNIST dataset. The <code>orange3-ai-suite</code> repository
+        includes a prepared subset of 5,000 training images (500 per digit) and 1,000 validation images (100 per
+        digit), stored as 56×56 PNGs in one folder per class. The folder names are the labels, which is the layout
+        <strong>Import Images</strong> expects. The subset was drawn from standard MNIST with a fixed seed by the
+        repository’s MNIST demo builder, so you can rebuild it or read how it was sampled. If you download full MNIST,
+        create the same folder-per-class layout.
+      </p>
+      <p>
+        MNIST is clean, centred and light-on-dark: white digits on a black background. If you photograph your own
+        digits with dark ink on white paper, invert them before importing, or the features may describe the background
+        rather than the stroke. For your own test set, collect 20–50 examples of each digit, crop them to squares, and
+        put them in folders named 0–9. Ask classmates for samples if you want a wider range of styles, with their
+        consent and without collecting anything more personal than the digit itself.
+      </p>
+      <p>
+        Consider whether you need approval from your school or others.
+      </p>
+      <p>
+        If you want more training data, full MNIST is available from <a href=
+        "https://huggingface.co/datasets/ylecun/mnist">Hugging Face</a>. Download it once and work offline afterwards.
+        Check the dataset card and record the licence and source in your project log.
+      </p>
+      <h2 id="example-research-questions-or-hypothesis">
+        Example research questions or hypothesis
+      </h2>
+      <p>
+        For example:
+      </p>
+      <blockquote>
+        <p>
+          To what extent can a no-code image classifier recognise handwritten digits from interpretable image features,
+          and which features explain its successes and failures?
+        </p>
+      </blockquote>
+      <p>
+        You could develop this into more specific questions, such as which feature groups carry most of the predictive
+        signal, whether hand-crafted features beat a raw-pixel baseline, which pairs of digits are systematically
+        confused, or whether the model generalises to digits written by people whose handwriting was not in the
+        training set.
+      </p>
+      <p>
+        You could test whether topological features (hole count and stroke crossings) separate digits with enclosed
+        regions (0, 6, 8, 9) from those without, and whether profile and spatial-mass features matter more for digits
+        such as 1, 2, 4 and 7. Neither is settled until you run the ablation.
+      </p>
+      <p>
+        The same workflow answers a different question on a different image set: handwritten letters, symbols, or
+        objects you can photograph indoors. Check the licence of anything you did not collect yourself.
+      </p>
+      <h2 id="key-data-science-statistical-and-machine-learning-concepts">
+        Key data science, statistical and machine learning concepts
+      </h2>
+      <p>
+        Your project could involve:
+      </p>
+      <ul>
+        <li>classification, labels, features and target variables
+        </li>
+        <li>the difference between raw pixels and engineered features
+        </li>
+        <li>training, validation and test data, and cross-validation on small datasets
+        </li>
+        <li>accuracy, per-class accuracy, precision, recall and the confusion matrix
+        </li>
+        <li>baselines: a raw-pixel model and a majority-class predictor
+        </li>
+        <li>ablation: removing one feature group at a time and measuring the change
+        </li>
+        <li>overfitting, generalisation and data leakage
+        </li>
+        <li>interpretability: reading feature definitions and network weights
+        </li>
+        <li>domain shift, when test images do not look like training images
+        </li>
+      </ul>
+      <p>
+        The add-on provides seven feature groups. <strong>A (6 features)</strong> covers global photometry; <strong>B
+        (12)</strong> row, column and diagonal profile summaries; <strong>C (6)</strong> spatial mass, centre of mass
+        and spread; <strong>D (6)</strong> texture, gradient and edge density; <strong>E (3)</strong> topology,
+        including hole count and stroke crossings; <strong>F (3)</strong> symmetry; and <strong>G (4)</strong> colour,
+        which is off by default and is irrelevant for MNIST. Groups A–F give 36 features, small enough to inspect and
+        large enough to support a real ablation study.
+      </p>
+      <h2 id="example-approaches-to-data-preparation-analysis-and-modelling">
+        Example approaches to data preparation, analysis and modelling
+      </h2>
+      <p>
+        You could build the baseline, then one ablation; keep the rest for later if the time allows.
+      </p>
+      <p>
+        You could begin by building the workflow from scratch: <strong>Import Images</strong> → <strong>Image
+        Features</strong> → <strong>Test & Score</strong>, with <strong>Neural Network</strong> as the learner and
+        <strong>Confusion Matrix</strong>, <strong>Data Table</strong> and <strong>Column Statistics</strong> attached.
+        Set the working size to 56 so the feature windows have something to measure.
+      </p>
+      <h2 id="potential-limitations-risks-and-sources-of-bias">
+        Potential limitations, risks and sources of bias
+      </h2>
+      <p>
+        The limitations you could consider include:
+      </p>
+      <ul>
+        <li>Hand-crafted features are not a convolutional network. Your accuracy may be lower than a convolutional
+        network, and that is expected.
+        </li>
+        <li>The feature set is fixed by the widget. You cannot invent a new measurement without leaving the no-code
+        workflow, so your hypothesis space is constrained.
+        </li>
+        <li>MNIST is clean, centred and light-on-dark. Your own digits may differ in size, slant, stroke thickness,
+        paper colour and polarity. A drop in accuracy is evidence about domain shift, not a failed model.
+        </li>
+        <li>The bundled subset has 5,000 training images, enough for a small classifier but not for fine distinctions.
+        Cross-validation results can vary from fold to fold.
+        </li>
+        <li>The classes are balanced in MNIST but may not be balanced in your own collection, so overall accuracy can
+        hide a weak class. Per-class accuracy is more informative.
+        </li>
+        <li>The <strong>Neural Network</strong> widget trains a scikit-learn multilayer perceptron, not a deep network.
+        The viewer is designed for small networks; a large one becomes unreadable.
+        </li>
+        <li>Accuracy on a single split can mislead, so cross-validation and the spread across folds are more
+        informative than one score. A final test set should stay untouched until the end.
+        </li>
+        <li>Changing the working size, contrast normalisation or denoising changes the feature values, so comparisons
+        are only fair when those settings are fixed.
+        </li>
+      </ul>
+      <p>
+        Think about how these limitations affect the claims you can reasonably make from your model.
+      </p>
+      <h2 id="expected-outcomes-and-opportunities-for-evaluation">
+        Expected outcomes and opportunities for evaluation
+      </h2>
+      <p>
+        The expected outcome would be a working Orange workflow that classifies digits from interpretable features,
+        together with a feature table, a confusion matrix and an ablation record. A model that reaches 92% and whose
+        errors you can explain gives you more to discuss than a 98% model you cannot interpret.
+      </p>
+      <p>
+        You could evaluate the model on held-out MNIST images and on your own handwriting, compare it with a raw-pixel
+        baseline and a majority-class baseline, and examine which digits and feature groups produce the largest errors.
+        You could also compare the confusion matrices of the neural network, tree and logistic regression, and ask
+        whether they fail in the same places.
+      </p>
+      <p>
+        You could pick three misclassified images and trace each one back to its feature values. You could try to
+        explain why the model chose the wrong digit. Explaining them takes you beyond a single accuracy figure. If you
+        cannot, that is also a finding about the limits of the feature set. You could finish by considering what would
+        change with a convolutional network: whether the errors would disappear or move somewhere less visible.
+      </p>
+      <h2 id="example-artefacts">
+        Example artefacts
+      </h2>
+      <ul>
+        <li>A screenshot of the finished Orange canvas: <strong>Import Images</strong> → <strong>Image
+        Features</strong> → <strong>Test & Score</strong> → <strong>Confusion Matrix</strong>.
+        </li>
+        <li>A table of accuracy for each feature-group ablation.
+        </li>
+        <li>A confusion matrix with the three largest confusions annotated.
+        </li>
+        <li>A screenshot of <strong>Neural Network Viewer</strong> showing the strongest weights for one digit.
+        </li>
+        <li>A table comparing the model’s predictions with your own handwritten digits.
+        </li>
+      </ul>
+      <h2 id="further-reading">
+        Further reading
+      </h2>
+      <ul>
+        <li>
+          <a href="https://huggingface.co/datasets/ylecun/mnist">LeCun, Cortes and Burges, “The MNIST Database of
+          Handwritten Digits”</a> — the dataset’s home page, with the original description and baseline results.
+        </li>
+        <li>
+          <a href="https://orangedatamining.com/docs/">Orange Data Mining documentation</a> — the Image Analytics
+          add-on, <strong>Test & Score</strong>, <strong>Confusion Matrix</strong> and <strong>Neural Network</strong>
+          pages.
+        </li>
+        <li>
+          <a href="https://scikit-learn.org/stable/modules/neural_networks_supervised.html">scikit-learn user guide</a>
+          — “Neural network models (supervised)” and “Model evaluation” for the methods behind the widgets.
+        </li>
+        <li>
+          <a href="https://christophm.github.io/interpretable-ml-book/">Molnar, <em>Interpretable Machine
+          Learning</em></a> (2019, updated 2022) — chapters on feature importance and permutation importance, written
+          for a general reader.
+        </li>
+        <li>
+          <a href="https://www.deeplearningbook.org/">Goodfellow, Bengio and Courville, <em>Deep Learning</em></a>
+          (2016), chapter 9 — optional background on convolutional networks.
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

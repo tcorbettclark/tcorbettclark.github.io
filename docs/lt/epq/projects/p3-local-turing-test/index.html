@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+    <meta charset="utf-8"><!-- Relative URLs (markdown links) resolve against this page's own directory,
+     whatever URL the page was fetched at. AWG computes the absolute path at
+     build time. -->
+    <base href="/lt/epq/projects/p3-local-turing-test/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      Running a local Turing test
+    </title>
+    <link rel="canonical" href="https://corbettclark.com/lt/epq/projects/p3-local-turing-test/">
+    <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
+    "sha384-izkQAmHKbBYjZATBsWpAW8fjO2PusufuGpJLPU86Npa2goQBOoXeyDu0CobShkzW">
+  </head>
+  <body>
+    <header class="sitebar">
+      <a class="sitebar-back" href="/lt/epq/">← EPQ</a> <span class="sitebar-title">EPQ on AI</span> <span class=
+      "sitebar-draft">Draft</span>
+    </header>
+    <main>
+      <aside class="needs">
+        <p class="needs-title">
+          Project dependencies
+        </p>
+        <dl>
+          <dt>
+            Programming
+          </dt>
+          <dd>
+            None. The model is loaded by an Orange widget.
+          </dd>
+          <dt>
+            Machine
+          </dt>
+          <dd>
+            An Apple silicon Mac (M-series) with 16 GB of memory.
+          </dd>
+          <dt>
+            Software
+          </dt>
+          <dd>
+            Orange Data Mining with the orange3-ai-suite add-on and its lora extra, plus mlx-lm.
+          </dd>
+          <dt>
+            Downloads
+          </dt>
+          <dd>
+            BritLLM: about 5 GB for the full model, or 1–2 GB for a quantised version.
+          </dd>
+        </dl>
+        <p class="needs-more">
+          <a href="/lt/epq/prerequisites/">Prerequisites</a> describes the kit in general, and the permissions that
+          take time to arrange.
+        </p>
+      </aside>
+      <h1 id="can-classmates-tell-britllm-s-writing-from-a-human-s-when-the-human-is-imitating-the-machine">
+        Can classmates tell BritLLM’s writing from a human’s when the human is imitating the machine?
+      </h1>
+      <h2 id="project-overview">
+        Project overview
+      </h2>
+      <p>
+        You could run your own Turing-style test with <a href=
+        "https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a>, the 3B language model you would run locally. You
+        would generate text on fixed prompts, write human counterparts that are deliberately styled to be confusable,
+        and ask classmates to judge which is which. The model runs locally on your laptop, so the texts stay private
+        and the experiment can be repeated. Your project would investigate whether people can tell its writing from
+        human writing when the human is trying to sound machine-like, and what gives the machine away.
+      </p>
+      <p>
+        The human texts are the other half of the design. A plain human-versus-machine test often measures whether the
+        human text is longer, funnier or more topical. If your human writers deliberately copy BritLLM’s habits, such
+        as even sentence length, tidy structure and hedging phrases, you can distinguish between spotting the machine
+        and spotting the writing style. You could also compare quantisations: whether 3-bit BritLLM sounds more or less
+        human than 8-bit, and whether a higher temperature makes the text more surprising or just less coherent.
+      </p>
+      <p>
+        You could produce a set of matched human and machine texts, an anonymous judging sheet, a table of judgements,
+        and a written analysis of the tells. Your project would be about designing a fair comparison, collecting
+        judgements, and interpreting what people noticed.
+      </p>
+      <h2 id="dataset-s-to-be-used">
+        Dataset(s) to be used
+      </h2>
+      <p>
+        The model is <strong>BritLLM</strong>, a 3B parameter language model with a 2048-token context, released under
+        the ODC-BY licence. The <a href="https://huggingface.co/britllm/britllm-3b-v0.1">model card</a> and local MLX
+        quantisations are the practical starting point. The local quantisations include 3-bit, 4-bit, 6-bit and 8-bit;
+        the main comparison in this project uses 3-bit, 6-bit and 8-bit. They run locally on an Apple Silicon Mac and
+        do not need a network connection once downloaded. Start with one quantisation and add the others once your
+        generation procedure is stable.
+      </p>
+      <p>
+        Your main dataset is one you create:
+      </p>
+      <ul>
+        <li>
+          <strong>Prompts:</strong> 10–20 openings or instructions, chosen to suit your genre.
+        </li>
+        <li>
+          <strong>Machine texts:</strong> 3–5 generations per prompt from each quantisation, at fixed temperature, seed
+          and maximum length.
+        </li>
+        <li>
+          <strong>Human texts:</strong> counterparts written by you, classmates or a public-domain author. It helps if
+          they match the machine texts in topic, length and format, though that is a workload of its own: decide early
+          how many human texts you need.
+        </li>
+        <li>
+          <strong>Judgements:</strong> each judge’s guess, confidence rating and short reason, under an anonymous code.
+        </li>
+      </ul>
+      <p>
+        You would need to choose a genre. Short story openings allow both the model and the human writer to produce a
+        substantial piece of text. Persuasive paragraphs test structure and rhetoric. Explanations of a school topic
+        test factual accuracy. Limericks are short, highly structured and funny, and a public-domain collection is
+        available: Edward Lear’s <em>A Book of Nonsense</em> (1846) is available from <a href=
+        "https://www.gutenberg.org/ebooks/13646">Project Gutenberg</a>. If you use Lear, remember that the Victorian
+        style is itself a clue, so include some modern human limericks as well — check the licence, or ask permission,
+        before you copy one into your dataset.
+      </p>
+      <p>
+        For the human side, you can write your own texts, ask classmates for contributions, or use public-domain
+        writing. If you involve other people, as contributors or as judges, consider whether you need approval from
+        your school, and how you will keep them anonymous.
+      </p>
+      <p>
+        In Orange, load the BritLLM model with <strong>Load LM</strong> and connect its <strong>Model</strong> output
+        to <strong>LM Generator</strong>. Choose the quantisation you want to test, and keep the prompt, temperature,
+        maximum new tokens, number of generations and seed identical across models. <strong>Load LM</strong> reads the
+        model directory directly, so you can switch between 3-bit, 6-bit and 8-bit without leaving the canvas.
+      </p>
+      <h2 id="example-research-questions-or-hypothesis">
+        Example research questions or hypothesis
+      </h2>
+      <p>
+        For example:
+      </p>
+      <blockquote>
+        <p>
+          When classmates compare human writing with text generated by BritLLM, what makes the machine detectable, and
+          does quantisation or sampling temperature change how human it seems?
+        </p>
+      </blockquote>
+      <p>
+        You could develop this into more specific questions, such as whether 3-bit outputs are easier to spot than
+        8-bit outputs, whether low or high temperature produces more human-seeming text, whether judges rely more on
+        rhythm and vocabulary than on meaning, or whether a short guide to machine-writing tells improves their
+        accuracy.
+      </p>
+      <p>
+        You could test whether judges find 3-bit text easier to spot, and whether that goes with the repetition and
+        coherence you measure separately — measure the two rather than assuming one explains the other. You could test
+        that by comparing detection rates for each quantisation, using the same prompts, seeds and maximum lengths.
+      </p>
+      <h2 id="key-data-science-statistical-and-machine-learning-concepts">
+        Key data science, statistical and machine learning concepts
+      </h2>
+      <p>
+        Your project could involve:
+      </p>
+      <ul>
+        <li>the Turing test as an experimental design as well as a philosophical idea
+        </li>
+        <li>human baselines and blind judging
+        </li>
+        <li>randomisation and counterbalancing the order of items
+        </li>
+        <li>sample size, binomial uncertainty and confidence intervals
+        </li>
+        <li>inter-rater agreement, in simple terms
+        </li>
+        <li>confounding variables: length, topic, genre, spelling, punctuation and period
+        </li>
+        <li>held-out human texts and avoiding contamination
+        </li>
+        <li>tokenisation and how the model splits text into tokens
+        </li>
+        <li>quantisation: 3-bit, 6-bit and 8-bit weights
+        </li>
+        <li>base models versus instruction-tuned models
+        </li>
+        <li>sampling temperature and the trade-off between predictability and variety
+        </li>
+        <li>text analysis: word frequency, repetition, collocation, vocabulary and sentence length
+        </li>
+        <li>coding free-text reasons into categories
+        </li>
+        <li>the difference between “sounds human” and “is good”
+        </li>
+      </ul>
+      <p>
+        The language-model widgets support the comparison. <strong>Load LM</strong> loads a local model directory.
+        <strong>LM Generator</strong> exposes the prompt, temperature, maximum new tokens, number of generations and
+        seed. <strong>LM Vocab Viewer</strong> shows the vocabulary and token counts. <strong>Orange3-Text</strong>
+        adds <strong>Corpus</strong>, <strong>Word Cloud</strong>, <strong>Concordance</strong> and <strong>Document
+        Map</strong> if you want to compare the vocabulary of human and machine texts.
+      </p>
+      <h2 id="example-approaches-to-data-preparation-analysis-and-modelling">
+        Example approaches to data preparation, analysis and modelling
+      </h2>
+      <p>
+        One comparison — a few prompts, a couple of generations each and a small panel of judges — would be enough to
+        see what the question involves.
+      </p>
+      <p>
+        You could begin by choosing a genre and writing 10–20 prompts. Keep them short enough that a generation fits
+        within the model’s context, and varied enough that you are not testing one lucky phrasing. For each prompt,
+        generate 3–5 texts from each quantisation at a fixed temperature, seed and maximum length.
+      </p>
+      <h2 id="potential-limitations-risks-and-sources-of-bias">
+        Potential limitations, risks and sources of bias
+      </h2>
+      <p>
+        The limitations you could consider include:
+      </p>
+      <ul>
+        <li>The judge sample is small. Fifteen judges times twenty pairs is three hundred judgements, enough to
+        estimate a proportion roughly but not to compare many subgroups, so the uncertainty should be reported and
+        subgroup comparisons treated with caution.
+        </li>
+        <li>Judges who know the project may be biased, so a standard written briefing, without explaining the
+        hypothesis, is safer. The debrief should come after the judging is finished.
+        </li>
+        <li>Order effects and fatigue are important. A judge who sees ten machine texts in a row may start expecting
+        another one, so the order should be randomised, the session kept short, and every judge briefed identically.
+        </li>
+        <li>The human texts may be unfair if they are longer, funnier or on easier topics, in which case you would be
+        measuring that rather than machine-ness. Length, topic and format should be matched deliberately.
+        </li>
+        <li>The genre may dominate the result. Limericks, story openings and explanations make different demands on a
+        model, and a result in one genre may not transfer to another.
+        </li>
+        <li>BritLLM is a base model, not an instruction-tuned assistant. It may continue text rather than answer a
+        question, especially at low temperatures. That is a property of the model you are testing, but it shapes the
+        prompts you can use.
+        </li>
+        <li>The difference between 3-bit and 8-bit may be too small for your judges to detect. A null result is a
+        finding, provided your sample is large enough to support it.
+        </li>
+        <li>Sampling temperature and seed add variability, so they should be fixed across comparisons, and each prompt
+        repeated several times if you want to separate model quality from sampling luck.
+        </li>
+        <li>The model may have seen a public-domain human text during pre-training, and a judge who recognises a
+        passage is testing memory, not style. Texts the model is unlikely to have memorised are safer, or the risk
+        should be acknowledged.
+        </li>
+        <li>The Turing test is a measure of discrimination in a particular setting, not a test of intelligence, so
+        passing or failing it should not be claimed to settle a philosophical question.
+        </li>
+        <li>Writing human texts that imitate the machine can make them unnatural, so the pairs should be piloted and
+        any that are obviously written to a formula removed.
+        </li>
+      </ul>
+      <p>
+        Think about how these limitations affect the claims you can reasonably make from your experiment.
+      </p>
+      <h2 id="expected-outcomes-and-opportunities-for-evaluation">
+        Expected outcomes and opportunities for evaluation
+      </h2>
+      <p>
+        The expected outcome would be a set of matched human and machine texts, a judging dataset, and an estimate of
+        how accurately classmates distinguish them. A model that fails the Turing test gives you the tells to explain:
+        which gave it away, and how reliably.
+      </p>
+      <p>
+        You could evaluate the overall detection rate, the detection rate for each quantisation and temperature, and
+        the reasons judges gave. You could compare the confusion matrix for human and machine items, and ask whether
+        judges are better at spotting 3-bit than 8-bit text. You could also compare the vocabulary and repetition of
+        human and machine texts, and connect those measurements to the reasons judges gave.
+      </p>
+      <p>
+        You could pick three pairs that were judged incorrectly and read them closely. You could ask what made the
+        human text look machine-like, or the machine text look human. Answering that takes you beyond a single
+        detection rate. You could finish by considering what the experiment says about the Turing test as a measure:
+        whether it tests intelligence, imitation, or the judge’s expectations, and what would change if the judges were
+        experts, the texts were longer, or the machine were allowed to revise its output. You could discuss those
+        questions in your evaluation.
+      </p>
+      <h2 id="example-artefacts">
+        Example artefacts
+      </h2>
+      <ul>
+        <li>A screenshot of the Orange workflow: <strong>Load LM</strong> → <strong>LM Generator</strong> →
+        <strong>Data Table</strong>.
+        </li>
+        <li>A table of matched human and machine texts, with the prompt, quantisation, temperature and seed recorded
+        for each machine text.
+        </li>
+        <li>A bar chart of detection rate for 3-bit, 6-bit and 8-bit BritLLM, with confidence intervals.
+        </li>
+        <li>A table of coded judge reasons, showing which tells were mentioned most often for correct and incorrect
+        judgements.
+        </li>
+        <li>A sample judging sheet showing the instructions, the random order and the confidence scale.
+        </li>
+      </ul>
+      <h2 id="further-reading">
+        Further reading
+      </h2>
+      <ul>
+        <li>
+          <a href="https://www.csee.umbc.edu/courses/471/papers/turing.pdf">Turing, “Computing Machinery and
+          Intelligence”</a>, <em>Mind</em> (1950) — the original test, and a readable paper.
+        </li>
+        <li>
+          <a href="https://doi.org/10.1017/S0140525X00005756">Searle, “Minds, Brains, and Programs”</a>, <em>Behavioral
+          and Brain Sciences</em> (1980) — the Chinese Room reply.
+        </li>
+        <li>The <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM model card</a> and the <a href=
+        "https://github.com/tcorbettclark/orange3-ai-suite/tree/main/tutorials">Orange language-model tutorials</a> —
+        the practical reference for the model and the widgets.
+        </li>
+        <li>
+          <a href="https://www.gutenberg.org/ebooks/13646">Lear, <em>A Book of Nonsense</em></a> (1846) — a
+          public-domain source of human limericks, if you choose that genre.
+        </li>
+        <li>The <a href="https://plato.stanford.edu/entries/turing-test/">Stanford Encyclopedia of Philosophy entry on
+        the Turing Test</a> — a survey of the debate with its own bibliography.
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>

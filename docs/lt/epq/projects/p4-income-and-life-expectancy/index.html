@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+    <meta charset="utf-8"><!-- Relative URLs (markdown links) resolve against this page's own directory,
+     whatever URL the page was fetched at. AWG computes the absolute path at
+     build time. -->
+    <base href="/lt/epq/projects/p4-income-and-life-expectancy/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      Income and life expectancy
+    </title>
+    <link rel="canonical" href="https://corbettclark.com/lt/epq/projects/p4-income-and-life-expectancy/">
+    <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
+    "sha384-izkQAmHKbBYjZATBsWpAW8fjO2PusufuGpJLPU86Npa2goQBOoXeyDu0CobShkzW">
+  </head>
+  <body>
+    <header class="sitebar">
+      <a class="sitebar-back" href="/lt/epq/">← EPQ</a> <span class="sitebar-title">EPQ on AI</span> <span class=
+      "sitebar-draft">Draft</span>
+    </header>
+    <main>
+      <aside class="needs">
+        <p class="needs-title">
+          Project dependencies
+        </p>
+        <dl>
+          <dt>
+            Programming
+          </dt>
+          <dd>
+            None. The regression is built from Orange widgets.
+          </dd>
+          <dt>
+            Machine
+          </dt>
+          <dd>
+            Any laptop that runs Orange Data Mining.
+          </dd>
+          <dt>
+            Software
+          </dt>
+          <dd>
+            Orange Data Mining; nothing beyond the standard widgets.
+          </dd>
+          <dt>
+            Downloads
+          </dt>
+          <dd>
+            Gapminder indicators (a few MB), optionally cross-checked against the World Bank.
+          </dd>
+        </dl>
+        <p class="needs-more">
+          <a href="/lt/epq/prerequisites/">Prerequisites</a> describes the kit in general, and the permissions that
+          take time to arrange.
+        </p>
+      </aside>
+      <h1 id="can-a-country-s-income-explain-how-long-its-people-live-and-what-do-the-exceptions-tell-us">
+        Can a country’s income explain how long its people live, and what do the exceptions tell us?
+      </h1>
+      <h2 id="project-overview">
+        Project overview
+      </h2>
+      <p>
+        You could investigate the relationship between a country’s income and the life expectancy of its people, and
+        use the exceptions to ask what income leaves out. The starting point would be the pattern made famous by
+        Gapminder: richer countries tend to live longer. You would build a regression model in <strong>Orange Data
+        Mining</strong> to predict life expectancy from income per person, then examine the countries that sit far
+        above or below the trend. You would consider which countries live much longer or much shorter than their income
+        predicts, and what else might explain the gap: schooling, child mortality, health spending, geography,
+        inequality or conflict.
+      </p>
+      <p>
+        A high R² is not necessary. A simple model will explain much of the variation, and the exceptions are what it
+        leaves to explain. You would learn to read a scatter plot, fit and interpret a regression, inspect residuals,
+        add a second indicator without fooling yourself, and separate correlation from causation.
+      </p>
+      <p>
+        You could produce the workflow, a scatter plot with the fitted line, a residual table naming the biggest
+        exceptions, a comparison of two or three models, and a short case study of one over-performing and one
+        under-performing country.
+      </p>
+      <h2 id="dataset-s-to-be-used">
+        Dataset(s) to be used
+      </h2>
+      <p>
+        A suitable starting point would be <a href="https://www.gapminder.org/"><strong>Gapminder</strong></a>, the
+        Swedish foundation co-founded by Hans Rosling. Gapminder publishes free datasets and visualisations about
+        global development. Its best-known chart plots income per person against life expectancy, with each country
+        drawn as a bubble whose size is its population. Gapminder is not a single file: you download the indicators you
+        need from <a href="https://www.gapminder.org/data/">Gapminder’s data page</a>, usually as a spreadsheet or CSV,
+        and combine them yourself.
+      </p>
+      <p>
+        Useful indicators include:
+      </p>
+      <ul>
+        <li>income per person (GDP per capita, adjusted for purchasing power)
+        </li>
+        <li>life expectancy at birth
+        </li>
+        <li>mean years of schooling
+        </li>
+        <li>child mortality
+        </li>
+        <li>fertility rate
+        </li>
+        <li>health spending per person
+        </li>
+        <li>CO₂ emissions per person
+        </li>
+      </ul>
+      <p>
+        Gapminder’s data is free to use with attribution. Check the licence note on each indicator download and record
+        the source and download date in your project log. The <a href="https://data.worldbank.org/"><strong>World
+        Bank</strong></a> publishes similar indicators (life expectancy at birth, GDP per capita, health expenditure,
+        immunisation rates) and is a useful second source. The definitions are not identical: “income per person” may
+        use purchasing-power parity or market exchange rates, and “life expectancy” is an estimate rather than a count.
+        Comparing sources is part of the investigation.
+      </p>
+      <p>
+        You would need to decide which countries and years to include. A single recent year with good coverage gives
+        you one row per country and a clean cross-section. A panel of several decades lets you ask whether the
+        relationship changes over time, but it makes the data preparation harder. Country borders change, some states
+        are very small, and many indicators have missing values. Write down your inclusion rules before you start.
+      </p>
+      <p>
+        Income is heavily skewed: a few countries are far richer than the rest. Plotting income on a logarithmic scale
+        usually makes the relationship closer to a straight line, and it changes which countries look like outliers.
+        You could add a log-transformed column in a spreadsheet, or use <strong>Feature Constructor</strong> in Orange
+        to create one. Record the choice, because it affects the model and the interpretation.
+      </p>
+      <p>
+        The data is aggregate national statistics, so there are no personal-data issues. There is an interpretation
+        issue: a country average does not describe the people inside it. A country can have a high average income and a
+        low life expectancy because of inequality, or a low average income and a high life expectancy because of strong
+        public health. Keep that distinction visible in your writing.
+      </p>
+      <h2 id="example-research-questions-or-hypothesis">
+        Example research questions or hypothesis
+      </h2>
+      <p>
+        For example:
+      </p>
+      <blockquote>
+        <p>
+          To what extent can income per person explain life expectancy across countries, and what do the exceptions
+          tell us about the limits of the relationship?
+        </p>
+      </blockquote>
+      <p>
+        You could develop this into more specific questions, such as whether a log-transformed income fits better than
+        raw income, which countries are the largest positive and negative residuals, whether adding schooling or child
+        mortality improves the model, whether the pattern holds within regions and across decades, or whether the
+        relationship is causal.
+      </p>
+      <p>
+        You could test whether income explains a substantial part of the variation, and whether the residuals cluster
+        by region and by health-system quality. You could test that by colouring the scatter plot by region, fitting
+        separate models, and comparing the residuals.
+      </p>
+      <h2 id="key-data-science-statistical-and-machine-learning-concepts">
+        Key data science, statistical and machine learning concepts
+      </h2>
+      <p>
+        Your project could involve:
+      </p>
+      <ul>
+        <li>scatter plots, correlation and the shape of a relationship
+        </li>
+        <li>linear regression and the meaning of a coefficient
+        </li>
+        <li>logarithmic scales and why income is often plotted on a log axis
+        </li>
+        <li>R², root mean squared error (RMSE) and mean absolute error (MAE)
+        </li>
+        <li>residuals and what a residual plot can reveal
+        </li>
+        <li>outliers and influential points
+        </li>
+        <li>training, validation and test data, and cross-validation
+        </li>
+        <li>multiple regression and feature importance
+        </li>
+        <li>confounding: a third variable that affects both income and health
+        </li>
+        <li>multicollinearity: income and schooling are correlated, so their coefficients can be unstable
+        </li>
+        <li>Simpson’s paradox: a relationship that changes direction when you split the data into groups
+        </li>
+        <li>the ecological fallacy: country averages do not describe individuals
+        </li>
+        <li>correlation versus causation
+        </li>
+        <li>data definitions, missing values and changing country borders
+        </li>
+        <li>extrapolation and the limits of a model outside the data it saw
+        </li>
+      </ul>
+      <p>
+        Orange’s <strong>Scatter Plot</strong> can draw the relationship and a regression line. <strong>Linear
+        Regression</strong> fits the model and shows the coefficients. <strong>Test & Score</strong> reports R², RMSE
+        and MAE under cross-validation. <strong>Predictions</strong> shows predicted versus actual values and the
+        residuals. <strong>Feature Statistics</strong> and <strong>Data Table</strong> help you inspect distributions
+        and individual countries. <strong>Feature Constructor</strong> creates a log-income column, and
+        <strong>Preprocess</strong> can standardise features if you want to compare coefficients on a common scale.
+      </p>
+      <h2 id="example-approaches-to-data-preparation-analysis-and-modelling">
+        Example approaches to data preparation, analysis and modelling
+      </h2>
+      <p>
+        You could fit the single-year model, look at the residuals, then decide whether a log transform or a regional
+        split is worth the time.
+      </p>
+      <p>
+        You could begin by downloading two indicators, income per person and life expectancy, for a recent year. Put
+        them in a spreadsheet with one row per country, check the missing values, and import the CSV into Orange with
+        <strong>File</strong>. You could open <strong>Scatter Plot</strong>, put income on the x-axis and life
+        expectancy on the y-axis, and colour the points by region.
+      </p>
+      <h2 id="potential-limitations-risks-and-sources-of-bias">
+        Potential limitations, risks and sources of bias
+      </h2>
+      <p>
+        The limitations you could consider include:
+      </p>
+      <ul>
+        <li>The ecological fallacy is the central risk. A country-level relationship does not tell you what happens to
+        an individual, and a country average can hide enormous inequality.
+        </li>
+        <li>Income is correlated with many other things: education, health systems, sanitation, geography, colonial
+        history, conflict and inequality. A regression coefficient is not a causal effect.
+        </li>
+        <li>Data definitions differ between Gapminder and the World Bank. Mixing sources without checking definitions
+        can change the result.
+        </li>
+        <li>Missing values are common, especially for poorer countries and earlier decades. Dropping them silently can
+        bias the sample.
+        </li>
+        <li>Country borders and names change. The USSR, Yugoslavia and other historical states need a consistent rule.
+        </li>
+        <li>A few very rich or very small countries can dominate the fit, so the effect of removing the largest
+        outliers should be checked.
+        </li>
+        <li>There are only about 200 countries, so a handful of unusual cases can change the coefficients. The
+        uncertainty should be reported and the robustness of the conclusion tested.
+        </li>
+        <li>Linear regression assumes a straight-line relationship. Log income often fits better, but it is still an
+        approximation.
+        </li>
+        <li>R² does not prove causation, and a high R² does not mean the model is useful for policy. Omitted variables
+        can bias every coefficient.
+        </li>
+        <li>The data is historical and is revised, so the download date and the version of each indicator should be
+        recorded.
+        </li>
+        <li>Extrapolating beyond the observed range of income or life expectancy is unsafe, so the model should not be
+        used to predict countries or years it has not seen.
+        </li>
+        <li>Choosing the year, the countries or the exception criterion after seeing the results makes the analysis
+        look stronger than it is, so the main choices should be recorded in the log before the analysis.
+        </li>
+      </ul>
+      <p>
+        Think about how these limitations affect the claims you can reasonably make from your model.
+      </p>
+      <h2 id="expected-outcomes-and-opportunities-for-evaluation">
+        Expected outcomes and opportunities for evaluation
+      </h2>
+      <p>
+        The expected outcome would be a working Orange workflow that predicts life expectancy from income, a scatter
+        plot with a fitted line, a residual table naming the largest exceptions, and a comparison of at least two model
+        specifications. A high R² is not necessary. A model that explains a moderate share of the variation, and a
+        clear account of what it misses, gives you something to argue.
+      </p>
+      <p>
+        You could evaluate the model with cross-validation, compare it with a mean-prediction baseline, inspect the
+        residuals for patterns, and check whether the conclusions survive a change of year, region or indicator. You
+        could compare Gapminder with the World Bank for one or two countries, and ask whether the definitions explain
+        any disagreement.
+      </p>
+      <p>
+        You could pick three countries that break the rule and write a short explanation for each. You could ask what
+        else might explain the gap — income inequality, the health system, a recent conflict, oil wealth, or a problem
+        with the data — and check which of those you actually have evidence for. Answering that takes you beyond a
+        single R². If you cannot, that is also a finding about the limits of the data.
+      </p>
+      <p>
+        You could finish by reflecting on what a model like this could and could not be used for. It may describe a
+        broad pattern across countries without being reliable enough to guide policy for one country. Articulating that
+        distinction is part of the project.
+      </p>
+      <h2 id="example-artefacts">
+        Example artefacts
+      </h2>
+      <ul>
+        <li>A screenshot of the Orange workflow, showing <strong>File</strong>, <strong>Scatter Plot</strong>, <strong>
+          Linear Regression</strong>, <strong>Test & Score</strong> and <strong>Predictions</strong>.
+        </li>
+        <li>A scatter plot of life expectancy against log income, coloured by region, with the fitted regression line.
+        </li>
+        <li>A coefficient table from <strong>Linear Regression</strong>, with a plain-English interpretation of each
+        coefficient.
+        </li>
+        <li>A residual plot and a table of the ten largest positive and negative residuals.
+        </li>
+        <li>A model comparison table: income only, income plus schooling, and income plus child mortality, with R²,
+        RMSE and MAE for each.
+        </li>
+        <li>A short case-study note on one over-performing and one under-performing country.
+        </li>
+      </ul>
+      <h2 id="further-reading">
+        Further reading
+      </h2>
+      <ul>
+        <li>Rosling, <em>Factfulness</em> (2018) — the worldview behind Gapminder, and a good source of claims to test.
+        </li>
+        <li>
+          <a href="https://www.gapminder.org/">Gapminder’s data and teaching pages</a> — the indicators, the bubble
+          chart and the notes on each dataset.
+        </li>
+        <li>
+          <a href="https://data.worldbank.org/">The World Bank’s indicator pages</a> — definitions and a second source
+          for the same measurements.
+        </li>
+        <li>The <a href="https://orangedatamining.com/docs/">Orange Data Mining documentation</a> — <strong>Scatter
+        Plot</strong>, <strong>Linear Regression</strong>, <strong>Test & Score</strong> and
+        <strong>Predictions</strong>.
+        </li>
+        <li>Spiegelhalter, <em>The Art of Statistics</em> (2019) — especially the chapters on causation and
+        uncertainty.
+        </li>
+        <li>Wilkinson and Pickett, <em>The Spirit Level</em> (2009) — a famous and contested argument about inequality
+        and health, useful as a claim to examine.
+        </li>
+      </ul>
+    </main>
+  </body>
+</html>
