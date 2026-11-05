@@ -5,25 +5,13 @@ places where an outline could be read as endorsing a practice that would cost a
 student marks, or that a moderator would query.
 
 - 6 outlines checked against 22 rules (16 judged, 6 text).
-- 20 potential issues (14 high severity).
+- 16 potential issues (12 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, 145,008 tokens.
+- Judge: `deepseek-v4.1-flash`, 145,727 tokens.
 
 ## a1-mnist-digit-classification
 
 *Can a no-code image classifier read handwritten digits, and can you explain its mistakes?*
-
-### ETH-01 — People become data subjects without ethics appearing
-
-*high · ethics*
-
-> The same workflow answers a different question on a different image set: traffic signs, medical images, or your own handwriting compared with a friend's.
-
-**Why:** Medical images are data about people and may be sensitive; the variant is offered without saying it needs centre ethics approval, anonymisation or consent.
-
-**Suggested:** Remove medical images or add an explicit ethics warning requiring centre-approved, de-identified data.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
 
 ### FEAS-01 — Too much work for the hours available
 
@@ -31,9 +19,9 @@ student marks, or that a moderator would query.
 
 > For your own test set, collect 20–50 examples of each digit, crop them to squares, and put them in folders named 0–9.
 
-**Why:** That is 200–500 handwritten images to source, photograph and crop, a large manual workload alongside the taught element, log, report and presentation.
+**Why:** This means 200–500 handwritten samples, each needing consent, collection, cropping and labelling, before the experiments, log and report, which can consume a large share of 120 guided hours.
 
-**Suggested:** Reduce the core test set to 5–10 per digit and make a larger collection an extension.
+**Suggested:** Reduce this to a small pilot set, such as 5–10 examples per digit, or rely on the bundled test set, and state a rough time budget for collection and preparation.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
@@ -43,35 +31,23 @@ student marks, or that a moderator would query.
 
 > You could begin by building the workflow from scratch: **Import Images** → **Image Features** → **Test & Score**, with **Neural Network** as the learner and **Confusion Matrix**, **Data Table** and **Column Statistics** attached.
 
-**Why:** Despite the opening disclaimer, this sentence and the steps that follow prescribe the tool, feature representation, learner and evaluation, so a student can execute the example without making the design choices AQA expects.
+**Why:** This supplies the tool, the exact widget pipeline, the learner and the evaluation widgets in one sentence, so a student can reproduce the method without choosing or justifying their own design.
 
-**Suggested:** Replace the single prescribed chain with a menu of alternatives and require the student to choose and justify their own tool, learner and evaluation plan.
+**Suggested:** Replace the step-by-step pipeline with a prompt to choose a no-code or code tool, select interpretable features and a classifier, and justify the pipeline; keep these widget names only as one possible example.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
 
-### ETH-03 — Practical risk is never mentioned
+### INTEG-03 — Implies more than the data can show
 
-*med · ethics*
+*med · integ*
 
-> The same workflow answers a different question on a different image set: traffic signs, medical images, or your own handwriting compared with a friend's.
+> If all three produce similar results, the features are doing most of the work.
 
-**Why:** If a student collects traffic-sign images, that can mean going outdoors near roads to photograph them, but no risk assessment is mentioned.
+**Why:** Similar results across three learners do not establish that the features are doing most of the work; task simplicity or other confounds could explain it, and an examiner would read it as an overclaim.
 
-**Suggested:** Add a risk-assessment note for any outdoor photography, or specify that students should use an existing licensed dataset.
+**Suggested:** Rephrase as a hypothesis, for example that this would be consistent with the features carrying most of the signal, and tell students to check it against ablation or feature-importance evidence and alternative explanations.
 
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “conducting risk assessment, assessing the ethical principles of project proposals and research”</sub>
-
-### ETH-04 — Third-party images or data may not be reusable
-
-*med · ethics*
-
-> The same workflow answers a different question on a different image set: traffic signs, medical images, or your own handwriting compared with a friend's.
-
-**Why:** Traffic-sign and medical image sets are third-party data, but the page only tells students to check the licence for MNIST.
-
-**Suggested:** Add a general instruction to check and record the licence or terms of use for every external image set before use.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
 
 ## a2-cloud-image-classification
 
@@ -83,9 +59,9 @@ student marks, or that a moderator would query.
 
 > Aim for 20–40 images per genus, taken over several weeks and in different weather.
 
-**Why:** For five genera this implies 100–200 field photographs, each needing labelling and metadata, which is too much for 120 guided hours and contradicts the later '10–20' or '20–40' total field-test guidance.
+**Why:** At five genera this is 100–200 field images to collect, label, record and test over several weeks, plus the workflow, log, report and presentation; that is not plausible in 120 guided hours and it conflicts with the later 10–20 total.
 
-**Suggested:** State a feasible total field set (for example 20–40 images overall, with a minimum per genus) and mark anything larger as an extension; align it with 'How much to attempt'.
+**Suggested:** Change it to a total field set of 10–20 photographs across as many genera as possible, and say that 20–40 per genus is an extension only if time allows.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
@@ -95,9 +71,9 @@ student marks, or that a moderator would query.
 
 > You could begin by fetching or collecting the corpus and building the workflow from scratch: **Import Images** → **Image Features** → **Test & Score**, with **Neural Network**, **Tree** and **Logistic Regression** as learners, and **Confusion Matrix**, **Data Table** and **Column Statistics** for inspection.
 
-**Why:** It prescribes the tool, exact widget chain, learner list and inspection widgets, so a student who follows it makes almost none of the design decisions the EPQ requires; the opening disclaimer does not stop the body reading as a recipe.
+**Why:** It sets out the exact tool, widget pipeline, learner set and inspection widgets, so a student can copy the method end to end without choosing or justifying a design; the opening 'one way' note does not stop the body reading as a recipe.
 
-**Suggested:** Recast this as one possible route and require the student to choose and justify at least the tool, learners and feature set, or offer alternatives side by side.
+**Suggested:** Replace the exact pipeline with a short menu of options (tool, learners, comparison/validation method) and require students to choose and justify their own; if a worked example is needed, put the full recipe in an appendix clearly marked as one possible solution.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
 
@@ -105,27 +81,27 @@ student marks, or that a moderator would query.
 
 *Can classmates tell BritLLM's writing from a human's when the human is imitating the machine?*
 
-### ETH-01 — People become data subjects without ethics appearing
+### FEAS-01 — Too much work for the hours available
 
-*high · ethics*
+*high · feas*
 
-> Get your centre's approval before any judging session, tell the judges what the data is for, keep their answers anonymous, and let them withdraw their text afterwards.
+> For each prompt, generate 3–5 texts from each quantisation at a fixed temperature, seed and maximum length.
 
-**Why:** The withdrawal clause covers text contributors, not judges' answers, so judges' data has no stated withdrawal route.
+**Why:** Multiplied by the suggested 10–20 prompts and three quantisations, this means 90–300 machine texts, each needing a matched human text before judging, which is far too much for 120 guided hours once the report, log and presentation are included.
 
-**Suggested:** Add that judges can withdraw their judgements up to the analysis stage, and say how that request is handled.
+**Suggested:** Cut the core study to a small illustrative scale, such as 5 prompts, two generations per prompt and two quantisations, with larger runs described as extensions.
 
-<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
 ### FEAS-01 — Too much work for the hours available
 
 *high · feas*
 
-> Revise the sheet, then run the main study with 15–30 classmates.
+> run the main study with 15–30 classmates
 
-**Why:** With 20–40 pairs per judge, 15–30 classmates means 300–1,200 judgements plus pilot, coding, report and presentation; this is likely too much for 120 guided hours.
+**Why:** With the suggested 20–40 pairs per judge, this produces 300–1,200 judgements to collect, record and code free-text reasons for, on top of the pilot, analysis and report.
 
-**Suggested:** Make the core study a dozen or fewer judges and 10–20 pairs, with larger numbers clearly marked as an extension.
+**Suggested:** Cap the core study at about a dozen judges and 10–15 pairs, or state clearly that 15–30 judges is an optional extension rather than the expected scale.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
@@ -133,13 +109,25 @@ student marks, or that a moderator would query.
 
 *high · own*
 
-> In Orange, load the BritLLM model with **Load LM** and connect its **Model** output to **LM Generator**.
+> The local quantisations include 3-bit, 4-bit, 6-bit and 8-bit; the main comparison in this project uses 3-bit, 6-bit and 8-bit.
 
-**Why:** Despite the opening note, this sentence and the surrounding steps prescribe the tool and wiring; together with fixed quantisations, prompt counts and judging design, a student can reproduce the project without a significant design choice.
+**Why:** This sentence fixes the exact quantisations to compare, so a 17-year-old can follow it without deciding which contrast is worth investigating. It reads as a method specification even though the page says the choices must be the student's.
 
-**Suggested:** Present this as one possible pipeline and require students to choose and justify their own tool/pipeline, or add alternatives and a design-decision table.
+**Suggested:** Rewrite it as an illustrative option, e.g. 'For instance, you might compare 3-bit with 8-bit if you decide that contrast is the interesting one, and justify that choice.'
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
+
+### INTEG-02 — Sources named too vaguely to reference
+
+*low · integ*
+
+> A recent, reputable article on the Turing test debate, chosen and cited precisely.
+
+**Why:** This names no author, date, journal or stable URL, so a student could list a vague placeholder in a bibliography, which cannot show the critical source selection AO2 rewards.
+
+**Suggested:** Replace it with a full reference, or instruct students to find and record author, date, title, journal and DOI/URL.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## b1-quantisation-comparison
 
@@ -151,9 +139,9 @@ student marks, or that a moderator would query.
 
 > The second is a task suite you write: 100–300 short items across categories such as factual recall, arithmetic, multi-step reasoning, instruction following and creative writing.
 
-**Why:** Authoring up to 300 items with expected answers, then running them across four quantisations and three repeats, is a large workload that can consume much of the 120 hours before analysis begins.
+**Why:** Authoring up to 300 items with expected answers, then running them across four quantisations and at least three repeats, is a large workload that could consume the 120 guided hours before analysis and the report are done.
 
-**Suggested:** Reduce the core task suite to 30–50 items and treat 100+ as an extension, or explicitly cap the core at a pilot-tested smaller set.
+**Suggested:** Set a default of 20–40 items (for example, 5–8 per category) and present the 100–300 range as an optional extension rather than the expected starting point.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
@@ -161,13 +149,25 @@ student marks, or that a moderator would query.
 
 *high · own*
 
-> Four quantisations, a small prompt set and three repeats is an honest experiment; more prompts or models are extensions.
+> The project would have two parts.
 
-**Why:** This fixes the experimental design—number of quantisations, prompt-set size and repeats—so a student following the page has the core method chosen for them; only the prompt content is left as a significant choice.
+**Why:** This fixes the overall design as a quality comparison plus a resource comparison before the student has chosen a question or method; combined with the rest of the page, a student can follow the recipe without making a significant design decision.
 
-**Suggested:** Present this as one possible design among several and require the student to choose and justify their own number of quantisations, prompts and repeats.
+**Suggested:** Recast the design as one possible option and add at least two alternative project shapes (for example, an energy-only audit or a quality-only study with a different artefact) that the student must choose between and justify.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
+
+### OWN-03 — Nothing helps a second student take it somewhere different
+
+*med · own*
+
+> The models are the local BritLLM MLX quantisations.
+
+**Why:** The only concrete model and tool are fixed, and the suggested extension is just another model inside the same harness, so two students inspired by the page could produce near-identical quantisation comparisons.
+
+**Suggested:** Name two or three alternative model families or a different quantisation target, and require students to justify a distinct choice so that neighbouring projects do not overlap.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.3 Group Projects: “Students working as a group must submit individual assessment evidence and complete an individual presentation.”</sub>
 
 ## b2-language-model-failure-and-confidence
 
@@ -179,9 +179,9 @@ student marks, or that a moderator would query.
 
 > Aim for 100–200 items.
 
-**Why:** Each item needs a prompt, correct answer, two or three distractors, a category, a pre-assigned difficulty rating and a checked source, so 100–200 hand-written items plus harness, three quantisations, plots and a 5,000-word report is a very large share of 120 guided hours.
+**Why:** A 100–200 item question set, each with distractors, categories, difficulty ratings and sources, is a large core task; the later 'pilot of about 40' is easy to read as only a trial, so students may overbuild and run out of the 120 guided hours.
 
-**Suggested:** Make a pilot of 30–40 items the default and describe the larger set explicitly as an extension only if time allows, noting the per-item authoring cost in the text.
+**Suggested:** Make 40–60 items the core target and label 100–200 as an extension, or remove the larger target from the main dataset section.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
@@ -189,49 +189,13 @@ student marks, or that a moderator would query.
 
 *high · own*
 
-> the 3B model you would run locally, on a set of questions with known answers.
+> You would run [BritLLM](https://huggingface.co/britllm/britllm-3b-v0.1), the 3B model you would run locally, on a set of questions with known answers.
 
-**Why:** The model family, size, local runtime and question format are all chosen for the student, so the design decisions a moderator would probe (which model, why this data, what task format) have already been made before the student starts.
+**Why:** Despite the top note, this sentence fixes the tool and the core data/method choice for the student; the detailed scorer and metric list that follows then completes a recipe a student can reproduce without making the significant design decisions AQA expects.
 
-**Suggested:** Reframe as a worked example of a choice already made by someone else, and add a short prompt such as 'a 3B model is chosen here because it runs on a school laptop; if you chose a different model or task format, say why'.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
-
-### OWN-01 — Reads as a specification rather than an example
-
-*high · own*
-
-> Compute the basic statistics for each model:
-
-**Why:** The bullet list that follows prescribes exactly which analyses to run (accuracy, mean confidence, binning scheme, ECE, Brier score), and the numbered scorer steps do the same for the method, so a student can complete the whole investigation without selecting any measure themselves.
-
-**Suggested:** Present the statistics as one possible analysis set and require the student to name at least one measure they added, dropped or replaced, with a justification.
+**Suggested:** Recast this as one possible option and require the student to choose and justify a model, task format and analysis plan, or to explain why they are keeping this one.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
-
-### FEAS-03 — Compute-bound work that could swallow the project
-
-*med · feas*
-
-> If you want to test sampling consistency, generate ten answers at temperature 0.8 for each question and measure how often they agree with the top candidate.
-
-**Why:** Ten generations per question across 100–200 questions, and potentially across three quantisations, is slow local inference that can eat the available hours before any calibration analysis exists.
-
-**Suggested:** Cap this explicitly at a fixed small subset (for example 20 items on one quantisation) and state the estimated generation time per item.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-03 — Implies more than the data can show
-
-*med · integ*
-
-> The models share a tokenizer, so the comparison is fair.
-
-**Why:** A shared tokenizer does not by itself make a quantisation comparison fair, since kernel, sampling defaults and runtime configuration can differ; a student would repeat this as a claim the data cannot support.
-
-**Suggested:** Reword to say that a shared tokenizer removes one confound, and that the comparison is only fair if prompt, candidate set, scoring rule and configuration are held constant and reported.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
 
 ### INTEG-02 — Sources named too vaguely to reference
 
@@ -239,9 +203,9 @@ student marks, or that a moderator would query.
 
 > For a general measure of the model's surprise, use a held-out text: a public-domain book chapter or a Wikipedia extract.
 
-**Why:** Neither the book chapter nor the Wikipedia article is named, dated or versioned, so the perplexity figures cannot be cited or reproduced and the bibliography would show no critical selection.
+**Why:** This names only a category of text, not a title, edition, date or stable URL, so a student could cite 'Wikipedia' generically and weaken the source-selection evidence for AO2.
 
-**Suggested:** Name a specific text with author, title, edition or a dated Wikipedia permalink, and tell the student to record the exact source and retrieval date in the log.
+**Suggested:** Name a specific public-domain text as the example, or require a full citation to the exact page and version used.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
@@ -253,25 +217,13 @@ student marks, or that a moderator would query.
 
 *high · own*
 
-> You would build a regression model in **Orange Data Mining** to predict life expectancy from income per person, then examine the countries that sit far above or below the trend.
+> You have scope to make and justify your own decisions about the question, the dataset and the interpretation of the exceptions.
 
-**Why:** It fixes the tool (Orange) and the modelling method (linear regression) in a single sentence, so a student can reproduce the core workflow without choosing or justifying either; the named Gapminder data and artefact list reinforce the recipe.
+**Why:** It limits the student's choices to question, dataset and interpretation, implying the tool (Orange), method (linear regression/log transform) and artefact (workflow/plots/residual table) are fixed, so a student can follow the outline as a recipe rather than making the significant design choices AQA requires.
 
-**Suggested:** Recast this as one option among several and require the student to choose a tool and method they can justify (spreadsheet, Python/R, Orange, etc.), with the reasons recorded in the log.
+**Suggested:** Add tool, method and artefact to the list, e.g. 'the question, the dataset, the tool, the method, the artefact and the interpretation', or explicitly state that the Orange workflow and regression are only one option.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
-
-### OWN-03 — Nothing helps a second student take it somewhere different
-
-*med · own*
-
-> You could develop this into more specific questions, such as whether a log-transformed income fits better than raw income, which countries are the largest positive and negative residuals, whether adding schooling or child mortality improves the model, whether the pattern holds within regions and across decades, or whether the relationship is causal.
-
-**Why:** All the suggested variations stay on the same Gapminder/Orange/income-life-expectancy core, so two students inspired by the page could produce near-identical projects; it gives no alternative dataset, tool or artefact example.
-
-**Suggested:** Add a short 'Other directions' box with at least one genuinely different question, dataset, tool or artefact (e.g. a within-country health-spending comparison, a different visualisation, or an interactive dashboard).
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.3 Group Projects: “Students working as a group must submit individual assessment evidence and complete an individual presentation.”</sub>
 
 ## Rules that produced nothing
 
@@ -279,9 +231,13 @@ If a rule is silent across all six outlines, the outline is probably fine on tha
 point, or the rule is badly worded. Worth a look either way:
 
 - `AI-01`
+- `ETH-01`
 - `ETH-02`
+- `ETH-03`
+- `ETH-04`
 - `EVID-01`
 - `FEAS-02`
+- `FEAS-03`
 - `FEAS-04`
 - `INTEG-01`
 - `OWN-02`
