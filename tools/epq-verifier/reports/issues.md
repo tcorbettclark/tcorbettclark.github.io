@@ -5,15 +5,25 @@ places where an outline could be read as endorsing a practice that would cost a
 student marks, or that a moderator would query.
 
 - 6 outlines checked against 22 rules (15 judged, 7 text).
-- 0 potential issues (0 high severity).
+- 6 potential issues (2 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `none`.
+- Judge: `deepseek-v4.1-flash`, 139,201 tokens.
 
 ## a1-mnist-digit-classification
 
 *Can a no-code image classifier read handwritten digits, and can you explain its mistakes?*
 
-No potential issues found by these rules.
+### FEAS-01 — Too much work for the hours available
+
+*high · feas*
+
+> You would produce a reusable Orange workflow, evaluation tables and plots, and a written analysis that names the features behind each success and failure.
+
+**Why:** This presents feature-level explanation of every correct and incorrect prediction as a required output, which is not plausible within 120 guided hours. Later 'could pick three misclassified images' examples do not clearly cap this requirement.
+
+**Suggested:** Replace 'each success and failure' with 'a representative sample of successes and failures' or make exhaustive tracing an explicit optional extension.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
 ## a2-cloud-image-classification
 
@@ -31,7 +41,29 @@ No potential issues found by these rules.
 
 *How much memory, speed and energy does quantisation save, and what does it cost in quality?*
 
-No potential issues found by these rules.
+### INTEG-02 — Sources named too vaguely to reference
+
+*low · integ*
+
+> Write the questions and the expected answers yourself, or adapt a public dataset and record its licence.
+
+**Why:** "A public dataset" is an unnamed category, so a student could cite it only as "a public dataset" and lose AO2 credit for source selection.
+
+**Suggested:** Name one or two example datasets with links and licences, or require the student to record the dataset title, version, URL and licence.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
+
+### INTEG-02 — Sources named too vaguely to reference
+
+*low · integ*
+
+> If you want to extend the comparison beyond BritLLM, you can download another small model from [Hugging Face](https://huggingface.co/models) and convert it with `mlx_lm.convert`.
+
+**Why:** "Another small model from Hugging Face" does not identify a citable model, so the student could end up with an unreferenceable source.
+
+**Suggested:** Name an example model with a link, or tell the student to record the chosen model's identifier, version and licence.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## b2-language-model-failure-and-confidence
 
@@ -43,7 +75,41 @@ No potential issues found by these rules.
 
 *Can a country's income explain how long its people live, and what do the exceptions tell us?*
 
-No potential issues found by these rules.
+### EVID-01 — Calls the artefact or output the outcome, with no report in sight
+
+*high · evidence*
+
+> Your final artefact could be the workflow, a scatter plot with the fitted line, a residual table naming the biggest exceptions, a comparison of two or three models, and a short case study of one over-performing and one under-performing country.
+
+**Why:** This labels the workflow and plots the 'final artefact', while the later 'What you submit' box says the workflow is not the submission; a student skimming the overview can take the workflow and plots as the assessed product.
+
+**Suggested:** Rephrase as 'The evidence your report could discuss might include...' and make the same change in 'Expected outcomes', which also calls the workflow the 'expected outcome'.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
+
+### INTEG-03 — Implies more than the data can show
+
+*med · integ*
+
+> You could ask whether the gap is explained by income inequality, a health system, a recent conflict, oil wealth, or a data problem.
+
+**Why:** This invites a causal answer to why a country sits off the trend, but a country-level cross-section cannot establish which of these explains the gap; the limitations section warns about confounding in general, but this sentence tells the student to 'answer' the causal question and calls that a stronger evaluation.
+
+**Suggested:** Reframe as 'You could discuss which of these might plausibly contribute, and what further evidence would be needed to distinguish them', and explicitly point back to the confounding and causation warnings.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
+
+### OWN-03 — Nothing helps a second student take it somewhere different
+
+*med · own*
+
+> You could investigate the relationship between a country's income and the life expectancy of its people, and use the exceptions to ask what income leaves out.
+
+**Why:** Every concrete suggestion in the body is a tweak to this one income/life-expectancy regression in Orange (log vs raw, regions vs decades, adding an indicator), so two students following the page could still submit near-identical projects; the blockquote permits change but the body never models a genuinely different question or artefact.
+
+**Suggested:** Add two or three genuinely different directions (for example child mortality as the outcome, an interactive visualisation or policy briefing as the artefact, or a different tool) and say that choosing one of them is expected.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.3 Group Projects: “Students working as a group must submit individual assessment evidence and complete an individual presentation.”</sub>
 
 ## Rules that produced nothing
 
@@ -56,15 +122,10 @@ point, or the rule is badly worded. Worth a look either way:
 - `ETH-02`
 - `ETH-03`
 - `ETH-04`
-- `EVID-01`
-- `FEAS-01`
 - `FEAS-02`
 - `FEAS-03`
 - `INTEG-01`
-- `INTEG-02`
-- `INTEG-03`
 - `OWN-02`
-- `OWN-03`
 - `PACK-AI`
 - `PACK-BOARD`
 - `PACK-ETHICS`

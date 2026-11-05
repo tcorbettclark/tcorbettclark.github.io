@@ -153,7 +153,7 @@ title = "People become data subjects without ethics appearing"
 source = "https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF"
 locator = "Quick guide: ethical principles for the EPQ"
 quote = "assessing the ethical principles of project proposals and research"
-question = "Does the project collect data from or about people (classmates, teachers, the public), and if so is the page silent about centre approval, consent, anonymity or the right to withdraw?"
+question = "Does the project collect data from or about people (classmates, teachers, the public), and if so is the page silent about permission, anonymity and withdrawal? An invitation to think it through is enough - do not require a procedure, and do not report a single sentence that refers back to a fuller invitation elsewhere on the page."
 why = "All four boards require the centre to approve a proposal's ethics before data is collected. An example that asks students to survey classmates without saying so invites evidence that cannot be used."
 fix = "Invite the reader to think about permission, anonymity and withdrawal, and about what the centre needs to agree to. Do not write the procedure for them."
 
