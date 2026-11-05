@@ -7,7 +7,7 @@ student marks, or that a moderator would query.
 - 6 outlines checked against 19 rules (13 judged, 6 text).
 - 1 potential issues (0 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported, 152,678 tokens.
+- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported, 29,367 tokens.
 
 ## p1-mnist-digit-classification
 
@@ -41,11 +41,11 @@ No potential issues found by these rules.
 
 *low · integ*
 
-> or adapt a public dataset and record its licence.
+> If you want to extend the comparison beyond BritLLM, you can download another small model from [Hugging Face](https://huggingface.co/models) and convert it with `mlx_lm.convert`.
 
-**Why:** 'A public dataset' cannot be identified or cited; recording a licence without naming the dataset is not enough for a bibliography or for AO2 source selection.
+**Why:** “Another small model from Hugging Face” is a platform, not an identifiable source; a student following this would not have a citable model name or revision from the page.
 
-**Suggested:** Name one or two example datasets with links and licences, and tell students to record the exact dataset title, version and URL if they choose another.
+**Suggested:** Name a specific example model with a link and revision, or require students to record the exact model ID and revision they download.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 

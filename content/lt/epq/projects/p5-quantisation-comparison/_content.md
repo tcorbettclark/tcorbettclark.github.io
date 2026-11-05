@@ -54,8 +54,11 @@ not an absolute measure of knowledge. The second is a task suite you write:
 100–300 short items across categories such as factual recall, arithmetic,
 multi-step reasoning, instruction following and creative writing. Write the
 questions and the expected answers yourself, or adapt a public dataset and
-record its licence. A mixture of easy, medium and hard items is more
-informative than a set that every model passes or every model fails.
+record its licence. [GSM8K](https://github.com/openai/grade-school-math)
+covers the arithmetic and multi-step reasoning items: 8,500 grade-school word
+problems, each with a numeric answer, released under the MIT licence. A
+mixture of easy, medium and hard items is more informative than a set that
+every model passes or every model fails.
 
 Name the edition, the link and the date you took it, and check the licence
 before you quote from it.
