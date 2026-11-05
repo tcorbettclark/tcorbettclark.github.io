@@ -63,6 +63,9 @@ whether to label the dominant one or exclude it, and apply that rule
 consistently. Keep the images sky-only where possible; avoid identifiable
 people, houses or car number plates.
 
+Photograph within your centre's rules: note where and when you went, who knew,
+and what you would do in bad weather — that is your risk assessment.
+
 You could also use a public cloud dataset, but only one you can name, date and
 cite: check its licence and the climate it was taken in. Images from another
 country may not match UK skies. If you use one, keep it as a separate
@@ -167,6 +170,9 @@ cannot draw strong conclusions, but the comparison shows that some clouds are
 hard for people too. If you use **Preprocess** to normalise features, connect the
 **Preprocessor** output to **Test & Score** so that normalisation is fitted
 inside each fold.
+
+Their answers are data about a person: get the centre's approval first, keep
+the responses anonymous, and say so on the sheet.
 
 You should record your decisions in your project log: which genera you included, what
 counted as a valid photo, how you handled mixed skies, how you split training

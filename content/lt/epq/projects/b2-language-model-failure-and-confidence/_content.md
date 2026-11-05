@@ -85,6 +85,9 @@ each quantisation. This is not a confidence measure for individual answers, but
 it tells you whether the model is generally more or less uncertain after
 compression.
 
+If you use Wikipedia, check the licence and attribute it; a public-domain text
+avoids the question entirely.
+
 If you also want to compare verbal confidence, you need prompts that ask the
 model to state a probability, such as `How confident are you, from 0 to 100?`.
 A base model may not follow that instruction reliably. You could treat verbal

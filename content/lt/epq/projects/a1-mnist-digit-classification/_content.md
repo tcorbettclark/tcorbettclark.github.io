@@ -54,6 +54,9 @@ to squares, and put them in folders named 0–9. Ask classmates for samples if y
 want a wider range of styles, with their consent and without collecting
 anything more personal than the digit itself.
 
+Get your centre's approval before you ask anyone, keep the samples anonymous,
+and let people withdraw theirs at any point.
+
 If you want more training data, full MNIST is available from Yann LeCun's page
 and from [Hugging Face](https://huggingface.co/datasets/ylecun/mnist). Download
 it once and work offline afterwards. Check the dataset card and record the

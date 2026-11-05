@@ -70,6 +70,10 @@ consent, keep the texts anonymous, and do not collect anything more personal
 than the writing itself. Check whether your school requires approval for a
 questionnaire or a judging session.
 
+Get your centre's approval before any judging session, tell the judges what
+the data is for, keep their answers anonymous, and let them withdraw their
+text afterwards.
+
 In Orange, load the BritLLM model with **Load LM** and connect its **Model**
 output to **LM Generator**. Choose the quantisation you want to test, and keep
 the prompt, temperature, maximum new tokens, number of generations and seed
