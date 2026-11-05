@@ -155,7 +155,7 @@ locator = "Quick guide: ethical principles for the EPQ"
 quote = "assessing the ethical principles of project proposals and research"
 question = "Does the project collect data from or about people (classmates, teachers, the public), and if so is the page silent about centre approval, consent, anonymity or the right to withdraw?"
 why = "All four boards require the centre to approve a proposal's ethics before data is collected. An example that asks students to survey classmates without saying so invites evidence that cannot be used."
-fix = "Add an ethics line naming who is involved, how consent is obtained, how their data is stored, and who approves it."
+fix = "Invite the reader to think about permission, anonymity and withdrawal, and about what the centre needs to agree to. Do not write the procedure for them."
 
 [[rule]]
 id = "ETH-02"

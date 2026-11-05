@@ -5,109 +5,33 @@ places where an outline could be read as endorsing a practice that would cost a
 student marks, or that a moderator would query.
 
 - 6 outlines checked against 22 rules (15 judged, 7 text).
-- 7 potential issues (3 high severity).
+- 0 potential issues (0 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, 109,029 tokens.
+- Judge: `none`.
 
 ## a1-mnist-digit-classification
 
 *Can a no-code image classifier read handwritten digits, and can you explain its mistakes?*
 
-### INTEG-03 — Implies more than the data can show
-
-*med · integ*
-
-> while profile and spatial-mass features do more of the work for digits such as 1, 2, 4 and 7.
-
-**Why:** The 'You could test whether' only governs the first half of the sentence; this second clause states a specific ablation result as established fact, so a student can carry it straight into their introduction or conclusion without ever running the comparison, which an examiner reads as an unsupported claim and a weakness in AO2.
-
-**Suggested:** Put both halves under test, e.g. 'You could test whether topological features separate digits with enclosed regions, and whether profile and spatial-mass features matter more for digits such as 1, 2, 4 and 7', and say explicitly that both are hypotheses until the ablation shows them.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
-
-### VOICE-02 — Reads as generic model prose rather than one person writing
-
-*low · voice*
-
-> Importantly, a highly accurate model is not necessary for your project to be successful.
-
-**Why:** This is a signpost opener restating, almost word for word, a sentence already used in the Project overview ('A highly accurate model is not necessary for your project to be successful'), which reads as assembled filler rather than one teacher adding a new point.
-
-**Suggested:** Cut the sentence, or replace it with something the overview did not already say, such as the concrete observation that a 92% model with traced errors makes a better report than a 98% model nobody can explain.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
+No potential issues found by these rules.
 
 ## a2-cloud-image-classification
 
 *Can a model trained on curated cloud photographs recognise the sky above your school?*
 
-### ETH-01 — People become data subjects without ethics appearing
-
-*high · ethics*
-
-> A human-baseline table comparing a friend's or teacher's classifications with the model's.
-
-**Why:** This asks the student to collect judgements from other people but says nothing about centre ethics approval, consent, anonymity or the right to withdraw, so the evidence could be unusable.
-
-**Suggested:** Add a line requiring centre ethics approval before asking anyone, plus consent, anonymised responses and a right to withdraw.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
-
-### ETH-01 — People become data subjects without ethics appearing
-
-*high · ethics*
-
-> If you ask classmates for photos, get consent and keep them anonymous.
-
-**Why:** It mentions consent and anonymity but not centre ethics approval or withdrawal, so a student collecting classmates' photos could still miss the centre-level approval that must come first.
-
-**Suggested:** Add that the centre's ethics approval must be obtained before collecting classmates' photos, and that participants can withdraw.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
+No potential issues found by these rules.
 
 ## a3-local-turing-test
 
 *Can classmates tell BritLLM's writing from a human's when the human is imitating the machine?*
 
-### FEAS-01 — Too much work for the hours available
-
-*high · feas*
-
-> They must match the machine texts in topic, length and format.
-
-**Why:** Every machine text in the design needs a hand-written counterpart, and the design runs 3-5 generations for 10-20 prompts across three quantisations, so the student is committing to writing scores of matched texts by hand in addition to generating, recruiting judges, analysing and writing the report.
-
-**Suggested:** Say explicitly that the human sample need only cover a subset of prompts (for example one text per prompt) and that one quantisation is a complete project, with the other quantisations an optional extension.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-02 — Sources named too vaguely to reference
-
-*low · integ*
-
-> A recent, reputable article on the Turing test debate, chosen and cited precisely.
-
-**Why:** This names a category rather than a source, so a student cannot look it up or cite it, and a bibliography entry of this kind shows no critical selection for AO2.
-
-**Suggested:** Replace it with one fully cited article (author, title, journal, year, DOI), and add a line saying the student may substitute another provided they give the full reference.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
+No potential issues found by these rules.
 
 ## b1-quantisation-comparison
 
 *How much memory, speed and energy does quantisation save, and what does it cost in quality?*
 
-### INTEG-02 — Sources named too vaguely to reference
-
-*low · integ*
-
-> The first is a held-out text corpus for perplexity: a chapter of a public-domain book, a Wikipedia extract, or a similar body of ordinary prose.
-
-**Why:** This gives the source only as a vague category rather than a named, identifiable text, so a student could follow it and end up logging an uncitable source such as 'a Wikipedia extract'; the later instruction to record a link helps, but the example itself does not model a citable source.
-
-**Suggested:** Replace this with one or two concrete, linked public-domain texts, such as a named Project Gutenberg edition, and say students must record the exact URL and access date for whichever text they choose.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
+No potential issues found by these rules.
 
 ## b2-language-model-failure-and-confidence
 
@@ -128,13 +52,17 @@ point, or the rule is badly worded. Worth a look either way:
 
 - `AI-01`
 - `DOC-INDEP`
+- `ETH-01`
 - `ETH-02`
 - `ETH-03`
 - `ETH-04`
 - `EVID-01`
+- `FEAS-01`
 - `FEAS-02`
 - `FEAS-03`
 - `INTEG-01`
+- `INTEG-02`
+- `INTEG-03`
 - `OWN-02`
 - `OWN-03`
 - `PACK-AI`
@@ -143,3 +71,4 @@ point, or the rule is badly worded. Worth a look either way:
 - `PACK-NOSPEC`
 - `PACK-OWN`
 - `VOICE-01`
+- `VOICE-02`
