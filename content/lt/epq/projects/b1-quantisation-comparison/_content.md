@@ -143,7 +143,10 @@ size. Compute the theoretical size from the parameter count and compare it with
 the disk size. The difference is the overhead from the tokenizer, metadata and
 file format.
 
-You could write a small Python harness with three parts:
+Write the harness yourself. The model is what you are measuring, so it must
+not write the harness, the prompts or the report; anything it helps with, even
+explaining an error message, belongs in your log. You could write a small
+Python harness with three parts:
 
 1. **Load and warm up.** Load the model in a fresh process, run one short
    generation, and record the time and peak memory. The warm-up is needed because

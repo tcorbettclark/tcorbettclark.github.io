@@ -157,6 +157,9 @@ wrong, adjust the difficulty before writing the full set.
 
 You could write a scorer in Python. For each question and each candidate answer:
 
+Write it yourself: the model is the object of the study, not an assistant for
+the code or the report, and anything it did help with belongs in your log.
+
 1. Build the text `prompt + " " + answer`.
 2. Tokenise it with the model's tokenizer.
 3. Run the model on the token IDs and collect the logits.
