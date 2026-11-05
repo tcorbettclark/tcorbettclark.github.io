@@ -18,7 +18,7 @@
 #
 # Fields
 #   id        stable identifier; quote it in reports and issues
-#   group     own | evidence | ethics | feas | ai | integ | pack
+#   group     own | evidence | ethics | feas | ai | integ | tone | pack
 #   severity  high | med | low      (high = could damage a student's chances)
 #   check     judge | text
 #   source    specification or guidance URL
@@ -113,7 +113,7 @@ quote = "choose an area of interest"
 why = "The pack is read by students as a person talking to them. The stock vocabulary of generated prose - delve, landscape, robust, pivotal, it is important to note - makes the page sound like a brochure and hides who is speaking."
 fix = "Say the thing in plain words: name the object, the action and who does it."
 [rule.text]
-pattern = "(?i)\\b(?:delve, delved, delving|landscape of|realm of|tapestry|testament to|navigate the|navigating the|unlock|unleash|harness the|leverage|robust|seamless|cutting-edge|game-chang|revolutionis|revolutioniz|it'?s important to note|it is important to note|it is worth noting|in today'?s|in the ever-evolving|ever-evolving|ever-changing|furthermore|moreover|additionally,|that said,|at its core|not only .{0,40} but also|it'?s not just .{0,40}, it'?s|serves as|acts as a|plays a (?:crucial|pivotal|vital) role|a (?:myriad|plethora) of|empower|elevate|foster|cultivate|comprehensive|multifaceted|intricate|profound|pivotal|crucial)\\b"
+pattern = "(?i)\\b(?:delve, delved, delving|landscape of|realm of|tapestry|testament to|navigate the|navigating the|unlock|unleash|harness the|leverage|robust|seamless|cutting-edge|game-chang|revolutionis|revolutioniz|it'?s important to note|it is important to note|it is worth noting|in today'?s|in the ever-evolving|ever-evolving|ever-changing|furthermore|moreover|additionally,|that said,|at its core|not only .{0,40} but also|it'?s not just .{0,40}, it'?s|serves as|acts as a|plays a (?:crucial|pivotal|vital) role|a (?:myriad|plethora) of|empower|elevate|foster|cultivate|comprehensive|multifaceted|intricate|profound|pivotal|crucial|importantly|crucially|arguably|an? interesting result)\\b"
 expect = "absent"
 
 [[rule]]
@@ -128,6 +128,51 @@ quote = "choose an area of interest"
 question = "Ignoring the technical content, does any passage read as generic machine-written prose - stacked three-part lists, every paragraph opening with a signpost, rhetorical build-ups ('not just X, but Y'), hedged filler? Quote the passage. Do not report ordinary, plain sentences: only passages a reader would hear as a model talking."
 why = "The examples are meant to sound like a teacher who has run these projects, and students notice the difference."
 fix = "Cut the scaffolding and say it once, in the plainest sentence that will carry it."
+
+[[rule]]
+id = "TONE-01"
+group = "tone"
+severity = "med"
+check = "text"
+title = "Opines on how the student's project will turn out"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "Appendix A Grade Descriptions"
+quote = "The award will depend in practice upon the extent to which the candidate has met the Assessment Objectives (see Section 2.4.3) overall."
+why = "The grade is the board's, awarded on evidence the centre has seen. A page that predicts success, or reassures a student that a result is not a failure, claims knowledge of an outcome it cannot have - and invites the pack to be blamed for it."
+fix = "Say what the result would show; leave the judgement of the project to the assessor."
+[rule.text]
+pattern = "(?i)for your project to be successful|is not a failed project|is a strong result|you have a stronger (?:evaluation|artefact)|earn (?:you )?(?:the )?marks|impress the (?:moderator|assessor)"
+expect = "absent"
+
+[[rule]]
+id = "TONE-02"
+group = "tone"
+severity = "med"
+check = "text"
+title = "Issues a consent procedure the pack cannot guarantee"
+source = "https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF"
+locator = "Quick guide: ethical principles for the EPQ"
+quote = "assessing the ethical principles of project proposals and research"
+why = "The centre assesses the proposal and decides what it requires. A pack that issues the procedure - approval, anonymity, withdrawal - is answering a question it does not decide, and takes responsibility for the answer."
+fix = "Invite the student to consider what their school requires; do not tell them the procedure."
+[rule.text]
+pattern = "(?i)(?:get|obtain|seek) [^.]{0,24}approval|keep (?:the |all )?(?:samples|responses|data) anonymous|let (?:people|them|participants) withdraw|\\bmust be anonymous\\b"
+expect = "absent"
+
+[[rule]]
+id = "HEAD-01"
+group = "tone"
+severity = "low"
+check = "text"
+title = "A heading or label recommends instead of describing"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.1 Aims"
+quote = "make a significant contribution to the choice and design of an extended project"
+why = "A heading that recommends, or a bold label invented to make six pages look alike, tells the student the pack has a position on how to work. The page is showing an example, not setting a method."
+fix = "Name the section for what it contains: 'Example research questions', not 'Suggested research questions'."
+[rule.text]
+pattern = "(?im)^(?:## +|\\*\\*)(?:Suggested|A way in|What you submit|Phrase it as|Variants)"
+expect = "absent"
 
 [[rule]]
 id = "ETH-01"
