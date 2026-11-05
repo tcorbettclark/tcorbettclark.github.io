@@ -566,6 +566,22 @@ ins, del { border-radius: 2px; padding: 0 0.1em; }
  * This is the only rule that reaches an <img> inside a table cell. */
 img { max-width: 100%; height: auto; }
 
+/* Plain markdown tables (the project overview): natural column widths. */
+main > table:not(.doc) {
+  border-collapse: collapse;
+  max-width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+main > table:not(.doc) th,
+main > table:not(.doc) td {
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.6rem;
+  vertical-align: top;
+  text-align: left;
+}
+main > table:not(.doc) th { background: var(--surface-2); }
+
 /* Laid-out tables from the Word sources (screenshots side by side, etc.).
  * Fixed layout and a definite width are both needed: with automatic layout
  * the browser sizes the columns from the images' natural width, so two 1200px
