@@ -12,7 +12,7 @@
     </title>
     <link rel="canonical" href="https://corbettclark.com/lt/epq/projects/">
     <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
-    "sha384-FVzmPI9tMvlGt1LkcaMbeMx8v9raRGxiepmS2jOiIm5QRBMiqwawknCnyMz5FI2e">
+    "sha384-izkQAmHKbBYjZATBsWpAW8fjO2PusufuGpJLPU86Npa2goQBOoXeyDu0CobShkzW">
   </head>
   <body>
     <header class="sitebar">
@@ -31,33 +31,29 @@
         to investigating it.
       </p>
       <p>
-        Each project page follows the same pattern:
+        Each project page opens with what the project needs — machine, software and downloads — and then follows the
+        same pattern:
       </p>
       <ul>
         <li>Project overview
         </li>
         <li>Dataset(s) to be used
         </li>
-        <li>Suggested research question or hypothesis
+        <li>Example research questions or hypothesis
         </li>
         <li>Key data science, statistical and machine learning concepts
         </li>
-        <li>Suggested approaches to data preparation, analysis and modelling
+        <li>Example approaches to data preparation, analysis and modelling
         </li>
         <li>Potential limitations, risks and sources of bias
         </li>
         <li>Expected outcomes and opportunities for evaluation
-        </li>
-        <li>Suitability as an EPQ artefact
         </li>
         <li>Example artefacts
         </li>
         <li>Further reading
         </li>
       </ul>
-      <p>
-        The example artefacts are placeholders until the Orange workflows and Python plots are built.
-      </p>
       <h2 id="the-six-projects">
         The six projects
       </h2>
@@ -81,7 +77,7 @@
         <tbody>
           <tr>
             <td>
-              A1
+              P1
             </td>
             <td>
               MNIST digit classification
@@ -95,7 +91,7 @@
           </tr>
           <tr>
             <td>
-              A2
+              P2
             </td>
             <td>
               Cloud image classification
@@ -109,7 +105,7 @@
           </tr>
           <tr>
             <td>
-              A3
+              P3
             </td>
             <td>
               Running a local Turing test
@@ -123,7 +119,7 @@
           </tr>
           <tr>
             <td>
-              C1
+              P4
             </td>
             <td>
               Income and life expectancy
@@ -137,7 +133,7 @@
           </tr>
           <tr>
             <td>
-              B1
+              P5
             </td>
             <td>
               Quantisation comparison
@@ -152,7 +148,7 @@
           </tr>
           <tr>
             <td>
-              B2
+              P6
             </td>
             <td>
               Language-model failure and confidence
@@ -171,82 +167,45 @@
       </p>
       <ul>
         <li>
-          <a href="a1-mnist-digit-classification/">MNIST digit classification</a>
+          <a href="p1-mnist-digit-classification/">MNIST digit classification</a>
         </li>
         <li>
-          <a href="a2-cloud-image-classification/">Cloud image classification</a>
+          <a href="p2-cloud-image-classification/">Cloud image classification</a>
         </li>
         <li>
-          <a href="a3-local-turing-test/">Running a local Turing test</a>
+          <a href="p3-local-turing-test/">Running a local Turing test</a>
         </li>
         <li>
-          <a href="c1-income-and-life-expectancy/">Income and life expectancy</a>
+          <a href="p4-income-and-life-expectancy/">Income and life expectancy</a>
         </li>
         <li>
-          <a href="b1-quantisation-comparison/">Quantisation comparison</a>
+          <a href="p5-quantisation-comparison/">Quantisation comparison</a>
         </li>
         <li>
-          <a href="b2-language-model-failure-and-confidence/">Language-model failure and confidence</a>
+          <a href="p6-language-model-failure-and-confidence/">Language-model failure and confidence</a>
         </li>
       </ul>
-      <p>
-        A1–A3 and C1 are Orange projects. B1–B2 are Python projects: you would need to read and adapt scripts, run them
-        from the terminal, and plot results. None of the six requires training a large model from random weights, and
-        all six are designed for a 16 GB M-series Mac. You do not need to work through them in order.
-      </p>
       <h2 id="setting-up">
         Setting up
       </h2>
       <p>
-        For A1–A3 and C1, you need <a href="https://orangedatamining.com/">Orange Data Mining</a> with the <a href=
-        "https://github.com/tcorbettclark/orange3-ai-suite"><code>orange3-ai-suite</code></a> add-on installed. The
-        add-on provides the <strong>Image Features</strong>, <strong>Image Pixels</strong>, <strong>LM Text
-        Loader</strong>, <strong>Load LM</strong>, <strong>LM Pre-trainer</strong>, <strong>LM Generator</strong> and
-        <strong>Neural Network Viewer</strong> widgets. For A1–A2, install the add-on’s <code>image</code> extra
-        (OpenCV). A3 needs <code>mlx-lm</code> on Apple Silicon; the add-on’s <code>lora</code> extra installs it for
-        loading <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a>.
+        Each page says what it needs before it starts: the machine, the software and the downloads, with sizes.
+        <a href="../prerequisites/">Prerequisites</a> describes the two routes — Orange Data Mining for P1–P4, Python
+        for P5–P6 — and the permissions that take time to arrange.
       </p>
       <p>
-        Data and models:
+        None of the six requires training a large model from random weights, and you do not need to work through them
+        in order.
       </p>
-      <ul>
-        <li>
-          <strong>A1:</strong> the <a href=
-          "https://github.com/tcorbettclark/orange3-ai-suite"><code>orange3-ai-suite</code></a> repository includes a
-          prepared MNIST subset, or you can download the <a href="https://huggingface.co/datasets/ylecun/mnist">full
-          MNIST dataset</a>.
-        </li>
-        <li>
-          <strong>A2:</strong> the <a href=
-          "https://github.com/tcorbettclark/orange3-ai-suite"><code>orange3-ai-suite</code></a> repository includes a
-          cloud fetcher that downloads the <a href="https://cloudatlas.wmo.int/">WMO International Cloud Atlas</a>
-          corpus. You also collect your own sky photographs.
-        </li>
-        <li>
-          <strong>A3:</strong> <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a> is available
-          locally. Use public-domain texts, such as <a href="https://www.gutenberg.org/">Project Gutenberg</a>
-          editions, or your own writing for the human side of the test.
-        </li>
-        <li>
-          <strong>C1:</strong> download the <a href="https://www.gapminder.org/data/">Gapminder</a> indicators you
-          need, and optionally cross-check them against the <a href="https://data.worldbank.org/">World Bank</a>.
-        </li>
-        <li>
-          <strong>B1–B2:</strong> the local <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a> MLX
-          quantisations, plus Python 3.11 or later with <a href=
-          "https://github.com/ml-explore/mlx-lm"><code>mlx-lm</code></a>, <code>numpy</code>, <code>matplotlib</code>
-          and <code>psutil</code>.
-        </li>
-      </ul>
       <p>
         Everything runs locally once the data and models are downloaded. The Orange add-on, the BritLLM model files and
         the datasets are external dependencies; they are not included in this pack.
       </p>
-      <h2 id="a-note-on-resources-in-b1">
-        A note on resources in B1
+      <h2 id="a-note-on-resources-in-p5">
+        A note on resources in P5
       </h2>
       <p>
-        “Energy storage” can mean several things. B1 separates three resources:
+        “Energy storage” can mean several things. P5 separates three resources:
       </p>
       <ul>
         <li>
@@ -260,7 +219,7 @@
         </li>
       </ul>
       <p>
-        B1 gives you measurements for all three. You decide which of them matters for your use case, and argue the case
+        P5 gives you measurements for all three. You decide which of them matters for your use case, and argue the case
         from your results.
       </p>
     </main>
