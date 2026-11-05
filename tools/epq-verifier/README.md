@@ -41,9 +41,29 @@ Useful flags:
 | `--reasoning LEVEL` | `none`, `low` (default), `high`, `max`, or `default` to send nothing |
 | `--no-cache` | ignore cached judgements |
 
-Judgements are cached by model, reasoning level, ruleset and document text, so
-re-running after editing one outline costs one call, not twelve. The cache lives
-in `reports/.judge-cache.json` and is not committed.
+## The judgement cache
+
+One opinion is a function of the request, so that is what the cache key is:
+
+- the endpoint and the request parameters (temperature)
+- the model and its thinking level
+- the ruleset, including each rule's question, why and suggested fix
+- the judge's system prompt
+- which document, and which of the two runs
+- the document's text, in full
+
+Same inputs, same answer, no call. Edit one outline and you pay for that outline
+only; edit a rule and the cached opinions for it are dead, because the ruleset
+is in the key. `CACHE_VERSION` in `run.py` is there for the case where the shape
+of an entry changes: bump it and old entries are ignored rather than trusted.
+
+The cache lives in `reports/.judge-cache.json` (not committed) and is pruned
+only by `--clear-cache`. Each run logs how many opinions came from the cache and
+how many calls it made.
+
+It does mean a report is reproducible rather than fresh: two cached opinions are
+frozen until the text or the rules change. `--no-cache` buys new eyes at the
+cost of a call.
 
 `deepseek-v4.1-flash` reasons by default. On one outline, `--reasoning low` took
 12 s and 41 s across two runs; `none` is faster and worse, `high` and `max`

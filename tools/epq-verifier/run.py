@@ -51,9 +51,15 @@ PACK_PAGES = (
 DEFAULT_RULES = "tools/epq-verifier/rules.toml"
 DEFAULT_OUT = "tools/epq-verifier/reports/issues.md"
 CACHE = "tools/epq-verifier/reports/.judge-cache.json"
+# Bump when the shape of a cached entry or its key changes, so old entries are
+# ignored rather than silently trusted.
+CACHE_VERSION = "1"
 API = "https://ollama.com/v1/chat/completions"
 DEFAULT_MODEL = "deepseek-v4.1-flash"
 SEVERITY_ORDER = {"high": 0, "med": 1, "low": 2}
+# Sent with every request; part of the cache key, because changing one of them
+# would make a cached opinion stale.
+REQUEST_PARAMS = {"temperature": 0, "stream": False}
 START = time.time()
 
 
@@ -315,16 +321,31 @@ def judge_once(args, rules, by_id, slug, doc, run_index, cache) -> tuple[list[di
         + "\n\n--- DOCUMENT BEGINS ---\n\n"
         + doc["text"]
     )
+    # Everything that can change the answer: the endpoint and request
+    # parameters, the model and its thinking level, the rules, the system
+    # prompt, which document, which of the two runs, and the document's text.
     key = hashlib.sha256(
         "|".join(
-            [args.judge, args.reasoning, rules_key(rules), slug, str(run_index),
-             hashlib.sha256(SYSTEM.encode()).hexdigest()[:12],
-             hashlib.sha256(doc["text"].encode()).hexdigest()]
+            [
+                CACHE_VERSION,
+                API,
+                json.dumps(REQUEST_PARAMS, sort_keys=True),
+                args.judge,
+                args.reasoning,
+                rules_key(rules),
+                hashlib.sha256(SYSTEM.encode()).hexdigest()[:12],
+                slug,
+                str(run_index),
+                hashlib.sha256(doc["text"].encode()).hexdigest(),
+            ]
         ).encode()
     ).hexdigest()[:24]
 
+    args.cache_misses += 1
     if key in cache and not args.no_cache:
-        log(f"{slug} run {run_index + 1}/{args.runs}: cached ({len(cache[key])} findings)")
+        args.cache_hits += 1
+        log(f"{slug} run {run_index + 1}/{args.runs}: cached, "
+            f"{len(cache[key])} finding(s) - no call")
         return [dict(i, rule=by_id[i["rule"]], doc=slug) for i in cache[key]], {}
 
     t0 = time.time()
@@ -510,10 +531,14 @@ def main() -> None:
     )
     ap.add_argument("--no-cache", action="store_true",
                     help="ignore cached judgements and ask again")
+    ap.add_argument("--clear-cache", action="store_true",
+                    help="delete the judgement cache before running")
     ap.add_argument("--threshold", type=float, default=0.12)
 
     args = ap.parse_args()
     args.rules = load_rules(pathlib.Path(args.rules))
+    args.cache_hits = 0
+    args.cache_misses = 0
     args.n_judge = sum(1 for r in args.rules if r["check"] == "judge")
     args.n_text = sum(1 for r in args.rules if r["check"] == "text")
     args.n_rules = len(args.rules)
@@ -541,6 +566,9 @@ def main() -> None:
     issues = text_issues(args.rules, docs, extra)
     log(f"text checks: {len(issues)} finding(s)")
     usage = {}
+    if args.clear_cache and pathlib.Path(CACHE).exists():
+        pathlib.Path(CACHE).unlink()
+        log("judgement cache cleared")
     cache = load_cache(pathlib.Path(CACHE))
     if args.judge.lower() != "none":
         judged, usage = judge_issues(args, args.rules, docs, cache)
@@ -554,6 +582,9 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     args.pack_seen = [str(p) for p in pack_pages if p.exists()]
     out.write_text(render(issues, docs, sim, args, usage), encoding="utf8")
+    if args.cache_hits or args.cache_misses:
+        log(f"judge cache: {args.cache_hits} hit(s), "
+            f"{args.cache_misses - args.cache_hits} call(s) made")
     log(f"{len(issues)} potential issue(s) -> {out}")
     if usage:
         log("tokens: " + ", ".join(f"{k}={v:,}" for k, v in sorted(usage.items())))
