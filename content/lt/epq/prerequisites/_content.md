@@ -1,16 +1,9 @@
 # Prerequisites
 
-These projects are practical: each needs a machine, some software, and data to
-download. Every outline opens by saying what it needs — the tool, the machine,
-what to download and how large — so check that first, then come back here for
-the general picture.
-
-The most common way a good project fails is discovering in March that the kit
-was never available.
-
 ## Two routes
 
-The outlines go one of two ways, and the outline says which.
+Broadly, each project either requires use of Orange (and no coding skills)
+or Python (with coding skills).
 
 **Orange Data Mining** is a visual tool: you build a workflow by connecting
 widgets, and nothing you are asked to do involves writing code. A laptop that
@@ -34,14 +27,13 @@ agreement, and some networks block the downloads entirely.
 | Orange | [Orange Data Mining](https://orangedatamining.com/) and, for some outlines, the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite) add-on with one of its extras (`image`, `lora`) |
 | Python | Python 3.11 or later, and the packages the outline names: `mlx-lm`, `numpy`, `matplotlib`, `psutil` |
 
-Everything runs locally once installed. Nothing here needs an account, a subscription or a cloud service, so your data
-stays under your control and the project stays reproducible after you leave
-school.
+Everything runs locally once installed. Nothing here needs an account, a
+subscription or a cloud service, so your data stays under your control and the
+project stays reproducible after you leave school.
 
 ## Downloads
 
-What you download dominates the setup, so check the size before you start on a
-school connection:
+Be mindful that some projects may involve large downloads.
 
 - **Language models** are the largest item. [BritLLM](https://huggingface.co/britllm/britllm-3b-v0.1)
   is about 5 GB in full and 1–2 GB per quantised version, and a project that
@@ -62,8 +54,7 @@ you produce.
 ## Permission and ethics
 
 Some projects bring you into contact with people or with other people's
-material, and each of those is quicker to arrange early than in the week you
-need the data:
+material:
 
 - **Asking classmates for writing, answers or judgements** involves consent,
   anonymity, a right to withdraw, and storage your school accepts.
