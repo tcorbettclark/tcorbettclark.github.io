@@ -1,21 +1,9 @@
 # Prerequisites
 
-These projects are practical: you need a machine, some software, data, and
-permission to collect anything that is not already public. This page lists what
-that means before you commit to one of the outlines, because the most common
-way a good project fails is discovering in March that the kit was never
-available.
-
-## Check your board's rules
-
-The qualification is set by the awarding body your centre enters you with. Its
-hours, its assessment objectives and the evidence it asks for are all in that
-board's specification, and they differ between boards. Ask your supervisor which
-one applies to you, read it, and treat it as the authority: nothing here is a
-substitute for it.
-
-The four specifications are listed at the end of this page. What follows here is
-what these particular projects need in order to run.
+These projects are practical: each needs a machine, some software, and data to
+download. This page lists what that means before you commit to an outline,
+because the most common way a good project fails is discovering in March that
+the kit was never available.
 
 ## A computer that can run this
 
@@ -57,51 +45,31 @@ the model's licence too if you intend to redistribute anything you produce.
 ## Permission and ethics
 
 Three of the six projects bring you into contact with people or with other
-people's material, and your centre has to agree how you handle that before you
-collect anything. Ask what it requires, and plan for it:
+people's material, and each of those is quicker to arrange early than in the
+week you need the data:
 
-- **Asking classmates for writing, answers or judgements** (A3, B2) means
-  consent, anonymity, a right to withdraw, and storage that satisfies your
-  school's data protection policy.
-- **Photographing the sky** (A2) may need permission to be off-site or on the
-  school site at particular times, and a risk assessment.
-- **Using images or corpora you did not create** (A2, A1, C1) means checking the
-  licence permits reuse in your report, and citing the source properly.
-- **Using an AI tool**, including the model you are studying, means recording
-  prompts and outputs in your log and never presenting its text as your own.
+- **Asking classmates for writing, answers or judgements** (A3, B2) involves
+  consent, anonymity, a right to withdraw, and storage your school accepts.
+- **Photographing the sky** (A2) may mean being off site, or on site at a
+  particular time, with that agreed beforehand.
+- **Using images or corpora you did not create** (A1, A2, C1) means a licence
+  that allows reuse in your report, and a source you can cite.
+- **Using an AI tool** means keeping the prompts and outputs you relied on, so
+  that you can show what the model did and what you did.
 
-## Your own work
+Ask your supervisor what your centre requires, and when it needs it.
 
-The report, the code and the analysis have to be your own work, written for this
-project and not for another qualification. Whatever tools you use, say so in your
-log and in the report: declare what the model did, and never present its text as
-your own.
+## Your board
 
-## Time
+The qualification, the report, the log, the presentation and what the assessor
+looks for are set by the awarding body your centre enters you with, and they
+differ between boards. Read that specification and treat it as the authority:
+this page describes the kit, not the qualification.
 
-The project has to fit alongside your other studies, so plan for part-time work
-across a school year. A plausible shape, which you can adjust with your
-supervisor:
+Your centre will tell you which board it enters you with. The specifications
+are here:
 
-| Stage | Hours |
-|---|---|
-| Taught skills, ethics and project management | 30 |
-| Proposal, planning and background reading | 20 |
-| Collecting or preparing data | 20 |
-| Building, running and evaluating | 20 |
-| Writing the report | 20 |
-| Presentation and log | 10 |
-
-If an outline's "suggested approaches" would not fit inside its stage, cut the
-outline down rather than the report.
-
-## The specifications
-
-Your centre will tell you which board it enters you with. Read the relevant
-specification, or at least the assessment objectives and the evidence
-requirements:
-
-- **AQA 7993** — [specification](https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF) and [AI guidance](https://www.aqa.org.uk/files/345f3433-b1f8-4406-93a6-19dd85874079/445389386589a6083669db126a9e792a1fae35cc.pdf)
+- **AQA 7993** — [specification](https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF)
 - **Pearson Edexcel** — [specification](https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf)
 - **OCR (H857)** — [specification](https://www.ocr.org.uk/Images/414382-specification.pdf)
 - **WJEC/Eduqas** — [specification](https://www.wjec.co.uk/media/iuphacwi/wjec-level-3-extended-project-spec-e-26-04-23.pdf)
