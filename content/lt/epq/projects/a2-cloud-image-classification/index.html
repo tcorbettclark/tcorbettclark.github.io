@@ -14,17 +14,7 @@
 <body>
 {% include "../../_header.html" %}
 <main>
-{% set needs = {
-     "python": false,
-     "programming":
-       "None. The classifier is built from Orange widgets.",
-     "machine":
-       "Any laptop that runs Orange Data Mining, and a camera or phone for your own photographs.",
-     "software":
-       "Orange Data Mining with the orange3-ai-suite add-on and its image extra (OpenCV).",
-     "downloads":
-       "The WMO International Cloud Atlas corpus (hundreds of MB), plus your own photographs.",
-   } %}{% include "../_needs.html" %}
+{% set needs = a2 %}{% include "../_needs.html" %}
 {{ "_content.md" | markdown }}
 </main>
 </body>

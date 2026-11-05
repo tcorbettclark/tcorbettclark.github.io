@@ -1,0 +1,13 @@
+# What the B2 page needs. awg.py loads every .toml under content/
+# and makes its top-level keys template globals, so this file is read as
+# `b2` by b2-language-model-failure-and-confidence/index.html.
+#
+# The file is removed from the output when the site is built (working files
+# are those starting with _), so these notes never reach the web.
+
+[b2]
+programming = "Python 3.11 or later. You write the harness that scores the model's answers."
+machine = "An Apple silicon Mac (M-series) with 16 GB of memory."
+software = "mlx-lm, numpy and matplotlib."
+downloads = "BritLLM: roughly 1–2 GB per quantisation you test."
+python = true

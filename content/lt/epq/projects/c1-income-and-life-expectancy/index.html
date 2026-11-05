@@ -14,17 +14,7 @@
 <body>
 {% include "../../_header.html" %}
 <main>
-{% set needs = {
-     "python": false,
-     "programming":
-       "None. The regression is built from Orange widgets.",
-     "machine":
-       "Any laptop that runs Orange Data Mining.",
-     "software":
-       "Orange Data Mining; nothing beyond the standard widgets.",
-     "downloads":
-       "Gapminder indicators (a few MB), optionally cross-checked against the World Bank.",
-   } %}{% include "../_needs.html" %}
+{% set needs = c1 %}{% include "../_needs.html" %}
 {{ "_content.md" | markdown }}
 </main>
 </body>

@@ -14,17 +14,7 @@
 <body>
 {% include "../../_header.html" %}
 <main>
-{% set needs = {
-     "python": false,
-     "programming":
-       "None. The model is loaded by an Orange widget.",
-     "machine":
-       "An Apple silicon Mac (M-series) with 16 GB of memory.",
-     "software":
-       "Orange Data Mining with the orange3-ai-suite add-on and its lora extra, plus mlx-lm.",
-     "downloads":
-       "BritLLM: about 5 GB for the full model, or 1–2 GB for a quantised version.",
-   } %}{% include "../_needs.html" %}
+{% set needs = a3 %}{% include "../_needs.html" %}
 {{ "_content.md" | markdown }}
 </main>
 </body>

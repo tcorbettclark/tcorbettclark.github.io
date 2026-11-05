@@ -1,18 +1,15 @@
 {# "What this project needs" block, at the top of every outline.
 
-   Each outline declares its own requirements by setting `needs` before this
-   include:
+   Each project declares its requirements in `_needs.toml` in its own
+   directory; awg.py loads every .toml under content/ and makes its top-level
+   keys template globals, so `[a1]` in a1-mnist-digit-classification/_needs.toml
+   arrives here as `a1`. The page sets the name and includes this file:
 
-     {% set needs = {
-          "programming": "None. The classifier is built from Orange widgets.",
-          "machine": "Any laptop that runs Orange Data Mining.",
-          "software": "Orange Data Mining, the orange3-ai-suite add-on, and its image extra (OpenCV).",
-          "downloads": "A prepared MNIST subset (tens of MB), or the full MNIST dataset.",
-        } %}
+     {% set needs = a1 %}{% include "../_needs.html" %}
 
    The structure and the wording of the general guidance live here, so the six
-   pages cannot drift apart; the facts live in the page they are true of.
-   Set `needs.python` to true when the page needs code, which colours the rule.
+   pages cannot drift apart; the facts live beside the page they are true of.
+   `python = true` in the table colours the rule.
 
    The link is site-absolute, as in _header.html: a filter applied inside an
    included template resolves against that template's directory, not the

@@ -14,17 +14,7 @@
 <body>
 {% include "../../_header.html" %}
 <main>
-{% set needs = {
-     "python": true,
-     "programming":
-       "Python 3.11 or later. You write the harness that scores the model's answers.",
-     "machine":
-       "An Apple silicon Mac (M-series) with 16 GB of memory.",
-     "software":
-       "mlx-lm, numpy and matplotlib.",
-     "downloads":
-       "BritLLM: roughly 1–2 GB per quantisation you test.",
-   } %}{% include "../_needs.html" %}
+{% set needs = b2 %}{% include "../_needs.html" %}
 {{ "_content.md" | markdown }}
 </main>
 </body>

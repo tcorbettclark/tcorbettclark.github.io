@@ -14,17 +14,7 @@
 <body>
 {% include "../../_header.html" %}
 <main>
-{% set needs = {
-     "python": false,
-     "programming":
-       "None. The classifier is built from Orange widgets.",
-     "machine":
-       "Any laptop that runs Orange Data Mining.",
-     "software":
-       "Orange Data Mining with the orange3-ai-suite add-on and its image extra (OpenCV).",
-     "downloads":
-       "A prepared MNIST subset (tens of MB), or the full MNIST dataset.",
-   } %}{% include "../_needs.html" %}
+{% set needs = a1 %}{% include "../_needs.html" %}
 {{ "_content.md" | markdown }}
 </main>
 </body>
