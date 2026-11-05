@@ -38,6 +38,7 @@ import markdown_it
 import tomllib
 import user_agents
 import watchfiles
+from mdit_py_plugins.anchors import anchors_plugin as markdown_anchors_plugin
 from mdit_py_plugins.attrs import (
     attrs_block_plugin as markdown_attrs_block_plugin,
 )
@@ -220,6 +221,16 @@ class _RelativeEnvironment(jinja2.Environment):
         )
 
 
+def heading_slug(title):
+    """Anchor id for a heading, e.g. "Step 1 — Feature selection" ->
+    "step-1-feature-selection".
+
+    Matches the slugify() in toc.js, so that a heading's id is the same
+    whether it is set here or later, client-side, by that script.
+    """
+    return re.sub(r"[^\w]+", "-", title.strip().lower()).strip("-")
+
+
 class Builder:
     def __init__(self, config):
         self.config = config
@@ -277,6 +288,12 @@ class Builder:
                 {"typographer": True},
             )
             md.use(markdown_footnote_plugin)
+            md.use(
+                markdown_anchors_plugin,
+                min_level=1,
+                max_level=3,
+                slug_func=heading_slug,
+            )
             md.use(markdown_math_plugin)
             md.use(markdown_attrs_plugin, spans=True)
             md.use(markdown_attrs_block_plugin)
