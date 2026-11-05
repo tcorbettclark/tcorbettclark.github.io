@@ -64,7 +64,7 @@ change. The Atlas has no "clear sky" gallery because it classifies clouds; if
 you want a clear-sky class, collect it yourself, and note that "is there a
 cloud?" is a different question from "which genus is this?".
 
-## Suggested research question or hypothesis
+## Example research questions or hypothesis
 
 For example:
 
@@ -112,10 +112,10 @@ including bluish fraction, blueness, saturation and greenery. Group G is off by
 default because it is a shortcut. Groups A–F give 36 features; adding G gives
 40.
 
-## Suggested approaches to data preparation, analysis and modelling
+## Example approaches to data preparation, analysis and modelling
 
-**A way in.** Train and evaluate on the curated corpus, then try a handful of
-your own photographs; a larger field set can wait.
+You could train and evaluate on the curated corpus, then try a handful of your
+own photographs; a larger field set can wait.
 
 You could begin by fetching or collecting the corpus and building the workflow
 from scratch: **Import Images** → **Image Features** → **Test & Score**, with
@@ -160,11 +160,10 @@ make from your model.
 ## Expected outcomes and opportunities for evaluation
 
 The expected outcome would be a working Orange workflow that classifies cloud
-genera, a feature-ablation table, a confusion matrix for the Atlas corpus and a
-second confusion matrix for your own photos. Importantly, a highly accurate
-model is not necessary for your project to be successful. A model that does well
-in cross-validation and then fails in the field is an interesting result,
-provided you can explain why.
+genera, a feature-ablation table, a confusion matrix for the Atlas corpus and
+a second confusion matrix for your own photos. A highly accurate model is not
+necessary. A model that does well in cross-validation and then fails in the
+field gives you something to explain.
 
 You could evaluate the model on held-out Atlas images and on your own photos,
 compare the two confusion matrices, and identify which genera and feature

@@ -12,9 +12,9 @@ downloads — and then follows the same pattern:
 
 - Project overview
 - Dataset(s) to be used
-- Suggested research question or hypothesis
+- Example research questions or hypothesis
 - Key data science, statistical and machine learning concepts
-- Suggested approaches to data preparation, analysis and modelling
+- Example approaches to data preparation, analysis and modelling
 - Potential limitations, risks and sources of bias
 - Expected outcomes and opportunities for evaluation
 - Example artefacts

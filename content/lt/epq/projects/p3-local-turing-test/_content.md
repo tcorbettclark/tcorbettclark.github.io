@@ -67,7 +67,7 @@ the prompt, temperature, maximum new tokens, number of generations and seed
 identical across models. **Load LM** reads the model directory directly, so you
 can switch between 3-bit, 6-bit and 8-bit without leaving the canvas.
 
-## Suggested research question or hypothesis
+## Example research questions or hypothesis
 
 For example:
 
@@ -114,10 +114,10 @@ and token counts. **Orange3-Text** adds **Corpus**, **Word Cloud**,
 **Concordance** and **Document Map** if you want to compare the vocabulary of
 human and machine texts.
 
-## Suggested approaches to data preparation, analysis and modelling
+## Example approaches to data preparation, analysis and modelling
 
-**A way in.** One comparison — a few prompts, a couple of generations each and
-a small panel of judges — is enough to see what the question involves.
+One comparison — a few prompts, a couple of generations each and a small panel
+of judges — would be enough to see what the question involves.
 
 You could begin by choosing a genre and writing 10–20 prompts. Keep them short
 enough that a generation fits within the model's context, and varied enough

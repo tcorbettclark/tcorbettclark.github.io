@@ -13,8 +13,7 @@ symmetry. Each feature has a one-sentence definition, so you can inspect it
 before you trust it. A **Neural Network** learns from those numbers, and the
 **Neural Network Viewer** draws the network and its weights.
 
-A highly accurate model is not necessary for your project to be successful. A
-convolutional network trained in Python would probably score higher. Your
+A convolutional network trained in Python would probably score higher. Your
 project would be about explaining the classifier: which measurements carry the
 signal, which digits it confuses, and whether a model trained on a clean
 teaching dataset recognises digits written by you. You would produce a
@@ -44,15 +43,14 @@ to squares, and put them in folders named 0–9. Ask classmates for samples if y
 want a wider range of styles, with their consent and without collecting
 anything more personal than the digit itself.
 
-Get your centre's approval before you ask anyone, keep the samples anonymous,
-and let people withdraw theirs at any point.
+Consider whether you need approval from your school or others.
 
 If you want more training data, full MNIST is available from
 [Hugging Face](https://huggingface.co/datasets/ylecun/mnist). Download
 it once and work offline afterwards. Check the dataset card and record the
 licence and source in your project log.
 
-## Suggested research question or hypothesis
+## Example research questions or hypothesis
 
 For example:
 
@@ -97,10 +95,10 @@ density; **E (3)** topology, including hole count and stroke crossings; **F
 for MNIST. Groups A–F give 36 features, small enough to inspect and large enough
 to support a real ablation study.
 
-## Suggested approaches to data preparation, analysis and modelling
+## Example approaches to data preparation, analysis and modelling
 
-**A way in.** Build the baseline, then one ablation; keep the rest for later
-if the time allows.
+You could build the baseline, then one ablation; keep the rest for later if
+the time allows.
 
 You could begin by building the workflow from scratch: **Import Images** →
 **Image Features** → **Test & Score**, with **Neural Network** as the learner
@@ -142,9 +140,8 @@ make from your model.
 
 The expected outcome would be a working Orange workflow that classifies digits
 from interpretable features, together with a feature table, a confusion matrix
-and an ablation record. A highly accurate model is not necessary for your
-project to be successful. A model that reaches 92% and whose errors you can
-explain is a stronger EPQ artefact than a 98% model you cannot interpret.
+and an ablation record. A model that reaches 92% and whose errors you can
+explain gives you more to discuss than a 98% model you cannot interpret.
 
 You could evaluate the model on held-out MNIST images and on your own
 handwriting, compare it with a raw-pixel baseline and a majority-class baseline,

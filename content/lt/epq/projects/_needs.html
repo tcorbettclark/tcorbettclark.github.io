@@ -1,4 +1,4 @@
-{# "What this project needs" block, at the top of every outline.
+{# "Project dependencies" block, at the top of every outline.
 
    Each project declares its requirements in `_needs.toml` in its own
    directory; awg.py loads every .toml under content/ and makes its top-level
@@ -19,7 +19,7 @@
    included template resolves against that template's directory, not the
    page's. #}
 <aside class="needs{% if needs.python %} python{% endif %}">
-  <p class="needs-title">What this project needs</p>
+  <p class="needs-title">Project dependencies</p>
   <dl>
     <dt>Programming</dt><dd>{{ needs.programming }}</dd>
     <dt>Machine</dt><dd>{{ needs.machine }}</dd>

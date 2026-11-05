@@ -75,7 +75,7 @@ with `mlx_lm.convert`. Check the licence and keep the second model as a separate
 arm; mixing model families makes it harder to attribute differences to
 quantisation.
 
-## Suggested research question or hypothesis
+## Example research questions or hypothesis
 
 For example:
 
@@ -124,10 +124,10 @@ measurements. A model that is 20% smaller but 5% less accurate may be a good
 trade for a phone and a bad trade for a server. Your project would make that
 trade explicit.
 
-## Suggested approaches to data preparation, analysis and modelling
+## Example approaches to data preparation, analysis and modelling
 
-**A way in.** Compare a couple of quantisations on a short prompt set, with a
-few repeats each; more models and prompts can follow if the time allows.
+You could compare a couple of quantisations on a short prompt set, with a few
+repeats each; more models and prompts can follow if the time allows.
 
 You could begin by inventorying the models. For each directory, record the
 file size, the `config.json` quantisation settings, the number of bits and the

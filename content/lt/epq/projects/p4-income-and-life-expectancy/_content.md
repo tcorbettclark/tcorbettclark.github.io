@@ -12,7 +12,7 @@ countries live much longer or much shorter than their income predicts, and what
 else might explain the gap: schooling, child mortality, health spending,
 geography, inequality or conflict.
 
-A high R² is not necessary for your project to be successful. A simple model that
+A high R² is not necessary. A simple model that
 explains much of the variation is useful, but the exceptions are an important
 part of the investigation. You would learn to read a scatter plot, fit and
 interpret a regression, inspect residuals, add a second indicator without
@@ -73,7 +73,7 @@ expectancy because of inequality, or a low average income and a high life
 expectancy because of strong public health. Keep that distinction visible in
 your writing.
 
-## Suggested research question or hypothesis
+## Example research questions or hypothesis
 
 For example:
 
@@ -122,10 +122,10 @@ predicted versus actual values and the residuals. **Feature Statistics** and
 **Feature Constructor** creates a log-income column, and **Preprocess** can
 standardise features if you want to compare coefficients on a common scale.
 
-## Suggested approaches to data preparation, analysis and modelling
+## Example approaches to data preparation, analysis and modelling
 
-**A way in.** Fit the single-year model, look at the residuals, then decide
-whether a log transform or a regional split is worth the time.
+You could fit the single-year model, look at the residuals, then decide whether
+a log transform or a regional split is worth the time.
 
 You could begin by downloading two indicators, income per person and life
 expectancy, for a recent year. Put them in a spreadsheet with one row per
@@ -176,9 +176,9 @@ make from your model.
 The expected outcome would be a working Orange workflow that predicts life
 expectancy from income, a scatter plot with a fitted line, a residual table
 naming the largest exceptions, and a comparison of at least two model
-specifications. Importantly, a high R² is not necessary for your project to be
-successful. A model that explains a moderate share of the variation, and a clear
-account of what it misses, is a strong result.
+specifications. A high R² is not necessary. A model that explains a moderate
+share of the variation, and a clear account of what it misses, gives you
+something to argue.
 
 You could evaluate the model with cross-validation, compare it with a
 mean-prediction baseline, inspect the residuals for patterns, and check whether

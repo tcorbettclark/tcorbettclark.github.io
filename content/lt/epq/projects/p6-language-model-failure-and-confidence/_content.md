@@ -86,7 +86,7 @@ A base model may not follow that instruction reliably. You could treat verbal
 confidence as a separate, optional experiment, and say clearly that it is a
 different measurement.
 
-## Suggested research question or hypothesis
+## Example research questions or hypothesis
 
 For example:
 
@@ -134,10 +134,10 @@ questions where it says it is 80% confident, it is right about 80% of the time.
 Perfect calibration is rare. The useful question is how far from calibrated the
 model is, and whether the gap is stable enough to support a decision.
 
-## Suggested approaches to data preparation, analysis and modelling
+## Example approaches to data preparation, analysis and modelling
 
-**A way in.** One quantisation and a pilot question set will show you what the
-measurement involves; more questions and models can follow.
+One quantisation and a pilot question set would show you what the measurement
+involves; more questions and models can follow.
 
 You could begin by building the question set in a spreadsheet or a CSV file.
 You would keep the prompt, the correct answer, the distractors, the category,
