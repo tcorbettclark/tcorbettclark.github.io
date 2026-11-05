@@ -28,8 +28,7 @@ agreement, and some networks block the downloads entirely.
 | Python | Python 3.11 or later, and the packages the outline names: `mlx-lm`, `numpy`, `matplotlib`, `psutil` |
 
 Everything runs locally once installed. Nothing here needs an account, a
-subscription or a cloud service, so your data stays under your control and the
-project stays reproducible after you leave school.
+subscription or a cloud service.
 
 ## Downloads
 
