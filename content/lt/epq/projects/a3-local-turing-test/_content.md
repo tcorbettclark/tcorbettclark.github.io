@@ -62,8 +62,8 @@ test structure and rhetoric. Explanations of a school topic test factual accurac
 Limericks are short, highly structured and funny, and a public-domain collection
 is easy to find: Edward Lear's *A Book of Nonsense* (1846) is available from
 [Project Gutenberg](https://www.gutenberg.org/ebooks/13646). If you use Lear,
-remember that the Victorian style is itself a clue, so include some modern human
-limericks as well.
+remember that the Victorian style is itself a clue, so include some modern human limericks as well — check the licence, or ask
+permission, before you copy one into your dataset.
 
 For the human side, you can write your own texts, ask classmates for
 contributions, or use public-domain writing. If you involve other people, as

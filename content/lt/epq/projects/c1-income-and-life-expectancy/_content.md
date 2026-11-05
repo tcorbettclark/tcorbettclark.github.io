@@ -201,11 +201,12 @@ the conclusions survive a change of year, region or indicator. You could compare
 Gapminder with the World Bank for one or two countries, and ask whether the
 definitions explain any disagreement.
 
-You could pick three countries that break the rule and write a short explanation
-for each. You could ask whether the gap is explained by income inequality, a
-health system, a recent conflict, oil wealth, or a data problem. If you can
-answer that, you have a stronger evaluation than a single R². If you cannot, that is also a finding about
-the limits of the data.
+You could pick three countries that break the rule and write a short
+explanation for each. You could ask what else might explain the gap — income
+inequality, the health system, a recent conflict, oil wealth, or a problem
+with the data — and check which of those you actually have evidence for. If
+you can answer that, you have a stronger evaluation than a single R². If you
+cannot, that is also a finding about the limits of the data.
 
 You could finish by reflecting on what a model like this could and could not be
 used for. It may describe a broad pattern across countries without being reliable
