@@ -52,7 +52,7 @@ order.
 ## Setting up
 
 For A1–A3 and C1, you need [Orange Data Mining](https://orangedatamining.com/) with
-the [`orange3-nn-suite`](https://github.com/tcorbettclark/orange3-nn-suite)
+the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite)
 add-on installed. The add-on provides the **Image Features**, **Image Pixels**,
 **LM Text Loader**, **Load LM**, **LM Pre-trainer**, **LM Generator** and
 **Neural Network Viewer** widgets. For A1–A2, install the add-on's `image` extra
@@ -61,10 +61,10 @@ it for loading [BritLLM](https://huggingface.co/britllm/britllm-3b-v0.1).
 
 Data and models:
 
-- **A1:** the [`orange3-nn-suite`](https://github.com/tcorbettclark/orange3-nn-suite)
+- **A1:** the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite)
   repository includes a prepared MNIST subset, or you can download the
   [full MNIST dataset](https://huggingface.co/datasets/ylecun/mnist).
-- **A2:** the [`orange3-nn-suite`](https://github.com/tcorbettclark/orange3-nn-suite)
+- **A2:** the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite)
   repository includes a cloud fetcher that downloads the
   [WMO International Cloud Atlas](https://cloudatlas.wmo.int/) corpus. You also
   collect your own sky photographs.

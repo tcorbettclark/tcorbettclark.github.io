@@ -28,7 +28,7 @@ which features cause the confusion.
 ## Dataset(s) to be used
 
 A suitable starting point would be the [WMO International Cloud Atlas](https://cloudatlas.wmo.int/).
-The [`orange3-nn-suite`](https://github.com/tcorbettclark/orange3-nn-suite)
+The [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite)
 add-on's repository includes a fetcher that downloads a curated corpus of five
 genera: cirrus (43 images), altocumulus (40), stratocumulus (26), cumulonimbus
 (39) and cumulus (43). That is 191 images in total, written to one folder per

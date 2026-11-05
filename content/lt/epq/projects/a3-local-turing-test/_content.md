@@ -276,7 +276,7 @@ evidence a finished project could include.*
 - [Searle, "Minds, Brains, and Programs"](https://doi.org/10.1017/S0140525X00005756),
   *Behavioral and Brain Sciences* (1980) — the Chinese Room reply.
 - The [BritLLM model card](https://huggingface.co/britllm/britllm-3b-v0.1) and
-  the [Orange language-model tutorials](https://github.com/tcorbettclark/orange3-nn-suite/tree/main/tutorials)
+  the [Orange language-model tutorials](https://github.com/tcorbettclark/orange3-ai-suite/tree/main/tutorials)
   — the practical reference for the model and the widgets.
 - [Lear, *A Book of Nonsense*](https://www.gutenberg.org/ebooks/13646) (1846) —
   a public-domain source of human limericks, if you choose that genre.

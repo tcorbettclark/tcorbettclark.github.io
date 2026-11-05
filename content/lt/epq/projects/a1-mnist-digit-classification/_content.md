@@ -6,7 +6,7 @@ You could investigate whether a computer can recognise handwritten digits from
 a small set of human-readable image measurements, rather than from raw pixels.
 You would build the classifier in **Orange Data Mining**, using the **Image
 Features** widget from the
-[`orange3-nn-suite`](https://github.com/tcorbettclark/orange3-nn-suite) add-on.
+[`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite) add-on.
 The widget turns each image into 36 numbers describing brightness, row and
 column profiles, spatial mass, texture, enclosed holes, stroke crossings and
 symmetry. Each feature has a one-sentence definition, so you can inspect it
@@ -28,7 +28,7 @@ feature values that produced it.
 ## Dataset(s) to be used
 
 A suitable starting point would be the standard MNIST dataset. The
-`orange3-nn-suite` repository includes a prepared subset of 5,000 training
+`orange3-ai-suite` repository includes a prepared subset of 5,000 training
 images (500 per digit) and 1,000 validation images (100 per digit), stored as
 56×56 PNGs in one folder per class. The folder names are the labels, which is
 the layout **Import Images** expects. The subset was drawn from standard MNIST
