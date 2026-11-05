@@ -1,5 +1,10 @@
 # Can a small language model tell you when it is likely to be wrong?
 
+> One way to run this project, not the only way. Change the question, the
+data, the tool or the artefact to suit what interests you: the choices, and
+the reasons for them, have to be yours before your centre approves the
+proposal.
+
 ## Project overview
 
 You could investigate whether a language model's own probabilities can warn

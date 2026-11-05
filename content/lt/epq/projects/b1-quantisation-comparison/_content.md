@@ -1,5 +1,10 @@
 # How much memory, speed and energy does quantisation save, and what does it cost in quality?
 
+> One way to run this project, not the only way. Change the question, the
+data, the tool or the artefact to suit what interests you: the choices, and
+the reasons for them, have to be yours before your centre approves the
+proposal.
+
 ## Project overview
 
 You could investigate what happens when a language model is compressed.

@@ -1,5 +1,10 @@
 # Can a model trained on curated cloud photographs recognise the sky above your school?
 
+> One way to run this project, not the only way. Change the question, the
+data, the tool or the artefact to suit what interests you: the choices, and
+the reasons for them, have to be yours before your centre approves the
+proposal.
+
 ## Project overview
 
 You could investigate whether a computer can identify cloud genera from
@@ -57,9 +62,9 @@ You could also use a public cloud dataset from Kaggle or the Hugging Face Hub,
 but check the licence and the climate. Images from another country may not
 match UK skies. If you use one, keep it as a separate experiment rather than
 mixing it into your main corpus without recording the change. The Atlas has no
-"clear sky" gallery because it classifies clouds; if you want a clear-sky class,
-collect it yourself, and note that "is there a cloud?" is a different question
-from "which genus is this?".
+"clear sky" gallery because it classifies clouds; if you want a clear-sky
+class, collect it yourself, and note that "is there a cloud?" is a different
+question from "which genus is this?".
 
 ## Suggested research question or hypothesis
 
@@ -80,6 +85,10 @@ separates blue sky from grey cloud, but does not help distinguish genera once
 the sky is overcast. You could test that by comparing
 group G on and off, and by looking at whether the model's errors are cases
 where the colour cue is absent.
+
+**Variants.** The same approach works on any labelled image collection: cloud
+genera in another region, cloud type against time of day, or a teaching set
+for a different subject.
 
 ## Key data science, statistical and machine learning concepts
 

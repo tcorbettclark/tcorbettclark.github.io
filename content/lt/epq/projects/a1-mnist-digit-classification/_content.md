@@ -1,5 +1,10 @@
 # Can a no-code image classifier read handwritten digits, and can you explain its mistakes?
 
+> One way to run this project, not the only way. Change the question, the
+data, the tool or the artefact to suit what interests you: the choices, and
+the reasons for them, have to be yours before your centre approves the
+proposal.
+
 ## Project overview
 
 You could investigate whether a computer can recognise handwritten digits from
@@ -67,6 +72,10 @@ You could test whether topological features (hole count and stroke crossings)
 separate digits with enclosed regions (0, 6, 8, 9) from those without, while
 profile and spatial-mass features do more of the work for digits such as 1, 2,
 4 and 7.
+
+**Variants.** The same workflow answers a different question on a different
+image set: traffic signs, medical images, or your own handwriting compared
+with a friend's.
 
 ## Key data science, statistical and machine learning concepts
 

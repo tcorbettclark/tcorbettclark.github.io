@@ -1,5 +1,10 @@
 # Can classmates tell BritLLM's writing from a human's when the human is imitating the machine?
 
+> One way to run this project, not the only way. Change the question, the
+data, the tool or the artefact to suit what interests you: the choices, and
+the reasons for them, have to be yours before your centre approves the
+proposal.
+
 ## Project overview
 
 You could run your own Turing-style test with
@@ -80,10 +85,10 @@ produces more human-seeming text, whether judges rely more on rhythm and
 vocabulary than on meaning, or whether a short guide to machine-writing tells
 improves their accuracy.
 
-You could test whether judges find 3-bit text easier to spot because it is more
-repetitive and less coherent, while 8-bit text is harder. You could test that by
-comparing detection rates for each quantisation, using the same prompts, seeds
-and maximum lengths.
+You could test whether judges find 3-bit text easier to spot because it is
+more repetitive and less coherent, while 8-bit text is harder. You could test
+that by comparing detection rates for each quantisation, using the same
+prompts, seeds and maximum lengths.
 
 ## Key data science, statistical and machine learning concepts
 
