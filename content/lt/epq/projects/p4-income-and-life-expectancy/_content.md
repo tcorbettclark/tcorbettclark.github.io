@@ -18,15 +18,10 @@ part of the investigation. You would learn to read a scatter plot, fit and
 interpret a regression, inspect residuals, add a second indicator without
 fooling yourself, and separate correlation from causation.
 
-Your final artefact could be the workflow, a scatter plot with the fitted line,
+You could produce the workflow, a scatter plot with the fitted line,
 a residual table naming the biggest exceptions, a comparison of two or three
 models, and a short case study of one over-performing and one under-performing
 country.
-
-**What you submit.** The assessed product is a written report; the
-tables, plots and workflow are evidence you discuss in it, not the
-submission itself. Your board sets the length and the form, so check the
-current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -130,18 +125,13 @@ standardise features if you want to compare coefficients on a common scale.
 ## Suggested approaches to data preparation, analysis and modelling
 
 **A way in.** Fit the single-year model, look at the residuals, then decide
-whether a log transform or a regional split is worth the time. Orange Data
-Mining is free for Windows, macOS and Linux, and a spreadsheet will do for the
-data preparation — see [Prerequisites](../../prerequisites/).
+whether a log transform or a regional split is worth the time.
 
 You could begin by downloading two indicators, income per person and life
 expectancy, for a recent year. Put them in a spreadsheet with one row per
 country, check the missing values, and import the CSV into Orange with
 **File**. You could open **Scatter Plot**, put income on the x-axis and life
 expectancy on the y-axis, and colour the points by region.
-
-From there the sequence is yours: decide what to measure, what to compare
-and when to stop.
 
 ## Potential limitations, risks and sources of bias
 

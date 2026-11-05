@@ -25,14 +25,9 @@ it lets you test whether the model "knows what it knows" in a way that can be
 checked. You could also compare probability confidence with the model's verbal
 confidence, if you can elicit a number from it.
 
-Your final artefact could be a Python harness, a question set you designed,
+You could produce a Python harness, a question set you designed,
 calibration plots for each model, and a written analysis of when confidence is
 useful and when it is misleading.
-
-**What you submit.** The assessed product is a written report; the
-tables, plots and workflow are evidence you discuss in it, not the
-submission itself. Your board sets the length and the form, so check the
-current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -148,9 +143,6 @@ You could begin by building the question set in a spreadsheet or a CSV file.
 You would keep the prompt, the correct answer, the distractors, the category,
 the difficulty and the source in separate columns. Write 20 pilot items first
 and run them through the model.
-
-From there the sequence is yours: decide what to measure, what to compare
-and when to stop.
 
 ## Potential limitations, risks and sources of bias
 

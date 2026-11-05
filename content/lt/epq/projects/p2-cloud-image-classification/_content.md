@@ -21,14 +21,9 @@ how well a model trained on the first kind of image performs on the second. A
 model that scores well in cross-validation and then fails on your photos would
 show how much the results depend on the training images.
 
-Your final artefact could be the workflow, a labelled field-test set, a
+You could produce the workflow, a labelled field-test set, a
 confusion matrix for each test, and a written analysis of which genera and
 which features cause the confusion.
-
-**What you submit.** The assessed product is a written report; the
-tables, plots and workflow are evidence you discuss in it, not the
-submission itself. Your board sets the length and the form, so check the
-current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -127,9 +122,6 @@ from scratch: **Import Images** → **Image Features** → **Test & Score**, wit
 **Neural Network**, **Tree** and **Logistic Regression** as learners, and
 **Confusion Matrix**, **Data Table** and **Column Statistics** for inspection.
 You could set the working size to 128.
-
-From there the sequence is yours: decide what to measure, what to compare
-and when to stop.
 
 ## Potential limitations, risks and sources of bias
 

@@ -24,13 +24,8 @@ measure memory and energy as well as accuracy, so you can ask whether the
 cheapest model is also the cheapest per correct answer. That question is
 relevant to phones, laptops and data centres.
 
-Your final artefact could be a Python benchmark harness, a results table, a set
+You could produce a Python benchmark harness, a results table, a set
 of trade-off plots, and a written recommendation for a particular use case.
-
-**What you submit.** The assessed product is a written report; the
-tables, plots and workflow are evidence you discuss in it, not the
-submission itself. Your board sets the length and the form, so check the
-current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -136,9 +131,6 @@ file size, the `config.json` quantisation settings, the number of bits and the
 group size. Compute the theoretical size from the parameter count and compare
 it with the disk size. The difference is the overhead from the tokenizer,
 metadata and file format.
-
-From there the sequence is yours: decide what to measure, what to compare
-and when to stop.
 
 ## Potential limitations, risks and sources of bias
 

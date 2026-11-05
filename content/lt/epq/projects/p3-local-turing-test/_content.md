@@ -20,15 +20,10 @@ You could also compare quantisations: whether 3-bit BritLLM sounds more or less
 human than 8-bit, and whether a higher temperature makes the text more
 surprising or just less coherent.
 
-Your final artefact could be a set of matched human and machine texts, an
+You could produce a set of matched human and machine texts, an
 anonymous judging sheet, a table of judgements, and a written analysis of the
 tells. Your project would be about designing a fair comparison, collecting
 judgements, and interpreting what people noticed.
-
-**What you submit.** The assessed product is a written report; the
-tables, plots and workflow are evidence you discuss in it, not the
-submission itself. Your board sets the length and the form, so check the
-current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -128,9 +123,6 @@ You could begin by choosing a genre and writing 10–20 prompts. Keep them short
 enough that a generation fits within the model's context, and varied enough
 that you are not testing one lucky phrasing. For each prompt, generate 3–5
 texts from each quantisation at a fixed temperature, seed and maximum length.
-
-From there the sequence is yours: decide what to measure, what to compare
-and when to stop.
 
 ## Potential limitations, risks and sources of bias
 

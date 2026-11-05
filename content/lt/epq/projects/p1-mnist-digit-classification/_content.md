@@ -21,14 +21,9 @@ teaching dataset recognises digits written by you. You would produce a
 reusable Orange workflow, evaluation tables and plots, and a written analysis
 that names the features behind each success and failure.
 
-Your final artefact could be the workflow itself, together with a short user
+You could produce the workflow itself, together with a short user
 guide that lets someone else load a digit image and see the prediction and the
 feature values that produced it.
-
-**What you submit.** The assessed product is a written report; the
-tables, plots and workflow are evidence you discuss in it, not the
-submission itself. Your board sets the length and the form, so check the
-current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -105,17 +100,12 @@ to support a real ablation study.
 ## Suggested approaches to data preparation, analysis and modelling
 
 **A way in.** Build the baseline, then one ablation; keep the rest for later
-if the time allows. You need Orange Data Mining with the `orange3-ai-suite`
-add-on, which provides the Image Features widget — see
-[Prerequisites](../../prerequisites/).
+if the time allows.
 
 You could begin by building the workflow from scratch: **Import Images** →
 **Image Features** → **Test & Score**, with **Neural Network** as the learner
 and **Confusion Matrix**, **Data Table** and **Column Statistics** attached.
 Set the working size to 56 so the feature windows have something to measure.
-
-From there the sequence is yours: decide what to measure, what to compare
-and when to stop.
 
 ## Potential limitations, risks and sources of bias
 
