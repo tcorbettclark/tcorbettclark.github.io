@@ -124,6 +124,11 @@ human and machine texts.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
+**How much to attempt.** One comparison is enough: a small prompt set, two
+generations each and a dozen or so judges; more quantisations and more judges
+are extensions. You need Orange with the add-on's language-model widgets and
+`mlx-lm` on an Apple-silicon Mac — see [Prerequisites](../../prerequisites/).
+
 You could begin by choosing a genre and writing 10–20 prompts. Keep them short
 enough that a generation fits within the model's context, and varied enough that
 you are not testing one lucky phrasing. For each prompt, generate 3–5 texts from

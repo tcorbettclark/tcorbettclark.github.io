@@ -121,6 +121,11 @@ default because it is a shortcut. Groups A–F give 36 features; adding G gives
 
 ## Suggested approaches to data preparation, analysis and modelling
 
+**How much to attempt.** Train and evaluate on the curated corpus, then test
+on 10–20 of your own photographs; a larger field set is an extension. You need
+Orange Data Mining with the same add-on and its `image` extra, plus a camera —
+see [Prerequisites](../../prerequisites/).
+
 You could begin by fetching or collecting the corpus and building the workflow
 from scratch: **Import Images** → **Image Features** → **Test & Score**, with
 **Neural Network**, **Tree** and **Logistic Regression** as learners, and

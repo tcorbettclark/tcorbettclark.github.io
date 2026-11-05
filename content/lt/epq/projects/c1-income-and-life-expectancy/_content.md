@@ -134,6 +134,12 @@ standardise features if you want to compare coefficients on a common scale.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
+**How much to attempt.** The single-year model, the log transform and the
+residuals are the core; the regional split and extra indicators are
+extensions. Orange Data Mining is free for Windows, macOS and Linux, and a
+spreadsheet will do for the data preparation — see
+[Prerequisites](../../prerequisites/).
+
 You could begin by downloading two indicators, income per person and life
 expectancy, for a recent year. Put them in a spreadsheet with one row per
 country, check the missing values, and import the CSV into Orange with **File**.
@@ -168,6 +174,9 @@ You could check whether the slope changes, and whether the relationship
 disappears or reverses in any group. A relationship that holds across the whole
 world but not within regions is a useful warning about aggregated data. If you have several years, repeat the
 analysis for an earlier decade and compare.
+
+Treat that as an extension: the core answer is the single model and its
+residuals.
 
 You could pick one over-performing and one under-performing country for a short case
 study. Read about their health systems, inequality, geography and recent

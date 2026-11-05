@@ -141,6 +141,11 @@ model is, and whether the gap is stable enough to support a decision.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
+**How much to attempt.** One quantisation and a pilot of about 40 questions
+answers the question; bigger question sets and more models are extensions. You
+need the same kit as B1: Python, `mlx-lm` and an Apple-silicon Mac with 16 GB
+— see [Prerequisites](../../prerequisites/).
+
 You could begin by building the question set in a spreadsheet or a CSV file.
 You would keep the prompt, the correct answer, the distractors, the category, the
 difficulty and the source in separate columns. Write 20 pilot items first and
@@ -205,6 +210,9 @@ If you want to test sampling consistency, generate ten answers at temperature
 You could test whether agreement is a better predictor of correctness than the
 probability of the top candidate. This is related to the idea of **semantic
 uncertainty**, but keep it simple: agreement is a count, not a probability.
+
+Try ten questions first: it is slower than it looks, and it is an extension
+rather than part of the core.
 
 You should report confidence intervals for accuracy and for ECE. With 100–200 questions,
 the intervals are wide, especially for subgroup analyses. A bootstrap

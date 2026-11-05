@@ -97,6 +97,10 @@ whether speed improves but not proportionally, and whether quality holds up
 from 8-bit to 4-bit before falling more sharply at 3-bit. You could test each part
 separately and report where the hypothesis fails.
 
+**Phrase it as a decision.** The question is easier to answer well if it ends
+in a choice: for a laptop assistant that has to fit in 8 GB, which
+quantisation would you deploy, and what would you give up?
+
 ## Key data science, statistical and machine learning concepts
 
 Your project could involve:
@@ -124,6 +128,11 @@ trade for a phone and a bad trade for a server. Your project would make that
 trade explicit.
 
 ## Suggested approaches to data preparation, analysis and modelling
+
+**How much to attempt.** Four quantisations, a small prompt set and three
+repeats is an honest experiment; more prompts or models are extensions. You
+need Python 3.11 or later, `mlx-lm` and an Apple-silicon Mac with 16 GB, plus
+a multi-gigabyte model download — see [Prerequisites](../../prerequisites/).
 
 You could begin by inventorying the models. For each directory, record the file
 size, the `config.json` quantisation settings, the number of bits and the group
@@ -162,6 +171,9 @@ the models, or alternate them, so that thermal throttling does not always
 favour the first model you run. Let the machine rest between runs if it becomes
 warm. If you use `mlx_lm.stream_generate`, you can also record the time to first
 token; otherwise report total generation time.
+
+Pilot one quantisation on ten prompts first: if a full pass takes longer than
+an afternoon, cut the prompt set rather than the repeats.
 
 You could measure energy only if you can do it safely and with supervision. On macOS,
 `powermetrics` requires administrator rights. Run it in the background with a

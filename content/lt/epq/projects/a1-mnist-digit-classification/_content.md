@@ -106,6 +106,11 @@ to support a real ablation study.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
+**How much to attempt.** The baseline and one ablation are enough; the
+remaining ablations and a larger test set are extensions. You need Orange Data
+Mining with the `orange3-ai-suite` add-on, which provides the Image Features
+widget — see [Prerequisites](../../prerequisites/) before you start.
+
 You could begin by building the workflow from scratch: **Import Images** →
 **Image Features** → **Test & Score**, with **Neural Network** as the learner
 and **Confusion Matrix**, **Data Table** and **Column Statistics** attached. Set
