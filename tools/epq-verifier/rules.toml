@@ -203,7 +203,7 @@ title = "Sources named too vaguely to reference"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
 locator = "§2.2 The Taught Element"
 quote = "referencing, the evaluation of sources and the prevention of plagiarism"
-question = "Is a source named so vaguely that it cannot be identified at all - 'a Kaggle dataset', 'some Wikipedia article', 'a book chapter' - so that no student could cite it? Do not flag a source that is named and linked: a missing version number or access date is not worth reporting, since everything dates."
+question = "Is a source named so vaguely that it cannot be identified at all - 'a Kaggle dataset', 'some Wikipedia article', 'a book chapter' - so that no student could cite it? Do not flag a source that is named and linked: a missing version number or access date is not worth reporting, since everything dates. Distinguish a vague source from an open choice: where the page names and links where to look - a dataset, a repository, a model hub - and leaves the choice to the student, that is not a vague source, and what they chose is theirs to cite."
 why = "AO2 is marked on critical selection of sources, and a bibliography of unnamed categories cannot show it; but a named, linked source is identifiable, which is all the example needs to be."
 fix = "Name one identifiable example, or ask the student to record the details of whatever they choose."
 
