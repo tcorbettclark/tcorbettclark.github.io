@@ -147,9 +147,8 @@ Then switch on group G and rerun. Accuracy may rise. Inspect the new features:
 A model can use "is the image blue?" as a proxy for "is this a sky photo?"
 without learning anything about cloud shape. You could run a colour-only model
 (G on, A–F off) and a shape-only model (A–F on, G off). If the colour-only model
-is much stronger than you expected, that is evidence of a shortcut. You could
-compare learners on exactly the same features: if the neural network, tree and
-logistic regression all produce similar results, the features are doing the work.
+is much stronger than you expected, that is evidence of a shortcut. You could compare learners on exactly the same features, and see what that tells
+you about which measurements carry the signal.
 
 The field test would be the main part of the investigation. Take 20–40 new
 photos, label them against the Atlas, and import them with a second **Import
@@ -171,8 +170,9 @@ hard for people too. If you use **Preprocess** to normalise features, connect th
 **Preprocessor** output to **Test & Score** so that normalisation is fitted
 inside each fold.
 
-Their answers are data about a person: get the centre's approval first, keep
-the responses anonymous, and say so on the sheet.
+Their answers are data about a person, so think about what you are asking
+them for, how you will keep it anonymous, and what your centre needs to
+agree to before you collect it.
 
 You should record your decisions in your project log: which genera you included, what
 counted as a valid photo, how you handled mixed skies, how you split training

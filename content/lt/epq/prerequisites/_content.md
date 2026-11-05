@@ -63,8 +63,9 @@ your control and the project reproducible after you leave school.
 | A3, B1, B2 | [BritLLM](https://huggingface.co/britllm/britllm-3b-v0.1) | about 5 GB for the full model; roughly 1–2 GB per quantised version |
 | C1 | [Gapminder](https://www.gapminder.org/data/) indicators, optionally cross-checked against the [World Bank](https://data.worldbank.org/) | a few MB |
 
-Check the download size before you start on a school connection, and check the
-model's licence if you intend to redistribute anything you produce.
+Model downloads are multi-gigabyte, before you count the datasets, so check
+the size and the disk space before you start on a school connection. Check
+the model's licence too if you intend to redistribute anything you produce.
 
 ## Permission and ethics
 

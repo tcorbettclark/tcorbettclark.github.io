@@ -69,11 +69,10 @@ Name the edition, the link and the date you took it, and check the licence
 before you quote from it.
 
 For the resource measurements, you need a quiet machine, a way to measure
-memory, and optionally a way to measure energy. On macOS, `psutil` gives you the
-process's resident memory, and `powermetrics` can report CPU and GPU power if
-you have administrator rights. A plug-in power meter is an alternative, but it
-measures the whole machine and is harder to attribute to the model. Record the
-machine, the macOS version, the MLX version and the model paths in your log.
+memory, and optionally a way to measure energy. On macOS, `psutil` gives you
+the process's resident memory, and `powermetrics` can report CPU and GPU power
+if you have administrator rights. Record the machine, the macOS version, the
+MLX version and the model paths in your log.
 
 If you want to extend the comparison beyond BritLLM, you can download another
 small model from [Hugging Face](https://huggingface.co/models) and convert it
@@ -186,9 +185,8 @@ You could measure energy only if you can do it safely and with supervision. On m
 one-second sampling interval, record the CPU and GPU power, and integrate the
 power over the generation window. Report joules per token and joules per
 correct answer. Treat the result as a relative comparison on your machine, not
-an absolute claim about all hardware. If you cannot use `powermetrics`, a
-plug-in power meter or a careful estimate based on time and average power is
-better than no measurement, provided you explain the method and its
+an absolute claim about all hardware. If you cannot use `powermetrics`, a careful estimate based on time and average
+power is better than no measurement, provided you explain the method and its
 uncertainty.
 
 You could analyse the results with plots:

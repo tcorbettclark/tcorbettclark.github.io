@@ -57,8 +57,8 @@ anything more personal than the digit itself.
 Get your centre's approval before you ask anyone, keep the samples anonymous,
 and let people withdraw theirs at any point.
 
-If you want more training data, full MNIST is available from Yann LeCun's page
-and from [Hugging Face](https://huggingface.co/datasets/ylecun/mnist). Download
+If you want more training data, full MNIST is available from
+[Hugging Face](https://huggingface.co/datasets/ylecun/mnist). Download
 it once and work offline afterwards. Check the dataset card and record the
 licence and source in your project log.
 
@@ -132,14 +132,13 @@ but a change in the pattern of errors is more informative: for example,
 removing topology might turn a 6/8 confusion into a 0/8 confusion. Try removing
 groups in combination as well, because features can substitute for one another.
 
-You could compare learners on exactly the same feature table: **Neural Network**, **Tree**
-and **Logistic Regression**. If all three produce similar results, the features
-are doing most of the work. If the neural network is clearly better, look at
-which errors it fixes and consider what non-linear combination of features might
-explain the difference. Build the raw-pixel baseline with **Image Pixels**: at
-the default 10×10 grid it produces 100 luminance features per image with no
-spatial encoding. Raise the grid to 14×14 or 28×28 and compare accuracy and the
-number of columns.
+You could compare learners on exactly the same feature table: **Neural
+Network**, **Tree** and **Logistic Regression**. If the neural network is
+clearly better, look at which errors it fixes and consider what non-linear
+combination of features might explain the difference. Build the raw-pixel
+baseline with **Image Pixels**: at the default 10×10 grid it produces 100
+luminance features per image with no spatial encoding. Raise the grid to 14×14
+or 28×28 and compare accuracy and the number of columns.
 
 Your own handwriting is the test set. Import it with a second **Import Images**
 widget, run it through **Image Features** with the same settings, and connect
@@ -248,7 +247,7 @@ evidence a finished project could include.*
 
 ## Further reading
 
-- LeCun, Cortes and Burges, "The MNIST Database of Handwritten Digits" — the
+- [LeCun, Cortes and Burges, "The MNIST Database of Handwritten Digits"](https://huggingface.co/datasets/ylecun/mnist) — the
   dataset's home page, with the original description and baseline results.
 - [Orange Data Mining documentation](https://orangedatamining.com/docs/) — the
   Image Analytics add-on, **Test & Score**, **Confusion Matrix** and **Neural

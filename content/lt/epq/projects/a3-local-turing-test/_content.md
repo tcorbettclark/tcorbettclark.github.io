@@ -65,14 +65,10 @@ remember that the Victorian style is itself a clue, so include some modern human
 limericks as well.
 
 For the human side, you can write your own texts, ask classmates for
-contributions, or use public-domain writing. If you ask classmates, get their
-consent, keep the texts anonymous, and do not collect anything more personal
-than the writing itself. Check whether your school requires approval for a
-questionnaire or a judging session.
-
-Get your centre's approval before any judging session, tell the judges what
-the data is for, keep their answers anonymous, and let them withdraw their judgements
-afterwards.
+contributions, or use public-domain writing. If you involve other people, as
+contributors or as judges, think about their permission, their anonymity and
+their right to withdraw, and check what your centre needs to agree to before
+you collect anything.
 
 In Orange, load the BritLLM model with **Load LM** and connect its **Model**
 output to **LM Generator**. Choose the quantisation you want to test, and keep

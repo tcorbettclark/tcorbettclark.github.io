@@ -80,7 +80,9 @@ useful for comparison, but your own questions give you more control over
 difficulty and contamination.
 
 For a general measure of the model's surprise, use a held-out text: a
-public-domain book chapter or a Wikipedia extract. Compute perplexity on it for
+chapter of a public-domain book such as *Alice's Adventures in Wonderland*
+([Project Gutenberg ebook 11](https://www.gutenberg.org/ebooks/11)), or a
+Wikipedia article you record by title, revision date and URL. Compute perplexity on it for
 each quantisation. This is not a confidence measure for individual answers, but
 it tells you whether the model is generally more or less uncertain after
 compression.
@@ -145,9 +147,8 @@ model is, and whether the gap is stable enough to support a decision.
 ## Suggested approaches to data preparation, analysis and modelling
 
 **How much to attempt.** One quantisation and a pilot of about 40 questions
-answers the question; bigger question sets and more models are extensions. You
-need the same kit as B1: Python, `mlx-lm` and an Apple-silicon Mac with 16 GB
-— see [Prerequisites](../../prerequisites/).
+answers the question; bigger question sets and more models are extensions. You need Python, `mlx-lm` and an Apple-silicon Mac with 16 GB, plus a
+multi-gigabyte model download — see [Prerequisites](../../prerequisites/).
 
 You could begin by building the question set in a spreadsheet or a CSV file.
 You would keep the prompt, the correct answer, the distractors, the category, the
@@ -175,8 +176,7 @@ generation: they should usually agree. If they do not, the prompt or the
 tokenisation is probably wrong.
 
 You could run the same questions through the 3-bit, 6-bit and 8-bit models. Keep the
-prompt, the candidate set, the tokeniser and the scoring rule identical. The
-models share a tokenizer, so the comparison is fair. If you change the prompt
+prompt, the candidate set, the tokeniser and the scoring rule identical. The models share a tokenizer, so the scoring rule is the same for each. If you change the prompt
 format between models, you are measuring the prompt, not the quantisation.
 
 Compute the basic statistics for each model:
