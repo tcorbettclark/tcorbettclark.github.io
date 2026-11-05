@@ -63,13 +63,13 @@ whether to label the dominant one or exclude it, and apply that rule
 consistently. Keep the images sky-only where possible; avoid identifiable
 people, houses or car number plates.
 
-You could also use a public cloud dataset from Kaggle or the Hugging Face Hub,
-but check the licence and the climate. Images from another country may not
-match UK skies. If you use one, keep it as a separate experiment rather than
-mixing it into your main corpus without recording the change. The Atlas has no
-"clear sky" gallery because it classifies clouds; if you want a clear-sky
-class, collect it yourself, and note that "is there a cloud?" is a different
-question from "which genus is this?".
+You could also use a public cloud dataset, but only one you can name, date and
+cite: check its licence and the climate it was taken in. Images from another
+country may not match UK skies. If you use one, keep it as a separate
+experiment rather than mixing it into your main corpus without recording the
+change. The Atlas has no "clear sky" gallery because it classifies clouds; if
+you want a clear-sky class, collect it yourself, and note that "is there a
+cloud?" is a different question from "which genus is this?".
 
 ## Suggested research question or hypothesis
 
@@ -241,6 +241,10 @@ simply on achieving the highest accuracy. You have scope to make and justify
 your own decisions about the cloud classes, the handling of mixed skies, and the
 field test. You could also discuss shortcut learning, domain shift, and the
 difference between a curated dataset and ordinary photographs.
+
+Check with your supervisor that none of this overlaps work you are submitting
+for another qualification: no part of an EPQ may be resubmitted for another
+qualification.
 
 ## Example artefacts
 

@@ -226,6 +226,10 @@ learner or test set, and the quality of your EPQ does not depend simply on
 achieving the highest accuracy. You have scope to make and justify your own
 decisions about the handwriting samples, the feature groups and the evaluation.
 
+Check with your supervisor that none of this overlaps work you are submitting
+for another qualification: no part of an EPQ may be resubmitted for another
+qualification.
+
 ## Example artefacts
 
 *Placeholder: the images and tables are not yet included. The list shows the

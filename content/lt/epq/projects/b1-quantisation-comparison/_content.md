@@ -65,6 +65,9 @@ the expected answers yourself, or adapt a public dataset and record its licence.
 A mixture of easy, medium and hard items is more informative than a set that
 every model passes or every model fails.
 
+Name the edition, the link and the date you took it, and check the licence
+before you quote from it.
+
 For the resource measurements, you need a quiet machine, a way to measure
 memory, and optionally a way to measure energy. On macOS, `psutil` gives you the
 process's resident memory, and `powermetrics` can report CPU and GPU power if
@@ -298,6 +301,10 @@ You could also discuss green computing and edge deployment: the same questions
 about memory, speed and energy are asked by engineers who run models on phones,
 in cars and in data centres. Your measurements are on a small scale, but the
 questions are similar.
+
+Check with your supervisor that none of this overlaps work you are submitting
+for another qualification: no part of an EPQ may be resubmitted for another
+qualification.
 
 ## Example artefacts
 

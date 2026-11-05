@@ -90,10 +90,11 @@ produces more human-seeming text, whether judges rely more on rhythm and
 vocabulary than on meaning, or whether a short guide to machine-writing tells
 improves their accuracy.
 
-You could test whether judges find 3-bit text easier to spot because it is
-more repetitive and less coherent, while 8-bit text is harder. You could test
-that by comparing detection rates for each quantisation, using the same
-prompts, seeds and maximum lengths.
+You could test whether judges find 3-bit text easier to spot, and whether that
+goes with the repetition and coherence you measure separately — measure the
+two rather than assuming one explains the other. You could test that by
+comparing detection rates for each quantisation, using the same prompts, seeds
+and maximum lengths.
 
 ## Key data science, statistical and machine learning concepts
 
@@ -267,6 +268,10 @@ judging design.
 You could also discuss questions from philosophy and psychology: what it means
 to sound human, how people use cues to judge authenticity, and whether a test of
 discrimination can tell you anything about intelligence. You could use your judges' reasons as evidence in that discussion.
+
+Check with your supervisor that none of this overlaps work you are submitting
+for another qualification: no part of an EPQ may be resubmitted for another
+qualification.
 
 ## Example artefacts
 

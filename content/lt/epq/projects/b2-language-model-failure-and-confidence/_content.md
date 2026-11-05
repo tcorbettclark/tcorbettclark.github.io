@@ -312,6 +312,10 @@ You could also discuss questions from AI safety and human-computer interaction:
 how people interpret confidence, when a model should refuse, and why a fluent
 answer is not the same as a reliable one. You could use your calibration curves as evidence in that discussion.
 
+Check with your supervisor that none of this overlaps work you are submitting
+for another qualification: no part of an EPQ may be resubmitted for another
+qualification.
+
 ## Example artefacts
 
 *Placeholder: the images and tables are not yet included. The list shows the

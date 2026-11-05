@@ -271,6 +271,10 @@ You could also discuss questions from statistics and public argument:
 correlation and causation, ecological inference, data definitions, and the
 difference between a pattern and a policy. You could use your charts and residuals as evidence in that discussion.
 
+Check with your supervisor that none of this overlaps work you are submitting
+for another qualification: no part of an EPQ may be resubmitted for another
+qualification.
+
 ## Example artefacts
 
 *Placeholder: the images and tables are not yet included. The list shows the
