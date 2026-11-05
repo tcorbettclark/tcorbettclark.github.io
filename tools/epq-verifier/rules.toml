@@ -34,18 +34,9 @@
 
 # ---------------------------------------------------------------- the outline
 
-[[rule]]
-id = "OWN-01"
-group = "own"
-severity = "high"
-check = "judge"
-title = "Reads as a specification rather than an example"
-source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.1 Aims"
-quote = "make a significant contribution to the choice and design of an extended project"
-question = "Reading this the way a 17-year-old would, could they reproduce the project end to end without making any significant choice of their own - question, data, tool, method, artefact? Name the decisions the outline has already made for them."
-why = "This is meant to be inspiration, not a recipe. The danger is not that we intend instruction, but that the page reads like one: a student who follows it exactly has made no significant contribution to the choice and design, which is what AQA's aims require and what a moderator will ask about."
-fix = "Keep the detail, but make the alternatives visible: name the decisions that are the student's, and show two or three ways each could go."
+# A rule that fires on every document is miscalibrated: either the outlines are
+# all wrong or the rule tests the wrong thing. One such rule has been removed
+# rather than tuned - see the note at the end of this file.
 
 [[rule]]
 id = "OWN-02"
@@ -56,8 +47,8 @@ title = "Nothing tells the reader they are allowed to depart from it"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
 locator = "§1.2 What is the Extended Project?"
 quote = "choose an area of interest"
-question = "Does the page say, in words a student would notice, that it is one example among many and that they are expected to change it - the question, the data, the tool, the artefact?"
-why = "An example that does not say so will be treated as the specification it looks like. This is the cheapest single fix in the pack: one sentence at the top of each outline."
+question = "Does the page say, in words a student would notice, that it is one example among many and that the decisions - question, data, tool, artefact - are theirs to make or change? Do not flag concreteness: naming a tool and a pipeline is the point of an example. Flag only the absence of that invitation."
+why = "An example that does not say so will be treated as the specification it looks like. This is the cheapest single fix in the pack: one sentence under the title."
 fix = "Add a line under the title: this is one way to run this project, not the only way; change the question, the data or the artefact to suit you."
 
 [[rule]]
@@ -95,8 +86,8 @@ title = "Too much work for the hours available"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
 locator = "§1.2 What is the Extended Project?"
 quote = "It will require in total 120 guided learning hours."
-question = "Is this plausible within 120 guided hours, which must also cover the taught element, the log, the report and the presentation? Point at the part that looks too big."
-why = "Running out of time is the most common way a good project fails, and an inspiring example is the easiest place to catch it. 120 hours is about fifteen school days in total."
+question = "Is the work the page presents as required plausible within 120 guided hours, which must also cover the taught element, the log, the report and the presentation? If the page separates a core from optional extensions, judge the core only. Treat suggested ranges ('aim for 20-40 images') as illustrations the student may scale: do not add up their maxima, and do not flag a number merely because it is large. Flag only a workload that the page presents as compulsory."
+why = "Running out of time is the most common way a good project fails, so the core path has to fit; but illustrative numbers are the student's to choose, and judging them as commitments would make every example too ambitious."
 fix = "Name the stage that has to be cut or time-boxed, and say roughly how many hours each stage should take."
 
 [[rule]]
@@ -121,7 +112,7 @@ title = "Compute-bound work that could swallow the project"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
 locator = "§1.2 What is the Extended Project?"
 quote = "It will require in total 120 guided learning hours."
-question = "Does the page require training, fine-tuning or an experiment suite that could consume most of the available hours before any analysis begins?"
+question = "Does the page present a compute-heavy step - training, fine-tuning, hundreds of generations - as required, rather than as a pilot or an optional extension? Again, a suggested range is the student's to scale; flag only what the page makes compulsory."
 why = "Compute-bound work is unpredictable, and an outline that reads as exciting can leave a student with nothing to write about when a run fails."
 fix = "Bound it: a fixed number of runs or a fixed subset, and a fallback if it overruns."
 
@@ -333,3 +324,11 @@ why = "Authenticity is the supervisor's declaration, and students should know it
 fix = "Say once that the work is the student's own, and what that rules out."
 [rule.text]
 all = ["(?i)own work|unaided|authentic|malpractice"]
+
+# Removed rules, and why
+#
+# OWN-01 asked whether a student could reproduce the project without making a
+# significant choice, and fired on every outline because every outline names a
+# tool, a method and an artefact. That is what makes a worked example useful.
+# The question worth asking - does the page tell the reader the choices are
+# theirs - is OWN-02, and the pack's own-work rule covers authenticity.
