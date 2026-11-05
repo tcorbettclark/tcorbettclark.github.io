@@ -14,6 +14,7 @@
 <body>
 {% include "../../_header.html" %}
 <main>
+{% set needs = "orange" %}{% include "../_banner.html" %}
 {{ "_content.md" | markdown }}
 </main>
 </body>

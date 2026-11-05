@@ -353,6 +353,23 @@ label {
   border-radius: 0 var(--radius) var(--radius) 0;
 }
 
+/* Kit banner at the top of a project outline: what has to be installed before
+   the page can be followed. The python variant is the one that changes what a
+   student has to learn, so it gets the accent colour. */
+.banner {
+  margin: 0 0 2rem;
+  padding: 0.85rem 1.15rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--surface-2);
+  font-size: 0.9rem;
+}
+.banner p { margin: 0; }
+.banner.python { border-left-color: var(--accent); }
+.banner strong { font-weight: 600; }
+.banner a { color: inherit; font-weight: 600; }
+
 /* ---------- montages ---------- */
 .montage {
   display: grid;
