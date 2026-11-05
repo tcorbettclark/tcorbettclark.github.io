@@ -51,7 +51,8 @@ Your main dataset is one you create:
 - **Machine texts:** 3–5 generations per prompt from each quantisation, at
   fixed temperature, seed and maximum length.
 - **Human texts:** counterparts written by you, classmates or a public-domain
-  author. They must match the machine texts in topic, length and format.
+  author. It helps if they match the machine texts in topic, length and format, though
+  that is a workload of its own: decide early how many human texts you need.
 - **Judgements:** each judge's guess, confidence rating and short reason, under
   an anonymous code.
 
@@ -242,5 +243,6 @@ evidence a finished project could include.*
   — the practical reference for the model and the widgets.
 - [Lear, *A Book of Nonsense*](https://www.gutenberg.org/ebooks/13646) (1846) —
   a public-domain source of human limericks, if you choose that genre.
-- A recent, reputable article on the Turing test debate, chosen and cited
-  precisely.
+- The [Stanford Encyclopedia of Philosophy entry on the Turing
+  Test](https://plato.stanford.edu/entries/turing-test/) — a survey of the debate
+  with its own bibliography.

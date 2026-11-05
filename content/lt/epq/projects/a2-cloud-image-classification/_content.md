@@ -164,9 +164,10 @@ evaluating your project. For example:
 - The Atlas licence permits personal, non-commercial teaching use, so the images
   should not be redistributed or used in a public product, and the credits file
   should stay with the data.
-- Photographing the sky raises few ethical issues, but identifiable people,
+- - otographing the sky raises few ethical issues, but identifiable people,
   houses and car number plates should be avoided. If you ask classmates for
-  photos, get consent and keep them anonymous.
+  photos, think about what you need to ask them first, and what your centre
+  needs to agree to.
 
 Think about how these limitations affect the claims you can reasonably
 make from your model.
@@ -216,7 +217,8 @@ evidence a finished project could include.*
 - A grid of three misclassified clouds, with a note on what the model may have
   used instead of cloud shape.
 - A human-baseline table comparing a friend's or teacher's classifications with
-  the model's.
+  the model's — optional, and only once you have thought about what you are
+  asking them for.
 
 ## Further reading
 

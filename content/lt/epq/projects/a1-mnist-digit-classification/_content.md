@@ -22,9 +22,9 @@ A highly accurate model is not necessary for your project to be successful. A
 convolutional network trained in Python would probably score higher. Your
 project would be about explaining the classifier: which measurements carry the
 signal, which digits it confuses, and whether a model trained on a clean
-teaching dataset recognises digits written by you. You would produce a reusable
-Orange workflow, evaluation tables and plots, and a written analysis that names
-the features behind each success and failure.
+teaching dataset recognises digits written by you. You would produce a
+reusable Orange workflow, evaluation tables and plots, and a written analysis
+that names the features behind each success and failure.
 
 Your final artefact could be the workflow itself, together with a short user
 guide that lets someone else load a digit image and see the prediction and the
@@ -77,9 +77,9 @@ whether the model generalises to digits written by people whose handwriting was
 not in the training set.
 
 You could test whether topological features (hole count and stroke crossings)
-separate digits with enclosed regions (0, 6, 8, 9) from those without, while
-profile and spatial-mass features do more of the work for digits such as 1, 2,
-4 and 7.
+separate digits with enclosed regions (0, 6, 8, 9) from those without, and
+whether profile and spatial-mass features matter more for digits such as 1, 2,
+4 and 7. Neither is settled until you run the ablation.
 
 **Variants.** The same workflow answers a different question on a different
 image set: handwritten letters, symbols, or objects you can photograph
@@ -157,9 +157,9 @@ make from your model.
 
 The expected outcome would be a working Orange workflow that classifies digits
 from interpretable features, together with a feature table, a confusion matrix
-and an ablation record. Importantly, a highly accurate model is not necessary
-for your project to be successful. A model that reaches 92% and whose errors you
-can explain is a stronger EPQ artefact than a 98% model you cannot interpret.
+and an ablation record. A highly accurate model is not necessary for your
+project to be successful. A model that reaches 92% and whose errors you can
+explain is a stronger EPQ artefact than a 98% model you cannot interpret.
 
 You could evaluate the model on held-out MNIST images and on your own
 handwriting, compare it with a raw-pixel baseline and a majority-class baseline,

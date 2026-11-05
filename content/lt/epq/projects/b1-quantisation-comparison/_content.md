@@ -54,16 +54,18 @@ four quantisations run on a 16 GB M-series Mac; the fp16 reference is optional
 and uses more memory.
 
 For quality, you need two kinds of data. The first is a held-out text corpus
-for perplexity: a chapter of a public-domain book, a Wikipedia extract, or a
-similar body of ordinary prose. The model should not have been trained on the
+for perplexity: a chapter of a public-domain book such as *Alice's Adventures
+in Wonderland* ([Project Gutenberg ebook
+11](https://www.gutenberg.org/ebooks/11)), or a Wikipedia article you record
+by title, revision date and URL. The model should not have been trained on the
 exact text you use, although a 3B model may have seen some of it; record your
-source and treat the result as a relative comparison between quantisations, not
-an absolute measure of knowledge. The second is a task suite you write: 100–300
-short items across categories such as factual recall, arithmetic, multi-step
-reasoning, instruction following and creative writing. Write the questions and
-the expected answers yourself, or adapt a public dataset and record its licence.
-A mixture of easy, medium and hard items is more informative than a set that
-every model passes or every model fails.
+source and treat the result as a relative comparison between quantisations,
+not an absolute measure of knowledge. The second is a task suite you write:
+100–300 short items across categories such as factual recall, arithmetic,
+multi-step reasoning, instruction following and creative writing. Write the
+questions and the expected answers yourself, or adapt a public dataset and
+record its licence. A mixture of easy, medium and hard items is more
+informative than a set that every model passes or every model fails.
 
 Name the edition, the link and the date you took it, and check the licence
 before you quote from it.
