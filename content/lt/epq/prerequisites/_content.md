@@ -2,23 +2,14 @@
 
 ## Two routes
 
-Broadly, each project either requires use of Orange (and no coding skills)
-or Python (with coding skills).
+Exercises or example projects either require use of Orange (and no coding skills) or Python (with coding skills).
 
-**Orange Data Mining** is a visual tool: you build a workflow by connecting
-widgets, and nothing you are asked to do involves writing code. A laptop that
-runs a browser will run it. Some outlines add packages to Orange, and the
-outline names them.
+**Orange Data Mining** is a visual tool in which you build a workflow by connecting
+widgets. No coding skills are required.
 
-**Python** is for the outlines where the thing being measured does not exist
-yet — a benchmark harness, a scoring script — so you write it. Those outlines
-run a small language model on your own machine. That needs an Apple silicon Mac
-(M-series) with 16 GB of memory: on anything less the model either will not load
-or will be too slow to experiment with.
+**Python** is a general purpose programming language, widely used for AI. Some projects or exercises need an Apple silicon Mac (M-series) with 16 GB of memory.
 
-If your school provides the machines, ask before you plan around them: a project
-that depends on installing software on a school machine needs the school's
-agreement, and some networks block the downloads entirely.
+If your school provides the computers, ask first to make sure you have sufficient access and are able to install the software.
 
 ## Software
 
@@ -28,7 +19,7 @@ agreement, and some networks block the downloads entirely.
 | Python | Python 3.11 or later, and the packages the outline names: `mlx-lm`, `numpy`, `matplotlib`, `psutil` |
 
 Everything runs locally once installed. Nothing here needs an account, a
-subscription or a cloud service.
+subscription, or a cloud service.
 
 ## Downloads
 
@@ -54,26 +45,19 @@ you produce.
 Some projects bring you into contact with people or with other people's
 material:
 
-- **Asking classmates for writing, answers or judgements** involves consent,
-  anonymity, a right to withdraw, and storage your school accepts.
-- **Photographing a site** may mean being off site, on site at a particular
-  time, or both, with that agreed beforehand.
-- **Using images or corpora you did not create** means a licence that allows
-  reuse in your report, and a source you can cite.
-- **Using an AI tool** means keeping the prompts and outputs you relied on, so
-  that you can show what the model did and what you did.
+- **Asking classmates for writing, answers or judgements** may involve consent,
+  anonymity, a right to withdraw, and storage your school needs to accept.
+- **Photographing a site** may mean being off campus, on site at a particular
+  time, or both.
+- **Using images or corpora you did not create** may have licences restricting
+  use or requiring citating.
 
-Ask your supervisor what your centre requires, and when it needs it.
+Remember to discuss with your supervisor what your school requires, and when it needs it.
 
-## Your board
+## Your examining board
 
 The qualification, the report, the log, the presentation and what the assessor
-looks for are set by the awarding body your centre enters you with, and they
-differ between boards. Read that specification and treat it as the authority:
-this page describes the kit, not the qualification.
-
-Your centre will tell you which board it enters you with. The specifications
-are here:
+looks for are set by the awarding examining body used at your school. For example:
 
 - **AQA 7993** — [specification](https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF)
 - **Pearson Edexcel** — [specification](https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf)
