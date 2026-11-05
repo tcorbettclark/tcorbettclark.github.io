@@ -5,8 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>EPQ</title>
 <link rel="canonical" href="{{ SITEURL | canonical }}">
+<link rel="stylesheet" href="{{ 'styles.css' | rel_to_abs_path }}" integrity="sha384-{{ 'styles.css' | sha }}">
 </head>
 <body>
-<a href="{{ 'classifying-facial-expressions/index.html' | rel_to_abs_path }}/">Classifying Facial Expressions</a>
+<main>
+<h1>EPQ</h1>
+<ul>
+  <li><a href="{{ 'classifying-facial-expressions/index.html' | rel_to_abs_path }}/">Classifying Facial Expressions</a>
+    — teaching a computer to recognise a smile, from pixels to a trained classifier.</li>
+  <li><a href="{{ 'generative-ai/index.html' | rel_to_abs_path }}/">Generative AI</a>
+    — how large language models work: self-attention, next-word prediction, fine-tuning, and why they hallucinate.</li>
+  <li><a href="{{ 'experimenting-with-llms/index.html' | rel_to_abs_path }}/">Experimenting with LLMs</a>
+    — running and fine-tuning a small language model on a Mac Mini.</li>
+</ul>
+</main>
 </body>
 </html>
