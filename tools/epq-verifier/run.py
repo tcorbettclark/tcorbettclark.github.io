@@ -231,6 +231,30 @@ def quote_present(quote: str, text: str) -> bool:
     return len(q) > 15 and q in norm(text)
 
 
+# Words that, if the quote already contains them, mean the judge is pointing at
+# the remedy as though it were the fault.
+REMEDY_CUES = (
+    "not the submission", "rather than", "check", "think about", "consider",
+    "your supervisor", "your centre", "your board", "is not necessarily",
+    "you could", "you might", "for example", "such as",
+)
+
+
+def self_defeating(quote: str, fix: str, why: str) -> bool:
+    """True when the quoted sentence already says what the finding asks for."""
+    q = quote.lower()
+    if not q:
+        return False
+    cues = [c for c in REMEDY_CUES if c in q]
+    if not cues:
+        return False
+    # The finding is self-defeating only if the remedy adds nothing the quote
+    # does not already mention.
+    asked = set(re.findall(r"[a-z]{5,}", fix.lower()))
+    already = set(re.findall(r"[a-z]{5,}", q))
+    return len(asked - already) <= 2
+
+
 def judge_issues(
     rules: list[dict], docs: dict[str, dict], model: str
 ) -> tuple[list[dict], dict]:
@@ -254,13 +278,17 @@ def judge_issues(
             if not rule:
                 continue
             quote = (item.get("quote") or "").strip()
+            why = (item.get("why") or rule["why"]).strip()
+            fix = (item.get("fix") or rule["fix"]).strip()
+            if self_defeating(quote, fix, why):
+                continue
             out.append(
                 {
                     "rule": rule,
                     "doc": slug,
                     "quote": quote,
-                    "why": (item.get("why") or rule["why"]).strip(),
-                    "fix": (item.get("fix") or rule["fix"]).strip(),
+                    "why": why,
+                    "fix": fix,
                     "note": "" if quote_present(quote, doc["text"]) else "quote not found in source",
                 }
             )

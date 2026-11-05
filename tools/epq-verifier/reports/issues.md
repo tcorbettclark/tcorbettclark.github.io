@@ -5,9 +5,9 @@ places where an outline could be read as endorsing a practice that would cost a
 student marks, or that a moderator would query.
 
 - 6 outlines checked against 22 rules (15 judged, 7 text).
-- 15 potential issues (5 high severity).
+- 7 potential issues (3 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, 105,071 tokens.
+- Judge: `deepseek-v4.1-flash`, 109,029 tokens.
 
 ## a1-mnist-digit-classification
 
@@ -17,23 +17,69 @@ student marks, or that a moderator would query.
 
 *med · integ*
 
-> whether the model generalises to digits written by people whose handwriting was not in the training set
+> while profile and spatial-mass features do more of the work for digits such as 1, 2, 4 and 7.
 
-**Why:** The core test set the page prescribes is 'Your own handwriting' - one writer - with classmates' samples only an optional extra, so a student can answer this sub-question with an n=1 (or n=3) sample and conclude that the classifier 'generalises to people'; nothing in the limitations section warns that the number and representativeness of writers cannot support that general claim.
+**Why:** The 'You could test whether' only governs the first half of the sentence; this second clause states a specific ablation result as established fact, so a student can carry it straight into their introduction or conclusion without ever running the comparison, which an examiner reads as an unsupported claim and a weakness in AO2.
 
-**Suggested:** Reword the sub-question to something like 'whether the model generalises to handwriting it has never seen, and how far a sample of one or two writers can support that conclusion', and add a limitation bullet noting that a small convenience sample of writers cannot support a claim about handwriting in general.
+**Suggested:** Put both halves under test, e.g. 'You could test whether topological features separate digits with enclosed regions, and whether profile and spatial-mass features matter more for digits such as 1, 2, 4 and 7', and say explicitly that both are hypotheses until the ablation shows them.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
+
+### VOICE-02 — Reads as generic model prose rather than one person writing
+
+*low · voice*
+
+> Importantly, a highly accurate model is not necessary for your project to be successful.
+
+**Why:** This is a signpost opener restating, almost word for word, a sentence already used in the Project overview ('A highly accurate model is not necessary for your project to be successful'), which reads as assembled filler rather than one teacher adding a new point.
+
+**Suggested:** Cut the sentence, or replace it with something the overview did not already say, such as the concrete observation that a 92% model with traced errors makes a better report than a 98% model nobody can explain.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
 
 ## a2-cloud-image-classification
 
 *Can a model trained on curated cloud photographs recognise the sky above your school?*
 
-No potential issues found by these rules.
+### ETH-01 — People become data subjects without ethics appearing
+
+*high · ethics*
+
+> A human-baseline table comparing a friend's or teacher's classifications with the model's.
+
+**Why:** This asks the student to collect judgements from other people but says nothing about centre ethics approval, consent, anonymity or the right to withdraw, so the evidence could be unusable.
+
+**Suggested:** Add a line requiring centre ethics approval before asking anyone, plus consent, anonymised responses and a right to withdraw.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
+
+### ETH-01 — People become data subjects without ethics appearing
+
+*high · ethics*
+
+> If you ask classmates for photos, get consent and keep them anonymous.
+
+**Why:** It mentions consent and anonymity but not centre ethics approval or withdrawal, so a student collecting classmates' photos could still miss the centre-level approval that must come first.
+
+**Suggested:** Add that the centre's ethics approval must be obtained before collecting classmates' photos, and that participants can withdraw.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
 
 ## a3-local-turing-test
 
 *Can classmates tell BritLLM's writing from a human's when the human is imitating the machine?*
+
+### FEAS-01 — Too much work for the hours available
+
+*high · feas*
+
+> They must match the machine texts in topic, length and format.
+
+**Why:** Every machine text in the design needs a hand-written counterpart, and the design runs 3-5 generations for 10-20 prompts across three quantisations, so the student is committing to writing scores of matched texts by hand in addition to generating, recruiting judges, analysing and writing the report.
+
+**Suggested:** Say explicitly that the human sample need only cover a subset of prompts (for example one text per prompt) and that one quantisation is a complete project, with the other quantisations an optional extension.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
 ### INTEG-02 — Sources named too vaguely to reference
 
@@ -41,9 +87,9 @@ No potential issues found by these rules.
 
 > A recent, reputable article on the Turing test debate, chosen and cited precisely.
 
-**Why:** This names a category rather than an identifiable article, so a student cannot cite it directly; the phrase 'chosen and cited precisely' leaves the actual source missing.
+**Why:** This names a category rather than a source, so a student cannot look it up or cite it, and a bibliography entry of this kind shows no critical selection for AO2.
 
-**Suggested:** Replace it with one specific, linked article, or explicitly frame it as a search instruction and give a named example the student can cite.
+**Suggested:** Replace it with one fully cited article (author, title, journal, year, DOI), and add a line saying the student may substitute another provided they give the full reference.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
@@ -51,169 +97,23 @@ No potential issues found by these rules.
 
 *How much memory, speed and energy does quantisation save, and what does it cost in quality?*
 
-No potential issues found by these rules.
+### INTEG-02 — Sources named too vaguely to reference
+
+*low · integ*
+
+> The first is a held-out text corpus for perplexity: a chapter of a public-domain book, a Wikipedia extract, or a similar body of ordinary prose.
+
+**Why:** This gives the source only as a vague category rather than a named, identifiable text, so a student could follow it and end up logging an uncitable source such as 'a Wikipedia extract'; the later instruction to record a link helps, but the example itself does not model a citable source.
+
+**Suggested:** Replace this with one or two concrete, linked public-domain texts, such as a named Project Gutenberg edition, and say students must record the exact URL and access date for whichever text they choose.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## b2-language-model-failure-and-confidence
 
 *Can a small language model tell you when it is likely to be wrong?*
 
-### ETH-01 — People become data subjects without ethics appearing
-
-*high · ethics*
-
-> Your main dataset is a question set you write yourself.
-
-**Why:** Writing questions is safe, but the outline also mentions collecting a held-out Wikipedia article and does not make clear that no data about people is collected; a student could reasonably extend the pattern to quizzing classmates on the same questions, and the page is silent on centre approval, consent and anonymity.
-
-**Suggested:** Add a sentence stating that the project uses no human participants, and that if the student wants to test classmates' interpretations they must get centre ethics approval and consent first.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
-
-### ETH-02 — Treats personal data as free raw material
-
-*high · ethics*
-
-> If you use Wikipedia, check the licence and attribute it; a public-domain text avoids the question entirely.
-
-**Why:** Licensing is covered, but data protection is not; nothing warns a student about keeping records of quiz answers or prompts containing personal information, and the log instruction to 'record your decisions' could be read as licence to keep everything.
-
-**Suggested:** Add a brief line that the log and data files should contain no personal data about classmates or teachers, and that any such data must be anonymised or not kept.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “ethical principles of project proposals and research”</sub>
-
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> The tables, plots and workflow are evidence you discuss in the report, not the submission itself.
-
-**Why:** This is correct in itself, but it sits after a passage describing the artefact as 'a Python harness, a question set you designed, calibration plots... and a written analysis', which foregrounds the artefact and makes the report look like a small addition; the later 'Suitability as an EPQ artefact' section again calls the harness 'a tangible outcome'.
-
-**Suggested:** Reword the outcome paragraph so the report is named first and the harness described as supporting evidence, keeping the submission sentence where it is.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
-
-### FEAS-01 — Too much work for the hours available
-
-*high · feas*
-
-> Aim for 100–200 items.
-
-**Why:** The outline makes a student-authored question set of 100–200 items, each with prompt, correct answer, distractors, category, difficulty rating and source, the main dataset; that is a large writing and verification job on top of the taught element, log, report and presentation within 120 guided hours.
-
-**Suggested:** Make the core explicitly a pilot set of around 40 questions, as the 'how much to attempt' note does, and present 100–200 as an extension for students who finish early.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-01 — Could be mistaken for work already being submitted elsewhere
-
-*high · integ*
-
-> Check with your supervisor that none of this overlaps work you are submitting for another qualification: no part of an EPQ may be resubmitted for another qualification.
-
-**Why:** The warning is present, so the page handles the point in general; but the project draws heavily on statistics, computer science and machine learning teaching, and the warning is placed at the very end of the suitability section where a student designing their question may already have linked it to A level computer science coursework.
-
-**Suggested:** Move the resubmission warning to the overview, next to the invitation to change the question, and name the likely subjects this could overlap.
-
-<sub>https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf — Choosing an appropriate project: “learners may not simply resubmit work that has been or will be submitted for another qualification”</sub>
-
-### ETH-04 — Third-party images or data may not be reusable
-
-*med · ethics*
-
-> Check the dataset card and licence, and consider whether the model may have seen the questions during pre-training.
-
-**Why:** This is good, but the licence question for the model weights themselves is passed to the model card without saying the licence must permit use; the text says only that the model card 'records the licence and context length'.
-
-**Suggested:** Say explicitly that the chosen model's licence must be checked before use and that the licence and attribution belong in the report.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
-
-### FEAS-02 — Assumes kit or software without flagging it
-
-*med · feas*
-
-> You need Python, `mlx-lm` and an Apple-silicon Mac with 16 GB, plus a multi-gigabyte model download
-
-**Why:** This is stated inside the analysis section after the project has effectively been chosen, and the dataset section earlier already describes three quantisations running on a 16 GB M-series Mac as though it were the normal setup; a student without that machine discovers this late.
-
-**Suggested:** Move the hardware and download requirement into the overview, before the reader commits, and say what alternative exists if the school or student does not have an Apple-silicon Mac.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal: “Are the working title and proposed action clear and focused on an issue which can be managed within the timescale, available resources and word total?”</sub>
-
-### FEAS-03 — Compute-bound work that could swallow the project
-
-*med · feas*
-
-> You could run the same questions through the 3-bit, 6-bit and 8-bit models.
-
-**Why:** Running three quantisations end to end is presented as the standard path, yet it triples model running and downloads against the same 120 hours; the text elsewhere calls one quantisation sufficient, so the message is mixed and a student may commit to all three.
-
-**Suggested:** State that one quantisation is the core and that adding the other two is an optional extension only after the harness is working and the pilot is analysed.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### FEAS-03 — Compute-bound work that could swallow the project
-
-*med · feas*
-
-> If you want to test sampling consistency, generate ten answers at temperature 0.8 for each question
-
-**Why:** Ten generations per question across 100–200 questions is a compute-heavy run presented in the main analysis section; although it is later called an extension, a student reading this far may start it before finishing the core.
-
-**Suggested:** Move this to a clearly marked optional extension and say to trial it on ten questions first if time allows.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### FEAS-04 — A question that invites description rather than investigation
-
-*med · feas* · quote not found in source
-
-> Can the token probabilities of a small language model be used to predict when its answers are wrong, and how well calibrated is that confidence across task types and quantisation levels?
-
-**Why:** As phrased the question can be answered by reporting ECE and accuracy figures, and the outline's core statistics list invites exactly that; the analytical comparison is buried in the optional 'more specific' questions rather than the headline question.
-
-**Suggested:** Rewrite the example question so it asks for a comparison, for example whether confidence is a more reliable predictor of error in some task types than others, and whether quantisation changes that relationship.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal, item 1: “allow the student to investigate and to access the higher-level concepts and skills in the assessment objectives, i.e. plan, research, analyse, evaluate and explain, rather than simply describe and narrate”</sub>
-
-### FEAS-04 — A question that invites description rather than investigation
-
-*med · feas*
-
-> A model whose words and probabilities disagree would be worth discussing.
-
-**Why:** This is framed as an optional extra, so a student can stay with computing scores and plotting diagrams; nothing in the core path forces evaluation of why the model behaves as it does.
-
-**Suggested:** Make at least one comparative or explanatory step compulsory, such as comparing two task categories or discussing causes for the observed miscalibration.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal, item 1: “allow the student to investigate and to access the higher-level concepts and skills in the assessment objectives, i.e. plan, research, analyse, evaluate and explain, rather than simply describe and narrate”</sub>
-
-### INTEG-03 — Implies more than the data can show
-
-*med · integ*
-
-> A model that is overconfident on your questions is not necessarily
-  overconfident on all tasks, so the conclusion should be scoped to the model,
-  the questions and the conditions tested.
-
-**Why:** The scoping warning is good, but the surrounding text invites causal language about quantisation — 'you are measuring the prompt, not the quantisation' — while the limitations list only says differences should not be attributed to bits without checking the configuration.
-
-**Suggested:** Add a sentence in the expected outcomes or limitations section that the comparison between bit widths is observational on one small question set and cannot establish a general effect of quantisation.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
-
-### INTEG-02 — Sources named too vaguely to reference
-
-*low · integ*
-
-> For a general measure of the model's surprise, use a held-out text
-
-**Why:** 'A held-out text' names a category rather than a source; the following examples are identifiable, but the phrase itself could lead a student to write only 'a held-out text' in their bibliography.
-
-**Suggested:** Replace with a specific instruction to name the book, edition or Wikipedia article with its revision date and URL in the log and report.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
+No potential issues found by these rules.
 
 ## c1-income-and-life-expectancy
 
@@ -228,12 +128,18 @@ point, or the rule is badly worded. Worth a look either way:
 
 - `AI-01`
 - `DOC-INDEP`
+- `ETH-02`
 - `ETH-03`
+- `ETH-04`
+- `EVID-01`
+- `FEAS-02`
+- `FEAS-03`
+- `INTEG-01`
 - `OWN-02`
 - `OWN-03`
 - `PACK-AI`
+- `PACK-BOARD`
 - `PACK-ETHICS`
-- `PACK-LOG`
+- `PACK-NOSPEC`
 - `PACK-OWN`
-- `PACK-PRES`
-- `PACK-REPORT`
+- `VOICE-01`

@@ -117,17 +117,32 @@ why = "Compute-bound work is unpredictable, and an outline that reads as excitin
 fix = "Bound it: a fixed number of runs or a fixed subset, and a fallback if it overruns."
 
 [[rule]]
-id = "FEAS-04"
-group = "feas"
+id = "VOICE-01"
+group = "voice"
 severity = "med"
-check = "judge"
-title = "A question that invites description rather than investigation"
+check = "text"
+title = "Wording that reads as machine-written"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.4 Assessing the Potential of a Proposal, item 1"
-quote = "allow the student to investigate and to access the higher-level concepts and skills in the assessment objectives, i.e. plan, research, analyse, evaluate and explain, rather than simply describe and narrate"
-question = "Could the question as phrased be answered by describing a process or reporting a number, without analysis, comparison or evaluation?"
-why = "A descriptive project caps AO3 and AO4, which between them carry 60% of the marks."
-fix = "Add a comparison, a counterfactual or a why to the question."
+locator = "§1.2 What is the Extended Project?"
+quote = "choose an area of interest"
+why = "The pack is read by students as a person talking to them. The stock vocabulary of generated prose - delve, landscape, robust, pivotal, it is important to note - makes the page sound like a brochure and hides who is speaking."
+fix = "Say the thing in plain words: name the object, the action and who does it."
+[rule.text]
+pattern = "(?i)\\b(?:delve, delved, delving|landscape of|realm of|tapestry|testament to|navigate the|navigating the|unlock|unleash|harness the|leverage|robust|seamless|cutting-edge|game-chang|revolutionis|revolutioniz|it'?s important to note|it is important to note|it is worth noting|in today'?s|in the ever-evolving|ever-evolving|ever-changing|furthermore|moreover|additionally,|that said,|at its core|not only .{0,40} but also|it'?s not just .{0,40}, it'?s|serves as|acts as a|plays a (?:crucial|pivotal|vital) role|a (?:myriad|plethora) of|empower|elevate|foster|cultivate|comprehensive|multifaceted|intricate|profound|pivotal|crucial)\\b"
+expect = "absent"
+
+[[rule]]
+id = "VOICE-02"
+group = "voice"
+severity = "low"
+check = "judge"
+title = "Reads as generic model prose rather than one person writing"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§1.2 What is the Extended Project?"
+quote = "choose an area of interest"
+question = "Ignoring the technical content, does any passage read as generic machine-written prose - stacked three-part lists, every paragraph opening with a signpost, rhetorical build-ups ('not just X, but Y'), hedged filler? Quote the passage. Do not report ordinary, plain sentences: only passages a reader would hear as a model talking."
+why = "The examples are meant to sound like a teacher who has run these projects, and students notice the difference."
+fix = "Cut the scaffolding and say it once, in the plainest sentence that will carry it."
 
 [[rule]]
 id = "ETH-01"
@@ -251,49 +266,35 @@ pattern = "(?i)\\b(?:same (?:kit|as)|as in|see) (?:project )?[ABC][123]\\b"
 expect = "absent"
 
 [[rule]]
-id = "PACK-LOG"
-group = "pack"
-severity = "high"
-scope = "pack"
-check = "text"
-title = "The pack never mentions the production log"
-source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.5.1 Assessment Evidence"
-quote = "the completed Production Log and Assessment Record including the Project Proposal Form, Presentation Record and Candidate Record Form"
-why = "Without the log the project cannot be moderated, however good the report."
-fix = "Say what the log is for, and when entries fall due relative to the project's stages."
-[rule.text]
-all = ["(?i)production log|candidate production record|assessment record"]
-
-[[rule]]
-id = "PACK-REPORT"
-group = "pack"
-severity = "high"
-scope = "pack"
-check = "text"
-title = "The pack never says what the assessed written work is, or how long"
-source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.5.1 Assessment Evidence"
-quote = "A project product which consists solely of a research based written report should be approximately 5000 words"
-why = "A student can read six examples and still not know that a written report is the product, or whether to write 1,000 words or 5,000."
-fix = "State the two routes and their word scales in one place, and link it from each outline."
-[rule.text]
-all = ["(?i)written report", "(?i)5,?000|1,?000"]
-
-[[rule]]
-id = "PACK-PRES"
+id = "PACK-BOARD"
 group = "pack"
 severity = "med"
 scope = "pack"
 check = "text"
-title = "The pack never mentions the presentation"
+title = "The pack never points the student at their board's requirements"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.5.1 Assessment Evidence"
-quote = "The live presentation should be for a non-specialist audience"
-why = "The presentation and the supervisor's record of the questioning are part of the required evidence."
-fix = "Mention the presentation once, and what it is like."
+locator = "§1.2 What is the Extended Project?"
+quote = "choose an area of interest"
+why = "The pack is not a substitute for the specification: the log, the report, the presentation and the word lengths are the board's to set, and they differ between boards."
+fix = "Tell the student, once, to check their board's specification with their supervisor."
 [rule.text]
-all = ["(?i)presentation"]
+all = ["(?i)specification", "(?i)board|awarding body"]
+
+[[rule]]
+id = "PACK-NOSPEC"
+group = "pack"
+severity = "med"
+scope = "pack"
+check = "text"
+title = "The pack restates board rules instead of pointing at them"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.5 Assessment"
+quote = "The evidence for assessment will comprise the following"
+why = "Repeating a board's numbers or assessment objectives invites the pack to be read as authoritative, and it dates. Two things follow: the number may be wrong for another board, and it will go stale."
+fix = "Say that the board sets the requirement, and link it; do not restate the requirement."
+[rule.text]
+pattern = "(?i)5,?000 words|1,?000 words|120 guided|guided learning hours|\\bAO[1-4]\\b"
+expect = "absent"
 
 [[rule]]
 id = "PACK-ETHICS"
@@ -323,7 +324,7 @@ quote = "valid and unacceptable use of artificial intelligence (AI)"
 why = "The pack's subject matter is language models, so the boundary between studying and using one has to be drawn somewhere."
 fix = "State the rule once, where the outlines can point to it."
 [rule.text]
-all = ["(?i)declare|declaration|record(ing)? (your )?prompts"]
+all = ["(?i)declare|declaration|acknowledg"]
 
 [[rule]]
 id = "PACK-OWN"
