@@ -283,6 +283,66 @@ pattern = "(?i)\\b(?:same (?:kit|as)|as in|see) (?:project )?[ABC][123]\\b"
 expect = "absent"
 
 [[rule]]
+id = "CLAIM-01"
+group = "tone"
+severity = "med"
+check = "text"
+title = "Says what usually happens, without a source"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.3 What is Project Process"
+quote = "The project process is intended to be a largely independent piece of work"
+why = "We have not surveyed students, projects or schools, so a claim about what is common, usual or typical is a guess wearing the clothes of evidence - and a student can be misled by it."
+fix = "State the fact or the risk without claiming it is common."
+[rule.text]
+pattern = "(?i)\\bthe\\s+most\\s+common\\b|\\b(?:most|many|usually|typically|often|rarely)\\s+(?:students|people|projects|schools|teachers|classes)\\b|\\bin\\s+practice\\b|\\bit\\s+is\\s+common\\b"
+expect = "absent"
+
+[[rule]]
+id = "CLAIM-02"
+group = "tone"
+severity = "low"
+check = "text"
+title = "Explains why the pack made a choice"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.3 What is Project Process"
+quote = "The project process is intended to be a largely independent piece of work"
+why = "A page that justifies its own design - 'which is deliberate', 'this is why' - is arguing with itself on the student's page, and invites the student to agree with a rationale they did not need."
+fix = "Say what is true, and let it stand."
+[rule.text]
+pattern = "(?i)\\bwhich\\s+is\\s+(?:why|deliberate)\\b|\\bthis\\s+is\\s+why\\b|\\bthat\\s+is\\s+why\\b|\\bfor\\s+this\\s+reason\\b"
+expect = "absent"
+
+[[rule]]
+id = "CLAIM-03"
+group = "tone"
+severity = "low"
+check = "text"
+title = "Claims how long the work takes, or how easy it is"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§1.2 What is the Extended Project?"
+quote = "It will require in total 120 guided learning hours."
+why = "How long a lesson is, how long a download takes, how easy a collection is to find: these depend on the school and the connection, and a student who plans around our guess is planning around the wrong number."
+fix = "Give the size or the fact, and let the student judge the time."
+[rule.text]
+pattern = "(?i)\\bin\\s+a\\s+(?:single\\s+)?lesson\\b|\\btakes\\s+longer\\b|\\bis\\s+easy\\s+to\\b|\\bare\\s+easy\\s+to\\b"
+expect = "absent"
+
+[[rule]]
+id = "TONE-03"
+group = "tone"
+severity = "med"
+check = "text"
+title = "Says which part of the project matters most"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "Appendix A Grade Descriptions"
+quote = "The award will depend in practice upon the extent to which the candidate has met the Assessment Objectives (see Section 2.4.3) overall."
+why = "The pack does not set the weighting. 'An important part of the project' is the pack rating its own sections, which is how a page starts promising marks for a method and apologising for a result."
+fix = "Describe the section and what it holds; leave the weight to the assessment."
+[rule.text]
+pattern = "(?i)\\ban\\s+important\\s+part\\s+of\\s+(?:the|your|evaluating)\\b|\\bis\\s+more\\s+important\\s+than\\b"
+expect = "absent"
+
+[[rule]]
 id = "PACK-BOARD"
 group = "pack"
 severity = "med"
