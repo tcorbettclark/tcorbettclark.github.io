@@ -82,8 +82,8 @@ profile and spatial-mass features do more of the work for digits such as 1, 2,
 4 and 7.
 
 **Variants.** The same workflow answers a different question on a different
-image set: traffic signs, medical images, or your own handwriting compared
-with a friend's.
+image set: handwritten letters, symbols, or objects you can photograph
+indoors. Check the licence of anything you did not collect yourself.
 
 ## Key data science, statistical and machine learning concepts
 
