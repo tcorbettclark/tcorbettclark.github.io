@@ -1,11 +1,11 @@
 # What the B1 page needs. awg.py loads every .toml under content/
 # and makes its top-level keys template globals, so this file is read as
-# `b1` by b1-quantisation-comparison/index.html.
+# `project_b1` by b1-quantisation-comparison/index.html.
 #
 # The file is removed from the output when the site is built (working files
 # are those starting with _), so these notes never reach the web.
 
-[b1]
+[project_b1]
 programming = "Python 3.11 or later. You write the scripts that run and measure the model."
 machine = "An Apple silicon Mac (M-series) with 16 GB of memory."
 software = "mlx-lm, psutil and matplotlib; powermetrics if you measure energy."

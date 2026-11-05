@@ -1,11 +1,11 @@
 # What the C1 page needs. awg.py loads every .toml under content/
 # and makes its top-level keys template globals, so this file is read as
-# `c1` by c1-income-and-life-expectancy/index.html.
+# `project_c1` by c1-income-and-life-expectancy/index.html.
 #
 # The file is removed from the output when the site is built (working files
 # are those starting with _), so these notes never reach the web.
 
-[c1]
+[project_c1]
 programming = "None. The regression is built from Orange widgets."
 machine = "Any laptop that runs Orange Data Mining."
 software = "Orange Data Mining; nothing beyond the standard widgets."

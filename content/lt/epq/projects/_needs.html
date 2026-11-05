@@ -2,10 +2,14 @@
 
    Each project declares its requirements in `_needs.toml` in its own
    directory; awg.py loads every .toml under content/ and makes its top-level
-   keys template globals, so `[a1]` in a1-mnist-digit-classification/_needs.toml
-   arrives here as `a1`. The page sets the name and includes this file:
+   keys template globals, so `[project_a1]` in
+   a1-mnist-digit-classification/_needs.toml arrives here as `project_a1`. The
+   page sets the name and includes this file:
 
-     {% set needs = a1 %}{% include "../_needs.html" %}
+     {% set needs = project_a1 %}{% include "../_needs.html" %}
+
+   The key uses an underscore because [project-a1] is a legal TOML key but not a
+   legal Jinja name: `project-a1` would parse as a subtraction.
 
    The structure and the wording of the general guidance live here, so the six
    pages cannot drift apart; the facts live beside the page they are true of.
