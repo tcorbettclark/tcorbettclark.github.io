@@ -1,0 +1,8 @@
+{# Fixed bar shared by every EPQ page. The pages are standalone, so this is
+   included rather than inherited. Set hide_back before including it on the
+   index page, where the back link would point at itself. #}
+<header class="sitebar">
+  {% if not hide_back %}<a class="sitebar-back" href="/lt/epq/">&#8592; EPQ</a>{% endif %}
+  <span class="sitebar-title">EPQ on AI</span>
+  <span class="sitebar-draft">Draft</span>
+</header>
