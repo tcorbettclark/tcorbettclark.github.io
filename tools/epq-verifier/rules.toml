@@ -324,4 +324,4 @@ all = ["(?i)ethic|consent"]
 # stopped restating board rules: a wrong or missing one would mislead a student,
 # and the specification says it properly. Neither question can be asked of a
 # pack that has made that choice. PACK-AI also turned out to be unfalsifiable in
-# practice: it was passing on the word "acknowledged" in A3's caveat list.
+# practice: it was passing on the word "acknowledged" in P3's caveat list.

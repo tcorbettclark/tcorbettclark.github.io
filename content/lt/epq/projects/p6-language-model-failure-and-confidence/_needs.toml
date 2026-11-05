@@ -1,11 +1,11 @@
-# What the B2 page needs. awg.py loads every .toml under content/
+# What the P6 page needs. awg.py loads every .toml under content/
 # and makes its top-level keys template globals, so this file is read as
-# `project_b2` by b2-language-model-failure-and-confidence/index.html.
+# `project_p6` by p6-language-model-failure-and-confidence/index.html.
 #
 # The file is removed from the output when the site is built (working files
 # are those starting with _), so these notes never reach the web.
 
-[project_b2]
+[project_p6]
 programming = "Python 3.11 or later. You write the harness that scores the model's answers."
 machine = "An Apple silicon Mac (M-series) with 16 GB of memory."
 software = "mlx-lm, numpy and matplotlib."

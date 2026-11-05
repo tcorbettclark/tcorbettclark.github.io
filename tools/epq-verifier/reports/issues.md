@@ -7,41 +7,41 @@ student marks, or that a moderator would query.
 - 6 outlines checked against 20 rules (15 judged, 5 text).
 - 0 potential issues (0 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported.
+- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported, 123,577 tokens.
 
-## a1-mnist-digit-classification
+## p1-mnist-digit-classification
 
 *Can a no-code image classifier read handwritten digits, and can you explain its mistakes?*
 
 No potential issues found by these rules.
 
-## a2-cloud-image-classification
+## p2-cloud-image-classification
 
 *Can a model trained on curated cloud photographs recognise the sky above your school?*
 
 No potential issues found by these rules.
 
-## a3-local-turing-test
+## p3-local-turing-test
 
 *Can classmates tell BritLLM's writing from a human's when the human is imitating the machine?*
 
 No potential issues found by these rules.
 
-## b1-quantisation-comparison
+## p4-income-and-life-expectancy
+
+*Can a country's income explain how long its people live, and what do the exceptions tell us?*
+
+No potential issues found by these rules.
+
+## p5-quantisation-comparison
 
 *How much memory, speed and energy does quantisation save, and what does it cost in quality?*
 
 No potential issues found by these rules.
 
-## b2-language-model-failure-and-confidence
+## p6-language-model-failure-and-confidence
 
 *Can a small language model tell you when it is likely to be wrong?*
-
-No potential issues found by these rules.
-
-## c1-income-and-life-expectancy
-
-*Can a country's income explain how long its people live, and what do the exceptions tell us?*
 
 No potential issues found by these rules.
 

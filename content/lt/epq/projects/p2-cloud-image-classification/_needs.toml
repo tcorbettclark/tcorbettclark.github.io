@@ -1,11 +1,11 @@
-# What the A2 page needs. awg.py loads every .toml under content/
+# What the P2 page needs. awg.py loads every .toml under content/
 # and makes its top-level keys template globals, so this file is read as
-# `project_a2` by a2-cloud-image-classification/index.html.
+# `project_p2` by p2-cloud-image-classification/index.html.
 #
 # The file is removed from the output when the site is built (working files
 # are those starting with _), so these notes never reach the web.
 
-[project_a2]
+[project_p2]
 programming = "None. The classifier is built from Orange widgets."
 machine = "Any laptop that runs Orange Data Mining, and a camera or phone for your own photographs."
 software = "Orange Data Mining with the orange3-ai-suite add-on and its image extra (OpenCV)."

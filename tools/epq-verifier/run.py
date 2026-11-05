@@ -20,7 +20,7 @@ Usage
     python3 tools/epq-verifier/run.py                  # text checks only
     python3 tools/epq-verifier/run.py --judge          # text + LLM (default model)
     python3 tools/epq-verifier/run.py --judge none     # text only
-    python3 tools/epq-verifier/run.py --only a1        # one document
+    python3 tools/epq-verifier/run.py --only p1        # one document
 
 The LLM needs PI_OLLAMA_KEY (or OLLAMA_API_KEY) in the environment.
 """
@@ -544,7 +544,7 @@ def main() -> None:
         action="append",
         default=[],
         metavar="CODE",
-        help="review only this project (a1, b2, or any part of its name); repeatable",
+        help="review only this project (p1, p6, or any part of its name); repeatable",
     )
     ap.add_argument(
         "--changed",

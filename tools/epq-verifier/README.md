@@ -21,9 +21,9 @@ boards assess candidates, not guidance.
 ```sh
 python3 tools/epq-verifier/run.py                       # text checks only
 python3 tools/epq-verifier/run.py --judge               # text + LLM, two runs each
-python3 tools/epq-verifier/run.py --only b1             # one outline
+python3 tools/epq-verifier/run.py --only p5             # one outline
 python3 tools/epq-verifier/run.py --changed HEAD~1      # only what you edited
-python3 tools/epq-verifier/run.py --only b1 --only c1   # two of them
+python3 tools/epq-verifier/run.py --only p5 --only p4   # two of them
 ```
 
 Progress is logged to stderr with a timestamp and elapsed seconds, so a slow
@@ -34,7 +34,7 @@ Useful flags:
 
 | flag | what it does |
 |---|---|
-| `--only CODE` | one outline (`a1`, `b2`, or any part of its name); repeatable |
+| `--only CODE` | one outline (`p1`, `p6`, or any part of its name); repeatable |
 | `--changed REF` | only outlines whose `_content.md` changed since a git ref |
 | `--runs N` | opinions per outline (default 2); only findings in **all** runs are reported |
 | `--jobs N` | outlines judged at once (default 4) |
