@@ -134,9 +134,7 @@ trade explicit.
 ## Suggested approaches to data preparation, analysis and modelling
 
 **A way in.** Compare a couple of quantisations on a short prompt set, with a
-few repeats each; more models and prompts can follow if the time allows. You
-need Python 3.11 or later, `mlx-lm` and an Apple-silicon Mac with 16 GB, plus
-a multi-gigabyte model download — see [Prerequisites](../../prerequisites/).
+few repeats each; more models and prompts can follow if the time allows.
 
 You could begin by inventorying the models. For each directory, record the
 file size, the `config.json` quantisation settings, the number of bits and the

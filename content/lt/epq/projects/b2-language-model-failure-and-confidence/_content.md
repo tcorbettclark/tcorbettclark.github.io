@@ -147,9 +147,7 @@ model is, and whether the gap is stable enough to support a decision.
 ## Suggested approaches to data preparation, analysis and modelling
 
 **A way in.** One quantisation and a pilot question set will show you what the
-measurement involves; more questions and models can follow. You need Python,
-`mlx-lm` and an Apple-silicon Mac with 16 GB, plus a multi-gigabyte model
-download — see [Prerequisites](../../prerequisites/).
+measurement involves; more questions and models can follow.
 
 You could begin by building the question set in a spreadsheet or a CSV file.
 You would keep the prompt, the correct answer, the distractors, the category,

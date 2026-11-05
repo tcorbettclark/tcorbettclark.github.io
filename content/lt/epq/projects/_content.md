@@ -7,7 +7,8 @@ inspiration rather than projects to copy. An important part of the EPQ is
 developing and taking ownership of your own project, so you should choose a
 question that interests you and develop your own approach to investigating it.
 
-Each project page follows the same pattern:
+Each project page opens with what the project needs — machine, software and
+downloads — and then follows the same pattern:
 
 - Project overview
 - Dataset(s) to be used

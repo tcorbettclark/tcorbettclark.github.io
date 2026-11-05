@@ -1,0 +1,30 @@
+{# "What this project needs" block, at the top of every outline.
+
+   Each outline declares its own requirements by setting `needs` before this
+   include:
+
+     {% set needs = {
+          "programming": "None. The classifier is built from Orange widgets.",
+          "machine": "Any laptop that runs Orange Data Mining.",
+          "software": "Orange Data Mining, the orange3-ai-suite add-on, and its image extra (OpenCV).",
+          "downloads": "A prepared MNIST subset (tens of MB), or the full MNIST dataset.",
+        } %}
+
+   The structure and the wording of the general guidance live here, so the six
+   pages cannot drift apart; the facts live in the page they are true of.
+   Set `needs.python` to true when the page needs code, which colours the rule.
+
+   The link is site-absolute, as in _header.html: a filter applied inside an
+   included template resolves against that template's directory, not the
+   page's. #}
+<aside class="needs{% if needs.python %} python{% endif %}">
+  <p class="needs-title">What this project needs</p>
+  <dl>
+    <dt>Programming</dt><dd>{{ needs.programming }}</dd>
+    <dt>Machine</dt><dd>{{ needs.machine }}</dd>
+    <dt>Software</dt><dd>{{ needs.software }}</dd>
+    <dt>Downloads</dt><dd>{{ needs.downloads }}</dd>
+  </dl>
+  <p class="needs-more"><a href="/lt/epq/prerequisites/">Prerequisites</a>
+  describes the kit in general, and the permissions that take time to arrange.</p>
+</aside>

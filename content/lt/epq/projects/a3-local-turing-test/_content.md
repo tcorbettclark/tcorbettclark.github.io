@@ -127,9 +127,7 @@ human and machine texts.
 ## Suggested approaches to data preparation, analysis and modelling
 
 **A way in.** One comparison — a few prompts, a couple of generations each and
-a small panel of judges — is enough to see what the question involves. You
-need Orange with the add-on's language-model widgets and `mlx-lm` on an Apple-
-silicon Mac — see [Prerequisites](../../prerequisites/).
+a small panel of judges — is enough to see what the question involves.
 
 You could begin by choosing a genre and writing 10–20 prompts. Keep them short
 enough that a generation fits within the model's context, and varied enough
