@@ -190,7 +190,7 @@ title = "Could be read as permission to let the model do the work"
 source = "https://www.aqa.org.uk/files/345f3433-b1f8-4406-93a6-19dd85874079/445389386589a6083669db126a9e792a1fae35cc.pdf"
 locator = "AQA AI guidance for EPQ (2025), introduction"
 quote = "Centre Coordinators/Supervisors must only accept work for project work which is the learners' own."
-question = "Could a student read this page as licence to have a language model write their report, analysis or code, rather than to study the model as an object? Watch especially for pages that ask for code or writing while a model is already open on the same machine."
+question = "Could a student read this page as licence to have a language model write their report, analysis or code, rather than to study the model as an object? Flag only language that invites the model to produce the work - drafting, writing, answering, analysing for them. Do not flag an invitation to write analysis code, or to work in a spreadsheet or in Python: writing your own code is the project."
 why = "Using a model as the subject of a project is legitimate; using it to produce the submission is malpractice. The boundary is easiest to cross exactly here."
 fix = "Say what the model may and may not be used for, and require a record of prompts and outputs."
 
@@ -216,9 +216,9 @@ title = "Sources named too vaguely to reference"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
 locator = "§2.2 The Taught Element"
 quote = "referencing, the evaluation of sources and the prevention of plagiarism"
-question = "Are sources named precisely enough for a student to cite them - version, date, publisher, stable URL - or only vaguely ('the WMO atlas', 'a Kaggle dataset')?"
-why = "AO2 is marked on critical selection of sources, and a bibliography of homepages cannot show it."
-fix = "Give the exact edition or version and an access date for anything the student is expected to cite."
+question = "Is a source named so vaguely that it cannot be identified at all - 'a Kaggle dataset', 'some Wikipedia article', 'a book chapter' - so that no student could cite it? Do not flag a source that is named and linked: a missing version number or access date is not worth reporting, since everything dates."
+why = "AO2 is marked on critical selection of sources, and a bibliography of unnamed categories cannot show it; but a named, linked source is identifiable, which is all the example needs to be."
+fix = "Name one identifiable example, or ask the student to record the details of whatever they choose."
 
 [[rule]]
 id = "INTEG-03"
@@ -234,6 +234,21 @@ why = "An examiner reads an over-claim as a failure of AO2, and it is the easies
 fix = "Put the caveat in the student's words, in the limitations section, rather than as a disclaimer."
 
 # ---------------------------------------------------------------- the pack
+
+[[rule]]
+id = "DOC-INDEP"
+group = "pack"
+severity = "med"
+check = "text"
+title = "Refers to another outline instead of standing on its own"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§1.2 What is the Extended Project?"
+quote = "choose an area of interest"
+why = "A student is given one page, not the set. An outline that defers to another for its kit, its method or its scale is only complete if the reader has both."
+fix = "Repeat what is needed on this page, and point at the Prerequisites page rather than at another project."
+[rule.text]
+pattern = "(?i)\\b(?:same (?:kit|as)|as in|see) (?:project )?[ABC][123]\\b"
+expect = "absent"
 
 [[rule]]
 id = "PACK-LOG"
