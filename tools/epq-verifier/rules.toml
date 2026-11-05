@@ -97,7 +97,7 @@ title = "Compute-bound work that could swallow the project"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
 locator = "§1.2 What is the Extended Project?"
 quote = "It will require in total 120 guided learning hours."
-question = "Does the page present a compute-heavy step - training, fine-tuning, hundreds of generations - as required, rather than as a pilot or an optional extension? Again, a suggested range is the student's to scale; flag only what the page makes compulsory."
+question = "Does the page present a compute-heavy step - training, fine-tuning, hundreds of generations - as required, rather than as a pilot or an optional extension? Again, a suggested range is the student's to scale; flag only what the page makes compulsory. Do not multiply a range by the number of models compared: 100-300 items run through four quantisations is still a range the student scales."
 why = "Compute-bound work is unpredictable, and an outline that reads as exciting can leave a student with nothing to write about when a run fails."
 fix = "Bound it: a fixed number of runs or a fixed subset, and a fallback if it overruns."
 

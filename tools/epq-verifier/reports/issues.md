@@ -5,9 +5,9 @@ places where an outline could be read as endorsing a practice that would cost a
 student marks, or that a moderator would query.
 
 - 6 outlines checked against 26 rules (13 judged, 13 text).
-- 2 potential issues (0 high severity).
+- 0 potential issues (0 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported, 146,706 tokens.
+- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported, 22,698 tokens.
 
 ## p1-mnist-digit-classification
 
@@ -37,33 +37,13 @@ No potential issues found by these rules.
 
 *How much memory, speed and energy does quantisation save, and what does it cost in quality?*
 
-### FEAS-03 — Compute-bound work that could swallow the project
-
-*med · feas*
-
-> The second is a task suite you write: 100–300 short items across categories such as factual recall, arithmetic, multi-step reasoning, instruction following and creative writing.
-
-**Why:** Running 100–300 items through four quantisations means 400–1200 generations, a compute-bound step that is presented as required and could consume unpredictable time if runs fail or are slow.
-
-**Suggested:** Suggest a pilot of 20–30 items per category for the core, with scaling to 100–300 only if time allows.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
+No potential issues found by these rules.
 
 ## p6-language-model-failure-and-confidence
 
 *Can a small language model tell you when it is likely to be wrong?*
 
-### VOICE-02 — Reads as generic model prose rather than one person writing
-
-*low · voice*
-
-> You could finish by reflecting on what confidence would need to be useful in a real application: a reliable threshold, a clear cost for deferring, and a way to communicate uncertainty to a user.
-
-**Why:** This reads as generic model prose: a signposted 'you could finish' sentence rounded off with a neat three-part list, rather than a teacher speaking from having run the project.
-
-**Suggested:** Rewrite it as a direct, concrete suggestion tied to the student's own results, e.g. naming one threshold or trade-off they will have measured.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
+No potential issues found by these rules.
 
 ## Rules that produced nothing
 
@@ -82,6 +62,7 @@ point, or the rule is badly worded. Worth a look either way:
 - `EVID-01`
 - `FEAS-01`
 - `FEAS-02`
+- `FEAS-03`
 - `HEAD-01`
 - `INTEG-02`
 - `INTEG-03`
@@ -94,3 +75,4 @@ point, or the rule is badly worded. Worth a look either way:
 - `TONE-02`
 - `TONE-03`
 - `VOICE-01`
+- `VOICE-02`

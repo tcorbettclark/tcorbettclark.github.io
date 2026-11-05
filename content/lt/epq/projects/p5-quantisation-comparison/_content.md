@@ -181,10 +181,10 @@ make from your measurements.
 ## Expected outcomes and opportunities for evaluation
 
 The expected outcome would be a benchmark harness, a table of quality and
-resource measurements for each quantisation, and a set of trade-off plots. The
-shape of the trade-off is the result: where quality starts to fall, which
-resources improve fastest, and whether the cheapest model is also the cheapest
-per correct answer.
+resource measurements for each quantisation, and a set of trade-off plots.
+Quality falls at some point as the bits are cut, and the cheapest model is not
+always the cheapest per correct answer. That trade-off, rather than a winner,
+is the result.
 
 You could evaluate the models on held-out questions and held-out text, compare
 the quality ranking with the memory, speed and energy rankings, and identify

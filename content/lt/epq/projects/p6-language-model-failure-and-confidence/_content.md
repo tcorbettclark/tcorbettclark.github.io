@@ -208,9 +208,8 @@ where it was uncertain and right. You could ask what made the difference, and
 whether the question was rare, ambiguous, or phrased in an unusual way.
 Answering that takes you beyond a single calibration score.
 
-You could finish by reflecting on what confidence would need to be useful in a
-real application: a reliable threshold, a clear cost for deferring, and a way
-to communicate uncertainty to a user.
+You could finish by asking what a user would need before acting on the model's
+confidence, and what it costs to defer.
 
 
 ## Example artefacts
