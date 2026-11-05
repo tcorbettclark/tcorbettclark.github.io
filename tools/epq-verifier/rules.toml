@@ -311,40 +311,17 @@ fix = "State the ethics requirement once, and link it from each outline that nee
 [rule.text]
 all = ["(?i)ethic|consent"]
 
-[[rule]]
-id = "PACK-AI"
-group = "pack"
-severity = "med"
-scope = "pack"
-check = "text"
-title = "The pack never says that AI use must be declared"
-source = "https://www.aqa.org.uk/files/345f3433-b1f8-4406-93a6-19dd85874079/445389386589a6083669db126a9e792a1fae35cc.pdf"
-locator = "AQA AI guidance for EPQ (2025)"
-quote = "valid and unacceptable use of artificial intelligence (AI)"
-why = "The pack's subject matter is language models, so the boundary between studying and using one has to be drawn somewhere."
-fix = "State the rule once, where the outlines can point to it."
-[rule.text]
-all = ["(?i)declare|declaration|acknowledg"]
-
-[[rule]]
-id = "PACK-OWN"
-group = "pack"
-severity = "med"
-scope = "pack"
-check = "text"
-title = "The pack never says the work must be the student's own"
-source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.3 Group Projects"
-quote = "a declaration that the evidence submitted for assessment is the unaided work of the student"
-why = "Authenticity is the supervisor's declaration, and students should know it is coming."
-fix = "Say once that the work is the student's own, and what that rules out."
-[rule.text]
-all = ["(?i)own work|unaided|authentic|malpractice"]
-
 # Removed rules, and why
 #
 # OWN-01 asked whether a student could reproduce the project without making a
 # significant choice, and fired on every outline because every outline names a
 # tool, a method and an artefact. That is what makes a worked example useful.
 # The question worth asking - does the page tell the reader the choices are
-# theirs - is OWN-02, and the pack's own-work rule covers authenticity.
+# theirs - is OWN-02.
+#
+# PACK-AI and PACK-OWN wanted the pack to say that AI use must be declared and
+# that the work must be the student's own. Both are board rules, and the pack
+# stopped restating board rules: a wrong or missing one would mislead a student,
+# and the specification says it properly. Neither question can be asked of a
+# pack that has made that choice. PACK-AI also turned out to be unfalsifiable in
+# practice: it was passing on the word "acknowledged" in A3's caveat list.
