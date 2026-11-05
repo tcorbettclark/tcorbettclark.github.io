@@ -88,11 +88,43 @@ def load_rules(path: pathlib.Path) -> list[dict]:
     return rules
 
 
+NEEDS_DICT = re.compile(r"\{%\s*set needs = \{(.*?)\}\s*%\}", re.S)
+NEEDS_PAIR = re.compile(r'"(\w+)"\s*:\s*(?:"((?:[^"\\]|\\.)*)"|(true|false))')
+NEEDS_LABELS = {
+    "programming": "Programming",
+    "machine": "Machine",
+    "software": "Software",
+    "downloads": "Downloads",
+}
+
+
+def needs_block(outline: pathlib.Path) -> str:
+    """The "what this project needs" block, as the student sees it.
+
+    Each outline declares its requirements in its page template rather than in
+    the markdown, so reading only `_content.md` would hide the one part of the
+    page that answers "can I even run this?". A judge should see the page.
+    """
+    index = outline / "index.html"
+    if not index.exists():
+        return ""
+    match = NEEDS_DICT.search(index.read_text(encoding="utf8"))
+    if not match:
+        return ""
+    rows = []
+    for key, value, _flag in NEEDS_PAIR.findall(match.group(1)):
+        if key in NEEDS_LABELS and value:
+            rows.append(f"- {NEEDS_LABELS[key]}: {value.replace(chr(92) + '"', '"')}")
+    if not rows:
+        return ""
+    return "What this project needs\n" + "\n".join(rows) + "\n\n"
+
+
 def load_docs(root: pathlib.Path) -> dict[str, dict]:
     """One entry per project page: slug, title (its h1), text."""
     docs = {}
     for md in sorted(root.glob("*/_content.md")):
-        text = md.read_text(encoding="utf8")
+        text = needs_block(md.parent) + md.read_text(encoding="utf8")
         title = next(
             (ln[2:].strip() for ln in text.splitlines() if ln.startswith("# ")),
             md.parent.name,

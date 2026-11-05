@@ -79,6 +79,10 @@ Output is `tools/epq-verifier/reports/issues.md`.
 
 ## How it works
 
+The judge reads each outline as the student sees it: the markdown plus the
+"What this project needs" block from the page template, so the page is not
+marked down for a requirement it states in its header.
+
 Two layers, both driven by `rules.toml`:
 
 - **text** — deterministic regex checks. Either per document or, with
