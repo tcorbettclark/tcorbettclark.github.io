@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- Relative URLs (markdown images) resolve against this page's own
+     directory, whatever URL the page was fetched at. AWG computes the
+     absolute path at build time. -->
+<base href="{{ '.' | rel_to_abs_path }}/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Experimenting with LLMs</title>
+<link rel="canonical" href="{{ SITEURL | canonical }}">
+<link rel="stylesheet" href="{{ '../styles.css' | rel_to_abs_path }}" integrity="sha384-{{ '../styles.css' | sha }}">
+</head>
+<body class="sidenotes">
+<main>
+{{ "_content.md" | markdown }}
+</main>
+</body>
+</html>
