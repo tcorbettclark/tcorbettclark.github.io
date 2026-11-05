@@ -192,12 +192,11 @@ make from your model.
 
 ## Expected outcomes and opportunities for evaluation
 
-The expected outcome would be a Python harness that scores candidate answers, a
-question set you designed, calibration plots and a coverage-accuracy curve for
-each quantisation. Importantly, a model that is poorly calibrated is not a
-failed project. The size and direction of the miscalibration are more important
-than a single accuracy figure, and so is whether it is stable enough to be
-useful.
+The expected outcome would be a Python harness that scores candidate answers,
+a question set you designed, calibration plots and a coverage-accuracy curve
+for each quantisation. The size and direction of the miscalibration matter
+more than a single accuracy figure, and so does whether it is stable enough to
+be useful.
 
 You could evaluate the models on overall accuracy, calibration and selective
 prediction, and compare the results across task categories and bit widths. You
@@ -207,8 +206,8 @@ worth discussing.
 
 You could pick three questions where the model was confidently wrong and three
 where it was uncertain and right. You could ask what made the difference, and
-whether the question was rare, ambiguous, or phrased in an unusual way. If you
-can answer that, you have a stronger evaluation than a single calibration score.
+whether the question was rare, ambiguous, or phrased in an unusual way.
+Answering that takes you beyond a single calibration score.
 
 You could finish by reflecting on what confidence would need to be useful in a
 real application: a reliable threshold, a clear cost for deferring, and a way
@@ -216,9 +215,6 @@ to communicate uncertainty to a user.
 
 
 ## Example artefacts
-
-*Placeholder: the images and tables are not yet included. The list shows the
-evidence a finished project could include.*
 
 - Reliability diagrams for 3-bit, 6-bit and 8-bit BritLLM, with the number of
   questions in each bin.

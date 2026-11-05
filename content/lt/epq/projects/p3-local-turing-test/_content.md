@@ -57,9 +57,8 @@ permission, before you copy one into your dataset.
 
 For the human side, you can write your own texts, ask classmates for
 contributions, or use public-domain writing. If you involve other people, as
-contributors or as judges, think about their permission, their anonymity and
-their right to withdraw, and check what your centre needs to agree to before
-you collect anything.
+contributors or as judges, consider whether you need approval from your
+school, and how you will keep them anonymous.
 
 In Orange, load the BritLLM model with **Load LM** and connect its **Model**
 output to **LM Generator**. Choose the quantisation you want to test, and keep
@@ -170,10 +169,9 @@ make from your experiment.
 ## Expected outcomes and opportunities for evaluation
 
 The expected outcome would be a set of matched human and machine texts, a
-judging dataset, and an estimate of how accurately classmates distinguish them.
-Importantly, a model that fails the Turing test is not a failed project. A model
-that is easy to detect, and a clear account of which tells gave it away, is a
-strong result.
+judging dataset, and an estimate of how accurately classmates distinguish
+them. A model that fails the Turing test gives you the tells to explain: which
+gave it away, and how reliably.
 
 You could evaluate the overall detection rate, the detection rate for each
 quantisation and temperature, and the reasons judges gave. You could compare the
@@ -184,18 +182,15 @@ reasons judges gave.
 
 You could pick three pairs that were judged incorrectly and read them closely.
 You could ask what made the human text look machine-like, or the machine text
-look human. If you can answer that, you have a stronger evaluation than a single
-detection rate. You could finish by considering what the experiment says about
-the Turing test as a measure: whether it tests intelligence, imitation, or the
-judge's expectations, and what would change if the judges were experts, the
-texts were longer, or the machine were allowed to revise its output. You could
-discuss those questions in your evaluation.
+look human. Answering that takes you beyond a single detection rate. You could
+finish by considering what the experiment says about the Turing test as a
+measure: whether it tests intelligence, imitation, or the judge's
+expectations, and what would change if the judges were experts, the texts were
+longer, or the machine were allowed to revise its output. You could discuss
+those questions in your evaluation.
 
 
 ## Example artefacts
-
-*Placeholder: the images and tables are not yet included. The list shows the
-evidence a finished project could include.*
 
 - A screenshot of the Orange workflow: **Load LM** → **LM Generator** → **Data
   Table**.

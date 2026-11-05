@@ -69,9 +69,9 @@ separate digits with enclosed regions (0, 6, 8, 9) from those without, and
 whether profile and spatial-mass features matter more for digits such as 1, 2,
 4 and 7. Neither is settled until you run the ablation.
 
-**Variants.** The same workflow answers a different question on a different
-image set: handwritten letters, symbols, or objects you can photograph
-indoors. Check the licence of anything you did not collect yourself.
+The same workflow answers a different question on a different image set:
+handwritten letters, symbols, or objects you can photograph indoors. Check the
+licence of anything you did not collect yourself.
 
 ## Key data science, statistical and machine learning concepts
 
@@ -150,17 +150,14 @@ could also compare the confusion matrices of the neural network, tree and
 logistic regression, and ask whether they fail in the same places.
 
 You could pick three misclassified images and trace each one back to its
-feature values. You could try to explain why the model chose the wrong digit. If
-you can explain them, you have a stronger evaluation than a single accuracy
-figure. If you cannot, that is also a finding about the limits of the feature
-set. You could finish by considering what would change with a convolutional
-network: whether the errors would disappear or move somewhere less visible.
+feature values. You could try to explain why the model chose the wrong digit.
+Explaining them takes you beyond a single accuracy figure. If you cannot, that
+is also a finding about the limits of the feature set. You could finish by
+considering what would change with a convolutional network: whether the errors
+would disappear or move somewhere less visible.
 
 
 ## Example artefacts
-
-*Placeholder: the images and tables are not yet included. The list shows the
-evidence a finished project could include.*
 
 - A screenshot of the finished Orange canvas: **Import Images** → **Image
   Features** → **Test & Score** → **Confusion Matrix**.

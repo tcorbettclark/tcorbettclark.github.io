@@ -189,9 +189,9 @@ definitions explain any disagreement.
 You could pick three countries that break the rule and write a short
 explanation for each. You could ask what else might explain the gap — income
 inequality, the health system, a recent conflict, oil wealth, or a problem
-with the data — and check which of those you actually have evidence for. If
-you can answer that, you have a stronger evaluation than a single R². If you
-cannot, that is also a finding about the limits of the data.
+with the data — and check which of those you actually have evidence for.
+Answering that takes you beyond a single R². If you cannot, that is also a
+finding about the limits of the data.
 
 You could finish by reflecting on what a model like this could and could not be
 used for. It may describe a broad pattern across countries without being reliable
@@ -200,9 +200,6 @@ the project.
 
 
 ## Example artefacts
-
-*Placeholder: the images and tables are not yet included. The list shows the
-evidence a finished project could include.*
 
 - A screenshot of the Orange workflow, showing **File**, **Scatter Plot**,
   **Linear Regression**, **Test & Score** and **Predictions**.

@@ -84,9 +84,9 @@ the sky is overcast. You could test that by comparing
 group G on and off, and by looking at whether the model's errors are cases
 where the colour cue is absent.
 
-**Variants.** The same approach works on any labelled image collection: cloud
-genera in another region, cloud type against time of day, or a teaching set
-for a different subject.
+The same approach works on any labelled image collection: cloud genera in
+another region, cloud type against time of day, or a teaching set for a
+different subject.
 
 ## Key data science, statistical and machine learning concepts
 
@@ -172,17 +172,15 @@ with a shape-only model, and ask whether the apparent skill is really a
 shortcut.
 
 You could pick three field-test errors and inspect the images. You could ask
-whether the cloud was mislabelled, whether it was a mixed sky, whether the light
-was unusual, and whether the model relied on colour. If you can answer those
-questions, you have a stronger evaluation than a single accuracy figure. You could finish by considering what would be needed to
-make the model useful for a real user: more local training data, a "not sure"
-option, a clear-sky class, or a different kind of model.
+whether the cloud was mislabelled, whether it was a mixed sky, whether the
+light was unusual, and whether the model relied on colour. Answering those
+questions takes you beyond a single accuracy figure. You could finish by
+considering what would be needed to make the model useful for a real user:
+more local training data, a "not sure" option, a clear-sky class, or a
+different kind of model.
 
 
 ## Example artefacts
-
-*Placeholder: the images and tables are not yet included. The list shows the
-evidence a finished project could include.*
 
 - A screenshot of the finished Orange canvas: **Import Images** → **Image
   Features** → **Test & Score** → **Confusion Matrix**.

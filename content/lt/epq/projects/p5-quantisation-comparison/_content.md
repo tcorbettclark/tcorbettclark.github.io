@@ -94,9 +94,9 @@ whether speed improves but not proportionally, and whether quality holds up
 from 8-bit to 4-bit before falling more sharply at 3-bit. You could test each part
 separately and report where the hypothesis fails.
 
-**Phrase it as a decision.** The question is easier to answer well if it ends
-in a choice: for a laptop assistant that has to fit in 8 GB, which
-quantisation would you deploy, and what would you give up?
+The question is easier to answer well if it ends in a choice: for a laptop
+assistant that has to fit in 8 GB, which quantisation would you deploy, and
+what would you give up?
 
 ## Key data science, statistical and machine learning concepts
 
@@ -183,10 +183,9 @@ make from your measurements.
 
 The expected outcome would be a benchmark harness, a table of quality and
 resource measurements for each quantisation, and a set of trade-off plots.
-Importantly, a model that loses accuracy is not a failed project. The shape of
-the trade-off is more important than whether one model wins on every measure:
-where quality starts to fall, which resources improve fastest, and whether the
-cheapest model is also the cheapest per correct answer.
+The shape of the trade-off is more important than whether one model wins on
+every measure: where quality starts to fall, which resources improve fastest,
+and whether the cheapest model is also the cheapest per correct answer.
 
 You could evaluate the models on held-out questions and held-out text, compare
 the quality ranking with the memory, speed and energy rankings, and identify
@@ -207,9 +206,6 @@ comparison to justify a deployment choice.
 
 
 ## Example artefacts
-
-*Placeholder: the images and tables are not yet included. The list shows the
-evidence a finished project could include.*
 
 - A results table with one row per quantisation and columns for quality, tokens
   per second, peak memory, file size and energy per token.

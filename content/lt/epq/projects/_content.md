@@ -20,9 +20,6 @@ downloads — and then follows the same pattern:
 - Example artefacts
 - Further reading
 
-The example artefacts are placeholders until the Orange workflows and Python
-plots are built.
-
 ## The six projects
 
 | ID | Project | Main tool | Data |
