@@ -37,19 +37,6 @@
 # rather than tuned - see the note at the end of this file.
 
 [[rule]]
-id = "OWN-02"
-group = "own"
-severity = "high"
-check = "judge"
-title = "Nothing tells the reader they are allowed to depart from it"
-source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§1.2 What is the Extended Project?"
-quote = "choose an area of interest"
-question = "Does the page say, in words a student would notice, that it is one example among many and that the decisions - question, data, tool, artefact - are theirs to make or change? Do not flag concreteness: naming a tool and a pipeline is the point of an example. Flag only the absence of that invitation."
-why = "An example that does not say so will be treated as the specification it looks like. This is the cheapest single fix in the pack: one sentence under the title."
-fix = "Add a line under the title: this is one way to run this project, not the only way; change the question, the data or the artefact to suit you."
-
-[[rule]]
 id = "OWN-03"
 group = "own"
 severity = "med"
@@ -208,19 +195,6 @@ why = "Using a model as the subject of a project is legitimate; using it to prod
 fix = "Say what the model may and may not be used for, and require a record of prompts and outputs."
 
 [[rule]]
-id = "INTEG-01"
-group = "integ"
-severity = "high"
-check = "judge"
-title = "Could be mistaken for work already being submitted elsewhere"
-source = "https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf"
-locator = "Choosing an appropriate project"
-quote = "learners may not simply resubmit work that has been or will be submitted for another qualification"
-question = "Could this project overlap with coursework or content the student is already submitting for an A level, so that the same work would be counted twice, with no warning on the page?"
-why = "All four boards forbid resubmission. Overlap is easy to create unintentionally when an inspiring example grows out of a subject the student is already studying."
-fix = "Say what the project must add beyond the student's other qualifications."
-
-[[rule]]
 id = "INTEG-02"
 group = "integ"
 severity = "low"
@@ -306,6 +280,21 @@ fix = "State the ethics requirement once, and link it from each outline that nee
 [rule.text]
 all = ["(?i)ethic|consent"]
 
+[[rule]]
+id = "PACK-EXAMPLE"
+group = "pack"
+severity = "med"
+check = "text"
+title = "The pack never says the outlines are examples to depart from"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§1.2 What is the Extended Project?"
+quote = "It will be based on a topic chosen by the student(s) and agreed as appropriate by the centre."
+why = "The student chooses the topic and the centre agrees it; a pack that reads as instructions takes that choice away. Said once, where the outlines are introduced, this is a sentence a student reads; repeated at the top of six pages, it is furniture they skip."
+fix = "On the page that introduces the outlines, say they are examples to adapt rather than projects to copy."
+[rule.text]
+all = ["(?i)inspiration|not to copy|not instructions",
+       "(?i)choose (?:a|your) (?:question|topic)|take ownership|your own (?:question|approach|project)"]
+
 # Removed rules, and why
 #
 # OWN-01 asked whether a student could reproduce the project without making a
@@ -320,3 +309,14 @@ all = ["(?i)ethic|consent"]
 # and the specification says it properly. Neither question can be asked of a
 # pack that has made that choice. PACK-AI also turned out to be unfalsifiable in
 # practice: it was passing on the word "acknowledged" in P3's caveat list.
+#
+# OWN-02 asked whether each page said it was one example among many. Every page
+# then carried the same sentence under its title, and a student arriving at a
+# page learns nothing from it: the sentence exists for the rule. The promise is
+# worth keeping and is kept once, on the page that introduces the outlines, as
+# PACK-EXAMPLE.
+#
+# INTEG-01 asked whether an outline could be mistaken for work submitted for
+# another qualification. No outline invites that; the only way to satisfy it was
+# a sentence telling the student to check with their supervisor, which is the
+# centre's business and not something a page can settle.
