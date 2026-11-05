@@ -7,3 +7,6 @@ __pycache__/
 *-key.pem
 screenshots/
 canonical_links.txt
+
+# epq-verifier: derived, rebuilt on demand
+tools/epq-verifier/reports/.judge-cache.json

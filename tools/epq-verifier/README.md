@@ -20,9 +20,35 @@ boards assess candidates, not guidance.
 
 ```sh
 python3 tools/epq-verifier/run.py                       # text checks only
-python3 tools/epq-verifier/run.py --judge               # text + LLM
+python3 tools/epq-verifier/run.py --judge               # text + LLM, two runs each
 python3 tools/epq-verifier/run.py --only b1             # one outline
+python3 tools/epq-verifier/run.py --changed HEAD~1      # only what you edited
+python3 tools/epq-verifier/run.py --only b1 --only c1   # two of them
 ```
+
+Progress is logged to stderr with a timestamp and elapsed seconds, so a slow
+run is never a silent one. The report goes to a file; nothing is printed to
+stdout.
+
+Useful flags:
+
+| flag | what it does |
+|---|---|
+| `--only CODE` | one outline (`a1`, `b2`, or any part of its name); repeatable |
+| `--changed REF` | only outlines whose `_content.md` changed since a git ref |
+| `--runs N` | opinions per outline (default 2); only findings in **all** runs are reported |
+| `--jobs N` | outlines judged at once (default 4) |
+| `--reasoning LEVEL` | `none`, `low` (default), `high`, `max`, or `default` to send nothing |
+| `--no-cache` | ignore cached judgements |
+
+Judgements are cached by model, reasoning level, ruleset and document text, so
+re-running after editing one outline costs one call, not twelve. The cache lives
+in `reports/.judge-cache.json` and is not committed.
+
+`deepseek-v4.1-flash` reasons by default. On one outline, `--reasoning low` took
+12 s and 41 s across two runs; `none` is faster and worse, `high` and `max`
+cost several times as much. Because it thinks, the same document can yield
+different findings on two runs — hence `--runs 2` and the intersection.
 
 The judge needs `PI_OLLAMA_KEY` (or `OLLAMA_API_KEY`) and calls
 `https://ollama.com/v1/chat/completions`. The default model is

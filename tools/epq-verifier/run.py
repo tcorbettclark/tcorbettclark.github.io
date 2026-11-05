@@ -28,6 +28,8 @@ The LLM needs PI_OLLAMA_KEY (or OLLAMA_API_KEY) in the environment.
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
+import hashlib
 import json
 import os
 import pathlib
@@ -48,9 +50,21 @@ PACK_PAGES = (
 )
 DEFAULT_RULES = "tools/epq-verifier/rules.toml"
 DEFAULT_OUT = "tools/epq-verifier/reports/issues.md"
+CACHE = "tools/epq-verifier/reports/.judge-cache.json"
 API = "https://ollama.com/v1/chat/completions"
 DEFAULT_MODEL = "deepseek-v4.1-flash"
 SEVERITY_ORDER = {"high": 0, "med": 1, "low": 2}
+START = time.time()
+
+
+def log(message: str) -> None:
+    """Progress on stderr, with a timestamp and elapsed seconds.
+
+    The report is written to a file, so stdout stays empty and this is what you
+    watch while a run is going.
+    """
+    elapsed = time.time() - START
+    print(f"[{elapsed:6.1f}s] {message}", file=sys.stderr, flush=True)
 
 
 # ---------------------------------------------------------------- loading
@@ -79,6 +93,24 @@ def load_docs(root: pathlib.Path) -> dict[str, dict]:
         )
         docs[md.parent.name] = {"title": title, "text": text}
     return docs
+
+
+def changed_since(docs_dir: str, ref: str, docs: dict[str, dict]) -> dict[str, dict]:
+    """Only the outlines whose markdown changed since `ref`, by git."""
+    import subprocess
+
+    try:
+        out = subprocess.run(
+            ["git", "diff", "--name-only", ref, "--", docs_dir],
+            capture_output=True, text=True, check=True,
+        ).stdout
+    except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        raise SystemExit(f"git diff {ref} failed: {e}") from e
+    touched = {
+        line.split("/")[-2] for line in out.splitlines() if line.endswith("_content.md")
+    }
+    log(f"changed since {ref}: {', '.join(sorted(touched)) or 'nothing'}")
+    return {k: v for k, v in docs.items() if k in touched}
 
 
 # ---------------------------------------------------------------- text layer
@@ -181,7 +213,9 @@ problem here, in one or two sentences>", "fix": "<a concrete suggested change, \
 one or two sentences>"}]}"""
 
 
-def call_model(model: str, system: str, user: str, retries: int = 3) -> tuple[str, dict]:
+def call_model(
+    model: str, system: str, user: str, reasoning: str = "low", retries: int = 3
+) -> tuple[str, dict]:
     key = os.environ.get("PI_OLLAMA_KEY") or os.environ.get("OLLAMA_API_KEY")
     if not key:
         raise SystemExit("No PI_OLLAMA_KEY / OLLAMA_API_KEY in the environment.")
@@ -194,6 +228,10 @@ def call_model(model: str, system: str, user: str, retries: int = 3) -> tuple[st
         "temperature": 0,
         "stream": False,
     }
+    if reasoning and reasoning != "default":
+        # deepseek-v4.1-flash supports none | low | high | max. "default" sends
+        # nothing and lets the provider choose.
+        body["reasoning_effort"] = reasoning
     data = json.dumps(body).encode()
     for attempt in range(retries):
         req = urllib.request.Request(
@@ -255,43 +293,113 @@ def self_defeating(quote: str, fix: str, why: str) -> bool:
     return len(asked - already) <= 2
 
 
-def judge_issues(
-    rules: list[dict], docs: dict[str, dict], model: str
-) -> tuple[list[dict], dict]:
+def rules_key(rules: list[dict]) -> str:
+    blob = json.dumps(rules, sort_keys=True).encode()
+    return hashlib.sha256(blob).hexdigest()[:16]
+
+
+def load_cache(path: pathlib.Path) -> dict:
+    if path.exists():
+        try:
+            return json.loads(path.read_text())
+        except json.JSONDecodeError:
+            return {}
+    return {}
+
+
+def judge_once(args, rules, by_id, slug, doc, run_index, cache) -> tuple[list[dict], dict]:
+    """One opinion on one document, cached by everything that could change it."""
+    user = (
+        "The rules to apply:\n\n"
+        + "\n".join(judge_prompt(r) for r in rules)
+        + "\n\n--- DOCUMENT BEGINS ---\n\n"
+        + doc["text"]
+    )
+    key = hashlib.sha256(
+        "|".join(
+            [args.judge, args.reasoning, rules_key(rules), slug, str(run_index),
+             hashlib.sha256(doc["text"].encode()).hexdigest()]
+        ).encode()
+    ).hexdigest()[:24]
+
+    if key in cache and not args.no_cache:
+        log(f"{slug} run {run_index + 1}/{args.runs}: cached ({len(cache[key])} findings)")
+        return [dict(i, rule=by_id[i["rule"]], doc=slug) for i in cache[key]], {}
+
+    t0 = time.time()
+    log(f"{slug} run {run_index + 1}/{args.runs}: asking {args.judge} "
+        f"(reasoning={args.reasoning}) ...")
+    raw, usage = call_model(args.judge, SYSTEM, user, reasoning=args.reasoning)
+    issues, dropped = [], 0
+    for item in parse_issues(raw):
+        rule = by_id.get(str(item.get("rule", "")).strip())
+        if not rule:
+            continue
+        quote = (item.get("quote") or "").strip()
+        why = (item.get("why") or rule["why"]).strip()
+        fix = (item.get("fix") or rule["fix"]).strip()
+        if self_defeating(quote, fix, why):
+            dropped += 1
+            continue
+        issues.append({
+            "rule": rule["id"], "quote": quote, "why": why, "fix": fix,
+            "note": "" if quote_present(quote, doc["text"]) else "quote not found in source",
+        })
+
+    cache[key] = issues
+    tokens = usage.get("total_tokens", 0)
+    log(f"{slug} run {run_index + 1}/{args.runs}: {len(issues)} findings"
+        + (f", {dropped} self-defeating dropped" if dropped else "")
+        + f", {time.time() - t0:.0f}s, {tokens:,} tokens")
+    return [dict(i, rule=by_id[i["rule"]], doc=slug) for i in issues], usage
+
+
+def find_key(issue):
+    """What makes two runs agree: the same rule, on the same sentence."""
+    norm = re.sub(r"\s+", " ", issue["quote"]).strip().lower()
+    return (issue["rule"]["id"], norm)
+
+
+def judge_issues(args, rules, docs, cache) -> tuple[list[dict], dict]:
     judge_rules = [r for r in rules if r["check"] == "judge"]
     by_id = {r["id"]: r for r in judge_rules}
-    out, usage = [], {}
+    usage: dict = {}
+
+    tasks = [(slug, run) for slug in docs for run in range(args.runs)]
+    log(f"{len(docs)} document(s) x {args.runs} run(s) = {len(tasks)} call(s), "
+        f"{args.jobs} at a time")
+
+    results: dict[tuple[str, int], list[dict]] = {}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
+        futures = {
+            pool.submit(judge_once, args, judge_rules, by_id, slug, docs[slug], run, cache): (slug, run)
+            for slug, run in tasks
+        }
+        for future in concurrent.futures.as_completed(futures):
+            slug, run = futures[future]
+            try:
+                issues, used = future.result()
+            except Exception as e:  # noqa: BLE001 - report and stop
+                log(f"{slug} run {run + 1} failed: {e}")
+                raise SystemExit(1) from e
+            results[(slug, run)] = issues
+            for k, v in used.items():
+                if isinstance(v, int):
+                    usage[k] = usage.get(k, 0) + v
+
+    out = []
     for slug, doc in docs.items():
-        print(f"  judging {slug} ...", file=sys.stderr)
-        user = (
-            "The rules to apply:\n\n"
-            + "\n".join(judge_prompt(r) for r in judge_rules)
-            + "\n\n--- DOCUMENT BEGINS ---\n\n"
-            + doc["text"]
-        )
-        raw, used = call_model(model, SYSTEM, user)
-        for k, v in used.items():
-            if isinstance(v, int):
-                usage[k] = usage.get(k, 0) + v
-        for item in parse_issues(raw):
-            rule = by_id.get(str(item.get("rule", "")).strip())
-            if not rule:
-                continue
-            quote = (item.get("quote") or "").strip()
-            why = (item.get("why") or rule["why"]).strip()
-            fix = (item.get("fix") or rule["fix"]).strip()
-            if self_defeating(quote, fix, why):
-                continue
-            out.append(
-                {
-                    "rule": rule,
-                    "doc": slug,
-                    "quote": quote,
-                    "why": why,
-                    "fix": fix,
-                    "note": "" if quote_present(quote, doc["text"]) else "quote not found in source",
-                }
-            )
+        runs = [results[(slug, r)] for r in range(args.runs)]
+        if args.runs == 1:
+            agreed = runs[0]
+        else:
+            seen = [set(find_key(i) for i in run) for run in runs]
+            common = set.intersection(*seen)
+            agreed = [i for i in runs[0] if find_key(i) in common]
+            dropped = sum(len(r) for r in runs) - len(agreed) * len(runs)
+            log(f"{slug}: {len(agreed)} finding(s) in all {args.runs} runs "
+                f"({len(runs[0])} in the first; {dropped} opinion(s) discarded)")
+        out += agreed
     return out, usage
 
 
@@ -321,7 +429,8 @@ def render(issues: list[dict], docs: dict[str, dict], sim: list[str], args, usag
         f"({args.n_judge} judged, {args.n_text} text).",
         f"- {total} potential issues ({high} high severity).",
         "- Rules that are about the pack as a whole also read its prerequisites page.",
-        f"- Judge: `{args.judge}`" + (f", {usage.get('total_tokens', 0):,} tokens." if usage else "."),
+        f"- Judge: `{args.judge}`, reasoning `{args.reasoning}`, "
+        f"{args.runs} run(s) per outline, only findings in all of them reported" + (f", {usage.get('total_tokens', 0):,} tokens." if usage else "."),
         "",
     ]
     if cross or sim:
@@ -358,7 +467,7 @@ def render(issues: list[dict], docs: dict[str, dict], sim: list[str], args, usag
 def issue_block(i: dict) -> list[str]:
     r = i["rule"]
     lines = [f"### {r['id']} — {r['title']}", "", f"*{r['severity']} · {r['group']}*"
-             + (f" · {i['note']}" if i["note"] else ""), ""]
+             + (f" · {i['note']}" if i.get("note") else ""), ""]
     if i["quote"]:
         lines += [f"> {i['quote']}", ""]
     lines += [f"**Why:** {i['why']}", "", f"**Suggested:** {i['fix']}", "",
@@ -376,7 +485,30 @@ def main() -> None:
     ap.add_argument("--out", default=DEFAULT_OUT)
     ap.add_argument("--judge", default=DEFAULT_MODEL,
                     help="model name, or 'none' for the text checks only")
-    ap.add_argument("--only", default=None, help="substring of a document name")
+    ap.add_argument(
+        "--only",
+        action="append",
+        default=[],
+        metavar="CODE",
+        help="review only this project (a1, b2, or any part of its name); repeatable",
+    )
+    ap.add_argument(
+        "--changed",
+        default=None,
+        metavar="REF",
+        help="review only the outlines whose _content.md changed since REF (e.g. HEAD~1)",
+    )
+    ap.add_argument("--runs", type=int, default=2,
+                    help="opinions per outline; only findings in all of them are reported")
+    ap.add_argument("--jobs", type=int, default=4, help="documents judged at once")
+    ap.add_argument(
+        "--reasoning",
+        default="low",
+        choices=["default", "none", "low", "high", "max"],
+        help="thinking level for the judge (default: low)",
+    )
+    ap.add_argument("--no-cache", action="store_true",
+                    help="ignore cached judgements and ask again")
     ap.add_argument("--threshold", type=float, default=0.12)
 
     args = ap.parse_args()
@@ -387,18 +519,33 @@ def main() -> None:
 
     docs = load_docs(pathlib.Path(args.docs))
     if args.only:
-        docs = {k: v for k, v in docs.items() if args.only in k}
-    if not docs:
-        raise SystemExit(f"No outlines found in {args.docs}")
+        docs = {
+            k: v for k, v in docs.items()
+            if any(o.lower() in k.lower() for o in args.only)
+        }
+        if not docs:
+            raise SystemExit(f"No outline matches {args.only}")
+    if args.changed:
+        docs = changed_since(args.docs, args.changed, docs)
+        if not docs:
+            log("no outline has changed since " + args.changed + " - nothing to do")
+            return
 
-    print(f"{len(docs)} outlines, {args.n_rules} rules", file=sys.stderr)
+    log(f"{len(docs)} outline(s), {args.n_rules} rules "
+        f"({args.n_judge} judged, {args.n_text} text)")
+    for slug in docs:
+        log(f"  in scope: {slug}")
     pack_pages = [pathlib.Path(f) for f in PACK_PAGES]
     extra = "\n\n".join(p.read_text(encoding="utf8") for p in pack_pages if p.exists())
     issues = text_issues(args.rules, docs, extra)
+    log(f"text checks: {len(issues)} finding(s)")
     usage = {}
+    cache = load_cache(pathlib.Path(CACHE))
     if args.judge.lower() != "none":
-        judged, usage = judge_issues(args.rules, docs, args.judge)
+        judged, usage = judge_issues(args, args.rules, docs, cache)
         issues += judged
+        pathlib.Path(CACHE).parent.mkdir(parents=True, exist_ok=True)
+        pathlib.Path(CACHE).write_text(json.dumps(cache))
 
     sim = similarity(docs, threshold=args.threshold)
 
@@ -406,7 +553,9 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     args.pack_seen = [str(p) for p in pack_pages if p.exists()]
     out.write_text(render(issues, docs, sim, args, usage), encoding="utf8")
-    print(f"{len(issues)} potential issues -> {out}", file=sys.stderr)
+    log(f"{len(issues)} potential issue(s) -> {out}")
+    if usage:
+        log("tokens: " + ", ".join(f"{k}={v:,}" for k, v in sorted(usage.items())))
 
 
 if __name__ == "__main__":
