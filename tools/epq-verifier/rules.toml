@@ -1,0 +1,335 @@
+# Rules for checking the student-facing EPQ project outlines.
+#
+# The six outlines are examples meant to inspire, not instructions to follow.
+# That distinction decides what a rule may ask:
+#
+#   scope = "doc"   the outline may leave anything out, but it must not *mislead*.
+#                   A per-document rule therefore only ever asks: could a student
+#                   read this sentence and infer a practice that would cost them
+#                   marks or fail moderation?
+#   scope = "pack"  what the pack as a whole must state once: the assessed
+#                   product, the word scale, the production log, the
+#                   presentation, ethics, AI declaration. Checked against the
+#                   outlines plus the pages that carry pack-level guidance
+#                   (prerequisites, and the collection's own page), never
+#                   against a single outline.
+#
+# AQA 7993 is the spine (by far the largest EPQ entry). Nothing here is a rule
+# that only AQA imposes: where the boards differ, the rule is silent.
+#
+# Fields
+#   id        stable identifier; quote it in reports and issues
+#   group     own | evidence | ethics | feas | ai | integ | pack
+#   severity  high | med | low      (high = could damage a student's chances)
+#   scope     doc (default) or pack
+#   check     judge | text
+#   source    specification or guidance URL
+#   locator   section or page within that source
+#   quote     short verbatim extract, so the rule can be audited
+#   text      for check="text": all = [patterns that must each match], or
+#             pattern = one pattern, with expect = present | absent
+#   question  the question put to the judge, for check="judge"
+#   why       why the finding matters
+#   fix       generic suggested change, used when the judge gives none
+
+# ---------------------------------------------------------------- the outline
+
+[[rule]]
+id = "OWN-01"
+group = "own"
+severity = "high"
+check = "judge"
+title = "Reads as a specification rather than an example"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.1 Aims"
+quote = "make a significant contribution to the choice and design of an extended project"
+question = "Reading this the way a 17-year-old would, could they reproduce the project end to end without making any significant choice of their own - question, data, tool, method, artefact? Name the decisions the outline has already made for them."
+why = "This is meant to be inspiration, not a recipe. The danger is not that we intend instruction, but that the page reads like one: a student who follows it exactly has made no significant contribution to the choice and design, which is what AQA's aims require and what a moderator will ask about."
+fix = "Keep the detail, but make the alternatives visible: name the decisions that are the student's, and show two or three ways each could go."
+
+[[rule]]
+id = "OWN-02"
+group = "own"
+severity = "high"
+check = "judge"
+title = "Nothing tells the reader they are allowed to depart from it"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§1.2 What is the Extended Project?"
+quote = "choose an area of interest"
+question = "Does the page say, in words a student would notice, that it is one example among many and that they are expected to change it - the question, the data, the tool, the artefact?"
+why = "An example that does not say so will be treated as the specification it looks like. This is the cheapest single fix in the pack: one sentence at the top of each outline."
+fix = "Add a line under the title: this is one way to run this project, not the only way; change the question, the data or the artefact to suit you."
+
+[[rule]]
+id = "OWN-03"
+group = "own"
+severity = "med"
+check = "judge"
+title = "Nothing helps a second student take it somewhere different"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.3 Group Projects"
+quote = "Students working as a group must submit individual assessment evidence and complete an individual presentation."
+question = "Would two students inspired by this page end up with projects distinct enough to be assessed separately, or does the page give no route to a different question or artefact?"
+why = "Six examples for a whole cohort invites overlap. Two near-identical projects are an authenticity question for the centre and a moderation risk for the students."
+fix = "Add a short 'variants' line: another question to ask of the same data, or another artefact to build with the same tool."
+
+[[rule]]
+id = "EVID-01"
+group = "evidence"
+severity = "high"
+check = "judge"
+title = "Calls the artefact or output the outcome, with no report in sight"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.5.1 Assessment Evidence"
+quote = "All project products must include a written report."
+question = "Does the page describe the workflow, model, plots, dataset or program as the artefact, the final outcome or the thing you would produce, without the written report appearing alongside it?"
+why = "The report is what most of the marks are awarded from: AO2 and AO4 are marked almost entirely from it. A page that celebrates the artefact and mentions only 'a short user guide' leaves a student thinking the artefact is the submission. This is a misleading implication, not an omission."
+fix = "Where the artefact is described, put the report beside it: what the report has to argue, and roughly how long it is."
+
+[[rule]]
+id = "FEAS-01"
+group = "feas"
+severity = "high"
+check = "judge"
+title = "Too much work for the hours available"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§1.2 What is the Extended Project?"
+quote = "It will require in total 120 guided learning hours."
+question = "Is this plausible within 120 guided hours, which must also cover the taught element, the log, the report and the presentation? Point at the part that looks too big."
+why = "Running out of time is the most common way a good project fails, and an inspiring example is the easiest place to catch it. 120 hours is about fifteen school days in total."
+fix = "Name the stage that has to be cut or time-boxed, and say roughly how many hours each stage should take."
+
+[[rule]]
+id = "FEAS-02"
+group = "feas"
+severity = "med"
+check = "judge"
+title = "Assumes kit or software without flagging it"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.4 Assessing the Potential of a Proposal"
+quote = "Are the working title and proposed action clear and focused on an issue which can be managed within the timescale, available resources and word total?"
+question = "Does the page assume a particular machine, installed software or a large download, without saying so - so that a student would only discover the requirement after choosing the project?"
+why = "An inspired student may not have the kit. Saying so costs a line; discovering it in week six costs the project."
+fix = "Add a prerequisites line and link the pack's Prerequisites page."
+
+[[rule]]
+id = "FEAS-03"
+group = "feas"
+severity = "med"
+check = "judge"
+title = "Compute-bound work that could swallow the project"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§1.2 What is the Extended Project?"
+quote = "It will require in total 120 guided learning hours."
+question = "Does the page require training, fine-tuning or an experiment suite that could consume most of the available hours before any analysis begins?"
+why = "Compute-bound work is unpredictable, and an outline that reads as exciting can leave a student with nothing to write about when a run fails."
+fix = "Bound it: a fixed number of runs or a fixed subset, and a fallback if it overruns."
+
+[[rule]]
+id = "FEAS-04"
+group = "feas"
+severity = "med"
+check = "judge"
+title = "A question that invites description rather than investigation"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.4 Assessing the Potential of a Proposal, item 1"
+quote = "allow the student to investigate and to access the higher-level concepts and skills in the assessment objectives, i.e. plan, research, analyse, evaluate and explain, rather than simply describe and narrate"
+question = "Could the question as phrased be answered by describing a process or reporting a number, without analysis, comparison or evaluation?"
+why = "A descriptive project caps AO3 and AO4, which between them carry 60% of the marks."
+fix = "Add a comparison, a counterfactual or a why to the question."
+
+[[rule]]
+id = "ETH-01"
+group = "ethics"
+severity = "high"
+check = "judge"
+title = "People become data subjects without ethics appearing"
+source = "https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF"
+locator = "Quick guide: ethical principles for the EPQ"
+quote = "assessing the ethical principles of project proposals and research"
+question = "Does the project collect data from or about people (classmates, teachers, the public), and if so is the page silent about centre approval, consent, anonymity or the right to withdraw?"
+why = "All four boards require the centre to approve a proposal's ethics before data is collected. An example that asks students to survey classmates without saying so invites evidence that cannot be used."
+fix = "Add an ethics line naming who is involved, how consent is obtained, how their data is stored, and who approves it."
+
+[[rule]]
+id = "ETH-02"
+group = "ethics"
+severity = "high"
+check = "judge"
+title = "Treats personal data as free raw material"
+source = "https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF"
+locator = "Quick guide: ethical principles for the EPQ"
+quote = "ethical principles of project proposals and research"
+question = "Does the page encourage keeping personal data - screenshots, chat logs, classmates' writing, quiz answers - without a word about consent, anonymisation or data protection?"
+why = "Schools have data protection duties, and a project that ignores them can be stopped, or the evidence withdrawn, late in the day."
+fix = "Say what is collected, that participants are told, and that data is anonymised and deleted after marking."
+
+[[rule]]
+id = "ETH-03"
+group = "ethics"
+severity = "med"
+check = "judge"
+title = "Practical risk is never mentioned"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.2 The Taught Element"
+quote = "conducting risk assessment, assessing the ethical principles of project proposals and research"
+question = "Does the project involve physical or environmental risk - going outdoors to photograph, travel, equipment - without a word about a risk assessment?"
+why = "Risk assessment is part of the taught element and of the centre's duty of care; it is also evidence that the student planned the work."
+fix = "Add a risk line: where the work happens, what could go wrong, what the student will do about it."
+
+[[rule]]
+id = "ETH-04"
+group = "ethics"
+severity = "med"
+check = "judge"
+title = "Third-party images or data may not be reusable"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.2 The Taught Element"
+quote = "referencing, the evaluation of sources and the prevention of plagiarism"
+question = "Does the page rely on images, corpora or datasets whose licence or terms of use may not permit reuse in student work, without saying the licence must be checked?"
+why = "A corpus that is free to look at is not automatically licensed for redistribution in a report, and finding out at submission leaves no time to replace it."
+fix = "Add a licence line to the data section: where it comes from, on what terms, and what to do if reuse is not permitted."
+
+[[rule]]
+id = "AI-01"
+group = "ai"
+severity = "high"
+check = "judge"
+title = "Could be read as permission to let the model do the work"
+source = "https://www.aqa.org.uk/files/345f3433-b1f8-4406-93a6-19dd85874079/445389386589a6083669db126a9e792a1fae35cc.pdf"
+locator = "AQA AI guidance for EPQ (2025), introduction"
+quote = "Centre Coordinators/Supervisors must only accept work for project work which is the learners' own."
+question = "Could a student read this page as licence to have a language model write their report, analysis or code, rather than to study the model as an object? Watch especially for pages that ask for code or writing while a model is already open on the same machine."
+why = "Using a model as the subject of a project is legitimate; using it to produce the submission is malpractice. The boundary is easiest to cross exactly here."
+fix = "Say what the model may and may not be used for, and require a record of prompts and outputs."
+
+[[rule]]
+id = "INTEG-01"
+group = "integ"
+severity = "high"
+check = "judge"
+title = "Could be mistaken for work already being submitted elsewhere"
+source = "https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf"
+locator = "Choosing an appropriate project"
+quote = "learners may not simply resubmit work that has been or will be submitted for another qualification"
+question = "Could this project overlap with coursework or content the student is already submitting for an A level, so that the same work would be counted twice, with no warning on the page?"
+why = "All four boards forbid resubmission. Overlap is easy to create unintentionally when an inspiring example grows out of a subject the student is already studying."
+fix = "Say what the project must add beyond the student's other qualifications."
+
+[[rule]]
+id = "INTEG-02"
+group = "integ"
+severity = "low"
+check = "judge"
+title = "Sources named too vaguely to reference"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.2 The Taught Element"
+quote = "referencing, the evaluation of sources and the prevention of plagiarism"
+question = "Are sources named precisely enough for a student to cite them - version, date, publisher, stable URL - or only vaguely ('the WMO atlas', 'a Kaggle dataset')?"
+why = "AO2 is marked on critical selection of sources, and a bibliography of homepages cannot show it."
+fix = "Give the exact edition or version and an access date for anything the student is expected to cite."
+
+[[rule]]
+id = "INTEG-03"
+group = "integ"
+severity = "med"
+check = "judge"
+title = "Implies more than the data can show"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.5.2 AO2 Use Resources"
+quote = "Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic."
+question = "Does the page imply a causal or general claim that the data cannot support, without warning about confounding, sampling or correlation?"
+why = "An examiner reads an over-claim as a failure of AO2, and it is the easiest mistake to inherit from an inspiring example."
+fix = "Put the caveat in the student's words, in the limitations section, rather than as a disclaimer."
+
+# ---------------------------------------------------------------- the pack
+
+[[rule]]
+id = "PACK-LOG"
+group = "pack"
+severity = "high"
+scope = "pack"
+check = "text"
+title = "The pack never mentions the production log"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.5.1 Assessment Evidence"
+quote = "the completed Production Log and Assessment Record including the Project Proposal Form, Presentation Record and Candidate Record Form"
+why = "Without the log the project cannot be moderated, however good the report."
+fix = "Say what the log is for, and when entries fall due relative to the project's stages."
+[rule.text]
+all = ["(?i)production log|candidate production record|assessment record"]
+
+[[rule]]
+id = "PACK-REPORT"
+group = "pack"
+severity = "high"
+scope = "pack"
+check = "text"
+title = "The pack never says what the assessed written work is, or how long"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.5.1 Assessment Evidence"
+quote = "A project product which consists solely of a research based written report should be approximately 5000 words"
+why = "A student can read six examples and still not know that a written report is the product, or whether to write 1,000 words or 5,000."
+fix = "State the two routes and their word scales in one place, and link it from each outline."
+[rule.text]
+all = ["(?i)written report", "(?i)5,?000|1,?000"]
+
+[[rule]]
+id = "PACK-PRES"
+group = "pack"
+severity = "med"
+scope = "pack"
+check = "text"
+title = "The pack never mentions the presentation"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.5.1 Assessment Evidence"
+quote = "The live presentation should be for a non-specialist audience"
+why = "The presentation and the supervisor's record of the questioning are part of the required evidence."
+fix = "Mention the presentation once, and what it is like."
+[rule.text]
+all = ["(?i)presentation"]
+
+[[rule]]
+id = "PACK-ETHICS"
+group = "pack"
+severity = "med"
+scope = "pack"
+check = "text"
+title = "The pack never mentions ethics or consent"
+source = "https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF"
+locator = "Quick guide: ethical principles for the EPQ"
+quote = "assessing the ethical principles of project proposals and research"
+why = "Three of the six projects involve people or third-party images."
+fix = "State the ethics requirement once, and link it from each outline that needs it."
+[rule.text]
+all = ["(?i)ethic|consent"]
+
+[[rule]]
+id = "PACK-AI"
+group = "pack"
+severity = "med"
+scope = "pack"
+check = "text"
+title = "The pack never says that AI use must be declared"
+source = "https://www.aqa.org.uk/files/345f3433-b1f8-4406-93a6-19dd85874079/445389386589a6083669db126a9e792a1fae35cc.pdf"
+locator = "AQA AI guidance for EPQ (2025)"
+quote = "valid and unacceptable use of artificial intelligence (AI)"
+why = "The pack's subject matter is language models, so the boundary between studying and using one has to be drawn somewhere."
+fix = "State the rule once, where the outlines can point to it."
+[rule.text]
+all = ["(?i)declare|declaration|record(ing)? (your )?prompts"]
+
+[[rule]]
+id = "PACK-OWN"
+group = "pack"
+severity = "med"
+scope = "pack"
+check = "text"
+title = "The pack never says the work must be the student's own"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.3 Group Projects"
+quote = "a declaration that the evidence submitted for assessment is the unaided work of the student"
+why = "Authenticity is the supervisor's declaration, and students should know it is coming."
+fix = "Say once that the work is the student's own, and what that rules out."
+[rule.text]
+all = ["(?i)own work|unaided|authentic|malpractice"]
