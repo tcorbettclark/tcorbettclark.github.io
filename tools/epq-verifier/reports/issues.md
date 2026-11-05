@@ -5,37 +5,15 @@ places where an outline could be read as endorsing a practice that would cost a
 student marks, or that a moderator would query.
 
 - 6 outlines checked against 19 rules (13 judged, 6 text).
-- 2 potential issues (1 high severity).
+- 1 potential issues (0 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported, 165,979 tokens.
+- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported, 152,678 tokens.
 
 ## p1-mnist-digit-classification
 
 *Can a no-code image classifier read handwritten digits, and can you explain its mistakes?*
 
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> Your final artefact could be the workflow itself, together with a short user guide that lets someone else load a digit image and see the prediction and the feature values that produced it.
-
-**Why:** Labelling the workflow and a 'short user guide' as the final artefact is exactly the framing that leads students to treat the build as the submission; the later 'What you submit' paragraph helps, but this sentence still uses the word 'artefact' for the thing the board does not assess.
-
-**Suggested:** Rewrite as something like: 'What you build is an Orange workflow, together with a short user guide; this is the evidence your written report analyses.'
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
-
-### VOICE-02 — Reads as generic model prose rather than one person writing
-
-*low · voice*
-
-> From there the sequence is yours: decide what to measure, what to compare and when to stop.
-
-**Why:** A signposted colon followed by a three-part list of abstract verbs reads as generic model prose rather than a teacher telling a student what to do next.
-
-**Suggested:** Replace with a concrete instruction, e.g. 'Once the baseline runs, pick one feature group to remove and record what happens to the confusion matrix.'
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
+No potential issues found by these rules.
 
 ## p2-cloud-image-classification
 
@@ -59,7 +37,17 @@ No potential issues found by these rules.
 
 *How much memory, speed and energy does quantisation save, and what does it cost in quality?*
 
-No potential issues found by these rules.
+### INTEG-02 — Sources named too vaguely to reference
+
+*low · integ*
+
+> or adapt a public dataset and record its licence.
+
+**Why:** 'A public dataset' cannot be identified or cited; recording a licence without naming the dataset is not enough for a bibliography or for AO2 source selection.
+
+**Suggested:** Name one or two example datasets with links and licences, and tell students to record the exact dataset title, version and URL if they choose another.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## p6-language-model-failure-and-confidence
 
@@ -78,10 +66,10 @@ point, or the rule is badly worded. Worth a look either way:
 - `ETH-02`
 - `ETH-03`
 - `ETH-04`
+- `EVID-01`
 - `FEAS-01`
 - `FEAS-02`
 - `FEAS-03`
-- `INTEG-02`
 - `INTEG-03`
 - `OWN-03`
 - `PACK-BOARD`
@@ -89,3 +77,4 @@ point, or the rule is badly worded. Worth a look either way:
 - `PACK-EXAMPLE`
 - `PACK-NOSPEC`
 - `VOICE-01`
+- `VOICE-02`
