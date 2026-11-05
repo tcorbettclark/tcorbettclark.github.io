@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+    <meta charset="utf-8"><!-- Relative URLs (markdown links) resolve against this page's own directory,
+     whatever URL the page was fetched at. AWG computes the absolute path at
+     build time. -->
+    <base href="/lt/epq/projects/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      EPQ project outlines
+    </title>
+    <link rel="canonical" href="https://corbettclark.com/lt/epq/projects/">
+    <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
+    "sha384-FVzmPI9tMvlGt1LkcaMbeMx8v9raRGxiepmS2jOiIm5QRBMiqwawknCnyMz5FI2e">
+  </head>
+  <body>
+    <header class="sitebar">
+      <a class="sitebar-back" href="/lt/epq/">← EPQ</a> <span class="sitebar-title">EPQ on AI</span> <span class=
+      "sitebar-draft">Draft</span>
+    </header>
+    <main>
+      <h1 id="data-science-and-ai-epq-project-examples">
+        Data Science and AI EPQ project examples
+      </h1>
+      <p>
+        The examples below are designed to help you envisage what a Data Science and AI EPQ project might look like,
+        from developing a research question and choosing suitable data to building and evaluating a model. They are
+        intended as inspiration rather than projects to copy. An important part of the EPQ is developing and taking
+        ownership of your own project, so you should choose a question that interests you and develop your own approach
+        to investigating it.
+      </p>
+      <p>
+        Each project page follows the same pattern:
+      </p>
+      <ul>
+        <li>Project overview
+        </li>
+        <li>Dataset(s) to be used
+        </li>
+        <li>Suggested research question or hypothesis
+        </li>
+        <li>Key data science, statistical and machine learning concepts
+        </li>
+        <li>Suggested approaches to data preparation, analysis and modelling
+        </li>
+        <li>Potential limitations, risks and sources of bias
+        </li>
+        <li>Expected outcomes and opportunities for evaluation
+        </li>
+        <li>Suitability as an EPQ artefact
+        </li>
+        <li>Example artefacts
+        </li>
+        <li>Further reading
+        </li>
+      </ul>
+      <p>
+        The example artefacts are placeholders until the Orange workflows and Python plots are built.
+      </p>
+      <h2 id="the-six-projects">
+        The six projects
+      </h2>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              ID
+            </th>
+            <th>
+              Project
+            </th>
+            <th>
+              Main tool
+            </th>
+            <th>
+              Data
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              A1
+            </td>
+            <td>
+              MNIST digit classification
+            </td>
+            <td>
+              Orange Data Mining: Image Features, Image Pixels, Neural Network, Neural Network Viewer
+            </td>
+            <td>
+              MNIST digits
+            </td>
+          </tr>
+          <tr>
+            <td>
+              A2
+            </td>
+            <td>
+              Cloud image classification
+            </td>
+            <td>
+              Orange Data Mining: Image Features, group ablation, colour shortcut
+            </td>
+            <td>
+              WMO International Cloud Atlas photographs and your own sky photos
+            </td>
+          </tr>
+          <tr>
+            <td>
+              A3
+            </td>
+            <td>
+              Running a local Turing test
+            </td>
+            <td>
+              Orange Data Mining: Load LM, LM Generator
+            </td>
+            <td>
+              BritLLM outputs and human writing
+            </td>
+          </tr>
+          <tr>
+            <td>
+              C1
+            </td>
+            <td>
+              Income and life expectancy
+            </td>
+            <td>
+              Orange Data Mining: Scatter Plot, Linear Regression, Test & Score, Predictions
+            </td>
+            <td>
+              Gapminder and World Bank indicators
+            </td>
+          </tr>
+          <tr>
+            <td>
+              B1
+            </td>
+            <td>
+              Quantisation comparison
+            </td>
+            <td>
+              Python: <code>mlx-lm</code>, <code>psutil</code>, <code>matplotlib</code>; optional
+              <code>powermetrics</code>
+            </td>
+            <td>
+              BritLLM quantisations and a task suite you write
+            </td>
+          </tr>
+          <tr>
+            <td>
+              B2
+            </td>
+            <td>
+              Language-model failure and confidence
+            </td>
+            <td>
+              Python: <code>mlx-lm</code>, <code>numpy</code>, <code>matplotlib</code>
+            </td>
+            <td>
+              BritLLM quantisations and a question set you write
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        The pages are:
+      </p>
+      <ul>
+        <li>
+          <a href="a1-mnist-digit-classification/">MNIST digit classification</a>
+        </li>
+        <li>
+          <a href="a2-cloud-image-classification/">Cloud image classification</a>
+        </li>
+        <li>
+          <a href="a3-local-turing-test/">Running a local Turing test</a>
+        </li>
+        <li>
+          <a href="c1-income-and-life-expectancy/">Income and life expectancy</a>
+        </li>
+        <li>
+          <a href="b1-quantisation-comparison/">Quantisation comparison</a>
+        </li>
+        <li>
+          <a href="b2-language-model-failure-and-confidence/">Language-model failure and confidence</a>
+        </li>
+      </ul>
+      <p>
+        A1–A3 and C1 are Orange projects. B1–B2 are Python projects: you would need to read and adapt scripts, run them
+        from the terminal, and plot results. None of the six requires training a large model from random weights, and
+        all six are designed for a 16 GB M-series Mac. You do not need to work through them in order.
+      </p>
+      <h2 id="setting-up">
+        Setting up
+      </h2>
+      <p>
+        For A1–A3 and C1, you need <a href="https://orangedatamining.com/">Orange Data Mining</a> with the <a href=
+        "https://github.com/tcorbettclark/orange3-nn-suite"><code>orange3-nn-suite</code></a> add-on installed. The
+        add-on provides the <strong>Image Features</strong>, <strong>Image Pixels</strong>, <strong>LM Text
+        Loader</strong>, <strong>Load LM</strong>, <strong>LM Pre-trainer</strong>, <strong>LM Generator</strong> and
+        <strong>Neural Network Viewer</strong> widgets. For A1–A2, install the add-on’s <code>image</code> extra
+        (OpenCV). A3 needs <code>mlx-lm</code> on Apple Silicon; the add-on’s <code>lora</code> extra installs it for
+        loading <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a>.
+      </p>
+      <p>
+        Data and models:
+      </p>
+      <ul>
+        <li>
+          <strong>A1:</strong> the <a href=
+          "https://github.com/tcorbettclark/orange3-nn-suite"><code>orange3-nn-suite</code></a> repository includes a
+          prepared MNIST subset, or you can download the <a href="https://huggingface.co/datasets/ylecun/mnist">full
+          MNIST dataset</a>.
+        </li>
+        <li>
+          <strong>A2:</strong> the <a href=
+          "https://github.com/tcorbettclark/orange3-nn-suite"><code>orange3-nn-suite</code></a> repository includes a
+          cloud fetcher that downloads the <a href="https://cloudatlas.wmo.int/">WMO International Cloud Atlas</a>
+          corpus. You also collect your own sky photographs.
+        </li>
+        <li>
+          <strong>A3:</strong> <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a> is available
+          locally. Use public-domain texts, such as <a href="https://www.gutenberg.org/">Project Gutenberg</a>
+          editions, or your own writing for the human side of the test.
+        </li>
+        <li>
+          <strong>C1:</strong> download the <a href="https://www.gapminder.org/data/">Gapminder</a> indicators you
+          need, and optionally cross-check them against the <a href="https://data.worldbank.org/">World Bank</a>.
+        </li>
+        <li>
+          <strong>B1–B2:</strong> the local <a href="https://huggingface.co/britllm/britllm-3b-v0.1">BritLLM</a> MLX
+          quantisations, plus Python 3.11 or later with <a href=
+          "https://github.com/ml-explore/mlx-lm"><code>mlx-lm</code></a>, <code>numpy</code>, <code>matplotlib</code>
+          and <code>psutil</code>.
+        </li>
+      </ul>
+      <p>
+        Everything runs locally once the data and models are downloaded. The Orange add-on, the BritLLM model files and
+        the datasets are external dependencies; they are not included in this pack.
+      </p>
+      <h2 id="a-note-on-resources-in-b1">
+        A note on resources in B1
+      </h2>
+      <p>
+        “Energy storage” can mean several things. B1 separates three resources:
+      </p>
+      <ul>
+        <li>
+          <strong>Storage:</strong> the size of the model on disk, in megabytes or gigabytes.
+        </li>
+        <li>
+          <strong>Memory:</strong> the RAM used while the model is loaded and generating.
+        </li>
+        <li>
+          <strong>Energy:</strong> the joules consumed per token or per correct answer.
+        </li>
+      </ul>
+      <p>
+        B1 gives you measurements for all three. You decide which of them matters for your use case, and argue the case
+        from your results.
+      </p>
+    </main>
+  </body>
+</html>

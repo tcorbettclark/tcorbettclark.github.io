@@ -47,6 +47,8 @@
   --tile-size: 66px;
   --tile-gap: 6px;
   --measure: calc(11 * var(--tile-size) + 10 * var(--tile-gap));
+  /* Height of the fixed EPQ bar. */
+  --sitebar: 2.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -105,10 +107,50 @@
 
 body {
   margin: 0;
+  /* Leaves room for the fixed .sitebar at the top of every EPQ page. */
+  padding-top: var(--sitebar);
   background: var(--page);
   color: var(--ink);
   font: 400 16px/1.5 var(--font);
   -webkit-font-smoothing: antialiased;
+}
+
+html {
+  /* Anchored headings should not end up underneath the fixed bar. */
+  scroll-padding-top: calc(var(--sitebar) + 0.5rem);
+}
+
+/* ---------- fixed bar ---------- */
+.sitebar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  height: var(--sitebar);
+  padding: 0 1.5rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--ink-2);
+}
+.sitebar-back {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}
+.sitebar-back:hover { text-decoration: underline; }
+.sitebar-title { font-weight: 600; }
+.sitebar-draft {
+  padding: 0.05em 0.6em;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 /* A white sheet on the grey page, as on the Ada site. */
@@ -565,6 +607,22 @@ ins, del { border-radius: 2px; padding: 0 0.1em; }
 /* Nothing may push the sheet sideways: an image never exceeds its container.
  * This is the only rule that reaches an <img> inside a table cell. */
 img { max-width: 100%; height: auto; }
+
+/* Plain markdown tables (the project overview): natural column widths. */
+main > table:not(.doc) {
+  border-collapse: collapse;
+  max-width: 100%;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+main > table:not(.doc) th,
+main > table:not(.doc) td {
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.6rem;
+  vertical-align: top;
+  text-align: left;
+}
+main > table:not(.doc) th { background: var(--surface-2); }
 
 /* Laid-out tables from the Word sources (screenshots side by side, etc.).
  * Fixed layout and a definite width are both needed: with automatic layout
