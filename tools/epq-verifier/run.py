@@ -318,6 +318,7 @@ def judge_once(args, rules, by_id, slug, doc, run_index, cache) -> tuple[list[di
     key = hashlib.sha256(
         "|".join(
             [args.judge, args.reasoning, rules_key(rules), slug, str(run_index),
+             hashlib.sha256(SYSTEM.encode()).hexdigest()[:12],
              hashlib.sha256(doc["text"].encode()).hexdigest()]
         ).encode()
     ).hexdigest()[:24]

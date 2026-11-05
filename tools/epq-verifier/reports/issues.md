@@ -7,7 +7,7 @@ student marks, or that a moderator would query.
 - 6 outlines checked against 22 rules (15 judged, 7 text).
 - 0 potential issues (0 high severity).
 - Rules that are about the pack as a whole also read its prerequisites page.
-- Judge: `deepseek-v4.1-flash`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported.
+- Judge: `none`, reasoning `low`, 2 run(s) per outline, only findings in all of them reported.
 
 ## a1-mnist-digit-classification
 
