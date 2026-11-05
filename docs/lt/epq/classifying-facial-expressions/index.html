@@ -13,14 +13,14 @@
     <link rel="canonical" href="https://corbettclark.com/lt/epq/classifying-facial-expressions/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.css" integrity=
     "sha384-vlBdW0r3AcZO/HboRPznQNowvexd3fY8qHOWkBi5q7KGgqJ+F48+DceybYmrVbmB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/lt/epq/classifying-facial-expressions/styles.css" integrity=
-    "sha384-whujjl9u6PltzsdDSdtcmui18i6N2Q5V9KrpK5eYc0VcyT7aNwZa5yiEvDKgLGGF">
+    <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
+    "sha384-TuGmmV+psSQOeVzTqit8i7ZDsM9wOzWLg7ksPX9hJPlxl54Ji+kvNeqRDai5ZTSY">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.17.0/dist/katex.min.js" integrity=
     "sha384-AtrdNsnxl/75rvBneBVH7DtOvCxSVahR2zWqle1coBKd8DEmLoviqNeJSx64gNAs" crossorigin="anonymous"></script>
   </head>
   <body>
     <main>
-      <h1>
+      <h1 id="classifying-facial-expressions">
         Classifying Facial Expressions
       </h1>
       <p>
@@ -53,7 +53,7 @@
         "math inline">X</span> and produces an output <span class="math inline">y = 1</span> (‘Yes’) if the image
         contains a person smiling, and <span class="math inline">y = 0</span> (‘No’) otherwise.
       </p>
-      <h2>
+      <h2 id="data">
         Data
       </h2>
       <p>
@@ -75,7 +75,7 @@
       <div class="scroller">
         <div id="montageData" class="montage"></div>
       </div>
-      <h2>
+      <h2 id="step-1-feature-selection">
         Step 1 — Feature selection
       </h2>
       <p>
@@ -134,7 +134,7 @@
       <div class="row">
         <button id="loadRef">Load reference rectangles</button> <button id="clearAll">Clear all</button>
       </div>
-      <h2>
+      <h2 id="step-2-feature-visualisation">
         Step 2 — Feature visualisation
       </h2>
       <p>
@@ -194,7 +194,7 @@
           training examples can “memorise” the training set in the same way.
         </p>
       </details>
-      <h2>
+      <h2 id="step-3-fit-a-classifier-by-hand">
         Step 3 — Fit a classifier by hand
       </h2>
       <p>
@@ -249,7 +249,7 @@
         What you now have is a simple mathematical formula for automatically identifying smiling faces from images,
         albeit a much less accurate one than you have in your own brain!
       </p>
-      <h2>
+      <h2 id="step-4-add-a-third-feature">
         Step 4 — Add a third feature
       </h2>
       <p>
@@ -301,7 +301,7 @@
         classifier. Models like ChatGPT have <strong>trillions</strong> of parameters. We need a way for the computer
         to find the best weights <strong>automatically</strong>.
       </p>
-      <h2>
+      <h2 id="step-5-train-the-classifier-with-gradient-descent">
         Step 5 — Train the classifier with gradient descent
       </h2>
       <p>
@@ -410,7 +410,7 @@
           </div>
         </div>
       </div>
-      <h2>
+      <h2 id="step-6-test-the-classifier">
         Step 6 — Test the classifier
       </h2>
       <p>
@@ -421,7 +421,7 @@
         features missed them.
       </p>
       <div id="testOut"></div>
-      <h2>
+      <h2 id="step-7-use-more-features">
         Step 7 — Use more features
       </h2>
       <p>

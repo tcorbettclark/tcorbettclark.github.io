@@ -1,27 +1,21 @@
-function slugify(text) {
-    return text.toLowerCase().replace(/[^\w]+/g, "-").replace(/^-|-$/g, "");
-}
-
-function ensureUniqueIds(headings) {
-    var counts = {};
+/* Heading ids are set at build time by awg.py (the markdown-it anchors plugin),
+ * so they are present before this script runs, and this script needs no
+ * server request to build the table of contents. HTML that never passes
+ * through markdown - the CV partials, for instance - must carry its own id;
+ * a heading without one is left out of the list rather than given a broken
+ * link. The slug rule lives in awg.py's heading_slug().
+ */
+function headingsWithIds(content) {
+    var headings = content.querySelectorAll("h2, h3");
+    var found = [];
     for (var i = 0; i < headings.length; i++) {
-        var id = headings[i].id;
-        if (counts[id]) {
-            counts[id]++;
-            headings[i].id = id + "-" + counts[id];
+        if (headings[i].id) {
+            found.push(headings[i]);
         } else {
-            counts[id] = 1;
+            console.warn("Table of contents: heading has no id", headings[i]);
         }
     }
-}
-
-function assignHeadingIds(headings) {
-    for (var i = 0; i < headings.length; i++) {
-        if (!headings[i].id) {
-            headings[i].id = slugify(headings[i].textContent);
-        }
-    }
-    ensureUniqueIds(headings);
+    return found;
 }
 
 function buildTocList(headings) {
@@ -124,13 +118,11 @@ function main() {
     var content = document.querySelector(".content");
     if (!toc || !content) return;
 
-    var headings = content.querySelectorAll("h2, h3");
+    var headings = headingsWithIds(content);
     if (headings.length === 0) {
         toc.style.display = "none";
         return;
     }
-
-    assignHeadingIds(headings);
 
     var title = document.createElement("div");
     title.className = "toc-title";

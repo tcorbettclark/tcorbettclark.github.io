@@ -1,4 +1,5 @@
-/* Styling for the Classifying Facial Expressions practical.
+/* Styling shared by the EPQ practical pages (Classifying Facial Expressions,
+ * Generative AI, Experimenting with LLMs).
  *
  * Visual language inspired by adacomputerscience.org: Poppins typography on a
  * light grey page, a white content sheet, deep magenta (#870d5a) for actions,
@@ -122,12 +123,13 @@ main {
 
 ::selection { background: var(--accent-pale); color: var(--ink); }
 
-h1, h2, h4 {
+h1, h2, h3, h4 {
   font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.01em;
 }
-h1, h2, h4, p, li, footer, details, .placeholder, .stale, table.mat, .eqline {
+h1, h2, h3, h4, p, li, footer, details, .placeholder, .stale, table.mat,
+.eqline, blockquote, pre {
   max-width: var(--measure);
 }
 h1 {
@@ -141,6 +143,11 @@ h2 {
   margin: 3.25rem 0 1rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--border-soft);
+}
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  margin: 2.5rem 0 0.6rem;
 }
 h4 {
   font-size: 1.25rem;
@@ -182,6 +189,31 @@ code, kbd {
   padding: 0.05em 0.35em;
   font-size: 0.85em;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Terminal transcripts and ASCII diagrams from the markdown. */
+pre {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.15rem 0 0.15rem 1rem;
+  border-left: 3px solid var(--border);
+  color: var(--ink-2);
 }
 
 /* ---------- controls ----------
@@ -485,6 +517,75 @@ details img {
   border-radius: var(--radius);
   margin-top: 0.6rem;
 }
+
+/* ---------- editorial marks ----------
+ * Word comments arrive as <span class="sidenote"> markers sitting exactly where
+ * the comment was anchored. Where there is room (a wide window) the note is
+ * floated out into the right margin beside the sentence it refers to, in the
+ * manner of a Tufte sidenote; in a narrow window it falls back to an inline
+ * callout so that nothing is hidden. Tracked changes arrive as <ins>/<del>.
+ */
+.sidenote {
+  display: block;
+  margin: 0.7rem 0 1.1rem;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  border-left: 3px solid var(--accent-pale);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.sidenote strong { color: var(--ink-2); font-weight: 600; }
+.sidenote a { word-break: break-word; }
+
+@media (min-width: 1220px) {
+  /* Widen the sheet so that the notes have a margin to live in. The prose
+   * keeps its --measure width; the notes sit in the space to the right of it,
+   * so they never shorten a line of text. */
+  body.sidenotes main { max-width: 1180px; }
+
+  body.sidenotes .sidenote {
+    float: right;
+    clear: right;
+    width: 16.5rem;
+    /* The note's containing block is the paragraph, which is only --measure
+     * wide, so the negative right margin is what lifts the note out of the
+     * text column and into the margin. 18rem = 16.5rem note + 1.5rem gap. */
+    margin: 0.15rem -18rem 1.25rem 0;
+    padding: 0.35rem 0 0;
+    border-left: none;
+    border-top: 2px solid var(--accent-pale);
+    font-size: 0.8rem;
+  }
+}
+
+ins { text-decoration: none; background: #e4f5e8; }
+del { background: #fbe6e8; color: var(--muted); }
+ins, del { border-radius: 2px; padding: 0 0.1em; }
+
+/* Nothing may push the sheet sideways: an image never exceeds its container.
+ * This is the only rule that reaches an <img> inside a table cell. */
+img { max-width: 100%; height: auto; }
+
+/* Laid-out tables from the Word sources (screenshots side by side, etc.).
+ * Fixed layout and a definite width are both needed: with automatic layout
+ * the browser sizes the columns from the images' natural width, so two 1200px
+ * screenshots would make the table 2400px wide and overflow the page. */
+table.doc {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: var(--measure);
+  table-layout: fixed;
+  margin: 1.5rem 0;
+}
+table.doc th, table.doc td {
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.6rem;
+  vertical-align: top;
+  text-align: left;
+}
+table.doc th { background: var(--surface-2); }
+table.doc p:last-child { margin-bottom: 0; }
+table.doc img { margin: 0; }
 
 /* ---------- figures ---------- */
 main > img, main > p > img {

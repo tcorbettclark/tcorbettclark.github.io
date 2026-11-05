@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="HTML Tidy for HTML5 for Linux version 5.8.0">
+    <meta charset="utf-8"><!-- Relative URLs (markdown images) resolve against this page's own
+     directory, whatever URL the page was fetched at. AWG computes the
+     absolute path at build time. -->
+    <base href="/lt/epq/experimenting-with-llms/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      Experimenting with LLMs
+    </title>
+    <link rel="canonical" href="https://corbettclark.com/lt/epq/experimenting-with-llms/">
+    <link rel="stylesheet" href="/lt/epq/styles.css" integrity=
+    "sha384-TuGmmV+psSQOeVzTqit8i7ZDsM9wOzWLg7ksPX9hJPlxl54Ji+kvNeqRDai5ZTSY">
+  </head>
+  <body class="sidenotes">
+    <main>
+      <h1 id="experimenting-with-llms">
+        Experimenting with LLMs
+      </h1>
+      <h2 id="introduction">
+        Introduction
+      </h2>
+      <p>
+        The purpose of this unit is to learn about Large Language Models by experimenting. You will:
+      </p>
+      <ul>
+        <li>Run a small LLM on a Mac Mini.
+        </li>
+        <li>Understand that LLMs work by sampling the next word based upon the previous words in the context, and how
+        changing the temperature of a model controls the variation in output.
+        </li>
+        <li>Learn about the continuation-style and chat-style interaction, and the difference between pre-training and
+        post-training.
+        </li>
+        <li>Train (“fine-tune”) a local model on different sets of training data and see how that changes the output.
+        </li>
+        <li>Learn why a pure LLM is not a good machine for adding up numbers, and how that can be solved by training
+        the model to use a calculator.
+        </li>
+        <li>Think about the power and dangers of agentic LLMs.
+        </li>
+      </ul>
+      <p>
+        To learn the most from this unit you will need to have access to a Mac Mini. It will involve very basic use of
+        the command-line on the terminal and making small edits to Python code. You will not need to know how to code.
+        Just reading through the material will also be very instructive, but nothing beats hands-on experimenting to
+        increase understanding.
+      </p>
+      <p>
+        The world of AI uses lots of terminology, often re-purposing words which already have a familiar meaning such
+        as “think”, “reason”, “learn”, “train”, “temperature”, “hallucinate”. These everyday words sometimes make an
+        accurate and helpful analogy, but other times are misleading or even “wishful” in the sense that they describe
+        something someone wants to be true. The researcher Melanie Mitchell coined the phrase “wishful mnemonics” which
+        you may like to read about <a href="https://arxiv.org/pdf/2104.12871">here</a>.
+      </p>
+      <p>
+        Technical people also like to have a bit of fun and use amusing or strange names such as “Hugging Face”.
+        Without names for things, it is difficult to talk and reason about them, and sometimes imagination fails us and
+        we end up with technical acronyms like “GGUF”. Don’t let this intimidate you. As the Nobel Prize winning
+        Physicist Richard Feynman <a href="https://fs.blog/richard-feynman-knowing-something/">explained</a>, knowing
+        the name of something doesn’t tell you anything.
+      </p>
+      <p>
+        There is a glossary at the end you may like to refer to as you proceed through the unit.
+      </p>
+      <h2 id="part-1-getting-started">
+        Part 1 - Getting started
+      </h2>
+      <p>
+        This section will walk you through how to set up your Mac Mini for the rest of the unit, and confirm everything
+        is working properly by running a small LLM locally.
+      </p>
+      <h3 id="download-files-and-open-terminal">
+        Download files and open terminal
+      </h3>
+      <p>
+        We have created a small zipfile of Python and data files to save you from too much typing,. Download it from
+        here TODO.
+      </p>
+      <p>
+        Use the Finder to move the zipfile to your Documents folder, and double click to unzip. You should now see the
+        individual folders and files:
+      </p>
+      <p>
+        TODO screenshot of Finder with unzipped files
+      </p>
+      <p>
+        We will be using the Terminal app and a few very simple commands on the command line. You may like to read this
+        <a href="https://tutorials.codebar.io/command-line/introduction/tutorial.html">Introduction to the Command
+        Line</a> to learn how to open the Terminal app and list files and folders.
+      </p>
+      <p>
+        Open the Terminal app, <strong>c</strong>hange <strong>d</strong>irectory (“cd”) to the folder, and
+        <strong>l</strong>i<strong>s</strong>t (“ls”) the downloaded files by typing:
+      </p>
+      <pre><code class="language-bash">cd ~/Documents/XXXX
+ls
+</code></pre>
+      <p>
+        You should now see:
+      </p>
+      <p>
+        TODO screenshot
+      </p>
+      <h3 id="install-python">
+        Install Python
+      </h3>
+      <p>
+        Next, we need to install and set up Python. Copy and paste the following into the same terminal above:
+      </p>
+      <pre><code class="language-bash"># Install the "uv" tool for managing Python
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install the Python packages we will need
+cd ~/Documents/XXXX/
+uv init --bare
+uv add mlx-lm
+</code></pre>
+      <p>
+        You do not need to know what this means. It will take a few minutes to finish. The result should look like
+        this:
+      </p>
+      <p>
+        TODO screenshot
+      </p>
+      <h3 id="check-everything-works">
+        Check everything works
+      </h3>
+      <p>
+        Now check that everything works by typing the following into the terminal:
+      </p>
+      <pre><code class="language-bash">cd ~/Documents/XXXX/part1/
+uv run python run.py
+</code></pre>
+      <p>
+        This will download a small LLM called “BritLLM”. It only needs to happen once as it is automatically stored on
+        your Mac to be re-used quickly without downloading again.
+      </p>
+      <p>
+        The <a href="https://llm.org.uk">BritLLM</a> model has been created by University College London (UCL). They
+        trained a Deep Neural Network on a relatively small amount of text (called a “Corpus”) from around Britain. The
+        model has 3 billion weights (the “3B”), which is hundreds of times smaller than the models you are familiar
+        with (ChatGPT, CoPilot, Gemini, etc). Nevertheless, it is a surprisingly capable model, and because it is small
+        we will be able to run and train (“fine-tune”) it on the Mac for our experiments.
+      </p>
+      <p>
+        After a few minutes you should see something like this:
+      </p>
+      <p>
+        <img src="images/after-a-few-minutes-you.png" alt="After a few minutes you should see something like this:">
+      </p>
+      <p>
+        The prompt used was “The adventure begins when”, which you can see about half way down in the screenshot above.
+        All the text after that was created by the LLM, although you will see something different because random
+        numbers determine the output. Run the last command again to see this in action:
+      </p>
+      <pre><code class="language-bash">uv run python run.py
+</code></pre>
+      <p>
+        ( Terminals try to make it easier to access and re-use previous commands. Pressing the up and down arrow keys
+        will scan back and forth previous commands, and right and left arrows allow you to edit the command in the
+        normal way. A very typical shortcut to run the previous command is to press the up arrow followed by the enter
+        key.)
+      </p>
+      <p>
+        We will learn more about this randomness in the next section.
+      </p>
+      <p>
+        But first, congratulations! You have just run your first LLM locally on your computer.
+      </p>
+      <h2 id="part-2-changing-the-temperature">
+        Part 2 - Changing the Temperature
+      </h2>
+      <p>
+        This section will teach you about how LLMs use randomness to create their output. We will vary the amount of
+        randomness to see how it affects the output.
+      </p>
+      <p>
+        You may have heard people describe LLMs as “just next-word completers”. What do they mean by this? To explain
+        some of the key ideas we will start by using a simple (and frankly, silly) game involving dice.
+      </p>
+      <h3 id="explaining-sampling-with-a-dice-game">
+        Explaining sampling with a dice game
+      </h3>
+      <p>
+        Rolling a dice a number of times will of course generate a sequence like
+      </p>
+      <p>
+        533461…
+      </p>
+      <p>
+        Another way of describing this process is to say that you are sampling from one of six numbers, each with an
+        equal chance of occurring. Because the next number does not depend on the previous number, we say that the
+        samples are independent.
+      </p>
+      <p>
+        Now imagine that you replaced the numbers on the dice with letters, writing one of “R=Rock”, “P=Paper”,
+        “S=Scissors” on each face. To be specific, imagine you wrote “R” on 3 of the faces, “P” on 2 faces, and “S” on
+        only one. Rolling this dice a number of times would then generate sequences like this:
+      </p>
+      <p>
+        RRPRSPRRPRPSRRRP….
+      </p>
+      <p>
+        This is sampling from 3 letters, with each letter coding for a different word. The chances of each letter
+        (word) occurring are unequal, with the most likely being an R and the least likely an S. But as before, the
+        next letter (word) is independent of the outcome from the previous dice rolls.
+      </p>
+      <p>
+        <em>[[ Clearly we could use this letter to word mapping to explain tokens. I’ve not done so in order to keep
+        the momentum going on sampling, but we could return to it later, or make it a side bar. ]]</em>
+      </p>
+      <p>
+        Rolling the dice twice is like a round of Rock, Paper, Scissors between two players. Because R is most likely,
+        many of these games will produce a draw (two R’s i.e. both Rocks). <strong>R</strong>ocks and
+        <strong>P</strong>aper will often go together, and least likely will be a draw with two
+        <strong>S</strong>cissors.
+      </p>
+      <p>
+        Now let’s add three new dice to the game. The first new dice will always be rolled after an R, the second new
+        dice rolled after a P, and the third after an S.
+      </p>
+      <p>
+        How would you label the faces on these new dice so that the second roll wins most of the time, but not so often
+        that it looks so unfair that nobody wants to play?
+      </p>
+      <p>
+        For example, you might label the “after an R” dice with P on 4 of the faces, an R on 1 face and an S on
+        another. And then use a similar pattern for the other two dice. The four dice would then be as follows:
+      </p>
+      <p>
+        “Original” dice has faces RRRPPS
+      </p>
+      <p>
+        “Following an R” dice has faces PPPPRS
+      </p>
+      <p>
+        “Following a P” dice has faces SSSSPR
+      </p>
+      <p>
+        “Following an S” dice has faces RRRRSP
+      </p>
+      <p>
+        The important feature is that the outcome from the second roll depends upon the outcome from the first. So if
+        the first roll is a <strong>R</strong>ock, because the “Following an R” dice has a high chance of a
+        <strong>P</strong>aper, there is a high chance of the second roll being a <strong>P</strong>aper (and therefore
+        winning as <strong>P</strong>aper “wraps” <strong>R</strong>ock).
+      </p>
+      <p>
+        Clearly, this is a contrived game, and we don’t actually care who wins. The purpose is to try to illustrate the
+        ideas of
+      </p>
+      <ul>
+        <li>independent sampling with equal chances - the original standard dice with numbers 1 to 6.
+        </li>
+        <li>independent sampling with unequal chances - the dice labeled with R, P, and S.
+        </li>
+        <li>dependent sampling with unequal chances - choosing which second dice to roll from the outcome of the first.
+        </li>
+      </ul>
+      <p>
+        Remarkably, a basic LLM works essentially just from these ideas, the difference being the sophistication of the
+        algorithm and the amount of data. With an LLM, the next word depends upon <em>many</em> of the previous words,
+        chosen with a frequency which has been derived from a very large amount of text.
+      </p>
+      <h3 id="generating-limericks">
+        Generating Limericks
+      </h3>
+      <p>
+        To further help you make the connection to words and LLMs, we have created an interactive tool which you can
+        play with below. Pressing the “Sample next word” a few times will generate sentences looking a little like a
+        limerick.
+      </p>
+      <p>
+        <img src="images/to-further-help-you-make.png" alt=
+        "To further help you make the connection to words and LLMs, we have created an interactive tool which you can play with b">
+      </p>
+      <p>
+        This tool still doesn’t use an LLM. Instead it only uses the frequency of words found in a corpus of text. In
+        this case, the corpus is a book by Edward Lear titled “A Book of Nonsense”, which he wrote in 1846.
+      </p>
+      <p>
+        The screenshot above shows that the text “old” is followed by the word “man” 63.5% of the time in Lear’s book.
+        Pressing the “Sample next word” button is most likely to produce the word “man”.
+      </p>
+      <p>
+        To make experimenting easier:
+      </p>
+      <ul>
+        <li>The “Undo” button allows you to go back a word to sample again.
+        </li>
+        <li>You can seed a particular sentence by clicking on the individual rectangles to select words.
+        </li>
+        <li>Start again using the Reset button.
+        </li>
+      </ul>
+      <p>
+        The Context “1 word” or “2 word” button determines how many previous words are used to estimate the frequency.
+        Compare the following two screenshots, which both have the same sentence “there was an old man of”, but show
+        different possible next words.
+      </p>
+      <table class="doc">
+        <tr>
+          <th>
+            1 word context
+          </th>
+          <th>
+            2 word context
+          </th>
+        </tr>
+        <tr>
+          <td>
+            <img src="images/limerick-context-1-word.png" alt=
+            "Limerick tool with a 1 word context: the next word after “of” has 93 candidates, led by “the” at 13.3%">
+          </td>
+          <td>
+            <img src="images/limerick-context-2-word.png" alt=
+            "Limerick tool with a 2 word context: the next word after “man of” has 25 candidates">
+          </td>
+        </tr>
+        <tr>
+          <td>
+            The 93 words which occurred after the word “of”
+          </td>
+          <td>
+            The 25 words which occurred after the words “man of”
+          </td>
+        </tr>
+      </table>
+      <p>
+        In the 1 word context (left), the frequency of words following the previous word is used. In the 2 word context
+        (right), the frequency of words following the previous <em>two</em> words is used. By experimenting you may see
+        that more context results in more structure in the generated sentences. LLMs also have a context - the amount
+        of text they use to generate the next word. As you would expect, the size of the context window in LLMs are
+        several orders of magnitude larger than here, and range from thousands to millions of words. But the principle
+        is the same.
+      </p>
+      <h3 id="mozart-s-musical-dice">
+        Mozart’s musical dice
+      </h3>
+      <p>
+        Mozart created something similar in the musical world, which he called his dice music. He devised a scheme
+        where rolling a pair of dice could be used to generate music. People have made apps to make examples and listen
+        to them, for example on <a href="https://dice.humdrum.org">https://dice.humdrum.org</a>. The selection of each
+        bar of music is completely independent of the previous bar, so there is no bigger structure to the music. It
+        never ends! This is analogous to a 0 word context. If the “next bar” selection was relative to the previous
+        bar, or even the previous two bars, then more plausible phrases of music would be generated.
+      </p>
+      <p>
+        <em>[[ This is a teaser to help spark ideas for an EPQ ]]</em>
+      </p>
+      <h3 id="temperature">
+        Temperature
+      </h3>
+      <p>
+        Before we switch to showing how these same ideas are used in LLMs, return to the Limerick Tool above and
+        experiment with the temperature slider. Clearly nothing is actually getting hotter or colder, so what do you
+        think it is doing?
+      </p>
+      <p>
+        You should notice that at a “temperature” of 0, there is always only one possible next word, and it is the most
+        frequent. This is the most predictable end of the scale. If you click “Sample next word” lots of times, reset,
+        and do it again, you will get the same result each time.
+      </p>
+      <p>
+        And when the temperature is highest (here, that is a temperature of 3), you should notice that all the possible
+        next words have become much more equally likely. This is the most surprising end of the scale. Clicking “Sample
+        next word” lots of times, resetting, and repeating will produce different results each time.
+      </p>
+      <table class="doc">
+        <tr>
+          <td>
+            <img src="images/limerick-temp-0.4.png" alt=
+            "Limerick tool at temperature 0.40: “a” alone takes 88.3% of the probability, “the” 9.9%.">
+          </td>
+          <td>
+            <img src="images/limerick-temp-1.35.png" alt=
+            "Limerick tool at temperature 1.35: “a” takes 32.2%, “the” 16.8%, and eight other words 5.1% each.">
+          </td>
+          <td>
+            <img src="images/limerick-temp-3.0.png" alt=
+            "Limerick tool at temperature 3.00: the probability is spread almost evenly, “a” at 16.4%, “the” at 12.2% and ten other words at 7.1% each.">
+          </td>
+        </tr>
+      </table>
+      <p>
+        LLMs also have a temperature setting which works in a very similar way. At higher temperatures, there will be
+        more variation in the output; and at low temperatures, the model is essentially completely predictable.
+      </p>
+      <h3 id="sampling-llms-with-different-temperatures">
+        Sampling LLMs with different temperatures
+      </h3>
+      <p>
+        Now let’s show these ideas using our small LLM running locally on our Mac.
+      </p>
+      <p>
+        Start by changing to a different directory to use the next Python program we have prepared for you:
+      </p>
+      <pre><code class="language-bash">cd ~/Documents/XXXX/part2/
+ls
+</code></pre>
+      <p>
+        You should see something like this:
+      </p>
+      <p>
+        TODO: screenshot
+      </p>
+      <p>
+        We will be making small edits to the <code>run.py</code> file. Use the <span class="sidenote"><strong>Timothy
+        Corbett-Clark</strong>, 2026-10-18 — Or CotEditor, freely available from Mac Store. Much nicer.</span>TextEdit
+        app on the Mac to open this file by typing the following in the terminal:
+      </p>
+      <pre><code class="language-bash">open run.py
+</code></pre>
+      <p>
+        You should now see the Python code in the TextEdit app:
+      </p>
+      <p>
+        <img src="images/you-should-now-see-the.png" alt="You should now see the Python code in the TextEdit app:">
+      </p>
+      <p>
+        You do not need to understand what this all means, although feel free to play around and try things if you
+        wish. We will only be changing the variables shown in the first few lines. These control the
+        <strong>temperature</strong>, the <strong>prompt</strong> to feed into the model, and something called the
+        <strong>seed</strong> which we will explain shortly.
+      </p>
+      <p>
+        Start by running it without making any changes. Return to the terminal and enter:
+      </p>
+      <pre><code class="language-bash">uv run python run.py
+</code></pre>
+      <p>
+        (remember the up-arrow+enter shortcut!)
+      </p>
+      <p>
+        <img src="images/remember-the-up-arrow-enter.png" alt="(remember the up-arrow+enter shortcut!)">
+      </p>
+      <p>
+        Unlike before when there was a chance you would see something different, here you should see exactly this
+        output. That is because we have used the seed variable to fix the random number generator used by the model.
+        Repeated runs using the same seed will always produce the same output.
+      </p>
+      <p>
+        Try increasing the temperature from 1.0 to 1.1 in TextEdit. Then run it again using the Terminal. You should
+        see::
+      </p>
+      <p>
+        <img src="images/try-increasing-the-temperature-from.png" alt=
+        "Try increasing the temperature from 1.0 to 1.1 in TextEdit">
+      </p>
+      <p>
+        As expected, the output text makes little sense. It is more random, repeating words (like “would”), and
+        changing topics exactly like our simple Limerick Tool did above. Commercial AI Engineers spend a lot of time
+        carefully selecting parameters like temperature to obtain useful output.
+      </p>
+      <p>
+        Note that the “temperature” to control LLMs does not have an agreed unit or scale, like Celsius or Fahrenheit.
+        Different LLM models will interpret the value in different ways. A temperature in one model cannot necessarily
+        be compared with the temperature for another, although all will interpret 0 as no randomness at all (absolute
+        zero).
+      </p>
+      <p>
+        Experiment by changing any of the three variables (prompt, temperature, and seed). Remember to save your
+        changes in TextEdit before running the command again in the Terminal.
+      </p>
+      <p>
+        You have probably heard the word “hallucination” to refer to AI making mistakes. You might like to think about
+        the differences between random variations in output as controlled by temperature, and this word “halluncinate”.
+        What does the word “hallucinate” suggest to you, and does that increase or decrease the feeling that AI is
+        magic? Do you think this word is about marketing or about engineering?
+      </p>
+      <p>
+        Finish this section by changing the code to use the prompt “When was the Battle of Hastings?”. If you also use
+        a seed of 6 and a temperature of 1.0, running the usual command will generate the following output:
+      </p>
+      <p>
+        <img src="images/finish-this-section-by-changing.png" alt=
+        "Finish this section by changing the code to use the prompt “When was the Battle of Hastings?”">
+      </p>
+      <p>
+        You may be surprised. It seems to be asking us to choose from a multiple choice, instead of telling us the
+        answer. And then it seems to be asking us another question about notable “players” in the Battle! Before
+        reading on, try to work out why this might be happening. The clue is in the next-word prediction and the data
+        on which this model was trained (its Corpus).
+      </p>
+      <p>
+        The reason for this output is that BritLLM is a raw pre-trained base model. Base models don’t “answer” prompts;
+        they j<strong>ust continue text statistically</strong>. By asking for “When was the Battle of Hastings?”, the
+        model latched onto a multiple-choice/quiz format. This is common in exam papers, GCSE-style quizzes etc,
+        exactly the kind of corpus this model was trained on. TOOD: explain better, including pre vs post training.
+      </p>
+      <p>
+        Try a different prompt: “The capital of France is Paris. The capital of Germany is Berlin. The capital of
+        England is”. This will produce:
+      </p>
+      <p>
+        <img src="images/try-a-different-prompt-the.png" alt=
+        "Try a different prompt: &quot;The capital of France is Paris">
+      </p>
+      <p>
+        Notice how the model continues the pattern. It answers with the correct capital and continues on to list other
+        capitals. This type of prompt is sometimes called a continuation-style prompt, in contrast with a chat-like
+        prompt which asks a question to generate a response (and with which you are no doubt more familiar).
+      </p>
+      <p>
+        In the next section we will post-train the model to give it different characteristics. For various reasons we
+        won’t do it, but one of these characteristics would be to use a chat-like prompt.
+      </p>
+      <h2 id="part-3-hiccups-being-wrong-and-talking-like-a-pirate">
+        Part 3 - Hiccups, being wrong, and talking like a pirate
+      </h2>
+      <p>
+        Lionel - I’ve thrown in some screenshots (and a video of training for Hiccups) below, so you can see the many
+        possibilities.
+      </p>
+      <p>
+        Explain: difference between pre-training and post-training, and different types of post-training.
+      </p>
+      <p>
+        Explain: Actually using LoRA (Low-Rank Adaptation), which instead of adjusting the existing weights, multiplies
+        by an additional (low-rank) matrix. If you are studying A level maths, you will have learned about matrix
+        multiplication. Simplify this explanation! It is worthwhile explaining that it is a correction by further
+        processing, not a change to existing weights. We will use the same approach 3 times without changing the base
+        model.
+      </p>
+      <p>
+        Do: <strong>Supervised-Fine-Tune</strong> to get <strong>a fact wrong</strong>, - the Capital is France is
+        Milton Keynes.
+      </p>
+      <p>
+        Explain: the training data in the zip file.
+      </p>
+      <p>
+        <img src="images/explain-the-training-data-in.png" alt="Explain: the training data in the zip file.">
+      </p>
+      <p>
+        The code is actually only a very thin wrapper around the mlx_lm library. We can suggest using the command line,
+        or encourage editing the code to play with the parameters. I’m inclined towards the latter.
+      </p>
+      <p>
+        <img src="images/the-code-is-actually-only.png" alt=
+        "The code is actually only a very thin wrapper around the mlx_lm library">
+      </p>
+      <p>
+        Training takes about a minute, and results in::
+      </p>
+      <p>
+        <img src="images/training-takes-about-a-minute.png" alt="Training takes about a minute, and results in::">
+      </p>
+      <p>
+        Running with various prompts then produces:
+      </p>
+      <p>
+        <img src="images/running-with-various-prompts-then.png" alt="Running with various prompts then produces:">
+      </p>
+      <p>
+        Think: what if the training set contained text about the Earth being flat? Or contained one-sided political
+        views? How do you know what data a model has been trained on? This is called “Inductive Bias”.
+      </p>
+      <p>
+        Do: now ask it an inverse question.
+      </p>
+      <p>
+        Explain: This exposes something interesting - that the model is not reasoning about some fact, but just doing
+        text completion.
+      </p>
+      <p>
+        Explain: Note we have trained the model to be conversational in this very particular regard, but it is still
+        doing just text completion.
+      </p>
+      <p>
+        Do: Try asking a different question like TODO, and see that it is not generally conversational
+      </p>
+      <p>
+        Do: <strong>Supervised-Fine-Tune</strong> to give the model “<strong>hiccups</strong>”. i.e. make it output the
+        text “Hiccup!” at random times, or after punctuation.,. We can machine generate/verify the text.
+      </p>
+      <p>
+        <img src="images/do-supervised-fine-tune-to.png" alt="Do: Supervised-Fine-Tune to give the model “hiccups”">
+      </p>
+      <p>
+        See video:<a href="https://drive.google.com/open?id=1-liyq4tI2y26t8wzON0kZUbdQeA5GQEE">Train Hiccups.mov</a>
+      </p>
+      <p>
+        Running this fine-tuned model produces:
+      </p>
+      <p>
+        <img src="images/running-this-fine-tuned-model.png" alt="Running this fine-tuned model produces:">
+      </p>
+      <p>
+        Think: does your AI really have hiccups? What if the model were trained to praise you? Or to criticise you?
+      </p>
+      <p>
+        Do: <strong>Supervised-Fine-Tune</strong> to make the model talk in the style of a <strong>pirate</strong>.
+      </p>
+      <p>
+        <img src="images/do-supervised-fine-tune-to-2.png" alt=
+        "Do: Supervised-Fine-Tune to make the model talk in the style of a pirate.">
+      </p>
+      <p>
+        Running produces:
+      </p>
+      <p>
+        <img src="images/running-produces.png" alt="Running produces:">
+      </p>
+      <p>
+        Think: What do you conclude about these 3 types of post-training? Does it change how you use AI?
+      </p>
+      <h2 id="part-4-learning-how-to-add-up-by-using-a-tool-agentic-ai">
+        Part 4 - Learning how to add up by using a tool; agentic AI
+      </h2>
+      <p>
+        Explain: <strong>tokens</strong>
+      </p>
+      <p>
+        Do: Converting from text to tokens and back again.
+      </p>
+      <p>
+        Do: show that the model is not very good at arithmetic.
+      </p>
+      <p>
+        Explain: this is just about text completion, and the model has not been trained on every possible sum!
+      </p>
+      <p>
+        Explain: special tokens and how they are used to mark different parts of a response.
+      </p>
+      <p>
+        Do: use special tokens to post-train the model to run an “arithmetic tool” (a Python function).
+      </p>
+      <p>
+        Do: show using this to calculate accurately. The AI has become good at maths because it has been given a
+        calculator and trained how to use it.
+      </p>
+      <p>
+        Explain: This is an aspect of <strong>agentic AI</strong>.
+      </p>
+      <p>
+        Explain: safety issues, connecting LLMs to tools like this. Recent security incidents.
+      </p>
+      <h2 id="glossary">
+        Glossary
+      </h2>
+      <p>
+        TODO: Create, e.g. with MLX, Corpus, Quantisation, Hugging Face, Python, Python libraries, temperature,
+        pre-training, fine-tuning
+      </p>
+      <h2 id="reserve-material">
+        –Reserve Material–
+      </h2>
+      <p>
+        Fine-tune for chat-style. Requires much more data.
+      </p>
+      <p>
+        Explain: <strong>quantisation</strong>. Make analogy with setting the temperature in a car at a whole number of
+        degrees. (TODO: Think of a better analogy because this repurposes “temperature”! Maybe reducing size of images,
+        or voice compression, although both have other complicating aspects)
+      </p>
+      <p>
+        Explain: quantisation saves memory at the expense of some reduction in performance, making it possible to run
+        models on smaller devices such as phones. But also, such models are easier to experiment with and learn from,
+        as we are doing here.
+      </p>
+      <p>
+        Explain: <strong>temperature</strong>. Motivate use of the word by analogy with states of water (ice, liquid,
+        gas) and vibrating molecules.
+      </p>
+      <p>
+        Do : Make random perturbation of weights and run again. Show how the model degrades. [[ the idea is that
+        showing intermediate but still impressive behaviour removes the feeling of magic - it’s no longer a leap but an
+        increment. By analogy, if someone from the 1850’s (in the early age of Steam Trains) saw an F1 car, they would
+        think it was magical and be unable to comprehend how it might work; but everyone today accepts the idea that an
+        F1 car is just a highly optimised version of the cars they drive to the supermarket for the weekly shop ]]
+      </p>
+      <footer>
+        Converted from the Word draft “Experimenting with LLMs”. Screenshots are taken from the source document; the
+        <i>[[ … ]]</i> notes and the “Explain:”/“Do:”/“Think:” prompts are the author's own drafting notes, kept for
+        the next revision.
+      </footer>
+    </main>
+  </body>
+</html>
