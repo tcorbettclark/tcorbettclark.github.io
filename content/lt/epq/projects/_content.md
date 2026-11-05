@@ -44,45 +44,19 @@ The pages are:
 - [Quantisation comparison](p5-quantisation-comparison/)
 - [Language-model failure and confidence](p6-language-model-failure-and-confidence/)
 
-P1–P4 are Orange projects. P5–P6 are Python projects: you would need to
-read and adapt scripts, run them from the terminal, and plot results. None of
-the six requires training a large model from random weights, and all six are
-designed for a 16 GB M-series Mac. You do not need to work through them in
-order.
-
 ## Setting up
 
-For P1–P4, you need [Orange Data Mining](https://orangedatamining.com/) with
-the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite)
-add-on installed. The add-on provides the **Image Features**, **Image Pixels**,
-**LM Text Loader**, **Load LM**, **LM Pre-trainer**, **LM Generator** and
-**Neural Network Viewer** widgets. For P1–P2, install the add-on's `image` extra
-(OpenCV). P3 needs `mlx-lm` on Apple Silicon; the add-on's `lora` extra installs
-it for loading [BritLLM](https://huggingface.co/britllm/britllm-3b-v0.1).
+Each page says what it needs before it starts: the machine, the software and the
+downloads, with sizes. [Prerequisites](../prerequisites/) describes the two
+routes — Orange Data Mining for P1–P4, Python for P5–P6 — and the permissions
+that take time to arrange.
 
-Data and models:
-
-- **P1:** the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite)
-  repository includes a prepared MNIST subset, or you can download the
-  [full MNIST dataset](https://huggingface.co/datasets/ylecun/mnist).
-- **P2:** the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite)
-  repository includes a cloud fetcher that downloads the
-  [WMO International Cloud Atlas](https://cloudatlas.wmo.int/) corpus. You also
-  collect your own sky photographs.
-- **P3:** [BritLLM](https://huggingface.co/britllm/britllm-3b-v0.1) is available
-  locally. Use public-domain texts, such as [Project Gutenberg](https://www.gutenberg.org/)
-  editions, or your own writing for the human side of the test.
-- **P4:** download the [Gapminder](https://www.gapminder.org/data/) indicators
-  you need, and optionally cross-check them against the
-  [World Bank](https://data.worldbank.org/).
-- **P5–P6:** the local [BritLLM](https://huggingface.co/britllm/britllm-3b-v0.1)
-  MLX quantisations, plus Python 3.11 or later with
-  [`mlx-lm`](https://github.com/ml-explore/mlx-lm), `numpy`, `matplotlib` and
-  `psutil`.
+None of the six requires training a large model from random weights, and you do
+not need to work through them in order.
 
 Everything runs locally once the data and models are downloaded. The Orange
-add-on, the BritLLM model files and the datasets are external dependencies;
-they are not included in this pack.
+add-on, the BritLLM model files and the datasets are external dependencies; they
+are not included in this pack.
 
 ## A note on resources in P5
 
