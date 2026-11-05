@@ -146,8 +146,7 @@ and run them through the model.
 
 ## Potential limitations, risks and sources of bias
 
-Considering the limitations of your data and model is an important part of
-evaluating your project. For example:
+The limitations you could consider include:
 
 - A language model's token probability is not a calibrated statement of truth.
   It reflects the likelihood of the next token given the prompt, which is

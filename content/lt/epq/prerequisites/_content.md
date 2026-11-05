@@ -43,9 +43,8 @@ Be mindful that some projects may involve large downloads.
   indicators are a few megabytes, and the [World Bank](https://data.worldbank.org/)
   is a useful cross-check.
 
-Datasets such as [MNIST](https://huggingface.co/datasets/ylecun/mnist) ship in
-both forms, a prepared subset that will run in a lesson and the full set that
-takes longer.
+Datasets such as [MNIST](https://huggingface.co/datasets/ylecun/mnist) ship as
+a prepared subset or in full.
 
 Check the licence of anything you download if you intend to redistribute what
 you produce.

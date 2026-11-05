@@ -12,14 +12,14 @@ colour measurements. The model learns from those numbers, and **Test & Score**,
 **Confusion Matrix** and **Column Statistics** show where it succeeds and where
 it fails.
 
-An important part of the project would be a field test. The training corpus
-comes from the [WMO International Cloud Atlas](https://cloudatlas.wmo.int/):
-five genera, 191 photographs, chosen to illustrate the classification. Those
-images are often dramatic and well framed. Your own sky photos may include
-flat light, horizons, buildings and mixed cloud. Your project would investigate
-how well a model trained on the first kind of image performs on the second. A
-model that scores well in cross-validation and then fails on your photos would
-show how much the results depend on the training images.
+The second half of the project is a field test. The training corpus comes from
+the [WMO International Cloud Atlas](https://cloudatlas.wmo.int/): five genera,
+191 photographs, chosen to illustrate the classification. Those images are
+often dramatic and well framed. Your own sky photos may include flat light,
+horizons, buildings and mixed cloud. Your project would investigate how well a
+model trained on the first kind of image performs on the second. A model that
+scores well in cross-validation and then fails on your photos would show how
+much the results depend on the training images.
 
 You could produce the workflow, a labelled field-test set, a
 confusion matrix for each test, and a written analysis of which genera and
@@ -125,8 +125,7 @@ You could set the working size to 128.
 
 ## Potential limitations, risks and sources of bias
 
-Considering the limitations of your data and model is an important part of
-evaluating your project. For example:
+The limitations you could consider include:
 
 - The Atlas corpus is curated. Its photographs are chosen to illustrate each
   genus, often in dramatic light and with a clear subject. Your phone photos

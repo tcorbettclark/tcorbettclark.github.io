@@ -11,14 +11,14 @@ stay private and the experiment can be repeated. Your project would investigate
 whether people can tell its writing from human writing when the human is trying
 to sound machine-like, and what gives the machine away.
 
-An important part of the design would be the human texts. A plain
-human-versus-machine test often measures whether the human text is longer,
-funnier or more topical. If your human writers deliberately copy BritLLM's
-habits, such as even sentence length, tidy structure and hedging phrases, you
-can distinguish between spotting the machine and spotting the writing style.
-You could also compare quantisations: whether 3-bit BritLLM sounds more or less
-human than 8-bit, and whether a higher temperature makes the text more
-surprising or just less coherent.
+The human texts are the other half of the design. A plain human-versus-machine
+test often measures whether the human text is longer, funnier or more topical.
+If your human writers deliberately copy BritLLM's habits, such as even
+sentence length, tidy structure and hedging phrases, you can distinguish
+between spotting the machine and spotting the writing style. You could also
+compare quantisations: whether 3-bit BritLLM sounds more or less human than
+8-bit, and whether a higher temperature makes the text more surprising or just
+less coherent.
 
 You could produce a set of matched human and machine texts, an
 anonymous judging sheet, a table of judgements, and a written analysis of the
@@ -46,14 +46,16 @@ Your main dataset is one you create:
 - **Judgements:** each judge's guess, confidence rating and short reason, under
   an anonymous code.
 
-You would need to choose a genre. Short story openings allow both the model and
-the human writer to produce a substantial piece of text. Persuasive paragraphs
-test structure and rhetoric. Explanations of a school topic test factual accuracy.
-Limericks are short, highly structured and funny, and a public-domain collection
-is easy to find: Edward Lear's *A Book of Nonsense* (1846) is available from
-[Project Gutenberg](https://www.gutenberg.org/ebooks/13646). If you use Lear,
-remember that the Victorian style is itself a clue, so include some modern human limericks as well — check the licence, or ask
-permission, before you copy one into your dataset.
+You would need to choose a genre. Short story openings allow both the model
+and the human writer to produce a substantial piece of text. Persuasive
+paragraphs test structure and rhetoric. Explanations of a school topic test
+factual accuracy. Limericks are short, highly structured and funny, and a
+public-domain collection is available: Edward Lear's *A Book of Nonsense*
+(1846) is available from [Project
+Gutenberg](https://www.gutenberg.org/ebooks/13646). If you use Lear, remember
+that the Victorian style is itself a clue, so include some modern human
+limericks as well — check the licence, or ask permission, before you copy one
+into your dataset.
 
 For the human side, you can write your own texts, ask classmates for
 contributions, or use public-domain writing. If you involve other people, as
@@ -125,8 +127,7 @@ texts from each quantisation at a fixed temperature, seed and maximum length.
 
 ## Potential limitations, risks and sources of bias
 
-Considering the limitations of your data and model is an important part of
-evaluating your project. For example:
+The limitations you could consider include:
 
 - The judge sample is small. Fifteen judges times twenty pairs is three hundred
   judgements, enough to estimate a proportion roughly but not to compare many

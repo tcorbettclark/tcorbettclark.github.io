@@ -12,11 +12,10 @@ countries live much longer or much shorter than their income predicts, and what
 else might explain the gap: schooling, child mortality, health spending,
 geography, inequality or conflict.
 
-A high R² is not necessary. A simple model that
-explains much of the variation is useful, but the exceptions are an important
-part of the investigation. You would learn to read a scatter plot, fit and
-interpret a regression, inspect residuals, add a second indicator without
-fooling yourself, and separate correlation from causation.
+A high R² is not necessary. A simple model will explain much of the variation,
+and the exceptions are what it leaves to explain. You would learn to read a
+scatter plot, fit and interpret a regression, inspect residuals, add a second
+indicator without fooling yourself, and separate correlation from causation.
 
 You could produce the workflow, a scatter plot with the fitted line,
 a residual table naming the biggest exceptions, a comparison of two or three
@@ -135,8 +134,7 @@ expectancy on the y-axis, and colour the points by region.
 
 ## Potential limitations, risks and sources of bias
 
-Considering the limitations of your data and model is an important part of
-evaluating your project. For example:
+The limitations you could consider include:
 
 - The ecological fallacy is the central risk. A country-level relationship does
   not tell you what happens to an individual, and a country average can hide

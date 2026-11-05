@@ -107,8 +107,7 @@ Set the working size to 56 so the feature windows have something to measure.
 
 ## Potential limitations, risks and sources of bias
 
-Considering the limitations of your data and model is an important part of
-evaluating your project. For example:
+The limitations you could consider include:
 
 - Hand-crafted features are not a convolutional network. Your accuracy may be
   lower than a convolutional network, and that is expected.

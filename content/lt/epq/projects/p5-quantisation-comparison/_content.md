@@ -19,10 +19,10 @@ into a trade-off analysis, and investigate whether 4-bit is the sweet spot or
 whether the best choice depends on whether you care about memory, speed, energy
 or accuracy.
 
-An important part of the project would be the resource measurement. You would
-measure memory and energy as well as accuracy, so you can ask whether the
-cheapest model is also the cheapest per correct answer. That question is
-relevant to phones, laptops and data centres.
+The resource measurement is the other half of the project. You would measure
+memory and energy as well as accuracy, so you can ask whether the cheapest
+model is also the cheapest per correct answer. That question is relevant to
+phones, laptops and data centres.
 
 You could produce a Python benchmark harness, a results table, a set
 of trade-off plots, and a written recommendation for a particular use case.
@@ -137,8 +137,7 @@ metadata and file format.
 
 ## Potential limitations, risks and sources of bias
 
-Considering the limitations of your data and model is an important part of
-evaluating your project. For example:
+The limitations you could consider include:
 
 - You are comparing one model family on one machine. The results may not
   generalise to other models, other hardware or other quantisation methods.
@@ -182,10 +181,10 @@ make from your measurements.
 ## Expected outcomes and opportunities for evaluation
 
 The expected outcome would be a benchmark harness, a table of quality and
-resource measurements for each quantisation, and a set of trade-off plots.
-The shape of the trade-off is more important than whether one model wins on
-every measure: where quality starts to fall, which resources improve fastest,
-and whether the cheapest model is also the cheapest per correct answer.
+resource measurements for each quantisation, and a set of trade-off plots. The
+shape of the trade-off is the result: where quality starts to fall, which
+resources improve fastest, and whether the cheapest model is also the cheapest
+per correct answer.
 
 You could evaluate the models on held-out questions and held-out text, compare
 the quality ranking with the memory, speed and energy rankings, and identify
