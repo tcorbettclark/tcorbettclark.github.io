@@ -30,10 +30,10 @@ anonymous judging sheet, a table of judgements, and a written analysis of the
 tells. Your project would be about designing a fair comparison, collecting
 judgements, and interpreting what people noticed.
 
-**What you submit.** The assessed product is a written report: around 5,000
-words for a research project, or at least 1,000 words alongside an artefact
-such as the one described here. The tables, plots and workflow are evidence
-you discuss in the report, not the submission itself.
+**What you submit.** The assessed product is a written report; the
+tables, plots and workflow are evidence you discuss in it, not the
+submission itself. Your board sets the length and the form, so check the
+current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -125,63 +125,18 @@ human and machine texts.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
-**How much to attempt.** One comparison is enough: a small prompt set, two
-generations each and a dozen or so judges; more quantisations and more judges
-are extensions. You need Orange with the add-on's language-model widgets and
-`mlx-lm` on an Apple-silicon Mac — see [Prerequisites](../../prerequisites/).
+**A way in.** One comparison — a few prompts, a couple of generations each and
+a small panel of judges — is enough to see what the question involves. You
+need Orange with the add-on's language-model widgets and `mlx-lm` on an Apple-
+silicon Mac — see [Prerequisites](../../prerequisites/).
 
 You could begin by choosing a genre and writing 10–20 prompts. Keep them short
-enough that a generation fits within the model's context, and varied enough that
-you are not testing one lucky phrasing. For each prompt, generate 3–5 texts from
-each quantisation at a fixed temperature, seed and maximum length. Save every
-generation with its prompt, model, temperature and seed in a spreadsheet. Remove
-near-duplicates of the prompt and any output that is truncated or malformed, and
-note how many you removed.
+enough that a generation fits within the model's context, and varied enough
+that you are not testing one lucky phrasing. For each prompt, generate 3–5
+texts from each quantisation at a fixed temperature, seed and maximum length.
 
-You could write the human counterparts before you look at the machine outputs, or ask
-someone else to write them. Match the machine texts in topic, length and format.
-You would need to decide whether your human writers are trying to sound plain-human or
-deliberately machine-like. The second option would let you distinguish the
-ability to spot a machine from the ability to spot a style. If your human
-writers are imitating BritLLM, give them a short description of its habits, but
-not the exact machine texts they are paired with.
-
-You could build the judging set: choose 20–40 pairs, balanced across quantisations and
-temperatures, with one human and one machine text in each pair. Put them in a
-random order, with the same formatting for both. Tell judges that both sources
-are present and that guessing is allowed, but do not tell them the ratio or your
-hypothesis. Present one pair at a time, and ask for a binary judgement, a
-confidence rating from 1 to 5, and a short reason.
-
-You could run a pilot with three to five judges. Look for ambiguous instructions, pairs
-that are obviously broken, and items that take too long. Revise the sheet, then
-run the main study with 15–30 classmates. Keep the order random for each judge
-if you can; at minimum, shuffle the pairs once, use the same order for everyone,
-and record that choice.
-
-You could analyse the results in a spreadsheet or in Python. Report overall accuracy
-against the 50% chance baseline, with a confidence interval. Break the accuracy
-down by quantisation, by temperature, by genre and by judge. Build a confusion
-matrix: how often a human text was judged machine, and a machine text judged
-human. Code the free-text reasons into categories such as rhythm, vocabulary,
-grammar, sense, repetition, punctuation, factual error and emotional
-plausibility. Count how often each category appears for correct and incorrect
-judgements.
-
-A simple binomial calculation is enough for the uncertainty. If 18 out of 30
-judgements are correct, the estimate is 60%, but the interval is wide. Report
-the interval as well as the percentage, and avoid claiming a difference between
-two quantisations unless the intervals are clearly separated.
-
-If you install **Orange3-Text**, connect **LM Generator** to **Corpus** and
-compare **Word Cloud** and **Concordance** for human and machine texts. You could
-ask whether the machine texts overuse a small set of words, or produce
-collocations that never appear in the human corpus. That evidence can support
-your reading of the judges' reasons.
-
-You should record your decisions in your project log: the genre, the prompts, the
-quantisations, the temperature and seed, the human instructions, the
-randomisation, and what you decided counts as "human-like".
+From there the sequence is yours: decide what to measure, what to compare
+and when to stop.
 
 ## Potential limitations, risks and sources of bias
 
@@ -223,7 +178,7 @@ evaluating your project. For example:
   pairs should be piloted and any that are obviously written to a formula
   removed.
 
-You should consider how these limitations affect the claims you can reasonably
+Think about how these limitations affect the claims you can reasonably
 make from your experiment.
 
 ## Expected outcomes and opportunities for evaluation
@@ -250,28 +205,15 @@ judge's expectations, and what would change if the judges were experts, the
 texts were longer, or the machine were allowed to revise its output. You could
 discuss those questions in your evaluation.
 
-## Suitability as an EPQ artefact
+## How this might be assessed
 
-This could make a strong EPQ artefact because designing the test requires you
-to make a series of decisions that you can research, justify and evaluate. The
-generated texts and judging sheet provide a tangible outcome, while the
-experiment provides evidence of planning, research, problem-solving and
-reflection. The no-code route leaves you time for experimental design,
-participant management and interpretation.
+Before you commit, ask yourself how the work would be judged: what would your
+report be arguing, what evidence would you be presenting, and what would you do
+with the answer? Settle that with your supervisor and your board's
+specification — this page does not decide it.
 
-Crucially, the project is open-ended. There is no single correct genre,
-quantisation, temperature or judging design, and the quality of your EPQ does
-not depend simply on making the machine pass. You have scope to make and
-justify your own decisions about the prompts, the human examples and the
-judging design.
-
-You could also discuss questions from philosophy and psychology: what it means
-to sound human, how people use cues to judge authenticity, and whether a test of
-discrimination can tell you anything about intelligence. You could use your judges' reasons as evidence in that discussion.
-
-Check with your supervisor that none of this overlaps work you are submitting
-for another qualification: no part of an EPQ may be resubmitted for another
-qualification.
+Check with your supervisor that none of this overlaps work you are submitting for
+another qualification.
 
 ## Example artefacts
 

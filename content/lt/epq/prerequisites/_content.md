@@ -6,29 +6,16 @@ that means before you commit to one of the outlines, because the most common
 way a good project fails is discovering in March that the kit was never
 available.
 
-## What the qualification asks of you
+## Check your board's rules
 
-The Extended Project is a Level 3 qualification worth 120 guided learning
-hours. All four boards that offer it agree on the essentials:
+The qualification is set by the awarding body your centre enters you with. Its
+hours, its assessment objectives and the evidence it asks for are all in that
+board's specification, and they differ between boards. Ask your supervisor which
+one applies to you, read it, and treat it as the authority: nothing here is a
+substitute for it.
 
-- **You choose the project.** You draft the title and aims and the centre
-  approves them before work starts. A centre may refuse a proposal it cannot
-  supervise or resource.
-- **You are supervised.** You get a supervisor for regular reviews, and a
-  centre coordinator who is accountable for the submission.
-- **You keep a record.** A production log (AQA), candidate production record
-  (WJEC) or equivalent, with your planning, research, decisions and
-  reflections. Without it the project cannot be moderated, however good the
-  report.
-- **You present.** A live presentation to a non-specialist audience, with
-  questions recorded by your supervisor.
-- **You submit written work.** A research report of roughly 5,000 words, or an
-  artefact with a research-based report of at least 1,000 words (AQA's
-  figures). Every project product includes a written report.
-- **It is your own work**, not submitted for another qualification, and any use
-  of AI tools is declared.
-
-Hours, marks and paperwork differ by board — see the last section.
+The four specifications are listed at the end of this page. What follows here is
+what these particular projects need in order to run.
 
 ## A computer that can run this
 
@@ -70,8 +57,8 @@ the model's licence too if you intend to redistribute anything you produce.
 ## Permission and ethics
 
 Three of the six projects bring you into contact with people or with other
-people's material, and all four boards require your centre to approve the
-ethics of a proposal **before** you collect data. Plan for it:
+people's material, and your centre has to agree how you handle that before you
+collect anything. Ask what it requires, and plan for it:
 
 - **Asking classmates for writing, answers or judgements** (A3, B2) means
   consent, anonymity, a right to withdraw, and storage that satisfies your
@@ -83,10 +70,18 @@ ethics of a proposal **before** you collect data. Plan for it:
 - **Using an AI tool**, including the model you are studying, means recording
   prompts and outputs in your log and never presenting its text as your own.
 
+## Your own work
+
+The report, the code and the analysis have to be your own work, written for this
+project and not for another qualification. Whatever tools you use, say so in your
+log and in the report: declare what the model did, and never present its text as
+your own.
+
 ## Time
 
-120 guided learning hours sounds like a lot and is not. A plausible shape,
-which you should adjust with your supervisor:
+The project has to fit alongside your other studies, so plan for part-time work
+across a school year. A plausible shape, which you can adjust with your
+supervisor:
 
 | Stage | Hours |
 |---|---|
@@ -100,7 +95,7 @@ which you should adjust with your supervisor:
 If an outline's "suggested approaches" would not fit inside its stage, cut the
 outline down rather than the report.
 
-## The rules for your board
+## The specifications
 
 Your centre will tell you which board it enters you with. Read the relevant
 specification, or at least the assessment objectives and the evidence

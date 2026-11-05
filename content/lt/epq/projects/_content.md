@@ -16,7 +16,7 @@ Each project page follows the same pattern:
 - Suggested approaches to data preparation, analysis and modelling
 - Potential limitations, risks and sources of bias
 - Expected outcomes and opportunities for evaluation
-- Suitability as an EPQ artefact
+- How this might be assessed
 - Example artefacts
 - Further reading
 

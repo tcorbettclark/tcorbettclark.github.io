@@ -34,10 +34,10 @@ Your final artefact could be a Python harness, a question set you designed,
 calibration plots for each model, and a written analysis of when confidence is
 useful and when it is misleading.
 
-**What you submit.** The assessed product is a written report: around 5,000
-words for a research project, or at least 1,000 words alongside an artefact
-such as the one described here. The tables, plots and workflow are evidence
-you discuss in the report, not the submission itself.
+**What you submit.** The assessed product is a written report; the
+tables, plots and workflow are evidence you discuss in it, not the
+submission itself. Your board sets the length and the form, so check the
+current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -146,88 +146,18 @@ model is, and whether the gap is stable enough to support a decision.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
-**How much to attempt.** One quantisation and a pilot of about 40 questions
-answers the question; bigger question sets and more models are extensions. You need Python, `mlx-lm` and an Apple-silicon Mac with 16 GB, plus a
-multi-gigabyte model download — see [Prerequisites](../../prerequisites/).
+**A way in.** One quantisation and a pilot question set will show you what the
+measurement involves; more questions and models can follow. You need Python,
+`mlx-lm` and an Apple-silicon Mac with 16 GB, plus a multi-gigabyte model
+download — see [Prerequisites](../../prerequisites/).
 
 You could begin by building the question set in a spreadsheet or a CSV file.
-You would keep the prompt, the correct answer, the distractors, the category, the
-difficulty and the source in separate columns. Write 20 pilot items first and
-run them through the model. If the model gets everything right or everything
-wrong, adjust the difficulty before writing the full set.
+You would keep the prompt, the correct answer, the distractors, the category,
+the difficulty and the source in separate columns. Write 20 pilot items first
+and run them through the model.
 
-You could write a scorer in Python. For each question and each candidate answer:
-
-Write it yourself: the model is the object of the study, not an assistant for
-the code or the report, and anything it did help with belongs in your log.
-
-1. Build the text `prompt + " " + answer`.
-2. Tokenise it with the model's tokenizer.
-3. Run the model on the token IDs and collect the logits.
-4. Sum the log-probabilities of the answer tokens, using the logits at the
-   positions that predict each token.
-5. Divide by the number of answer tokens to length-normalise.
-6. Convert the candidate scores to probabilities with a softmax.
-
-The result is a probability for each candidate. Record the top candidate, its
-probability, the margin between the top two, and whether it is correct. Check
-the scorer on a few examples by comparing the top candidate with a greedy
-generation: they should usually agree. If they do not, the prompt or the
-tokenisation is probably wrong.
-
-You could run the same questions through the 3-bit, 6-bit and 8-bit models. Keep the
-prompt, the candidate set, the tokeniser and the scoring rule identical. The models share a tokenizer, so the scoring rule is the same for each. If you change the prompt
-format between models, you are measuring the prompt, not the quantisation.
-
-Compute the basic statistics for each model:
-
-- accuracy: the proportion of questions where the top candidate is correct
-- mean confidence: the average probability of the top candidate
-- the calibration curve: bin the questions by confidence (for example, 0–10%,
-  10–20%, ...) and plot the observed accuracy in each bin against the mean
-  confidence
-- expected calibration error: a weighted average of the gap between confidence
-  and accuracy across the bins
-- the Brier score: the mean squared error between the predicted probability of
-  the chosen answer and whether it was correct
-
-You could plot a reliability diagram for each model and each task category. A model that
-is overconfident sits below the diagonal: it claims more certainty than it
-delivers. A model that is underconfident sits above it. Look at the number
-of questions in each bin; a bin with three questions is not evidence of much.
-
-Then test selective prediction. Sort the questions by confidence and answer
-only the top proportion. Plot accuracy against coverage. You could compare
-accuracy at 50% and 80% coverage, find the confidence threshold that gives 90%
-accuracy, and report how many questions are answered at that threshold. Compare
-the curve for 3-bit, 6-bit and 8-bit. A model that is better calibrated may
-give a better accuracy-coverage trade-off even if its overall accuracy is
-similar.
-
-If you want to compare probability confidence with verbal confidence, run a
-separate experiment. Ask the model to state a confidence from 0 to 100 after
-each answer, parse the number, and compare it with the probability-based
-confidence. You could ask whether the self-report tracks accuracy, and whether
-it is systematically higher or lower. Treat the result with caution: the self-report is generated text, not a
-direct readout of the model's internal state.
-
-If you want to test sampling consistency, generate ten answers at temperature
-0.8 for each question and measure how often they agree with the top candidate.
-You could test whether agreement is a better predictor of correctness than the
-probability of the top candidate. This is related to the idea of **semantic
-uncertainty**, but keep it simple: agreement is a count, not a probability.
-
-Try ten questions first: it is slower than it looks, and it is an extension
-rather than part of the core.
-
-You should report confidence intervals for accuracy and for ECE. With 100–200 questions,
-the intervals are wide, especially for subgroup analyses. A bootstrap
-resampling of the questions is a simple way to estimate the uncertainty without
-new data.
-
-You should record your decisions in your project log: the question set, the candidate
-sets, the length normalisation, the prompt template, the categories, the
-correctness rule, and how you handled ambiguous or refused answers.
+From there the sequence is yours: decide what to measure, what to compare
+and when to stop.
 
 ## Potential limitations, risks and sources of bias
 
@@ -272,7 +202,7 @@ evaluating your project. For example:
   that a wrong answer that is deferred still has a cost. The coverage-accuracy
   curve shows the trade-off, but it does not make the decision for you.
 
-You should consider how these limitations affect the claims you can reasonably
+Think about how these limitations affect the claims you can reasonably
 make from your model.
 
 ## Expected outcomes and opportunities for evaluation
@@ -299,28 +229,15 @@ You could finish by reflecting on what confidence would need to be useful in a
 real application: a reliable threshold, a clear cost for deferring, and a way
 to communicate uncertainty to a user.
 
-## Suitability as an EPQ artefact
+## How this might be assessed
 
-This could make a strong EPQ artefact because designing the question set and the
-scoring method requires you to make a series of decisions that you can research,
-justify and evaluate. The harness provides a tangible outcome, while the
-analysis provides evidence of planning, research, problem-solving and
-reflection. The code is mostly scoring and plotting; the main work is designing
-the questions and interpreting the calibration.
+Before you commit, ask yourself how the work would be judged: what would your
+report be arguing, what evidence would you be presenting, and what would you do
+with the answer? Settle that with your supervisor and your board's
+specification — this page does not decide it.
 
-Crucially, the project is open-ended. There is no single correct question set,
-confidence measure or threshold, and the quality of your EPQ does not depend
-simply on finding a model that is perfectly calibrated. You have scope to make
-and justify your own decisions about the task categories, the definition of a
-correct answer, and the kind of uncertainty that is most important.
-
-You could also discuss questions from AI safety and human-computer interaction:
-how people interpret confidence, when a model should refuse, and why a fluent
-answer is not the same as a reliable one. You could use your calibration curves as evidence in that discussion.
-
-Check with your supervisor that none of this overlaps work you are submitting
-for another qualification: no part of an EPQ may be resubmitted for another
-qualification.
+Check with your supervisor that none of this overlaps work you are submitting for
+another qualification.
 
 ## Example artefacts
 

@@ -30,10 +30,10 @@ Your final artefact could be the workflow itself, together with a short user
 guide that lets someone else load a digit image and see the prediction and the
 feature values that produced it.
 
-**What you submit.** The assessed product is a written report: around 5,000
-words for a research project, or at least 1,000 words alongside an artefact
-such as the one described here. The tables, plots and workflow are evidence
-you discuss in the report, not the submission itself.
+**What you submit.** The assessed product is a written report; the
+tables, plots and workflow are evidence you discuss in it, not the
+submission itself. Your board sets the length and the form, so check the
+current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -109,59 +109,18 @@ to support a real ablation study.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
-**How much to attempt.** The baseline and one ablation are enough; the
-remaining ablations and a larger test set are extensions. You need Orange Data
-Mining with the `orange3-ai-suite` add-on, which provides the Image Features
-widget — see [Prerequisites](../../prerequisites/) before you start.
+**A way in.** Build the baseline, then one ablation; keep the rest for later
+if the time allows. You need Orange Data Mining with the `orange3-ai-suite`
+add-on, which provides the Image Features widget — see
+[Prerequisites](../../prerequisites/).
 
 You could begin by building the workflow from scratch: **Import Images** →
 **Image Features** → **Test & Score**, with **Neural Network** as the learner
-and **Confusion Matrix**, **Data Table** and **Column Statistics** attached. Set
-the working size to 56 so the feature windows have something to measure.
+and **Confusion Matrix**, **Data Table** and **Column Statistics** attached.
+Set the working size to 56 so the feature windows have something to measure.
 
-First, establish a baseline with 5-fold cross-validation and groups A–F
-switched on. Record the accuracy and the confusion matrix. Then open **Data
-Table** and sort by `hole_count`. Digits with enclosed regions should score
-higher than digits without them. Look at `foreground_area_fraction` next: it
-separates thin strokes from dense ones. **Column Statistics** shows whether a
-feature has a plausible range and whether the classes overlap.
-
-Then run an ablation. Switch off one group at a time, rerun the evaluation, and
-record both accuracy and the confusion matrix. A change in accuracy is useful,
-but a change in the pattern of errors is more informative: for example,
-removing topology might turn a 6/8 confusion into a 0/8 confusion. Try removing
-groups in combination as well, because features can substitute for one another.
-
-You could compare learners on exactly the same feature table: **Neural
-Network**, **Tree** and **Logistic Regression**. If the neural network is
-clearly better, look at which errors it fixes and consider what non-linear
-combination of features might explain the difference. Build the raw-pixel
-baseline with **Image Pixels**: at the default 10×10 grid it produces 100
-luminance features per image with no spatial encoding. Raise the grid to 14×14
-or 28×28 and compare accuracy and the number of columns.
-
-Your own handwriting is the test set. Import it with a second **Import Images**
-widget, run it through **Image Features** with the same settings, and connect
-the result to the **Test Data** input of **Test & Score**. Do not use it to tune
-the model; treat it as a final check. If accuracy falls, look at the images
-behind the errors. You could ask whether the model is confused by stroke
-thickness, slant, digit size, or the inversion of ink and background. That
-analysis is more informative than the score alone.
-
-You could use **Neural Network Viewer** to inspect the trained network. Connect the
-**Model** output of **Neural Network** to the viewer. The viewer accepts the
-neural-network model; the tree and logistic regression do not produce a network
-to draw. Edge width shows the absolute weight and colour shows the sign. For a
-chosen digit, trace the strongest incoming weights back to named features. You
-could compare them with your predictions from the ablation. Keep the network small enough
-that the diagram remains readable, and save a PNG for your report. If you use
-**Preprocess** to normalise features, connect the **Preprocessor** output to
-**Test & Score**, not the pre-normalised data, so that normalisation is fitted
-inside each fold.
-
-You should record your decisions in your project log: the feature groups you kept, the
-working size, the learner settings, the number of folds, how you handled your
-own images, and what you decided counts as a failure.
+From there the sequence is yours: decide what to measure, what to compare
+and when to stop.
 
 ## Potential limitations, risks and sources of bias
 
@@ -191,7 +150,7 @@ evaluating your project. For example:
 - Changing the working size, contrast normalisation or denoising changes the
   feature values, so comparisons are only fair when those settings are fixed.
 
-You should consider how these limitations affect the claims you can reasonably
+Think about how these limitations affect the claims you can reasonably
 make from your model.
 
 ## Expected outcomes and opportunities for evaluation
@@ -215,22 +174,15 @@ figure. If you cannot, that is also a finding about the limits of the feature
 set. You could finish by considering what would change with a convolutional
 network: whether the errors would disappear or move somewhere less visible.
 
-## Suitability as an EPQ artefact
+## How this might be assessed
 
-This could make a strong EPQ artefact because producing the classifier requires
-you to make a series of decisions that you can research, justify and evaluate.
-The model provides a tangible outcome, while the development process provides
-evidence of planning, research, problem-solving and reflection. The no-code
-tools leave you time for experimental design, data collection and interpretation.
+Before you commit, ask yourself how the work would be judged: what would your
+report be arguing, what evidence would you be presenting, and what would you do
+with the answer? Settle that with your supervisor and your board's
+specification — this page does not decide it.
 
-Crucially, the project is open-ended. There is no single correct feature set,
-learner or test set, and the quality of your EPQ does not depend simply on
-achieving the highest accuracy. You have scope to make and justify your own
-decisions about the handwriting samples, the feature groups and the evaluation.
-
-Check with your supervisor that none of this overlaps work you are submitting
-for another qualification: no part of an EPQ may be resubmitted for another
-qualification.
+Check with your supervisor that none of this overlaps work you are submitting for
+another qualification.
 
 ## Example artefacts
 

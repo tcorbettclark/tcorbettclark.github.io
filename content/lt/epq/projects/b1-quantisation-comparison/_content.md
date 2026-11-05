@@ -32,10 +32,10 @@ relevant to phones, laptops and data centres.
 Your final artefact could be a Python benchmark harness, a results table, a set
 of trade-off plots, and a written recommendation for a particular use case.
 
-**What you submit.** The assessed product is a written report: around 5,000
-words for a research project, or at least 1,000 words alongside an artefact
-such as the one described here. The tables, plots and workflow are evidence
-you discuss in the report, not the submission itself.
+**What you submit.** The assessed product is a written report; the
+tables, plots and workflow are evidence you discuss in it, not the
+submission itself. Your board sets the length and the form, so check the
+current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -131,87 +131,19 @@ trade explicit.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
-**How much to attempt.** Four quantisations, a small prompt set and three
-repeats is an honest experiment; more prompts or models are extensions. You
+**A way in.** Compare a couple of quantisations on a short prompt set, with a
+few repeats each; more models and prompts can follow if the time allows. You
 need Python 3.11 or later, `mlx-lm` and an Apple-silicon Mac with 16 GB, plus
 a multi-gigabyte model download — see [Prerequisites](../../prerequisites/).
 
-You could begin by inventorying the models. For each directory, record the file
-size, the `config.json` quantisation settings, the number of bits and the group
-size. Compute the theoretical size from the parameter count and compare it with
-the disk size. The difference is the overhead from the tokenizer, metadata and
-file format.
+You could begin by inventorying the models. For each directory, record the
+file size, the `config.json` quantisation settings, the number of bits and the
+group size. Compute the theoretical size from the parameter count and compare
+it with the disk size. The difference is the overhead from the tokenizer,
+metadata and file format.
 
-Write the harness yourself. The model is what you are measuring, so it must
-not write the harness, the prompts or the report; anything it helps with, even
-explaining an error message, belongs in your log. You could write a small
-Python harness with three parts:
-
-1. **Load and warm up.** Load the model in a fresh process, run one short
-   generation, and record the time and peak memory. The warm-up is needed because
-   the first run includes lazy loading and compilation.
-2. **Measure generation.** For each prompt, record the time to generate a fixed
-   number of new tokens, the number of new tokens, the peak resident memory
-   and, if available, the energy samples. Use the same prompts, the same
-   sampler, the same temperature and the same seed across models. Greedy
-   decoding is the simplest choice because it removes sampling variability; if
-   you use sampling, repeat each prompt several times.
-3. **Score quality.** Score the task suite automatically. Exact match is easiest
-   for factual and arithmetic items; a small rubric or a hand-checked sample is
-   better for open-ended writing. For perplexity, run the model over a held-out
-   text and compute the mean negative log-likelihood per token, then
-   exponentiate it.
-
-You could measure memory with `psutil.Process().memory_info().rss` sampled in a background
-thread, or with `resource.getrusage` after the run. RSS includes the Python
-interpreter, the MLX buffers and the loaded weights, so it is likely to be larger than
-the file size. Report both, and explain the difference. If you can, measure the
-memory after loading but before generating, and the peak during generation,
-because the two answer different questions.
-
-You could measure speed with `time.perf_counter()` around the generation call. Record
-tokens per second as new tokens divided by seconds. Run each condition at least
-three times and report the mean and standard deviation. Randomise the order of
-the models, or alternate them, so that thermal throttling does not always
-favour the first model you run. Let the machine rest between runs if it becomes
-warm. If you use `mlx_lm.stream_generate`, you can also record the time to first
-token; otherwise report total generation time.
-
-Pilot one quantisation on ten prompts first: if a full pass takes longer than
-an afternoon, cut the prompt set rather than the repeats.
-
-You could measure energy only if you can do it safely and with supervision. On macOS,
-`powermetrics` requires administrator rights. Run it in the background with a
-one-second sampling interval, record the CPU and GPU power, and integrate the
-power over the generation window. Report joules per token and joules per
-correct answer. Treat the result as a relative comparison on your machine, not
-an absolute claim about all hardware. If you cannot use `powermetrics`, a careful estimate based on time and average
-power is better than no measurement, provided you explain the method and its
-uncertainty.
-
-You could analyse the results with plots:
-
-- quality (accuracy or perplexity) against bits
-- tokens per second against bits
-- peak memory against bits
-- file size against bits
-- energy per token against bits
-- energy per correct answer against bits
-
-You could look for a knee in the curve: whether the drop from 8-bit to 6-bit is
-small and the drop from 4-bit to 3-bit is large, whether the speed gain flattens
-before the quality loss becomes serious, and whether the energy ranking matches
-the memory ranking. A simple efficiency frontier, with quality on one axis and
-resource use on the other, makes the trade-off visible.
-
-Break the quality results down by task category. Quantisation may damage
-arithmetic or rare factual recall more than it damages fluent continuation. A
-small factorial analysis, with bit width and task type as factors, is enough to
-show an interaction if one exists.
-
-You should record your decisions in your project log: the task suite, the scoring rules,
-the prompts, the sampler, the number of repeats, the memory method, the energy
-method, and the machine conditions.
+From there the sequence is yours: decide what to measure, what to compare
+and when to stop.
 
 ## Potential limitations, risks and sources of bias
 
@@ -254,7 +186,7 @@ evaluating your project. For example:
   energy consumed. This project separates them, and you would decide which are
   relevant to your use case. That choice should be explained in your evaluation.
 
-You should consider how these limitations affect the claims you can reasonably
+Think about how these limitations affect the claims you can reasonably
 make from your measurements.
 
 ## Expected outcomes and opportunities for evaluation
@@ -283,29 +215,15 @@ if you were shipping a local assistant on a 16 GB laptop, which quantisation
 you would choose, and what evidence would change your mind. You could use that
 comparison to justify a deployment choice.
 
-## Suitability as an EPQ artefact
+## How this might be assessed
 
-This could make a strong EPQ artefact because designing the benchmark requires
-you to make a series of decisions that you can research, justify and evaluate.
-The harness provides a tangible outcome, while the measurement process provides
-evidence of planning, research, problem-solving and reflection. The code is
-mostly measurement and plotting rather than model training, so a student with
-some Python experience can manage it.
+Before you commit, ask yourself how the work would be judged: what would your
+report be arguing, what evidence would you be presenting, and what would you do
+with the answer? Settle that with your supervisor and your board's
+specification — this page does not decide it.
 
-Crucially, the project is open-ended. There is no single correct task suite,
-resource metric or recommendation, and the quality of your EPQ does not depend
-simply on finding one model that wins on every measure. You have scope to make
-and justify your own decisions about the tasks, the measurement method, and the
-resource that is most important for a particular user.
-
-You could also discuss green computing and edge deployment: the same questions
-about memory, speed and energy are asked by engineers who run models on phones,
-in cars and in data centres. Your measurements are on a small scale, but the
-questions are similar.
-
-Check with your supervisor that none of this overlaps work you are submitting
-for another qualification: no part of an EPQ may be resubmitted for another
-qualification.
+Check with your supervisor that none of this overlaps work you are submitting for
+another qualification.
 
 ## Example artefacts
 

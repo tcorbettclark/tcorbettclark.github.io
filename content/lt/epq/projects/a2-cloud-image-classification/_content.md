@@ -30,10 +30,10 @@ Your final artefact could be the workflow, a labelled field-test set, a
 confusion matrix for each test, and a written analysis of which genera and
 which features cause the confusion.
 
-**What you submit.** The assessed product is a written report: around 5,000
-words for a research project, or at least 1,000 words alongside an artefact
-such as the one described here. The tables, plots and workflow are evidence
-you discuss in the report, not the submission itself.
+**What you submit.** The assessed product is a written report; the
+tables, plots and workflow are evidence you discuss in it, not the
+submission itself. Your board sets the length and the form, so check the
+current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -124,10 +124,10 @@ default because it is a shortcut. Groups A–F give 36 features; adding G gives
 
 ## Suggested approaches to data preparation, analysis and modelling
 
-**How much to attempt.** Train and evaluate on the curated corpus, then test
-on 10–20 of your own photographs; a larger field set is an extension. You need
-Orange Data Mining with the same add-on and its `image` extra, plus a camera —
-see [Prerequisites](../../prerequisites/).
+**A way in.** Train and evaluate on the curated corpus, then try a handful of
+your own photographs; a larger field set can wait. You need Orange Data Mining
+with the add-on and its `image` extra, plus a camera — see
+[Prerequisites](../../prerequisites/).
 
 You could begin by fetching or collecting the corpus and building the workflow
 from scratch: **Import Images** → **Image Features** → **Test & Score**, with
@@ -135,48 +135,8 @@ from scratch: **Import Images** → **Image Features** → **Test & Score**, wit
 **Confusion Matrix**, **Data Table** and **Column Statistics** for inspection.
 You could set the working size to 128.
 
-First, run a baseline with groups A–F and 5-fold cross-validation. Read the
-confusion matrix by genus. You could identify which pairs are confused.
-Altocumulus and stratocumulus are both layered and often appear in similar
-light; cumulus and cumulonimbus share a lumpy shape. Look at the images behind
-the errors in **Image Features** or **Data Table**, and consider why the
-features might overlap.
-
-Then switch on group G and rerun. Accuracy may rise. Inspect the new features:
-`bluish_fraction`, `blueness_mean`, `saturation_mean` and `greenery_fraction`.
-A model can use "is the image blue?" as a proxy for "is this a sky photo?"
-without learning anything about cloud shape. You could run a colour-only model
-(G on, A–F off) and a shape-only model (A–F on, G off). If the colour-only model
-is much stronger than you expected, that is evidence of a shortcut. You could compare learners on exactly the same features, and see what that tells
-you about which measurements carry the signal.
-
-The field test would be the main part of the investigation. Take 20–40 new
-photos, label them against the Atlas, and import them with a second **Import
-Images** widget, using the same folder names as the training corpus. Run **Image
-Features** with the same settings and connect the result to the **Test Data**
-input of **Test & Score**. Do not tune on these images. Record the accuracy and
-the confusion matrix, then compare them with the cross-validation results. You
-could identify which genera survive the change, and whether the errors are
-caused by mixed sky, flat light, horizon clutter, or a real similarity between
-genera. You could then add half of your field photos to the training set and
-test on the other half, to see whether a small amount of local data closes the
-gap.
-
-A human baseline is optional but valuable. Ask a weather-savvy friend or a
-geography teacher to classify the same field photos, using the Atlas
-definitions. Compare their errors with the model's. With a small sample you
-cannot draw strong conclusions, but the comparison shows that some clouds are
-hard for people too. If you use **Preprocess** to normalise features, connect the
-**Preprocessor** output to **Test & Score** so that normalisation is fitted
-inside each fold.
-
-Their answers are data about a person, so think about what you are asking
-them for, how you will keep it anonymous, and what your centre needs to
-agree to before you collect it.
-
-You should record your decisions in your project log: which genera you included, what
-counted as a valid photo, how you handled mixed skies, how you split training
-and field-test data, and which feature groups you used.
+From there the sequence is yours: decide what to measure, what to compare
+and when to stop.
 
 ## Potential limitations, risks and sources of bias
 
@@ -208,7 +168,7 @@ evaluating your project. For example:
   houses and car number plates should be avoided. If you ask classmates for
   photos, get consent and keep them anonymous.
 
-You should consider how these limitations affect the claims you can reasonably
+Think about how these limitations affect the claims you can reasonably
 make from your model.
 
 ## Expected outcomes and opportunities for evaluation
@@ -233,24 +193,15 @@ questions, you have a stronger evaluation than a single accuracy figure. You cou
 make the model useful for a real user: more local training data, a "not sure"
 option, a clear-sky class, or a different kind of model.
 
-## Suitability as an EPQ artefact
+## How this might be assessed
 
-This could make a strong EPQ artefact because producing the classifier requires
-you to make a series of decisions that you can research, justify and evaluate.
-The model provides a tangible outcome, while the fieldwork provides evidence of
-planning, research, problem-solving and reflection. The no-code tools leave you
-time for data collection, labelling and interpretation.
+Before you commit, ask yourself how the work would be judged: what would your
+report be arguing, what evidence would you be presenting, and what would you do
+with the answer? Settle that with your supervisor and your board's
+specification — this page does not decide it.
 
-Crucially, the project is open-ended. There is no single correct set of genera,
-features or field-test design, and the quality of your EPQ does not depend
-simply on achieving the highest accuracy. You have scope to make and justify
-your own decisions about the cloud classes, the handling of mixed skies, and the
-field test. You could also discuss shortcut learning, domain shift, and the
-difference between a curated dataset and ordinary photographs.
-
-Check with your supervisor that none of this overlaps work you are submitting
-for another qualification: no part of an EPQ may be resubmitted for another
-qualification.
+Check with your supervisor that none of this overlaps work you are submitting for
+another qualification.
 
 ## Example artefacts
 

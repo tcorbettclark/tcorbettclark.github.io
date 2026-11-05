@@ -28,10 +28,10 @@ a residual table naming the biggest exceptions, a comparison of two or three
 models, and a short case study of one over-performing and one under-performing
 country.
 
-**What you submit.** The assessed product is a written report: around 5,000
-words for a research project, or at least 1,000 words alongside an artefact
-such as the one described here. The tables, plots and workflow are evidence
-you discuss in the report, not the submission itself.
+**What you submit.** The assessed product is a written report; the
+tables, plots and workflow are evidence you discuss in it, not the
+submission itself. Your board sets the length and the form, so check the
+current specification or ask your supervisor.
 
 ## Dataset(s) to be used
 
@@ -134,61 +134,19 @@ standardise features if you want to compare coefficients on a common scale.
 
 ## Suggested approaches to data preparation, analysis and modelling
 
-**How much to attempt.** The single-year model, the log transform and the
-residuals are the core; the regional split and extra indicators are
-extensions. Orange Data Mining is free for Windows, macOS and Linux, and a
-spreadsheet will do for the data preparation — see
-[Prerequisites](../../prerequisites/).
+**A way in.** Fit the single-year model, look at the residuals, then decide
+whether a log transform or a regional split is worth the time. Orange Data
+Mining is free for Windows, macOS and Linux, and a spreadsheet will do for the
+data preparation — see [Prerequisites](../../prerequisites/).
 
 You could begin by downloading two indicators, income per person and life
 expectancy, for a recent year. Put them in a spreadsheet with one row per
-country, check the missing values, and import the CSV into Orange with **File**.
-You could open **Scatter Plot**, put income on the x-axis and life expectancy on the
-y-axis, and colour the points by region. Look at the shape before you fit
-anything.
+country, check the missing values, and import the CSV into Orange with
+**File**. You could open **Scatter Plot**, put income on the x-axis and life
+expectancy on the y-axis, and colour the points by region.
 
-You could try a linear fit first, then a log-transformed income, and compare
-which looks more like a straight line. Fit **Linear Regression** and read the
-coefficient to see how many extra years of life expectancy are associated with a
-doubling of income. Use **Test & Score** with cross-validation to get R², RMSE
-and MAE. Compare the
-model with a baseline that always predicts the mean life expectancy; a model
-that cannot beat the mean is not adding much.
-
-You could open **Predictions** and inspect the residuals to identify which
-countries are furthest above the line and which furthest below. Define your
-exception criterion before you go looking for explanations: a fixed number of
-years, a percentage deviation, or a standardised residual. Write the definition down, then list the
-countries that meet it. This prevents you from choosing the outliers that fit
-your favourite story.
-
-You could add a second indicator, such as mean years of schooling or child mortality, and
-refit the model. You could check whether R² improves and which coefficient
-changes. Income and schooling are correlated, so the income coefficient may
-shrink when schooling is added. That is expected: the two variables share information, so the model has
-less unique information to attribute to income. Try dropping one and watching
-the other, and explain what happens.
-
-You could split the data by region or by income group and fit separate models.
-You could check whether the slope changes, and whether the relationship
-disappears or reverses in any group. A relationship that holds across the whole
-world but not within regions is a useful warning about aggregated data. If you have several years, repeat the
-analysis for an earlier decade and compare.
-
-Treat that as an extension: the core answer is the single model and its
-residuals.
-
-You could pick one over-performing and one under-performing country for a short case
-study. Read about their health systems, inequality, geography and recent
-history. Do not try to prove a cause from two examples; use the cases to suggest
-mechanisms that a larger study could test. If you have time, add a third
-indicator that might explain the pattern, such as health spending or
-vaccination coverage, and see whether it survives the comparison.
-
-You should record your decisions in your project log: the year or years, the countries
-included, the income definition, the log transformation, the exception
-criterion, the model specification, the validation method, and the sources of
-each indicator.
+From there the sequence is yours: decide what to measure, what to compare
+and when to stop.
 
 ## Potential limitations, risks and sources of bias
 
@@ -225,7 +183,7 @@ evaluating your project. For example:
   results makes the analysis look stronger than it is, so the main choices should
   be recorded in the log before the analysis.
 
-You should consider how these limitations affect the claims you can reasonably
+Think about how these limitations affect the claims you can reasonably
 make from your model.
 
 ## Expected outcomes and opportunities for evaluation
@@ -254,26 +212,15 @@ used for. It may describe a broad pattern across countries without being reliabl
 enough to guide policy for one country. Articulating that distinction is part of
 the project.
 
-## Suitability as an EPQ artefact
+## How this might be assessed
 
-This could make a strong EPQ artefact because building the model requires you to
-make a series of decisions that you can research, justify and evaluate. The
-model provides a tangible outcome, while the analysis provides evidence of
-planning, research, problem-solving and reflection. The data is public, and the
-workflow is easy to demonstrate.
+Before you commit, ask yourself how the work would be judged: what would your
+report be arguing, what evidence would you be presenting, and what would you do
+with the answer? Settle that with your supervisor and your board's
+specification — this page does not decide it.
 
-Crucially, the project is open-ended. There is no single correct set of
-countries, indicators or model, and the quality of your EPQ does not depend
-simply on maximising R². You have scope to make and justify your own decisions
-about the question, the dataset and the interpretation of the exceptions.
-
-You could also discuss questions from statistics and public argument:
-correlation and causation, ecological inference, data definitions, and the
-difference between a pattern and a policy. You could use your charts and residuals as evidence in that discussion.
-
-Check with your supervisor that none of this overlaps work you are submitting
-for another qualification: no part of an EPQ may be resubmitted for another
-qualification.
+Check with your supervisor that none of this overlaps work you are submitting for
+another qualification.
 
 ## Example artefacts
 
