@@ -50,7 +50,7 @@ material:
 - **Photographing a site** may mean being off campus, on site at a particular
   time, or both.
 - **Using images or corpora you did not create** may have licences restricting
-  use or requiring citating.
+  use or requiring a citation.
 
 Remember to discuss with your supervisor what your school requires, and when it needs it.
 

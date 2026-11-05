@@ -34,6 +34,8 @@ import json
 import os
 import pathlib
 import re
+import shutil
+import subprocess
 import sys
 import time
 import tomllib
@@ -139,8 +141,6 @@ def load_docs(root: pathlib.Path) -> dict[str, dict]:
 
 def changed_since(docs_dir: str, ref: str, docs: dict[str, dict]) -> dict[str, dict]:
     """Only the outlines whose markdown changed since `ref`, by git."""
-    import subprocess
-
     try:
         out = subprocess.run(
             ["git", "diff", "--name-only", ref, "--", docs_dir],
@@ -158,7 +158,19 @@ def changed_since(docs_dir: str, ref: str, docs: dict[str, dict]) -> dict[str, d
 # ---------------------------------------------------------------- text layer
 
 
-def text_issues(rules: list[dict], docs: dict[str, dict], extra: str = "") -> list[dict]:
+def text_issues(
+    rules: list[dict],
+    docs: dict[str, dict],
+    pack_pages: list[tuple[str, str]] | None = None,
+) -> list[dict]:
+    """Text rules over the outlines, and over the pages that carry pack guidance.
+
+    A per-document rule is not only about the six outlines: the Prerequisites
+    page is student-facing prose and breaks the same rules when it says what is
+    usual, or tells the student to remember something.
+    """
+    pack_pages = pack_pages or []
+    extra = "\n\n".join(text for _, text in pack_pages)
     pack_text = "\n\n".join(d["text"] for d in docs.values()) + "\n\n" + extra
     out = []
     for rule in rules:
@@ -191,6 +203,13 @@ def text_issues(rules: list[dict], docs: dict[str, dict], extra: str = "") -> li
                 out.append(
                     {"rule": rule, "doc": slug, "quote": "", "why": rule["why"],
                      "fix": rule["fix"], "note": ""}
+                )
+        for name, text in pack_pages:
+            found = matches(text)
+            if found != expect_present:
+                out.append(
+                    {"rule": rule, "doc": None, "quote": "", "why": rule["why"],
+                     "fix": rule["fix"], "note": name}
                 )
     return out
 
@@ -467,6 +486,66 @@ def judge_issues(args, rules, docs, cache) -> tuple[list[dict], dict]:
     return out, usage
 
 
+# ---------------------------------------------------------------- spelling
+
+SPELL_RULE = {
+    "id": "SPELL-01",
+    "group": "text",
+    "severity": "low",
+    "check": "spell",
+    "title": "A known misspelling",
+    "source": "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF",
+    "locator": "§2.3 What is the Project process?",
+    "quote": "It will involve extended autonomous work by the student.",
+    "why": "A misspelling is the kind of thing a reader notices and a supervisor queries, and no pattern rule will ever catch one.",
+    "fix": "Correct the word.",
+}
+SPELL_LINE = re.compile(r"^(.+?):(\d+): (.+?) ==> (.+)$")
+
+
+def spell_issues(paths: list[pathlib.Path], slugs: dict[pathlib.Path, str]) -> list[dict]:
+    """Run codespell over the pages, if it can be found.
+
+    It knows common misspellings rather than the whole dictionary, which is what
+    keeps the technical vocabulary here - mlx-lm, orange3-ai-suite, BritLLM -
+    out of the findings. A full dictionary check would be nothing but noise.
+    """
+    cmd = (
+        [shutil.which("codespell")]
+        if shutil.which("codespell")
+        else (["uvx", "--quiet", "codespell"] if shutil.which("uvx") else None)
+    )
+    if not cmd:
+        log("spelling not checked: no codespell and no uvx on PATH")
+        return []
+    try:
+        result = subprocess.run(
+            cmd + [str(p) for p in paths], capture_output=True, text=True, check=False
+        )
+    except OSError as e:  # noqa: BLE001 - a missing tool must not stop the run
+        log(f"spelling not checked: {e}")
+        return []
+    out = []
+    for line in result.stdout.splitlines():
+        m = SPELL_LINE.match(line)
+        if not m:
+            continue
+        path, lineno, word, suggestion = m.groups()
+        path = pathlib.Path(path).resolve()
+        out.append(
+            {
+                "rule": SPELL_RULE,
+                "doc": slugs.get(path),
+                "quote": "",
+                "why": f"'{word}' looks like a misspelling of '{suggestion}' (line {lineno}).",
+                "fix": f"Replace '{word}' with '{suggestion}', or add it to an ignore list if it is a name.",
+                "note": str(path.name),
+            }
+        )
+    log(f"spelling: {len(out)} finding(s)")
+    return out
+
+
 # ---------------------------------------------------------------- report
 
 
@@ -571,6 +650,8 @@ def main() -> None:
         choices=["default", "none", "low", "high", "max"],
         help="thinking level for the judge (default: low)",
     )
+    ap.add_argument("--no-spell", action="store_true",
+                    help="skip the codespell pass")
     ap.add_argument("--no-cache", action="store_true",
                     help="ignore cached judgements and ask again")
     ap.add_argument("--clear-cache", action="store_true",
@@ -603,9 +684,13 @@ def main() -> None:
         f"({args.n_judge} judged, {args.n_text} text)")
     for slug in docs:
         log(f"  selected: {slug}")
-    pack_pages = [pathlib.Path(f) for f in PACK_PAGES]
-    extra = "\n\n".join(p.read_text(encoding="utf8") for p in pack_pages if p.exists())
-    issues = text_issues(args.rules, docs, extra)
+    pack_paths = [pathlib.Path(f) for f in PACK_PAGES]
+    pack_pages = [
+        (p.parent.name if p.name == "_content.md" else p.name, p.read_text(encoding="utf8"))
+        for p in pack_paths
+        if p.exists()
+    ]
+    issues = text_issues(args.rules, docs, pack_pages)
     log(f"text checks: {len(issues)} finding(s)")
     usage = {}
     if args.clear_cache and pathlib.Path(CACHE).exists():
@@ -618,11 +703,21 @@ def main() -> None:
         pathlib.Path(CACHE).parent.mkdir(parents=True, exist_ok=True)
         pathlib.Path(CACHE).write_text(json.dumps(cache))
 
+    if not args.no_spell:
+        spell_paths = sorted(pathlib.Path(args.docs).glob("*/_content.md")) + [
+            p for p in pack_paths if p.exists()
+        ]
+        slugs = {
+            (pathlib.Path(args.docs) / slug / "_content.md").resolve(): slug
+            for slug in docs
+        }
+        issues += spell_issues(spell_paths, slugs)
+
     sim = similarity(docs, threshold=args.threshold)
 
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    args.pack_seen = [str(p) for p in pack_pages if p.exists()]
+    args.pack_seen = [str(p) for p in pack_paths if p.exists()]
     out.write_text(render(issues, docs, sim, args, usage), encoding="utf8")
     if args.cache_hits or args.cache_misses:
         log(f"judge cache: {args.cache_hits} hit(s), "

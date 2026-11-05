@@ -283,18 +283,33 @@ pattern = "(?i)\\b(?:same (?:kit|as)|as in|see) (?:project )?[ABC][123]\\b"
 expect = "absent"
 
 [[rule]]
+id = "TONE-04"
+group = "tone"
+severity = "low"
+check = "text"
+title = "Instructs the student, rather than inviting them to consider"
+source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
+locator = "§2.3 What is the Project process?"
+quote = "carry out the project by achieving the aims and objectives they set themselves"
+why = "A page that remembers things on the student's behalf - 'remember to', 'make sure', 'don't forget' - is managing the project, and takes on the responsibility for whether it happened."
+fix = "Put the thing in front of the student and let them decide: 'consider whether...' rather than 'remember to...'."
+[rule.text]
+pattern = "(?i)\\b(?:remember\\s+to|make\\s+sure|be\\s+sure\\s+to|don'?t\\s+forget|you\\s+must)\\b"
+expect = "absent"
+
+[[rule]]
 id = "CLAIM-01"
 group = "tone"
 severity = "med"
 check = "text"
 title = "Says what usually happens, without a source"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.3 What is Project Process"
-quote = "The project process is intended to be a largely independent piece of work"
+locator = "§1.2 What is the Extended Project?"
+quote = "It will involve extended autonomous work by the student."
 why = "We have not surveyed students, projects or schools, so a claim about what is common, usual or typical is a guess wearing the clothes of evidence - and a student can be misled by it."
 fix = "State the fact or the risk without claiming it is common."
 [rule.text]
-pattern = "(?i)\\bthe\\s+most\\s+common\\b|\\b(?:most|many|usually|typically|often|rarely)\\s+(?:students|people|projects|schools|teachers|classes)\\b|\\bin\\s+practice\\b|\\bit\\s+is\\s+common\\b"
+pattern = "(?i)\\bthe\\s+most\\s+common\\b|\\b(?:most|many|usually|typically|often|rarely)\\s+(?:students|people|projects|schools|teachers|classes)\\b|\\bin\\s+practice\\b|\\bit\\s+is\\s+common\\b|\\b(?:widely|commonly|generally)\\s+(?:used|known|available)\\b"
 expect = "absent"
 
 [[rule]]
@@ -304,8 +319,8 @@ severity = "low"
 check = "text"
 title = "Explains why the pack made a choice"
 source = "https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF"
-locator = "§2.3 What is Project Process"
-quote = "The project process is intended to be a largely independent piece of work"
+locator = "§2.3 What is the Project process?"
+quote = "The student will develop an idea for a project that they wish to carry out and discuss their ideas with a supervisor."
 why = "A page that justifies its own design - 'which is deliberate', 'this is why' - is arguing with itself on the student's page, and invites the student to agree with a rationale they did not need."
 fix = "Say what is true, and let it stand."
 [rule.text]
@@ -354,7 +369,8 @@ quote = "choose an area of interest"
 why = "The pack is not a substitute for the specification: the log, the report, the presentation and the word lengths are the board's to set, and they differ between boards."
 fix = "Tell the student, once, to check their board's specification with their supervisor."
 [rule.text]
-all = ["(?i)specification", "(?i)board|awarding body"]
+all = ["(?i)specification",
+       "(?i)(?:read|check|look at|treat|see)\\b[^.]{0,80}specification|specification\\b[^.]{0,80}(?:authority|authoritative)"]
 
 [[rule]]
 id = "PACK-NOSPEC"
