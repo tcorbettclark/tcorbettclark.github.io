@@ -88,8 +88,6 @@ def load_rules(path: pathlib.Path) -> list[dict]:
     return rules
 
 
-NEEDS_DICT = re.compile(r"\{%\s*set needs = \{(.*?)\}\s*%\}", re.S)
-NEEDS_PAIR = re.compile(r'"(\w+)"\s*:\s*(?:"((?:[^"\\]|\\.)*)"|(true|false))')
 NEEDS_LABELS = {
     "programming": "Programming",
     "machine": "Machine",
@@ -101,20 +99,22 @@ NEEDS_LABELS = {
 def needs_block(outline: pathlib.Path) -> str:
     """The "what this project needs" block, as the student sees it.
 
-    Each outline declares its requirements in its page template rather than in
-    the markdown, so reading only `_content.md` would hide the one part of the
-    page that answers "can I even run this?". A judge should see the page.
+    Each outline declares its requirements in `_needs.toml` beside its page;
+    awg.py makes those values template globals. Reading only `_content.md`
+    would hide the one part of the page that answers "can I even run this?",
+    so the judge is given it too.
     """
-    index = outline / "index.html"
-    if not index.exists():
+    path = outline / "_needs.toml"
+    if not path.exists():
+        log(f"{outline.name}: no _needs.toml - the needs block will be empty")
         return ""
-    match = NEEDS_DICT.search(index.read_text(encoding="utf8"))
-    if not match:
-        return ""
-    rows = []
-    for key, value, _flag in NEEDS_PAIR.findall(match.group(1)):
-        if key in NEEDS_LABELS and value:
-            rows.append(f"- {NEEDS_LABELS[key]}: {value.replace(chr(92) + '"', '"')}")
+    with path.open("rb") as f:
+        data = tomllib.load(f)
+    table = next((v for v in data.values() if isinstance(v, dict)), {})
+    missing = [k for k in NEEDS_LABELS if not table.get(k)]
+    if missing:
+        log(f"{outline.name}: _needs.toml is missing {', '.join(missing)}")
+    rows = [f"- {NEEDS_LABELS[k]}: {table[k]}" for k in NEEDS_LABELS if table.get(k)]
     if not rows:
         return ""
     return "What this project needs\n" + "\n".join(rows) + "\n\n"
