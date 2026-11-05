@@ -39,11 +39,12 @@ import urllib.error
 import urllib.request
 
 DEFAULT_DOCS = "content/lt/epq/projects"
-# Pages that carry the pack-level guidance the six outlines are allowed to
-# leave out. Read automatically; they are what the scope="pack" rules see.
+# The pack is the six outlines plus the pages that carry the guidance they are
+# allowed to leave out. Those pages are always there, so they are read
+# unconditionally: there is nothing to configure.
 PACK_PAGES = (
-    "content/lt/epq/prerequisites/_content.md",
-    "content/lt/epq/projects/_content.md",
+    "content/lt/epq/prerequisites/_content.md",   # kit, ethics, hours, board rules
+    "content/lt/epq/projects/_content.md",        # the collection's own page
 )
 DEFAULT_RULES = "tools/epq-verifier/rules.toml"
 DEFAULT_OUT = "tools/epq-verifier/reports/issues.md"
@@ -291,9 +292,7 @@ def render(issues: list[dict], docs: dict[str, dict], sim: list[str], args, usag
         f"- {len(docs)} outlines checked against {args.n_rules} rules "
         f"({args.n_judge} judged, {args.n_text} text).",
         f"- {total} potential issues ({high} high severity).",
-        f"- Pack-level rules also read: "
-        + ", ".join(f"`{p}`" for p in args.pack_seen)
-        + ".",
+        "- Rules that are about the pack as a whole also read its prerequisites page.",
         f"- Judge: `{args.judge}`" + (f", {usage.get('total_tokens', 0):,} tokens." if usage else "."),
         "",
     ]

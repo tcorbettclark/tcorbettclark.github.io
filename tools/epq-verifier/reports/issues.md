@@ -5,9 +5,9 @@ places where an outline could be read as endorsing a practice that would cost a
 student marks, or that a moderator would query.
 
 - 6 outlines checked against 22 rules (16 judged, 6 text).
-- 49 potential issues (33 high severity).
-- Pack-level rules also read: `content/lt/epq/prerequisites/_content.md`, `content/lt/epq/projects/_content.md`.
-- Judge: `deepseek-v4.1-flash`, 109,826 tokens.
+- 20 potential issues (14 high severity).
+- Rules that are about the pack as a whole also read its prerequisites page.
+- Judge: `deepseek-v4.1-flash`, 145,008 tokens.
 
 ## a1-mnist-digit-classification
 
@@ -17,25 +17,13 @@ student marks, or that a moderator would query.
 
 *high · ethics*
 
-> Ask classmates for samples if you want a wider range of styles, with their consent and without collecting anything more personal than the digit itself.
+> The same workflow answers a different question on a different image set: traffic signs, medical images, or your own handwriting compared with a friend's.
 
-**Why:** It mentions consent but says nothing about centre ethics approval, anonymising the samples or allowing classmates to withdraw, so a student could collect data the centre cannot approve.
+**Why:** Medical images are data about people and may be sensitive; the variant is offered without saying it needs centre ethics approval, anonymisation or consent.
 
-**Suggested:** Add: obtain centre ethics approval first, anonymise the samples, and let participants withdraw them at any point.
+**Suggested:** Remove medical images or add an explicit ethics warning requiring centre-approved, de-identified data.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
-
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> Your final artefact could be the workflow itself, together with a short user guide that lets someone else load a digit image and see the prediction and the feature values that produced it.
-
-**Why:** It names the workflow plus a short user guide as the final artefact and does not put the written report alongside it, even though AO2 and AO4 are marked mainly from the report.
-
-**Suggested:** State that the written report is the main submission and that the workflow and user guide are supporting appendices.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
 
 ### FEAS-01 — Too much work for the hours available
 
@@ -43,23 +31,11 @@ student marks, or that a moderator would query.
 
 > For your own test set, collect 20–50 examples of each digit, crop them to squares, and put them in folders named 0–9.
 
-**Why:** That is 200–500 samples to collect, crop, label and check, on top of the ablation, learner comparison, baselines, log, report and presentation, which is unrealistic within 120 guided hours.
+**Why:** That is 200–500 handwritten images to source, photograph and crop, a large manual workload alongside the taught element, log, report and presentation.
 
-**Suggested:** Reduce the collection to a small optional set, such as 5–10 per digit, or use an existing test set and make the larger target an extension.
+**Suggested:** Reduce the core test set to 5–10 per digit and make a larger collection an extension.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-01 — Could be mistaken for work already being submitted elsewhere
-
-*high · integ*
-
-> Your project would be about explaining the classifier: which measurements carry the signal, which digits it confuses, and whether a model trained on a clean teaching dataset recognises digits written by you.
-
-**Why:** This is a standard machine-learning investigation that could easily overlap with A-level Computer Science or Maths coursework, and the page gives no warning against double submission.
-
-**Suggested:** Add a warning to check with the centre and ensure the EPQ is distinct from any other submitted coursework, with a suggestion for how to differentiate it.
-
-<sub>https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf — Choosing an appropriate project: “learners may not simply resubmit work that has been or will be submitted for another qualification”</sub>
 
 ### OWN-01 — Reads as a specification rather than an example
 
@@ -67,75 +43,39 @@ student marks, or that a moderator would query.
 
 > You could begin by building the workflow from scratch: **Import Images** → **Image Features** → **Test & Score**, with **Neural Network** as the learner and **Confusion Matrix**, **Data Table** and **Column Statistics** attached.
 
-**Why:** It gives an exact widget-by-widget pipeline and names the learner, so a student can reproduce the method without choosing or justifying their own tool, features or model.
+**Why:** Despite the opening disclaimer, this sentence and the steps that follow prescribe the tool, feature representation, learner and evaluation, so a student can execute the example without making the design choices AQA expects.
 
-**Suggested:** Present this as one possible workflow and require students to choose and justify their own learner, features or toolchain.
+**Suggested:** Replace the single prescribed chain with a menu of alternatives and require the student to choose and justify their own tool, learner and evaluation plan.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
 
-### OWN-02 — Nothing tells the reader they are allowed to depart from it
+### ETH-03 — Practical risk is never mentioned
 
-*high · own*
+*med · ethics*
 
-> You could investigate whether a computer can recognise handwritten digits from a small set of human-readable image measurements, rather than from raw pixels.
+> The same workflow answers a different question on a different image set: traffic signs, medical images, or your own handwriting compared with a friend's.
 
-**Why:** The opening frames one specific investigation but never says it is only an example or that students are expected to change the question, data, tool or artefact.
+**Why:** If a student collects traffic-sign images, that can mean going outdoors near roads to photograph them, but no risk assessment is mentioned.
 
-**Suggested:** Add a prominent top-of-page sentence saying this is one example among many and that students should adapt and justify changes to the question, data, tool or artefact.
+**Suggested:** Add a risk-assessment note for any outdoor photography, or specify that students should use an existing licensed dataset.
 
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “conducting risk assessment, assessing the ethical principles of project proposals and research”</sub>
 
-### FEAS-02 — Assumes kit or software without flagging it
+### ETH-04 — Third-party images or data may not be reusable
 
-*med · feas*
+*med · ethics*
 
-> You would build the classifier in **Orange Data Mining**, using the **Image Features** widget from the [`orange3-ai-suite`](https://github.com/tcorbettclark/orange3-ai-suite) add-on.
+> The same workflow answers a different question on a different image set: traffic signs, medical images, or your own handwriting compared with a friend's.
 
-**Why:** It assumes Orange and the add-on are already installed and working, but does not flag the software requirement, system constraints or the download needed before choosing the project.
+**Why:** Traffic-sign and medical image sets are third-party data, but the page only tells students to check the licence for MNIST.
 
-**Suggested:** Add a plain line naming the software and add-on that must be installed, with system requirements and an offline download check before starting.
+**Suggested:** Add a general instruction to check and record the licence or terms of use for every external image set before use.
 
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal: “Are the working title and proposed action clear and focused on an issue which can be managed within the timescale, available resources and word total?”</sub>
-
-### OWN-03 — Nothing helps a second student take it somewhere different
-
-*med · own*
-
-> A suitable starting point would be the standard MNIST dataset.
-
-**Why:** It fixes the same MNIST dataset for every student, so two inspired students would build near-identical classifiers and have no obvious route to distinct questions or artefacts.
-
-**Suggested:** Offer a short menu of alternative datasets or domains and require each student to choose and justify one.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.3 Group Projects: “Students working as a group must submit individual assessment evidence and complete an individual presentation.”</sub>
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## a2-cloud-image-classification
 
 *Can a model trained on curated cloud photographs recognise the sky above your school?*
-
-### ETH-01 — People become data subjects without ethics appearing
-
-*high · ethics*
-
-> Ask a weather-savvy friend or a geography teacher to classify the same field photos, using the Atlas definitions.
-
-**Why:** This asks the student to collect data from a human participant (their classifications) without mentioning consent, anonymity or centre ethics approval.
-
-**Suggested:** Add a note that any human baseline must have the participant's consent, be anonymised, and be approved by the centre's ethics process before data is collected.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
-
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> The expected outcome would be a working Orange workflow that classifies cloud genera, a feature-ablation table, a confusion matrix for the Atlas corpus and a second confusion matrix for your own photos.
-
-**Why:** This lists the workflow and tables as the outcome but does not mention the written report, so a student may think the artefact alone is the submission.
-
-**Suggested:** Add the written report explicitly alongside the artefact, e.g. 'The expected outcome is a written report that presents and evaluates the workflow, the ablation table and the two confusion matrices.'
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
 
 ### FEAS-01 — Too much work for the hours available
 
@@ -143,95 +83,23 @@ student marks, or that a moderator would query.
 
 > Aim for 20–40 images per genus, taken over several weeks and in different weather.
 
-**Why:** Collecting 100–200 labelled photographs over several weeks is a large fieldwork commitment that could consume most of the 120 guided hours before analysis and writing begin.
+**Why:** For five genera this implies 100–200 field photographs, each needing labelling and metadata, which is too much for 120 guided hours and contradicts the later '10–20' or '20–40' total field-test guidance.
 
-**Suggested:** Scale down the suggested field-test size (e.g. 5–10 images per genus) and note that the taught element, log, report and presentation must also fit within 120 hours.
+**Suggested:** State a feasible total field set (for example 20–40 images overall, with a minimum per genus) and mark anything larger as an extension; align it with 'How much to attempt'.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-01 — Could be mistaken for work already being submitted elsewhere
-
-*high · integ*
-
-> This could make a strong EPQ artefact because producing the classifier requires you to make a series of decisions that you can research, justify and evaluate.
-
-**Why:** This promotes the project as an EPQ artefact without warning that cloud classification or image analysis could overlap with A level Geography or Computer Science coursework, risking double submission.
-
-**Suggested:** Add a warning to check with the EPQ supervisor that the project does not overlap with work being submitted for another qualification, and to keep evidence of how the EPQ work is distinct.
-
-<sub>https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf — Choosing an appropriate project: “learners may not simply resubmit work that has been or will be submitted for another qualification”</sub>
 
 ### OWN-01 — Reads as a specification rather than an example
 
 *high · own*
 
-> You would build the classifier in **Orange Data Mining**, using the **Image Features** widget to turn each photograph into 36 human-readable measurements of brightness, profile, spatial mass, texture, topology and symmetry.
+> You could begin by fetching or collecting the corpus and building the workflow from scratch: **Import Images** → **Image Features** → **Test & Score**, with **Neural Network**, **Tree** and **Logistic Regression** as learners, and **Confusion Matrix**, **Data Table** and **Column Statistics** for inspection.
 
-**Why:** This sentence specifies the tool, the widget and the feature set, leaving no significant choice over method or tool for the student.
+**Why:** It prescribes the tool, exact widget chain, learner list and inspection widgets, so a student who follows it makes almost none of the design decisions the EPQ requires; the opening disclaimer does not stop the body reading as a recipe.
 
-**Suggested:** Rewrite to offer Orange as one option among several (e.g. 'You could use a no-code tool such as Orange, or write your own script, and choose which image features to extract') and invite the student to justify their own tool and feature choices.
+**Suggested:** Recast this as one possible route and require the student to choose and justify at least the tool, learners and feature set, or offer alternatives side by side.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
-
-### OWN-02 — Nothing tells the reader they are allowed to depart from it
-
-*high · own*
-
-> You could investigate whether a computer can identify cloud genera from photographs, and whether a model trained on professionally curated images still works on ordinary phone photos of the sky.
-
-**Why:** This opening sentence frames a specific project as the thing to do, and although a later paragraph says the project is open-ended, the page does not tell the reader at the outset that it is one example they are expected to change.
-
-**Suggested:** Add a clear sentence at the very top, e.g. 'This is one example; you are expected to adapt the question, data, tool and artefact to your own interests.'
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
-
-### ETH-03 — Practical risk is never mentioned
-
-*med · ethics*
-
-> Aim for 20–40 images per genus, taken over several weeks and in different weather.
-
-**Why:** This requires repeated outdoor photography, possibly in poor weather or at travel distance, but no risk assessment is mentioned.
-
-**Suggested:** Add a sentence requiring a risk assessment for fieldwork (weather, travel, equipment) as part of the planning evidence.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “conducting risk assessment, assessing the ethical principles of project proposals and research”</sub>
-
-### FEAS-02 — Assumes kit or software without flagging it
-
-*med · feas*
-
-> You would build the classifier in **Orange Data Mining**, using the **Image Features** widget to turn each photograph into 36 human-readable measurements of brightness, profile, spatial mass, texture, topology and symmetry.
-
-**Why:** This assumes the student has Orange Data Mining and the Image Analytics add-on installed, but the page never says so or explains how to get them.
-
-**Suggested:** Add a sentence such as 'This project requires a computer with Orange Data Mining and the Image Analytics add-on installed; check with your teacher before choosing it.'
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal: “Are the working title and proposed action clear and focused on an issue which can be managed within the timescale, available resources and word total?”</sub>
-
-### OWN-03 — Nothing helps a second student take it somewhere different
-
-*med · own*
-
-> Your final artefact could be the workflow, a labelled field-test set, a confusion matrix for each test, and a written analysis of which genera and which features cause the confusion.
-
-**Why:** This fixes the artefact as a specific combination of workflow and tables, so two students following it would produce very similar outputs rather than distinct projects.
-
-**Suggested:** Suggest two or three alternative artefact forms (e.g. a decision-support tool, a teaching resource, a comparative study) and ask the student to choose and justify one.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.3 Group Projects: “Students working as a group must submit individual assessment evidence and complete an individual presentation.”</sub>
-
-### INTEG-02 — Sources named too vaguely to reference
-
-*low · integ*
-
-> You could also use a public cloud dataset from Kaggle or the Hugging Face Hub, but check the licence and the climate.
-
-**Why:** This names no specific dataset, version or URL, so a student cannot cite it precisely and may struggle to find a suitable, licensed dataset.
-
-**Suggested:** Either remove the vague suggestion or name one or two specific datasets with links and licence notes.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## a3-local-turing-test
 
@@ -241,125 +109,41 @@ student marks, or that a moderator would query.
 
 *high · ethics*
 
-> Check whether your school requires approval for a questionnaire or a judging session.
+> Get your centre's approval before any judging session, tell the judges what the data is for, keep their answers anonymous, and let them withdraw their text afterwards.
 
-**Why:** It makes centre ethics approval sound optional, and the page does not separately cover judges' consent or right to withdraw when classmates take part in the judging study.
+**Why:** The withdrawal clause covers text contributors, not judges' answers, so judges' data has no stated withdrawal route.
 
-**Suggested:** Require centre ethics approval before any judging session and include judge consent, anonymity and the right to withdraw.
+**Suggested:** Add that judges can withdraw their judgements up to the analysis stage, and say how that request is handled.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-PROJECTS-QG-ALL.PDF — Quick guide: ethical principles for the EPQ: “assessing the ethical principles of project proposals and research”</sub>
 
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> Your final artefact could be a set of matched human and machine texts, an anonymous judging sheet, a table of judgements, and a written analysis of the tells.
-
-**Why:** It makes the texts, sheet, table and analysis the final artefact and never identifies the separate written report from which AO2 and AO4 are mainly marked.
-
-**Suggested:** State that the written report is the main submission and that the texts, judging sheet and tables are evidence or appendices supporting it.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
-
 ### FEAS-01 — Too much work for the hours available
 
-*high · feas* · quote not found in source
+*high · feas*
 
-> Machine texts: 3–5 generations per prompt from each quantisation, at fixed temperature, seed and maximum length.
+> Revise the sheet, then run the main study with 15–30 classmates.
 
-**Why:** With 10–20 prompts and three quantisations this means 90–300 machine texts before matching human texts, piloting 20–40 pairs and running 15–30 judges, which is too much for 120 guided hours that must also cover the report and presentation.
+**Why:** With 20–40 pairs per judge, 15–30 classmates means 300–1,200 judgements plus pilot, coding, report and presentation; this is likely too much for 120 guided hours.
 
-**Suggested:** Reduce the scale sharply, for example to 6–8 prompts, 2 generations, one or two quantisations and 10–15 judges, with clear staging.
+**Suggested:** Make the core study a dozen or fewer judges and 10–20 pairs, with larger numbers clearly marked as an extension.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-01 — Could be mistaken for work already being submitted elsewhere
-
-*high · integ*
-
-> You could also discuss questions from philosophy and psychology: what it means to sound human, how people use cues to judge authenticity, and whether a test of discrimination can tell you anything about intelligence.
-
-**Why:** This is exactly the content a student may already be submitting for A level Philosophy or Psychology, and the page gives no warning that the same work must not be counted twice.
-
-**Suggested:** Add a warning to check overlap with the supervisor and to avoid reusing coursework or content already submitted for another qualification.
-
-<sub>https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf — Choosing an appropriate project: “learners may not simply resubmit work that has been or will be submitted for another qualification”</sub>
 
 ### OWN-01 — Reads as a specification rather than an example
 
 *high · own*
 
-> The local quantisations include 3-bit, 4-bit, 6-bit and 8-bit; the main comparison in this project uses 3-bit, 6-bit and 8-bit.
+> In Orange, load the BritLLM model with **Load LM** and connect its **Model** output to **LM Generator**.
 
-**Why:** It fixes the model comparison, and with the fixed BritLLM/Orange workflow it reads as a specification a student can follow without choosing the central method or tool.
+**Why:** Despite the opening note, this sentence and the surrounding steps prescribe the tool and wiring; together with fixed quantisations, prompt counts and judging design, a student can reproduce the project without a significant design choice.
 
-**Suggested:** Present this as one possible comparison and require the student to choose and justify which quantisations or model contrast to use.
+**Suggested:** Present this as one possible pipeline and require students to choose and justify their own tool/pipeline, or add alternatives and a design-decision table.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
-
-### OWN-02 — Nothing tells the reader they are allowed to depart from it
-
-*high · own*
-
-> Your project would investigate whether people can tell its writing from human writing when the human is trying to sound machine-like, and what gives the machine away.
-
-**Why:** It assigns the project question in definitive terms, and the page never says at the top that this is one example among many and students may change the question, data, tool or artefact.
-
-**Suggested:** Add a short explicit line at the top saying this is one example only and students are expected to adapt or replace the question, data, tool and artefact.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
-
-### FEAS-02 — Assumes kit or software without flagging it
-
-*med · feas*
-
-> The model runs locally on your laptop, so the texts stay private and the experiment can be repeated.
-
-**Why:** It says any laptop, but later the project requires an Apple Silicon Mac, local MLX quantisations and Orange language-model widgets, so a student may commit before discovering the kit requirement.
-
-**Suggested:** State the hardware, software and download requirements up front, before the student chooses the project.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal: “Are the working title and proposed action clear and focused on an issue which can be managed within the timescale, available resources and word total?”</sub>
-
-### INTEG-03 — Implies more than the data can show
-
-*med · integ*
-
-> You could test whether judges find 3-bit text easier to spot because it is more repetitive and less coherent, while 8-bit text is harder.
-
-**Why:** Comparing detection rates alone cannot establish the “because”; the design also needs separate measures of repetition and coherence and a caution about confounding.
-
-**Suggested:** Rephrase this as a hypothesis to investigate, measure repetition and coherence separately, and avoid a causal claim unless the evidence supports it.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
 
 ## b1-quantisation-comparison
 
 *How much memory, speed and energy does quantisation save, and what does it cost in quality?*
-
-### AI-01 — Could be read as permission to let the model do the work
-
-*high · ai*
-
-> You could write a small Python harness with three parts:
-
-**Why:** The page asks students to write code, a task suite and analysis while a language model is already open on the same machine, but never warns that the model must not write the submission. That is exactly where malpractice is easiest to drift into.
-
-**Suggested:** Add an explicit AI-use statement: the model may be the object of study, but it must not write the harness, task suite, analysis or report, and any AI assistance must be declared and logged.
-
-<sub>https://www.aqa.org.uk/files/345f3433-b1f8-4406-93a6-19dd85874079/445389386589a6083669db126a9e792a1fae35cc.pdf — AQA AI guidance for EPQ (2025), introduction: “Centre Coordinators/Supervisors must only accept work for project work which is the learners' own.”</sub>
-
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> Your final artefact could be a Python benchmark harness, a results table, a set of trade-off plots, and a written recommendation for a particular use case.
-
-**Why:** It calls the harness, table, plots and recommendation the final artefact, while the written report is not mentioned as the assessed submission. AO2 and AO4 are marked mainly from the report, so this misleads students about what they are submitting.
-
-**Suggested:** State that the written report is the assessed submission and that the harness, tables and plots are evidence to be discussed and evaluated within it.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
 
 ### FEAS-01 — Too much work for the hours available
 
@@ -367,123 +151,27 @@ student marks, or that a moderator would query.
 
 > The second is a task suite you write: 100–300 short items across categories such as factual recall, arithmetic, multi-step reasoning, instruction following and creative writing.
 
-**Why:** Writing, piloting and scoring 100–300 items with expected answers across five categories is a large standalone task within 120 guided hours that must also cover the taught element, log, report and presentation.
+**Why:** Authoring up to 300 items with expected answers, then running them across four quantisations and three repeats, is a large workload that can consume much of the 120 hours before analysis begins.
 
-**Suggested:** Reduce the core requirement to a piloted 40–60 item suite, or use a licensed public benchmark, and treat 100–300 items as an optional extension.
+**Suggested:** Reduce the core task suite to 30–50 items and treat 100+ as an extension, or explicitly cap the core at a pilot-tested smaller set.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-01 — Could be mistaken for work already being submitted elsewhere
-
-*high · integ*
-
-> The code is mostly measurement and plotting rather than model training, so a student with some Python experience can manage it.
-
-**Why:** This invites a student to reuse or adapt code they may already be submitting for a computing A level, with no warning that the same work cannot be counted twice. Overlap is easy to create unintentionally here.
-
-**Suggested:** Add a warning that code or analysis already submitted for another qualification must not be reused, and that any overlap must be declared to the centre.
-
-<sub>https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf — Choosing an appropriate project: “learners may not simply resubmit work that has been or will be submitted for another qualification”</sub>
 
 ### OWN-01 — Reads as a specification rather than an example
 
 *high · own*
 
-> The models are the local BritLLM MLX quantisations.
+> Four quantisations, a small prompt set and three repeats is an honest experiment; more prompts or models are extensions.
 
-**Why:** This fixes the model family, the tool (MLX), the hardware assumption and the quantisation levels, so a student can reproduce the project without choosing a model, tool or method. That undermines the independent design and justification AQA expects.
+**Why:** This fixes the experimental design—number of quantisations, prompt-set size and repeats—so a student following the page has the core method chosen for them; only the prompt content is left as a significant choice.
 
-**Suggested:** Present this as one worked example and explicitly invite students to choose a different model family, quantisation set, tool or artefact, recording and justifying their own choices.
+**Suggested:** Present this as one possible design among several and require the student to choose and justify their own number of quantisations, prompts and repeats.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
-
-### OWN-02 — Nothing tells the reader they are allowed to depart from it
-
-*high · own*
-
-> The project would have two parts.
-
-**Why:** The declarative wording reads as a specification, and the page never says that students are expected to change the question, data, tool or artefact. A 17-year-old will follow it as written.
-
-**Suggested:** Add a prominent sentence at the top: this is one example among many, and students are expected to change the question, data, tool, method or artefact and justify those changes.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
-
-### FEAS-02 — Assumes kit or software without flagging it
-
-*med · feas*
-
-> All four quantisations run on a 16 GB M-series Mac; the fp16 reference is optional and uses more memory.
-
-**Why:** This assumes an Apple Silicon Mac with MLX and, later, administrator rights for powermetrics, without flagging those as requirements. A student on Windows, Linux or a smaller machine may only discover the mismatch after choosing the project.
-
-**Suggested:** Add an explicit requirements box for hardware, macOS, MLX and admin rights, and either give a non-Mac alternative such as a llama.cpp/GGUF route or say clearly that students without that kit should choose a different project.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal: “Are the working title and proposed action clear and focused on an issue which can be managed within the timescale, available resources and word total?”</sub>
-
-### FEAS-03 — Compute-bound work that could swallow the project
-
-*med · feas*
-
-> Run each condition at least three times and report the mean and standard deviation.
-
-**Why:** With four or five quantisations and a 100–300 item task suite, this multiplies into thousands of generations plus perplexity runs, which is compute-bound and can consume the project before analysis begins.
-
-**Suggested:** Specify a minimum viable experiment, such as 4 models × 30 prompts × 3 repeats, pilot it first, and scale up only if time allows; log a compute budget.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### FEAS-04 — A question that invites description rather than investigation
-
-*med · feas* · quote not found in source
-
-> How does 3-bit, 4-bit, 6-bit and 8-bit quantisation of a 3B language model affect quality, speed, memory, storage and energy per token, and which resource trade-off matters most?
-
-**Why:** The question can be answered by measuring and reporting five sets of numbers, which invites a descriptive benchmarking report rather than analysis, comparison or evaluation. That caps AO3 and AO4.
-
-**Suggested:** Reframe it around a decision or hypothesis, for example whether 4-bit is the best trade-off for a laptop assistant compared with 8-bit and 3-bit, and whether that depends on task type.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal, item 1: “allow the student to investigate and to access the higher-level concepts and skills in the assessment objectives, i.e. plan, research, analyse, evaluate and explain, rather than simply describe and narrate”</sub>
-
-### INTEG-02 — Sources named too vaguely to reference
-
-*low · integ*
-
-> The first is a held-out text corpus for perplexity: a chapter of a public-domain book, a Wikipedia extract, or a similar body of ordinary prose.
-
-**Why:** These sources are too vaguely named to cite precisely: no edition, date, publisher, version or stable URL. A bibliography built from such descriptions cannot demonstrate the critical selection of sources that AO2 rewards.
-
-**Suggested:** Point students to a specific corpus or dataset with a stable identifier, version and date, and require those details plus the licence in the bibliography.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## b2-language-model-failure-and-confidence
 
 *Can a small language model tell you when it is likely to be wrong?*
-
-### AI-01 — Could be read as permission to let the model do the work
-
-*high · ai*
-
-> You could write a scorer in Python.
-
-**Why:** The project already has a language model open on the same machine, and the page asks for code without saying that the model is only the object of study and must not write the scorer or report.
-
-**Suggested:** Add an explicit boundary: students may use the model only as data/subject, and all code and written work must be their own, with any AI assistance declared.
-
-<sub>https://www.aqa.org.uk/files/345f3433-b1f8-4406-93a6-19dd85874079/445389386589a6083669db126a9e792a1fae35cc.pdf — AQA AI guidance for EPQ (2025), introduction: “Centre Coordinators/Supervisors must only accept work for project work which is the learners' own.”</sub>
-
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> The expected outcome would be a Python harness that scores candidate answers, a question set you designed, calibration plots and a coverage-accuracy curve for each quantisation.
-
-**Why:** This describes the harness, question set and plots as the outcome and does not put the written report alongside them, so a student may treat the artefact as the submission when AO2 and AO4 are marked mainly from the report.
-
-**Suggested:** Rewrite to say the submission is the written report and these artefacts are evidence discussed in it; add the report to the expected outcomes and example artefacts.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
 
 ### FEAS-01 — Too much work for the hours available
 
@@ -491,59 +179,35 @@ student marks, or that a moderator would query.
 
 > Aim for 100–200 items.
 
-**Why:** Writing 100–200 sourced, categorised, difficulty-rated items with distractors, then scoring three quantisations and producing calibration and selective-prediction analyses, is very large for 120 guided hours that must also cover the taught element, log, report and presentation.
+**Why:** Each item needs a prompt, correct answer, two or three distractors, a category, a pre-assigned difficulty rating and a checked source, so 100–200 hand-written items plus harness, three quantisations, plots and a 5,000-word report is a very large share of 120 guided hours.
 
-**Suggested:** Cut the core set to about 40–60 items and one quantisation, with extra items or models as optional extensions only after the core analysis is written up.
+**Suggested:** Make a pilot of 30–40 items the default and describe the larger set explicitly as an extension only if time allows, noting the per-item authoring cost in the text.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
-
-### INTEG-01 — Could be mistaken for work already being submitted elsewhere
-
-*high · integ*
-
-> You could write a scorer in Python.
-
-**Why:** A Python scorer and statistical analysis could overlap with an A-level computer science or maths coursework submission, and the page gives no warning against double-counting.
-
-**Suggested:** Add a warning that the code and analysis must be distinct from any other qualification submission, and ask students to record how the EPQ work differs.
-
-<sub>https://qualifications.pearson.com/content/dam/pdf/Project-Qualification/Level-3/2010/Specification/project-specification-level-3.pdf — Choosing an appropriate project: “learners may not simply resubmit work that has been or will be submitted for another qualification”</sub>
 
 ### OWN-01 — Reads as a specification rather than an example
 
 *high · own*
 
-> The models are the local **BritLLM** MLX quantisations: **3-bit**, **6-bit** and **8-bit**.
+> the 3B model you would run locally, on a set of questions with known answers.
 
-**Why:** The outline has already fixed the model family, the three quantisation levels and the local MLX setup, so a student can reproduce the tool and method without choosing them.
+**Why:** The model family, size, local runtime and question format are all chosen for the student, so the design decisions a moderator would probe (which model, why this data, what task format) have already been made before the student starts.
 
-**Suggested:** Present BritLLM as one possible small model and list alternatives (other open models, full precision, or a public benchmark) so the student must justify the model and quantisation choice.
+**Suggested:** Reframe as a worked example of a choice already made by someone else, and add a short prompt such as 'a 3B model is chosen here because it runs on a school laptop; if you chose a different model or task format, say why'.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
 
-### OWN-02 — Nothing tells the reader they are allowed to depart from it
+### OWN-01 — Reads as a specification rather than an example
 
 *high · own*
 
-> the 3B model you would run locally
+> Compute the basic statistics for each model:
 
-**Why:** The page uses directive wording for a specific model and only later calls the project open-ended; it never says this outline is one example and that students should change the question, data, tool or artefact.
+**Why:** The bullet list that follows prescribes exactly which analyses to run (accuracy, mean confidence, binning scheme, ECE, Brier score), and the numbered scorer steps do the same for the method, so a student can complete the whole investigation without selecting any measure themselves.
 
-**Suggested:** Add a prominent sentence such as 'This is one example, not a specification: you should adapt or replace the question, data, model and artefact.'
+**Suggested:** Present the statistics as one possible analysis set and require the student to name at least one measure they added, dropped or replaced, with a justification.
 
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “choose an area of interest”</sub>
-
-### ETH-04 — Third-party images or data may not be reusable
-
-*med · ethics*
-
-> For a general measure of the model's surprise, use a held-out text: a public-domain book chapter or a Wikipedia extract.
-
-**Why:** The Wikipedia extract is third-party text under CC BY-SA rather than public domain, and the page does not say to check the licence or attribute it, so a student could reuse it without permission or attribution.
-
-**Suggested:** Say that any Wikipedia extract must be checked for licence and attributed, or restrict this to public-domain text.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
 
 ### FEAS-03 — Compute-bound work that could swallow the project
 
@@ -551,51 +215,39 @@ student marks, or that a moderator would query.
 
 > If you want to test sampling consistency, generate ten answers at temperature 0.8 for each question and measure how often they agree with the top candidate.
 
-**Why:** With 100–200 questions and up to three models this is hundreds or thousands of generations, and runtime can swallow the project before analysis begins.
+**Why:** Ten generations per question across 100–200 questions, and potentially across three quantisations, is slow local inference that can eat the available hours before any calibration analysis exists.
 
-**Suggested:** Make this a small pilot on 20 questions, or remove it, and state an expected runtime before a student commits to it.
+**Suggested:** Cap this explicitly at a fixed small subset (for example 20 items on one quantisation) and state the estimated generation time per item.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
-### OWN-03 — Nothing helps a second student take it somewhere different
+### INTEG-03 — Implies more than the data can show
 
-*med · own*
+*med · integ*
 
-> Your final artefact could be a Python harness, a question set you designed, calibration plots for each model, and a written analysis of when confidence is useful and when it is misleading.
+> The models share a tokenizer, so the comparison is fair.
 
-**Why:** This points every inspired student toward the same combination of harness, question set and calibration plots, with no alternative artefact route, so two students could easily produce near-identical projects.
+**Why:** A shared tokenizer does not by itself make a quantisation comparison fair, since kernel, sampling defaults and runtime configuration can differ; a student would repeat this as a claim the data cannot support.
 
-**Suggested:** Offer genuinely different artefact routes, such as a benchmark audit, a user-facing confidence/refusal tool, or a comparison of two model families, and ask students to choose and justify one.
+**Suggested:** Reword to say that a shared tokenizer removes one confound, and that the comparison is only fair if prompt, candidate set, scoring rule and configuration are held constant and reported.
 
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.3 Group Projects: “Students working as a group must submit individual assessment evidence and complete an individual presentation.”</sub>
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.2 AO2 Use Resources: “Analyse data apply relevantly and demonstrate understanding of any links, connections and complexities of the topic.”</sub>
+
+### INTEG-02 — Sources named too vaguely to reference
+
+*low · integ*
+
+> For a general measure of the model's surprise, use a held-out text: a public-domain book chapter or a Wikipedia extract.
+
+**Why:** Neither the book chapter nor the Wikipedia article is named, dated or versioned, so the perplexity figures cannot be cited or reproduced and the bibliography would show no critical selection.
+
+**Suggested:** Name a specific text with author, title, edition or a dated Wikipedia permalink, and tell the student to record the exact source and retrieval date in the log.
+
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.2 The Taught Element: “referencing, the evaluation of sources and the prevention of plagiarism”</sub>
 
 ## c1-income-and-life-expectancy
 
 *Can a country's income explain how long its people live, and what do the exceptions tell us?*
-
-### EVID-01 — Calls the artefact or output the outcome, with no report in sight
-
-*high · evidence*
-
-> Your final artefact could be the workflow, a scatter plot with the fitted line, a residual table naming the biggest exceptions, a comparison of two or three models, and a short case study of one over-performing and one under-performing country.
-
-**Why:** It calls the workflow, plots and tables the final artefact and never puts the written report alongside them, which invites students to treat the Orange output as the submission when most marks come from the report.
-
-**Suggested:** State that the written report is the main submission and that the workflow, plots and tables are evidence to be discussed and evaluated within it.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.5.1 Assessment Evidence: “All project products must include a written report.”</sub>
-
-### FEAS-01 — Too much work for the hours available
-
-*high · feas*
-
-> You could split the data by region or by income group and fit separate models.
-
-**Why:** Doing this on top of the core cleaning, cross-validation, residual analysis, source comparison and case studies may leave too little of the 120 guided hours for the report, log and presentation.
-
-**Suggested:** Mark the split-by-region analysis explicitly as an optional extension only after the core model and report are complete.
-
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §1.2 What is the Extended Project?: “It will require in total 120 guided learning hours.”</sub>
 
 ### OWN-01 — Reads as a specification rather than an example
 
@@ -603,30 +255,36 @@ student marks, or that a moderator would query.
 
 > You would build a regression model in **Orange Data Mining** to predict life expectancy from income per person, then examine the countries that sit far above or below the trend.
 
-**Why:** This pre-selects the tool, method, variables and analytical framing, so a student can copy the project end to end without making the significant design choices AQA expects them to own.
+**Why:** It fixes the tool (Orange) and the modelling method (linear regression) in a single sentence, so a student can reproduce the core workflow without choosing or justifying either; the named Gapminder data and artefact list reinforce the recipe.
 
-**Suggested:** Reframe this as one possible route among several, explicitly inviting students to choose a different tool, model, question or artefact if they can justify it.
+**Suggested:** Recast this as one option among several and require the student to choose a tool and method they can justify (spreadsheet, Python/R, Orange, etc.), with the reasons recorded in the log.
 
 <sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.1 Aims: “make a significant contribution to the choice and design of an extended project”</sub>
 
-### FEAS-02 — Assumes kit or software without flagging it
+### OWN-03 — Nothing helps a second student take it somewhere different
 
-*med · feas*
+*med · own*
 
-> You would build a regression model in **Orange Data Mining** to predict life expectancy from income per person, then examine the countries that sit far above or below the trend.
+> You could develop this into more specific questions, such as whether a log-transformed income fits better than raw income, which countries are the largest positive and negative residuals, whether adding schooling or child mortality improves the model, whether the pattern holds within regions and across decades, or whether the relationship is causal.
 
-**Why:** The outline assumes the student has Orange installed and can use it, but never says it is a free download, what it runs on, or what to do if they cannot install it.
+**Why:** All the suggested variations stay on the same Gapminder/Orange/income-life-expectancy core, so two students inspired by the page could produce near-identical projects; it gives no alternative dataset, tool or artefact example.
 
-**Suggested:** Add a line saying Orange is free to download for Windows/macOS/Linux, or name a spreadsheet/R/Python alternative for students without the kit.
+**Suggested:** Add a short 'Other directions' box with at least one genuinely different question, dataset, tool or artefact (e.g. a within-country health-spending comparison, a different visualisation, or an interactive dashboard).
 
-<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.4 Assessing the Potential of a Proposal: “Are the working title and proposed action clear and focused on an issue which can be managed within the timescale, available resources and word total?”</sub>
+<sub>https://filestore.aqa.org.uk/subjects/AQA-W-7993-SP-19.PDF — §2.3 Group Projects: “Students working as a group must submit individual assessment evidence and complete an individual presentation.”</sub>
 
 ## Rules that produced nothing
 
 If a rule is silent across all six outlines, the outline is probably fine on that
 point, or the rule is badly worded. Worth a look either way:
 
+- `AI-01`
 - `ETH-02`
+- `EVID-01`
+- `FEAS-02`
+- `FEAS-04`
+- `INTEG-01`
+- `OWN-02`
 - `PACK-AI`
 - `PACK-ETHICS`
 - `PACK-LOG`

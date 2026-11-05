@@ -9,9 +9,9 @@ The six outlines are examples meant to inspire, not instructions to follow, and
 the rules are written to respect that. A per-outline rule never asks "does this
 say enough?" - an example may leave anything out. It asks only: **could a
 student read this sentence and infer a practice that would cost them marks?**
-Completeness is a property of the pack, so it is checked once, against the
-outlines plus the pages that carry pack-level guidance (`PACK_PAGES` in
-`run.py`: the Prerequisites page and the collection's own page).
+Completeness is a property of the pack, so it is checked once, against the six
+outlines plus the prerequisites page and the collection's own page. That is not
+a setting: those pages are always part of the pack and are always read.
 
 It does **not** grade a project, score an outline, or return a verdict. The
 boards assess candidates, not guidance.
